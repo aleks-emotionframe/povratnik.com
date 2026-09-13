@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/page.schema.json",
+  "title": "Page",
+  "description": "One language version of a content page. Each language version has its own status, version and check date (datenmodell.md section 6). The full section layout of a topic page (inhaltskonzept.md 4.2) is specified in M4; this schema carries the metadata and the links to structured objects.",
+  "type": "object",
+  "allOf": [{ "$ref": "common.schema.json#/$defs/lifecycle" }],
+  "properties": {
+    "id": {
+      "description": "Slug. The file name is <id>.<lang>.yaml.",
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "lang": { "$ref": "vocabularies.schema.json#/$defs/language" },
+    "version": { "type": "integer", "minimum": 1 },
+    "synthetic": true,
+    "type": {
+      "type": "string",
+      "enum": ["topic", "category", "procedure", "glossary", "country", "situation"]
+    },
+    "depth": {
+      "description": "Two depth levels, visible to the reader. inhaltskonzept.md 4.1.",
+      "type": "string",
+      "enum": ["full", "short"]
+    },
+    "title": { "type": "string", "minLength": 1 },
+    "short_answer": { "type": "string", "minLength": 1 },
+    "translation": {
+      "description": "Only for languages other than de: which German version this translation follows and whether it has been checked since.",
+      "type": "object",
+      "properties": {
+        "of_version": { "type": "integer", "minimum": 1 },
+        "status": { "type": "string", "enum": ["current", "review_due", "outdated"] }
+      },
+      "required": ["of_version", "status"],
+      "additionalProperties": false
+    },
+    "terms": {
+      "type": "array",
+      "items": { "$ref": "common.schema.json#/$defs/term" }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "rules": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "tasks": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "procedures": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "requires_pages": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "followed_by_pages": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } }
+      },
+      "required": ["rules", "tasks", "procedures", "requires_pages", "followed_by_pages"],
+      "additionalProperties": false
+    },
+    "sources": true,
+    "approval": true,
+    "publication": true,
+    "validity": true,
+    "review": true
+  },
+  "required": ["id", "lang", "version", "type", "depth", "title", "short_answer", "terms", "links"],
+  "additionalProperties": false,
+  "if": { "properties": { "lang": { "const": "de" } } },
+  "then": { "not": { "required": ["translation"] } },
+  "else": { "required": ["translation"] }
+}

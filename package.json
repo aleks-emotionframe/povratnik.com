@@ -1,0 +1,24 @@
+{
+  "name": "leben-in-kroatien",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Informationsplattform für Rückkehrer und Zuwanderer nach Kroatien",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "validate": "node --experimental-strip-types scripts/validate.ts",
+    "test": "node --experimental-strip-types --test scripts/*.test.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "^5.9.2"
+  }
+}

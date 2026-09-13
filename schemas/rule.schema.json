@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/rule.schema.json",
+  "title": "Rule",
+  "description": "A legal or funding rule as versioned data. docs/datenmodell.md section 3. Operators are an exhaustive list: no free expressions in YAML.",
+  "type": "object",
+  "allOf": [{ "$ref": "common.schema.json#/$defs/lifecycle" }],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "version": { "type": "integer", "minimum": 1 },
+    "synthetic": true,
+    "title": { "$ref": "common.schema.json#/$defs/i18n_text" },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "applies_to_persons": {
+          "type": "object",
+          "properties": {
+            "citizenship_status": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "vocabularies.schema.json#/$defs/citizenship_status" }
+            },
+            "residence_status": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "vocabularies.schema.json#/$defs/residence_status" }
+            }
+          },
+          "required": ["citizenship_status", "residence_status"],
+          "additionalProperties": false
+        },
+        "procedure": {
+          "description": "Exactly one procedure per rule.",
+          "$ref": "common.schema.json#/$defs/id"
+        }
+      },
+      "required": ["applies_to_persons", "procedure"],
+      "additionalProperties": false
+    },
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "field": { "type": "string", "pattern": "^[a-z_]+(\\.[a-z_]+)*$" },
+          "operator": { "type": "string", "enum": ["in", "eq", "gte", "lte", "between", "exists"] },
+          "value": {},
+          "on_unknown": { "type": "string", "enum": ["clarify", "skip", "fail"] }
+        },
+        "required": ["field", "operator", "on_unknown"],
+        "additionalProperties": false,
+        "allOf": [
+          {
+            "if": { "properties": { "operator": { "const": "exists" } } },
+            "then": { "not": { "required": ["value"] } },
+            "else": { "required": ["value"] }
+          },
+          {
+            "if": { "properties": { "operator": { "enum": ["in"] } } },
+            "then": { "properties": { "value": { "type": "array", "minItems": 1 } } }
+          },
+          {
+            "if": { "properties": { "operator": { "const": "between" } } },
+            "then": { "properties": { "value": { "type": "array", "minItems": 2, "maxItems": 2 } } }
+          }
+        ]
+      }
+    },
+    "result": {
+      "type": "object",
+      "properties": {
+        "task": { "$ref": "common.schema.json#/$defs/id" },
+        "deadline": { "$ref": "common.schema.json#/$defs/deadline" },
+        "status_text_key": { "type": "string", "pattern": "^[a-z0-9_]+(\\.[a-z0-9_]+)*$" }
+      },
+      "required": ["task", "status_text_key"],
+      "additionalProperties": false
+    },
+    "priority": {
+      "description": "Explicit priority when several rules match at once. Without it, a conflict becomes a clarification task. datenmodell.md 2.5.",
+      "type": "integer",
+      "minimum": 1
+    },
+    "sources": true,
+    "approval": true,
+    "publication": true,
+    "validity": true,
+    "review": true
+  },
+  "required": ["id", "version", "title", "scope", "conditions", "result"],
+  "additionalProperties": false
+}

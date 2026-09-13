@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/source.schema.json",
+  "title": "Source",
+  "description": "Entry in the source register. docs/datenmodell.md section 5 and redaktionsgrundsaetze.md section 1. Link check (fetched_at) and content check (content_checked_at) are two different acts with their own fields.",
+  "type": "object",
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "synthetic": { "type": "boolean" },
+    "url": { "type": "string", "format": "uri" },
+    "title": { "type": "string", "minLength": 1 },
+    "publisher": { "type": "string", "minLength": 1 },
+    "tier": {
+      "description": "Position in the source hierarchy, 1 is official legal publication, 7 is press and experience reports. A lower tier never refutes a higher one.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 7
+    },
+    "published_at": { "oneOf": [{ "$ref": "common.schema.json#/$defs/date" }, { "type": "null" }] },
+    "fetched_at": { "$ref": "common.schema.json#/$defs/date" },
+    "content_checked_at": { "$ref": "common.schema.json#/$defs/date" },
+    "content_checked_by": { "type": "string", "minLength": 1 },
+    "reuse_rights": {
+      "type": "string",
+      "enum": ["official_free", "licensed", "quotation_only", "unclear"]
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": { "$ref": "common.schema.json#/$defs/date" },
+          "note": { "type": "string", "minLength": 1 }
+        },
+        "required": ["date", "note"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "synthetic",
+    "url",
+    "title",
+    "publisher",
+    "tier",
+    "published_at",
+    "fetched_at",
+    "content_checked_at",
+    "content_checked_by",
+    "reuse_rights",
+    "changelog"
+  ],
+  "additionalProperties": false
+}

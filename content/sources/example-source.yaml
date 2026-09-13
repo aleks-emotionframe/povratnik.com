@@ -1,0 +1,15 @@
+# SYNTHETISCH. Fiktive Quelle für Beispiele und Tests. Kein realer Rechtsakt.
+id: example-source
+synthetic: true
+url: https://example.invalid/beispielgesetz
+title: Beispielgesetz über die Meldung von Beispielen (fiktiv)
+publisher: Beispielbehörde (fiktiv)
+tier: 1
+published_at: 2026-01-01
+fetched_at: 2026-09-13
+content_checked_at: 2026-09-13
+content_checked_by: Beispielredaktion
+reuse_rights: official_free
+changelog:
+  - date: 2026-09-13
+    note: Angelegt als synthetisches Beispiel für den Validator.

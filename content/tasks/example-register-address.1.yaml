@@ -1,0 +1,60 @@
+# SYNTHETISCH. Fiktive Aufgabe für Beispiele und Tests.
+id: example-register-address
+version: 1
+synthetic: true
+title:
+  de: Beispielmeldung für die Person einreichen
+purpose:
+  de: Ohne die Beispielmeldung läuft im fiktiven Beispiel keine Frist.
+phase: arrive
+affects: person
+responsible: person
+prerequisites: []
+documents:
+  - name:
+      de: Reisedokument
+  - name:
+      de: Beispielformular B-1
+    term:
+      term_hr: obrazac B-1
+      term_explained:
+        de: Fiktives Formular der Beispielbehörde.
+authority:
+  key: example-authority
+  name:
+    de: Beispielbehörde (fiktiv)
+duration:
+  availability: unknown
+  evidence: self_reported
+  currency: current
+  checked_at: 2026-09-13
+cost:
+  value: 0
+  unit: EUR
+  availability: known
+  evidence: document
+  currency: current
+  checked_at: 2026-09-13
+completion_evidence:
+  de: Bestätigung der Beispielbehörde liegt vor.
+follow_ups: []
+page: example-registration
+sources:
+  - id: example-source
+    reference: Art. 1
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

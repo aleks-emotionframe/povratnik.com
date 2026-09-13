@@ -1,0 +1,5 @@
+# Ergebnistexte und Oberflächentexte, Ausgangssprache Deutsch.
+# Schlüssel unter rules.* werden von Regeln über status_text_key referenziert.
+rules:
+  example_address_report:
+    matches: Nach Ihren Angaben kommt die Beispielmeldung infrage. Über die Meldung entscheidet die Beispielbehörde (fiktiv).

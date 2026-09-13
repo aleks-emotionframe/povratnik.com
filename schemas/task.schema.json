@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/task.schema.json",
+  "title": "Task",
+  "description": "A task template. docs/datenmodell.md section 5 and wizard-recherche.md section 16. Deadlines are not stored here: they belong to the rule that produces the task, so a fact is kept once.",
+  "type": "object",
+  "allOf": [{ "$ref": "common.schema.json#/$defs/lifecycle" }],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/id" },
+    "version": { "type": "integer", "minimum": 1 },
+    "synthetic": true,
+    "title": {
+      "description": "The action, not the topic.",
+      "$ref": "common.schema.json#/$defs/i18n_text"
+    },
+    "purpose": { "$ref": "common.schema.json#/$defs/i18n_text" },
+    "phase": { "$ref": "vocabularies.schema.json#/$defs/phase" },
+    "affects": {
+      "description": "Which household member the task is about.",
+      "type": "string",
+      "enum": ["person", "each_member", "partner", "each_child", "sponsor"]
+    },
+    "responsible": {
+      "description": "Who acts. May differ from affects, for example a parent for a child.",
+      "type": "string",
+      "enum": ["person", "partner", "parent", "sponsor"]
+    },
+    "prerequisites": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/id" }
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "$ref": "common.schema.json#/$defs/i18n_text" },
+          "term": { "$ref": "common.schema.json#/$defs/term" }
+        },
+        "required": ["name"],
+        "additionalProperties": false
+      }
+    },
+    "authority": {
+      "description": "Responsible body. Contact details come from the maintained directory, not from here.",
+      "type": "object",
+      "properties": {
+        "key": { "$ref": "common.schema.json#/$defs/id" },
+        "name": { "$ref": "common.schema.json#/$defs/i18n_text" }
+      },
+      "required": ["key", "name"],
+      "additionalProperties": false
+    },
+    "duration": { "$ref": "common.schema.json#/$defs/fact" },
+    "cost": { "$ref": "common.schema.json#/$defs/fact" },
+    "completion_evidence": { "$ref": "common.schema.json#/$defs/i18n_text" },
+    "follow_ups": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/id" }
+    },
+    "page": {
+      "description": "Slug of the page with the full explanation.",
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "sources": true,
+    "approval": true,
+    "publication": true,
+    "validity": true,
+    "review": true
+  },
+  "required": [
+    "id",
+    "version",
+    "title",
+    "purpose",
+    "phase",
+    "affects",
+    "responsible",
+    "prerequisites",
+    "documents",
+    "authority",
+    "duration",
+    "cost",
+    "completion_evidence",
+    "follow_ups"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/i18n.schema.json",
+  "title": "Message catalogue",
+  "description": "One file per language, content/i18n/<lang>.yaml. Nested keys of strings. Rules refer to result texts by key, so a result text is stored once and translated per language. The German file is the reference set of keys.",
+  "$defs": {
+    "node": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z0-9_]+$" },
+          "additionalProperties": { "$ref": "#/$defs/node" },
+          "minProperties": 1
+        }
+      ]
+    }
+  },
+  "type": "object",
+  "propertyNames": { "pattern": "^[a-z0-9_]+$" },
+  "additionalProperties": { "$ref": "#/$defs/node" }
+}

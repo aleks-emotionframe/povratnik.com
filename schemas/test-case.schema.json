@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/test-case.schema.json",
+  "title": "Acceptance test case",
+  "description": "Declarative fixture for the acceptance cases T01 to T18 (wizard-recherche.md section 19) and the mandatory extra tests (CLAUDE.md section 5). Minimal in M0; the expectation format is refined in M1 together with the evaluation engine.",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string", "pattern": "^t[0-9]{2,}(-[a-z0-9]+)*$" },
+    "synthetic": { "type": "boolean" },
+    "title": { "$ref": "common.schema.json#/$defs/i18n_text" },
+    "covers": {
+      "description": "Which documented case this fixture implements, for example T01, or the extra test kinds from CLAUDE.md section 5.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "reference_date": {
+      "description": "The date the plan is generated on. Needed for reproducibility, never for version selection.",
+      "$ref": "common.schema.json#/$defs/date"
+    },
+    "input": {
+      "type": "object",
+      "properties": {
+        "persons": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "$ref": "common.schema.json#/$defs/id" },
+              "citizenships": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "country": { "type": "string", "pattern": "^[a-z]{2}$" },
+                    "availability": { "$ref": "vocabularies.schema.json#/$defs/availability" },
+                    "evidence": { "$ref": "vocabularies.schema.json#/$defs/evidence" }
+                  },
+                  "required": ["country", "availability"],
+                  "additionalProperties": false
+                }
+              },
+              "croatian_link": { "$ref": "vocabularies.schema.json#/$defs/croatian_link" },
+              "residence_status": { "$ref": "vocabularies.schema.json#/$defs/residence_status" },
+              "answers": {
+                "description": "Further answers keyed by question id (Q01 to Q48). Values are free until the engine defines them in M1.",
+                "type": "object",
+                "propertyNames": { "pattern": "^q[0-9]{2}(_[a-z0-9_]+)?$" }
+              }
+            },
+            "required": ["id", "citizenships", "croatian_link", "residence_status"],
+            "additionalProperties": false
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "between": {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": { "$ref": "common.schema.json#/$defs/id" }
+              },
+              "kind": { "$ref": "vocabularies.schema.json#/$defs/relationship_kind" },
+              "evidence": { "$ref": "vocabularies.schema.json#/$defs/evidence" }
+            },
+            "required": ["between", "kind", "evidence"],
+            "additionalProperties": false
+          }
+        },
+        "events": {
+          "description": "Triggering events per person. A missing date is an explicit state, never a guess.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": { "$ref": "common.schema.json#/$defs/id" },
+              "type": { "$ref": "vocabularies.schema.json#/$defs/event_type" },
+              "date": { "$ref": "common.schema.json#/$defs/open_ended_date" }
+            },
+            "required": ["person", "type", "date"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["persons", "relationships", "events"],
+      "additionalProperties": false
+    },
+    "expect": {
+      "type": "object",
+      "properties": {
+        "routes": {
+          "description": "Per person: which routes must appear and with which eligibility status.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": { "$ref": "common.schema.json#/$defs/id" },
+              "route": { "$ref": "vocabularies.schema.json#/$defs/route" },
+              "eligibility": { "$ref": "vocabularies.schema.json#/$defs/eligibility_status" }
+            },
+            "required": ["person", "route", "eligibility"],
+            "additionalProperties": false
+          }
+        },
+        "routes_absent": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": { "$ref": "common.schema.json#/$defs/id" },
+              "route": { "$ref": "vocabularies.schema.json#/$defs/route" }
+            },
+            "required": ["person", "route"],
+            "additionalProperties": false
+          }
+        },
+        "tasks": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "tasks_absent": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/id" } },
+        "clarifications": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "forbidden_texts": {
+          "description": "Result text must never contain these phrases (text tests, CLAUDE.md section 5).",
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "rule_versions": {
+          "description": "Which rule versions must be selected, for cut-off date tests.",
+          "type": "array",
+          "items": { "$ref": "common.schema.json#/$defs/version_ref" }
+        }
+      },
+      "required": ["routes", "routes_absent", "tasks", "tasks_absent", "clarifications", "forbidden_texts", "rule_versions"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "synthetic", "title", "covers", "reference_date", "input", "expect"],
+  "additionalProperties": false
+}

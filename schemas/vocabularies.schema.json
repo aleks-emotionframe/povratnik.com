@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://leben-in-kroatien.example/schemas/vocabularies.schema.json",
+  "title": "Controlled vocabularies",
+  "description": "Classification keys used across all datasets. These are structural identifiers, not domain values: amounts, deadlines and conditions never live here. See docs/datenmodell.md.",
+  "$defs": {
+    "language": {
+      "type": "string",
+      "enum": ["de", "hr", "en", "es", "pt"]
+    },
+    "citizenship_status": {
+      "description": "Citizenship as a legal status, separate from any document (a passport is a document).",
+      "type": "string",
+      "enum": ["hr_citizen", "eea_citizen", "ch_citizen", "third_country", "stateless", "unknown"]
+    },
+    "residence_status": {
+      "description": "Residence status in Croatia, separate from citizenship. See datenmodell.md 2.2.",
+      "type": "string",
+      "enum": [
+        "none",
+        "eea_registered",
+        "temporary_residence",
+        "diaspora_certificate",
+        "digital_nomad",
+        "permanent_residence",
+        "long_term_residence",
+        "unknown"
+      ]
+    },
+    "croatian_link": {
+      "type": "string",
+      "enum": ["citizen", "parent", "ancestor", "partner", "former_residence", "none", "unknown"]
+    },
+    "relationship_kind": {
+      "type": "string",
+      "enum": [
+        "marriage",
+        "registered_partnership",
+        "unmarried_partnership",
+        "parent_child",
+        "guardianship",
+        "dependency",
+        "other"
+      ]
+    },
+    "event_type": {
+      "description": "Triggering event kinds from datenmodell.md 2.1.",
+      "type": "string",
+      "enum": [
+        "entry",
+        "address_change",
+        "residence_registration",
+        "application_submitted",
+        "decision_served",
+        "permit_expiry",
+        "employment_start",
+        "business_registration",
+        "insurance_end_abroad"
+      ]
+    },
+    "deadline_kind": {
+      "type": "string",
+      "enum": ["statutory", "funding", "recommended", "user_reminder"]
+    },
+    "phase": {
+      "type": "string",
+      "enum": ["orient", "prepare", "move", "arrive", "stay"]
+    },
+    "route": {
+      "description": "Routes R0 to R7 from wizard-recherche.md section 4.",
+      "type": "string",
+      "enum": ["R0", "R1", "R2", "R3", "R4", "R5", "R6", "R7"]
+    },
+    "availability": {
+      "type": "string",
+      "enum": ["known", "unknown", "not_collected", "not_applicable", "not_existing"]
+    },
+    "evidence": {
+      "type": "string",
+      "enum": ["self_reported", "document", "expert_verified", "conflicting"]
+    },
+    "currency": {
+      "type": "string",
+      "enum": ["current", "review_due", "outdated"]
+    },
+    "program_status": {
+      "description": "Vocabulary B, datenmodell.md 1.1.",
+      "type": "string",
+      "enum": ["open", "announced", "closed", "exhausted", "unconfirmed", "budget_unknown"]
+    },
+    "facts_status": {
+      "description": "Vocabulary C, dimension facts.",
+      "type": "string",
+      "enum": ["self_reported", "document", "expert_verified", "conflicting", "unknown"]
+    },
+    "eligibility_status": {
+      "description": "Vocabulary C, dimension eligibility.",
+      "type": "string",
+      "enum": ["matches", "condition_missing", "unclear", "unchecked"]
+    },
+    "procedure_status": {
+      "description": "Vocabulary C, dimension procedure.",
+      "type": "string",
+      "enum": ["not_started", "preparable", "submittable", "submitted", "decided", "follow_up_open"]
+    },
+    "review_cycle": {
+      "type": "string",
+      "enum": ["weekly", "monthly", "quarterly", "biannual"]
+    }
+  }
+}

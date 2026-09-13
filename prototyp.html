@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leben in Kroatien · Informationsportal für Rückkehrer und Zuziehende</title>
+<meta name="description" content="Verstehen, vergleichen, ankommen. Unabhängiges Informationsportal zu Aufenthalt, Steuern, Versorgung, Familie und Ortswahl in Kroatien.">
+<style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
+:root{
+  /* Farbe: Papier, Tinte, ein Akzent. Neutrale tragen einen Hauch des Akzent-Hue. */
+  --paper:        oklch(99.2% 0.002 25);
+  --surface:      oklch(97.2% 0.004 25);
+  --surface-deep: oklch(94.6% 0.006 25);
+  --ink:          oklch(21% 0.012 240);
+  --ink-soft:     oklch(43% 0.012 240);
+  --muted:        oklch(56% 0.010 240);
+  --line:         oklch(89% 0.006 25);
+  --line-strong:  oklch(58% 0.012 25);
+  --accent:       oklch(48% 0.152 22);
+  --accent-deep:  oklch(40% 0.140 22);
+  --accent-wash:  oklch(96% 0.018 22);
+  --accent-ink:   oklch(99% 0.004 22);
+
+  /* Zustandsfarben: bedeuten etwas, dekorieren nicht. */
+  --st-open:      oklch(45% 0.105 155);
+  --st-open-bg:   oklch(96% 0.024 155);
+  --st-closed:    oklch(47% 0.020 240);
+  --st-closed-bg: oklch(95% 0.004 240);
+  --st-unknown:   oklch(50% 0.030 85);
+  --st-unknown-bg:oklch(96% 0.030 85);
+
+  --font-display: "Helvetica Neue", "Helvetica Now Display", Helvetica, "Arial Nova", Arial, sans-serif;
+  --font-text:    "Helvetica Neue", Helvetica, "Arial Nova", Arial, sans-serif;
+  --font-mono:    ui-monospace, "SF Mono", SFMono-Regular, Menlo, "DejaVu Sans Mono", monospace;
+
+  --step--2: clamp(0.70rem, 0.68rem + 0.08vw, 0.76rem);
+  --step--1: clamp(0.82rem, 0.80rem + 0.12vw, 0.89rem);
+  --step-0:  clamp(1rem, 0.97rem + 0.16vw, 1.075rem);
+  --step-1:  clamp(1.26rem, 1.18rem + 0.38vw, 1.45rem);
+  --step-2:  clamp(1.58rem, 1.40rem + 0.86vw, 2.05rem);
+  --step-3:  clamp(1.98rem, 1.62rem + 1.75vw, 2.95rem);
+  --step-4:  clamp(2.45rem, 1.78rem + 3.30vw, 4.30rem);
+
+  --s-1:.25rem; --s-2:.5rem; --s-3:.75rem; --s-4:1rem; --s-5:1.25rem;
+  --s-6:1.5rem; --s-8:2rem; --s-10:2.5rem; --s-12:3rem; --s-16:4rem; --s-20:5rem; --s-24:6rem;
+
+  --radius-sm:3px; --radius-md:6px; --radius-pill:999px;
+  --shadow-1: 0 1px 2px oklch(21% 0.012 240 / .07);
+  --shadow-2: 0 10px 30px -14px oklch(21% 0.012 240 / .22);
+
+  --ease: cubic-bezier(.2,0,0,1);
+  --dur: 180ms;
+
+  --measure: 68ch;
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --maxw: 1320px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-text); font-size:var(--step-0); line-height:1.6;
+  font-synthesis-weight:none; text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:700; letter-spacing:-.019em; line-height:1.08; margin:0; text-wrap:balance}
+h1{font-size:var(--step-4)}
+h2{font-size:var(--step-3)}
+h3{font-size:var(--step-1); letter-spacing:-.012em}
+h4{font-size:var(--step-0); letter-spacing:0}
+p{margin:0}
+a{color:inherit}
+ul,ol{margin:0; padding:0; list-style:none}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
+:where(a,button,input,select,summary,[tabindex]):focus-visible{
+  outline:2px solid var(--accent); outline-offset:2px; border-radius:var(--radius-sm);
+}
+::selection{background:var(--accent-wash); color:var(--accent-deep)}
+.num{font-family:var(--font-mono); font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+
+.wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gutter)}
+.narrow{max-width:var(--measure)}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--s-4);top:var(--s-4);z-index:60;background:var(--ink);color:var(--paper);padding:.6rem 1rem;border-radius:var(--radius-sm);transform:translateY(-400%);transition:transform var(--dur) var(--ease)}
+.skip:focus{transform:translateY(0)}
+
+/* ============================================================
+   KOPF
+   ============================================================ */
+.site-head{position:sticky; top:0; z-index:50; background:oklch(99.2% .002 25 / .94); backdrop-filter:saturate(1.1) blur(6px); border-bottom:1px solid var(--line)}
+.head-inner{display:flex; align-items:stretch; gap:var(--s-6); min-height:64px}
+.brand{display:flex; align-items:center; gap:.6rem; padding-block:.9rem; font-family:var(--font-display); font-weight:700; letter-spacing:-.03em; font-size:1.02rem; white-space:nowrap}
+.brand .mark{width:19px;height:19px;flex:none}
+.brand .mark rect{fill:var(--accent)}
+.brand .mark rect.b{fill:var(--ink)}
+.head-nav{display:flex; align-items:stretch; gap:0; margin-inline-start:auto}
+.head-nav button{padding:0 var(--s-4); font-size:var(--step--1); letter-spacing:.005em; color:var(--ink-soft); border-bottom:2px solid transparent; transition:color var(--dur) var(--ease), border-color var(--dur) var(--ease)}
+.head-nav button:hover{color:var(--ink)}
+.head-nav button[aria-current="page"]{color:var(--ink); font-weight:700; border-bottom-color:var(--accent)}
+.lang{display:flex; align-items:center; gap:.1rem; padding-inline-start:var(--s-4); border-inline-start:1px solid var(--line); margin-block:.9rem}
+.lang button{font-size:var(--step--2); font-family:var(--font-mono); letter-spacing:.06em; padding:.28rem .42rem; color:var(--muted); border-radius:var(--radius-sm)}
+.lang button[aria-pressed="true"]{color:var(--paper); background:var(--ink)}
+.lang button:hover{color:var(--ink)}
+.lang button[aria-pressed="true"]:hover{color:var(--paper)}
+@media(max-width:860px){
+  .head-inner{flex-wrap:wrap; min-height:0}
+  .head-nav{order:3; width:100%; margin:0; border-top:1px solid var(--line); overflow-x:auto}
+  .head-nav button{flex:1 0 auto; padding:.7rem var(--s-3)}
+  .lang{margin-inline-start:auto}
+}
+
+/* ============================================================
+   BÄNDER
+   ============================================================ */
+.band{padding-block:var(--s-16)}
+.band-tight{padding-block:var(--s-10)}
+.band-fill{background:var(--surface); border-block:1px solid var(--line)}
+.eyebrow{font-family:var(--font-mono); font-size:var(--step--2); letter-spacing:.14em; text-transform:uppercase; color:var(--muted)}
+.rule{height:1px; background:var(--line); border:0; margin:0}
+
+/* Opener: asymmetrisch, Type trägt die Seite */
+.opener{display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,1fr); gap:var(--s-16); align-items:end; padding-block:var(--s-20) var(--s-12)}
+.opener h1{max-width:14ch}
+.opener h1 em{font-style:normal; color:var(--accent)}
+.opener .lede{margin-top:var(--s-6); max-width:46ch; font-size:var(--step-1); line-height:1.45; color:var(--ink-soft)}
+@media(max-width:980px){.opener{grid-template-columns:1fr; gap:var(--s-10); padding-block:var(--s-12) var(--s-8)}}
+
+/* Suchpanel */
+.searchbox{border:1px solid var(--line-strong); border-radius:var(--radius-md); background:var(--paper); padding:var(--s-5); box-shadow:var(--shadow-2)}
+.searchbox label{display:block; font-size:var(--step--1); font-weight:700; margin-bottom:var(--s-2)}
+.searchbox .hint{font-size:var(--step--1); color:var(--muted); margin-top:var(--s-3)}
+.field{display:flex; gap:var(--s-2)}
+.field input{flex:1; min-width:0; font:inherit; font-size:var(--step-0); padding:.72rem .85rem; border:1px solid var(--line-strong); border-radius:var(--radius-sm); background:var(--paper); color:var(--ink)}
+.field input::placeholder{color:var(--muted)}
+.field input:focus-visible{outline:2px solid var(--accent); outline-offset:1px; border-color:var(--accent)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:.45rem; min-height:44px; padding:.6rem 1.05rem; border-radius:var(--radius-sm); font-size:var(--step--1); font-weight:700; letter-spacing:.005em; border:1px solid transparent; transition:background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease)}
+.btn-primary{background:var(--accent); color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-deep)}
+.btn-primary:active{background:var(--accent-deep); transform:translateY(1px)}
+.btn-ghost{border-color:var(--line-strong); color:var(--ink); background:var(--paper)}
+.btn-ghost:hover{border-color:var(--ink); background:var(--surface)}
+.btn-ghost[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.btn-sm{min-height:34px; padding:.34rem .7rem; font-size:var(--step--2)}
+.btn[disabled]{opacity:.42; cursor:not-allowed}
+
+/* Drei Wege: Liste, keine gleichrangigen Kacheln */
+.ways{border-top:1px solid var(--line)}
+.way{display:grid; grid-template-columns:3.2rem minmax(0,22ch) minmax(0,1fr) auto; gap:var(--s-6); align-items:baseline; padding-block:var(--s-6); border-bottom:1px solid var(--line); width:100%; text-align:start}
+.way .idx{font-family:var(--font-mono); font-size:var(--step--1); color:var(--muted)}
+.way h3{transition:color var(--dur) var(--ease)}
+.way p{color:var(--ink-soft); font-size:var(--step--1); max-width:52ch}
+.way .go{font-size:var(--step--1); font-weight:700; color:var(--accent); white-space:nowrap}
+.way:hover h3{color:var(--accent)}
+@media(max-width:860px){.way{grid-template-columns:2.4rem 1fr; gap:var(--s-3) var(--s-4)}.way p{grid-column:2}.way .go{grid-column:2}}
+
+/* ============================================================
+   DATENSTAND: der Signature-Move
+   ============================================================ */
+.stamp{display:flex; flex-wrap:wrap; gap:.35rem .9rem; align-items:center; font-family:var(--font-mono); font-size:var(--step--2); color:var(--muted); letter-spacing:.01em}
+.stamp b{font-weight:400; color:var(--ink-soft)}
+.stamp .dot{width:5px;height:5px;border-radius:50%;background:var(--line-strong);flex:none}
+.tag{display:inline-flex; align-items:center; gap:.35rem; font-family:var(--font-mono); font-size:var(--step--2); letter-spacing:.04em; text-transform:uppercase; padding:.18rem .5rem; border-radius:var(--radius-pill); border:1px solid currentColor}
+.tag-open{color:var(--st-open); background:var(--st-open-bg)}
+.tag-closed{color:var(--st-closed); background:var(--st-closed-bg)}
+.tag-unknown{color:var(--st-unknown); background:var(--st-unknown-bg)}
+.unknown{font-family:var(--font-mono); font-size:var(--step--1); color:var(--st-unknown); letter-spacing:.01em}
+.unknown::before{content:"○ "; }
+
+/* ============================================================
+   ORTE ENTDECKEN
+   ============================================================ */
+.explore{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,460px); gap:var(--s-10); align-items:start}
+@media(max-width:1080px){.explore{grid-template-columns:1fr}}
+.filters{display:flex; flex-wrap:wrap; gap:var(--s-2); align-items:center; padding-block:var(--s-4); border-block:1px solid var(--line)}
+.filters .lbl{font-size:var(--step--2); font-family:var(--font-mono); letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-inline-end:var(--s-2)}
+.chip{min-height:34px; padding:.32rem .7rem; border:1px solid var(--line-strong); border-radius:var(--radius-pill); font-size:var(--step--1); color:var(--ink-soft); background:var(--paper); transition:all var(--dur) var(--ease)}
+.chip:hover{border-color:var(--ink); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink); border-color:var(--ink); color:var(--paper)}
+.active-filters{display:flex; flex-wrap:wrap; gap:var(--s-2); align-items:center; margin-top:var(--s-4); min-height:1.5rem; font-size:var(--step--1)}
+.pill-x{display:inline-flex; align-items:center; gap:.4rem; min-height:30px; padding:.2rem .3rem .2rem .65rem; border:1px solid var(--accent); color:var(--accent-deep); background:var(--accent-wash); border-radius:var(--radius-pill); font-size:var(--step--2)}
+.pill-x span.x{display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; font-size:.8rem; line-height:1}
+.pill-x:hover span.x{background:var(--accent); color:var(--accent-ink)}
+
+.viewtoggle{display:flex; gap:0; border:1px solid var(--line-strong); border-radius:var(--radius-sm); overflow:hidden}
+.viewtoggle button{padding:.35rem .8rem; font-size:var(--step--2); font-family:var(--font-mono); letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.viewtoggle button[aria-pressed="true"]{background:var(--ink); color:var(--paper)}
+
+.results{margin-top:var(--s-6)}
+.result{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--s-4); padding-block:var(--s-5); border-bottom:1px solid var(--line)}
+.result:first-child{border-top:1px solid var(--line)}
+.result h3{font-size:var(--step-1)}
+.result .meta{font-size:var(--step--1); color:var(--muted); margin-top:.2rem}
+.result .facts{display:flex; flex-wrap:wrap; gap:.3rem .8rem; margin-top:var(--s-3); font-size:var(--step--1); color:var(--ink-soft)}
+.result .facts .k{color:var(--muted)}
+.result .acts{display:flex; flex-direction:column; gap:var(--s-2); align-items:stretch; justify-content:start}
+.depth{display:flex; align-items:center; gap:.4rem; margin-top:var(--s-3); font-family:var(--font-mono); font-size:var(--step--2); color:var(--muted)}
+.depth .bar{display:flex; gap:2px}
+.depth .bar i{width:16px; height:4px; background:var(--surface-deep); border-radius:1px}
+.depth .bar i.on{background:var(--accent)}
+.empty{padding:var(--s-10) 0; border-top:1px solid var(--line)}
+.empty p{color:var(--ink-soft); max-width:52ch}
+
+/* Karte */
+.mapcard{position:sticky; top:84px; border:1px solid var(--line-strong); border-radius:var(--radius-md); background:var(--paper); overflow:hidden}
+.mapcard .caption{padding:var(--s-3) var(--s-4); border-top:1px solid var(--line); background:var(--surface); font-size:var(--step--2); color:var(--muted); line-height:1.45}
+.mapsvg{display:block; width:100%; height:auto; background:var(--surface)}
+.mapsvg .land{fill:var(--paper); stroke:var(--line-strong); stroke-width:1.1; stroke-linejoin:round}
+.mapsvg .sea{fill:var(--surface)}
+.mapsvg .pt{cursor:pointer}
+.mapsvg .pt circle{fill:var(--paper); stroke:var(--ink-soft); stroke-width:1.5; transition:all var(--dur) var(--ease)}
+.mapsvg .pt text{font-family:var(--font-text); font-size:9.5px; fill:var(--ink-soft); paint-order:stroke; stroke:var(--paper); stroke-width:3px}
+.mapsvg .pt:hover circle,.mapsvg .pt:focus-visible circle{fill:var(--accent); stroke:var(--accent); r:6.5}
+.mapsvg .pt.is-hit circle{fill:var(--accent); stroke:var(--accent-deep)}
+.mapsvg .pt.is-hit text{fill:var(--ink); font-weight:700}
+.mapsvg .pt.is-dim{opacity:.28}
+.mapsvg .pt.is-sel circle{stroke:var(--ink); stroke-width:3}
+
+/* ============================================================
+   ORTSPROFIL
+   ============================================================ */
+.crumb{display:flex; gap:.5rem; align-items:center; font-size:var(--step--1); color:var(--muted); padding-block:var(--s-6) 0}
+.crumb button{color:var(--accent); font-weight:700}
+.crumb button:hover{text-decoration:underline}
+.profile-head{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:var(--s-6); align-items:end; padding-block:var(--s-4) var(--s-8); border-bottom:2px solid var(--ink)}
+@media(max-width:720px){.profile-head{grid-template-columns:1fr}}
+.sec{padding-block:var(--s-8); border-bottom:1px solid var(--line)}
+.sec-grid{display:grid; grid-template-columns:minmax(0,20ch) minmax(0,1fr); gap:var(--s-8)}
+@media(max-width:860px){.sec-grid{grid-template-columns:1fr; gap:var(--s-4)}}
+.sec h3{position:sticky; top:84px; align-self:start}
+.kv{border-top:1px solid var(--line)}
+.kv>div{display:grid; grid-template-columns:minmax(0,17ch) minmax(0,1fr); gap:var(--s-4); padding-block:var(--s-3); border-bottom:1px solid var(--line)}
+.kv dt{color:var(--muted); font-size:var(--step--1)}
+.kv dd{margin:0}
+@media(max-width:620px){.kv>div{grid-template-columns:1fr; gap:.2rem}}
+.benefit{padding:var(--s-5) 0; border-bottom:1px solid var(--line)}
+.benefit:last-child{border-bottom:0}
+.benefit .top{display:flex; flex-wrap:wrap; gap:var(--s-3); align-items:baseline; justify-content:space-between}
+.benefit h4{font-size:var(--step-0); font-weight:700}
+.benefit .amount{font-family:var(--font-mono); font-size:var(--step-1); font-weight:400; letter-spacing:-.03em; white-space:nowrap}
+.benefit .cond{margin-top:var(--s-2); color:var(--ink-soft); font-size:var(--step--1); max-width:60ch}
+.benefit .stamp{margin-top:var(--s-3)}
+.srclink{color:var(--accent); text-decoration:underline; text-underline-offset:2px; font-family:var(--font-mono); font-size:var(--step--2)}
+
+/* ============================================================
+   VERGLEICH
+   ============================================================ */
+.cmp-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius-md)}
+table.cmp{width:100%; border-collapse:collapse; min-width:640px; font-size:var(--step--1)}
+table.cmp th,table.cmp td{text-align:start; padding:var(--s-3) var(--s-4); border-bottom:1px solid var(--line); vertical-align:top}
+table.cmp thead th{position:sticky; top:0; background:var(--surface); font-size:var(--step-0); border-bottom:2px solid var(--ink); z-index:1}
+table.cmp tbody th{font-weight:400; color:var(--muted); width:22%; background:var(--paper)}
+table.cmp tr:last-child td,table.cmp tr:last-child th{border-bottom:0}
+table.cmp .row-group th{font-family:var(--font-mono); font-size:var(--step--2); letter-spacing:.1em; text-transform:uppercase; color:var(--ink); background:var(--surface-deep)}
+
+/* ============================================================
+   WISSEN
+   ============================================================ */
+.topics{display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:0; border-top:1px solid var(--line)}
+.topic{text-align:start; padding:var(--s-5) var(--s-5) var(--s-5) 0; border-bottom:1px solid var(--line); display:flex; gap:var(--s-4); align-items:baseline}
+.topic .n{font-family:var(--font-mono); font-size:var(--step--2); color:var(--muted); min-width:2ch}
+.topic h4{transition:color var(--dur) var(--ease)}
+.topic p{font-size:var(--step--1); color:var(--muted); margin-top:.2rem}
+.topic:hover h4{color:var(--accent)}
+.answer{border:1px solid var(--ink); border-radius:var(--radius-md); padding:var(--s-6); background:var(--surface)}
+.answer .q{font-size:var(--step--1); color:var(--muted); font-family:var(--font-mono); letter-spacing:.06em; text-transform:uppercase}
+.answer .a{font-size:var(--step-1); line-height:1.4; margin-top:var(--s-2); max-width:54ch; font-weight:700; letter-spacing:-.01em}
+.answer .who{margin-top:var(--s-4); color:var(--ink-soft); max-width:60ch; font-size:var(--step--1)}
+.steps{counter-reset:s; border-top:1px solid var(--line)}
+.steps li{counter-increment:s; display:grid; grid-template-columns:2.5rem 1fr; gap:var(--s-4); padding-block:var(--s-4); border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s,decimal-leading-zero); font-family:var(--font-mono); font-size:var(--step--1); color:var(--muted)}
+.callout{border-inline-start:0; border:1px solid var(--line-strong); background:var(--paper); border-radius:var(--radius-md); padding:var(--s-5); margin-top:var(--s-6)}
+.callout h4{margin-bottom:var(--s-2)}
+.callout p{font-size:var(--step--1); color:var(--ink-soft); max-width:64ch}
+
+/* ============================================================
+   MEIN UMZUG
+   ============================================================ */
+.qgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:var(--s-6); padding-block:var(--s-6)}
+.q fieldset{border:0; margin:0; padding:0}
+.q legend{font-size:var(--step--1); font-weight:700; padding:0; margin-bottom:var(--s-3)}
+.opts{display:flex; flex-direction:column; gap:var(--s-2)}
+.opt{display:flex; align-items:flex-start; gap:.6rem; padding:.55rem .7rem; border:1px solid var(--line); border-radius:var(--radius-sm); font-size:var(--step--1); cursor:pointer; transition:border-color var(--dur) var(--ease), background var(--dur) var(--ease)}
+.opt:hover{border-color:var(--line-strong); background:var(--surface)}
+.opt input{margin:.28rem 0 0; accent-color:var(--accent); width:16px; height:16px; flex:none}
+.opt:has(input:checked){border-color:var(--accent); background:var(--accent-wash)}
+.opt:has(input:focus-visible){outline:2px solid var(--accent); outline-offset:2px}
+.plan-phase{padding-block:var(--s-6); border-bottom:1px solid var(--line)}
+.plan-phase>header{display:flex; align-items:baseline; gap:var(--s-3); margin-bottom:var(--s-4)}
+.task{display:grid; grid-template-columns:auto minmax(0,1fr); gap:var(--s-3) var(--s-4); padding-block:var(--s-4); border-top:1px solid var(--line)}
+.task:first-of-type{border-top:0}
+.task .box{width:18px;height:18px;border:1px solid var(--line-strong); border-radius:var(--radius-sm); margin-top:.3rem; flex:none}
+.task h4{font-size:var(--step-0)}
+.task .why{color:var(--ink-soft); font-size:var(--step--1); margin-top:.2rem; max-width:60ch}
+.task .dep{margin-top:var(--s-2); font-family:var(--font-mono); font-size:var(--step--2); color:var(--st-unknown)}
+.task .stamp{margin-top:var(--s-2)}
+.task.blocked{opacity:.72}
+
+/* ============================================================
+   FUSS
+   ============================================================ */
+.site-foot{border-top:1px solid var(--line); background:var(--surface); padding-block:var(--s-12) var(--s-8); margin-top:var(--s-16)}
+.foot-grid{display:grid; grid-template-columns:minmax(0,1.5fr) repeat(2,minmax(0,1fr)); gap:var(--s-8)}
+@media(max-width:820px){.foot-grid{grid-template-columns:1fr}}
+.site-foot h4{font-size:var(--step--1); margin-bottom:var(--s-3)}
+.site-foot li{padding-block:.2rem}
+.site-foot a{color:var(--ink-soft); font-size:var(--step--1); text-decoration:none}
+.site-foot a:hover{color:var(--accent); text-decoration:underline}
+.disclaimer{margin-top:var(--s-8); padding-top:var(--s-6); border-top:1px solid var(--line-strong); font-size:var(--step--1); color:var(--muted); max-width:78ch}
+.demo-note{background:var(--ink); color:var(--paper); font-size:var(--step--2); font-family:var(--font-mono); letter-spacing:.02em; padding:.55rem var(--gutter); text-align:center; line-height:1.5}
+.demo-note b{color:var(--paper)}
+
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important; transition-duration:.01ms!important}
+}
+@media print{.site-head,.demo-note{position:static}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Direkt zum Inhalt</a>
+
+<p class="demo-note">Arbeitsstand <b>v0.1</b> · Prototyp mit echten, belegten Daten von vier Gemeinden · Alle weiteren Orte sind bewusst als «noch im Aufbau» gekennzeichnet</p>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="#" data-nav="start">
+      <svg class="mark" viewBox="0 0 20 20" aria-hidden="true"><rect x="0" y="0" width="9" height="9"/><rect class="b" x="11" y="0" width="9" height="9"/><rect class="b" x="0" y="11" width="9" height="9"/><rect x="11" y="11" width="9" height="9"/></svg>
+      Leben in Kroatien
+    </a>
+    <nav class="head-nav" aria-label="Hauptnavigation">
+      <button data-nav="wissen" data-i18n="nav.wissen">Wissen</button>
+      <button data-nav="orte" data-i18n="nav.orte">Orte entdecken</button>
+      <button data-nav="plan" data-i18n="nav.plan">Mein Umzug</button>
+    </nav>
+    <div class="lang" role="group" aria-label="Sprache">
+      <button data-lang="de" aria-pressed="true">DE</button>
+      <button data-lang="es" aria-pressed="false">ES</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ START ============ -->
+<section id="v-start" class="view">
+  <div class="wrap opener">
+    <div>
+      <p class="eyebrow" data-i18n="start.eyebrow">Unabhängiges Informationsportal</p>
+      <h1 style="margin-top:var(--s-4)" data-i18n="start.h1">Verstehen, vergleichen, <em>ankommen</em>.</h1>
+      <p class="lede" data-i18n="start.lede">Aufenthalt, Steuern, Krankenversicherung, Schule, Wohnen und Förderungen. An einem Ort, in Ihrer Sprache, mit sichtbarer Quelle und Prüfdatum.</p>
+    </div>
+    <div class="searchbox">
+      <label for="q-start" data-i18n="start.searchLabel">Wo soll Ihr Alltag stattfinden?</label>
+      <div class="field">
+        <input id="q-start" type="search" placeholder="Ort, Gemeinde oder Region" autocomplete="off">
+        <button class="btn btn-primary" data-action="search-start" data-i18n="start.searchBtn">Orte ansehen</button>
+      </div>
+      <p class="hint" data-i18n="start.searchHint">Vier Gemeinden sind vollständig erfasst. Alle übrigen sind im Index enthalten und als unvollständig gekennzeichnet.</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <ul class="ways">
+      <li><button class="way" data-nav="wissen">
+        <span class="idx">01</span>
+        <h3 data-i18n="way1.t">Wissen</h3>
+        <p data-i18n="way1.d">Zwölf Themenwege von Staatsangehörigkeit bis Umzug. Jede Seite nennt Zielgruppe, Bedingungen, zuständige Stelle und Stand.</p>
+        <span class="go" data-i18n="way.go">Öffnen</span>
+      </button></li>
+      <li><button class="way" data-nav="orte">
+        <span class="idx">02</span>
+        <h3 data-i18n="way2.t">Orte entdecken</h3>
+        <p data-i18n="way2.d">Karte und Liste mit Filtern. Kommunale Leistungen, Versorgung und Datentiefe je Ort, vergleichbar nebeneinander.</p>
+        <span class="go" data-i18n="way.go">Öffnen</span>
+      </button></li>
+      <li><button class="way" data-nav="plan">
+        <span class="idx">03</span>
+        <h3 data-i18n="way3.t">Mein Umzug</h3>
+        <p data-i18n="way3.d">Ein Fahrplan aus Ihren Rahmenbedingungen. Mit Abhängigkeiten, Fristarten und offenen Klärungen. Ohne Konto, ohne Speicherung.</p>
+        <span class="go" data-i18n="way.go">Öffnen</span>
+      </button></li>
+    </ul>
+  </div>
+
+  <div class="band band-tight">
+    <div class="wrap">
+      <p class="eyebrow" style="margin-bottom:var(--s-4)">Was gerade läuft</p>
+      <div id="now-list"></div>
+    </div>
+  </div>
+
+  <div class="band band-fill">
+    <div class="wrap" style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--s-12)">
+      <div>
+        <h2 style="font-size:var(--step-2)">Warum Beträge allein nichts sagen</h2>
+        <p class="narrow" style="margin-top:var(--s-4); color:var(--ink-soft)">Ein Betrag in einer Schlagzeile kann ein Gemeindebudget, ein Höchstbetrag je Antrag oder die Summe mehrerer Programme sein. Deshalb trägt jede Leistung hier vier Zeitangaben und einen Zustand: Veröffentlichung, Inkrafttreten, Antragszeitraum, letzte Prüfung.</p>
+      </div>
+      <div>
+        <dl class="kv">
+          <div><dt>Zustände</dt><dd><span class="tag tag-open">offen</span> <span class="tag tag-closed">geschlossen</span> <span class="tag tag-unknown">unbekannt</span></dd></div>
+          <div><dt>Nicht dasselbe</dt><dd>«nicht vorhanden», «nicht erhoben» und «unbekannt» sind drei verschiedene Aussagen.</dd></div>
+          <div><dt>Keine Null</dt><dd>Eine Null ist ein bestätigter Wert, kein Ersatz für eine fehlende Angabe.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ORTE ============ -->
+<section id="v-orte" class="view" hidden>
+  <div class="wrap">
+    <div style="padding-block:var(--s-10) var(--s-6)">
+      <p class="eyebrow">Orte entdecken</p>
+      <h2 style="margin-top:var(--s-3)">Welcher Ort passt zu Ihrem Alltag?</h2>
+      <p class="narrow" style="margin-top:var(--s-4); color:var(--ink-soft)">Suchen Sie einen Ort, den Sie kennen, oder filtern Sie nach dem, was Ihr Haushalt braucht. Die Liste enthält dieselben Angaben wie die Karte und ist ohne Karte vollständig nutzbar.</p>
+    </div>
+
+    <div style="max-width:520px; margin-bottom:var(--s-6)">
+      <label for="q-orte" style="display:block; font-size:var(--step--1); font-weight:700; margin-bottom:var(--s-2)">Ort suchen</label>
+      <div class="field">
+      <input id="q-orte" type="search" placeholder="Ort, Gemeinde oder Region" autocomplete="off">
+      <button class="btn btn-ghost" data-action="clear-search">Zurücksetzen</button>
+      </div>
+    </div>
+
+    <div class="filters" role="group" aria-label="Filter">
+      <span class="lbl">Filter</span>
+      <button class="chip" data-filter="wohnbeihilfe" aria-pressed="false">Wohnbeihilfe</button>
+      <button class="chip" data-filter="miete" aria-pressed="false">Mietzuschuss</button>
+      <button class="chip" data-filter="bauland" aria-pressed="false">Bauen und Kaufen</button>
+      <button class="chip" data-filter="familie" aria-pressed="false">Familienleistung</button>
+      <button class="chip" data-filter="kueste" aria-pressed="false">Küstennähe</button>
+      <button class="chip" data-filter="vollstaendig" aria-pressed="false">Nur vollständig erfasst</button>
+      <div style="margin-inline-start:auto; display:flex; gap:var(--s-3); align-items:center">
+        <div class="viewtoggle" role="group" aria-label="Ansicht">
+          <button data-view="liste" aria-pressed="true">Liste</button>
+          <button data-view="karte" aria-pressed="false">Karte</button>
+        </div>
+      </div>
+    </div>
+    <div class="active-filters" id="active-filters" aria-live="polite"></div>
+  </div>
+
+  <div class="wrap band-tight">
+    <div class="explore">
+      <div>
+        <div id="results" class="results"></div>
+      </div>
+      <aside class="mapcard" id="mapcard">
+        <svg class="mapsvg" viewBox="0 0 460 380" role="img" aria-label="Schematische Übersichtskarte Kroatiens mit den erfassten Gemeinden">
+          <rect class="sea" x="0" y="0" width="460" height="380"/>
+          <path class="land" d="M62 66 L128 44 L196 52 L244 40 L300 48 L352 42 L398 58 L410 92 L392 118 L352 128 L318 120 L300 140 L306 176 L282 196 L250 190 L228 168 L196 160 L170 140 L150 152 L166 182 L200 206 L236 226 L268 252 L296 284 L322 316 L336 344 L312 352 L282 330 L252 300 L218 268 L184 240 L150 210 L118 176 L92 140 L70 106 Z"/>
+          <g id="map-points"></g>
+        </svg>
+        <p class="caption">Schematische Darstellung zur Bedienung, keine geografisch exakte Karte. Die Umsetzung verwendet lizenzierte Geodaten mit stabilen Ortskennungen.</p>
+      </aside>
+    </div>
+  </div>
+
+  <div class="wrap band-tight" id="cmp-zone" hidden>
+    <div style="display:flex; flex-wrap:wrap; gap:var(--s-4); align-items:baseline; justify-content:space-between; margin-bottom:var(--s-4)">
+      <h3>Vergleich</h3>
+      <button class="btn btn-ghost btn-sm" data-action="clear-cmp">Vergleich leeren</button>
+    </div>
+    <div class="cmp-wrap"><table class="cmp" id="cmp-table"></table></div>
+    <p style="margin-top:var(--s-4); font-size:var(--step--1); color:var(--muted); max-width:64ch">Die Tabelle zeigt Rohinformationen nebeneinander. Es gibt bewusst keine Gesamtnote und keine Rangfolge: welche Zeile für Ihren Haushalt zählt, entscheiden Sie.</p>
+  </div>
+</section>
+
+<!-- ============ ORTSPROFIL ============ -->
+<section id="v-profil" class="view" hidden>
+  <div class="wrap">
+    <nav class="crumb" aria-label="Pfad"><button data-nav="orte">Orte entdecken</button> <span>/</span> <span id="crumb-name"></span></nav>
+    <div id="profile-body"></div>
+  </div>
+</section>
+
+<!-- ============ WISSEN ============ -->
+<section id="v-wissen" class="view" hidden>
+  <div class="wrap">
+    <div style="padding-block:var(--s-10) var(--s-6)">
+      <p class="eyebrow">Wissen</p>
+      <h2 style="margin-top:var(--s-3)">Zwölf Themenwege</h2>
+      <p class="narrow" style="margin-top:var(--s-4); color:var(--ink-soft)">Abstammung, Staatsangehörigkeit, Aufenthaltsrecht, Steuerstatus und Krankenversicherung sind getrennte Sachverhalte. Deshalb wird hier keiner davon aus einem anderen abgeleitet.</p>
+    </div>
+    <div class="topics" id="topics"></div>
+    <div style="padding-block:var(--s-10)">
+      <p class="eyebrow" style="margin-bottom:var(--s-4)">Beispielseite im finalen Aufbau</p>
+      <div id="article"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section id="v-plan" class="view" hidden>
+  <div class="wrap">
+    <div style="padding-block:var(--s-10) var(--s-4)">
+      <p class="eyebrow">Mein Umzug</p>
+      <h2 style="margin-top:var(--s-3)">Ihr Fahrplan entsteht aus fünf Angaben</h2>
+      <p class="narrow" style="margin-top:var(--s-4); color:var(--ink-soft)">Alles läuft in Ihrem Browser. Es wird nichts übertragen und nichts gespeichert. «Weiss ich noch nicht» ist eine gültige Antwort und erzeugt eine Klärungsaufgabe statt einer erfundenen Einstufung.</p>
+    </div>
+    <form class="q" id="planform">
+      <div class="qgrid" id="planq"></div>
+    </form>
+    <div id="planout" style="padding-block:var(--s-6) var(--s-16)"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Leben in Kroatien</h4>
+        <p style="font-size:var(--step--1); color:var(--ink-soft); max-width:42ch">Unabhängiges Informationsportal zu Rückkehr und Zuzug. Redaktionell gepflegt, mit sichtbarer Quelle und Prüfdatum je Angabe.</p>
+        <p class="stamp" style="margin-top:var(--s-4)"><b>Redaktionsstand</b> 13.09.2026 <span class="dot"></span> <b>Version</b> v0.1</p>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutzerklärung</a></li>
+          <li><a href="#">Barrierefreiheitserklärung</a></li>
+          <li><a href="#">Redaktionsgrundsätze</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Mitarbeiten</h4>
+        <ul>
+          <li><a href="#">Fehler melden</a></li>
+          <li><a href="#">Gemeinde eintragen</a></li>
+          <li><a href="#">Fachpartner werden</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="disclaimer">Dieses Portal liefert allgemeine Information und keine Rechts-, Steuer- oder Finanzberatung. Über Staatsangehörigkeit, Aufenthalt, Versicherungspflicht und Förderansprüche entscheidet ausschliesslich die zuständige Stelle im Einzelfall. Bei Abstammungsnachweis, Steuerstatus, Grundbuch und Sozialversicherung ist eine kroatische Fachperson beizuziehen.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+
+/* ============================================================
+   DATEN
+   Nur belegte Angaben. Alles andere trägt einen expliziten Zustand.
+   ============================================================ */
+const STAND = "12.09.2026";
+
+const PLACES = [
+  {
+    id:"opuzen", name:"Opuzen", county:"Dubrovnik-Neretva", region:"Süddalmatien, Neretva-Delta",
+    x:296, y:284, coast:true, depth:3,
+    tags:["wohnbeihilfe","bauland","kueste"],
+    benefits:[
+      { title:"Beihilfe für junge Familien und Landwirte", amount:"bis 10.000 EUR",
+        cond:"Je Massnahme: Kauf, Bau oder Anpassung von Wohnraum. Bedingungen und Antragsberechtigung ergeben sich aus der Ausschreibung der Gemeinde.",
+        status:"open", deadline:"22.09.2026", src:"Öffentliche Ausschreibung der Gemeinde Opuzen", checked:STAND }
+    ],
+    fields:{ schule:"nicht erhoben", kindergarten:"nicht erhoben", hausarzt:"nicht erhoben", klinik:"nicht erhoben", miete:"nicht erhoben", internet:"nicht erhoben" }
+  },
+  {
+    id:"kastela", name:"Kaštela", county:"Split-Dalmatien", region:"Küste, Grossraum Split",
+    x:250, y:190, coast:true, depth:3,
+    tags:["miete","kueste","familie"],
+    benefits:[
+      { title:"Mietzuschuss für Zuziehende mit Kindern", amount:"bis 300 EUR / Monat",
+        cond:"Haushalte mit Kindern. Ohne Kinder liegt der Zuschuss bei bis zu 200 EUR im Monat.",
+        status:"unknown", deadline:"Antragszeitraum nicht bestätigt", src:"Städtisches Programm Kaštela", checked:STAND }
+    ],
+    fields:{ schule:"nicht erhoben", kindergarten:"nicht erhoben", hausarzt:"nicht erhoben", klinik:"nicht erhoben", miete:"nicht erhoben", internet:"nicht erhoben" }
+  },
+  {
+    id:"marija-bistrica", name:"Marija Bistrica", county:"Krapina-Zagorje", region:"Hrvatsko zagorje, nördlich von Zagreb",
+    x:150, y:152, coast:false, depth:3,
+    tags:["wohnbeihilfe","bauland"],
+    benefits:[
+      { title:"Zuschuss zur Lösung des Wohnproblems", amount:"bis 3.981,68 EUR",
+        cond:"Bis 50 Prozent der anerkannten Kosten. Das Gesamtbudget der Gemeinde für diese Massnahme beträgt 40.000 EUR und begrenzt die Zahl der Bewilligungen.",
+        status:"unknown", deadline:"Antragszeitraum nicht bestätigt", src:"Programm der Gemeinde Marija Bistrica", checked:STAND }
+    ],
+    fields:{ schule:"nicht erhoben", kindergarten:"nicht erhoben", hausarzt:"nicht erhoben", klinik:"nicht erhoben", miete:"nicht erhoben", internet:"nicht erhoben" }
+  },
+  {
+    id:"velika", name:"Velika", county:"Požega-Slawonien", region:"Slawonien, am Papuk",
+    x:228, y:168, coast:false, depth:3,
+    tags:["wohnbeihilfe","bauland","familie"],
+    benefits:[
+      { title:"Wohnraumförderung für junge Familien", amount:"bis 5.000 EUR",
+        cond:"Höchstens 50 Prozent der Kosten für Bauland, Wohnobjekt, Bau oder Rekonstruktion. Ein Partner unter 40 Jahren, erste Lösung des Wohnproblems. Das Gesamtbudget der Gemeinde beträgt 65.000 EUR.",
+        status:"open", deadline:"30.09.2026", src:"Javni poziv der Gemeinde Velika 2026", checked:STAND }
+    ],
+    fields:{ schule:"nicht erhoben", kindergarten:"nicht erhoben", hausarzt:"nicht erhoben", klinik:"nicht erhoben", miete:"nicht erhoben", internet:"nicht erhoben" }
+  },
+  { id:"vukovar", name:"Vukovar", county:"Vukovar-Srijem", region:"Ostslawonien, Donau", x:306, y:176, coast:false, depth:1, tags:[], benefits:[], fields:{} },
+  { id:"zadar", name:"Zadar", county:"Zadar", region:"Norddalmatien", x:196, y:160, coast:true, depth:1, tags:["kueste"], benefits:[], fields:{} },
+  { id:"osijek", name:"Osijek", county:"Osijek-Baranja", region:"Slawonien, Drau", x:282, y:140, coast:false, depth:1, tags:[], benefits:[], fields:{} },
+  { id:"rijeka", name:"Rijeka", county:"Primorje-Gorski kotar", region:"Kvarner", x:150, y:210, coast:true, depth:1, tags:["kueste"], benefits:[], fields:{} },
+  { id:"zagreb", name:"Zagreb", county:"Stadt Zagreb", region:"Hauptstadt", x:170, y:140, coast:false, depth:1, tags:[], benefits:[], fields:{} },
+  { id:"split", name:"Split", county:"Split-Dalmatien", region:"Mitteldalmatien", x:236, y:226, coast:true, depth:1, tags:["kueste"], benefits:[], fields:{} }
+];
+
+const NATIONAL = [
+  { t:"Befreiung von der Lohnsteuer für fünf Jahre", s:"open",
+    d:"100 Prozent des anteiligen Jahresbetrags auf Einkünfte aus nichtselbständiger Arbeit. Gilt für qualifizierte Rückkehrfälle ab dem 1. Januar 2025 nach mindestens zwei Jahren im Ausland.",
+    src:"Porezna uprava", when:"laufend" },
+  { t:"Biram Hrvatsku, Rückkehr und Selbständigkeit", s:"open",
+    d:"7.000 EUR für qualifizierte Rückkehrfälle, 3.500 EUR für bestimmte Binnenmobilität. Fristen, Bindungen und Voraussetzungen entscheiden über den Anspruch.",
+    src:"HZZ, Programmjahr 2026", when:"bis 30.09.2026 oder bis zur Erschöpfung der Mittel" },
+  { t:"Stipendien zum Erlernen der kroatischen Sprache", s:"closed",
+    d:"Bewerbungsrunde für das Studienjahr 2026/2027 ist abgelaufen. Ein neuer Aufruf wird üblicherweise im Folgejahr veröffentlicht.",
+    src:"Ministerium für Demografie und Einwanderung", when:"Frist war 06.07.2026" },
+  { t:"Wohnraumversorgung für Rückkehrer", s:"open",
+    d:"Anträge sind ganzjährig möglich. Die Zuteilung hängt von den Voraussetzungen und vom verfügbaren Wohnungsbestand ab und ist kein Anspruch auf einen bestimmten Ort.",
+    src:"Ministerium für Demografie und Einwanderung", when:"laufend" }
+];
+
+const TOPICS = [
+  ["01","Status und Staatsangehörigkeit","Abstammung, Einbürgerung, Aufenthaltswege, Familienangehörige"],
+  ["02","Dokumente und Behörden","OIB, Personenstand, Apostille, Übersetzungen, Namensabweichungen"],
+  ["03","Das bisherige Wohnland verlassen","Abmeldung, Steuerfragen, Versicherungsende, Verträge, Schulunterlagen"],
+  ["04","Arbeit und Qualifikation","Stellensuche, Anerkennung, reglementierte Berufe, Arbeitsrechte"],
+  ["05","Gründen und selbständig arbeiten","Rechtsformen, Beiträge, Genehmigungen, Reihenfolge, Pflichten"],
+  ["06","Steuern, Geld und Pension","Ansässigkeit, Auslandseinkommen, Bankkonto, Rentenansprüche"],
+  ["07","Gesundheit und Pflege","Versicherungsbeginn, Übergangsdeckung, Hausarzt, chronischer Bedarf"],
+  ["08","Kinder, Schule und Ausbildung","Einschreibung, Zeugnisse, Sprachförderung, Betreuung, Kosten"],
+  ["09","Wohnen und Regionen","Miete, Kaution, Kaufprüfung, Grundbuch, Erreichbarkeit, Internet"],
+  ["10","Sprache und Gemeinschaft","Kurse, Stipendien, Vereine, Mentoring, Teilhabe"],
+  ["11","Umzug und Mobilität","Hausrat, Zoll, Fahrzeuge, Führerschein, Haustiere, erste Wochen"],
+  ["12","Leistungen und Förderung","Staat, Region, Gemeinde. Anspruch, Nachweise, Kumulation, Rückzahlung"]
+];
+
+const PLAN_QUESTIONS = [
+  { id:"status", legend:"Welchen Pass haben Sie?", opts:[
+    ["hr","Kroatischer Pass"],["abst","Kroatische Vorfahren, kein kroatischer Pass"],
+    ["eu","EU-, EWR- oder Schweizer Pass"],["dritt","Anderer Pass, keine kroatischen Vorfahren"],["unklar","Weiss ich noch nicht"]]},
+  { id:"land", legend:"Aus welchem Land ziehen Sie zu?", opts:[
+    ["ar","Argentinien"],["de","Deutschland"],["ch","Schweiz"],["andere","Anderes Land"]]},
+  { id:"haushalt", legend:"Wer zieht mit?", opts:[
+    ["allein","Ich allein"],["partner","Partnerin oder Partner"],["kinder","Partner und Kinder"]]},
+  { id:"geld", legend:"Wovon leben Sie in Kroatien?", opts:[
+    ["anstellung","Anstellung in Kroatien"],["selbst","Eigene Tätigkeit oder Gründung"],
+    ["remote","Arbeit für einen Arbeitgeber im Ausland"],["offen","Noch offen"]]},
+  { id:"zeit", legend:"Wann soll der Umzug stattfinden?", opts:[
+    ["6","In bis zu 6 Monaten"],["12","In 6 bis 12 Monaten"],["spaeter","Später oder unklar"]]}
+];
+
+const TASKS = [
+  { ph:"Orientieren", t:"Statusweg klären, bevor alles andere geplant wird", if:a=>true,
+    why:"Abstammung, Staatsangehörigkeit und Aufenthaltsrecht sind getrennte Sachverhalte. Welcher davon auf Sie zutrifft, bestimmt fast jeden weiteren Schritt.",
+    stelle:"MUP, zuständiges Konsulat, bei Auswandererfällen zusätzlich das Ministerium für Demografie und Einwanderung", frist:"keine gesetzliche Frist" },
+  { ph:"Orientieren", t:"Prüfen lassen, ob der Abstammungsnachweis vollständig ist", if:a=>a.status==="abst"||a.status==="unklar",
+    why:"Bei Nachkommen entscheidet die lückenlose Urkundenkette über Generationen. Diese Prüfung gehört an den Anfang, weil die Beschaffung Monate dauern kann.",
+    stelle:"Konsulat, Standesämter, kroatische Fachperson", frist:"keine gesetzliche Frist", unsicher:"Ergebnis offen, bis eine zuständige Stelle entschieden hat" },
+  { ph:"Orientieren", t:"Zwei bis drei Zielorte vergleichen", if:a=>true,
+    why:"Kommunale Leistungen unterscheiden sich stark. Ebenso Schulweg, Versorgung und dauerhaft verfügbarer Wohnraum.",
+    stelle:"dieses Portal, Gemeindeverwaltung", frist:"keine" },
+  { ph:"Vorbereiten", t:"Urkunden beschaffen, mit Apostille und beglaubigter Übersetzung", if:a=>a.land==="ar"||a.land==="andere"||a.status==="abst",
+    why:"Ausserhalb der EU ist dies erfahrungsgemäss der längste Schritt. Reihenfolge beachten: zuerst Original, dann Apostille, dann Übersetzung.",
+    stelle:"Ausstellende Register im Herkunftsland, Apostillestelle, gerichtlich beeidigte Übersetzer", frist:"Vorlaufzeit, keine Behördenfrist" },
+  { ph:"Vorbereiten", t:"OIB beantragen", if:a=>true,
+    why:"Die persönliche Identifikationsnummer ist Voraussetzung für Bankkonto, Mietvertrag, Anmeldung und fast jeden Antrag.",
+    stelle:"Porezna uprava, auch über das zuständige Konsulat", frist:"keine Frist, aber blockierend für spätere Schritte" },
+  { ph:"Vorbereiten", t:"Aufenthaltstitel oder Bescheinigung für Auswanderer beantragen", if:a=>a.status==="abst"||a.status==="dritt",
+    why:"Ohne geklärten Aufenthalt sind Arbeit, Versicherung und mehrere Förderungen nicht zugänglich.",
+    stelle:"MUP, bei Auswandererfällen mit Bescheinigung des Ministeriums", frist:"abhängig vom Verfahren", unsicher:"Voraussetzungen im Einzelfall von der Behörde zu bestätigen" },
+  { ph:"Vorbereiten", t:"Versicherungsweg für jedes Haushaltsmitglied einzeln klären", if:a=>a.haushalt!=="allein",
+    why:"Partner und Kinder können auf unterschiedlichen Grundlagen versichert sein. Eine Lücke zwischen alter und neuer Deckung ist das häufigste vermeidbare Problem.",
+    stelle:"HZZO, bisheriger Versicherer", frist:"fristgebunden, abhängig vom bisherigen System" },
+  { ph:"Vorbereiten", t:"Schulaufnahme und Sprachförderung anfragen", if:a=>a.haushalt==="kinder",
+    why:"Aufnahme, Zeugnisanerkennung und Förderunterricht laufen über die aufnehmende Schule und brauchen Vorlauf vor dem Schuljahr.",
+    stelle:"Aufnehmende Schule, Bildungsbehörde", frist:"an den Schuljahresbeginn gebunden" },
+  { ph:"Vorbereiten", t:"Steuerliche Folgen der Arbeit für einen Arbeitgeber im Ausland prüfen", if:a=>a.geld==="remote",
+    why:"Ansässigkeit, Doppelbesteuerung und Beitragspflicht hängen zusammen und betreffen auch Ihren Arbeitgeber. Eine Fehleinschätzung wirkt rückwirkend.",
+    stelle:"Steuerberatung in beiden Ländern", frist:"vor dem Umzug zu klären", unsicher:"Zwingend individuell zu beurteilen" },
+  { ph:"Vorbereiten", t:"Reihenfolge der Förderung gegen die Gründung prüfen", if:a=>a.geld==="selbst",
+    why:"Mehrere Programme verlangen eine bestimmte Reihenfolge vor oder nach der Gründung. Wer zuerst gründet, kann den Anspruch verlieren.",
+    stelle:"HZZ", frist:"Programmfristen im jeweiligen Jahr" },
+  { ph:"Umziehen", t:"Abmeldung und laufende Verpflichtungen im bisherigen Wohnland abschliessen", if:a=>true,
+    why:"Steuer, Versicherung, Verträge und Rentenunterlagen brauchen einen dokumentierten Abschluss, der später als Nachweis dient.",
+    stelle:"Zuständige Stellen im bisherigen Wohnland", frist:"nach Landesrecht" },
+  { ph:"Ankommen", t:"Wohnsitz anmelden", if:a=>true,
+    why:"Die Anmeldung ist Auslöser für mehrere Fristen und für manche Förderung ausdrücklich das massgebende Datum.",
+    stelle:"Zuständige Polizeiverwaltung", frist:"gesetzliche Frist, abhängig von Ihrem Status" },
+  { ph:"Ankommen", t:"Krankenversicherung aktivieren", if:a=>true,
+    why:"Der Beginn hängt davon ab, ob Sie arbeiten, eine Tätigkeit anmelden oder sich anderweitig versichern.",
+    stelle:"HZZO", frist:"fristgebunden nach Ende der bisherigen Versicherung" },
+  { ph:"Ankommen", t:"Anspruch auf die fünfjährige Lohnsteuerbefreiung prüfen lassen", if:a=>a.status==="hr"||a.status==="abst",
+    why:"Die Steuerverwaltung stellt das Recht von Amts wegen fest. Eine eigene Prüfung lohnt sich, weil Rückkehrdatum und Vorgeschichte entscheidend sind.",
+    stelle:"Porezna uprava", frist:"jahresgebunden" },
+  { ph:"Bleiben", t:"Verlängerungen und Bindungen im Blick behalten", if:a=>true,
+    why:"Aufenthaltstitel laufen ab, Förderungen verlangen oft eine mehrjährige Fortführung der Tätigkeit. Beides wird leicht übersehen.",
+    stelle:"je nach Verfahren", frist:"vom bewilligten Zeitraum abhängig" },
+  { ph:"Bleiben", t:"Sprache und Anschluss vor Ort aufbauen", if:a=>true,
+    why:"Der häufigste Grund für einen Abbruch ist nicht die Bürokratie, sondern fehlender Anschluss von Partner und Kindern.",
+    stelle:"Sprachschulen, Gemeinde, Vereine", frist:"keine" }
+];
+
+const I18N = {
+  de:{}, es:{
+    "nav.wissen":"Información","nav.orte":"Explorar lugares","nav.plan":"Mi mudanza",
+    "start.eyebrow":"Portal de información independiente",
+    "start.h1":"Entender, comparar, <em>llegar</em>.",
+    "start.lede":"Residencia, impuestos, seguro de salud, escuela, vivienda y ayudas. En un solo lugar, en su idioma, con fuente y fecha de revisión visibles.",
+    "start.searchLabel":"¿Dónde quiere vivir su día a día?",
+    "start.searchBtn":"Ver lugares","start.searchHint":"Cuatro municipios están documentados por completo. El resto figura en el índice y aparece marcado como incompleto.",
+    "way1.t":"Información","way1.d":"Doce recorridos temáticos, desde la ciudadanía hasta la mudanza. Cada página indica a quién aplica, condiciones, organismo competente y fecha.",
+    "way2.t":"Explorar lugares","way2.d":"Mapa y lista con filtros. Ayudas municipales, servicios y profundidad de datos por lugar, comparables lado a lado.",
+    "way3.t":"Mi mudanza","way3.d":"Un plan a partir de su situación. Con dependencias, tipos de plazo y preguntas abiertas. Sin cuenta y sin almacenamiento.",
+    "way.go":"Abrir"
+  }
+};
+
+/* ============================================================
+   ZUSTAND
+   ============================================================ */
+const S = { view:"start", lang:"de", q:"", filters:new Set(), mapView:"liste", cmp:[], place:null, answers:{} };
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function tagFor(status){
+  if(status==="open")   return '<span class="tag tag-open">offen</span>';
+  if(status==="closed") return '<span class="tag tag-closed">geschlossen</span>';
+  return '<span class="tag tag-unknown">unbestätigt</span>';
+}
+function stampFor(b){
+  return `<p class="stamp"><b>Quelle</b> ${esc(b.src)} <span class="dot"></span> <b>Geprüft</b> ${esc(b.checked)} <span class="dot"></span> <b>Antragszeitraum</b> ${esc(b.deadline)}</p>`;
+}
+function depthBar(d){
+  return `<span class="depth"><span class="bar">${[1,2,3].map(i=>`<i class="${i<=d?"on":""}"></i>`).join("")}</span>${d===3?"vollständig erfasst":d===2?"teilweise erfasst":"noch im Aufbau"}</span>`;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+function show(view){
+  S.view = view;
+  $$(".view").forEach(v=>v.hidden = (v.id !== "v-"+view));
+  $$(".head-nav button").forEach(b=>{
+    const on = b.dataset.nav===view || (view==="profil" && b.dataset.nav==="orte");
+    b.setAttribute("aria-current", on ? "page" : "false");
+  });
+  window.scrollTo({top:0, behavior:"instant"});
+  const h = $("#v-"+view+" h1, #v-"+view+" h2");
+  if(h){ h.setAttribute("tabindex","-1"); h.focus({preventScroll:true}); }
+}
+document.addEventListener("click", e=>{
+  const nav = e.target.closest("[data-nav]");
+  if(nav){ e.preventDefault(); show(nav.dataset.nav); if(nav.dataset.nav==="orte") renderResults(); return; }
+  const act = e.target.closest("[data-action]");
+  if(act) handleAction(act.dataset.action, act);
+});
+
+function handleAction(a, el){
+  if(a==="search-start"){ S.q = $("#q-start").value.trim(); $("#q-orte").value = S.q; show("orte"); renderResults(); }
+  if(a==="clear-search"){ S.q=""; $("#q-orte").value=""; renderResults(); }
+  if(a==="open-place"){ openPlace(el.dataset.id); }
+  if(a==="toggle-cmp"){ toggleCmp(el.dataset.id); }
+  if(a==="clear-cmp"){ S.cmp=[]; renderResults(); renderCmp(); }
+  if(a==="loosen"){ S.filters.clear(); renderFilters(); renderResults(); }
+}
+
+/* ============================================================
+   SPRACHE
+   ============================================================ */
+$$(".lang button").forEach(b=>b.addEventListener("click",()=>{
+  S.lang = b.dataset.lang;
+  $$(".lang button").forEach(x=>x.setAttribute("aria-pressed", String(x===b)));
+  document.documentElement.lang = S.lang;
+  applyLang();
+}));
+function applyLang(){
+  const dict = I18N[S.lang] || {};
+  $$("[data-i18n]").forEach(el=>{
+    const k = el.dataset.i18n;
+    if(!el.dataset.de) el.dataset.de = el.innerHTML;
+    el.innerHTML = (S.lang==="de") ? el.dataset.de : (dict[k] ?? el.dataset.de);
+  });
+  const note = $("#lang-note");
+  if(note) note.hidden = (S.lang==="de");
+}
+
+/* ============================================================
+   ORTE: FILTER, LISTE, KARTE
+   ============================================================ */
+function matches(p){
+  if(S.q){
+    const q = S.q.toLowerCase();
+    if(!(p.name.toLowerCase().includes(q) || p.county.toLowerCase().includes(q) || p.region.toLowerCase().includes(q))) return false;
+  }
+  for(const f of S.filters){
+    if(f==="vollstaendig"){ if(p.depth<3) return false; }
+    else if(!p.tags.includes(f)) return false;
+  }
+  return true;
+}
+function renderFilters(){
+  $$(".chip").forEach(c=>c.setAttribute("aria-pressed", String(S.filters.has(c.dataset.filter))));
+  const box = $("#active-filters");
+  if(!S.filters.size && !S.q){ box.innerHTML = '<span style="color:var(--muted)">Keine Einschränkung. Alle 10 Orte im Index werden angezeigt.</span>'; return; }
+  const items = [];
+  if(S.q) items.push(`<button class="pill-x" data-clearq="1">Suche: ${esc(S.q)} <span class="x">×</span></button>`);
+  S.filters.forEach(f=>{
+    const label = $(`.chip[data-filter="${f}"]`).textContent;
+    items.push(`<button class="pill-x" data-clear="${f}">${esc(label)} <span class="x">×</span></button>`);
+  });
+  box.innerHTML = items.join(" ");
+}
+$$(".chip").forEach(c=>c.addEventListener("click",()=>{
+  S.filters.has(c.dataset.filter) ? S.filters.delete(c.dataset.filter) : S.filters.add(c.dataset.filter);
+  renderResults();
+}));
+$("#active-filters").addEventListener("click", e=>{
+  const b = e.target.closest("[data-clear],[data-clearq]"); if(!b) return;
+  if(b.dataset.clearq){ S.q=""; $("#q-orte").value=""; } else S.filters.delete(b.dataset.clear);
+  renderResults();
+});
+$("#q-orte").addEventListener("input", e=>{ S.q = e.target.value.trim(); renderResults(); });
+$$("[data-view]").forEach(b=>b.addEventListener("click",()=>{
+  S.mapView = b.dataset.view;
+  $$("[data-view]").forEach(x=>x.setAttribute("aria-pressed", String(x===b)));
+  const narrow = window.matchMedia("(max-width:1080px)").matches;
+  if(narrow){ $("#mapcard").hidden = (S.mapView!=="karte"); $("#results").hidden = (S.mapView==="karte"); }
+}));
+
+function toggleCmp(id){
+  const i = S.cmp.indexOf(id);
+  if(i>-1) S.cmp.splice(i,1);
+  else { if(S.cmp.length>=3) S.cmp.shift(); S.cmp.push(id); }
+  renderResults(); renderCmp();
+}
+
+function renderResults(){
+  renderFilters();
+  const hits = PLACES.filter(matches);
+  const box = $("#results");
+  if(!hits.length){
+    box.innerHTML = `<div class="empty"><h3>Keine Treffer</h3>
+      <p style="margin-top:var(--s-3)">Die gewählte Kombination ergibt keinen Ort im aktuellen Index. Das bedeutet nicht, dass es keinen solchen Ort gibt, sondern dass unsere Daten dafür noch nicht reichen.</p>
+      <p style="margin-top:var(--s-4)"><button class="btn btn-ghost btn-sm" data-action="loosen">Filter lockern</button></p></div>`;
+  } else {
+    box.innerHTML = hits.map(p=>{
+      const sel = S.cmp.includes(p.id);
+      const ben = p.benefits.length
+        ? p.benefits.map(b=>`<span><span class="k">${esc(b.title)}:</span> <span class="num">${esc(b.amount)}</span> ${tagFor(b.status)}</span>`).join("")
+        : `<span class="unknown">Kommunale Leistungen noch nicht erfasst</span>`;
+      return `<article class="result">
+        <div>
+          <h3>${esc(p.name)}</h3>
+          <p class="meta">${esc(p.county)} · ${esc(p.region)}</p>
+          <div class="facts">${ben}</div>
+          ${depthBar(p.depth)}
+        </div>
+        <div class="acts">
+          <button class="btn btn-ghost btn-sm" data-action="open-place" data-id="${p.id}">Profil ansehen</button>
+          <button class="btn btn-ghost btn-sm" data-action="toggle-cmp" data-id="${p.id}" aria-pressed="${sel}">${sel?"Im Vergleich":"Vergleichen"}</button>
+        </div>
+      </article>`;
+    }).join("");
+  }
+  renderMap(hits);
+}
+
+function renderMap(hits){
+  const ids = new Set(hits.map(h=>h.id));
+  $("#map-points").innerHTML = PLACES.map(p=>{
+    const cls = ["pt", ids.has(p.id)?"is-hit":"is-dim", S.cmp.includes(p.id)?"is-sel":""].join(" ");
+    const anchor = p.x > 300 ? "end" : "start";
+    const dx = p.x > 300 ? -10 : 10;
+    return `<g class="${cls}" role="button" tabindex="0" data-action="open-place" data-id="${p.id}" aria-label="${esc(p.name)}, Profil öffnen">
+      <circle cx="${p.x}" cy="${p.y}" r="5"></circle>
+      <text x="${p.x+dx}" y="${p.y+3.5}" text-anchor="${anchor}">${esc(p.name)}</text>
+    </g>`;
+  }).join("");
+}
+$("#map-points").addEventListener("keydown", e=>{
+  if(e.key==="Enter"||e.key===" "){ const g=e.target.closest("[data-id]"); if(g){ e.preventDefault(); openPlace(g.dataset.id); } }
+});
+
+function renderCmp(){
+  const zone = $("#cmp-zone");
+  if(S.cmp.length<2){ zone.hidden = true; return; }
+  zone.hidden = false;
+  const sel = S.cmp.map(id=>PLACES.find(p=>p.id===id));
+  const row = (label, fn) => `<tr><th scope="row">${label}</th>${sel.map(p=>`<td>${fn(p)}</td>`).join("")}</tr>`;
+  const unk = v => v ? esc(v) : '<span class="unknown">unbekannt</span>';
+  $("#cmp-table").innerHTML = `
+    <thead><tr><th scope="col">Merkmal</th>${sel.map(p=>`<th scope="col">${esc(p.name)}</th>`).join("")}</tr></thead>
+    <tbody>
+      <tr class="row-group"><th colspan="${sel.length+1}">Einordnung</th></tr>
+      ${row("Gespanschaft", p=>esc(p.county))}
+      ${row("Lage", p=>esc(p.region))}
+      ${row("Datentiefe", p=>depthBar(p.depth))}
+      <tr class="row-group"><th colspan="${sel.length+1}">Kommunale Leistungen</th></tr>
+      ${row("Erfasste Leistungen", p=>p.benefits.length
+        ? p.benefits.map(b=>`<div style="margin-bottom:.5rem"><b>${esc(b.title)}</b><br><span class="num">${esc(b.amount)}</span> ${tagFor(b.status)}<br><span style="color:var(--muted); font-size:var(--step--2)">Antragszeitraum: ${esc(b.deadline)}</span></div>`).join("")
+        : '<span class="unknown">nicht erfasst</span>')}
+      <tr class="row-group"><th colspan="${sel.length+1}">Versorgung und Alltag</th></tr>
+      ${row("Grundschule", p=>unk(p.fields.schule))}
+      ${row("Kinderbetreuung", p=>unk(p.fields.kindergarten))}
+      ${row("Hausärztliche Versorgung", p=>unk(p.fields.hausarzt))}
+      ${row("Klinik in Reichweite", p=>unk(p.fields.klinik))}
+      ${row("Dauerhafte Miete", p=>unk(p.fields.miete))}
+      ${row("Internetversorgung", p=>unk(p.fields.internet))}
+      <tr class="row-group"><th colspan="${sel.length+1}">Nachweis</th></tr>
+      ${row("Letzte Prüfung", p=>p.benefits.length ? `<span class="num">${esc(p.benefits[0].checked)}</span>` : '<span class="unknown">keine Prüfung hinterlegt</span>')}
+    </tbody>`;
+}
+
+function openPlace(id){
+  const p = PLACES.find(x=>x.id===id); if(!p) return;
+  S.place = p;
+  $("#crumb-name").textContent = p.name;
+  const unk = v => v ? esc(v) : '<span class="unknown">unbekannt</span>';
+  $("#profile-body").innerHTML = `
+    <div class="profile-head">
+      <div>
+        <p class="eyebrow">${esc(p.county)}</p>
+        <h1 style="font-size:var(--step-3); margin-top:var(--s-2)">${esc(p.name)}</h1>
+        <p style="margin-top:var(--s-3); color:var(--ink-soft); max-width:52ch">${esc(p.region)}</p>
+      </div>
+      <div style="text-align:end">${depthBar(p.depth)}</div>
+    </div>
+
+    <section class="sec"><div class="sec-grid">
+      <h3>Leistungen der Gemeinde</h3>
+      <div>${p.benefits.length ? p.benefits.map(b=>`
+        <article class="benefit">
+          <div class="top"><h4>${esc(b.title)}</h4><span class="amount">${esc(b.amount)}</span></div>
+          <p class="cond">${esc(b.cond)}</p>
+          <p style="margin-top:var(--s-3)">${tagFor(b.status)}</p>
+          ${stampFor(b)}
+          <p style="margin-top:var(--s-2)"><a class="srclink" href="#">Originalausschreibung öffnen</a></p>
+        </article>`).join("")
+        : `<p class="unknown">Für diesen Ort sind noch keine kommunalen Leistungen erfasst.</p>
+           <p style="margin-top:var(--s-4); color:var(--ink-soft); font-size:var(--step--1); max-width:58ch">Das ist keine Aussage darüber, dass es keine gibt. Der Ort ist im Index enthalten, die Erhebung steht aus. Gemeinden können ihre Angaben kostenlos melden.</p>
+           <p style="margin-top:var(--s-4)"><button class="btn btn-ghost btn-sm">Angaben für ${esc(p.name)} melden</button></p>`}
+      </div>
+    </div></section>
+
+    <section class="sec"><div class="sec-grid">
+      <h3>Familie und Bildung</h3>
+      <div><dl class="kv">
+        <div><dt>Grundschule</dt><dd>${unk(p.fields.schule)}</dd></div>
+        <div><dt>Kinderbetreuung</dt><dd>${unk(p.fields.kindergarten)}</dd></div>
+        <div><dt>Freie Plätze</dt><dd><span class="unknown">nicht erhoben, Kapazität wird nur mit aktuellem Nachweis angezeigt</span></dd></div>
+      </dl></div>
+    </div></section>
+
+    <section class="sec"><div class="sec-grid">
+      <h3>Gesundheit</h3>
+      <div><dl class="kv">
+        <div><dt>Hausärztliche Versorgung</dt><dd>${unk(p.fields.hausarzt)}</dd></div>
+        <div><dt>Klinik in Reichweite</dt><dd>${unk(p.fields.klinik)}</dd></div>
+        <div><dt>Aufnahme neuer Patienten</dt><dd><span class="unknown">nur mit aktueller Bestätigung anzeigbar</span></dd></div>
+      </dl></div>
+    </div></section>
+
+    <section class="sec"><div class="sec-grid">
+      <h3>Wohnen und Arbeit</h3>
+      <div><dl class="kv">
+        <div><dt>Dauerhafte Miete</dt><dd>${unk(p.fields.miete)}</dd></div>
+        <div><dt>Internetversorgung</dt><dd>${unk(p.fields.internet)}</dd></div>
+        <div><dt>Lage</dt><dd>${p.coast ? "Küstennähe" : "Binnenland"}</dd></div>
+      </dl></div>
+    </div></section>
+
+    <section class="sec" style="border-bottom:0"><div class="sec-grid">
+      <h3>Ankommen und Kontakt</h3>
+      <div>
+        <p style="color:var(--ink-soft); max-width:58ch">Ein benannter Kontakt wird erst angezeigt, wenn die Gemeinde eine zuständige Funktion, die Sprache und einen Antwortweg bestätigt hat. Bis dahin führt der Weg über die allgemeine Verwaltung.</p>
+        <p style="margin-top:var(--s-5); display:flex; gap:var(--s-3); flex-wrap:wrap">
+          <button class="btn btn-ghost btn-sm" data-action="toggle-cmp" data-id="${p.id}">Zum Vergleich hinzufügen</button>
+          <button class="btn btn-ghost btn-sm">Fehler auf dieser Seite melden</button>
+        </p>
+      </div>
+    </div></section>`;
+  show("profil");
+}
+
+/* ============================================================
+   STARTSEITE: laufende Massnahmen
+   ============================================================ */
+function renderNow(){
+  $("#now-list").innerHTML = `<div class="kv">` + NATIONAL.map(n=>`
+    <div>
+      <dt>${tagFor(n.s)}</dt>
+      <dd>
+        <b>${esc(n.t)}</b>
+        <p style="color:var(--ink-soft); font-size:var(--step--1); margin-top:.25rem; max-width:66ch">${esc(n.d)}</p>
+        <p class="stamp" style="margin-top:var(--s-2)"><b>Quelle</b> ${esc(n.src)} <span class="dot"></span> <b>Zeitraum</b> ${esc(n.when)} <span class="dot"></span> <b>Geprüft</b> ${STAND}</p>
+      </dd>
+    </div>`).join("") + `</div>`;
+}
+
+/* ============================================================
+   WISSEN
+   ============================================================ */
+function renderTopics(){
+  $("#topics").innerHTML = TOPICS.map(([n,t,d])=>`
+    <button class="topic"><span class="n">${n}</span><span><h4>${esc(t)}</h4><p>${esc(d)}</p></span></button>`).join("");
+
+  $("#article").innerHTML = `
+    <article>
+      <p id="lang-note" hidden style="margin-bottom:var(--s-4); font-family:var(--font-mono); font-size:var(--step--2); color:var(--st-unknown); border:1px solid currentColor; border-radius:var(--radius-sm); padding:.5rem .7rem; display:inline-block">
+        Esta página aún no está traducida y se muestra en alemán. Las versiones lingüísticas se revisan por separado.
+      </p>
+      <h3 style="font-size:var(--step-2)">Befreiung von der Lohnsteuer für fünf Jahre</h3>
+      <div class="answer" style="margin-top:var(--s-6)">
+        <p class="q">Kurze Antwort</p>
+        <p class="a">Wer nach mindestens zwei Jahren im Ausland zurückkehrt und in Kroatien angestellt arbeitet, kann fünf Jahre lang von der Einkommensteuer auf den Lohn befreit werden.</p>
+        <p class="who"><b>Gilt für:</b> qualifizierte Rückkehrfälle mit Rückkehr ab dem 1. Januar 2025. <b>Gilt nicht als:</b> allgemeine Befreiung von sämtlichen Steuern und Abgaben. Sozialbeiträge bleiben bestehen.</p>
+        <p class="stamp" style="margin-top:var(--s-5)"><b>Zuständig</b> Porezna uprava <span class="dot"></span> <b>Quelle</b> Steuerverwaltung, Rückkehrerregelung <span class="dot"></span> <b>Geprüft</b> ${STAND} <span class="dot"></span> ${tagFor("open")}</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--s-10); margin-top:var(--s-10)" class="art-cols">
+        <div>
+          <h4 style="margin-bottom:var(--s-3)">Voraussetzungen</h4>
+          <ul class="kv">
+            <li style="display:grid; grid-template-columns:minmax(0,15ch) 1fr; gap:var(--s-4); padding-block:var(--s-3); border-bottom:1px solid var(--line)"><span style="color:var(--muted); font-size:var(--step--1)">Vorheriger Aufenthalt</span><span>Mindestens zwei Jahre ununterbrochen ausserhalb Kroatiens.</span></li>
+            <li style="display:grid; grid-template-columns:minmax(0,15ch) 1fr; gap:var(--s-4); padding-block:var(--s-3); border-bottom:1px solid var(--line)"><span style="color:var(--muted); font-size:var(--step--1)">Rückkehrdatum</span><span>Meldung des Wohnsitzes oder Aufenthalts ab dem 1. Januar 2025.</span></li>
+            <li style="display:grid; grid-template-columns:minmax(0,15ch) 1fr; gap:var(--s-4); padding-block:var(--s-3); border-bottom:1px solid var(--line)"><span style="color:var(--muted); font-size:var(--step--1)">Art des Einkommens</span><span>Einkünfte aus nichtselbständiger Arbeit. Andere Einkunftsarten brauchen eine eigene Prüfung.</span></li>
+            <li style="display:grid; grid-template-columns:minmax(0,15ch) 1fr; gap:var(--s-4); padding-block:var(--s-3)"><span style="color:var(--muted); font-size:var(--step--1)">Personenkreis</span><span>Kroatische Staatsbürger sowie Auswanderer, deren Familienangehörige und Nachkommen.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:var(--s-3)">Ablauf</h4>
+          <ol class="steps">
+            <li><div><b>Wohnsitz anmelden</b><p style="color:var(--ink-soft); font-size:var(--step--1)">Dieses Datum ist für die Regelung massgebend.</p></div></li>
+            <li><div><b>Arbeitsverhältnis in Kroatien aufnehmen</b><p style="color:var(--ink-soft); font-size:var(--step--1)">Die Befreiung betrifft den Lohn, nicht den Aufenthalt.</p></div></li>
+            <li><div><b>Feststellung durch die Steuerverwaltung abwarten</b><p style="color:var(--ink-soft); font-size:var(--step--1)">Das Recht wird von Amts wegen festgestellt.</p></div></li>
+            <li><div><b>Bei abweichender Beurteilung Nachweise nachreichen</b><p style="color:var(--ink-soft); font-size:var(--step--1)">Fristen sind jahresgebunden und im Einzelfall zu prüfen.</p></div></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="callout">
+        <h4>Häufiger Irrtum</h4>
+        <p>Die Befreiung wird oft mit einer Auszahlung verwechselt. Es fliesst kein Geld vom Staat an Sie: Es entfällt eine Steuer, die Sie sonst auf Ihren Lohn zahlen würden. Wer in Kroatien keinen steuerpflichtigen Lohn bezieht, hat von dieser Regelung keinen Vorteil.</p>
+      </div>
+
+      <div class="callout" style="border-color:var(--st-unknown)">
+        <h4>Was hier nicht entschieden wird</h4>
+        <p>Ob Ihr konkreter Fall die Voraussetzungen erfüllt, entscheidet die Steuerverwaltung. Bei Einkünften aus dem Ausland, bei Selbständigkeit und bei Arbeit für einen ausländischen Arbeitgeber ist zusätzlich eine steuerliche Beratung in beiden Ländern erforderlich.</p>
+      </div>
+    </article>`;
+}
+
+/* ============================================================
+   PLAN
+   ============================================================ */
+function renderPlanQuestions(){
+  $("#planq").innerHTML = PLAN_QUESTIONS.map(q=>`
+    <fieldset><legend>${esc(q.legend)}</legend>
+      <div class="opts">${q.opts.map(([v,l])=>`
+        <label class="opt"><input type="radio" name="${q.id}" value="${v}"><span>${esc(l)}</span></label>`).join("")}
+      </div>
+    </fieldset>`).join("");
+  $("#planform").addEventListener("change", e=>{
+    S.answers[e.target.name] = e.target.value;
+    renderPlan();
+  });
+  renderPlan();
+}
+function renderPlan(){
+  const a = S.answers;
+  const answered = Object.keys(a).length;
+  const out = $("#planout");
+  if(answered < 2){
+    out.innerHTML = `<div class="empty" style="border-top:1px solid var(--line)">
+      <h3>Noch keine Aufgaben</h3>
+      <p style="margin-top:var(--s-3)">Beantworten Sie mindestens zwei Fragen. Der Fahrplan wird daraufhin sofort berechnet und passt sich bei jeder Änderung an.</p></div>`;
+    return;
+  }
+  const list = TASKS.filter(t=>t.if(a));
+  const phases = ["Orientieren","Vorbereiten","Umziehen","Ankommen","Bleiben"];
+  const unresolved = (a.status==="unklar");
+  out.innerHTML = `
+    <div style="display:flex; flex-wrap:wrap; gap:var(--s-4); align-items:baseline; justify-content:space-between; border-bottom:2px solid var(--ink); padding-bottom:var(--s-4)">
+      <h3>Ihr Fahrplan: <span class="num">${list.length}</span> Aufgaben</h3>
+      <p class="stamp"><b>Regeln geprüft</b> ${STAND} <span class="dot"></span> <b>Speicherung</b> keine</p>
+    </div>
+    ${unresolved ? `<div class="callout" style="border-color:var(--st-unknown); margin-top:var(--s-6)">
+      <h4>Ihr Status ist noch offen</h4>
+      <p>Solange nicht geklärt ist, welcher Weg für Sie gilt, zeigt der Plan bewusst mehr Klärungs- als Erledigungsaufgaben. Das ist richtig so: Eine falsche Reihenfolge kostet hier mehr Zeit als ein später Start.</p>
+    </div>` : ""}
+    ${phases.map(ph=>{
+      const items = list.filter(t=>t.ph===ph); if(!items.length) return "";
+      return `<section class="plan-phase">
+        <header><h3 style="font-size:var(--step-1)">${ph}</h3><span class="num" style="color:var(--muted); font-size:var(--step--1)">${items.length}</span></header>
+        ${items.map(t=>`
+          <article class="task${t.unsicher?" blocked":""}">
+            <span class="box" aria-hidden="true"></span>
+            <div>
+              <h4>${esc(t.t)}</h4>
+              <p class="why">${esc(t.why)}</p>
+              ${t.unsicher?`<p class="dep">Zu prüfen: ${esc(t.unsicher)}</p>`:""}
+              <p class="stamp"><b>Stelle</b> ${esc(t.stelle)} <span class="dot"></span> <b>Frist</b> ${esc(t.frist)}</p>
+            </div>
+          </article>`).join("")}
+      </section>`;
+    }).join("")}
+    <p style="margin-top:var(--s-8); font-size:var(--step--1); color:var(--muted); max-width:64ch">Dieser Plan ist ein möglicher Weg, keine Entscheidung. Wo eine Behörde oder Fachperson zu entscheiden hat, steht «zu prüfen» statt einer Einstufung.</p>`;
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderNow();
+renderTopics();
+renderResults();
+renderPlanQuestions();
+applyLang();
+
+const mq = window.matchMedia("(max-width:1080px)");
+function syncLayout(){
+  if(mq.matches){ $("#mapcard").hidden = (S.mapView!=="karte"); $("#results").hidden = (S.mapView==="karte"); }
+  else { $("#mapcard").hidden = false; $("#results").hidden = false; }
+}
+mq.addEventListener("change", syncLayout); syncLayout();
+</script>
+</body>
+</html>

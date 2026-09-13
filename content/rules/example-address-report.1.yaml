@@ -1,0 +1,44 @@
+# SYNTHETISCH. Fiktive Regel, Fassung 1, ersetzt durch Fassung 2. Alle Werte erfunden.
+id: example-address-report
+version: 1
+synthetic: true
+title:
+  de: Beispielmeldung innerhalb von 30 Tagen (fiktive alte Fassung)
+scope:
+  applies_to_persons:
+    citizenship_status: [third_country]
+    residence_status: [temporary_residence]
+  procedure: example-registration
+conditions:
+  - field: person.entry_date
+    operator: exists
+    on_unknown: clarify
+result:
+  task: example-register-address
+  deadline:
+    trigger: entry
+    interval: 30
+    unit: calendar_days
+    counting_starts: day_after
+    weekend_holiday_rule: extend_to_next_working_day
+    kind: statutory
+  status_text_key: rules.example_address_report.matches
+sources:
+  - id: example-source
+    reference: Art. 1 Abs. 1, Fassung vor 2026
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2020-01-01
+  valid_until:
+    kind: date
+    date: 2026-05-31
+  supersedes: null
+  superseded_by: example-address-report@2
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly
