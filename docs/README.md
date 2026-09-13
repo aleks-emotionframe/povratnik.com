@@ -63,6 +63,10 @@ Diese fünf Punkte blockieren. Keiner davon ist technisch.
 5. **Pilotgemeinden.** Drei bis fünf, mit verbindlicher Zusage und benannter
    Ansprechperson.
 
+Technisch offen, vor M2 zu erledigen: Namen in `rollen.md` eintragen und den
+Branch-Schutz für `main` auf GitHub aktivieren (Pull Request erforderlich,
+Status-Check `validate`). Bis dahin sind direkte Pushes auf `main` bewusst erlaubt.
+
 Zusätzlich zu klären, weil es eine Ausbaustufe betrifft: eine lizenzierbare Quelle für
 regionale Lohn-, Miet- und Lebenshaltungskosten. Ohne sie ist die Simulation nicht
 seriös umsetzbar.
