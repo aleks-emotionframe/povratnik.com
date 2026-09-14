@@ -11,11 +11,13 @@ ein Wizard nach Zeit und Reihenfolge.
 
 ## Stand
 
-M1 Machbarkeitsnachweis. Es gibt Schemas, einen Validator, CI und die Regel-Engine
-als eigenes Paket (`packages/engine`), geprüft mit 13 Abnahmefällen gegen
-synthetische Regeln. Es gibt noch keine Website und keine fachlich freigegebene Regel.
-Alle Datensätze unter `content/` sind synthetische Beispiele und als solche
-gekennzeichnet.
+M2a. Es gibt Schemas, einen Validator, CI, die Regel-Engine als eigenes Paket
+(`packages/engine`, 13 Abnahmefälle) und die Website (`apps/web`): Startseite,
+Rechtsseiten, Kurzcheck mit Haushalt, Auswertung im Browser, Abschlussplan mit
+Druckansicht. Es gibt noch keine fachlich freigegebene Regel; der Kurzcheck läuft
+lokal mit synthetischen Beispielregeln und sagt das sichtbar. Ein Produktionsbuild
+enthält keine synthetische Regel (Test). Alle Datensätze unter `content/` sind
+synthetische Beispiele und als solche gekennzeichnet.
 
 ## Struktur
 
@@ -24,6 +26,7 @@ content/          Regeln, Aufgaben, Verfahren, Seiten, Quellen, Abnahmefälle, T
 schemas/          JSON Schema je Datensatztyp, abgeleitet aus docs/datenmodell.md
 scripts/          Validator und seine Tests
 packages/engine/  Regel-Engine: Operatoren, Fristen, Fassungswahl, Konflikte, Fixture-Harness
+apps/web/         Website (Astro): Seiten, Wizard-Insel (Preact), Regelpaket, Build-Test
 docs/             Konzept, Datenmodell, Designsystem, Betrieb, ADRs
 ```
 
@@ -36,12 +39,15 @@ Voraussetzung: Node 22.6 oder neuer.
 
 ```bash
 npm ci
+npm run dev        # Website auf http://localhost:4321, mit synthetischen Regeln
+npm run build      # Produktionsbuild nach apps/web/dist, nur freigegebene Regeln
 npm run validate   # prüft content/ gegen Schemas und Querbezüge
-npm test           # Tests des Validators, der Engine und alle Abnahmefälle in content/tests
-npm run typecheck
+npm test           # Validator, Engine, Abnahmefälle, Website, Build-Ergebnis
+npm run typecheck  # Engine und Validator
+npm run check:web  # Website
 ```
 
-Jeder Pull Request lässt diese drei Kommandos in der CI laufen. Rot bedeutet: keine
+Jeder Pull Request lässt Typprüfung, Build, Tests und Validierung in der CI laufen. Rot bedeutet: keine
 Auslieferung.
 
 ## Regeln für Datensätze

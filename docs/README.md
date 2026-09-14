@@ -12,15 +12,15 @@ Zuwanderer nach Kroatien.
 | `../CLAUDE.md` | Entwicklungsanweisung: Zweck, Grenzen, Arbeitsablauf | v2.1, an ADR-0001 angeglichen |
 | `strategie.md` | Geschäftsmodell, Positionierung, Wirtschaftlichkeit, Markteintritt | v1 |
 | `inhaltskonzept.md` | Sitemap, Seitentypen, zwölf Rubriken, Checklisten, Prozessdarstellung | v1.1 |
-| `wizard-konzept.md` | Fragenpfad, Statusgabelung, Fallprofile, Zusammenfassung | v1.2, Kurzcheck an Q01 bis Q09 angeglichen |
+| `wizard-konzept.md` | Fragenpfad, Statusgabelung, Fallprofile, Zusammenfassung | v1.3, Antwortoptionen ans Vokabular angeglichen, Zusatzfragen |
 | `wizard-recherche.md` | Fragenkatalog Q01 bis Q48, Routen R0 bis R7, Entscheidungslogik L01 bis L09, 18 Abnahmefälle, 13 Klärungspunkte | v1, fachlich führend |
-| `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell, Engine-Semantik | v1.2, M1 eingearbeitet |
+| `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell, Engine-Semantik | v1.3, M1 und M2a eingearbeitet |
 | `umsetzungskonzept.md` | Architektur, Komponenten, Technologiekriterien, Module, Rollen, Risiken | v1.1, an ADR-0001 und M0 bis M7 angeglichen |
 | `redaktionsgrundsaetze.md` | Quellenhierarchie, Prüfzyklen, Arbeitsablauf, Unabhängigkeit, Tonfall | v1 |
 | `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung | v1.1 |
 | `designsystem.md` | Tokens, Seitentypen, Zustandsdarstellung, Formulare, Mobil | v1.2 |
 | `adr/0001-quelle-und-abgeleitete-kopie.md` | Welcher Bestand wird im Repository, welcher in der Datenbank gepflegt | entschieden |
-| `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket | entschieden |
+| `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket, Nachtrag Preact | entschieden |
 | `rollen.md` | Besetzung der Rollen, wer gibt was frei | v1, Namen einzutragen |
 | `recherche-faktenbasis.md` | Rechtslage, Förderungen, Zahlen, Wettbewerb, mit Quellen und Stand | v1 |
 | `review-claude-md.md` | Review der Entwicklungsanweisung v1, Grundlage für v2 | v1, P0 und P1 abgearbeitet |
@@ -73,6 +73,29 @@ seriös umsetzbar.
 
 Die 13 Klärungspunkte O01 bis O13 aus der Wizard-Recherche bleiben als fachliche
 Arbeitsliste bestehen.
+
+Aus der Umsetzung hinzugekommen:
+
+- **O-M1-1 Zählregeln.** Die Fristdefinitionen in `datenmodell.md` 2.3 müssen vor der
+  ersten freigegebenen Regel von der Fachprüfung bestätigt werden.
+- **O-M1-2 Konfliktdefinition.** «Ein Verfahren, eine Pflicht»: mehr als ein
+  Ergebnis je Person und Verfahren gilt als Konflikt (`datenmodell.md` 2.5). Ob das
+  die kroatischen Verfahren richtig abbildet, prüft die Fachprüfung.
+- **O-M2-1 Künftige Ereignisse.** Für Personen, die noch nicht eingereist sind, ist
+  das Einreisedatum unbekannt. Die Engine wählt dann die heute gültige Fassung, stuft
+  positive Ergebnisse als `unclear` ein und erzeugt die Klärung «Einreisedatum fehlt».
+  Das ist konservativ richtig, macht aber jeden Plan vor der Einreise zu einer
+  Klärungsliste. Nach dem ersten Test mit Testpersonen entscheidet die
+  Produktverantwortung mit der Fachprüfung, ob künftige Ereignisse eine eigene
+  Behandlung bekommen.
+
+**Stand M2a (14.09.2026):** Astro-Website mit Startseite, Rechtsseiten (Betreiberangaben
+offen), Kurzcheck als Preact-Insel, Auswertung im Browser, Abschlussplan mit
+Druckansicht. Ausschliesslich synthetische Regeln. Offen für **M2b:** Ortsprofil
+(braucht Datenlizenz und Datenbank nach ADR-0001), Hosting-Entscheidung (EU,
+Node-fähig; Optionen vorlegen), Redaktionsdurchlauf (eine Regeländerung über Pull
+Request bis zur Freigabe dokumentiert durchspielen), Feiertagsdatensatz mit Quelle,
+Test mit echten Testpersonen.
 
 Entschieden am 13.09.2026 durch die Produktverantwortung: Der Kurzcheck fragt nach
 Staatsangehörigkeiten (Mehrfachauswahl) und Bezug zu Kroatien, nicht nach dem Pass.

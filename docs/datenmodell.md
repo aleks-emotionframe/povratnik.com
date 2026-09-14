@@ -1,10 +1,11 @@
 # Datenmodell
 
 Verbindliche Grundlage für Schema, Zustände, Zeitlogik und Haushaltsmodell.
-Version 1.2, 14.09.2026. Referenziert aus CLAUDE.md Abschnitt 2.2, 2.3, 2.4 und 4.
+Version 1.3, 14.09.2026. Referenziert aus CLAUDE.md Abschnitt 2.2, 2.3, 2.4 und 4.
 Änderungen in 1.2 (M1): Zählregeln in 2.3, Fassungswahl bei unbekanntem Ereignisdatum
 in 2.4, Konfliktdefinition und Prioritätsrichtung in 2.5, Feld `trigger`, Semantik von
-`on_unknown` und Fakten-Pfade in 3.
+`on_unknown` und Fakten-Pfade in 3. Änderungen in 1.3 (M2a): Fakten des Kurzchecks in 3,
+bekannte Hürde bleibt bei provisorischer Fassung in 2.4.
 
 ---
 
@@ -255,7 +256,13 @@ Fakt trägt die Dimensionen aus Abschnitt 1; die Engine wertet `availability` un
 `value` aus.
 
 - `person.<name>` für Angaben zur Person, darunter immer `person.citizenship_status`
-  (Liste der Status), `person.residence_status` und `person.croatian_link`.
+  (Liste der Status), `person.residence_status` und `person.croatian_link`. Der
+  Kurzcheck (`wizard-konzept.md` 2.2) liefert zusätzlich `person.stage` (exploring,
+  planning, arrived), `person.country` (ISO-Code oder `other`), `person.move_horizon`
+  (within_6_months, 6_to_12_months, later_or_unclear) und `person.income_source`
+  (employment, self_employment, remote_employer_abroad, pension_or_assets, study).
+  Wer noch nicht eingereist ist, erhält `person.residence_status: none` als bekannten
+  Wert und ein unbekanntes `event.entry`.
 - `event.<ereignisart>` für das Datum eines Ereignisses aus 2.1. So erzeugt ein
   fehlendes Einreisedatum genau eine Klärungsaufgabe, egal ob es die Fassungswahl, die
   Frist oder eine Bedingung betrifft.
