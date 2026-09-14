@@ -1,0 +1,59 @@
+---
+// Ein Fachwert in der Oberfläche (designsystem.md 4, Vokabular A): bekannt zeigt den
+// Wert, unbekannt ist ein sichtbarer Zustand mit Wortlaut, nie eine leere Zelle.
+// veraltet zeigt den Wert mit Stand und dem Hinweis, dass die aktuelle Höhe ungeklärt ist.
+import type { Fact } from "../lib/places.ts";
+import { formatDate } from "../lib/places.ts";
+
+interface Props {
+  fact: Fact | undefined;
+}
+const { fact } = Astro.props;
+const f: Fact = fact ?? { state: "not_collected" };
+const labels: Record<Fact["state"], string> = {
+  known: "",
+  unknown: "unbekannt",
+  not_collected: "nicht erhoben",
+  outdated: "veraltet",
+  not_applicable: "nicht zutreffend",
+  not_present: "nicht vorhanden",
+};
+---
+
+{f.state === "known" && (
+  <span class="fact">
+    {f.value}
+    {f.as_of && <span class="fact__meta mono">Stand {formatDate(f.as_of)}</span>}
+    {f.note && <span class="fact__note">{f.note}</span>}
+  </span>
+)}
+{f.state === "outdated" && (
+  <span class="fact">
+    {f.value}
+    <span class="state state--unknown">veraltet</span>
+    <span class="fact__note">Stand {f.as_of ? formatDate(f.as_of) : "unbekannt"}. Die aktuelle Höhe ist ungeklärt.{f.note && ` ${f.note}`}</span>
+  </span>
+)}
+{(f.state === "unknown" || f.state === "not_collected" || f.state === "not_applicable" || f.state === "not_present") && (
+  <span class="fact">
+    <span class={`state state--${f.state === "unknown" ? "unknown" : "closed"}`}>{labels[f.state]}</span>
+    {f.state === "not_collected" && <span class="fact__note">{f.note ?? "So lässt es sich klären: Anfrage an die Gemeinde, die Antwort erscheint hier mit Datum."}</span>}
+    {f.state !== "not_collected" && f.note && <span class="fact__note">{f.note}</span>}
+  </span>
+)}
+
+<style>
+  .fact {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: flex-start;
+  }
+  .fact__meta {
+    color: var(--muted);
+  }
+  .fact__note {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+</style>

@@ -1,0 +1,113 @@
+---
+// Vergleich (designsystem.md 3, Typ 6; inhaltskonzept.md 5.3): Rohinformation nebeneinander,
+// ohne Gesamtnote. Was fehlt, steht als Zustand und nicht als leere Zelle.
+import Base from "../../layouts/Base.astro";
+import Fact from "../../components/Fact.astro";
+import { REGION, loadPlaces, openBenefits, placeName, type Place } from "../../lib/places.ts";
+
+const places = loadPlaces();
+const rows: { label: string; get: (p: Place) => any; fact?: boolean }[] = [
+  { label: "Lage", get: (p) => `${REGION[p.region]}, ${p.county}` },
+  { label: "Einwohner", get: (p) => p.population, fact: true },
+  { label: "Entwicklungsindex", get: (p) => p.development_index, fact: true },
+  { label: "Offene Leistungen", get: (p) => `${openBenefits(p)} von ${p.benefits.length}` },
+  { label: "Kindergarten, freie Plätze", get: (p) => p.family_education.kindergarten_capacity, fact: true },
+  { label: "Grundschule", get: (p) => p.family_education.primary_school, fact: true },
+  { label: "Weiterführende Schule", get: (p) => p.family_education.secondary_school, fact: true },
+  { label: "Hausarzt nimmt neue Patienten", get: (p) => p.health.gp_accepting, fact: true },
+  { label: "Kinderarzt", get: (p) => p.health.pediatrician, fact: true },
+  { label: "Nächstes Spital", get: (p) => p.health.clinic, fact: true },
+  { label: "Jahresmieten", get: (p) => p.housing.long_term_rent, fact: true },
+  { label: "Preisniveau", get: (p) => p.housing.price_level, fact: true },
+  { label: "Bauland", get: (p) => p.housing.building_land, fact: true },
+  { label: "Pendeln", get: (p) => p.work.commute.map((c) => `${c.to} ${c.minutes} Min.`).join(", ") },
+  { label: "Internet", get: (p) => p.daily.internet, fact: true },
+  { label: "Öffentlicher Verkehr", get: (p) => p.daily.transport, fact: true },
+  { label: "Sprachkurse", get: (p) => p.daily.language_courses, fact: true },
+  { label: "Datentiefe", get: (p) => `${p.data_depth.collected} von ${p.data_depth.total}` },
+];
+---
+
+<Base title="Orte vergleichen: povratnik.com" description="Zwei bis drei Orte nebeneinander, als Rohinformation ohne Gesamtnote." current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/orte">Orte</a> / Vergleich</p>
+        <h1>Orte vergleichen</h1>
+        <p class="lede">Rohinformation nebeneinander, ohne Gesamtnote. Ein Gesamtwert würde unsere Gewichtung durchsetzen und nicht Ihre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>Fiktive Testgemeinden</strong>
+        Alle Orte in diesem Vergleich sind erfunden. Sie zeigen die Darstellung, nicht reale Verhältnisse.
+      </p>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col">Merkmal</th>
+              {places.map((p) => <th scope="col"><a href={`/orte/${p.id}`}>{placeName(p)}</a></th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <th scope="row">{r.label}</th>
+                {places.map((p) => <td>{r.fact ? <Fact fact={r.get(p)} /> : r.get(p)}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .compare {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 720px;
+    font-size: 0.9375rem;
+  }
+  .compare th,
+  .compare td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: var(--surface-blue);
+  }
+  .compare thead th a {
+    text-decoration: none;
+    color: var(--brand);
+  }
+  .compare tbody th {
+    font-weight: 400;
+    color: var(--muted);
+    width: 14rem;
+  }
+</style>

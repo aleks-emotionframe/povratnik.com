@@ -1,0 +1,164 @@
+---
+// Leistungsdatenbank (designsystem.md 3, Typ 7; inhaltskonzept.md 5.2): alle Leistungen,
+// auch ohne Karte durchsuchbar, dieselben Felder wie im Ortsprofil. Filter blendet aus,
+// ohne JavaScript steht die vollständige Liste.
+import Base from "../../layouts/Base.astro";
+import Fact from "../../components/Fact.astro";
+import { PROGRAM_STATE, formatDate, loadPlaces, placeName } from "../../lib/places.ts";
+
+const places = loadPlaces();
+const items = places.flatMap((p) => p.benefits.map((b) => ({ place: p, b })));
+const order = ["open", "announced", "unconfirmed", "budget_unknown", "exhausted", "closed"];
+items.sort((x, y) => order.indexOf(x.b.program_state) - order.indexOf(y.b.program_state));
+---
+
+<Base title="Leistungen für Rückkehrer: povratnik.com" description="Alle erfassten Förderungen mit Zustand, Antragszeitraum und Prüfdatum, ohne Kartenumweg." current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/orte">Orte</a> / Leistungen</p>
+        <h1>Leistungen und Förderungen</h1>
+        <p class="lede">Für alle, die wissen, was sie suchen, aber noch nicht wo. Jeder Eintrag mit Zustand, Antragszeitraum und Prüfdatum.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>Fiktive Testgemeinden</strong>
+        Alle Leistungen hier sind erfunden. Staatliche Programme wie Biram Hrvatsku stehen im <a href="/wissen/leistungen-und-foerderung">Wissen</a>.
+      </p>
+      <form class="filters" id="filters" aria-label="Leistungen filtern">
+        <fieldset>
+          <legend>Zustand</legend>
+          {Object.entries(PROGRAM_STATE).map(([key, s]) => (
+            <label><input type="checkbox" name="state" value={key} /> {s.label}</label>
+          ))}
+        </fieldset>
+      </form>
+      <p class="count mono" id="count" aria-live="polite">{items.length} Leistungen</p>
+      <ul class="cards cards--benefits" id="items">
+        {items.map(({ place, b }) => (
+          <li class="card" data-state={b.program_state}>
+            <div class="card__body">
+              <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{PROGRAM_STATE[b.program_state].label}</span> <a class="benefit__place" href={`/orte/${place.id}`}>{placeName(place)}</a></p>
+              <h3>{b.title}</h3>
+              <dl class="benefit">
+                <dt>Für wen</dt><dd>{b.target}</dd>
+                <dt>Betrag</dt><dd><Fact fact={b.amount} /></dd>
+                <dt>Antragszeitraum</dt><dd class="mono">{b.application.from || b.application.until ? `${b.application.from ? formatDate(b.application.from) : "offen"} bis ${b.application.until ? formatDate(b.application.until) : "laufend"}` : "unbekannt"}</dd>
+                <dt>Bindung</dt><dd>{b.binding}</dd>
+              </dl>
+              <p class="datenstand"><span>Quelle: {b.source}</span><span>Geprüft {formatDate(b.checked)}</span></p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>Keine Leistung in diesem Zustand erfasst.</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("filters");
+      var cards = Array.prototype.slice.call(document.querySelectorAll("#items > li"));
+      var count = document.getElementById("count");
+      var empty = document.getElementById("empty");
+      form.addEventListener("change", function () {
+        var states = Array.prototype.map.call(form.querySelectorAll('input[name="state"]:checked'), function (i) { return i.value; });
+        var shown = 0;
+        cards.forEach(function (c) {
+          var ok = states.length === 0 || states.indexOf(c.dataset.state) !== -1;
+          c.hidden = !ok;
+          if (ok) shown++;
+        });
+        count.textContent = shown + (shown === 1 ? " Leistung" : " Leistungen");
+        empty.hidden = shown > 0;
+      });
+    })();
+  </script>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .filters {
+    margin: 1.5rem 0 1rem;
+  }
+  .filters fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+  .filters legend {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0;
+    margin-bottom: 0.35rem;
+    float: left;
+    width: 100%;
+  }
+  .filters label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    font-size: 0.9375rem;
+  }
+  .filters input {
+    accent-color: var(--accent);
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .cards--benefits {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  }
+  .benefit__state {
+    margin: 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .benefit__place {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .benefit {
+    margin: 0.5rem 0 0;
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) 1fr;
+    gap: 0.15rem 1rem;
+    font-size: 0.9375rem;
+  }
+  .benefit dt {
+    color: var(--muted);
+  }
+  .benefit dd {
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .card .datenstand {
+    margin-top: 0.75rem;
+  }
+  .empty {
+    color: var(--ink-soft);
+  }
+</style>

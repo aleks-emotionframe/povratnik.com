@@ -1,0 +1,105 @@
+---
+// Glossar der Amtsbegriffe: gesammelt aus den Themenseiten (CLAUDE.md 3: das Original
+// verschwindet nie, das Verstehen darf daran nicht scheitern). Jeder Begriff verweist
+// auf die Seite, die ihn erklärt.
+import { join } from "node:path";
+import Base from "../../layouts/Base.astro";
+import { loadPages, pagePath } from "../../lib/pages.ts";
+
+const pages = loadPages(join(process.cwd(), "..", "..", "content"));
+const entries = new Map<string, { term: string; explained: string; pages: { title: string; href: string }[] }>();
+for (const p of pages) {
+  for (const t of p.terms) {
+    const e = entries.get(t.term_hr) ?? { term: t.term_hr, explained: t.term_explained.de, pages: [] };
+    e.pages.push({ title: p.title, href: pagePath(p) });
+    entries.set(t.term_hr, e);
+  }
+}
+const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "hr"));
+---
+
+<Base title="Glossar der Amtsbegriffe: povratnik.com" description="Kroatische Amtsbegriffe im Original, verständlich erklärt: OIB, prebivalište, Domovnica, HZZO und mehr." current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/wissen">Wissen</a> / Glossar</p>
+        <h1>Glossar der Amtsbegriffe</h1>
+        <p class="lede">Der kroatische Begriff bleibt stehen, weil Sie ihn am Schalter brauchen. Daneben steht, was er bedeutet.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-wide">
+        <p class="count mono">{list.length} Begriffe aus {pages.length} Themenseiten</p>
+        <dl class="glossary">
+          {list.map((e) => (
+            <div class="glossary__entry">
+              <dt lang="hr">{e.term}</dt>
+              <dd>
+                <p>{e.explained}</p>
+                <p class="glossary__links">
+                  {e.pages.map((p) => <a class="arrow-link" href={p.href}>{p.title}</a>)}
+                </p>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .glossary {
+    margin: 0;
+    max-width: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .glossary__entry {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    display: grid;
+    gap: 0.25rem 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .glossary__entry {
+      grid-template-columns: minmax(12rem, 16rem) 1fr;
+    }
+  }
+  .glossary dt {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+  .glossary dd {
+    margin: 0;
+  }
+  .glossary dd p {
+    margin: 0 0 0.35rem;
+  }
+  .glossary__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 0.875rem;
+  }
+</style>

@@ -44,6 +44,10 @@ test("test stage: every page is marked as test stage and not indexable", { skip:
   // Der Kurzcheck läuft mit Beispielregeln und sagt das auf der Seite.
   const wizard = readFileSync(join(DIST, "mein-weg", "index.html"), "utf8");
   assert.match(wizard, /Synthetische Beispielregeln/);
+  // Jede Ortsseite nennt die Testgemeinden fiktiv (CLAUDE.md 10).
+  for (const file of walk(join(DIST, "orte")).filter((f) => f.endsWith(".html"))) {
+    assert.match(readFileSync(file, "utf8"), /fiktiv/i, file);
+  }
 });
 
 test("page weight stays within the budgets of betrieb.md section 2 (uncompressed, stricter)", { skip }, () => {

@@ -1,0 +1,212 @@
+---
+// Orte entdecken (inhaltskonzept.md 5): Liste mit Filtern, vollwertig ohne JavaScript
+// (die Liste ist serverseitig gerendert, der Filter blendet nur aus). Auf der Teststufe
+// fiktive Testgemeinden (ADR-0004), die Karte folgt mit der Datenbank (M5).
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { loadPlaces, placeName, openBenefits, REGION } from "../../lib/places.ts";
+import ort from "../../assets/ort-hauptplatz.webp";
+
+const places = loadPlaces();
+const targets = (p: (typeof places)[number]) => {
+  const t = new Set<string>();
+  for (const b of p.benefits) {
+    const s = `${b.title} ${b.target}`.toLowerCase();
+    if (/famil|kind|partner/.test(s)) t.add("families");
+    if (/gewerbe|gründ|rückkehrer|auswanderer/.test(s)) t.add("returnees");
+    if (/miet|wohn|bauland/.test(s)) t.add("housing");
+  }
+  return [...t].join(" ");
+};
+---
+
+<Base title="Orte entdecken: povratnik.com" description="Gemeinden in Kroatien mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum." current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Orte entdecken</h1>
+        <p class="lede">
+          Welche Gemeinde fördert Rückkehrer, wo nimmt der Kinderarzt noch Patienten auf, wo
+          gibt es Jahresmieten? Ortsprofile mit Zustand und Prüfdatum, ohne Rangliste.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--light" href="/orte/leistungen">Alle Leistungen</a>
+          <a class="button button--outline-light" href="/orte/vergleich">Orte vergleichen</a>
+        </div>
+      </div>
+      <div class="hero__media">
+        <Image src={ort} alt="Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei." widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>Fiktive Testgemeinden</strong>
+        Die Orte auf dieser Seite sind erfunden und zeigen, wie ein Ortsprofil aussieht, mit allen
+        Zuständen. Echte Gemeinden folgen mit der Datenbank. Kein Wert bezieht sich auf einen realen Ort.
+      </p>
+
+      <form class="filters" id="filters" aria-label="Orte filtern">
+        <fieldset>
+          <legend>Lage</legend>
+          <label><input type="radio" name="region" value="" checked /> alle</label>
+          <label><input type="radio" name="region" value="coast" /> Küste</label>
+          <label><input type="radio" name="region" value="inland" /> Landesinneres</label>
+        </fieldset>
+        <fieldset>
+          <legend>Leistungen für</legend>
+          <label><input type="checkbox" name="target" value="families" /> Familien</label>
+          <label><input type="checkbox" name="target" value="returnees" /> Rückkehrer und Gründer</label>
+          <label><input type="checkbox" name="target" value="housing" /> Wohnen</label>
+        </fieldset>
+        <fieldset>
+          <legend>Zustand</legend>
+          <label><input type="checkbox" name="open" value="1" /> nur mit offenen Leistungen</label>
+        </fieldset>
+        <noscript><p class="soft">Ohne JavaScript zeigt die Liste alle Orte.</p></noscript>
+      </form>
+
+      <p class="count mono" id="count" aria-live="polite">{places.length} Orte</p>
+      <ul class="cards cards--places" id="places">
+        {places.map((p) => (
+          <li class="card card--link" data-region={p.region} data-targets={targets(p)} data-open={openBenefits(p)}>
+            <div class="card__body">
+              <span class="card__num">{p.county} · {REGION[p.region]}</span>
+              <h3><a href={`/orte/${p.id}`}>{placeName(p)}</a></h3>
+              <p>{p.summary}</p>
+              <p class="card__facts">
+                <span class={`state state--${openBenefits(p) > 0 ? "matches" : "closed"}`}>{openBenefits(p)} {openBenefits(p) === 1 ? "offene Leistung" : "offene Leistungen"}</span>
+                <span class="state state--closed">{p.benefits.length - openBenefits(p)} weitere</span>
+              </p>
+              <div class="depth">
+                <span>Datentiefe {p.data_depth.collected} von {p.data_depth.total} Angaben erfasst</span>
+                <div class="depth__bar"><div class="depth__fill" style={`width:${Math.round((100 * p.data_depth.collected) / p.data_depth.total)}%`}></div></div>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>Kein Ort passt zu dieser Auswahl. Das heisst nicht, dass es keine Angebote gibt, nur dass wir keine erfasst haben.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Kein Ranking, keine Gesamtnote</h2>
+        <p>
+          Zwei bis drei Orte lassen sich nebeneinander vergleichen, als Rohinformation. Ein
+          Gesamtwert würde immer unsere Gewichtung durchsetzen und nicht Ihre. Was fehlt, steht
+          als «unbekannt» und nicht als leere Zelle. Ein Ort mit wenig Daten sieht nie aus wie ein
+          Ort ohne Angebote, deshalb zeigt jeder Ort seine Datentiefe.
+        </p>
+        <p><a class="arrow-link" href="/orte/vergleich">Zum Vergleich</a></p>
+      </div>
+      <aside class="col-aside">
+        <div class="side--cta">
+          <h3>Sie vertreten eine Gemeinde?</h3>
+          <p>Tragen Sie Ihre Leistungen für Rückkehrer ein. Jede Angabe erscheint mit Quelle, Prüfdatum und Zustand.</p>
+          <a class="button button--primary" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">Gemeinde eintragen</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Filter blendet Karten aus; ohne JavaScript bleibt die vollständige Liste stehen.
+    (function () {
+      var form = document.getElementById("filters");
+      var cards = Array.prototype.slice.call(document.querySelectorAll("#places > li"));
+      var count = document.getElementById("count");
+      var empty = document.getElementById("empty");
+      function apply() {
+        var region = form.querySelector('input[name="region"]:checked').value;
+        var targets = Array.prototype.map.call(form.querySelectorAll('input[name="target"]:checked'), function (i) { return i.value; });
+        var open = form.querySelector('input[name="open"]').checked;
+        var shown = 0;
+        cards.forEach(function (c) {
+          var ok = (!region || c.dataset.region === region) &&
+            targets.every(function (t) { return (c.dataset.targets || "").split(" ").indexOf(t) !== -1; }) &&
+            (!open || Number(c.dataset.open) > 0);
+          c.hidden = !ok;
+          if (ok) shown++;
+        });
+        count.textContent = shown + (shown === 1 ? " Ort" : " Orte");
+        empty.hidden = shown > 0;
+      }
+      form.addEventListener("change", apply);
+      form.addEventListener("submit", function (e) { e.preventDefault(); });
+    })();
+  </script>
+</Base>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2.5rem;
+    margin: 1.5rem 0 1rem;
+  }
+  .filters fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    align-items: center;
+  }
+  .filters legend {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0;
+    margin-bottom: 0.35rem;
+    float: left;
+    width: 100%;
+  }
+  .filters label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    font-size: 0.9375rem;
+  }
+  .filters input {
+    accent-color: var(--accent);
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .cards--places {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .card__facts {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .cards--places .depth {
+    margin-top: 0.5rem;
+  }
+  .empty {
+    color: var(--ink-soft);
+  }
+  .side--cta {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta h3 {
+    font-size: 1.0625rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+</style>

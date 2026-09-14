@@ -2,9 +2,13 @@
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.0: Aufmacher mit Foto,
 // Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, die Zustände,
 // Einstiege nach Lebenssituation. Wissen und Orte tragen ihren Zustand sichtbar.
+import { join } from "node:path";
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS } from "../lib/rubrics.ts";
+import { SITUATIONS } from "../lib/situations.ts";
+import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
 import hero from "../assets/hero-dokumente.webp";
 import ort from "../assets/ort-hauptplatz.webp";
 
@@ -20,7 +24,14 @@ const chips = [
   ["Schule und Zeugnisse", "kinder-schule-und-ausbildung/schule-und-zeugnisse"],
   ["Führerschein", "umzug-und-mobilitaet/fuehrerschein-umschreiben"],
 ];
-const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pensioniert", "Ich habe keinen kroatischen Pass", "Ich komme allein", "Ich arbeite für einen Arbeitgeber im Ausland"];
+
+// Was gerade läuft: offene und angekündigte Leistungen mit Antragszeitraum, dazu
+// Themenseiten mit befristeter Gültigkeit. Der Block ist der Grund für Wiederbesuche.
+const places = loadPlaces();
+const running = places
+  .flatMap((p) => p.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(p), href: `/orte/${p.id}`, until: b.application.until, state: b.program_state, checked: b.checked })))
+  .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
+const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) => p.validity.valid_until.kind === "date");
 ---
 
 <Base
@@ -93,8 +104,8 @@ const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pe
           </div>
           <div class="card__body">
             <h3><a href="/orte">Orte entdecken</a></h3>
-            <p>Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum, nie mit erfundenen Werten.</p>
-            <span class="state state--unknown">im Aufbau</span>
+            <p>Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand, Prüfdatum und Datentiefe, ohne Rangliste.</p>
+            <span class="arrow-link">Orte und Leistungen</span>
           </div>
         </li>
       </ul>
@@ -148,6 +159,36 @@ const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pe
     </div>
   </section>
 
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>Was gerade läuft</h2>
+        <p class="soft">Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.</p>
+      </div>
+      <ul class="running">
+        {dated.map((p) => (
+          <li class="running__item">
+            <span class="state state--matches">läuft</span>
+            <a href={pagePath(p)}>{p.title}</a>
+            <span class="running__where">staatlich</span>
+            <span class="mono">bis {formatDate(p.validity.valid_until.date!)}</span>
+            <span class="mono muted">geprüft {formatDate(p.sources[0]?.checked ?? p.validity.valid_from)}</span>
+          </li>
+        ))}
+        {running.map((r) => (
+          <li class="running__item">
+            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{PROGRAM_STATE[r.state].label}</span>
+            <a href={r.href}>{r.title}</a>
+            <span class="running__where">{r.where}</span>
+            <span class="mono">{r.until ? `bis ${formatDate(r.until)}` : "Antragszeitraum unbekannt"}</span>
+            <span class="mono muted">geprüft {formatDate(r.checked)}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="soft running__note">Kommunale Einträge stammen auf der Teststufe aus fiktiven Testgemeinden. <a class="arrow-link" href="/orte/leistungen">Alle Leistungen</a></p>
+    </div>
+  </section>
+
   <section class="band band--brand">
     <div class="container grid">
       <div class="col-main">
@@ -178,7 +219,7 @@ const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pe
         <p class="soft">Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.</p>
       </div>
       <ul class="chips">
-        {situations.map((s) => <li><a href="/mein-weg">{s}</a></li>)}
+        {SITUATIONS.map((s) => <li><a href={`/wissen/situation/${s.slug}`}>{s.title}</a></li>)}
       </ul>
     </div>
   </section>
@@ -217,6 +258,56 @@ const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pe
   .card__media--list .mono {
     color: var(--accent);
     margin-right: 0.35rem;
+  }
+  .running {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .running__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 1rem;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9375rem;
+  }
+  .running__item:last-child {
+    border-bottom: 0;
+  }
+  .running__item a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .running__item a:hover {
+    color: var(--accent);
+  }
+  .running__where {
+    color: var(--ink-soft);
+    grid-column: 2;
+  }
+  .running__item .mono {
+    grid-column: 2;
+  }
+  @media (min-width: 900px) {
+    .running__item {
+      grid-template-columns: 9rem 1fr 12rem 9rem 9rem;
+    }
+    .running__where,
+    .running__item .mono {
+      grid-column: auto;
+    }
+  }
+  .running__note {
+    margin: 1rem 0 0;
+    font-size: 0.9375rem;
   }
   .states-aside {
     background: rgba(255, 255, 255, 0.06);

@@ -749,6 +749,45 @@ a:hover {
   color: var(--st-announced);
   background: var(--st-announced-bg);
 }
+.state--closed {
+  color: var(--st-closed);
+  background: var(--st-closed-bg);
+}
+.state--closed::before {
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* Datentiefe eines Orts: eigener Balken, damit ein dünn erfasster Ort nie wie ein Ort
+   ohne Angebote aussieht (designsystem.md 4). */
+.depth {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+.depth__bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line);
+  overflow: hidden;
+}
+.depth__fill {
+  height: 100%;
+  background: var(--accent);
+}
+.band--brand .depth,
+.hero .depth {
+  color: var(--on-brand-soft);
+}
+.band--brand .depth__bar,
+.hero .depth__bar {
+  background: rgba(255, 255, 255, 0.2);
+}
+.band--brand .depth__fill,
+.hero .depth__fill {
+  background: var(--accent-bright);
+}
 .state-list {
   list-style: none;
   padding: 0;
