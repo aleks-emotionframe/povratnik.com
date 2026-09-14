@@ -110,4 +110,4 @@ Durchgeführt am 14.09.2026 mit der fiktiven Fassung 3 aus Abschnitt 4.
 Gemessene Zeit von der Sperre bis zum grünen CI-Lauf: siehe PR. Was in echt
 dazukommt: Build und Auslieferung auf den Server, Kontrolle im Browser.
 
-Pull Request: wird nach dem Lauf hier eingetragen.
+Pull Request: https://github.com/aleks-emotionframe/povratnik.com/pull/5. Von der Sperre bis zum grünen CI-Lauf rund zwei Minuten (CI 36 Sekunden).
