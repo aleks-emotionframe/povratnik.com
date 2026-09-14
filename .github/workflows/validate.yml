@@ -51,7 +51,7 @@ jobs:
         run: |
           rsync -az --delete \
             -e "ssh -i ~/.ssh/deploy_key -o MACs=hmac-sha2-512 -o StrictHostKeyChecking=yes" \
-            apps/web/dist/ "${{ secrets.HOSTPOINT_USER }}@${{ secrets.HOSTPOINT_HOST }}:./"
+            apps/web/dist/ "${{ secrets.HOSTPOINT_USER }}@${{ secrets.HOSTPOINT_HOST }}:."
       - name: Erreichbarkeit prüfen
         run: |
           code=$(curl -s -o /dev/null -w '%{http_code}' https://www.povratnik.com/)
