@@ -13,7 +13,7 @@ const ROLES = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "d
 test("public stage requires a named expert reviewer in docs/rollen.md", () => {
   const row = readFileSync(ROLES, "utf8").split("\n").find((l) => l.startsWith("| Fachprüfung Recht und Steuern"));
   assert.ok(row, "role row missing");
-  const person = (row.split("|")[3] ?? "").trim();|")[3].trim();
+  const person = (row.split("|")[3] ?? "").trim();
   if (STAGE === "public") assert.doesNotMatch(person, /Platzhalter|^offen$/, "public stage without named expert reviewer");
 });
 
