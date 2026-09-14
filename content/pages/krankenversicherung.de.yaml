@@ -1,0 +1,73 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 5), fachlich nicht geprüft.
+id: krankenversicherung
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: gesundheit-und-pflege
+covers: [Versicherungsbeginn je Grundlage, Übergangsdeckung, Zusatzversicherung]
+title: Krankenversicherung, wann sie beginnt und wie die Lücke geschlossen wird
+short_answer: Die Pflichtversicherung beginnt je nach Grundlage an einem anderen Tag. Bei Arbeitsaufnahme oder Anmeldung einer eigenen Tätigkeit wird sie automatisch aktiviert. Wer aus der EU, dem EWR, der Schweiz oder dem Vereinigten Königreich zurückkehrt, muss sich binnen 30 Tagen nach Ende des Arbeitsverhältnisses und der ausländischen Versicherung melden. Für Drittstaaten gilt diese Frist nicht.
+terms:
+  - term_hr: HZZO
+    term_explained:
+      de: Hrvatski zavod za zdravstveno osiguranje, die Krankenversicherungsanstalt. Sie führt die Pflichtversicherung.
+  - term_hr: obvezno zdravstveno osiguranje
+    term_explained:
+      de: Die Pflichtversicherung. Grundlage kann Arbeit, eigene Tätigkeit, Familienangehörigkeit oder eigene Beitragszahlung sein.
+  - term_hr: dopunsko zdravstveno osiguranje
+    term_explained:
+      de: Zusatzversicherung, die Zuzahlungen deckt. Seit 1.2.2026 15 EUR im Monat.
+sections:
+  applies_to: Alle, die in Kroatien wohnen. Die Grundlage entscheidet über den Beginn.
+  not_applies_to: Personen mit einem Aufenthalt, der eine private Versicherung verlangt, etwa digitale Nomaden. Für sie gilt das eigene Verfahren.
+  authority: HZZO, Regionalstelle am Wohnort. Bei Arbeitsaufnahme meldet der Arbeitgeber an.
+  prerequisites:
+    - OIB
+    - Angemeldeter Wohnsitz oder Aufenthalt
+    - Eine Versicherungsgrundlage, also Arbeit, eigene Tätigkeit, Familienangehöriger mit Versicherung oder eigene Beiträge
+  steps:
+    - Vor der Abreise klären, wann die bisherige Versicherung endet
+    - Übergang planen, etwa durch Verlängerung der bisherigen Versicherung, eine Reiseversicherung oder den Beginn der kroatischen Versicherung am ersten Tag
+    - Nach der Anmeldung die Versicherung bei der HZZO regeln, bei Arbeit übernimmt das der Arbeitgeber
+    - Zusatzversicherung prüfen, sie deckt Zuzahlungen
+  documents:
+    - OIB
+    - Nachweis des Wohnsitzes oder Aufenthalts
+    - Nachweis der Grundlage, etwa Arbeitsvertrag oder Nachweis der Familienangehörigkeit
+    - Bei Rückkehr aus EU, EWR, Schweiz oder UK Nachweis über das Ende der bisherigen Versicherung
+  duration_costs: Beiträge bei eigener Zahlung nicht belegt. Zusatzversicherung 15 EUR im Monat seit 1.2.2026.
+  deadlines:
+    - Rückkehr aus EU, EWR, Schweiz und UK, Meldung binnen 30 Tagen nach Ende des Arbeitsverhältnisses und der ausländischen Versicherung
+    - Für Drittstaaten gilt diese 30-Tage-Frist nicht, die Grundlage ist gesondert zu prüfen
+  common_mistake: Davon ausgehen, dass die Versicherung mit der Einreise beginnt. Sie beginnt mit der Grundlage. Zwischen Ende der alten und Beginn der neuen Versicherung entsteht sonst eine Lücke ohne Deckung.
+  not_decided_here: Ob eine Person über einen Familienangehörigen versichert werden kann und ab wann, entscheidet die HZZO. Die Anrechnung ausländischer Versicherungszeiten ist eine Frage für die HZZO und die Rentenanstalt HZMO.
+  open_points:
+    - Höhe der Beiträge bei eigener Zahlung nicht belegt
+    - Wartezeiten und Aufnahme neuer Patienten bei Hausärzten nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib, wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-hzzo
+    reference: Obvezno zdravstveno osiguranje, Stjecanje statusa osigurane osobe, Frist 30 Tage für Rückkehrer aus EU, EWR, Schweiz und UK, Dopunsko osiguranje seit 1.2.2026
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

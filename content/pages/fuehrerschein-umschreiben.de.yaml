@@ -1,0 +1,69 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 4), fachlich nicht geprüft.
+id: fuehrerschein-umschreiben
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: short
+category: umzug-und-mobilitaet
+covers: [Führerscheinumschreibung]
+title: Führerschein umschreiben
+short_answer: Mit einem ausländischen Führerschein darf höchstens ein Jahr ab Einreise gefahren werden, für Drittstaaten nur, wenn das Herkunftsland kroatische Führerscheine ebenfalls anerkennt. Die Umschreibung braucht eine Übersetzung, ein ärztliches Zeugnis von höchstens sechs Monaten, ein Foto und eine Gebühr ab 20,04 EUR.
+terms:
+  - term_hr: zamjena inozemne vozačke dozvole
+    term_explained:
+      de: Umtausch eines ausländischen Führerscheins in einen kroatischen. Zuständig ist die Polizeiverwaltung.
+  - term_hr: uvjerenje o zdravstvenoj sposobnosti
+    term_explained:
+      de: Ärztliches Zeugnis über die Fahrtauglichkeit, höchstens sechs Monate alt.
+sections:
+  applies_to: Alle mit angemeldetem Wohnsitz oder Aufenthalt, die einen ausländischen Führerschein besitzen.
+  not_applies_to: Kurzaufenthalte ohne Wohnsitz. Wer nur besucht, fährt mit dem eigenen Führerschein, soweit er anerkannt ist.
+  authority: Ministarstvo unutarnjih poslova, Polizeiverwaltung am Wohnort.
+  prerequisites:
+    - Angemeldeter Wohnsitz oder Aufenthalt
+    - Gültiger ausländischer Führerschein
+    - Bei Drittstaaten Gegenseitigkeit zwischen Kroatien und dem Ausstellungsland
+  steps:
+    - Prüfen, ob für das Ausstellungsland Gegenseitigkeit besteht
+    - Beglaubigte Übersetzung des Führerscheins beschaffen
+    - Ärztliches Zeugnis einholen
+    - Antrag bei der Polizeiverwaltung stellen, alter Führerschein wird eingezogen
+  documents:
+    - Ausländischer Führerschein und beglaubigte Übersetzung
+    - Ärztliches Zeugnis, höchstens sechs Monate alt
+    - Foto
+    - Ausweis, Wohnsitznachweis, OIB
+  duration_costs: Gebühr ab 20,04 EUR. Kosten für Übersetzung und ärztliches Zeugnis kommen dazu, Beträge nicht belegt.
+  deadlines:
+    - Fahren mit ausländischem Führerschein höchstens ein Jahr ab Einreise
+  common_mistake: Das Jahr verstreichen lassen und dann ohne gültige Fahrerlaubnis fahren. Die Frist läuft ab Einreise, nicht ab Anmeldung.
+  not_decided_here: Ob für ein bestimmtes Drittland Gegenseitigkeit besteht und ob eine Fahrprüfung nötig ist, entscheidet die Polizeiverwaltung nach der aktuellen Liste.
+  open_points:
+    - Liste der Drittstaaten mit Gegenseitigkeit nicht belegt
+    - Ob die Jahresfrist ab Einreise oder ab Anmeldung zählt, am Primärtext prüfen
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-mup
+    reference: Vozačke dozvole, Zamjena inozemne vozačke dozvole, Unterlagen und Gebühr
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

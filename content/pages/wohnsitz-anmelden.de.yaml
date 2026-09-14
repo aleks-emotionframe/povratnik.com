@@ -1,0 +1,75 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 4), fachlich nicht geprüft.
+# Drei verschiedene Vorgänge mit eigenen Rechtsgrundlagen, hier bewusst getrennt dargestellt.
+id: wohnsitz-anmelden
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [Personalausweis, e-Bürger-Zugang]
+title: Wohnsitz und Aufenthalt anmelden
+short_answer: Die Anmeldung ist nicht ein Vorgang, sondern drei. Kroatische Staatsbürger melden den Wohnsitz (prebivalište), Personen mit vorübergehendem Aufenthalt den Aufenthaltsort (boravište), Personen mit Dauer- oder Langzeitaufenthalt jede Änderung. Alle drei laufen über die Polizeiverwaltung, in der Regel binnen 15 Tagen, und lösen Fristen in anderen Verfahren aus.
+terms:
+  - term_hr: prijava prebivališta
+    term_explained:
+      de: Wohnsitzanmeldung für kroatische Staatsbürger. Sie ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
+  - term_hr: prijava boravišta
+    term_explained:
+      de: Meldung des Aufenthaltsorts für Personen mit vorübergehendem Aufenthalt. Seit NN 55/2026 binnen 15 Tagen statt zuvor drei.
+  - term_hr: stalni boravak, dugotrajni boravak
+    term_explained:
+      de: Daueraufenthalt und Langzeitaufenthalt. Änderungen der Adresse sind binnen 15 Tagen zu melden.
+sections:
+  applies_to: Alle, die in Kroatien wohnen. Welcher der drei Vorgänge gilt, hängt vom Status ab.
+  not_applies_to: Touristen und Kurzaufenthalte. Die Unterkunftsmeldung durch den Vermieter ist ein vierter, eigener Vorgang und ersetzt keine der drei Anmeldungen.
+  authority: Ministarstvo unutarnjih poslova, Polizeiverwaltung oder Polizeistation am Wohnort.
+  prerequisites:
+    - Geklärter Status, also Staatsangehörigkeit oder ein bewilligter Aufenthalt
+    - Wohnnachweis, ein notariell beglaubigter Mietvertrag genügt
+    - OIB
+  steps:
+    - Klären, welcher der drei Vorgänge gilt
+    - Wohnnachweis beschaffen, bei Miete den Vertrag notariell beglaubigen lassen
+    - Bei der Polizeiverwaltung vorsprechen und die Anmeldung vornehmen
+    - Datum der Anmeldung notieren, es ist der Auslöser für Fristen bei Förderungen, Führerschein und Übersiedlungsgut
+  documents:
+    - Reisepass oder Personalausweis, bei Staatsbürgern die Domovnica
+    - Wohnnachweis, etwa beglaubigter Mietvertrag oder Grundbuchauszug
+    - Aufenthaltstitel, wo einer besteht
+    - OIB
+  duration_costs: Die Anmeldung selbst erfolgt am Schalter. Gebühren nicht belegt.
+  deadlines:
+    - Wohnsitz kroatischer Staatsbürger, in der Regel binnen 15 Tagen nach Einzug
+    - Aufenthaltsort bei vorübergehendem Aufenthalt, binnen 15 Tagen (NN 55/2026)
+    - Änderungen bei Dauer- oder Langzeitaufenthalt, binnen 15 Tagen nach der Änderung
+  common_mistake: Die Anmeldung aufschieben, weil man noch keine endgültige Wohnung hat. Bei Biram Hrvatsku läuft die Antragsfrist ab dem Tag der Anmeldung, und die Lohnsteuerbefreiung knüpft an die Meldung der Rückkehr an. Wer spät anmeldet, verschiebt nicht nur die Anmeldung, sondern alles, was daran hängt.
+  not_decided_here: Ob ein bestimmter Wohnnachweis genügt, entscheidet die Polizeiverwaltung. Welche Frist im Einzelfall gilt, hängt vom Status ab und ist bei Unsicherheit fachlich zu klären.
+  open_points:
+    - Gebühren nicht belegt
+    - Genaue Fristformulierung für Staatsbürger am Primärtext prüfen
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib]
+  followed_by_pages: [krankenversicherung, biram-hrvatsku, fuehrerschein-umschreiben]
+sources:
+  - id: hr-mup
+    reference: Prijava prebivališta i boravišta, Zakon o prebivalištu, Zakon o strancima, Änderung NN 55/2026
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

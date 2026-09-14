@@ -1,0 +1,78 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 2), fachlich nicht geprüft.
+id: staatsangehoerigkeit-abstammung
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: status-und-staatsangehoerigkeit
+covers: [Abstammung, Einbürgerung über die Auswandererregelung, Doppelte Staatsbürgerschaft]
+title: Kroatische Staatsangehörigkeit über Abstammung
+short_answer: Nachkommen kroatischer Auswanderer können die Staatsangehörigkeit beantragen, seit der Reform vom 1.1.2020 ohne Begrenzung auf eine Generation in gerader Linie. Es gibt keinen Sprachtest und keine Kulturprüfung für Auswanderer, ihre Nachkommen und Ehepartner. Über den Antrag entscheidet das Innenministerium.
+terms:
+  - term_hr: Zakon o hrvatskom državljanstvu
+    term_explained:
+      de: Das kroatische Staatsangehörigkeitsgesetz. Artikel 11 regelt Auswanderer und ihre Nachkommen, Artikel 16 die Zugehörigkeit zum kroatischen Volk.
+  - term_hr: Domovnica
+    term_explained:
+      de: Die Urkunde über die kroatische Staatsangehörigkeit. Sie ist der Nachweis, den Behörden verlangen.
+  - term_hr: MUP
+    term_explained:
+      de: Ministarstvo unutarnjih poslova, das Innenministerium. Es führt das Verfahren.
+sections:
+  applies_to: Personen, die in gerader Linie von einer kroatischen Auswanderin oder einem kroatischen Auswanderer abstammen, sowie deren Ehepartner.
+  not_applies_to: Personen ohne kroatische Vorfahren, etwa EU-Bürger ohne Wurzeln. Für sie gilt die EU-Freizügigkeit, nicht dieses Verfahren.
+  authority: Ministarstvo unutarnjih poslova (MUP), im Ausland über die zuständige kroatische Vertretung.
+  prerequisites:
+    - Mindestalter 18 Jahre
+    - Nachweis der Abstammung von einer Auswanderin oder einem Auswanderer, über Urkunden aller Zwischengenerationen
+    - Achtung der kroatischen Rechtsordnung, keine Sicherheitshindernisse
+    - Beglichene öffentliche Abgaben, soweit welche bestehen
+  steps:
+    - Abstammungskette klären, welche Person ausgewandert ist und über welche Generationen die Linie läuft
+    - Geburts-, Heirats- und gegebenenfalls Sterbeurkunden aller Personen in der Linie beschaffen, aus dem Herkunftsland und aus kroatischen Matrikel- oder Pfarrbüchern
+    - Ausländische Urkunden mit Apostille versehen und beglaubigt übersetzen lassen
+    - Antrag bei der kroatischen Vertretung im Wohnland oder bei der Polizeiverwaltung in Kroatien stellen
+    - Nach dem Entscheid die Domovnica ausstellen lassen, danach OIB und Reisepass
+  documents:
+    - Eigene Geburtsurkunde
+    - Urkunden der Eltern, Grosseltern und weiterer Vorfahren bis zur ausgewanderten Person
+    - Nachweis der kroatischen Herkunft der ausgewanderten Person, etwa Auszug aus dem kroatischen Geburtenregister
+    - Reisepass oder Ausweis
+    - Bei Namensabweichungen ergänzende Nachweise
+  duration_costs: Dauer je nach Vertretung und Vollständigkeit der Urkunden unterschiedlich. Belegte Zahlen fehlen, der Wert ist unbekannt.
+  deadlines:
+    - Keine Antragsfrist. Der Antrag kann jederzeit gestellt werden.
+  common_mistake: Zuerst Urkunden übersetzen und dann die Apostille anbringen. Die Reihenfolge ist Original, dann Apostille, dann beglaubigte Übersetzung. Sonst muss die Übersetzung wiederholt werden.
+  not_decided_here: Ob die vorgelegte Urkundenkette im Einzelfall genügt, insbesondere bei abweichenden Schreibweisen oder fehlenden Registern, entscheidet das Innenministerium. Bei Lücken in der Kette ist eine kroatische Fachperson beizuziehen.
+  open_points:
+    - Bearbeitungsdauer je Vertretung nicht belegt
+    - Gebühren für Antrag und Domovnica nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [apostille-und-uebersetzung]
+  followed_by_pages: [oib, wohnsitz-anmelden]
+sources:
+  - id: hr-mup
+    reference: Hrvatsko državljanstvo, Zakon o hrvatskom državljanstvu, Art. 11 und Art. 16, Reform in Kraft seit 1.1.2020
+    checked: 2026-09-12
+  - id: hr-narodne-novine
+    reference: Zakon o hrvatskom državljanstvu, konsolidierte Fassung mit Änderungen ab 2020
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

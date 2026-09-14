@@ -1,0 +1,63 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 4), fachlich nicht geprüft.
+id: oib
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [OIB]
+title: OIB, die persönliche Identifikationsnummer
+short_answer: Die OIB ist die Nummer, die jede Behörde, jede Bank und jeder Vermieter verlangt. Sie wird bei der Steuerverwaltung beantragt, ist kostenlos und wird bei vollständigen Unterlagen persönlich oft sofort vergeben. Ohne OIB ist fast nichts beantragbar.
+terms:
+  - term_hr: osobni identifikacijski broj (OIB)
+    term_explained:
+      de: Persönliche Identifikationsnummer, elf Ziffern. Sie begleitet jede Person lebenslang in allen Verfahren, ähnlich einer Steuernummer, aber breiter genutzt.
+  - term_hr: Porezna uprava
+    term_explained:
+      de: Die Steuerverwaltung des Finanzministeriums. Sie vergibt die OIB.
+sections:
+  applies_to: Alle, die in Kroatien ein Konto eröffnen, mieten, arbeiten, einen Antrag stellen oder Eigentum erwerben wollen, unabhängig von der Staatsangehörigkeit.
+  not_applies_to: Niemand ist ausgenommen. Wer eine OIB schon einmal erhalten hat, etwa als Kind oder bei einem früheren Aufenthalt, behält sie und beantragt keine neue.
+  authority: Porezna uprava, jede Dienststelle. Aus dem Ausland per E-Mail an OIB@porezna-uprava.hr oder über die kroatische Vertretung.
+  prerequisites:
+    - Gültiger Reisepass oder Personalausweis
+    - Ein Grund für die Zuteilung, etwa Aufenthalt, Arbeit, Konto oder Eigentum
+  steps:
+    - Antragsformular ausfüllen
+    - Persönlich bei einer Dienststelle vorsprechen, oder Antrag per E-Mail oder über das Konsulat einreichen
+    - Bescheinigung über die OIB entgegennehmen und für alle weiteren Verfahren bereithalten
+  documents:
+    - Reisepass oder Personalausweis, Kopie bei Antrag aus dem Ausland
+    - Antragsformular
+    - Bei Antrag durch eine bevollmächtigte Person eine Vollmacht
+  duration_costs: Kostenlos. Persönlich bei vollständigen Unterlagen sofort, Behördenfrist 15 Werktage, über das Konsulat oft mehrere Wochen.
+  deadlines:
+    - Keine Frist für den Antrag. Die OIB wird aber für fast jeden weiteren Schritt gebraucht und gehört deshalb an den Anfang.
+  common_mistake: Die OIB erst nach der Ankunft beantragen und dann wochenlang auf Konto, Mietvertrag und Versicherung warten. Wer die OIB über das Konsulat vor der Abreise beantragt, spart diese Wartezeit.
+  not_decided_here: Nichts Fachliches. Die Zuteilung ist ein Verwaltungsakt ohne Ermessen, sofern die Unterlagen vollständig sind.
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [wohnsitz-anmelden, krankenversicherung]
+sources:
+  - id: hr-porezna-uprava
+    reference: OIB, Dodjela OIB-a stranim osobama, Antrag persönlich, per E-Mail oder über Konsulat, Frist 15 Werktage
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

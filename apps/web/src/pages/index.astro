@@ -10,13 +10,15 @@ import ort from "../assets/ort-hauptplatz.webp";
 
 const heroImg = await getImage({ src: hero, width: 960, format: "webp", quality: 62 });
 const chips = [
-  ["OIB", "dokumente-und-behoerden"],
-  ["Staatsangehörigkeit über Abstammung", "status-und-staatsangehoerigkeit"],
-  ["Krankenversicherung", "gesundheit-und-pflege"],
-  ["Schule anmelden", "kinder-schule-und-ausbildung"],
-  ["Förderungen", "leistungen-und-foerderung"],
-  ["Auto und Hausrat", "umzug-und-mobilitaet"],
-  ["Steuern und Rente", "steuern-geld-und-pension"],
+  ["OIB", "dokumente-und-behoerden/oib"],
+  ["Staatsangehörigkeit über Abstammung", "status-und-staatsangehoerigkeit/staatsangehoerigkeit-abstammung"],
+  ["Bescheinigung für Auswanderer", "status-und-staatsangehoerigkeit/bescheinigung-auswanderer"],
+  ["Wohnsitz anmelden", "dokumente-und-behoerden/wohnsitz-anmelden"],
+  ["Krankenversicherung", "gesundheit-und-pflege/krankenversicherung"],
+  ["Fünf Jahre keine Lohnsteuer", "steuern-geld-und-pension/lohnsteuerbefreiung"],
+  ["Biram Hrvatsku", "leistungen-und-foerderung/biram-hrvatsku"],
+  ["Schule und Zeugnisse", "kinder-schule-und-ausbildung/schule-und-zeugnisse"],
+  ["Führerschein", "umzug-und-mobilitaet/fuehrerschein-umschreiben"],
 ];
 const situations = ["Ich komme mit Familie", "Ich möchte gründen", "Ich bin pensioniert", "Ich habe keinen kroatischen Pass", "Ich komme allein", "Ich arbeite für einen Arbeitgeber im Ausland"];
 ---

@@ -2,63 +2,245 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://leben-in-kroatien.example/schemas/page.schema.json",
   "title": "Page",
-  "description": "One language version of a content page. Each language version has its own status, version and check date (datenmodell.md section 6). The full section layout of a topic page (inhaltskonzept.md 4.2) is specified in M4; this schema carries the metadata and the links to structured objects.",
+  "description": "One language version of a content page. Each language version has its own status, version and check date (datenmodell.md section 6). A topic page carries the fixed mask of inhaltskonzept.md 4.2 in sections; every field there is optional so that a short page can leave out what is not yet researched, and the page shows the gap instead of an empty cell.",
   "type": "object",
-  "allOf": [{ "$ref": "common.schema.json#/$defs/lifecycle" }],
+  "allOf": [
+    {
+      "$ref": "common.schema.json#/$defs/lifecycle"
+    }
+  ],
   "properties": {
     "id": {
       "description": "Slug. The file name is <id>.<lang>.yaml.",
       "$ref": "common.schema.json#/$defs/id"
     },
-    "lang": { "$ref": "vocabularies.schema.json#/$defs/language" },
-    "version": { "type": "integer", "minimum": 1 },
+    "lang": {
+      "$ref": "vocabularies.schema.json#/$defs/language"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
     "synthetic": true,
     "type": {
       "type": "string",
-      "enum": ["topic", "category", "procedure", "glossary", "country", "situation"]
+      "enum": [
+        "topic",
+        "category",
+        "procedure",
+        "glossary",
+        "country",
+        "situation"
+      ]
     },
     "depth": {
       "description": "Two depth levels, visible to the reader. inhaltskonzept.md 4.1.",
       "type": "string",
-      "enum": ["full", "short"]
+      "enum": [
+        "full",
+        "short"
+      ]
     },
-    "title": { "type": "string", "minLength": 1 },
-    "short_answer": { "type": "string", "minLength": 1 },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "short_answer": {
+      "type": "string",
+      "minLength": 1
+    },
     "translation": {
       "description": "Only for languages other than de: which German version this translation follows and whether it has been checked since.",
       "type": "object",
       "properties": {
-        "of_version": { "type": "integer", "minimum": 1 },
-        "status": { "type": "string", "enum": ["current", "review_due", "outdated"] }
+        "of_version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "current",
+            "review_due",
+            "outdated"
+          ]
+        }
       },
-      "required": ["of_version", "status"],
+      "required": [
+        "of_version",
+        "status"
+      ],
       "additionalProperties": false
     },
     "terms": {
       "type": "array",
-      "items": { "$ref": "common.schema.json#/$defs/term" }
+      "items": {
+        "$ref": "common.schema.json#/$defs/term"
+      }
     },
     "links": {
       "type": "object",
       "properties": {
-        "rules": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
-        "tasks": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
-        "procedures": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
-        "requires_pages": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } },
-        "followed_by_pages": { "type": "array", "uniqueItems": true, "items": { "$ref": "common.schema.json#/$defs/id" } }
+        "rules": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        },
+        "tasks": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        },
+        "procedures": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        },
+        "requires_pages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        },
+        "followed_by_pages": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "common.schema.json#/$defs/id"
+          }
+        }
       },
-      "required": ["rules", "tasks", "procedures", "requires_pages", "followed_by_pages"],
+      "required": [
+        "rules",
+        "tasks",
+        "procedures",
+        "requires_pages",
+        "followed_by_pages"
+      ],
       "additionalProperties": false
     },
     "sources": true,
     "approval": true,
     "publication": true,
     "validity": true,
-    "review": true
+    "review": true,
+    "category": {
+      "description": "Slug of the knowledge category (inhaltskonzept.md 4.1) this page belongs to, as used in the site navigation.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "covers": {
+      "description": "Topic names of the category list that this page covers, verbatim.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "sections": {
+      "description": "The fixed mask of a topic page (inhaltskonzept.md 4.2). Missing field means: not yet researched, shown as such.",
+      "type": "object",
+      "properties": {
+        "applies_to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "not_applies_to": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authority": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "duration_costs": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deadlines": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "common_mistake": {
+          "type": "string",
+          "minLength": 1
+        },
+        "not_decided_here": {
+          "type": "string",
+          "minLength": 1
+        },
+        "open_points": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    }
   },
-  "required": ["id", "lang", "version", "type", "depth", "title", "short_answer", "terms", "links"],
+  "required": [
+    "id",
+    "lang",
+    "version",
+    "type",
+    "depth",
+    "title",
+    "short_answer",
+    "terms",
+    "links"
+  ],
   "additionalProperties": false,
-  "if": { "properties": { "lang": { "const": "de" } } },
-  "then": { "not": { "required": ["translation"] } },
-  "else": { "required": ["translation"] }
+  "if": {
+    "properties": {
+      "lang": {
+        "const": "de"
+      }
+    }
+  },
+  "then": {
+    "not": {
+      "required": [
+        "translation"
+      ]
+    }
+  },
+  "else": {
+    "required": [
+      "translation"
+    ]
+  }
 }

@@ -1,8 +1,13 @@
 ---
-// Übersicht Wissen: die zwölf Rubriken (inhaltskonzept.md 4.1). Themenseiten folgen
-// in M4 als geprüfte Inhalte; bis dahin trägt jede Rubrik ihren Zustand sichtbar.
+// Übersicht Wissen: die zwölf Rubriken (inhaltskonzept.md 4.1) mit der Zahl ihrer
+// Themenseiten; Rubriken ohne Seite tragen ihren Zustand sichtbar.
+import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import { RUBRICS } from "../../lib/rubrics.ts";
+import { loadPages } from "../../lib/pages.ts";
+
+const pages = loadPages(join(process.cwd(), "..", "..", "content"));
+const count = (slug: string) => pages.filter((p) => p.category === slug).length;
 ---
 
 <Base title="Wissen nach Thema: povratnik.com" description="Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung." current="wissen">
@@ -31,7 +36,11 @@ import { RUBRICS } from "../../lib/rubrics.ts";
               <span class="card__num">{r.number}</span>
               <h3><a href={`/wissen/${r.slug}`}>{r.title}</a></h3>
               <p>{r.intro}</p>
-              <span class="arrow-link">{r.topics.length} Themen</span>
+              {count(r.slug) > 0 ? (
+                <span class="arrow-link">{count(r.slug)} {count(r.slug) === 1 ? "Themenseite" : "Themenseiten"}</span>
+              ) : (
+                <span class="state state--unknown">{r.topics.length} Themen in Arbeit</span>
+              )}
             </div>
           </li>
         ))}

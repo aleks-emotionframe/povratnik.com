@@ -1,0 +1,73 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 10), fachlich nicht geprüft.
+id: immobilienkauf
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: short
+category: wohnen-und-regionen
+covers: [Kaufprüfung, Kauf durch Ausländer, Grundbuch, Geerbtes Familienland, Ungeklärte Miteigentümer]
+title: Immobilien kaufen als Ausländer, Grundbuch und geerbtes Land
+short_answer: EU-, EWR- und Schweizer Bürger kaufen wie Inländer, seit 1.7.2023 auch landwirtschaftliches Land. Drittstaatsangehörige brauchen die Zustimmung des Justizministeriums und Gegenseitigkeit mit ihrem Land, landwirtschaftliches Land bleibt für sie ausgeschlossen. Die Grunderwerbsteuer beträgt 3 Prozent. Bei geerbtem Familienland ist wegen ungeklärter Miteigentümer und veralteter Grundbücher ein Anwalt zwingend.
+terms:
+  - term_hr: zemljišne knjige
+    term_explained:
+      de: Das Grundbuch. Seit 10.2.2023 wird der Eintrag elektronisch über Notar oder Anwalt beantragt.
+  - term_hr: porez na promet nekretnina
+    term_explained:
+      de: Grunderwerbsteuer, 3 Prozent des Kaufpreises.
+  - term_hr: suglasnost Ministarstva pravosuđa
+    term_explained:
+      de: Zustimmung des Justizministeriums, die Drittstaatsangehörige für den Erwerb brauchen.
+sections:
+  applies_to: Alle, die in Kroatien Wohneigentum oder Land erwerben oder geerbtes Land nutzen wollen.
+  not_applies_to: Miete. Sie ist ein eigenes Thema mit eigenen Regeln.
+  authority: Notar für den Vertrag, Grundbuchamt beim Gericht für den Eintrag, Justizministerium für die Zustimmung bei Drittstaaten, Steuerverwaltung für die Grunderwerbsteuer.
+  prerequisites:
+    - OIB der Käuferin oder des Käufers
+    - Bei Drittstaaten Gegenseitigkeit, sie besteht unter anderem mit Australien, Chile, Neuseeland und Peru
+    - Bereinigter Grundbuchstand der Liegenschaft
+  steps:
+    - Grundbuchauszug prüfen, Eigentümer, Lasten, Miteigentümer, Legalisierungsstand des Gebäudes
+    - Bei Drittstaaten Zustimmung des Justizministeriums beantragen, in der Praxis ein bis drei Monate
+    - Kaufvertrag beim Notar beurkunden
+    - Grundbucheintrag elektronisch über Notar oder Anwalt beantragen
+    - Grunderwerbsteuer nach Bescheid bezahlen
+  documents:
+    - Reisepass, OIB
+    - Grundbuchauszug, Katasterauszug
+    - Bei Drittstaaten Zustimmung des Justizministeriums
+    - Kaufvertrag
+  duration_costs: Grunderwerbsteuer 3 Prozent. Zustimmung für Drittstaaten in der Praxis ein bis drei Monate. Notar- und Anwaltskosten nicht belegt.
+  deadlines:
+    - Grunderwerbsteuer nach Bescheid der Steuerverwaltung, die Zahlungsfrist steht im Bescheid
+  common_mistake: Geerbtes Familienland als geregelt ansehen, weil die Familie es seit Generationen nutzt. Oft stehen noch verstorbene oder ausgewanderte Miteigentümer im Grundbuch. Ohne Bereinigung ist weder Verkauf noch Bau noch Beleihung möglich.
+  not_decided_here: Ob Gegenseitigkeit mit einem bestimmten Land besteht, entscheidet das Justizministerium. Erbrechtliche Bereinigungen und Legalisierung von Bauten sind Anwaltsaufgaben.
+  open_points:
+    - Vollständige Liste der Länder mit Gegenseitigkeit nicht belegt
+    - Kosten für Notar, Anwalt und Grundbuch nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib]
+  followed_by_pages: []
+sources:
+  - id: hr-pravosudje
+    reference: Stjecanje prava vlasništva stranih osoba na nekretninama, Uzajamnost, Zemljišne knjige elektronisch seit 10.2.2023
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

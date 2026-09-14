@@ -1,0 +1,359 @@
+---
+// Themenseite mit der festen Maske aus inhaltskonzept.md 4.2 (designsystem.md 3, Typ 3).
+// Inhalt aus content/pages, Sichtbarkeit nach Stufe (lib/pages.ts). Fehlende Felder
+// erscheinen als Zustand «noch nicht recherchiert», nie als leere Stelle.
+import { join } from "node:path";
+import Base from "../../../layouts/Base.astro";
+import { rubricBySlug } from "../../../lib/rubrics.ts";
+import { loadPages, loadSources, pagePath, pageState, type PageView } from "../../../lib/pages.ts";
+
+export function getStaticPaths() {
+  const contentDir = join(process.cwd(), "..", "..", "content");
+  const pages = loadPages(contentDir);
+  const sources = loadSources(contentDir);
+  return pages.map((page) => ({
+    params: { rubrik: page.category, thema: page.id },
+    props: { page, pages, sources },
+  }));
+}
+
+const { page, pages, sources } = Astro.props as { page: PageView; pages: PageView[]; sources: Record<string, any> };
+const rubric = rubricBySlug(page.category!)!;
+const s = page.sections;
+const state = pageState(page);
+const byId = new Map(pages.map((p) => [p.id, p]));
+const requires = page.links.requires_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const fmt = (iso: string) => iso.split("-").reverse().join(".");
+const missing = "noch nicht recherchiert";
+---
+
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/wissen">Wissen</a> / <a href={`/wissen/${rubric.slug}`}>{rubric.title}</a></p>
+        <h1>{page.title}</h1>
+        <p class="lede">{page.short_answer}</p>
+        <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span> <span class="mono">Stand {fmt(page.sources[0]?.checked ?? page.validity.valid_from)}</span></p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <dl class="glance">
+          <dt>Gilt für</dt><dd>{s.applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>Gilt nicht für</dt><dd>{s.not_applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>Zuständig</dt><dd>{s.authority ?? <span class="state state--unknown">{missing}</span>}</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main mask">
+        <h2>Voraussetzungen</h2>
+        {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>Ablauf</h2>
+        {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>Unterlagen</h2>
+        {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>Dauer und Kosten</h2>
+        <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
+
+        <h2>Fristen</h2>
+        {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+      </div>
+      <aside class="col-aside">
+        {page.terms.length > 0 && (
+          <div class="side">
+            <h3>Amtsbegriffe</h3>
+            <dl class="terms">
+              {page.terms.map((t) => (
+                <>
+                  <dt lang="hr">{t.term_hr}</dt>
+                  <dd>{t.term_explained.de}</dd>
+                </>
+              ))}
+            </dl>
+          </div>
+        )}
+        {requires.length > 0 && (
+          <div class="side">
+            <h3>Vorher nötig</h3>
+            <ul class="side__list">{requires.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+          </div>
+        )}
+        {followed.length > 0 && (
+          <div class="side">
+            <h3>Danach folgt</h3>
+            <ul class="side__list">{followed.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+          </div>
+        )}
+        <div class="side side--cta">
+          <h3>Gilt das für mich?</h3>
+          <p>Der Kurzcheck ordnet dieses Thema in Ihren Weg ein, Person für Person.</p>
+          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <ul class="cards cards--two">
+        <li class="card card--mistake">
+          <div class="card__body">
+            <h3>Häufiger Irrtum</h3>
+            <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
+          </div>
+        </li>
+        <li class="card">
+          <div class="card__body">
+            <h3>Was hier nicht entschieden wird</h3>
+            <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
+          </div>
+        </li>
+      </ul>
+      {s.open_points && (
+        <div class="open-points">
+          <h3>Offene Punkte</h3>
+          <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">offen</span> {x}</li>)}</ul>
+        </div>
+      )}
+      {page.validity.transitional && <p class="notice" role="note"><strong>Gültigkeit</strong>{page.validity.transitional.de}</p>}
+
+      <div class="stand">
+        <h3>Stand und Quellen</h3>
+        <dl class="open-field">
+          <dt>Kennzeichnung</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>Originalquelle</dt>
+          <dd>
+            {page.sources.map((src) => (
+              <p class="stand__source">
+                <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
+                <span class="mono">{sources[src.id]?.publisher}, Stufe {sources[src.id]?.tier}. Fundstelle: {src.reference}. Geprüft {fmt(src.checked)}.</span>
+              </p>
+            ))}
+          </dd>
+          <dt>Gültig ab</dt><dd class="mono">{fmt(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` bis ${fmt(page.validity.valid_until.date!)}`}</dd>
+          <dt>Nächste Prüfung</dt><dd class="mono">{fmt(page.review.next_check)}</dd>
+          <dt>Fehler melden</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent("Fehler: " + page.title)}`}>kontakt@povratnik.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__state {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1.25rem 0 0;
+    color: var(--on-brand-soft);
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .glance {
+    margin: 0;
+    display: grid;
+    gap: 0.35rem 1.25rem;
+    grid-template-columns: max-content 1fr;
+    max-width: none;
+    font-size: 0.9375rem;
+  }
+  .glance dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--on-brand-soft);
+    padding-top: 0.15rem;
+  }
+  .glance dd {
+    margin: 0 0 0.6rem;
+    color: var(--on-brand);
+  }
+  .glance .state {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--on-brand-soft);
+  }
+  .mask h2 {
+    font-size: 1.375rem;
+    margin-top: 1.75rem;
+  }
+  .mask h2:first-child {
+    margin-top: 0;
+  }
+  .checks,
+  .steps,
+  .deadlines {
+    padding: 0;
+    margin: 0 0 0.5rem;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .checks li {
+    padding-left: 1.75rem;
+    position: relative;
+  }
+  .checks li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--surface-blue);
+    color: var(--accent);
+    font-size: 0.75rem;
+    display: grid;
+    place-items: center;
+    margin-top: 0.15rem;
+  }
+  .checks--doc li::before {
+    content: "▪";
+  }
+  .checks--open li::before {
+    content: none;
+  }
+  .checks--open li {
+    padding-left: 0;
+  }
+  .steps {
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    padding-left: 2.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    display: grid;
+    place-items: center;
+  }
+  .deadlines .deadline {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    border-left: 3px solid var(--accent);
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .terms {
+    margin: 0;
+  }
+  .terms dt {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent-deep);
+    margin-top: 0.6rem;
+  }
+  .terms dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .cards--two {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    margin-bottom: 2rem;
+  }
+  .card--mistake {
+    background: var(--st-unknown-bg);
+    border-color: transparent;
+  }
+  .card--mistake p,
+  .card p {
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .open-points {
+    margin-bottom: 2rem;
+  }
+  .open-points h3 {
+    font-size: 1.125rem;
+  }
+  .stand {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .stand h3 {
+    font-size: 1.125rem;
+  }
+  .stand .open-field {
+    max-width: none;
+  }
+  .stand__source {
+    margin: 0 0 0.5rem;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .stand__source .mono {
+    color: var(--muted);
+  }
+</style>
