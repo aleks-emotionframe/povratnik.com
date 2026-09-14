@@ -10,6 +10,10 @@
     "version": { "type": "integer", "minimum": 1 },
     "synthetic": true,
     "title": { "$ref": "common.schema.json#/$defs/i18n_text" },
+    "trigger": {
+      "description": "The event that triggers this rule. Its date selects the version (datenmodell.md 2.4). Must equal result.deadline.trigger when a deadline is present.",
+      "$ref": "vocabularies.schema.json#/$defs/event_type"
+    },
     "scope": {
       "type": "object",
       "properties": {
@@ -90,6 +94,6 @@
     "validity": true,
     "review": true
   },
-  "required": ["id", "version", "title", "scope", "conditions", "result"],
+  "required": ["id", "version", "title", "trigger", "scope", "conditions", "result"],
   "additionalProperties": false
 }

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://leben-in-kroatien.example/schemas/test-case.schema.json",
   "title": "Acceptance test case",
-  "description": "Declarative fixture for the acceptance cases T01 to T18 (wizard-recherche.md section 19) and the mandatory extra tests (CLAUDE.md section 5). Minimal in M0; the expectation format is refined in M1 together with the evaluation engine.",
+  "description": "Declarative fixture for the acceptance cases T01 to T18 (wizard-recherche.md section 19) and the mandatory extra tests (CLAUDE.md section 5). Evaluated by packages/engine/test/fixtures.test.ts. Routes are not produced before M6; until then routes and routes_absent stay empty.",
   "type": "object",
   "properties": {
     "id": { "type": "string", "pattern": "^t[0-9]{2,}(-[a-z0-9]+)*$" },
@@ -41,15 +41,23 @@
                   "additionalProperties": false
                 }
               },
+              "citizenship_status": {
+                "description": "Citizenship as legal status, supplied directly by the fixture. Deriving it from citizenships is wizard logic (M6).",
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "$ref": "vocabularies.schema.json#/$defs/citizenship_status" }
+              },
               "croatian_link": { "$ref": "vocabularies.schema.json#/$defs/croatian_link" },
               "residence_status": { "$ref": "vocabularies.schema.json#/$defs/residence_status" },
-              "answers": {
-                "description": "Further answers keyed by question id (Q01 to Q48). Values are free until the engine defines them in M1.",
+              "facts": {
+                "description": "Further person facts keyed by field path (datenmodell.md section 3), each with the four dimensions of a fact.",
                 "type": "object",
-                "propertyNames": { "pattern": "^q[0-9]{2}(_[a-z0-9_]+)?$" }
+                "propertyNames": { "pattern": "^person\\.[a-z_]+(\\.[a-z_]+)*$" },
+                "additionalProperties": { "$ref": "common.schema.json#/$defs/fact" }
               }
             },
-            "required": ["id", "citizenships", "croatian_link", "residence_status"],
+            "required": ["id", "citizenships", "citizenship_status", "croatian_link", "residence_status"],
             "additionalProperties": false
           }
         },
@@ -121,21 +129,32 @@
         "tasks": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/id" } },
         "tasks_absent": { "type": "array", "items": { "$ref": "common.schema.json#/$defs/id" } },
         "clarifications": {
+          "description": "Exact set of clarification ids the engine must produce, format <kind>:<subject>, for example missing:event.entry or rule_conflict:example-registration.",
           "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z_]+:[a-z0-9_.-]+$" }
         },
         "forbidden_texts": {
           "description": "Result text must never contain these phrases (text tests, CLAUDE.md section 5).",
           "type": "array",
           "items": { "type": "string", "minLength": 1 }
         },
-        "rule_versions": {
-          "description": "Which rule versions must be selected, for cut-off date tests.",
+        "results": {
+          "description": "Exact set of rule results per person: which version was selected and with which eligibility. Cut-off date tests live here.",
           "type": "array",
-          "items": { "$ref": "common.schema.json#/$defs/version_ref" }
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": { "$ref": "common.schema.json#/$defs/id" },
+              "rule": { "$ref": "common.schema.json#/$defs/version_ref" },
+              "eligibility": { "$ref": "vocabularies.schema.json#/$defs/eligibility_status" }
+            },
+            "required": ["person", "rule", "eligibility"],
+            "additionalProperties": false
+          }
         }
       },
-      "required": ["routes", "routes_absent", "tasks", "tasks_absent", "clarifications", "forbidden_texts", "rule_versions"],
+      "required": ["routes", "routes_absent", "tasks", "tasks_absent", "clarifications", "forbidden_texts", "results"],
       "additionalProperties": false
     }
   },

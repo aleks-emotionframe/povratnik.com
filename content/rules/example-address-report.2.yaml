@@ -2,6 +2,7 @@
 id: example-address-report
 version: 2
 synthetic: true
+trigger: entry
 title:
   de: Beispielmeldung innerhalb von 42 Tagen (fiktive neue Fassung)
 scope:
@@ -10,7 +11,7 @@ scope:
     residence_status: [temporary_residence]
   procedure: example-registration
 conditions:
-  - field: person.entry_date
+  - field: event.entry
     operator: exists
     on_unknown: clarify
   - field: person.age
