@@ -48,7 +48,7 @@ innerhalb von Stunden, nicht Tagen.
    bis 8. Die zurückgezogene Fassung bleibt als Nachweis im Bestand.
 
 Die Rücknahme muss vor der ersten Veröffentlichung einmal geprobt sein
-(`betrieb.md` 1). Protokoll der Probe: siehe Abschnitt 4, sobald durchgeführt.
+(`betrieb.md` 1). Protokoll der Probe: Abschnitt 5.
 
 ---
 
@@ -90,5 +90,24 @@ bevor eine echte Regel ihn geht. Ergebnis je Schritt:
 
 Pull Request: https://github.com/aleks-emotionframe/povratnik.com/pull/3 (CI grün, gemerged in den Arbeitsbranch von M2b-1).
 
-Offen nach dem Probelauf: Rollen benennen (`rollen.md`), Branch-Schutz aktivieren,
-Rücknahme einmal proben.
+Offen nach dem Probelauf: Rollen benennen (`rollen.md`), Branch-Schutz aktivieren
+(auf dem kostenlosen GitHub-Plan für private Repositories nicht verfügbar; Repository
+öffentlich stellen oder GitHub Pro, Entscheidung der Betreiberin).
+
+---
+
+## 5. Protokoll der Rücknahme-Probe
+
+Durchgeführt am 14.09.2026 mit der fiktiven Fassung 3 aus Abschnitt 4.
+
+| Schritt | Ergebnis |
+|---|---|
+| 1 Sperre | `example-address-report.3.yaml`: `publication.state: withdrawn`; Eintrag im Quellenregister `example-source` mit fiktivem Grund |
+| 2 Pull Request | Art «Rücknahme», Selbstmerge nach Abschnitt 2 erlaubt; Link unten |
+| 3 Wirkung | Abnahmefall `t14-withdrawn-version`: Einreise 2027-01-01 liefert kein Ergebnis, kein Rückfall auf Fassung 2 (deren Fenster endet 2026-12-31). Bundle-Test: Dev-Modus enthält die zurückgezogene Fassung nicht. Build-Test: `dist/` ohne die Fassung |
+| 4 Wiederfreigabe | nicht durchgeführt; sie wäre eine neue Fassung 4 nach Abschnitt 1, Schritt 2 bis 8 |
+
+Gemessene Zeit von der Sperre bis zum grünen CI-Lauf: siehe PR. Was in echt
+dazukommt: Build und Auslieferung auf den Server, Kontrolle im Browser.
+
+Pull Request: https://github.com/aleks-emotionframe/povratnik.com/pull/5. Von der Sperre bis zum grünen CI-Lauf rund zwei Minuten (CI 36 Sekunden).
