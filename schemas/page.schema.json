@@ -30,7 +30,8 @@
         "procedure",
         "glossary",
         "country",
-        "situation"
+        "situation",
+        "figures"
       ]
     },
     "depth": {
@@ -381,6 +382,48 @@
         "duration"
       ],
       "additionalProperties": false
+    },
+    "figures": {
+      "description": "Rows of a figures page (inhaltskonzept.md 10): each value with its reference date and source id; a missing value is a state, never a blank.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "state": {
+            "type": "string",
+            "enum": [
+              "known",
+              "unknown",
+              "outdated"
+            ]
+          },
+          "as_of": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "$ref": "common.schema.json#/$defs/id"
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "label",
+          "state",
+          "source"
+        ],
+        "additionalProperties": false
+      }
     }
   },
   "required": [

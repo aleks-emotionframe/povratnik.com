@@ -1,0 +1,154 @@
+---
+// Suche über Themenseiten, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe.
+// Der Index entsteht zur Bauzeit und liegt in der Seite; die Suche läuft im Browser,
+// ohne Anfrage an einen Server (CLAUDE.md 2.5 gilt sinngemäss: kein Suchbegriff verlässt
+// den Browser). Ohne JavaScript bleibt die Liste aller Einträge lesbar.
+import { join } from "node:path";
+import Base from "../layouts/Base.astro";
+import { RUBRICS } from "../lib/rubrics.ts";
+import { SITUATIONS } from "../lib/situations.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
+
+const contentDir = join(process.cwd(), "..", "..", "content");
+const topics = loadPages(contentDir);
+const countries = loadPages(contentDir, "de", "country");
+type Entry = { kind: string; title: string; text: string; href: string; terms?: string };
+const index: Entry[] = [
+  ...topics.map((p) => ({ kind: "Themenseite", title: p.title, text: p.short_answer, href: pagePath(p), terms: [...p.covers, ...p.terms.map((t) => t.term_hr)].join(" ") })),
+  ...RUBRICS.map((r) => ({ kind: "Rubrik", title: r.title, text: r.intro, href: `/wissen/${r.slug}`, terms: r.topics.join(" ") })),
+  ...SITUATIONS.map((s) => ({ kind: "Lebenssituation", title: s.title, text: s.intro, href: `/wissen/situation/${s.slug}` })),
+  ...countries.map((p) => ({ kind: "Herkunftsland", title: p.title, text: p.short_answer, href: pagePath(p) })),
+  ...loadPlaces().map((p) => ({ kind: "Ort (fiktiv)", title: placeName(p), text: p.summary, href: `/orte/${p.id}`, terms: p.benefits.map((b) => b.title).join(" ") })),
+  ...topics.flatMap((p) => p.terms.map((t) => ({ kind: "Amtsbegriff", title: t.term_hr, text: t.term_explained.de, href: pagePath(p) }))),
+];
+---
+
+<Base title="Suche: povratnik.com" description="Suche über Themen, Rubriken, Orte und Amtsbegriffe. Läuft im Browser." current="suche">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Suche</h1>
+        <p class="lede">Themen, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe. Die Suche läuft in Ihrem Browser, kein Suchbegriff wird übertragen.</p>
+        <form class="search" role="search" id="search" action="/suche" method="get">
+          <label class="visually-hidden" for="q">Suchbegriff</label>
+          <input id="q" name="q" type="search" placeholder="OIB, Krankenversicherung, Apostille, Biram Hrvatsku" autocomplete="off" />
+          <button class="button button--light" type="submit">Suchen</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="count mono" id="count" aria-live="polite">{index.length} Einträge</p>
+      <ul class="results" id="results">
+        {index.map((e) => (
+          <li class="result" data-title={e.title.toLowerCase()} data-text={`${e.text} ${e.terms ?? ""}`.toLowerCase()}>
+            <span class="result__kind mono">{e.kind}</span>
+            <a href={e.href}>{e.title}</a>
+            <p>{e.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>Nichts gefunden. Das heisst nicht, dass es das Thema nicht gibt, nur dass wir noch keine Seite dazu haben. <a href="mailto:kontakt@povratnik.com?subject=Suchbegriff%20ohne%20Treffer">Sagen Sie uns, was Sie gesucht haben.</a></p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById("q");
+      var items = Array.prototype.slice.call(document.querySelectorAll("#results > li"));
+      var count = document.getElementById("count");
+      var empty = document.getElementById("empty");
+      var form = document.getElementById("search");
+      function norm(s) { return s.toLowerCase().normalize("NFD").replace(/\p{M}/gu, ""); }
+      function apply() {
+        var q = norm(input.value.trim());
+        var words = q ? q.split(/\s+/) : [];
+        var shown = 0;
+        items.forEach(function (li) {
+          var hay = norm(li.dataset.title + " " + li.dataset.text);
+          var ok = words.every(function (w) { return hay.indexOf(w) !== -1; });
+          var strong = words.length > 0 && words.every(function (w) { return norm(li.dataset.title).indexOf(w) !== -1; });
+          li.hidden = !ok;
+          li.classList.toggle("result--strong", strong);
+          if (ok) shown++;
+        });
+        count.textContent = shown + (shown === 1 ? " Eintrag" : " Einträge") + (q ? " für «" + input.value.trim() + "»" : "");
+        empty.hidden = shown > 0;
+      }
+      // Der Suchbegriff wird bewusst nicht in die Adresse geschrieben.
+      form.addEventListener("submit", function (e) { e.preventDefault(); apply(); });
+      input.addEventListener("input", apply);
+      input.focus();
+    })();
+  </script>
+</Base>
+
+<style>
+  .search {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    max-width: 40rem;
+  }
+  .search input {
+    flex: 1 1 16rem;
+    min-height: 48px;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--on-brand);
+    font: inherit;
+  }
+  .search input::placeholder {
+    color: var(--on-brand-soft);
+  }
+  .search input:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 2px;
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .result {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+  .result--strong {
+    border-color: var(--accent);
+  }
+  .result__kind {
+    color: var(--muted);
+  }
+  .result a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.0625rem;
+  }
+  .result p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .empty {
+    color: var(--ink-soft);
+  }
+</style>

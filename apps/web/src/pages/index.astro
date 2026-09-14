@@ -7,6 +7,7 @@ import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS } from "../lib/rubrics.ts";
 import { SITUATIONS } from "../lib/situations.ts";
+import { CASES } from "../lib/cases.ts";
 import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
 import hero from "../assets/hero-dokumente.webp";
@@ -223,6 +224,28 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
       </ul>
     </div>
   </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>Fünf Beispielwege</h2>
+        <p class="soft">Fiktive Fallprofile aus dem Konzept. Echte Erfahrungsberichte folgen, sobald Testpersonen den Plan benutzt haben.</p>
+      </div>
+      <ul class="cards cases">
+        {CASES.map((c) => (
+          <li class="card card--link">
+            <div class="card__body">
+              <span class="card__num">Beispiel, fiktiv</span>
+              <h3><a href={`/wissen/situation/${c.situation}`}>{c.name}</a></h3>
+              <p class="cases__line">{c.line}</p>
+              <p>{c.shapes}</p>
+              <p class="cases__first"><strong>Erster Schritt:</strong> {c.first}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -308,6 +331,17 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   .running__note {
     margin: 1rem 0 0;
     font-size: 0.9375rem;
+  }
+  .cases {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+  .cases__line {
+    color: var(--ink) !important;
+  }
+  .cases__first {
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
+    margin-top: auto !important;
   }
   .states-aside {
     background: rgba(255, 255, 255, 0.06);

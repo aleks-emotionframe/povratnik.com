@@ -37,6 +37,7 @@ export type PageView = {
   short_answer: string;
   terms: { term_hr: string; term_explained: I18n }[];
   sections: PageSections;
+  figures?: { label: string; value?: string; state: "known" | "unknown" | "outdated"; as_of?: string; source: string; note?: string }[];
   country?: Record<"representation" | "apostille" | "social_security" | "double_taxation" | "deregistration" | "duration", CountryFact>;
   links: { requires_pages: string[]; followed_by_pages: string[] };
   sources: { id: string; reference: string; checked: string }[];
@@ -61,7 +62,7 @@ function visible(p: PageView): boolean {
   return p.publication.state !== "withdrawn";
 }
 
-export function loadPages(contentDir: string, lang = "de", type: "topic" | "country" = "topic"): PageView[] {
+export function loadPages(contentDir: string, lang = "de", type: "topic" | "country" | "figures" = "topic"): PageView[] {
   return (loadDir(join(contentDir, "pages")) as PageView[])
     .filter((p) => p.lang === lang && p.type === type)
     .map((p) => ({ ...p, covers: p.covers ?? [], sections: p.sections ?? {}, terms: p.terms ?? [] }))

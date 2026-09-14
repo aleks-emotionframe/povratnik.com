@@ -1,0 +1,51 @@
+# Zahlenseite, Grundlagen aus docs/recherche-faktenbasis.md 11, fachlich nicht geprüft.
+# Zwei Zählweisen für 2025 (DZS und MDU) sind bewusst beide aufgeführt.
+id: zahlen-rueckkehr
+lang: de
+version: 1
+synthetic: false
+type: figures
+depth: short
+title: "Rückkehr und Zuwanderung in Zahlen"
+short_answer: "Kroatien hat seit 2023 einen positiven Wanderungssaldo, getragen zu über 80 Prozent von Arbeitsmigration, nicht von der Diaspora. 2025 war der Saldo kroatischer Staatsbürger erstmals positiv. Die Rückkehrförderung Biram Hrvatsku wächst jedes Jahr."
+terms: []
+figures:
+  - { label: "Zuzüge 2023", value: "69.396", state: known, as_of: "2023", source: hr-dzs }
+  - { label: "Wegzüge 2023", value: "39.218", state: known, as_of: "2023", source: hr-dzs }
+  - { label: "Zuzüge 2024", value: "70.391", state: known, as_of: "2024", source: hr-dzs }
+  - { label: "Wegzüge 2024", value: "38.997", state: known, as_of: "2024", source: hr-dzs }
+  - { label: "Anteil kroatischer Staatsbürger an den Zuzügen 2024", value: "18,9 Prozent", state: known, as_of: "2024", source: hr-dzs, note: "81,1 Prozent Ausländer, grösste Herkunft Nepal 14,2 Prozent und Bosnien-Herzegowina 11,3 Prozent." }
+  - { label: "Zuzug kroatischer Staatsbürger 2025", value: "16.843", state: known, as_of: "2025", source: hr-dzs, note: "Das MDU nennt mehr als 17.000 zurückgekehrte Bürger; andere Zählweise." }
+  - { label: "Wegzug kroatischer Staatsbürger 2025", value: "13.138", state: known, as_of: "2025", source: hr-dzs, note: "Saldo erstmals positiv, plus 3.705." }
+  - { label: "Anträge Biram Hrvatsku 2022 bis 2025", value: "129, 229, 471, 716", state: known, as_of: "2025", source: hr-hzz, note: "2025 davon 703 Rückkehr aus dem Ausland. Häufigste Herkunft Deutschland, Österreich, Irland." }
+  - { label: "Biram Hrvatsku seit 2022 gesamt", value: "1.632 Anträge, über 26 Mio. EUR ausbezahlt, 2.340 Arbeitsplätze", state: known, as_of: "Anfang 2026", source: hr-hzz }
+  - { label: "Nettolohn Durchschnitt", value: "1.446 EUR", state: known, as_of: "August 2025", source: hr-dzs, note: "Brutto 2.015 EUR. Median netto 1.245 EUR, Median brutto 1.700 EUR. Rund zwei Drittel verdienen unter dem Durchschnitt." }
+  - { label: "Regionale Löhne und Immobilienpreise", state: unknown, source: hr-dzs, note: "Nicht ausreichend belegt, wird mit der Ortsdatenbank erhoben." }
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: []
+sources:
+  - id: hr-dzs
+    reference: "Migracija stanovništva 2023, 2024, 2025; Prosječne plaće kolovoz 2025"
+    checked: 2026-09-12
+  - id: hr-hzz
+    reference: "Biram Hrvatsku, Statistik der Anträge 2022 bis 2025"
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

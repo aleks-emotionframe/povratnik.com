@@ -1,0 +1,110 @@
+---
+// Anlaufstellen (inhaltskonzept.md 8): Behördenverzeichnis aus dem Quellenregister, mit den
+// Themenseiten, die auf jede Stelle verweisen. Konsulate, kommunale Stellen und Vereine
+// folgen; ihr Zustand steht sichtbar.
+import { join } from "node:path";
+import Base from "../layouts/Base.astro";
+import { loadPages, loadSources, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
+
+const contentDir = join(process.cwd(), "..", "..", "content");
+const topics = loadPages(contentDir);
+const sources = loadSources(contentDir);
+const authorities = Object.values(sources)
+  .filter((s) => s.id.startsWith("hr-") && s.tier === 2)
+  .map((s) => ({ ...s, pages: topics.filter((p) => p.sources.some((x) => x.id === s.id)) }));
+const places = loadPlaces();
+const countries = loadPages(contentDir, "de", "country").map((c) => ({ title: c.title, href: pagePath(c), known: c.country?.representation.state === "known" }));
+---
+
+<Base title="Anlaufstellen: povratnik.com" description="Behörden in Kroatien, Konsulate, kommunale Willkommensstellen und Vereine, mit den Themen, für die sie zuständig sind." current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Anlaufstellen</h1>
+        <p class="lede">Welche Stelle wofür zuständig ist, mit Einstieg zur Behörde und den Themenseiten, die auf sie verweisen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>Behörden in Kroatien</h2>
+        <p class="soft">Einstiegsseiten der Behörden. Die genaue Fundstelle steht auf jeder Themenseite.</p>
+      </div>
+      <ul class="cards">
+        {authorities.map((a) => (
+          <li class="card">
+            <div class="card__body">
+              <h3><a href={a.url} rel="noopener">{a.publisher}</a></h3>
+              <p>{a.title}</p>
+              {a.pages.length > 0 && (
+                <ul class="plain">
+                  {a.pages.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Konsulate und Vertretungen</h2>
+        <p>
+          Die kroatischen Vertretungen im Herkunftsland stellen Empfehlungsschreiben aus, nehmen
+          OIB-Anträge entgegen und beglaubigen. Adressen und Zuständigkeiten werden mit jeder
+          Vertretung bestätigt und dann auf der Länderseite eingetragen.
+        </p>
+        <ul class="topics">
+          {countries.map((c) => (
+            <li><a href={c.href}>{c.title}</a><span class={`state state--${c.known ? "matches" : "closed"}`}>{c.known ? "bestätigt" : "nicht erhoben"}</span></li>
+          ))}
+        </ul>
+      </div>
+      <aside class="col-aside">
+        <h3>Kommunale Willkommensstellen</h3>
+        <ul class="topics">
+          {places.map((p) => (
+            <li><a href={`/orte/${p.id}`}>{placeName(p)}</a><span class={`state state--${p.arrival.office.state === "known" ? "matches" : "unknown"}`}>{p.arrival.office.state === "known" ? "erfasst" : "unbekannt"}</span></li>
+          ))}
+        </ul>
+        <h3>Vereine und Diaspora-Netzwerke</h3>
+        <p><span class="state state--unknown">im Aufbau</span> Werden je Ort und Herkunftsland erhoben.</p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    font-size: 0.9375rem;
+  }
+  .plain li {
+    padding: 0.2rem 0;
+  }
+  .plain a {
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .topics a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .col-aside h3 {
+    margin-top: 1.5rem;
+  }
+  .col-aside h3:first-child {
+    margin-top: 0;
+  }
+</style>

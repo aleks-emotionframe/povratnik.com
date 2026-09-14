@@ -1,0 +1,100 @@
+---
+// Zahlen und Fakten (inhaltskonzept.md 10): jede Zahl mit Stand und Quelle, eine fehlende
+// Zahl als Zustand. Keine Zahlenstreifen, sondern eine Tabelle mit Datenstand.
+import { join } from "node:path";
+import Base from "../layouts/Base.astro";
+import { loadPages, loadSources, pageState } from "../lib/pages.ts";
+
+const contentDir = join(process.cwd(), "..", "..", "content");
+const pages = loadPages(contentDir, "de", "figures");
+const sources = loadSources(contentDir);
+const fmt = (iso: string) => iso.split("-").reverse().join(".");
+---
+
+<Base title="Zahlen und Fakten: povratnik.com" description="Rückkehr und Zuwanderung nach Kroatien in Zahlen, mit Stand und Quelle." current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Zahlen und Fakten</h1>
+        <p class="lede">Jede Zahl trägt Stand und Quelle. Wo eine Zahl fehlt, steht das dort, statt einer Schätzung.</p>
+      </div>
+    </div>
+  </section>
+
+  {pages.map((page) => (
+    <section class="band band--surface">
+      <div class="container">
+        <div class="band__head">
+          <h2>{page.title}</h2>
+          <span class={`state state--${pageState(page).key}`}>{pageState(page).label}</span>
+        </div>
+        <p class="lede">{page.short_answer}</p>
+        <div class="table-wrap">
+          <table class="figures">
+            <thead>
+              <tr><th scope="col">Kennzahl</th><th scope="col">Wert</th><th scope="col">Stand</th><th scope="col">Quelle</th></tr>
+            </thead>
+            <tbody>
+              {(page.figures ?? []).map((f) => (
+                <tr>
+                  <th scope="row">{f.label}{f.note && <span class="note">{f.note}</span>}</th>
+                  <td>{f.state === "known" ? <strong>{f.value}</strong> : <span class="state state--unknown">unbekannt</span>}</td>
+                  <td class="mono">{f.as_of ?? ""}</td>
+                  <td><a href={sources[f.source]?.url} rel="noopener">{sources[f.source]?.publisher ?? f.source}</a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="datenstand">
+          {page.sources.map((s) => <span>{sources[s.id]?.title ?? s.id}: {s.reference}, geprüft {fmt(s.checked)}</span>)}
+          <span>Nächste Prüfung {fmt(page.review.next_check)}</span>
+        </p>
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+  }
+  .figures {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 0.9375rem;
+  }
+  .figures th,
+  .figures td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .figures thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: var(--surface-blue);
+  }
+  .figures tbody th {
+    font-weight: 400;
+    max-width: 28rem;
+  }
+  .figures strong {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--brand);
+  }
+  .note {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+</style>

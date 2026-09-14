@@ -10,7 +10,7 @@ interface Props {
   title: string;
   description: string;
   /** Aktueller Navigationspunkt für aria-current. */
-  current?: "start" | "wissen" | "orte" | "mein-weg" | "ueber-uns";
+  current?: "start" | "wissen" | "orte" | "mein-weg" | "ueber-uns" | "suche";
   /** Aufmacherbild vorladen (LCP). */
   preload?: string;
 }
@@ -20,6 +20,7 @@ const nav = [
   { href: "/orte", label: "Orte", key: "orte" },
   { href: "/mein-weg", label: "Mein Weg", key: "mein-weg" },
   { href: "/ueber-uns", label: "Über uns", key: "ueber-uns" },
+  { href: "/suche", label: "Suche", key: "suche" },
 ];
 ---
 
@@ -113,6 +114,8 @@ const nav = [
             <li><a href="/wissen/gesundheit-und-pflege">Gesundheit und Pflege</a></li>
             <li><a href="/wissen/leistungen-und-foerderung">Leistungen und Förderung</a></li>
             <li><a href="/wissen">Alle zwölf Rubriken</a></li>
+            <li><a href="/wissen/glossar">Glossar</a></li>
+            <li><a href="/zahlen">Zahlen und Fakten</a></li>
           </ul>
         </div>
         <div>
@@ -120,6 +123,9 @@ const nav = [
           <ul>
             <li><a href="/mein-weg">Kurzcheck: Mein Weg</a></li>
             <li><a href="/orte">Orte entdecken</a></li>
+            <li><a href="/orte/leistungen">Leistungsdatenbank</a></li>
+            <li><a href="/anlaufstellen">Anlaufstellen</a></li>
+            <li><a href="/suche">Suche</a></li>
           </ul>
         </div>
         <div>
