@@ -1,7 +1,8 @@
 # ADR-0003: Hosting für Website, Node-Dienste und Datenbank
 
-Status: **vorgelegt am 14.09.2026, Entscheidung durch die Produktverantwortung
-offen.** Betrifft CLAUDE.md Abschnitt 8 (Hosting EU, Node-fähig, Entscheidung in M2),
+Status: **entschieden am 14.09.2026, Option A.** Vorgelegt von der technischen
+Verantwortung, Entscheidung durch die Produktverantwortung an sie delegiert, mit dem
+Auftrag, bei Unsicherheit die Optionen vorzulegen. Betrifft CLAUDE.md Abschnitt 8 (Hosting EU, Node-fähig, Entscheidung in M2),
 `betrieb.md` Abschnitt 1 und 4, ADR-0001, ADR-0002.
 
 ---
@@ -69,7 +70,7 @@ erfolgt. Infomaniak (Schweiz): fachlich passend, aber CLAUDE.md 8 sagt EU; die
 Produktverantwortung müsste die Vorgabe auf «EU oder Schweiz» erweitern, bevor diese
 Option zählt.
 
-## Empfehlung
+## Entscheidung
 
 Option A für den Pilot. Begründung: Die Last ist klein, das Team kann einen Server
 betreiben, und die Sicherung wird ohnehin selbst erprobt, weil `betrieb.md` 1 eine
