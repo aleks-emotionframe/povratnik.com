@@ -24,3 +24,36 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: npm run validate
+
+  # Auslieferung nach betrieb.md 7: nur nach grünem validate, nur von main. rsync über
+  # SSH auf das Hostpoint-Konto; der Schlüssel ist per rrsync auf den Ordner der Website
+  # beschränkt (ADR-0003). --delete hält den Ordner identisch zum Build.
+  deploy:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency: deploy-production
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: SSH-Schlüssel und bekannten Host einrichten
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "${{ secrets.HOSTPOINT_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "${{ secrets.HOSTPOINT_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+      - name: Website übertragen
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o MACs=hmac-sha2-512 -o StrictHostKeyChecking=yes" \
+            apps/web/dist/ "${{ secrets.HOSTPOINT_USER }}@${{ secrets.HOSTPOINT_HOST }}:/"
+      - name: Erreichbarkeit prüfen
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' https://www.povratnik.com/)
+          echo "HTTP $code"
+          test "$code" = "200"

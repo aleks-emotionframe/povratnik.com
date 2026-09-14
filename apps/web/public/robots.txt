@@ -1,0 +1,3 @@
+# Aufbaustufe: noch nicht indexieren. Wird mit Impressum und erster freigegebener Regel geöffnet.
+User-agent: *
+Disallow: /

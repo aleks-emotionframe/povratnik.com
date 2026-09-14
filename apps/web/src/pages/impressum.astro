@@ -1,7 +1,7 @@
 ---
-// Betreiberangaben werden nicht erfunden. Offene Felder tragen den Zustand «wird ergänzt».
+// Betreiberangaben nach dem Impressum von emotionframe.ch (Stand 14.09.2026). Offene
+// Felder tragen den Zustand «wird ergänzt», nichts wird erfunden.
 import Base from "../layouts/Base.astro";
-const open = '<span class="state state--unknown">wird ergänzt</span>';
 ---
 
 <Base title="Impressum: povratnik.com" description="Verantwortliche Stelle für povratnik.com.">
@@ -9,18 +9,17 @@ const open = '<span class="state state--unknown">wird ergänzt</span>';
     <div class="container grid">
       <div class="col-main">
         <h1>Impressum</h1>
-        <p>Die Betreiberangaben werden vor der Veröffentlichung eingetragen. Bis dahin ist die Website nicht öffentlich.</p>
         <dl class="open-field">
           <dt>Betreiberin</dt>
-          <dd set:html={open} />
-          <dt>Adresse</dt>
-          <dd set:html={open} />
+          <dd>Emotionframe GmbH<br />Loorenstrasse 4<br />5443 Niederrohrdorf<br />Schweiz</dd>
+          <dt>Handelsregister</dt>
+          <dd>CHE-271.087.263</dd>
           <dt>Kontakt</dt>
-          <dd set:html={open} />
+          <dd><span class="state state--unknown">wird ergänzt</span> Vorgesehen: kontakt@povratnik.com, sobald das Postfach eingerichtet ist.</dd>
           <dt>Verantwortlich für den Inhalt</dt>
-          <dd set:html={open} />
+          <dd><span class="state state--unknown">wird ergänzt</span></dd>
           <dt>Fehler melden</dt>
-          <dd set:html={open} />
+          <dd>Falsche Frist, falsche Angabe, toter Link: an die Kontaktadresse, Sichtung binnen zwei Werktagen. Eine falsche Fachausgabe wird sofort zurückgezogen.</dd>
         </dl>
         <h2>Umsetzung</h2>
         <p>Konzept, Gestaltung und Entwicklung: <a href="https://emotionframe.ch" rel="noopener">EmotionFrame GmbH</a>, Schweiz.</p>

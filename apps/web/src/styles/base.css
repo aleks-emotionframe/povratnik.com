@@ -293,6 +293,18 @@ a:hover {
   margin-bottom: 0.2rem;
 }
 
+.notice--stage {
+  border-width: 0 0 1px;
+  border-radius: 0;
+  margin: 0;
+  padding-inline: var(--gutter);
+  font-size: 0.9375rem;
+}
+.notice--stage strong {
+  display: inline;
+  margin-right: 0.6rem;
+}
+
 /* Offene Angaben auf Rechtsseiten */
 .open-field {
   display: grid;
