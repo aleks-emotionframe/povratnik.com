@@ -136,25 +136,24 @@ Paketumfang werden daraus abgeleitet, nicht umgekehrt.
 
 ---
 
-## 7. Server-Einrichtung nach ADR-0003
+## 7. Auslieferung nach ADR-0003
 
-Checkliste für den ersten Server bei Hetzner Cloud. Reihenfolge ist verbindlich;
-jeder Punkt wird mit Datum und Person in diesem Abschnitt abgehakt, sobald erledigt.
-Bis dahin ist kein Schritt erledigt, auch wenn er «vorbereitet» ist.
+Checkliste für die statische Website auf dem bestehenden Hostpoint-Konto. Jeder Punkt
+wird mit Datum und Person abgehakt, sobald erledigt. Bis dahin ist kein Schritt
+erledigt, auch wenn er «vorbereitet» ist.
 
 | Schritt | Inhalt | Erledigt |
 |---|---|---|
-| 1 Konto | Hetzner-Konto auf die Betreiberin, Zahlungsmittel, Zwei-Faktor-Anmeldung, zweite Person mit Zugriff (Vertretung) | offen |
-| 2 Server | kleinster Cloud-Server, Standort Falkenstein oder Nürnberg, aktuelles Ubuntu LTS, nur SSH-Schlüssel, kein Passwort, Root-Anmeldung aus | offen |
-| 3 Grundhärtung | `unattended-upgrades` an, Firewall nur 22, 80, 443, `fail2ban` für SSH, eigener Nutzer mit `sudo` | offen |
-| 4 Auslieferung | Caddy als Webserver mit automatischem Zertifikat, `apps/web/dist` als Wurzel, Domain auf die Server-Adresse | offen |
-| 5 Deploy | Build in der CI, Übertragung per `rsync` über SSH mit eigenem Deploy-Schlüssel (nur Lesen des Repos, nur Schreiben ins Zielverzeichnis). Erst einrichten, wenn 1 bis 4 stehen | offen |
-| 6 Datenbank | ab M2b-2: PostgreSQL und PostGIS aus den Ubuntu-Paketen, nur lokal erreichbar, eigene Rolle je Dienst | offen |
-| 7 Sicherung | täglich `pg_dump` plus Kopie von `content/` und Konfiguration auf eine Hetzner Storage Box (SFTP), 30 Tage Vorhaltung, zusätzlich wöchentlicher Server-Snapshot | offen |
-| 8 Wiederherstellung | einmal auf einem frischen Server aus der Sicherung wiederherstellen, Zeit messen, hier protokollieren. Ohne diesen Eintrag kein Pilot (Abschnitt 1) | offen |
-| 9 Protokolle | Caddy-Zugriffsprotokoll ohne IP-Adressen oder mit gekürzten Adressen, Aufbewahrung 14 Tage; kein Zugriff auf Wizard-Antworten, weil es keinen Endpunkt gibt | offen |
-| 10 Datenschutzseite | Anbieter, Standort, Protokolle und Aufbewahrung in `apps/web/src/pages/datenschutz.astro` eintragen | offen |
-| 11 Fehlerkontakt | Adresse einrichten, in Impressum und Datenschutz eintragen, Sofortweg nach `redaktionsdurchlauf.md` 2 bekannt | offen |
+| 1 Zugang | Hostpoint-Konto auf die Betreiberin, zweite Person mit Zugriff (Vertretung), Zwei-Faktor-Anmeldung im Control Panel | offen |
+| 2 Domain | Domain auf das Hosting, TLS-Zertifikat aktiv, Weiterleitung von http auf https | offen |
+| 3 SSH | SSH-Zugang mit Schlüssel, eigener Deploy-Schlüssel nur für das Zielverzeichnis der Website | offen |
+| 4 Deploy | Build in der CI (`npm run build`), Übertragung von `apps/web/dist` per `rsync` über SSH oder SFTP; Schlüssel als GitHub-Secret; erst einrichten, wenn 1 bis 3 stehen | offen |
+| 5 Ausfallzustand | Fehlerseiten 404 und 500 als statische Dateien, Wizard-Seite zeigt ohne JavaScript den definierten Hinweis | offen |
+| 6 Protokolle | Zugriffsprotokoll bei Hostpoint auf das Minimum, Aufbewahrung nach Anbieter prüfen und auf der Datenschutzseite nennen; kein Endpunkt für Wizard-Antworten | offen |
+| 7 Sicherung | Quelle ist das Repository; Build reproduzierbar. Zusätzlich: GitHub-Repository regelmässig lokal spiegeln (`git clone --mirror`), einmal aus dem Spiegel neu bauen und ausliefern, protokollieren | offen |
+| 8 Datenschutzseite | Anbieter Hostpoint AG, Standort Schweiz, Protokolle und Aufbewahrung in `apps/web/src/pages/datenschutz.astro` eintragen | offen |
+| 9 Fehlerkontakt | Adresse einrichten, in Impressum und Datenschutz eintragen, Sofortweg nach `redaktionsdurchlauf.md` 2 bekannt | offen |
 
-Was hier bewusst fehlt: Docker, Kubernetes, ein zweiter Server. Für den Pilot ist ein
-Server mit geprobter Wiederherstellung sicherer als zwei ohne.
+**Ab M2b-2, sobald das Ortsprofil die Datenbank braucht:** eigener Server nach
+ADR-0003 (PostgreSQL mit PostGIS, Node-Dienst, tägliches `pg_dump`, geprobte
+Wiederherstellung). Die Checkliste dafür wird dann hier ergänzt.

@@ -1,9 +1,9 @@
 # ADR-0003: Hosting für Website, Node-Dienste und Datenbank
 
-Status: **entschieden am 14.09.2026, Option A.** Vorgelegt von der technischen
-Verantwortung, Entscheidung durch die Produktverantwortung an sie delegiert, mit dem
-Auftrag, bei Unsicherheit die Optionen vorzulegen. Betrifft CLAUDE.md Abschnitt 8 (Hosting EU, Node-fähig, Entscheidung in M2),
-`betrieb.md` Abschnitt 1 und 4, ADR-0001, ADR-0002.
+Status: **entschieden am 14.09.2026 durch die Produktverantwortung.** Ersetzt die
+erste Fassung vom selben Tag, die Hetzner empfahl, ohne das bestehende
+Hostpoint-Konto zu kennen. Betrifft CLAUDE.md Abschnitt 8 (seit 2.2: «EU oder
+Schweiz»), `betrieb.md` Abschnitt 1, 4 und 7, ADR-0001, ADR-0002.
 
 ---
 
@@ -15,100 +15,79 @@ braucht: einen Node-Prozess für serverseitig gerenderte Seiten (Suche, Ortsprof
 und PostgreSQL mit PostGIS für Orte, Geometrie und Leistungen (ADR-0001). Ab M3 kommt
 die Redaktionsoberfläche mit Anmeldung dazu.
 
+Die Betreiberin hat ein bestehendes Webhosting-Konto bei Hostpoint (Schweiz). Die
+erste Fassung dieses ADR kannte es nicht und schloss Schweizer Anbieter wegen der
+damaligen Vorgabe «Hosting in der EU» aus. Die Produktverantwortung hat die Vorgabe
+auf «EU oder Schweiz» erweitert: Die Schweiz hat einen Angemessenheitsbeschluss der
+EU, das DSG gilt, und Schweizer Nutzer sind eine benannte Zielgruppe.
+
 Anforderungen, nicht verhandelbar:
 
-1. Standort und Vertragspartner in der EU (CLAUDE.md 8). Ein US-Anbieter mit
-   EU-Rechenzentrum erfüllt das nicht.
-2. Statische Auslieferung heute, Node und PostgreSQL mit PostGIS ohne Anbieterwechsel
-   später.
+1. Standort und Vertragspartner in der EU oder der Schweiz.
+2. Statische Auslieferung heute; Node und PostgreSQL mit PostGIS, sobald das
+   Ortsprofil sie braucht.
 3. Sicherung und **erprobte** Wiederherstellung vor dem ersten Pilot (`betrieb.md` 1).
 4. Zugriff nur per Schlüssel, getrennte Zugänge für technische Verantwortung und
    Vertretung.
 5. Kosten, die ein Zweierteam ohne Förderung trägt.
 
-Nicht entscheidend heute: Skalierung. Die Zielgruppe ist klein, die Seiten sind
-leicht (Budget 150 KB je Informationsseite).
+## Was Hostpoint kann und was nicht
 
-## Optionen
+Geprüft am 14.09.2026 auf https://www.hostpoint.ch/en/webhosting/webhosting.html:
 
-Preise werden hier bewusst nicht als Zahlen festgeschrieben: Die Anbieterseiten nennen
-sie nur in Detailansichten, und sie ändern sich. Grössenordnung nach Drittquellen vom
-14.09.2026 (siehe unten): Option A im einstelligen bis niedrigen zweistelligen
-Eurobereich pro Monat, Option B und C mit Managed-Datenbank im mittleren zweistelligen
-Bereich. **Vor Vertragsabschluss auf der Anbieterseite prüfen.**
+- Webhosting-Tarife (Standard, Smart, Business): SSH und SFTP in allen Tarifen,
+  Datenbanken ausschliesslich MariaDB, kein PostgreSQL, kein Node.js. Server in
+  Glattbrugg ZH.
+- Node.js nur auf dem Managed Flex Server; PostgreSQL wird auch dort nicht genannt.
 
-**A: Hetzner Cloud (Deutschland oder Finnland), alles selbst betrieben.**
-Ein kleiner Cloud-Server, darauf Caddy oder nginx für die statische Site, ein
-Node-Prozess als Systemdienst, PostgreSQL mit PostGIS aus den Distributionspaketen.
-Sicherung per täglichem `pg_dump` und Dateiabgleich auf eine Storage Box, zusätzlich
-die Server-Snapshots des Anbieters. Standorte Falkenstein, Nürnberg, Helsinki.
+Für die heutige Website reicht jeder Webhosting-Tarif. Für Ortsprofil und Suche
+(PostgreSQL mit PostGIS nach ADR-0001) reicht Hostpoint nicht.
 
-- erfüllt 1 bis 5; günstigste Option
-- Betrieb liegt vollständig bei der technischen Verantwortung: Updates, Sicherung,
-  Wiederherstellung, Härtung. Das ist Arbeitszeit, keine Rechnung.
-- Ein Ausfall betrifft alles zugleich; für den Pilot vertretbar.
+## Optionen für die spätere Datenbank
 
-**B: Scaleway (Paris, Amsterdam, Warschau), Managed PostgreSQL.**
-Statische Site und Node als Serverless Container oder auf einer kleinen Instance,
-Datenbank als Managed Database for PostgreSQL mit PostGIS als verfügbarer Erweiterung,
-automatische Sicherungen und Snapshots eingeschlossen (Anbieterseite, 14.09.2026).
+Erst zu entscheiden, wenn Datenlizenz und Ortsdaten vorliegen (M2b-2). Zur Auswahl:
 
-- erfüllt 1 bis 5; Sicherung der Datenbank ist Anbieterleistung, die Wiederherstellung
-  muss trotzdem einmal geprobt werden
-- höhere Fixkosten, die schon vor M2b-2 anfallen, wenn die Datenbank früh angelegt wird
-- weniger Betriebsarbeit; bei Managed-Datenbank kein Root-Zugriff, was für Erweiterungen
-  reicht, solange PostGIS dabei ist
+**A: Kleiner Cloud-Server bei Hetzner (Deutschland oder Finnland)** für PostgreSQL
+mit PostGIS und den Node-Dienst, statische Site bleibt auf Hostpoint. Günstig,
+Betrieb (Updates, Sicherung, Wiederherstellung) bei der technischen Verantwortung.
 
-**C: OVHcloud (Frankreich, Deutschland), VPS plus Public Cloud Database.**
-Mittelweg: VPS für Site und Node, Datenbank als Managed-Dienst. Angebot und
-Konsolen sind umfangreicher als nötig; für ein Zweierteam mehr Einarbeitung als A,
-ohne den Einfachheitsvorteil von B.
+**B: Managed PostgreSQL bei Scaleway (Paris, Amsterdam, Warschau)**, PostGIS als
+Erweiterung verfügbar, Sicherung eingeschlossen. Weniger Betrieb, höhere Fixkosten.
 
-**Ausgeschlossen mit Begründung.** GitHub Pages, Vercel, Netlify, Cloudflare Pages:
-US-Vertragspartner, Anforderung 1 nicht erfüllt, auch wenn die Auslieferung aus der EU
-erfolgt. Infomaniak (Schweiz): fachlich passend, aber CLAUDE.md 8 sagt EU; die
-Produktverantwortung müsste die Vorgabe auf «EU oder Schweiz» erweitern, bevor diese
-Option zählt.
+**C: Datenbankwahl in ADR-0001 überdenken** (MariaDB mit räumlichen Funktionen auf
+Hostpoint). Nur, wenn A und B ausfallen; räumliche Abfragen und mehrsprachige
+Volltextsuche sind in PostgreSQL deutlich besser abgedeckt.
+
+Ausgeschlossen: US-Plattformen (GitHub Pages, Vercel, Netlify, Cloudflare Pages) als
+Vertragspartner, Anforderung 1.
 
 ## Entscheidung
 
-Option A für den Pilot. Begründung: Die Last ist klein, das Team kann einen Server
-betreiben, und die Sicherung wird ohnehin selbst erprobt, weil `betrieb.md` 1 eine
-durchgeführte Wiederherstellung verlangt, nicht eine konfigurierte. Die Kosten bleiben
-im Bereich, den das Projekt ohne Förderung trägt.
-
-Wechselpunkt: Sobald die Redaktion (M3) schreibend auf die Datenbank zugreift und
-mehrere Personen davon abhängen, wird die Datenbank zu einem Managed-Angebot (B oder
-C) verschoben. Der Rest bleibt. Das ist ein Umzug einer Datenbank, kein Umbau.
+1. **Statische Website auf dem bestehenden Hostpoint-Konto.** Keine Zusatzkosten.
+   Auslieferung des Build-Ergebnisses `apps/web/dist` per SFTP oder `rsync` über
+   SSH aus der CI, Details in `betrieb.md` 7.
+2. **Datenbank- und Node-Hosting wird in M2b-2 entschieden**, wenn das Ortsprofil sie
+   tatsächlich braucht. Bis dahin entstehen keine Kosten. Empfehlung dann: Option A,
+   solange nur die technische Verantwortung auf die Datenbank zugreift; Option B ab M3.
 
 ## Konsequenzen
 
-Was die Empfehlung teuer macht, ausdrücklich:
+- Zwei Anbieter, sobald die Datenbank kommt: Site in der Schweiz, Datenbank in der
+  EU. Das ist zulässig und muss auf der Datenschutzseite je Bereich stehen.
+- Sicherung der statischen Site ist trivial (das Repository ist die Quelle, der Build
+  ist reproduzierbar). Die Sicherungspflicht nach `betrieb.md` 1 betrifft heute nur
+  das Repository und später die Datenbank.
+- Hostpoint-Zugang und Vertretung nach `betrieb.md` 1 eintragen; SSH-Schlüssel statt
+  Passwort, soweit der Tarif das zulässt.
+- Kein Node auf Hostpoint: serverseitig gerenderte Seiten (Suche, Ortsprofile) laufen
+  später auf dem Datenbank-Server, nicht auf Hostpoint. Die statischen Seiten bleiben,
+  wo sie sind.
 
-- Betriebszeit der technischen Verantwortung für Updates, Sicherung, Wiederherstellung
-  und Härtung. Benannte Verantwortung und Vertretung nach `betrieb.md` 1 sind
-  Voraussetzung, nicht Folge.
-- Ein einzelner Server ist ein einzelner Ausfallpunkt. Vor dem ersten öffentlichen
-  Pilot muss die Wiederherstellung auf einem frischen Server aus der Sicherung
-  tatsächlich durchgeführt und protokolliert sein.
-- Keine Anbieter-Sicherung für die Datenbank; `pg_dump` und Storage Box sind selbst
-  einzurichten und zu überwachen.
-
-Was sie spart: laufende Kosten, Abhängigkeit von Anbieter-Konsolen, Einarbeitung.
-
-Nach der Entscheidung zu erledigen: Datenschutzseite ergänzen (Anbieter, Standort,
-Protokolle), Server-Protokollierung nach `betrieb.md` 4 minimal halten,
-Zugriffsschlüssel und Vertretung eintragen, Wiederherstellung proben und in
-`betrieb.md` protokollieren.
-
-Prüfpunkt: nach M2b-2, mit den ersten echten Betriebsstunden, Kosten und Aufwand
-erneut vorlegen.
+Prüfpunkt: bei M2b-2, wenn die Datenbank ansteht.
 
 ## Quellen, Stand 14.09.2026
 
+- Hostpoint Webhosting: https://www.hostpoint.ch/en/webhosting/webhosting.html
 - Hetzner Cloud, Standorte: https://www.hetzner.com/cloud/
 - Scaleway Managed Database for PostgreSQL, PostGIS, Regionen, Sicherung:
   https://www.scaleway.com/en/database/
-- Grössenordnung der Preise (Drittquellen, nicht verbindlich):
-  https://hoststack.dev/blog/managed-postgresql-europe-buyers-guide und
-  https://sliplane.io/blog/5-cheap-ways-to-host-postgres

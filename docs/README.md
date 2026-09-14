@@ -9,7 +9,7 @@ Zuwanderer nach Kroatien.
 
 | Dokument | Regelt | Status |
 |---|---|---|
-| `../CLAUDE.md` | Entwicklungsanweisung: Zweck, Grenzen, Arbeitsablauf | v2.1, an ADR-0001 angeglichen |
+| `../CLAUDE.md` | Entwicklungsanweisung: Zweck, Grenzen, Arbeitsablauf | v2.2, Hosting EU oder Schweiz |
 | `strategie.md` | Geschäftsmodell, Positionierung, Wirtschaftlichkeit, Markteintritt | v1 |
 | `inhaltskonzept.md` | Sitemap, Seitentypen, zwölf Rubriken, Checklisten, Prozessdarstellung | v1.1 |
 | `wizard-konzept.md` | Fragenpfad, Statusgabelung, Fallprofile, Zusammenfassung | v1.3, Antwortoptionen ans Vokabular angeglichen, Zusatzfragen |
@@ -17,12 +17,12 @@ Zuwanderer nach Kroatien.
 | `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell, Engine-Semantik | v1.3, M1 und M2a eingearbeitet |
 | `umsetzungskonzept.md` | Architektur, Komponenten, Technologiekriterien, Module, Rollen, Risiken | v1.1, an ADR-0001 und M0 bis M7 angeglichen |
 | `redaktionsgrundsaetze.md` | Quellenhierarchie, Prüfzyklen, Arbeitsablauf, Unabhängigkeit, Tonfall | v1 |
-| `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung, Server-Checkliste | v1.2 |
+| `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung, Auslieferungs-Checkliste | v1.2 |
 | `designsystem.md` | Tokens, Seitentypen, Zustandsdarstellung, Formulare, Mobil | v1.2 |
 | `adr/0001-quelle-und-abgeleitete-kopie.md` | Welcher Bestand wird im Repository, welcher in der Datenbank gepflegt | entschieden |
 | `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket, Nachtrag Preact | entschieden |
 | `redaktionsdurchlauf.md` | Regeländerung von der Quelle bis zur Veröffentlichung und Rücknahme, Protokoll des Probelaufs | v1.0 |
-| `adr/0003-hosting.md` | Hosting: Hetzner Cloud für den Pilot, Wechselpunkt für die Datenbank bei M3 | entschieden |
+| `adr/0003-hosting.md` | Hosting: statische Website auf Hostpoint (Schweiz), Datenbank-Hosting wird bei M2b-2 entschieden | entschieden |
 | `rollen.md` | Besetzung der Rollen, wer gibt was frei | v1, Namen einzutragen |
 | `recherche-faktenbasis.md` | Rechtslage, Förderungen, Zahlen, Wettbewerb, mit Quellen und Stand | v1 |
 | `review-claude-md.md` | Review der Entwicklungsanweisung v1, Grundlage für v2 | v1, P0 und P1 abgearbeitet |
@@ -100,9 +100,10 @@ Druckansicht. Ausschliesslich synthetische Regeln.
 **Stand M2b-1 (14.09.2026):** Feiertagskalender Kroatien 2026 und 2027 als belegter
 Datensatz (`content/calendars/hr.yaml`, Quelle NN 110/2019, Entwurf bis zur
 Fachfreigabe), Redaktionsdurchlauf dokumentiert und mit PR #3 einmal durchgespielt,
-Hosting mit ADR-0003 entschieden (Hetzner), Rücknahme mit PR #5 geprobt, alles in
-`main`. Offen für **M2b-2:** Hetzner-Konto und Server nach `betrieb.md` 7 (braucht
-Zahlungsmittel der Betreiberin), Ortsprofil (braucht Datenlizenz und Datenbank nach
+Hosting mit ADR-0003 entschieden (statische Website auf dem bestehenden
+Hostpoint-Konto, Datenbank-Hosting erst bei Bedarf), Rücknahme mit PR #5 geprobt,
+alles in `main`. Offen für **M2b-2:** Auslieferung auf Hostpoint nach `betrieb.md` 7
+(braucht SSH-Zugang zum Konto), Ortsprofil (braucht Datenlizenz und Datenbank nach
 ADR-0001), Fachfreigabe des Kalenders, Test mit echten Testpersonen.
 
 Entschieden am 13.09.2026 durch die Produktverantwortung: Der Kurzcheck fragt nach
