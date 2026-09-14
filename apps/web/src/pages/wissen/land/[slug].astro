@@ -1,0 +1,200 @@
+---
+// Länderseite (inhaltskonzept.md 4.3): die Ausreiseanforderungen des bisherigen Wohnlands,
+// getrennt vom kroatischen Prozess. Jedes Feld ist ein Fachwert mit Zustand.
+import { join } from "node:path";
+import Base from "../../../layouts/Base.astro";
+import { loadPages, loadSources, pagePath, pageState, type PageView } from "../../../lib/pages.ts";
+
+export function getStaticPaths() {
+  const contentDir = join(process.cwd(), "..", "..", "content");
+  const countries = loadPages(contentDir, "de", "country");
+  const topics = loadPages(contentDir);
+  const sources = loadSources(contentDir);
+  return countries.map((page) => ({ params: { slug: page.id.replace(/^land-/, "") }, props: { page, countries, topics, sources } }));
+}
+
+const { page, countries, topics, sources } = Astro.props as { page: PageView; countries: PageView[]; topics: PageView[]; sources: Record<string, any> };
+const c = page.country!;
+const state = pageState(page);
+const fmt = (iso: string) => iso.split("-").reverse().join(".");
+const byId = new Map(topics.map((p) => [p.id, p]));
+const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const rows: [string, keyof typeof c][] = [
+  ["Kroatische Vertretung", "representation"],
+  ["Apostille", "apostille"],
+  ["Sozialversicherung", "social_security"],
+  ["Doppelbesteuerung", "double_taxation"],
+  ["Abmeldepflichten", "deregistration"],
+  ["Realistische Laufzeiten", "duration"],
+];
+const labels = { known: "", unknown: "unbekannt", not_collected: "nicht erhoben", outdated: "veraltet" };
+---
+
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/wissen">Wissen</a> / Nach Herkunftsland</p>
+        <h1>{page.title}</h1>
+        <p class="lede">{page.short_answer}</p>
+        <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span></p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <div>
+          <h2 class="others__title">Andere Herkunftsländer</h2>
+          <ul class="chips chips--on-brand">
+            {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={pagePath(x)}>{x.title.replace(/^Aus (der |den )?/, "").replace(/ nach Kroatien$/, "")}</a></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Was für die Ausreise zählt</h2>
+        <p class="soft">Der kroatische Prozess und die Anforderungen des Herkunftslands sind zwei verschiedene Dinge.</p>
+        <dl class="open-field country">
+          {rows.map(([label, key]) => (
+            <>
+              <dt>{label}</dt>
+              <dd>
+                {c[key].state === "known" ? (
+                  <span>{c[key].value}</span>
+                ) : (
+                  <span class={`state state--${c[key].state === "unknown" ? "unknown" : "closed"}`}>{labels[c[key].state]}</span>
+                )}
+                {c[key].note && <span class="note">{c[key].note}</span>}
+              </dd>
+            </>
+          ))}
+        </dl>
+      </div>
+      <aside class="col-aside">
+        <div class="side">
+          <h3>Danach folgt in Kroatien</h3>
+          <ul class="side__list">{followed.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+        </div>
+        <div class="side side--cta">
+          <h3>Ihr Weg, Person für Person</h3>
+          <p>Der Kurzcheck fragt nach dem Herkunftsland jeder Person im Haushalt.</p>
+          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="stand">
+        <h3>Stand und Quellen</h3>
+        <dl class="open-field">
+          <dt>Kennzeichnung</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>Originalquelle</dt>
+          <dd>
+            {page.sources.map((src) => (
+              <p class="stand__source">
+                <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
+                <span class="mono">{sources[src.id]?.publisher}, Stufe {sources[src.id]?.tier}. Fundstelle: {src.reference}. Geprüft {fmt(src.checked)}.</span>
+              </p>
+            ))}
+          </dd>
+          <dt>Nächste Prüfung</dt><dd class="mono">{fmt(page.review.next_check)}</dd>
+          <dt>Fehler melden</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent("Fehler: " + page.title)}`}>kontakt@povratnik.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__state {
+    margin: 1.25rem 0 0;
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .others__title {
+    font-size: 1rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .country {
+    max-width: none;
+  }
+  .country dd {
+    display: grid;
+    gap: 0.25rem;
+    justify-items: start;
+  }
+  .note {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .stand h3 {
+    font-size: 1.125rem;
+  }
+  .stand .open-field {
+    max-width: none;
+  }
+  .stand__source {
+    margin: 0 0 0.5rem;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .stand__source .mono {
+    color: var(--muted);
+  }
+</style>

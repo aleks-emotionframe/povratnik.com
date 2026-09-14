@@ -1,0 +1,46 @@
+# Länderseite, Grundlagen aus docs/recherche-faktenbasis.md 3, 5 und 6, fachlich nicht geprüft.
+# Der kroatische Prozess und die Ausreiseanforderungen sind zwei verschiedene Dinge.
+id: land-schweiz
+lang: de
+version: 1
+synthetic: false
+type: country
+depth: short
+title: "Aus der Schweiz nach Kroatien"
+short_answer: "Für die Schweiz gilt in der Sozialversicherung die EU-Koordination, Versicherungszeiten werden angerechnet. Wer aus der Schweiz zurückkehrt, muss sich binnen 30 Tagen nach Ende der Schweizer Versicherung bei der HZZO melden. Die Schweiz ist Vertragsstaat des Apostille-Übereinkommens."
+terms: []
+country:
+  representation: { state: not_collected, note: "Adresse und Zuständigkeit der kroatischen Vertretung werden mit der Vertretung bestätigt und dann hier eingetragen." }
+  apostille: { value: "Ja, Vertragsstaat. Apostille durch die Staatskanzlei des Kantons vor der Übersetzung.", state: known }
+  social_security: { value: "EU-Koordination gilt. Zeiten werden angerechnet. HZZO-Meldung binnen 30 Tagen nach Ende der Schweizer Versicherung.", state: known }
+  double_taxation: { state: unknown, note: "Ob und wie ein Doppelbesteuerungsabkommen greift, ist noch nicht belegt. Steuerfachperson beiziehen." }
+  deregistration: { state: unknown, note: "Abmeldung bei der Wohngemeinde, Steuerabschluss und Versicherungsende sind noch nicht recherchiert." }
+  duration: { state: unknown }
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [apostille-und-uebersetzung, oib, wohnsitz-anmelden, krankenversicherung]
+sources:
+  - id: hcch-apostille
+    reference: Status table, Vertragsstaaten des Apostille-Übereinkommens
+    checked: 2026-09-12
+  - id: hr-porezna-uprava
+    reference: Doppelbesteuerungsabkommen, Liste der Staaten; Meldepflicht für Auslandsrenten aus Staaten ohne Abkommen bis 31.1.
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

@@ -24,6 +24,8 @@ export type PageSections = {
   open_points?: string[];
 };
 
+export type CountryFact = { value?: string; state: "known" | "unknown" | "not_collected" | "outdated"; note?: string };
+
 export type PageView = {
   id: string;
   lang: string;
@@ -35,6 +37,7 @@ export type PageView = {
   short_answer: string;
   terms: { term_hr: string; term_explained: I18n }[];
   sections: PageSections;
+  country?: Record<"representation" | "apostille" | "social_security" | "double_taxation" | "deregistration" | "duration", CountryFact>;
   links: { requires_pages: string[]; followed_by_pages: string[] };
   sources: { id: string; reference: string; checked: string }[];
   approval: { state: string; reviewer?: string; approved_at?: string };
@@ -58,9 +61,9 @@ function visible(p: PageView): boolean {
   return p.publication.state !== "withdrawn";
 }
 
-export function loadPages(contentDir: string, lang = "de"): PageView[] {
+export function loadPages(contentDir: string, lang = "de", type: "topic" | "country" = "topic"): PageView[] {
   return (loadDir(join(contentDir, "pages")) as PageView[])
-    .filter((p) => p.lang === lang && p.type === "topic")
+    .filter((p) => p.lang === lang && p.type === type)
     .map((p) => ({ ...p, covers: p.covers ?? [], sections: p.sections ?? {}, terms: p.terms ?? [] }))
     .filter(visible);
 }
@@ -79,5 +82,5 @@ export function pageState(p: PageView): { key: "matches" | "unclear"; label: str
 }
 
 export function pagePath(p: PageView): string {
-  return `/wissen/${p.category}/${p.id}`;
+  return p.type === "country" ? `/wissen/land/${p.id.replace(/^land-/, "")}` : `/wissen/${p.category}/${p.id}`;
 }
