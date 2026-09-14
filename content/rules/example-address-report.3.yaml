@@ -35,7 +35,7 @@ sources:
 approval:
   state: in_review
 publication:
-  state: unpublished
+  state: withdrawn
 validity:
   valid_from: 2027-01-01
   valid_until:

@@ -31,7 +31,9 @@ test("build mode includes an approved, published, non-synthetic rule and its tas
 test("dev mode includes drafts and flags the bundle as synthetic, but never withdrawn rules", () => {
   const bundle = bundleFor("dev", content);
   assert.equal(bundle.synthetic, true);
-  assert.equal(bundle.rules.length, content.rules.length);
+  const notWithdrawn = content.rules.filter((r) => r.publication.state !== "withdrawn");
+  assert.equal(bundle.rules.length, notWithdrawn.length);
+  assert.ok(content.rules.length > notWithdrawn.length, "the withdrawn probe version must exist in content/");
   const withdrawn: RuleView = { ...content.rules[0]!, publication: { state: "withdrawn" } };
   const without = bundleFor("dev", { ...content, rules: [withdrawn] });
   assert.deepEqual(without.rules, []);

@@ -1,9 +1,10 @@
-# SYNTHETISCH. Probelauf Redaktionsdurchlauf: Einreise am Stichtag der Fassung 3.
-id: t14-cutoff-version-3
+# SYNTHETISCH. Rücknahme-Probe: Fassung 3 ist zurückgezogen. Für eine Einreise in ihrem
+# Fenster gibt es kein Ergebnis und keinen Rückfall auf Fassung 2 (Ende 2026-12-31).
+id: t14-withdrawn-version
 synthetic: true
 title:
-  de: Einreise am Stichtag der Fassung 3, 50 Tage, Ende auf Samstag verschoben
-covers: [cutoff-day, editorial-run-through]
+  de: Zurückgezogene Fassung 3 wird nie ausgewertet, kein Rückfall auf Fassung 2
+covers: [withdrawal, editorial-run-through]
 reference_date: 2026-09-13
 input:
   persons:
@@ -32,15 +33,8 @@ input:
 expect:
   routes: []
   routes_absent: []
-  tasks: [example-register-address]
-  tasks_absent: []
+  tasks: []
+  tasks_absent: [example-register-address]
   clarifications: []
   forbidden_texts: ["kein Anspruch"]
-  results:
-    - person: p1
-      rule: example-address-report@3
-      eligibility: matches
-  deadlines:
-    - person: p1
-      rule: example-address-report@3
-      due: 2027-02-22
+  results: []

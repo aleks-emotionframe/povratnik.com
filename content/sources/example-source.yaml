@@ -13,3 +13,5 @@ reuse_rights: official_free
 changelog:
   - date: 2026-09-13
     note: Angelegt als synthetisches Beispiel für den Validator.
+  - date: 2026-09-14
+    note: "Rücknahme-Probe: Fassung 3 von example-address-report zurückgezogen (publication: withdrawn), fiktiver Grund: Fristangabe falsch übernommen. Beleg für den Sofortweg nach redaktionsdurchlauf.md Abschnitt 2."
