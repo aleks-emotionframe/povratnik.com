@@ -1,0 +1,1079 @@
+# Catálogo en español. Versión de trabajo (CLAUDE.md 3): la versión alemana es la de
+# referencia, los textos legales croatas rigen en su original. Las claves que faltan
+# aquí se muestran en alemán (apps/web/src/lib/i18n.ts). Ortografía: es neutro.
+results:
+  unclear: Para la comprobación falta todavía esta información.
+  condition_missing: Según sus datos, actualmente no cumple este requisito.
+  unchecked: Según sus datos, este ámbito aún no se ha comprobado de forma concluyente.
+  rule_conflict: Este punto requiere una aclaración profesional. La entidad competente es la indicada.
+rules:
+  example_address_report:
+    matches: Según sus datos, el registro de ejemplo podría aplicarse. Sobre el registro decide la autoridad de ejemplo (ficticia).
+  example_conflict_a:
+    matches: Según sus datos, la regla ficticia A podría aplicarse.
+  example_conflict_b:
+    matches: Según sus datos, la regla ficticia B podría aplicarse.
+  example_priority_a:
+    matches: Según sus datos, la regla ficticia con prioridad 1 podría aplicarse.
+  example_priority_b:
+    matches: Según sus datos, la regla ficticia con prioridad 2 podría aplicarse.
+  example_skip_rule:
+    matches: Según sus datos, la regla ficticia con condición secundaria podría aplicarse.
+  example_accommodation_rule:
+    matches: Según sus datos, el registro de ejemplo del alojamiento podría aplicarse.
+  example_passport_check:
+    matches: Según sus datos, en el ejemplo ficticio podría aplicarse la comprobación del documento de viaje.
+  example_eea_registration:
+    matches: Según sus datos, en el ejemplo ficticio podría aplicarse la inscripción tras la entrada. Sobre la inscripción decide la autoridad de ejemplo (ficticia).
+  example_descent_check:
+    matches: Según sus datos, en el ejemplo ficticio podría aplicarse la comprobación de la cadena de ascendencia. Si los documentos bastan lo decide la autoridad de ejemplo (ficticia).
+  example_remote_work_check:
+    matches: Según sus datos, en el ejemplo ficticio podría aplicarse la vía para el trabajo remoto. Sobre la solicitud decide la autoridad de ejemplo (ficticia).
+wizard:
+  title: Mi camino a Croacia
+  intro: Seis preguntas y luego su primer plan. Sus respuestas se quedan en este navegador.
+  progress: Pregunta {n} de {total}
+  for_person: Para {person}
+  unknown: Todavía no lo sé
+  back: Atrás
+  next: Continuar
+  finish: Mostrar el plan
+  restart: Empezar de nuevo
+  remove: quitar
+  household_label: Hogar
+  add: Añadir
+  edit: Cambiar
+  print: Imprimir como PDF
+  no_js: El chequeo rápido necesita JavaScript, porque la evaluación se hace en su navegador y sus respuestas no se envían a ningún sitio. Active JavaScript o use otro navegador.
+  no_rules_title: Ninguna regla aprobada
+  no_rules_text: Actualmente no hay ninguna regla revisada profesionalmente y publicada. Por eso el chequeo rápido aún no puede generar un plan.
+  synthetic_banner: Reglas de ejemplo sintéticas
+  synthetic_text: Este plan se basa en reglas de ejemplo inventadas, sin revisión profesional. No dice nada sobre su situación real.
+  roles:
+    self: Usted
+    partner: Pareja
+    child: Hijo o hija
+    other: Otra persona
+  q:
+    stage:
+      title: ¿En qué punto está?
+      help: Quien ya ha entrado en Croacia recibe primero la comprobación de los plazos en curso.
+      options:
+        exploring: Todavía estoy explorando
+        planning: Estoy planificando en concreto
+        arrived: Ya estoy en Croacia
+    household:
+      title: ¿Quién se muda con usted?
+      help: Cada persona tiene su propio camino. Su pareja y sus hijos pueden tener requisitos distintos a los suyos.
+      options:
+        alone: Yo solo o sola
+        partner: Con mi pareja
+        partner_children: Con pareja e hijos
+        alone_children: Solo o sola con hijos
+        others: Con otras personas
+    country:
+      title: ¿Dónde vive hoy esta persona?
+      help: Determina la vía de los documentos, la legalización, la traducción y los deberes de baja.
+      options:
+        ar: Argentina
+        cl: Chile
+        de: Alemania
+        ch: Suiza
+        at: Austria
+        ca: Canadá
+        other: Otro país
+    citizenship:
+      title: ¿Qué nacionalidades tiene esta persona?
+      help: Selección múltiple. Se pregunta por la nacionalidad, no por el pasaporte. Un pasaporte vencido no cambia la nacionalidad.
+      options:
+        hr: Croata
+        eea: UE o EEE
+        ch: Suiza
+        other: Otra
+        stateless: Apátrida
+    link:
+      title: ¿Existe un vínculo con Croacia?
+      help: El vínculo abre caminos por el origen, sin prometer nada. Si una prueba basta lo decide la autoridad.
+      options:
+        parent: Un progenitor es o era croata
+        ancestor: Abuelos o antepasados anteriores eran croatas
+        former_residence: Vivió antes en Croacia
+        partner: Pareja con vínculo croata
+        none: Ningún vínculo
+    horizon:
+      title: ¿Cuándo será la mudanza?
+      help: Determina el orden, no el contenido. Una fecha común es un escenario, no una fecha fija.
+      options:
+        within_6_months: En hasta 6 meses
+        6_to_12_months: En 6 a 12 meses
+        later_or_unclear: Más tarde o todavía no está claro
+    income:
+      title: ¿De qué vivirá esta persona en Croacia?
+      help: Activa las preguntas sobre trabajo, formación y finanzas.
+      options:
+        employment: Empleo en Croacia
+        self_employment: Actividad propia o emprendimiento
+        remote_employer_abroad: Trabajo para un empleador en el extranjero
+        pension_or_assets: Jubilación o patrimonio
+        study: Estudios
+    residence:
+      title: ¿Qué estatus de residencia tiene esta persona en Croacia?
+      help: El estatus decide qué reglas se aplican. Es algo distinto de la nacionalidad.
+      options:
+        eea_registered: Registrado como ciudadano de la UE, del EEE o de Suiza
+        temporary_residence: Residencia temporal (privremeni boravak)
+        diaspora_certificate: Residencia para emigrantes y descendientes
+        digital_nomad: Nómada digital
+        permanent_residence: Residencia permanente (stalni boravak)
+        long_term_residence: Residencia de larga duración (dugotrajno boravište)
+        none: Todavía sin estatus
+    entry:
+      title: ¿Cuándo entró esta persona en Croacia?
+      help: La fecha de entrada activa plazos. Sin fecha, los plazos solo se pueden calcular cuando esté confirmada.
+  refine:
+    unknown: No lo sé
+    children:
+      title: "{person}: edad e idioma"
+      help: Influye en la escuela, el apoyo lingüístico y el calendario.
+      age:
+        label: Edad
+        0_5: 0 a 5 años
+        6_14: 6 a 14 años
+        15_18: 15 a 18 años
+      croatian:
+        label: Habla croata
+        "yes": Sí
+        some: Un poco
+        "no": No
+    founding:
+      title: Su emprendimiento
+      help: Influye en la elegibilidad para ayudas y en la trampa del orden.
+      sector:
+        label: Sector según la convocatoria
+        allowed: Sector admitido
+        excluded: Sector excluido (comercio, transporte, alojamiento, gastronomía, finanzas, inmobiliario)
+      founded:
+        label: Ya constituido
+        "yes": Sí
+        "no": No
+    place:
+      title: ¿Qué municipio?
+      help: Muestra las ayudas municipales en el plan. En la fase de prueba, municipios ficticios.
+      place:
+        label: Destino
+        none: Todavía sin destino
+    property:
+      title: Vivienda en el destino
+      help: Influye en el registro de la propiedad, la herencia y la autorización de compra.
+      property:
+        label: Está previsto
+        buy: Compra
+        rent: Alquiler
+        inherited: Propiedad familiar heredada
+    pension:
+      title: "{person}: jubilación"
+      help: Influye en el cómputo y en la tributación.
+      pension:
+        label: De qué país
+        ar: Argentina
+        cl: Chile
+        br: Brasil
+        de: Alemania
+        ch: Suiza
+        at: Austria
+        us: Estados Unidos
+        ca: Canadá
+        other: Otro país
+    regulated:
+      title: "{person}: profesión regulada"
+      help: Por ejemplo profesiones sanitarias, docentes y jurídicas. El reconocimiento es un paso previo propio.
+      regulated:
+        label: La profesión está regulada
+        "yes": Sí
+        "no": No
+    care:
+      title: Cuidados y tratamiento continuo
+      help: Influye en la atención en el destino y en la cobertura transitoria.
+      care:
+        label: Necesidad médica continua en el hogar
+        "yes": Sí
+        "no": No
+facts:
+  person:
+    stage: En qué punto está
+    move_horizon: Momento de la mudanza
+    country: País de residencia actual
+    citizenship_status: Nacionalidad
+    croatian_link: Vínculo con Croacia
+    income_source: Ingresos en Croacia
+    residence_status: Estatus de residencia en Croacia
+  event:
+    entry: Fecha de entrada
+plan:
+  title: Su plan
+  situation: Su situación de partida
+  next: Los próximos pasos
+  next_help: Como máximo tres. Todo lo demás está en la hoja de ruta de abajo.
+  next_empty: Para este ámbito no se reconocen actualmente más pasos.
+  roadmap: Su hoja de ruta por fases
+  open: Lo que sigue abierto
+  open_help: Esta lista es visible a propósito. Muestra lo que todavía no sabemos, en vez de fingir seguridad.
+  open_empty: Actualmente no hay nada abierto.
+  missing: "falta todavía {fact}"
+  conflict: Para el procedimiento «{procedure}» se aplican varias reglas. Este punto requiere una aclaración profesional.
+  why: ¿Por qué se me muestra esto?
+  used_facts: Datos utilizados
+  rule: Regla
+  source: Fuente
+  checked: comprobado el
+  documents: Documentos
+  authority: Entidad competente
+  purpose: Para qué
+  provisional: Según el estado actual, porque falta la fecha de entrada.
+  datenstand: Estado de los datos
+  reference_date: Creado el
+  rule_versions: Versiones de reglas
+  recheck: Antes de presentar una solicitud, compruebe de nuevo si el estado ha cambiado.
+  errors: Errores técnicos en la evaluación
+  no_holidays: sin festivos, porque aún no hay un calendario de festivos aprobado
+  with_holidays: "Calendario {calendar}, estado {date}"
+  calendars: Festivos
+  none: ninguno
+  reading: Conocimiento para su camino
+  reading_help: Páginas temáticas que, según sus datos, encajan con su hogar. Es una recomendación de lectura, no una comprobación.
+  reading_for: "aplica a {persons}"
+  reading_state: Bases disponibles, sin revisión profesional
+  documents_all: Documentos que probablemente necesitará
+  documents_help: Recopilados de las páginas temáticas de arriba. Cuáles exige su entidad en cada caso lo decide esa entidad.
+  different: Qué es distinto en su caso
+  different_help: Según sus datos. Es una orientación, no una comprobación.
+  chain: Su camino en una imagen
+  chain_help: Cuatro claves, en este orden. El cuello de botella está marcado.
+  deadlines: Sus plazos
+  deadlines_help: Todo lo que tiene fecha, en un solo lugar. Una fecha no confirmada nunca activa una cuenta atrás.
+  deadlines_empty: Según sus datos, actualmente no corre ningún plazo calculado.
+  deadline_kind_legal: plazo legal (regla de ejemplo)
+  deadline_kind_funding: plazo de una ayuda
+  deadline_awaiting: calculable solo cuando la fecha que lo activa esté confirmada
+  deadline_unknown: periodo de solicitud desconocido
+  place_benefits: Ayudas en su destino
+  place_benefits_help: Con estado y periodo de solicitud. Sobre la solicitud decide el municipio.
+  place_benefits_empty: Para este lugar no hay ayudas registradas. Eso no significa que no las haya.
+  terms: Palabras para la ventanilla
+  terms_help: Los términos oficiales croatas de su camino, para llevar a la cita con la administración.
+  helpers: Quién le ayuda
+  helpers_help: Separado en público y comercial. Los socios profesionales llegarán cuando exista el directorio.
+  helpers_public: Entidades públicas
+  helpers_place: Llegada al destino
+  helpers_country: Representación croata en el país de origen
+  helpers_country_unknown: La dirección y la competencia se confirman con la representación y luego se registran.
+  helpers_country_none: Para este país todavía no hay página.
+  helpers_partners: Socios profesionales
+  helpers_partners_empty: El directorio por especialidad e idioma todavía no está construido.
+  checklist_arrive: Lista de llegada para las primeras ocho semanas
+  checklist_stay: Lista para quedarse, del mes tres al veinticuatro
+  checklist_help: Para marcar e imprimir. El estado se queda en este navegador.
+  refine: Precisar los datos
+  refine_help: Voluntario. Cada respuesta afina la recomendación de lectura, la lista de aclaraciones y el destino, pero no cambia ninguna evaluación de reglas.
+  refine_progress: "{n} de {total} respondidas"
+phases:
+  orient: Orientarse
+  prepare: Preparar
+  move: Mudarse
+  arrive: Llegar
+  stay: Quedarse
+eligibility:
+  matches: encaja según sus datos
+  condition_missing: falta un requisito
+  unclear: no está claro
+  unchecked: sin comprobar
+deadline:
+  due: Plazo hasta el {date}
+  awaiting: Fecha calculable en cuanto se confirme la fecha del evento «{event}».
+  kinds:
+    statutory: plazo legal
+    funding: plazo de una ayuda
+    recommended: antelación recomendada
+    user_reminder: recordatorio propio
+  adjusted:
+    weekend: aplazado por fin de semana
+    holiday: aplazado por festivo
+events:
+  entry: Entrada
+  address_change: Cambio de dirección
+  residence_registration: Registro de residencia
+  application_submitted: Presentación de la solicitud
+  decision_served: Notificación de la resolución
+  permit_expiry: Vencimiento del permiso
+  employment_start: Inicio del empleo
+  business_registration: Constitución
+  insurance_end_abroad: Fin del seguro anterior
+summary:
+  different:
+    status_unknown: "La nacionalidad de {person} todavía está abierta. Antes del estatus no se puede decidir nada; por eso la aclaración va primero."
+    mixed_household: No todas las personas de su hogar tienen la misma nacionalidad. Cada persona sigue su propio camino y los plazos corren por separado.
+    arrived: Ya está en Croacia. Los plazos corren desde la entrada y el registro, no desde el día en que lee esta página.
+    self_employed_tax: Planea una actividad propia. La exención de cinco años del impuesto sobre el salario se aplica a sueldos por cuenta ajena; si y cómo se aplica en su caso lo aclara un asesor fiscal.
+    remote: Trabajo para un empleador en el extranjero. La vía de residencia depende de la nacionalidad, la cuestión fiscal de la residencia fiscal. Ninguna de las dos es un caso estándar.
+    children: Hijos en el hogar. La escuela y el pediatra dependen del domicilio y del seguro de los padres; el orden de los padres marca el de los hijos.
+    already_founded: Ya ha constituido su negocio. Algunas ayudas exigen la solicitud antes o poco después de la constitución; si un plazo sigue abierto hay que comprobarlo de inmediato.
+  chain:
+    status: Estatus
+    oib: OIB
+    registration: Registro
+    insurance: Seguro
+    clear: aclarado
+    open: por aclarar
+    next: sigue
+    bottleneck: cuello de botella
+  clarify:
+    founded_deadline: "Ya constituido: comprobar de inmediato en el HZZ si el plazo de solicitud de Biram Hrvatsku (30 días tras el inicio de la actividad) sigue abierto."
+    sector_excluded: Según sus datos, su sector está entre los excluidos. Si se aplica una excepción lo decide el HZZ según la convocatoria vigente.
+    sector_unknown: Si su sector es elegible está en la convocatoria vigente del HZZ. Compruébelo antes de constituir.
+    regulated: "Reconocimiento de la profesión ({person}): paso previo propio a través del colegio competente (PISK). Qué colegio, depende de la profesión."
+    care: "Necesidad médica continua: aclarar antes de partir la atención en el destino y la cobertura transitoria, con el HZZO y la consulta local."
+    inherited: "Propiedad familiar heredada: antes de cualquier paso, que un abogado en Croacia revise el registro de la propiedad y los copropietarios."
+    buy: "Compra de inmueble: si puede comprar como extranjero y si existe reciprocidad lo decide el Ministerio de Justicia."
+    child_language: "Apoyo lingüístico ({person}): la oferta y la competencia dependen del distrito escolar; pregunte en la escuela del destino."
+    pension_no_agreement: "Jubilación ({person}): con este país no existe convenio de doble imposición. Aclarar la obligación de declarar y la tributación con un asesor fiscal."
+checklists:
+  arrive:
+    a1: Registrar el domicilio o la residencia en la administración policial, anotar la fecha
+    a2: Presentar o solicitar el OIB de cada persona
+    a3: Regular el seguro de salud en el HZZO, comprobar el seguro complementario
+    a4: Abrir una cuenta bancaria
+    a5: Inscribir a los hijos en la guardería o la escuela
+    a6: Encontrar médico de cabecera y pediatra, confirmar la admisión
+    a7: Dar de alta electricidad, agua, internet y teléfono
+    a8: Canjear el permiso de conducir, respetar el plazo desde la entrada
+    a9: Importar y matricular el vehículo
+    a10: Presentar las solicitudes de ayuda cuyo plazo depende del registro
+  stay:
+    s1: Prorrogar la residencia, respetar el plazo de antelación
+    s2: Cumplir los compromisos de las ayudas, conservar los justificantes
+    s3: Mejorar el nivel de idioma, comprobar cursos o becas
+    s4: Integración de la familia, asociaciones y escuela
+    s5: Declaración de la renta en el primer año completo, comprobar la exención del impuesto sobre el salario
+    s6: Respetar las obligaciones de declarar pensiones extranjeras hasta el 31.1.
+    s7: Hacer reconocer certificados y títulos, si sigue pendiente
+    s8: Revisar el plan a los doce meses, porque las reglas cambian cada año
+rubrics:
+  status-und-staatsangehoerigkeit:
+    title: Estatus y nacionalidad
+    intro: "Antes del estatus no se puede decidir nada: determina la vía de residencia, el acceso al trabajo, a la escuela y a las ayudas."
+    q1: ¿Obtengo la nacionalidad croata a través de mis abuelos?
+    q2: ¿Qué es el certificado para emigrantes y para qué me sirve?
+    q3: ¿Puedo conservar dos pasaportes?
+    t1: Ascendencia
+    t2: Naturalización por la regla de emigrantes
+    t3: Residencia para emigrantes y descendientes
+    t4: Libre circulación en la UE
+    t5: Residencia por trabajo para terceros países
+    t6: Nómada digital
+    t7: Reagrupación familiar
+    t8: Prórroga
+    t9: Doble nacionalidad
+  dokumente-und-behoerden:
+    title: Documentos y administración
+    intro: "El OIB es la llave de casi cualquier trámite. Antes viene la cadena de documentos: original, apostilla, traducción jurada, en ese orden."
+    q1: ¿Qué es el OIB y dónde lo obtengo?
+    q2: ¿Cómo demuestro la ascendencia a lo largo de tres generaciones?
+    q3: Mi nombre está escrito de forma distinta en los documentos. ¿Y ahora?
+    t1: OIB
+    t2: Certificados del registro civil
+    t3: Cadena de ascendencia a lo largo de generaciones
+    t4: Apostilla
+    t5: Traducción jurada
+    t6: Diferencias y grafías de nombres
+    t7: Libros parroquiales y registros
+    t8: Domovnica
+    t9: Documento de identidad
+    t10: Acceso e-Građani
+  das-bisherige-wohnland-verlassen:
+    title: Dejar el país de residencia anterior
+    intro: La baja, el cierre fiscal y el fin del seguro en el país de origen tienen plazos propios que no tienen nada que ver con el procedimiento croata.
+    q1: ¿Cuándo me doy de baja en Suiza o en Argentina?
+    q2: ¿Qué documentos debo asegurar antes de partir?
+    q3: ¿Qué pasa con mi jubilación y mi cuenta?
+    t1: Baja
+    t2: Cierre fiscal
+    t3: Fin del seguro
+    t4: Cancelación de contratos
+    t5: Asegurar la documentación de la jubilación
+    t6: Solicitar certificados escolares
+    t7: Cuenta bancaria
+    t8: Poderes
+  arbeit-und-qualifikation:
+    title: Trabajo y cualificación
+    intro: Si un título debe reconocerse y cómo se lee un contrato de trabajo en Croacia decide los primeros meses.
+    q1: ¿Se reconoce mi título en Croacia?
+    q2: ¿Cuánto queda neto del salario bruto?
+    q3: ¿Está regulada mi profesión?
+    t1: Mercado laboral
+    t2: Búsqueda de empleo
+    t3: Entender el contrato de trabajo
+    t4: Bruto y neto
+    t5: Reconocimiento de títulos académicos
+    t6: Profesiones reguladas
+    t7: Derechos laborales
+    t8: Búsqueda de empleo de la pareja
+    t9: El idioma en el trabajo
+  unternehmen-gruenden:
+    title: Emprender y trabajar por cuenta propia
+    intro: Algunas ayudas exigen la solicitud antes de la constitución. Quien constituye primero y solicita después pierde el derecho.
+    q1: ¿Qué forma jurídica me conviene?
+    q2: ¿Qué es el negocio a tanto alzado?
+    q3: ¿Debo solicitar la ayuda antes o después de constituir?
+    t1: Formas jurídicas comparadas
+    t2: Negocio a tanto alzado
+    t3: Obligaciones contables
+    t4: Cotizaciones
+    t5: Autorizaciones
+    t6: Orden respecto a las ayudas
+    t7: Factura electrónica
+    t8: Obligaciones corrientes
+  steuern-geld-und-pension:
+    title: Impuestos, dinero y jubilación
+    intro: La residencia fiscal, la doble imposición y el cómputo de pensiones extranjeras son los temas en los que hay que consultar a un profesional croata.
+    q1: ¿Dónde tributo si me mudo a mitad de año?
+    q2: ¿Se grava mi pensión extranjera en Croacia?
+    q3: ¿Cómo abro una cuenta bancaria?
+    t1: Residencia fiscal
+    t2: Doble imposición
+    t3: Exención de cinco años del impuesto sobre el salario
+    t4: Ingresos del extranjero
+    t5: Pensiones extranjeras
+    t6: Cómputo de la pensión
+    t7: Convenios de seguridad social
+    t8: Cuenta bancaria
+    t9: Transferencias de dinero
+  gesundheit-und-pflege:
+    title: Salud y cuidados
+    intro: El seguro empieza en un día distinto según la base. Quien no planifica la laguna se queda sin cobertura las primeras semanas.
+    q1: ¿Desde cuándo tengo seguro de salud en Croacia?
+    q2: ¿Cómo cubro el tiempo intermedio?
+    q3: ¿Cómo encuentro médico de cabecera o pediatra?
+    t1: Inicio del seguro según la base
+    t2: Cobertura transitoria
+    t3: Seguro complementario
+    t4: Encontrar médico de cabecera y pediatra
+    t5: Medicamentos
+    t6: Embarazo
+    t7: Enfermedad crónica
+    t8: Cuidados
+    t9: Accesibilidad
+  kinder-schule-und-ausbildung:
+    title: Hijos, escuela y formación
+    intro: La inscripción, el distrito escolar y el apoyo lingüístico dependen del registro del domicilio. Los certificados extranjeros necesitan un procedimiento propio.
+    q1: ¿Cómo inscribo a mi hijo en la escuela?
+    q2: ¿Se reconocen los certificados?
+    q3: ¿Hay apoyo lingüístico para niños sin croata?
+    t1: Guardería
+    t2: Inscripción
+    t3: Distrito escolar
+    t4: Reconocimiento de certificados
+    t5: Apoyo lingüístico
+    t6: Necesidades educativas especiales
+    t7: Costes
+    t8: Formación profesional
+    t9: Estudios universitarios
+    t10: Becas
+  wohnen-und-regionen:
+    title: Vivienda y regiones
+    intro: Los alquileres anuales escasean por temporada en las regiones costeras. Los terrenos familiares heredados suelen tener copropietarios sin aclarar en el registro.
+    q1: ¿Puedo comprar en Croacia como extranjero?
+    q2: ¿Qué figura en el registro de la propiedad y por qué importa?
+    q3: ¿Cómo encuentro un alquiler anual en la costa?
+    t1: Alquiler de larga duración
+    t2: Disponibilidad por temporada
+    t3: Fianza
+    t4: Gastos
+    t5: Comprobación antes de comprar
+    t6: Compra por extranjeros
+    t7: Registro de la propiedad
+    t8: Terreno familiar heredado
+    t9: Copropietarios sin aclarar
+    t10: Legalización
+    t11: Construcción
+    t12: Vivienda municipal
+  sprache-und-gemeinschaft:
+    title: Idioma y comunidad
+    intro: "El regreso rara vez fracasa en el registro, a menudo en la integración: el idioma, las asociaciones, las personas que le acompañan."
+    q1: ¿Dónde aprendo croata, en línea y presencial?
+    q2: ¿Hay becas para cursos de idioma?
+    q3: ¿Cómo se integran la pareja y los hijos?
+    t1: Cursos en línea y presenciales
+    t2: Becas
+    t3: Niveles de idioma
+    t4: Idioma cotidiano
+    t5: Asociaciones
+    t6: Iglesia
+    t7: Deporte
+    t8: Mentoría
+    t9: Integración de pareja e hijos
+  umzug-und-mobilitaet:
+    title: Mudanza y movilidad
+    intro: Los enseres, la importación del vehículo y el permiso de conducir tienen cada uno plazos propios desde el registro. El transporte es el menor de los problemas.
+    q1: ¿Mis enseres están libres de aduana?
+    q2: ¿Puedo llevarme mi coche?
+    q3: ¿Debo canjear mi permiso de conducir?
+    t1: Enseres domésticos
+    t2: Aduana y bienes de mudanza
+    t3: Importación del vehículo
+    t4: Canje del permiso de conducir
+    t5: Mascotas
+    t6: Empresas de transporte
+    t7: Viaje
+    t8: Electricidad, agua, internet, teléfono
+  leistungen-und-foerderung:
+    title: Prestaciones y ayudas
+    intro: El Estado, los condados y los municipios fomentan el regreso, pero de forma dispersa. Cada ayuda lleva aquí estado, fuente y fecha de comprobación.
+    q1: ¿Qué ayudas hay para quienes regresan?
+    q2: ¿Puedo combinar varias ayudas?
+    q3: ¿Qué compromisos y obligaciones de devolución existen?
+    t1: Ayudas estatales
+    t2: Ayudas regionales y municipales
+    t3: Familia
+    t4: Vivienda
+    t5: Educación
+    t6: Movilidad
+    t7: Emprendimiento
+    t8: Derecho a la ayuda
+    t9: Justificantes
+    t10: Acumulación
+    t11: Compromisos
+    t12: Obligaciones de devolución
+situations:
+  familie:
+    title: Vengo con mi familia
+    intro: La pareja y los hijos pueden tener nacionalidades y bases de seguro distintas. Cada persona tiene su propio camino, el hogar es el marco.
+    trap: El seguro de salud de los hijos depende de la base de los padres. Quien no planifica la laguna se queda las primeras semanas sin pediatra.
+  selbstaendig:
+    title: Quiero emprender
+    intro: Algunas ayudas exigen la solicitud antes de la constitución, otras pocos días después. El orden decide el derecho.
+    trap: Primero constituir, luego leer. Quien registra la actividad y presenta la solicitud demasiado tarde ha perdido la ayuda al regreso.
+  pensioniert:
+    title: Estoy jubilado
+    intro: Pensión del extranjero, seguro de salud sin empleador, doble imposición. En impuestos y seguridad social hay que consultar a un profesional croata.
+    trap: Con Estados Unidos, Argentina y Brasil no existe convenio de doble imposición. Las pensiones de estos países deben declararse hasta el 31.1. por el año anterior.
+  ohne-pass:
+    title: No tengo pasaporte croata
+    intro: "Sin nacionalidad croata todo depende de la vía de residencia: libre circulación para UE, EEE y Suiza, certificado para descendientes de emigrantes, si no residencia por trabajo o nómada digital."
+    trap: Confundir el certificado para emigrantes con la naturalización. Es una vía de residencia y puede correr en paralelo al procedimiento de nacionalidad.
+  allein:
+    title: Vengo solo
+    intro: "El camino más corto: estatus, OIB, registro, seguro. Después cuenta la integración, porque ahí es donde más a menudo fracasa el regreso."
+    trap: La quinta fase, quedarse, la omiten todos. El idioma, las asociaciones y las personas que le acompañan deben estar en el plan desde el principio.
+  arbeitgeber-im-ausland:
+    title: Trabajo para un empleador en el extranjero
+    intro: Quien trabaja desde Croacia para un empleador en el extranjero necesita, según la nacionalidad, otra vía de residencia, y la cuestión fiscal no es trivial.
+    trap: Residencia fiscal a partir de 183 días. Quien se muda a lo largo del año puede tener que tributar en dos países. Eso lo aclara un asesor fiscal, no esta web.
+cases:
+  familie:
+    name: Lucía, 32, Buenos Aires
+    line: Bisabuelos de Dalmacia, sin pasaporte croata, pareja sin vínculo, un hijo en edad escolar.
+    shapes: El estatus está abierto, y la cadena de documentos a lo largo de cuatro generaciones es el paso individual más largo. Su pareja sigue un camino completamente distinto.
+    first: Hacer comprobar si la cadena de ascendencia se puede documentar por completo. No el seguro de salud que había buscado.
+  selbstaendig:
+    name: Marko, 41, Stuttgart
+    line: Pasaporte croata, la pareja también, dos hijos, quiere trabajar por cuenta propia.
+    shapes: El estatus está aclarado, el camino es corto. Lo decisivo es el orden entre solicitud de ayuda y constitución, y que la exención del impuesto sobre el salario quizá no se aplique por cuenta propia.
+    first: Leer la convocatoria vigente antes de registrar nada.
+  arbeitgeber-im-ausland:
+    name: Anna, 29, Viena
+    line: Ciudadana de la UE sin raíces croatas, sola, trabaja desde Croacia para un empleador austriaco.
+    shapes: "La residencia no es complicada. Su riesgo es fiscal: residencia fiscal, doble imposición y seguridad social al trabajar para un empleador extranjero, con efecto retroactivo."
+    first: Aclarar este punto antes de la mudanza, no después.
+  pensioniert:
+    name: Ivan, 58, Toronto
+    line: Pasaporte croata, pareja sin él, vive de una pensión canadiense, mudanza sin fecha.
+    shapes: Su pareja sigue un camino distinto al suyo. En su caso el seguro de salud no deriva de un empleo; ahí surgen lagunas. Las ayudas al regreso para trabajo y emprendimiento no se aplican a él.
+    first: Aclarar el cómputo de la pensión y la base del seguro, con el convenio entre Canadá y Croacia.
+  ohne-pass:
+    name: Sofía, 26, Santiago de Chile
+    line: No sabe si su abuela tenía la nacionalidad. Sola, mudanza más adelante o sin definir.
+    shapes: El plan consiste casi solo en tareas de aclaración, y así debe ser. Muestra qué tres informaciones necesita antes de que nada sea planificable.
+    first: Tres pasos concretos y realizables, en vez de la certeza de que ya podría planificar.
+ui:
+  shell:
+    tagline: Vivir en Croacia
+    stage: Fase de prueba
+    stage_text: Reglas de ejemplo sin revisión profesional, revisión profesional como marcador de posición. No destinado a clientes.
+    report: Informar de un error
+    skip: Saltar al contenido
+    nav_wissen: Conocimiento
+    nav_orte: Lugares
+    nav_weg: Mi camino
+    nav_about: Sobre nosotros
+    nav_search: Buscar
+    cta: Iniciar el chequeo rápido
+    language: Idioma
+    contact_title: ¿Ha encontrado algo que no es correcto?
+    contact_text: "Un plazo erróneo, un dato erróneo, un enlace roto: revisamos cada aviso en dos días laborables."
+    contact_how: Cómo trabajamos
+    foot_claim: "Vivir en Croacia: el orden correcto para regresar o emigrar, persona por persona."
+    foot_disclaimer: Esta web no sustituye el asesoramiento jurídico ni fiscal. Sobre las solicitudes decide siempre la entidad competente.
+    foot_stage: Fase de prueba. Reglas de ejemplo sin revisión profesional (ADR-0004).
+    foot_wissen: Conocimiento
+    foot_all: Las doce secciones
+    foot_glossary: Glosario
+    foot_figures: Cifras y datos
+    foot_tools: Herramientas
+    foot_check: "Chequeo rápido: mi camino"
+    foot_places: Descubrir lugares
+    foot_benefits: Base de datos de ayudas
+    foot_contacts: Puntos de contacto
+    foot_search: Buscar
+    foot_about: Sobre nosotros
+    foot_mission: Misión e independencia
+    foot_principles: Principios editoriales
+    foot_contact: Contacto
+    working_copy_title: Falta la versión de trabajo
+    working_copy_text: Esta página todavía no existe en su idioma. Está viendo la versión alemana.
+    translation_note: Versión de trabajo. La versión alemana es la de referencia; los textos legales croatas rigen en su original.
+    legal_note: Los textos legales solo existen en alemán.
+  home:
+    title: "povratnik.com: Vivir en Croacia"
+    description: "Regresar o emigrar a Croacia en el orden correcto: residencia, registro, seguro, familia, ayudas. Plan personal en el navegador, sin cuenta."
+    hero_title: Volver a Croacia o llegar por primera vez. En el orden correcto.
+    hero_lede: "Residencia, registro, seguro, escuela, ayudas: qué va primero no está escrito en ningún sitio. Aquí recibe el orden para su hogar, persona por persona."
+    hero_wissen: Conocimiento por tema
+    hero_note: Sin cuenta. Sus respuestas se quedan en su navegador.
+    hero_alt: Una mujer y su padre ordenan documentos en una mesa en un casco antiguo.
+    quick_title: ¿Busca algo concreto?
+    ways_title: Tres caminos al mismo conocimiento
+    ways_help: Por tema, por lugar o según su orden.
+    way_check_title: Mi camino
+    way_check_text: "Seis preguntas sobre su hogar y luego un primer plan: qué va primero, qué plazo activa cada cosa, qué queda abierto."
+    way_wissen_title: Conocimiento por tema
+    way_wissen_text: "Doce secciones, del estatus a las ayudas. Cada página temática con la misma plantilla: respuesta breve, a quién aplica, entidad competente, estado."
+    way_wissen_link: A las secciones
+    way_orte_title: Descubrir lugares
+    way_orte_text: Municipios con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado, fecha de comprobación y profundidad de datos, sin ranking.
+    way_orte_link: Lugares y ayudas
+    keys_title: Casi todo depende de cuatro claves
+    keys_help: Y en este orden. Es el hilo conductor de toda la web.
+    key1_title: Estatus
+    key1_sub: ¿Quién soy legalmente?
+    key1_text: Decide la vía de residencia y el acceso al trabajo, la escuela y las ayudas.
+    key2_title: OIB
+    key2_text: El número fiscal. Sin él no hay cuenta bancaria, ni contrato de alquiler, ni solicitud, ni contrato de trabajo.
+    key3_title: Registro
+    key3_text: Activa plazos y en muchas ayudas es la fecha que cuenta, no la llegada.
+    key4_title: Seguro
+    key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
+    phases_title: Cinco fases, y una la omiten todos
+    phases_help: "La quinta es la más importante: ahí fracasa el regreso, no en el registro."
+    phase1_time: de 12 a 6 meses antes
+    phase1_text: ¿Es viable? ¿Qué vía de estatus? ¿Qué lugar? ¿Alcanza el dinero?
+    phase2_time: de 9 a 2 meses antes
+    phase2_text: Documentos, residencia, seguro, escuela, vivienda, país de origen.
+    phase3_time: de 4 semanas antes hasta la llegada
+    phase3_text: Transporte, cobertura transitoria, viaje, primeras citas.
+    phase4_time: primeras 8 semanas
+    phase4_text: Registro, seguro, trabajo, escuela, vida cotidiana.
+    phase5_time: del mes 3 al 24
+    phase5_text: Prórrogas, obligaciones de las ayudas, idioma, integración.
+    running_title: Qué está en curso
+    running_help: Plazos abiertos y medidas actuales, con estado y fecha de comprobación.
+    running_state: en curso
+    running_national: estatal
+    running_until: hasta el {date}
+    running_checked: comprobado el {date}
+    running_note: En la fase de prueba, las entradas municipales provienen de municipios ficticios.
+    running_all: Todas las ayudas
+    why_title: Por qué un importe por sí solo no dice nada
+    why_text: Una ayuda puede estar abierta, anunciada o agotada. Un valor puede ser conocido, documentado y aun así estar desactualizado. Por eso cada dato lleva aquí fuente, fecha de comprobación y estado. Donde no sabemos algo, se ve, en vez de una laguna.
+    why_note: Sobre las solicitudes decide siempre la entidad competente. El plan muestra el camino, no el resultado.
+    states_title: Cómo leer los estados
+    state_matches: Según sus datos, los requisitos se cumplen.
+    state_unclear: Falta un dato o debe decidir un profesional.
+    state_missing: Un requisito no se cumple actualmente.
+    state_unknown: Este valor todavía no lo conocemos.
+    situations_title: Entradas por situación de vida
+    situations_help: Los mismos temas, en el orden que le corresponde.
+    cases_title: Cinco caminos de ejemplo
+    cases_help: Perfiles ficticios del concepto. Los testimonios reales llegarán cuando personas de prueba hayan usado el plan.
+    cases_label: Ejemplo, ficticio
+    cases_first: "Primer paso:"
+  wissen:
+    title: Conocimiento por tema
+    description: "Doce secciones sobre regresar o emigrar a Croacia: estatus, documentos, trabajo, impuestos, salud, escuela, vivienda, ayudas."
+    lede: "Doce secciones, del estatus a las ayudas. Cada página temática tiene la misma plantilla: respuesta breve, a quién aplica, a quién no, entidad competente, estado. A la segunda página ya sabe dónde buscar."
+    claim: Las webs de las administraciones explican su propio fragmento. Nosotros explicamos en qué orden encajan los fragmentos.
+    pages_one: "{n} página temática"
+    pages_many: "{n} páginas temáticas"
+    topics_wip: "{n} temas en preparación"
+    depth_title: Dos niveles de profundidad, reconocibles
+    depth_text: "Unos veinte temas se desarrollan por completo: aquellos en los que la gente fracasa o de los que depende dinero. Los demás reciben un resumen comprobado con entrada, competencia y enlace directo. Ambos niveles están marcados, y ninguna página se publica sin fuente, fecha de comprobación y revisión profesional."
+    state_title: Estado de las secciones
+    state_text: La estructura está lista, las páginas temáticas están en preparación. Hasta la revisión profesional, cada sección muestra qué temas vendrán y qué preguntas responderá.
+    more_title: Otras entradas
+    more_situations: Por situación de vida
+    more_situations_link: Seis entradas
+    more_glossary: Glosario de términos oficiales
+    more_glossary_link: Glosario
+    more_countries: Por país de origen
+    more_countries_link: Seis países
+    crumb: Conocimiento
+    crumb_rubric: Sección {n}
+    questions: Preguntas típicas
+    topics_title: Temas de esta sección
+    remaining_more: Otros temas, todavía en preparación
+    remaining_only: Temas, todavía en preparación
+    remaining_help: Cada tema aparece en cuanto tiene fuente y fecha de comprobación.
+    wip: en preparación
+    requires: Necesario antes
+    followed: Después viene
+    cta_title: ¿Qué se aplica a mí?
+    cta_text: "El chequeo rápido ordena los temas según su hogar: quién sigue qué camino y qué va primero."
+    mask_title: Así se estructura cada página temática
+    mask_answer: Respuesta breve
+    mask_answer_v: en dos o tres frases
+    mask_for: Aplica a
+    mask_for_v: grupo destinatario, de forma explícita
+    mask_notfor: No aplica a
+    mask_notfor_v: la confusión más frecuente
+    mask_authority: Entidad competente
+    mask_authority_v: administración u organismo
+    mask_state: Estado
+    mask_state_v: fecha de comprobación, fuente, estado
+    mask_mistake: Error frecuente
+    mask_mistake_v: el error que cometen muchos
+    mask_notdecided: Qué no se decide aquí
+    mask_notdecided_v: lo que decide un profesional
+  topic:
+    state_checked: revisado profesionalmente
+    state_draft: Bases disponibles, sin revisión profesional
+    stand: Estado {date}
+    missing: todavía sin investigar
+    applies: Aplica a
+    not_applies: No aplica a
+    authority: Entidad competente
+    prerequisites: Requisitos
+    steps: Procedimiento
+    documents: Documentos
+    duration: Duración y costes
+    deadlines: Plazos
+    terms: Términos oficiales
+    requires: Necesario antes
+    followed: Después viene
+    cta_title: ¿Se aplica a mí?
+    cta_text: El chequeo rápido sitúa este tema en su camino, persona por persona.
+    mistake: Error frecuente
+    not_decided: Qué no se decide aquí
+    open_points: Puntos abiertos
+    open: abierto
+    validity: Vigencia
+    stand_title: Estado y fuentes
+    label: Marcado
+    source: Fuente original
+    source_meta: "{publisher}, nivel {tier}. Referencia: {reference}. Comprobado el {date}."
+    valid_from: Vigente desde
+    valid_until: hasta el {date}
+    next_check: Próxima comprobación
+    report: Informar de un error
+    report_subject: "Error: {title}"
+  country:
+    crumb: Por país de origen
+    others: Otros países de origen
+    what_title: Qué cuenta para la salida
+    what_help: El procedimiento croata y los requisitos del país de origen son dos cosas distintas.
+    representation: Representación croata
+    apostille: Apostilla
+    social_security: Seguridad social
+    double_taxation: Doble imposición
+    deregistration: Deberes de baja
+    duration: Plazos realistas
+    unknown: desconocido
+    not_collected: no recopilado
+    outdated: desactualizado
+    followed: Después viene en Croacia
+    cta_title: Su camino, persona por persona
+    cta_text: El chequeo rápido pregunta por el país de origen de cada persona del hogar.
+  situation:
+    crumb: Situación de vida
+    trap_title: Dónde suele fracasar
+    path_title: Su camino en este orden
+    rubrics_title: Estas secciones también cuentan
+    cta_title: Personal en vez de general
+    cta_text: El chequeo rápido convierte este recorrido en su plan, persona por persona, con plazos.
+  glossary:
+    title: Glosario de términos oficiales
+    description: "Términos oficiales croatas en su original, explicados de forma comprensible: OIB, prebivalište, Domovnica, HZZO y más."
+    crumb: Glosario
+    lede: El término croata se mantiene, porque lo necesita en la ventanilla. Al lado está lo que significa.
+    count: "{n} términos de {pages} páginas temáticas"
+  orte:
+    title: Descubrir lugares
+    description: Municipios de Croacia con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado y fecha de comprobación.
+    lede: ¿Qué municipio apoya a quienes regresan, dónde admite el pediatra nuevos pacientes, dónde hay alquileres anuales? Perfiles de lugares con estado y fecha de comprobación, sin ranking.
+    all_benefits: Todas las ayudas
+    compare: Comparar lugares
+    image_alt: Plaza principal de una pequeña ciudad de Croacia con el ayuntamiento y una panadería.
+    fictional_title: Municipios de prueba ficticios
+    fictional_text: Los lugares de esta página son inventados y muestran cómo es un perfil de lugar, con todos los estados. Los municipios reales llegarán con la base de datos. Ningún valor se refiere a un lugar real. En la fase de prueba, los datos de los lugares solo existen en alemán.
+    filter_label: Filtrar lugares
+    filter_region: Ubicación
+    filter_all: todos
+    coast: Costa
+    inland: Interior
+    filter_target: Ayudas para
+    target_families: Familias
+    target_returnees: Retornados y emprendedores
+    target_housing: Vivienda
+    filter_state: Estado
+    only_open: solo con ayudas abiertas
+    no_js: Sin JavaScript la lista muestra todos los lugares.
+    count_one: "{n} lugar"
+    count_many: "{n} lugares"
+    open_one: "{n} ayuda abierta"
+    open_many: "{n} ayudas abiertas"
+    more: "{n} más"
+    depth: Profundidad de datos {n} de {total} datos recopilados
+    empty: Ningún lugar coincide con esta selección. Eso no significa que no haya ofertas, solo que no las hemos recopilado.
+    ranking_title: Sin ranking, sin nota global
+    ranking_text: Dos o tres lugares se pueden comparar uno junto a otro, como información en bruto. Un valor global siempre impondría nuestra ponderación y no la suya. Lo que falta aparece como «desconocido» y no como celda vacía. Un lugar con pocos datos nunca parece un lugar sin ofertas; por eso cada lugar muestra su profundidad de datos.
+    to_compare: A la comparación
+    municipality_title: ¿Representa a un municipio?
+    municipality_text: Registre sus ayudas para quienes regresan. Cada dato aparece con fuente, fecha de comprobación y estado.
+    municipality_cta: Registrar municipio
+    crumb: Lugares
+  place:
+    location: Ubicación
+    population: Habitantes
+    index: Índice de desarrollo
+    arrival: Llegada
+    fictional_title: Municipio de prueba ficticio
+    fictional_text: Este lugar es inventado. Muestra la estructura de un perfil de lugar con todos los estados. Ningún valor se refiere a un lugar real.
+    benefits_title: Ayudas del municipio
+    benefits_help: Cuatro fechas, un estado. Sobre la solicitud decide el municipio.
+    benefits_empty: Para este lugar no hay ayudas registradas. Eso no significa que no las haya.
+    target: Para quién
+    amount: Importe
+    conditions: Condiciones
+    period: Periodo de solicitud
+    period_unknown: Periodo de solicitud desconocido
+    period_range: "del {from} al {until}"
+    period_open: abierto
+    period_running: en curso
+    budget: Presupuesto
+    binding: Compromiso
+    source: "Fuente: {source}"
+    checked: Comprobado el {date}
+    family_title: Familia y educación
+    kindergarten: Guardería
+    kindergarten_capacity: Plazas libres
+    primary: Escuela primaria
+    secondary: Secundaria
+    language_support: Apoyo lingüístico
+    costs: Costes
+    health_title: Salud
+    gp: Médico de cabecera
+    gp_accepting: Admite nuevos pacientes
+    pediatrician: Pediatra
+    pharmacy: Farmacia
+    clinic: Hospital más cercano
+    housing_title: Vivienda
+    rent: Alquileres anuales
+    price: Nivel de precios
+    municipal: Viviendas municipales
+    land: Suelo edificable
+    work_title: Trabajo
+    sectors: Sectores
+    commute: Desplazamientos
+    commute_note: Tiempo de viaje, no distancia en línea recta
+    minutes: "{n} minutos"
+    employers: Empleadores
+    daily_title: Vida cotidiana e integración
+    internet: Internet
+    transport: Transporte público
+    courses: Cursos de idioma
+    clubs: Asociaciones
+    church: Iglesia
+    shopping: Compras
+    surroundings_title: Entorno accesible
+    not_collected: no recopilado
+    unknown: no conocido
+    arrival_title: Llegada
+    office: Oficina
+    function: Función
+    languages: Idiomas
+    channel: Vía de respuesta
+    changes_title: Cambios
+    changes_note: Un anuncio no es un estado. Solo cuenta «en funcionamiento».
+    cta_title: ¿Encaja este lugar con mi camino?
+    cta_text: El chequeo rápido muestra qué ayudas podrían aplicarse según sus datos.
+    cta_compare: Comparar con otros lugares
+    state_open: abierta
+    state_announced: anunciada
+    state_closed: cerrada
+    state_exhausted: agotada
+    state_unconfirmed: sin confirmar
+    state_budget_unknown: presupuesto desconocido
+    change_announced: anunciado
+    change_decided: aprobado
+    change_funded: financiado
+    change_under_construction: en construcción
+    change_operating: en funcionamiento
+    fact_unknown: desconocido
+    fact_not_collected: no recopilado
+    fact_outdated: desactualizado
+    fact_not_applicable: no aplicable
+    fact_not_present: no existe
+    fact_stand: Estado {date}
+    fact_outdated_note: Estado {date}. El importe actual no está aclarado.
+    fact_clarify: "Así se puede aclarar: consulta al municipio; la respuesta aparece aquí con fecha."
+  compare:
+    title: Comparar lugares
+    description: Dos o tres lugares uno junto a otro, como información en bruto sin nota global.
+    crumb: Comparación
+    lede: Información en bruto una junto a otra, sin nota global. Un valor global impondría nuestra ponderación y no la suya.
+    fictional_text: Todos los lugares de esta comparación son inventados. Muestran la presentación, no condiciones reales.
+    feature: Característica
+    location: Ubicación
+    population: Habitantes
+    index: Índice de desarrollo
+    open_benefits: Ayudas abiertas
+    of: "{n} de {total}"
+    kindergarten: Guardería, plazas libres
+    primary: Escuela primaria
+    secondary: Escuela secundaria
+    gp: El médico de cabecera admite nuevos pacientes
+    pediatrician: Pediatra
+    clinic: Hospital más cercano
+    rent: Alquileres anuales
+    price: Nivel de precios
+    land: Suelo edificable
+    commute: Desplazamientos
+    internet: Internet
+    transport: Transporte público
+    courses: Cursos de idioma
+    depth: Profundidad de datos
+  benefits:
+    title: Prestaciones y ayudas
+    description: Todas las ayudas registradas con estado, periodo de solicitud y fecha de comprobación, sin pasar por el mapa.
+    crumb: Ayudas
+    lede: Para quienes saben qué buscan, pero todavía no dónde. Cada entrada con estado, periodo de solicitud y fecha de comprobación.
+    fictional_text: Todas las ayudas de aquí son inventadas. Los programas estatales como Biram Hrvatsku están en
+    filter_label: Filtrar ayudas
+    filter_state: Estado
+    count_one: "{n} ayuda"
+    count_many: "{n} ayudas"
+    empty: Ninguna ayuda registrada en este estado.
+  about:
+    title: "Sobre nosotros: povratnik.com"
+    description: Quién está detrás de povratnik.com, cómo nos financiamos, cómo comprobamos y por qué los servicios de pago no cambian los contenidos.
+    hero: Entender, comparar, llegar.
+    lede: Las webs de las administraciones explican cada una su propio fragmento. Nadie explica en qué orden encajan los fragmentos y qué depende de qué. Exactamente eso hacemos por usted.
+    mission_title: Misión e independencia
+    mission_1: "povratnik.com lo gestiona EmotionFrame GmbH en Suiza. La orientación es gratuita: la información general, el perfil básico de cada municipio, las correcciones objetivas y los datos comparativos neutrales no cuestan nada y nunca se ponen tras un muro de pago."
+    mission_2: "Se pagan los servicios de mantenimiento: municipios que hacen preparar, traducir y comprobar continuamente sus ofertas, socios profesionales con un perfil transparente, empleadores con ofertas actuales. Un municipio que no paga no se mantiene artificialmente incompleto. Los servicios de pago no cambian los resultados; no hay posicionamiento pagado y la publicidad se marca."
+    households_title: Hogares en vez de personas individuales
+    households_text: La pareja y los hijos pueden tener nacionalidades, vías de residencia y bases de seguro distintas. Por eso, para nosotros la persona es la unidad de planificación y el hogar es el marco.
+    stay_title: Quedarse después de llegar
+    stay_text: "Los primeros doce meses forman parte del producto: aprender el idioma, el cambio de escuela, la integración, la búsqueda de empleo de la pareja, las prórrogas. El éxito no termina con el registro."
+    always_title: Lo que siempre vale
+    always_1: Sin muro de pago ante la información esencial
+    always_2: Sin posicionamiento pagado
+    always_3: Sin ranking de municipios
+    always_4: Ninguna respuesta sale del navegador
+    always_5: Ninguna regla sin revisión profesional nominal
+    check_title: Cómo comprobamos
+    check_text: "Cada afirmación es de uno de tres tipos y se marca como tal: un hallazgo con fuente nombrada y fecha de comprobación, una regla de producto que derivamos de él, o un punto abierto que requiere una aclaración individual o administrativa. Una oferta no encontrada nunca se presenta como inexistente."
+    hierarchy_title: Jerarquía de fuentes
+    h1: Publicación legal oficial en su original, leída con sus modificaciones
+    h2: Administración croata competente
+    h3: Resolución o convocatoria municipal original
+    h4: Administración competente del país de residencia anterior
+    h5: Información profesional escrita de una administración, con fecha y supuestos del caso
+    h6: Publicaciones especializadas y artículos de asesoramiento
+    h7: "Prensa y testimonios: contexto, nunca base de un derecho"
+    hierarchy_note: Un nivel inferior nunca refuta a uno superior. Un artículo de prensa nunca es prueba de un plazo, un importe o un requisito.
+    cycles_title: Ciclos de comprobación
+    c1: Convocatorias de ayudas abiertas
+    c1_v: semanal mientras estén vigentes
+    c2: Residencia, impuestos, seguro
+    c2_v: revisión mensual de cambios
+    c3: Medidas municipales
+    c3_v: trimestral y con cada resolución
+    c4: Contactos e instituciones
+    c4_v: semestral
+    cycles_note: Una fecha de comprobación incumplida genera un aviso, no una reutilización silenciosa.
+    roles_title: Quién es responsable
+    role_product: Responsabilidad del producto
+    role_tech: Responsabilidad técnica
+    role_review: Revisión profesional en derecho e impuestos
+    role_review_v: "Fase de prueba: no aprueba nada. Se busca un profesional croata para la aprobación nominal de cada regla jurídica."
+    placeholder: Marcador de posición
+    open: abierto
+    role_editorial: Redacción especializada en croata
+    role_errors: Contacto para errores
+    role_errors_v: revisión en dos días laborables
+    stage_title: Fase de prueba
+    stage_text: No hay ninguna regla jurídica revisada profesionalmente. El chequeo rápido funciona con reglas de ejemplo marcadas, para que el portal pueda probarse. Ningún resultado dice nada sobre su situación real. Una revisión por un sistema de IA no sustituye a un profesional independiente cualificado.
+    join_title: Participar
+    join_municipality: Registrar municipio
+    join_expert: Ser profesional revisor
+    join_report: Informar de un error
+    request: Consulta
+    mail: Correo
+  search:
+    title: "Buscar: povratnik.com"
+    description: Búsqueda en temas, secciones, lugares y términos oficiales. Funciona en el navegador.
+    heading: Buscar
+    lede: Temas, secciones, situaciones de vida, países, lugares y términos oficiales. La búsqueda funciona en su navegador; ningún término se envía.
+    label: Término de búsqueda
+    placeholder: OIB, seguro de salud, apostilla, Biram Hrvatsku
+    button: Buscar
+    entries: "{n} entradas"
+    entry: "{n} entrada"
+    for: para «{q}»
+    empty: No se ha encontrado nada. Eso no significa que el tema no exista, solo que todavía no tenemos una página sobre él.
+    empty_link: Díganos qué ha buscado.
+    kind_topic: Página temática
+    kind_rubric: Sección
+    kind_situation: Situación de vida
+    kind_country: País de origen
+    kind_place: Lugar (ficticio)
+    kind_term: Término oficial
+  figures:
+    title: "Cifras y datos: povratnik.com"
+    description: Regreso e inmigración a Croacia en cifras, con estado y fuente.
+    heading: Cifras y datos
+    lede: Cada cifra lleva estado y fuente. Donde falta una cifra, se ve, en vez de una estimación.
+    figure: Indicador
+    value: Valor
+    stand: Estado
+    source: Fuente
+    unknown: desconocido
+    checked: comprobado el {date}
+    next_check: Próxima comprobación el {date}
+  contacts:
+    title: "Puntos de contacto: povratnik.com"
+    description: Administraciones en Croacia, consulados, oficinas municipales de bienvenida y asociaciones, con los temas de los que son responsables.
+    heading: Puntos de contacto
+    lede: Qué entidad es responsable de qué, con acceso a la administración y las páginas temáticas que la citan.
+    authorities_title: Administraciones en Croacia
+    authorities_help: Páginas de entrada de las administraciones. La referencia exacta está en cada página temática.
+    consulates_title: Consulados y representaciones
+    consulates_text: Las representaciones croatas en el país de origen emiten cartas de recomendación, reciben solicitudes de OIB y legalizan. Las direcciones y competencias se confirman con cada representación y luego se registran en la página del país.
+    confirmed: confirmado
+    not_collected: no recopilado
+    municipal_title: Oficinas municipales de bienvenida
+    recorded: registrado
+    unknown: desconocido
+    clubs_title: Asociaciones y redes de la diáspora
+    clubs_text: Se recopilan por lugar y país de origen.
+    wip: en preparación
+  weg:
+    title: "Mi camino a Croacia: chequeo rápido"
+    description: Seis preguntas y luego su primer plan. Las respuestas se quedan en el navegador.
+    promise_1: Sin cuenta, sin registro
+    promise_2: Las respuestas se quedan en este navegador
+    promise_3: Cada dato del plan con fuente y fecha de comprobación
+    promise_4: «Todavía no lo sé» siempre es una respuesta
+  notfound:
+    title: Página no encontrada
+    text: Esta dirección no existe o ya no existe. La página de inicio lleva a los tres caminos.
+    home: A la página de inicio

@@ -39,11 +39,13 @@ test("test stage: every page is marked as test stage and not indexable", { skip:
     const text = readFileSync(file, "utf8");
     assert.match(text, /<html[^>]*data-stage="test"/, file);
     assert.match(text, /name="robots" content="noindex, nofollow"/, file);
-    assert.match(text, /Teststufe/, file);
+    // Kennzeichnung in jeder Sprache (ui.shell.stage der vier Kataloge).
+    assert.match(text, /Teststufe|Test stage|Testna faza|Fase de prueba/, file);
   }
   // Der Kurzcheck läuft mit Beispielregeln und sagt das auf der Seite.
   const wizard = readFileSync(join(DIST, "mein-weg", "index.html"), "utf8");
   assert.match(wizard, /Synthetische Beispielregeln/);
+  for (const l of ["hr", "en", "es"]) assert.match(readFileSync(join(DIST, l, "mein-weg", "index.html"), "utf8"), /Sintetička|Synthetic|sintéticas/, l);
   // Jede Ortsseite nennt die Testgemeinden fiktiv (CLAUDE.md 10).
   for (const file of walk(join(DIST, "orte")).filter((f) => f.endsWith(".html"))) {
     assert.match(readFileSync(file, "utf8"), /fiktiv/i, file);
