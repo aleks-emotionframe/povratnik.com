@@ -24,10 +24,16 @@ const nav = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light" />
+    <!-- Aufbaustufe: nicht indexieren, bis Impressum und erste freigegebene Regel da sind. -->
+    <meta name="robots" content="noindex, nofollow" />
     <link rel="stylesheet" href="/ef-signature/ef-signature.css" />
     <script src="/ef-signature/ef-signature.js" defer is:inline></script>
   </head>
   <body>
+    <p class="notice notice--stage" role="note">
+      <strong>Aufbaustufe</strong>
+      Diese Website ist im Aufbau. Der Kurzcheck arbeitet noch ohne fachlich freigegebene Regeln.
+    </p>
     <header class="site-head">
       <div class="container">
         <a class="brand" href="/">povratnik.com <small>Leben in Kroatien</small></a>

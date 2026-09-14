@@ -144,15 +144,15 @@ erledigt, auch wenn er «vorbereitet» ist.
 
 | Schritt | Inhalt | Erledigt |
 |---|---|---|
-| 1 Zugang | Hostpoint-Konto auf die Betreiberin, zweite Person mit Zugriff (Vertretung), Zwei-Faktor-Anmeldung im Control Panel | offen |
-| 2 Domain | Domain auf das Hosting, TLS-Zertifikat aktiv, Weiterleitung von http auf https | offen |
-| 3 SSH | SSH-Zugang mit Schlüssel, eigener Deploy-Schlüssel nur für das Zielverzeichnis der Website | offen |
-| 4 Deploy | Build in der CI (`npm run build`), Übertragung von `apps/web/dist` per `rsync` über SSH oder SFTP; Schlüssel als GitHub-Secret; erst einrichten, wenn 1 bis 3 stehen | offen |
-| 5 Ausfallzustand | Fehlerseiten 404 und 500 als statische Dateien, Wizard-Seite zeigt ohne JavaScript den definierten Hinweis | offen |
+| 1 Zugang | Hostpoint-Konto auf die Betreiberin, zweite Person mit Zugriff (Vertretung), Zwei-Faktor-Anmeldung im Control Panel | Konto vorhanden (Emotionframe GmbH); Vertretung und Zwei-Faktor offen |
+| 2 Domain | Domain auf das Hosting, TLS-Zertifikat aktiv, Weiterleitung von http auf https | 14.09.2026, technische Verantwortung: www.povratnik.com eingerichtet, https aktiv, Weiterleitung per .htaccess |
+| 3 SSH | SSH-Zugang mit Schlüssel, eigener Deploy-Schlüssel nur für das Zielverzeichnis der Website | 14.09.2026: Schlüssel `povratnik-deploy-ci-2026-09`, per `rrsync` auf `www/povratnik.com` beschränkt; privater Teil nur als GitHub-Secret `HOSTPOINT_SSH_KEY` und auf dem Rechner der technischen Verantwortung |
+| 4 Deploy | Build in der CI (`npm run build`), Übertragung von `apps/web/dist` per `rsync` über SSH; Job `deploy` in `.github/workflows/validate.yml`, läuft nur nach grünem `validate` und nur von `main` | 14.09.2026 eingerichtet, erster Lauf siehe Actions |
+| 5 Ausfallzustand | Fehlerseite 404 als statische Datei, Wizard-Seite zeigt ohne JavaScript den definierten Hinweis | 14.09.2026: `404.html` per `.htaccess`; 500 liegt beim Anbieter |
 | 6 Protokolle | Zugriffsprotokoll bei Hostpoint auf das Minimum, Aufbewahrung nach Anbieter prüfen und auf der Datenschutzseite nennen; kein Endpunkt für Wizard-Antworten | offen |
 | 7 Sicherung | Quelle ist das Repository; Build reproduzierbar. Zusätzlich: GitHub-Repository regelmässig lokal spiegeln (`git clone --mirror`), einmal aus dem Spiegel neu bauen und ausliefern, protokollieren | offen |
-| 8 Datenschutzseite | Anbieter Hostpoint AG, Standort Schweiz, Protokolle und Aufbewahrung in `apps/web/src/pages/datenschutz.astro` eintragen | offen |
-| 9 Fehlerkontakt | Adresse einrichten, in Impressum und Datenschutz eintragen, Sofortweg nach `redaktionsdurchlauf.md` 2 bekannt | offen |
+| 8 Datenschutzseite | Anbieter Hostpoint AG, Standort Schweiz, Protokolle und Aufbewahrung in `apps/web/src/pages/datenschutz.astro` eintragen | Anbieter und Standort eingetragen; Aufbewahrung der Protokolle offen (beim Anbieter erfragen) |
+| 9 Fehlerkontakt | Adresse einrichten, in Impressum und Datenschutz eintragen, Sofortweg nach `redaktionsdurchlauf.md` 2 bekannt | offen: Postfach kontakt@povratnik.com bei Hostpoint anlegen, dann eintragen |
 
 **Ab M2b-2, sobald das Ortsprofil die Datenbank braucht:** eigener Server nach
 ADR-0003 (PostgreSQL mit PostGIS, Node-Dienst, tägliches `pg_dump`, geprobte
