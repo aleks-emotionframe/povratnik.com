@@ -96,10 +96,9 @@ a:hover {
   column-gap: clamp(1rem, 2.5vw, 2.5rem);
   row-gap: 1.5rem;
 }
-.col-main {
-  grid-column: 1 / -1;
-}
-.col-aside {
+.col-main,
+.col-aside,
+.col-wide {
   grid-column: 1 / -1;
 }
 @media (min-width: 860px) {
@@ -297,7 +296,7 @@ a:hover {
 /* Offene Angaben auf Rechtsseiten */
 .open-field {
   display: grid;
-  grid-template-columns: minmax(8rem, 12rem) 1fr;
+  grid-template-columns: 1fr;
   gap: 0.25rem 1rem;
   padding-block: 0.5rem;
   border-bottom: 1px solid var(--line);
@@ -307,7 +306,15 @@ a:hover {
   color: var(--ink-soft);
 }
 .open-field dd {
-  margin: 0;
+  margin: 0 0 0.5rem;
+}
+@media (min-width: 600px) {
+  .open-field {
+    grid-template-columns: minmax(8rem, 12rem) 1fr;
+  }
+  .open-field dd {
+    margin: 0;
+  }
 }
 
 .visually-hidden {

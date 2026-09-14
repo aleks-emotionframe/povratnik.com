@@ -30,3 +30,176 @@ rules:
     matches: Nach Ihren Angaben kommt im fiktiven Beispiel die Prüfung der Abstammungskette infrage. Ob die Urkunden ausreichen, entscheidet die Beispielbehörde (fiktiv).
   example_remote_work_check:
     matches: Nach Ihren Angaben kommt im fiktiven Beispiel der Weg für Fernarbeit infrage. Über den Antrag entscheidet die Beispielbehörde (fiktiv).
+# Oberflächentexte des Kurzchecks und des Plans (wizard-konzept.md 2.2 und 6).
+wizard:
+  title: Mein Weg nach Kroatien
+  intro: Sechs Fragen, dann Ihr erster Plan. Ihre Antworten bleiben in diesem Browser.
+  progress: Frage {n} von {total}
+  for_person: Für {person}
+  unknown: Weiss ich noch nicht
+  back: Zurück
+  next: Weiter
+  finish: Plan anzeigen
+  restart: Von vorn beginnen
+  remove: entfernen
+  household_label: Haushalt
+  add: Hinzufügen
+  edit: Ändern
+  print: Als PDF drucken
+  no_js: Der Kurzcheck braucht JavaScript, weil die Auswertung in Ihrem Browser läuft und Ihre Antworten nirgendwohin übertragen werden. Bitte aktivieren Sie JavaScript oder nutzen Sie einen anderen Browser.
+  no_rules_title: Keine freigegebene Regel
+  no_rules_text: Es gibt derzeit keine fachlich freigegebene und veröffentlichte Regel. Der Kurzcheck kann deshalb noch keinen Plan erzeugen.
+  synthetic_banner: Synthetische Beispielregeln
+  synthetic_text: Dieser Plan beruht auf erfundenen Beispielregeln ohne fachliche Freigabe. Er trifft keine Aussage über Ihre tatsächliche Lage.
+  roles:
+    self: Sie
+    partner: Partnerin oder Partner
+    child: Kind
+    other: Weitere Person
+  q:
+    stage:
+      title: Wo stehen Sie gerade?
+      help: Wer bereits eingereist ist, bekommt zuerst die laufenden Fristen geprüft.
+      options:
+        exploring: Ich erkunde noch
+        planning: Ich plane konkret
+        arrived: Ich bin bereits in Kroatien
+    household:
+      title: Wer zieht mit?
+      help: Jede Person bekommt einen eigenen Weg. Partnerin und Kind können andere Voraussetzungen haben als Sie.
+      options:
+        alone: Ich allein
+        partner: Mit Partnerin oder Partner
+        partner_children: Mit Partner und Kindern
+        alone_children: Allein mit Kindern
+        others: Mit weiteren Personen
+    country:
+      title: Wo lebt diese Person heute?
+      help: Bestimmt Dokumentenweg, Beglaubigung, Übersetzung und Abmeldepflichten.
+      options:
+        ar: Argentinien
+        cl: Chile
+        de: Deutschland
+        ch: Schweiz
+        at: Österreich
+        ca: Kanada
+        other: Anderes Land
+    citizenship:
+      title: Welche Staatsangehörigkeiten hat diese Person?
+      help: Mehrfachauswahl. Gefragt ist die Staatsangehörigkeit, nicht der Pass. Ein abgelaufener Pass ändert nichts an der Staatsangehörigkeit.
+      options:
+        hr: Kroatisch
+        eea: EU oder EWR
+        ch: Schweiz
+        other: Andere
+        stateless: Staatenlos
+    link:
+      title: Besteht ein Bezug zu Kroatien?
+      help: Der Bezug öffnet Wege über die Herkunft, ohne etwas zu versprechen. Ob ein Nachweis ausreicht, entscheidet die Behörde.
+      options:
+        parent: Ein Elternteil ist oder war kroatisch
+        ancestor: Grosseltern oder frühere Vorfahren waren kroatisch
+        former_residence: Hat früher selbst in Kroatien gelebt
+        partner: Partnerin oder Partner mit kroatischem Bezug
+        none: Kein Bezug
+    horizon:
+      title: Wann soll der Umzug stattfinden?
+      help: Bestimmt die Reihenfolge, nicht den Inhalt. Ein gemeinsamer Termin ist ein Szenario, kein Datum.
+      options:
+        within_6_months: In bis zu 6 Monaten
+        6_to_12_months: In 6 bis 12 Monaten
+        later_or_unclear: Später oder noch unklar
+    income:
+      title: Wovon lebt diese Person in Kroatien?
+      help: Aktiviert Erwerbs-, Bildungs- und Finanzfragen.
+      options:
+        employment: Anstellung in Kroatien
+        self_employment: Eigene Tätigkeit oder Gründung
+        remote_employer_abroad: Arbeit für einen Arbeitgeber im Ausland
+        pension_or_assets: Rente oder Vermögen
+        study: Studium
+    residence:
+      title: Welchen Aufenthaltsstatus hat diese Person in Kroatien?
+      help: Der Status entscheidet, welche Regeln überhaupt gelten. Er ist etwas anderes als die Staatsangehörigkeit.
+      options:
+        eea_registered: Als EU-, EWR- oder Schweizer Bürger registriert
+        temporary_residence: Vorübergehender Aufenthalt (privremeni boravak)
+        diaspora_certificate: Aufenthalt für Auswanderer und Nachkommen
+        digital_nomad: Digitale Nomadin oder digitaler Nomade
+        permanent_residence: Dauerhafter Aufenthalt (stalni boravak)
+        long_term_residence: Langfristiger Aufenthalt (dugotrajno boravište)
+        none: Noch kein Status
+    entry:
+      title: Wann ist diese Person eingereist?
+      help: Das Einreisedatum löst Fristen aus. Ohne Datum sind Fristen erst berechenbar, wenn es bestätigt ist.
+facts:
+  person:
+    stage: Wo Sie gerade stehen
+    move_horizon: Zeitpunkt des Umzugs
+    country: Heutiges Wohnland
+    citizenship_status: Staatsangehörigkeit
+    croatian_link: Bezug zu Kroatien
+    income_source: Einkommen in Kroatien
+    residence_status: Aufenthaltsstatus in Kroatien
+  event:
+    entry: Einreisedatum
+plan:
+  title: Ihr Plan
+  situation: Ihre Ausgangslage
+  next: Die nächsten Schritte
+  next_help: Höchstens drei. Alles Weitere steht im Fahrplan darunter.
+  next_empty: Für diesen Bereich sind derzeit keine weiteren Schritte erkennbar.
+  roadmap: Ihr Fahrplan nach Phasen
+  open: Was noch offen ist
+  open_help: Diese Liste ist bewusst sichtbar. Sie zeigt, was wir noch nicht wissen, statt Sicherheit vorzutäuschen.
+  open_empty: Derzeit ist nichts offen.
+  missing: "{fact} fehlt noch"
+  conflict: Für das Verfahren «{procedure}» treffen mehrere Regeln zu. Dieser Punkt braucht eine fachliche Klärung.
+  why: Warum wird mir das angezeigt?
+  used_facts: Verwendete Angaben
+  rule: Regel
+  source: Quelle
+  checked: geprüft am
+  documents: Unterlagen
+  authority: Zuständige Stelle
+  purpose: Wozu
+  provisional: Nach heutigem Stand, weil das Einreisedatum noch fehlt.
+  datenstand: Datenstand
+  reference_date: Erstellt am
+  rule_versions: Regelfassungen
+  recheck: Vor einer Antragstellung erneut prüfen, ob sich der Stand geändert hat.
+  errors: Technische Fehler bei der Auswertung
+  no_holidays: ohne Feiertage
+  none: keine
+phases:
+  orient: Orientieren
+  prepare: Vorbereiten
+  move: Umziehen
+  arrive: Ankommen
+  stay: Bleiben
+eligibility:
+  matches: nach Angaben passend
+  condition_missing: Voraussetzung fehlt
+  unclear: unklar
+  unchecked: nicht geprüft
+deadline:
+  due: Frist bis {date}
+  awaiting: Termin berechenbar, sobald das Datum der Ereignisart «{event}» bestätigt ist.
+  kinds:
+    statutory: gesetzliche Frist
+    funding: Förderfrist
+    recommended: empfohlene Vorlaufzeit
+    user_reminder: eigene Erinnerung
+  adjusted:
+    weekend: verschoben wegen Wochenende
+    holiday: verschoben wegen Feiertag
+events:
+  entry: Einreise
+  address_change: Adresswechsel
+  residence_registration: Aufenthaltsregistrierung
+  application_submitted: Antragstellung
+  decision_served: Zustellung des Bescheids
+  permit_expiry: Ablauf des Titels
+  employment_start: Beschäftigungsbeginn
+  business_registration: Gründung
+  insurance_end_abroad: Ende der bisherigen Versicherung

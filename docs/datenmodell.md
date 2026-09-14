@@ -181,8 +181,10 @@ Gültigkeitsfenster, die sich nicht überschneiden. Ändert sich das Ereignis od
 Verfahren, ist das eine neue Regel-Id. Der Validator lehnt Verstösse ab. Findet
 sich keine Fassung, ist die Regel für dieses Ereignis nicht in Kraft und liefert kein
 Ergebnis. Ist das Ereignisdatum unbekannt, wählt die Engine die am Referenzdatum
-gültige Fassung, kennzeichnet die Wahl als provisorisch, stuft das Ergebnis höchstens
-als `unclear` ein und erzeugt eine Klärungsaufgabe für das fehlende Datum.
+gültige Fassung, kennzeichnet die Wahl als provisorisch, stuft ein positives oder
+ungeprüftes Ergebnis auf `unclear` herab und erzeugt eine Klärungsaufgabe für das
+fehlende Datum. Eine bekannt nicht erfüllte Bedingung bleibt `condition_missing`, auch
+bei provisorischer Fassung (CLAUDE.md Abschnitt 9).
 
 Öffentlich ausgewertet werden nur Fassungen mit `synthetic: false`,
 `approval.state: approved` und `publication.state: published`. Eine zurückgezogene

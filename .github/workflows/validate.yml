@@ -1,5 +1,7 @@
 # Runs on every pull request and on pushes to main. Red means: no delivery.
-# Checks: TypeScript types, validator tests, content validation (CLAUDE.md section 4).
+# Checks: TypeScript types (engine, validator, website), production build of the website,
+# all tests (validator, engine, acceptance fixtures, website, build output), content
+# validation (CLAUDE.md section 4).
 name: validate
 
 on:
@@ -18,5 +20,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - run: npm run check:web
+      - run: npm run build
       - run: npm test
       - run: npm run validate

@@ -9,7 +9,7 @@ scope:
   applies_to_persons:
     citizenship_status: [third_country]
     residence_status: [none]
-  procedure: example-preparation
+  procedure: example-descent-procedure
 conditions:
   - field: person.croatian_link
     operator: in

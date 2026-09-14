@@ -9,7 +9,7 @@ scope:
   applies_to_persons:
     citizenship_status: [hr_citizen]
     residence_status: [none]
-  procedure: example-preparation
+  procedure: example-passport-procedure
 conditions: []
 result:
   task: example-check-passport

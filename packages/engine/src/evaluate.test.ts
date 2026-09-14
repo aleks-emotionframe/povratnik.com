@@ -143,9 +143,9 @@ test("unknown event date: version by reference date, provisional, unclear, deadl
   assert.equal(out.results[0]!.eligibility, "unclear");
   assert.deepEqual(out.results[0]!.deadline, { status: "awaiting_event", event: "entry", kind: "statutory" });
   assert.deepEqual(out.clarifications, ["missing:event.entry"]);
-  // Even a known hurdle stays unclear while the version itself is provisional.
+  // A known hurdle stays a known hurdle even while the version is provisional.
   const hurdle = rule({ id: "b", conditions: [{ field: "person.age", operator: "gte", value: 18, on_unknown: "clarify" }] });
-  assert.equal(run([hurdle], person({ "event.entry": { availability: "unknown" }, "person.age": known(16) })).results[0]!.eligibility, "unclear");
+  assert.equal(run([hurdle], person({ "event.entry": { availability: "unknown" }, "person.age": known(16) })).results[0]!.eligibility, "condition_missing");
 });
 
 test("no version in force for the event date, or event known not to exist: no result", () => {
