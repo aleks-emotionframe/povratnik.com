@@ -1,0 +1,68 @@
+# English working copy of oib.de.yaml, version 1. Not professionally checked.
+id: oib
+lang: en
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [OIB]
+translation:
+  of_version: 1
+  status: current
+title: "OIB, the personal identification number"
+short_answer: The OIB is the number that every authority, every bank and every landlord asks for. It is applied for at the tax administration, is free of charge and, with complete documents, is often issued on the spot in person. Without an OIB almost nothing can be applied for.
+terms:
+  - term_hr: osobni identifikacijski broj (OIB)
+    term_explained:
+      de: Persönliche Identifikationsnummer, elf Ziffern. Sie begleitet jede Person lebenslang in allen Verfahren, ähnlich einer Steuernummer, aber breiter genutzt.
+      en: Personal identification number, eleven digits. It accompanies every person for life in all procedures, similar to a tax number but used more widely.
+  - term_hr: Porezna uprava
+    term_explained:
+      de: Die Steuerverwaltung des Finanzministeriums. Sie vergibt die OIB.
+      en: The tax administration of the Ministry of Finance. It issues the OIB.
+sections:
+  applies_to: Everyone who wants to open an account, rent, work, submit an application or acquire property in Croatia, regardless of citizenship.
+  not_applies_to: Nobody is exempt. Whoever has already received an OIB, for example as a child or during an earlier stay, keeps it and does not apply for a new one.
+  authority: Porezna uprava, any office. From abroad by e-mail to OIB@porezna-uprava.hr or through the Croatian representation.
+  prerequisites:
+    - Valid passport or identity card
+    - A reason for the allocation, such as residence, work, an account or property
+  steps:
+    - Fill in the application form
+    - Appear in person at an office, or submit the application by e-mail or through the consulate
+    - Receive the OIB certificate and keep it at hand for all further procedures
+  documents:
+    - Passport or identity card, a copy when applying from abroad
+    - Application form
+    - When applying through an authorised person, a power of attorney
+  duration_costs: Free of charge. In person with complete documents immediately, official deadline 15 working days, through the consulate often several weeks.
+  deadlines:
+    - No deadline for the application. But the OIB is needed for almost every further step, which is why it belongs at the beginning.
+  common_mistake: Applying for the OIB only after arrival and then waiting weeks for account, rental contract and insurance. Whoever applies through the consulate before leaving saves that wait.
+  not_decided_here: Nothing professional. The allocation is an administrative act without discretion, provided the documents are complete.
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [wohnsitz-anmelden, krankenversicherung]
+sources:
+  - id: hr-porezna-uprava
+    reference: OIB, Dodjela OIB-a stranim osobama, application in person, by e-mail or through the consulate, deadline 15 working days
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

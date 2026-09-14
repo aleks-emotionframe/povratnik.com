@@ -1,0 +1,82 @@
+# Versión de trabajo en español de bescheinigung-auswanderer.de.yaml, versión 1. Sin revisión profesional.
+id: bescheinigung-auswanderer
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: status-und-staatsangehoerigkeit
+covers: [Aufenthalt für Auswanderer und Nachkommen, Familiennachzug, Verlängerung]
+translation:
+  of_version: 1
+  status: current
+title: Certificado para emigrantes y residencia para el regreso
+short_answer: Con el certificado del Ministerio de Demografía e Inmigración, los emigrantes y sus descendientes ya no se tratan como extranjeros comunes según la nueva ley de extranjería. Pueden regular una residencia temporal con fines de inmigración y regreso, de hasta dos años, prorrogable. Tras tres años es posible la residencia permanente.
+terms:
+  - term_hr: Potvrda za hrvatske iseljenike
+    term_explained:
+      de: Bescheinigung für kroatische Auswanderer. Sie bestätigt die Zugehörigkeit zur Auswanderergruppe und öffnet den erleichterten Aufenthaltsweg.
+      es: Certificado para emigrantes croatas. Confirma la pertenencia al grupo de emigrantes y abre la vía de residencia facilitada.
+  - term_hr: privremeni boravak u svrhu useljenja i povratka
+    term_explained:
+      de: Vorübergehender Aufenthalt zum Zweck der Einwanderung und Rückkehr. Der Aufenthaltstitel, der mit der Bescheinigung beantragt wird.
+      es: Residencia temporal con fines de inmigración y regreso. El permiso de residencia que se solicita con el certificado.
+  - term_hr: Zakon o strancima
+    term_explained:
+      de: Das Ausländergesetz, in dieser Fassung in Kraft seit 15.3.2025. Die Durchführungsverordnung ist Pravilnik NN 53/2026 vom 22.5.2026.
+      es: La ley de extranjería, en esta versión en vigor desde el 15.3.2025. El reglamento de aplicación es el Pravilnik NN 53/2026 del 22.5.2026.
+sections:
+  applies_to: Emigrantes, sus descendientes y sus familiares que no tienen la nacionalidad croata o no quieren esperar al procedimiento de nacionalidad.
+  not_applies_to: Ciudadanos croatas, no necesitan permiso de residencia. Ciudadanos de la UE, del EEE y de Suiza sin raíces, se registran según la libre circulación.
+  authority: Certificado del Ministarstvo demografije i useljeništva (contacto useljenistvo@mdu.hr). Residencia a través de la administración policial del Ministerio del Interior.
+  prerequisites:
+    - Prueba del origen emigrante, normalmente mediante la cadena de certificados y una carta de recomendación de la representación croata
+    - No se exige prueba de medios de subsistencia
+    - No se exige prueba de seguro de salud
+  steps:
+    - Obtener la cadena de certificados y la carta de recomendación de la representación
+    - Solicitar el certificado en el Ministerio
+    - Solicitar la residencia con fines de inmigración y regreso en la administración policial; si hay obligación de visado, la solicitud también es posible en Croacia
+    - Tras la autorización, registrar el domicilio, solicitar el OIB, regular el seguro de salud
+  documents:
+    - Pasaporte
+    - Certificados de ascendencia con apostilla y traducción
+    - Carta de recomendación de la representación croata
+    - Certificado del Ministerio
+  duration_costs: Residencia de hasta dos años, prorrogable. La duración del trámite y las tasas no están documentadas.
+  deadlines:
+    - Solicitar la prórroga antes de que venza la residencia en curso. El plazo exacto de antelación debe comprobarse en el texto original.
+    - Residencia permanente posible tras tres años de residencia ininterrumpida
+  common_mistake: Confundir el certificado con la nacionalidad. El certificado es una vía de residencia, no una naturalización. Ambos pueden ir en paralelo.
+  not_decided_here: Si una persona pertenece al grupo de emigrantes lo decide el Ministerio según la documentación. La autorización de residencia la concede la administración policial.
+  open_points:
+    - Duración del trámite en ambas entidades, sin documentar
+    - Plazo de antelación para la prórroga, sin documentar
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [apostille-und-uebersetzung]
+  followed_by_pages: [wohnsitz-anmelden, oib, krankenversicherung]
+sources:
+  - id: hr-mdu
+    reference: Potvrda za hrvatske iseljenike, Pravilnik NN 53/2026 del 22.5.2026, Zakon o strancima en vigor desde el 15.3.2025
+    checked: 2026-09-12
+  - id: hr-mup
+    reference: Privremeni boravak u svrhu useljenja i povratka, requisitos y documentación
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

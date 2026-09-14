@@ -1,0 +1,81 @@
+# Versión de trabajo en español de wohnsitz-anmelden.de.yaml, versión 1. Sin revisión profesional.
+# Tres trámites distintos con bases legales propias, presentados aquí a propósito por separado.
+id: wohnsitz-anmelden
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [Personalausweis, e-Bürger-Zugang]
+translation:
+  of_version: 1
+  status: current
+title: Registrar el domicilio y la residencia
+short_answer: El registro no es un trámite, sino tres. Los ciudadanos croatas registran el domicilio (prebivalište), las personas con residencia temporal el lugar de estancia (boravište), las personas con residencia permanente o de larga duración cada cambio. Los tres se hacen en la administración policial, por regla general en un plazo de 15 días, y activan plazos en otros procedimientos.
+terms:
+  - term_hr: prijava prebivališta
+    term_explained:
+      de: Wohnsitzanmeldung für kroatische Staatsbürger. Sie ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
+      es: Registro del domicilio para ciudadanos croatas. En muchas ayudas es la fecha que cuenta, no la llegada.
+  - term_hr: prijava boravišta
+    term_explained:
+      de: Meldung des Aufenthaltsorts für Personen mit vorübergehendem Aufenthalt. Seit NN 55/2026 binnen 15 Tagen statt zuvor drei.
+      es: Declaración del lugar de estancia para personas con residencia temporal. Desde NN 55/2026 en 15 días, antes tres.
+  - term_hr: stalni boravak, dugotrajni boravak
+    term_explained:
+      de: Daueraufenthalt und Langzeitaufenthalt. Änderungen der Adresse sind binnen 15 Tagen zu melden.
+      es: Residencia permanente y residencia de larga duración. Los cambios de dirección deben declararse en 15 días.
+sections:
+  applies_to: Todas las personas que viven en Croacia. Cuál de los tres trámites se aplica depende del estatus.
+  not_applies_to: Turistas y estancias cortas. La declaración del alojamiento por parte del arrendador es un cuarto trámite propio y no sustituye ninguno de los tres registros.
+  authority: Ministarstvo unutarnjih poslova, administración policial o comisaría del lugar de residencia.
+  prerequisites:
+    - Estatus aclarado, es decir nacionalidad o una residencia autorizada
+    - Prueba de vivienda; basta un contrato de alquiler legalizado ante notario
+    - OIB
+  steps:
+    - Aclarar cuál de los tres trámites se aplica
+    - Obtener la prueba de vivienda; en caso de alquiler, legalizar el contrato ante notario
+    - Acudir a la administración policial y hacer el registro
+    - Anotar la fecha del registro; es lo que activa los plazos de ayudas, permiso de conducir y bienes de mudanza
+  documents:
+    - Pasaporte o documento de identidad; los ciudadanos, la Domovnica
+    - Prueba de vivienda, por ejemplo contrato de alquiler legalizado o extracto del registro de la propiedad
+    - Permiso de residencia, si existe
+    - OIB
+  duration_costs: El registro se hace en ventanilla. Tasas sin documentar.
+  deadlines:
+    - Domicilio de ciudadanos croatas, por regla general en 15 días desde la mudanza
+    - Lugar de estancia con residencia temporal, en 15 días (NN 55/2026)
+    - Cambios con residencia permanente o de larga duración, en 15 días desde el cambio
+  common_mistake: Aplazar el registro porque todavía no se tiene vivienda definitiva. En Biram Hrvatsku el plazo de solicitud corre desde el día del registro, y la exención del impuesto sobre el salario se vincula a la declaración del regreso. Quien registra tarde no solo aplaza el registro, sino todo lo que depende de él.
+  not_decided_here: Si una prueba de vivienda concreta basta lo decide la administración policial. Qué plazo rige en cada caso depende del estatus y, en caso de duda, debe aclararse con un profesional.
+  open_points:
+    - Tasas sin documentar
+    - Formulación exacta del plazo para ciudadanos, comprobar en el texto original
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib]
+  followed_by_pages: [krankenversicherung, biram-hrvatsku, fuehrerschein-umschreiben]
+sources:
+  - id: hr-mup
+    reference: Prijava prebivališta i boravišta, Zakon o prebivalištu, Zakon o strancima, modificación NN 55/2026
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

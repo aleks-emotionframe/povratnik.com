@@ -1,0 +1,68 @@
+# Radna verzija na hrvatskom od oib.de.yaml, verzija 1. Bez stručne provjere.
+id: oib
+lang: hr
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [OIB]
+translation:
+  of_version: 1
+  status: current
+title: "OIB, osobni identifikacijski broj"
+short_answer: OIB je broj koji traži svako tijelo, svaka banka i svaki najmodavac. Zahtjev se podnosi Poreznoj upravi, besplatan je i uz potpunu dokumentaciju osobno se često dodjeljuje odmah. Bez OIB-a gotovo se ništa ne može zatražiti.
+terms:
+  - term_hr: osobni identifikacijski broj (OIB)
+    term_explained:
+      de: Persönliche Identifikationsnummer, elf Ziffern. Sie begleitet jede Person lebenslang in allen Verfahren, ähnlich einer Steuernummer, aber breiter genutzt.
+      hr: Jedanaest znamenki. Prati svaku osobu cijeli život u svim postupcima, slično poreznom broju, ali šire u uporabi.
+  - term_hr: Porezna uprava
+    term_explained:
+      de: Die Steuerverwaltung des Finanzministeriums. Sie vergibt die OIB.
+      hr: Tijelo Ministarstva financija. Ona dodjeljuje OIB.
+sections:
+  applies_to: Svi koji u Hrvatskoj žele otvoriti račun, unajmiti stan, raditi, podnijeti zahtjev ili steći nekretninu, neovisno o državljanstvu.
+  not_applies_to: Nitko nije izuzet. Tko je OIB već jednom dobio, primjerice kao dijete ili pri ranijem boravku, zadržava ga i ne traži novi.
+  authority: Porezna uprava, svaka ispostava. Iz inozemstva e-poštom na OIB@porezna-uprava.hr ili preko hrvatskog predstavništva.
+  prerequisites:
+    - Važeća putovnica ili osobna iskaznica
+    - Razlog za dodjelu, primjerice boravak, rad, račun ili nekretnina
+  steps:
+    - Ispuniti obrazac zahtjeva
+    - Osobno doći u ispostavu, ili zahtjev poslati e-poštom ili preko konzulata
+    - Preuzeti potvrdu o OIB-u i imati je pri ruci za sve daljnje postupke
+  documents:
+    - Putovnica ili osobna iskaznica, preslika kod zahtjeva iz inozemstva
+    - Obrazac zahtjeva
+    - Kod zahtjeva preko opunomoćenika, punomoć
+  duration_costs: Besplatno. Osobno uz potpunu dokumentaciju odmah, rok tijela 15 radnih dana, preko konzulata često više tjedana.
+  deadlines:
+    - Nema roka za zahtjev. OIB se, međutim, treba za gotovo svaki daljnji korak i zato ide na početak.
+  common_mistake: Zatražiti OIB tek nakon dolaska i zatim tjednima čekati na račun, ugovor o najmu i osiguranje. Tko OIB zatraži preko konzulata prije odlaska, štedi to čekanje.
+  not_decided_here: Ništa stručno. Dodjela je upravni čin bez diskrecije, ako je dokumentacija potpuna.
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [wohnsitz-anmelden, krankenversicherung]
+sources:
+  - id: hr-porezna-uprava
+    reference: OIB, Dodjela OIB-a stranim osobama, zahtjev osobno, e-poštom ili preko konzulata, rok 15 radnih dana
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

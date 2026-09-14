@@ -1,0 +1,79 @@
+# Versión de trabajo en español de krankenversicherung.de.yaml, versión 1. Sin revisión profesional.
+id: krankenversicherung
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: gesundheit-und-pflege
+covers: [Versicherungsbeginn je Grundlage, Übergangsdeckung, Zusatzversicherung]
+translation:
+  of_version: 1
+  status: current
+title: Seguro de salud, cuándo empieza y cómo se cierra la laguna
+short_answer: El seguro obligatorio empieza en un día distinto según la base. Al empezar a trabajar o al registrar una actividad propia se activa automáticamente. Quien regresa de la UE, del EEE, de Suiza o del Reino Unido debe darse de alta en un plazo de 30 días tras el fin de la relación laboral y del seguro extranjero. Para terceros países ese plazo no se aplica.
+terms:
+  - term_hr: HZZO
+    term_explained:
+      de: Hrvatski zavod za zdravstveno osiguranje, die Krankenversicherungsanstalt. Sie führt die Pflichtversicherung.
+      es: Hrvatski zavod za zdravstveno osiguranje, el instituto del seguro de salud. Gestiona el seguro obligatorio.
+  - term_hr: obvezno zdravstveno osiguranje
+    term_explained:
+      de: Die Pflichtversicherung. Grundlage kann Arbeit, eigene Tätigkeit, Familienangehörigkeit oder eigene Beitragszahlung sein.
+      es: El seguro obligatorio. La base puede ser el trabajo, una actividad propia, la condición de familiar o el pago propio de cotizaciones.
+  - term_hr: dopunsko zdravstveno osiguranje
+    term_explained:
+      de: Zusatzversicherung, die Zuzahlungen deckt. Seit 1.2.2026 15 EUR im Monat.
+      es: Seguro complementario que cubre los copagos. Desde el 1.2.2026, 15 EUR al mes.
+sections:
+  applies_to: Todas las personas que viven en Croacia. La base decide el inicio.
+  not_applies_to: Personas con una residencia que exige seguro privado, por ejemplo nómadas digitales. Para ellas rige un procedimiento propio.
+  authority: HZZO, oficina regional del lugar de residencia. Al empezar a trabajar, el empleador da de alta.
+  prerequisites:
+    - OIB
+    - Domicilio o residencia registrados
+    - Una base de aseguramiento, es decir trabajo, actividad propia, un familiar asegurado o cotizaciones propias
+  steps:
+    - Antes de partir, aclarar cuándo termina el seguro anterior
+    - Planificar la transición, por ejemplo prolongando el seguro anterior, con un seguro de viaje o empezando el seguro croata el primer día
+    - Tras el registro, regular el seguro en el HZZO; si hay trabajo, lo hace el empleador
+    - Comprobar el seguro complementario; cubre los copagos
+  documents:
+    - OIB
+    - Prueba del domicilio o de la residencia
+    - Prueba de la base, por ejemplo contrato de trabajo o prueba de la condición de familiar
+    - Al regresar de la UE, del EEE, de Suiza o del Reino Unido, prueba del fin del seguro anterior
+  duration_costs: Cotizaciones con pago propio, sin documentar. Seguro complementario 15 EUR al mes desde el 1.2.2026.
+  deadlines:
+    - Regreso de la UE, el EEE, Suiza y el Reino Unido, alta en un plazo de 30 días tras el fin de la relación laboral y del seguro extranjero
+    - Para terceros países no se aplica este plazo de 30 días; la base debe comprobarse por separado
+  common_mistake: Suponer que el seguro empieza con la entrada al país. Empieza con la base. Entre el fin del seguro anterior y el inicio del nuevo queda, si no, una laguna sin cobertura.
+  not_decided_here: Si una persona puede asegurarse a través de un familiar y desde cuándo lo decide el HZZO. El cómputo de periodos de seguro extranjeros es una cuestión para el HZZO y el instituto de pensiones HZMO.
+  open_points:
+    - Importe de las cotizaciones con pago propio, sin documentar
+    - Tiempos de espera y admisión de nuevos pacientes por los médicos de cabecera, sin documentar
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib, wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-hzzo
+    reference: Obvezno zdravstveno osiguranje, Stjecanje statusa osigurane osobe, plazo de 30 días para quienes regresan de la UE, el EEE, Suiza y el Reino Unido, Dopunsko osiguranje desde el 1.2.2026
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly
