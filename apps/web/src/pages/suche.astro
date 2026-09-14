@@ -1,0 +1,154 @@
+---
+// Suche über Themenseiten, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe.
+// Der Index entsteht zur Bauzeit und liegt in der Seite; die Suche läuft im Browser,
+// ohne Anfrage an einen Server (CLAUDE.md 2.5 gilt sinngemäss: kein Suchbegriff verlässt
+// den Browser). Ohne JavaScript bleibt die Liste aller Einträge lesbar.
+import Base from "../layouts/Base.astro";
+import { RUBRICS, rubricText } from "../lib/rubrics.ts";
+import { SITUATIONS, situationText } from "../lib/situations.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+
+const { lang, texts, u, p } = pageContext(Astro);
+const topics = loadPages(CONTENT_DIR, lang);
+const countries = loadPages(CONTENT_DIR, lang, "country");
+type Entry = { kind: string; title: string; text: string; href: string; terms?: string };
+const index: Entry[] = [
+  ...topics.map((x) => ({ kind: u("search.kind_topic"), title: x.title, text: x.short_answer, href: p(pagePath(x)), terms: [...x.covers, ...x.terms.map((t) => t.term_hr)].join(" ") })),
+  ...RUBRICS.map((r) => { const tx = rubricText(r, texts); return { kind: u("search.kind_rubric"), title: tx.title, text: tx.intro, href: p(`/wissen/${r.slug}`), terms: tx.topics.join(" ") }; }),
+  ...SITUATIONS.map((s) => { const tx = situationText(s, texts); return { kind: u("search.kind_situation"), title: tx.title, text: tx.intro, href: p(`/wissen/situation/${s.slug}`) }; }),
+  ...countries.map((x) => ({ kind: u("search.kind_country"), title: x.title, text: x.short_answer, href: p(pagePath(x)) })),
+  ...loadPlaces().map((pl) => ({ kind: u("search.kind_place"), title: placeName(pl), text: pl.summary, href: p(`/orte/${pl.id}`), terms: pl.benefits.map((b) => b.title).join(" ") })),
+  ...topics.flatMap((x) => x.terms.map((t) => ({ kind: u("search.kind_term"), title: t.term_hr, text: t.term_explained[lang] ?? t.term_explained.de, href: p(pagePath(x)) }))),
+];
+---
+
+<Base title={u("search.title")} description={u("search.description")} current="suche">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("search.heading")}</h1>
+        <p class="lede">{u("search.lede")}</p>
+        <form class="search" role="search" id="search" action={p("/suche")} method="get">
+          <label class="visually-hidden" for="q">{u("search.label")}</label>
+          <input id="q" name="q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
+          <button class="button button--light" type="submit">{u("search.button")}</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="count mono" id="count" aria-live="polite" data-one={u("search.entry", { n: "{n}" })} data-many={u("search.entries", { n: "{n}" })} data-for={u("search.for", { q: "{q}" })}>{u("search.entries", { n: index.length })}</p>
+      <ul class="results" id="results">
+        {index.map((e) => (
+          <li class="result" data-title={e.title.toLowerCase()} data-text={`${e.text} ${e.terms ?? ""}`.toLowerCase()}>
+            <span class="result__kind mono">{e.kind}</span>
+            <a href={e.href}>{e.title}</a>
+            <p>{e.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>{u("search.empty")} <a href="mailto:kontakt@povratnik.com?subject=Suche">{u("search.empty_link")}</a></p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var input = document.getElementById("q");
+      var items = Array.prototype.slice.call(document.querySelectorAll("#results > li"));
+      var count = document.getElementById("count");
+      var empty = document.getElementById("empty");
+      var form = document.getElementById("search");
+      function norm(s) { return s.toLowerCase().normalize("NFD").replace(/\p{M}/gu, ""); }
+      function apply() {
+        var q = norm(input.value.trim());
+        var words = q ? q.split(/\s+/) : [];
+        var shown = 0;
+        items.forEach(function (li) {
+          var hay = norm(li.dataset.title + " " + li.dataset.text);
+          var ok = words.every(function (w) { return hay.indexOf(w) !== -1; });
+          var strong = words.length > 0 && words.every(function (w) { return norm(li.dataset.title).indexOf(w) !== -1; });
+          li.hidden = !ok;
+          li.classList.toggle("result--strong", strong);
+          if (ok) shown++;
+        });
+        count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown) + (q ? " " + count.dataset.for.replace("{q}", input.value.trim()) : "");
+        empty.hidden = shown > 0;
+      }
+      // Der Suchbegriff wird bewusst nicht in die Adresse geschrieben.
+      form.addEventListener("submit", function (e) { e.preventDefault(); apply(); });
+      input.addEventListener("input", apply);
+      input.focus();
+    })();
+  </script>
+</Base>
+
+<style>
+  .search {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    max-width: 40rem;
+  }
+  .search input {
+    flex: 1 1 16rem;
+    min-height: 48px;
+    padding: 0.6rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--on-brand);
+    font: inherit;
+  }
+  .search input::placeholder {
+    color: var(--on-brand-soft);
+  }
+  .search input:focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 2px;
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .results {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .result {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.1rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+  .result--strong {
+    border-color: var(--accent);
+  }
+  .result__kind {
+    color: var(--muted);
+  }
+  .result a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.0625rem;
+  }
+  .result p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .empty {
+    color: var(--ink-soft);
+  }
+</style>

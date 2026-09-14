@@ -132,6 +132,75 @@ wizard:
     entry:
       title: Wann ist diese Person eingereist?
       help: Das Einreisedatum löst Fristen aus. Ohne Datum sind Fristen erst berechenbar, wenn es bestätigt ist.
+  # Vertiefende Fragen (wizard-konzept.md 2.3, lib/refine.ts). Freiwillig, nach der Zusammenfassung.
+  refine:
+    unknown: Weiss ich nicht
+    children:
+      title: "{person}: Alter und Sprache"
+      help: Wirkt auf Schule, Sprachförderung und Zeitplan.
+      age:
+        label: Alter
+        0_5: 0 bis 5 Jahre
+        6_14: 6 bis 14 Jahre
+        15_18: 15 bis 18 Jahre
+      croatian:
+        label: Spricht Kroatisch
+        "yes": Ja
+        some: Etwas
+        "no": Nein
+    founding:
+      title: Ihre Gründung
+      help: Wirkt auf Förderfähigkeit und die Reihenfolgefalle.
+      sector:
+        label: Branche laut Förderaufruf
+        allowed: Zugelassene Branche
+        excluded: Ausgeschlossene Branche (Handel, Transport, Beherbergung, Gastronomie, Finanzen, Immobilien)
+      founded:
+        label: Bereits gegründet
+        "yes": Ja
+        "no": Nein
+    place:
+      title: Welche Gemeinde?
+      help: Blendet die kommunalen Leistungen in den Plan ein. Auf der Teststufe fiktive Testgemeinden.
+      place:
+        label: Zielort
+        none: Noch kein Zielort
+    property:
+      title: Wohnen am Zielort
+      help: Wirkt auf Grundbuch, Erbschaft und Kaufgenehmigung.
+      property:
+        label: Geplant ist
+        buy: Kauf
+        rent: Miete
+        inherited: Geerbtes Familieneigentum
+    pension:
+      title: "{person}: Rente"
+      help: Wirkt auf Anrechnung und Besteuerung.
+      pension:
+        label: Aus welchem Land
+        ar: Argentinien
+        cl: Chile
+        br: Brasilien
+        de: Deutschland
+        ch: Schweiz
+        at: Österreich
+        us: USA
+        ca: Kanada
+        other: Anderes Land
+    regulated:
+      title: "{person}: Reglementierter Beruf"
+      help: Etwa Gesundheits-, Lehr- und Rechtsberufe. Die Anerkennung ist ein eigener Vorschritt.
+      regulated:
+        label: Beruf ist reglementiert
+        "yes": Ja
+        "no": Nein
+    care:
+      title: Pflege und laufende Behandlung
+      help: Wirkt auf Versorgung am Zielort und Übergangsdeckung.
+      care:
+        label: Laufender medizinischer Bedarf im Haushalt
+        "yes": Ja
+        "no": Nein
 facts:
   person:
     stage: Wo Sie gerade stehen
@@ -173,6 +242,43 @@ plan:
   with_holidays: "Kalender {calendar}, Stand {date}"
   calendars: Feiertage
   none: keine
+  reading: Wissen zu Ihrem Weg
+  reading_help: Themenseiten, die nach Ihren Angaben zu Ihrem Haushalt passen. Das ist eine Leseempfehlung, keine Prüfung.
+  reading_for: "gilt für {persons}"
+  reading_state: Grundlagen vorhanden, fachlich nicht geprüft
+  documents_all: Unterlagen, die Sie voraussichtlich brauchen
+  documents_help: Zusammengestellt aus den Themenseiten oben. Welche davon Ihre Stelle im Einzelfall verlangt, entscheidet diese Stelle.
+  different: Was für Sie anders ist als für andere
+  different_help: Nach Ihren Angaben. Das ist eine Einordnung, keine Prüfung.
+  chain: Ihr Weg in einem Bild
+  chain_help: Vier Schlüssel, in dieser Reihenfolge. Die Engstelle ist markiert.
+  deadlines: Ihre Fristen
+  deadlines_help: Alles Datumsgebundene an einem Ort. Ein unbestätigter Termin löst nie einen Countdown aus.
+  deadlines_empty: Nach Ihren Angaben läuft derzeit keine berechnete Frist.
+  deadline_kind_legal: gesetzliche Frist (Beispielregel)
+  deadline_kind_funding: Förderfrist
+  deadline_awaiting: erst berechenbar, wenn das auslösende Datum bestätigt ist
+  deadline_unknown: Antragszeitraum unbekannt
+  place_benefits: Leistungen an Ihrem Zielort
+  place_benefits_help: Mit Zustand und Antragszeitraum. Über den Antrag entscheidet die Gemeinde.
+  place_benefits_empty: Für diesen Ort sind keine Leistungen erfasst. Das heisst nicht, dass es keine gibt.
+  terms: Wörter für den Schalter
+  terms_help: Die kroatischen Amtsbegriffe zu Ihrem Weg, zum Mitnehmen an den Behördentermin.
+  helpers: Wer Ihnen weiterhilft
+  helpers_help: Getrennt nach öffentlich und kommerziell. Fachpartner folgen, sobald das Verzeichnis steht.
+  helpers_public: Öffentliche Stellen
+  helpers_place: Ankommen am Zielort
+  helpers_country: Kroatische Vertretung im Herkunftsland
+  helpers_country_unknown: Adresse und Zuständigkeit werden mit der Vertretung bestätigt und dann eingetragen.
+  helpers_country_none: Für dieses Land gibt es noch keine Länderseite.
+  helpers_partners: Fachpartner
+  helpers_partners_empty: Das Verzeichnis nach Fachgebiet und Sprache ist noch nicht aufgebaut.
+  checklist_arrive: Ankommensliste für die ersten acht Wochen
+  checklist_stay: Bleibeliste für Monat drei bis vierundzwanzig
+  checklist_help: Abhakbar und druckbar. Der Stand bleibt in diesem Browser.
+  refine: Angaben verfeinern
+  refine_help: Freiwillig. Jede Antwort schärft Leseempfehlung, Klärungsliste und Zielort, ändert aber keine Regelauswertung.
+  refine_progress: "{n} von {total} beantwortet"
 phases:
   orient: Orientieren
   prepare: Vorbereiten
@@ -205,3 +311,561 @@ events:
   employment_start: Beschäftigungsbeginn
   business_registration: Gründung
   insurance_end_abroad: Ende der bisherigen Versicherung
+# Produktregeln der Zusammenfassung (lib/summary.ts): Einordnung, keine Prüfung.
+summary:
+  different:
+    status_unknown: "Bei {person} ist die Staatsangehörigkeit noch offen. Vor dem Status ist nichts entscheidbar, deshalb steht die Klärung an erster Stelle."
+    mixed_household: Nicht alle Personen in Ihrem Haushalt haben dieselbe Staatsangehörigkeit. Jede Person geht deshalb einen eigenen Weg, und die Fristen laufen getrennt.
+    arrived: Sie sind bereits in Kroatien. Fristen laufen ab Einreise und Anmeldung, nicht ab dem Tag, an dem Sie diese Seite lesen.
+    self_employed_tax: Sie planen eine eigene Tätigkeit. Die fünfjährige Lohnsteuerbefreiung gilt für Löhne aus unselbständiger Arbeit; ob und wie sie bei Ihnen greift, klärt eine Steuerfachperson.
+    remote: Arbeit für einen Arbeitgeber im Ausland. Der Aufenthaltsweg hängt von der Staatsangehörigkeit ab, die Steuerfrage von der Ansässigkeit. Beides ist kein Standardfall.
+    children: Kinder im Haushalt. Schule und Kinderarzt hängen an Wohnsitz und Versicherung der Eltern; die Reihenfolge der Eltern bestimmt die der Kinder.
+    already_founded: Sie haben bereits gegründet. Manche Förderungen verlangen den Antrag vor oder kurz nach der Gründung; ob eine Frist noch offen ist, gehört sofort geprüft.
+  chain:
+    status: Status
+    oib: OIB
+    registration: Anmeldung
+    insurance: Versicherung
+    clear: geklärt
+    open: zu klären
+    next: folgt
+    bottleneck: Engstelle
+  clarify:
+    founded_deadline: "Bereits gegründet: Ob die Antragsfrist von Biram Hrvatsku (30 Tage nach der Selbstbeschäftigung) noch offen ist, sofort bei der HZZ klären."
+    sector_excluded: Ihre Branche gehört nach Ihren Angaben zu den ausgeschlossenen. Ob eine Ausnahme greift, entscheidet die HZZ anhand des aktuellen Aufrufs.
+    sector_unknown: Ob Ihre Branche förderfähig ist, steht im aktuellen Aufruf der HZZ. Vor der Gründung prüfen.
+    regulated: "Anerkennung des Berufs ({person}): eigener Vorschritt über die zuständige Kammer (PISK). Welche Kammer, hängt vom Beruf ab."
+    care: "Laufender medizinischer Bedarf: Versorgung am Zielort und Übergangsdeckung vor der Abreise klären, bei der HZZO und der Praxis vor Ort."
+    inherited: "Geerbtes Familieneigentum: Grundbuchstand und Miteigentümer vor jedem Schritt durch eine Anwältin oder einen Anwalt in Kroatien prüfen lassen."
+    buy: "Immobilienkauf: Ob Sie als Ausländer kaufen dürfen und ob Gegenseitigkeit besteht, entscheidet das Justizministerium."
+    child_language: "Sprachförderung ({person}): Angebot und Zuständigkeit hängen vom Schulbezirk ab; bei der Schule am Zielort erfragen."
+    pension_no_agreement: "Rente ({person}): Mit diesem Land besteht kein Doppelbesteuerungsabkommen. Meldepflicht und Besteuerung mit einer Steuerfachperson klären."
+# Ankommens- und Bleibeliste (inhaltskonzept.md 6.2 E und F), abhakbar im Plan.
+checklists:
+  arrive:
+    a1: Wohnsitz oder Aufenthalt bei der Polizeiverwaltung anmelden, Datum notieren
+    a2: OIB für jede Person vorlegen oder beantragen
+    a3: Krankenversicherung bei der HZZO regeln, Zusatzversicherung prüfen
+    a4: Bankkonto eröffnen
+    a5: Kinder in Kindergarten oder Schule einschreiben
+    a6: Hausarzt und Kinderarzt finden, Aufnahme bestätigen lassen
+    a7: Strom, Wasser, Internet, Telefon anmelden
+    a8: Führerschein umschreiben, Frist ab Einreise beachten
+    a9: Fahrzeug einführen und anmelden
+    a10: Förderanträge stellen, deren Frist an der Anmeldung hängt
+  stay:
+    s1: Aufenthalt verlängern, Vorlauffrist beachten
+    s2: Förderbindungen einhalten, Nachweise aufbewahren
+    s3: Sprachniveau aufbauen, Kurs oder Stipendium prüfen
+    s4: Anschluss der Familie, Vereine und Schule
+    s5: Steuererklärung im ersten vollen Jahr, Lohnsteuerbefreiung prüfen
+    s6: Meldepflichten für Auslandsrenten bis 31.1. beachten
+    s7: Zeugnisse und Abschlüsse anerkennen lassen, falls noch offen
+    s8: Nach zwölf Monaten den Plan erneut prüfen, weil sich Regeln jährlich ändern
+# Oberflächentexte der Website (Kopf, Fuss, Seiten). Schlüssel je Seite, Werte je Sprache
+# in hr.yaml, en.yaml, es.yaml; fehlende Schlüssel fallen auf Deutsch zurück (lib/i18n.ts).
+ui:
+  shell:
+    tagline: Leben in Kroatien
+    stage: Teststufe
+    stage_text: Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.
+    report: Fehler melden
+    skip: Zum Inhalt springen
+    nav_wissen: Wissen
+    nav_orte: Orte
+    nav_weg: Mein Weg
+    nav_about: Über uns
+    nav_search: Suche
+    cta: Kurzcheck starten
+    language: Sprache
+    contact_title: Haben Sie etwas gefunden, das nicht stimmt?
+    contact_text: "Falsche Frist, falsche Angabe, toter Link: Wir sichten jede Meldung innert zwei Werktagen."
+    contact_how: Wie wir arbeiten
+    foot_claim: "Leben in Kroatien: die Reihenfolge für Rückkehr und Auswanderung, Person für Person."
+    foot_disclaimer: Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer die zuständige Stelle.
+    foot_stage: Teststufe. Beispielregeln ohne fachliche Freigabe (ADR-0004).
+    foot_wissen: Wissen
+    foot_all: Alle zwölf Rubriken
+    foot_glossary: Glossar
+    foot_figures: Zahlen und Fakten
+    foot_tools: Werkzeuge
+    foot_check: "Kurzcheck: Mein Weg"
+    foot_places: Orte entdecken
+    foot_benefits: Leistungsdatenbank
+    foot_contacts: Anlaufstellen
+    foot_search: Suche
+    foot_about: Über uns
+    foot_mission: Auftrag und Unabhängigkeit
+    foot_principles: Redaktionsgrundsätze
+    foot_contact: Kontakt
+    working_copy_title: Arbeitsfassung fehlt
+    working_copy_text: Diese Seite gibt es noch nicht in Ihrer Sprache. Sie sehen die deutsche Fassung.
+    translation_note: Arbeitsfassung. Massgeblich ist die deutsche Fassung; kroatische Rechtstexte gelten im Original.
+    legal_note: Rechtstexte gibt es nur auf Deutsch.
+  home:
+    title: "povratnik.com: Leben in Kroatien"
+    description: "Rückkehr und Auswanderung nach Kroatien in der richtigen Reihenfolge: Aufenthalt, Meldung, Versicherung, Familie, Förderung. Persönlicher Plan im Browser, ohne Konto."
+    hero_title: Nach Kroatien zurück oder neu dorthin. In der richtigen Reihenfolge.
+    hero_lede: "Aufenthalt, Meldung, Versicherung, Schule, Förderung: Was zuerst kommt, steht nirgends. Hier bekommen Sie die Reihenfolge für Ihren Haushalt, Person für Person."
+    hero_wissen: Wissen nach Thema
+    hero_note: Ohne Konto. Ihre Antworten bleiben in Ihrem Browser.
+    hero_alt: Eine Frau und ihr Vater sortieren an einem Tisch in einer Altstadt Unterlagen.
+    quick_title: Suchen Sie etwas Bestimmtes?
+    ways_title: Drei Wege zum selben Wissen
+    ways_help: Nach Thema, nach Ort oder nach Ihrer Reihenfolge.
+    way_check_title: Mein Weg
+    way_check_text: "Sechs Fragen zu Ihrem Haushalt, dann ein erster Plan: was zuerst, welche Frist wodurch ausgelöst wird, was offen bleibt."
+    way_wissen_title: Wissen nach Thema
+    way_wissen_text: "Zwölf Rubriken, von Status bis Förderung. Jede Themenseite mit derselben Maske: kurze Antwort, gilt für, zuständig, Stand."
+    way_wissen_link: Zu den Rubriken
+    way_orte_title: Orte entdecken
+    way_orte_text: Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand, Prüfdatum und Datentiefe, ohne Rangliste.
+    way_orte_link: Orte und Leistungen
+    keys_title: Fast alles hängt an vier Schlüsseln
+    keys_help: Und zwar in dieser Reihenfolge. Das ist der rote Faden der ganzen Website.
+    key1_title: Status
+    key1_sub: Wer bin ich rechtlich?
+    key1_text: Entscheidet über den Aufenthaltsweg, den Zugang zu Arbeit, Schule und Förderung.
+    key2_title: OIB
+    key2_text: Die Steuernummer. Ohne sie kein Bankkonto, kein Mietvertrag, kein Antrag, kein Arbeitsvertrag.
+    key3_title: Anmeldung
+    key3_text: Löst Fristen aus und ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
+    key4_title: Versicherung
+    key4_text: Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.
+    phases_title: Fünf Phasen, eine davon lassen alle weg
+    phases_help: "Die fünfte ist die wichtigste: Dort scheitert die Rückkehr, nicht bei der Anmeldung."
+    phase1_time: 12 bis 6 Monate vorher
+    phase1_text: Ist es machbar? Welcher Statusweg? Welcher Ort? Reicht das Geld?
+    phase2_time: 9 bis 2 Monate vorher
+    phase2_text: Dokumente, Aufenthalt, Versicherung, Schule, Wohnung, Herkunftsland.
+    phase3_time: 4 Wochen vorher bis Ankunft
+    phase3_text: Transport, Übergangsdeckung, Anreise, erste Termine.
+    phase4_time: erste 8 Wochen
+    phase4_text: Anmeldung, Versicherung, Arbeit, Schule, Alltag.
+    phase5_time: Monat 3 bis 24
+    phase5_text: Verlängerungen, Förderpflichten, Sprache, Anschluss.
+    running_title: Was gerade läuft
+    running_help: Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.
+    running_state: läuft
+    running_national: staatlich
+    running_until: bis {date}
+    running_checked: geprüft {date}
+    running_note: Kommunale Einträge stammen auf der Teststufe aus fiktiven Testgemeinden.
+    running_all: Alle Leistungen
+    why_title: Warum ein Betrag allein nichts sagt
+    why_text: Eine Förderung kann offen, angekündigt oder ausgeschöpft sein. Ein Wert kann bekannt, belegt und trotzdem veraltet sein. Deshalb trägt bei uns jede Angabe Quelle, Prüfdatum und Zustand. Wo wir etwas nicht wissen, steht das dort, sichtbar, statt einer Lücke.
+    why_note: Über Anträge entscheidet immer die zuständige Stelle. Der Plan zeigt den Weg, nicht das Ergebnis.
+    states_title: So lesen Sie Zustände
+    state_matches: Die Voraussetzungen treffen nach Ihren Angaben zu.
+    state_unclear: Eine Angabe fehlt oder eine Fachperson muss entscheiden.
+    state_missing: Eine Voraussetzung ist derzeit nicht erfüllt.
+    state_unknown: Diesen Wert kennen wir noch nicht.
+    situations_title: Einstiege nach Lebenssituation
+    situations_help: Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.
+    cases_title: Fünf Beispielwege
+    cases_help: Fiktive Fallprofile aus dem Konzept. Echte Erfahrungsberichte folgen, sobald Testpersonen den Plan benutzt haben.
+    cases_label: Beispiel, fiktiv
+    cases_first: "Erster Schritt:"
+  wissen:
+    title: Wissen nach Thema
+    description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."
+    lede: "Zwölf Rubriken, von Status bis Förderung. Jede Themenseite hat dieselbe Maske: kurze Antwort, gilt für, gilt nicht für, zuständig, Stand. Nach der zweiten Seite wissen Sie, wo Sie suchen müssen."
+    claim: Behördenseiten erklären ihren eigenen Ausschnitt. Wir erklären, in welcher Reihenfolge die Ausschnitte zusammengehören.
+    pages_one: "{n} Themenseite"
+    pages_many: "{n} Themenseiten"
+    topics_wip: "{n} Themen in Arbeit"
+    depth_title: Zwei Tiefen, für Sie erkennbar
+    depth_text: "Etwa zwanzig Themen werden vollständig ausgearbeitet: die, an denen Menschen scheitern oder an denen Geld hängt. Alle anderen bekommen eine geprüfte Kurzfassung mit Einstieg, Zuständigkeit und Direktlink. Beide Stufen sind gekennzeichnet, und keine Seite geht ohne Quelle, Prüfdatum und fachliche Freigabe online."
+    state_title: Stand der Rubriken
+    state_text: Die Struktur steht, die Themenseiten sind in Arbeit. Bis zur fachlichen Freigabe zeigt jede Rubrik, welche Themen kommen und welche Fragen sie beantworten wird.
+    more_title: Weitere Zugänge
+    more_situations: Nach Lebenssituation
+    more_situations_link: Sechs Einstiege
+    more_glossary: Glossar der Amtsbegriffe
+    more_glossary_link: Glossar
+    more_countries: Nach Herkunftsland
+    more_countries_link: Sechs Länder
+    crumb: Wissen
+    crumb_rubric: Rubrik {n}
+    questions: Typische Fragen
+    topics_title: Themen in dieser Rubrik
+    remaining_more: Weitere Themen, noch in Arbeit
+    remaining_only: Themen, noch in Arbeit
+    remaining_help: Jedes Thema erscheint, sobald es Quelle und Prüfdatum trägt.
+    wip: in Arbeit
+    requires: Vorher nötig
+    followed: Danach folgt
+    cta_title: Was gilt für mich?
+    cta_text: "Der Kurzcheck ordnet die Themen nach Ihrem Haushalt: Wer welchen Weg hat und was zuerst kommt."
+    mask_title: So wird jede Themenseite aufgebaut
+    mask_answer: Kurze Antwort
+    mask_answer_v: in zwei bis drei Sätzen
+    mask_for: Gilt für
+    mask_for_v: Zielgruppe, ausdrücklich
+    mask_notfor: Gilt nicht für
+    mask_notfor_v: die häufigste Verwechslung
+    mask_authority: Zuständig
+    mask_authority_v: Behörde oder Stelle
+    mask_state: Stand
+    mask_state_v: Prüfdatum, Quelle, Zustand
+    mask_mistake: Häufiger Irrtum
+    mask_mistake_v: der Fehler, den viele machen
+    mask_notdecided: Was hier nicht entschieden wird
+    mask_notdecided_v: was eine Fachperson entscheidet
+  topic:
+    state_checked: fachlich geprüft
+    state_draft: Grundlagen vorhanden, fachlich nicht geprüft
+    stand: Stand {date}
+    missing: noch nicht recherchiert
+    applies: Gilt für
+    not_applies: Gilt nicht für
+    authority: Zuständig
+    prerequisites: Voraussetzungen
+    steps: Ablauf
+    documents: Unterlagen
+    duration: Dauer und Kosten
+    deadlines: Fristen
+    terms: Amtsbegriffe
+    requires: Vorher nötig
+    followed: Danach folgt
+    cta_title: Gilt das für mich?
+    cta_text: Der Kurzcheck ordnet dieses Thema in Ihren Weg ein, Person für Person.
+    mistake: Häufiger Irrtum
+    not_decided: Was hier nicht entschieden wird
+    open_points: Offene Punkte
+    open: offen
+    validity: Gültigkeit
+    stand_title: Stand und Quellen
+    label: Kennzeichnung
+    source: Originalquelle
+    source_meta: "{publisher}, Stufe {tier}. Fundstelle: {reference}. Geprüft {date}."
+    valid_from: Gültig ab
+    valid_until: bis {date}
+    next_check: Nächste Prüfung
+    report: Fehler melden
+    report_subject: "Fehler: {title}"
+  country:
+    crumb: Nach Herkunftsland
+    others: Andere Herkunftsländer
+    what_title: Was für die Ausreise zählt
+    what_help: Der kroatische Prozess und die Anforderungen des Herkunftslands sind zwei verschiedene Dinge.
+    representation: Kroatische Vertretung
+    apostille: Apostille
+    social_security: Sozialversicherung
+    double_taxation: Doppelbesteuerung
+    deregistration: Abmeldepflichten
+    duration: Realistische Laufzeiten
+    unknown: unbekannt
+    not_collected: nicht erhoben
+    outdated: veraltet
+    followed: Danach folgt in Kroatien
+    cta_title: Ihr Weg, Person für Person
+    cta_text: Der Kurzcheck fragt nach dem Herkunftsland jeder Person im Haushalt.
+  situation:
+    crumb: Lebenssituation
+    trap_title: Woran es hier oft scheitert
+    path_title: Ihr Weg in dieser Reihenfolge
+    rubrics_title: Diese Rubriken zählen zusätzlich
+    cta_title: Persönlich statt allgemein
+    cta_text: Der Kurzcheck macht aus diesem Pfad Ihren Plan, Person für Person, mit Fristen.
+  glossary:
+    title: Glossar der Amtsbegriffe
+    description: "Kroatische Amtsbegriffe im Original, verständlich erklärt: OIB, prebivalište, Domovnica, HZZO und mehr."
+    crumb: Glossar
+    lede: Der kroatische Begriff bleibt stehen, weil Sie ihn am Schalter brauchen. Daneben steht, was er bedeutet.
+    count: "{n} Begriffe aus {pages} Themenseiten"
+  orte:
+    title: Orte entdecken
+    description: Gemeinden in Kroatien mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum.
+    lede: Welche Gemeinde fördert Rückkehrer, wo nimmt der Kinderarzt noch Patienten auf, wo gibt es Jahresmieten? Ortsprofile mit Zustand und Prüfdatum, ohne Rangliste.
+    all_benefits: Alle Leistungen
+    compare: Orte vergleichen
+    image_alt: Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei.
+    fictional_title: Fiktive Testgemeinden
+    fictional_text: Die Orte auf dieser Seite sind erfunden und zeigen, wie ein Ortsprofil aussieht, mit allen Zuständen. Echte Gemeinden folgen mit der Datenbank. Kein Wert bezieht sich auf einen realen Ort. Die Ortsdaten liegen auf der Teststufe nur auf Deutsch vor.
+    filter_label: Orte filtern
+    filter_region: Lage
+    filter_all: alle
+    coast: Küste
+    inland: Landesinneres
+    filter_target: Leistungen für
+    target_families: Familien
+    target_returnees: Rückkehrer und Gründer
+    target_housing: Wohnen
+    filter_state: Zustand
+    only_open: nur mit offenen Leistungen
+    no_js: Ohne JavaScript zeigt die Liste alle Orte.
+    count_one: "{n} Ort"
+    count_many: "{n} Orte"
+    open_one: "{n} offene Leistung"
+    open_many: "{n} offene Leistungen"
+    more: "{n} weitere"
+    depth: Datentiefe {n} von {total} Angaben erfasst
+    empty: Kein Ort passt zu dieser Auswahl. Das heisst nicht, dass es keine Angebote gibt, nur dass wir keine erfasst haben.
+    ranking_title: Kein Ranking, keine Gesamtnote
+    ranking_text: Zwei bis drei Orte lassen sich nebeneinander vergleichen, als Rohinformation. Ein Gesamtwert würde immer unsere Gewichtung durchsetzen und nicht Ihre. Was fehlt, steht als «unbekannt» und nicht als leere Zelle. Ein Ort mit wenig Daten sieht nie aus wie ein Ort ohne Angebote, deshalb zeigt jeder Ort seine Datentiefe.
+    to_compare: Zum Vergleich
+    municipality_title: Sie vertreten eine Gemeinde?
+    municipality_text: Tragen Sie Ihre Leistungen für Rückkehrer ein. Jede Angabe erscheint mit Quelle, Prüfdatum und Zustand.
+    municipality_cta: Gemeinde eintragen
+    crumb: Orte
+  place:
+    location: Lage
+    population: Einwohner
+    index: Entwicklungsindex
+    arrival: Ankommen
+    fictional_title: Fiktive Testgemeinde
+    fictional_text: Dieser Ort ist erfunden. Er zeigt die Struktur eines Ortsprofils mit allen Zuständen. Kein Wert bezieht sich auf einen realen Ort.
+    benefits_title: Leistungen der Gemeinde
+    benefits_help: Vier Zeitangaben, ein Zustand. Über den Antrag entscheidet die Gemeinde.
+    benefits_empty: Für diesen Ort sind keine Leistungen erfasst. Das heisst nicht, dass es keine gibt.
+    target: Für wen
+    amount: Betrag
+    conditions: Bedingungen
+    period: Antragszeitraum
+    period_unknown: Antragszeitraum unbekannt
+    period_range: "{from} bis {until}"
+    period_open: offen
+    period_running: laufend
+    budget: Budget
+    binding: Bindung
+    source: "Quelle: {source}"
+    checked: Geprüft {date}
+    family_title: Familie und Bildung
+    kindergarten: Kindergarten
+    kindergarten_capacity: Freie Plätze
+    primary: Grundschule
+    secondary: Weiterführend
+    language_support: Sprachförderung
+    costs: Kosten
+    health_title: Gesundheit
+    gp: Hausarzt
+    gp_accepting: Nimmt neue Patienten
+    pediatrician: Kinderarzt
+    pharmacy: Apotheke
+    clinic: Nächstes Spital
+    housing_title: Wohnen
+    rent: Jahresmieten
+    price: Preisniveau
+    municipal: Gemeindewohnungen
+    land: Bauland
+    work_title: Arbeit
+    sectors: Branchen
+    commute: Pendeln
+    commute_note: Fahrzeit, keine Luftlinie
+    minutes: "{n} Minuten"
+    employers: Arbeitgeber
+    daily_title: Alltag und Anschluss
+    internet: Internet
+    transport: Öffentlicher Verkehr
+    courses: Sprachkurse
+    clubs: Vereine
+    church: Kirche
+    shopping: Einkauf
+    surroundings_title: Erreichbares Umfeld
+    not_collected: nicht erhoben
+    unknown: nicht bekannt
+    arrival_title: Ankommen
+    office: Stelle
+    function: Funktion
+    languages: Sprachen
+    channel: Antwortweg
+    changes_title: Veränderungen
+    changes_note: Eine Ankündigung ist kein Zustand. Erst «in Betrieb» zählt.
+    cta_title: Passt dieser Ort zu meinem Weg?
+    cta_text: Der Kurzcheck zeigt, welche Leistungen nach Ihren Angaben infrage kommen.
+    cta_compare: Mit anderen Orten vergleichen
+    state_open: offen
+    state_announced: angekündigt
+    state_closed: geschlossen
+    state_exhausted: ausgeschöpft
+    state_unconfirmed: unbestätigt
+    state_budget_unknown: Budget unbekannt
+    change_announced: angekündigt
+    change_decided: beschlossen
+    change_funded: finanziert
+    change_under_construction: im Bau
+    change_operating: in Betrieb
+    fact_unknown: unbekannt
+    fact_not_collected: nicht erhoben
+    fact_outdated: veraltet
+    fact_not_applicable: nicht zutreffend
+    fact_not_present: nicht vorhanden
+    fact_stand: Stand {date}
+    fact_outdated_note: Stand {date}. Die aktuelle Höhe ist ungeklärt.
+    fact_clarify: "So lässt es sich klären: Anfrage an die Gemeinde, die Antwort erscheint hier mit Datum."
+  compare:
+    title: Orte vergleichen
+    description: Zwei bis drei Orte nebeneinander, als Rohinformation ohne Gesamtnote.
+    crumb: Vergleich
+    lede: Rohinformation nebeneinander, ohne Gesamtnote. Ein Gesamtwert würde unsere Gewichtung durchsetzen und nicht Ihre.
+    fictional_text: Alle Orte in diesem Vergleich sind erfunden. Sie zeigen die Darstellung, nicht reale Verhältnisse.
+    feature: Merkmal
+    location: Lage
+    population: Einwohner
+    index: Entwicklungsindex
+    open_benefits: Offene Leistungen
+    of: "{n} von {total}"
+    kindergarten: Kindergarten, freie Plätze
+    primary: Grundschule
+    secondary: Weiterführende Schule
+    gp: Hausarzt nimmt neue Patienten
+    pediatrician: Kinderarzt
+    clinic: Nächstes Spital
+    rent: Jahresmieten
+    price: Preisniveau
+    land: Bauland
+    commute: Pendeln
+    internet: Internet
+    transport: Öffentlicher Verkehr
+    courses: Sprachkurse
+    depth: Datentiefe
+  benefits:
+    title: Leistungen und Förderungen
+    description: Alle erfassten Förderungen mit Zustand, Antragszeitraum und Prüfdatum, ohne Kartenumweg.
+    crumb: Leistungen
+    lede: Für alle, die wissen, was sie suchen, aber noch nicht wo. Jeder Eintrag mit Zustand, Antragszeitraum und Prüfdatum.
+    fictional_text: Alle Leistungen hier sind erfunden. Staatliche Programme wie Biram Hrvatsku stehen im Wissen.
+    filter_label: Leistungen filtern
+    filter_state: Zustand
+    count_one: "{n} Leistung"
+    count_many: "{n} Leistungen"
+    empty: Keine Leistung in diesem Zustand erfasst.
+  about:
+    title: "Über uns: povratnik.com"
+    description: Wer hinter povratnik.com steht, wie wir finanziert werden, wie wir prüfen und warum bezahlte Leistungen keine Inhalte verändern.
+    hero: Verstehen, vergleichen, ankommen.
+    lede: Behördenseiten erklären jeweils ihren eigenen Ausschnitt. Niemand erklärt, in welcher Reihenfolge die Ausschnitte zusammengehören und was wovon abhängt. Genau das nehmen wir Ihnen ab.
+    mission_title: Auftrag und Unabhängigkeit
+    mission_1: "povratnik.com wird von der EmotionFrame GmbH in der Schweiz betrieben. Die Orientierung ist frei: allgemeine Informationen, das Basisprofil jeder Gemeinde, sachliche Korrekturen und neutrale Vergleichsdaten kosten nichts und werden nie hinter eine Bezahlschranke gestellt."
+    mission_2: "Bezahlt werden Pflegeleistungen: Gemeinden, die ihre Angebote strukturiert aufbereiten, übersetzen und laufend prüfen lassen, Fachpartner mit einem transparenten Profil, Arbeitgeber mit aktuellen Stellen. Eine Gemeinde, die nichts bezahlt, wird nicht künstlich unvollständig gehalten. Bezahlte Leistungen verändern keine fachlichen Ergebnisse, es gibt keine bezahlte Platzierung, und Werbung wird gekennzeichnet."
+    households_title: Haushalte statt Einzelpersonen
+    households_text: Partner und Kinder können unterschiedliche Staatsangehörigkeiten, Aufenthaltswege und Versicherungsgrundlagen haben. Deshalb ist bei uns die Person die Planungseinheit und der Haushalt die Klammer.
+    stay_title: Bleiben nach dem Ankommen
+    stay_text: "Die ersten zwölf Monate gehören zum Produkt: Spracherwerb, Schulwechsel, Anschluss, Arbeitssuche des Partners, Verlängerungen. Erfolg endet nicht mit der Anmeldung."
+    always_title: Was immer gilt
+    always_1: Keine Bezahlschranke vor Kerninformationen
+    always_2: Keine bezahlte Platzierung
+    always_3: Keine Rangliste von Gemeinden
+    always_4: Keine Antworten, die den Browser verlassen
+    always_5: Keine Regel ohne namentliche Fachfreigabe
+    check_title: Wie wir prüfen
+    check_text: "Jede Aussage ist eine von drei Arten und wird so gekennzeichnet: ein Befund mit benannter Quelle und Prüfdatum, eine Produktregel, die wir daraus ableiten, oder ein offener Punkt, der eine Einzelfall- oder Behördenklärung braucht. Ein nicht gefundenes Angebot wird nie als nicht existent ausgewiesen."
+    hierarchy_title: Quellenhierarchie
+    h1: Amtliche Rechtsveröffentlichung im Original, mit ihren Änderungen gelesen
+    h2: Zuständige kroatische Behörde
+    h3: Kommunaler Originalbeschluss oder Ausschreibung
+    h4: Zuständige Behörde des bisherigen Wohnlands
+    h5: Schriftliche Fachauskunft einer Behörde, mit Datum und Fallannahmen
+    h6: Fachpublikationen und Beratungsbeiträge
+    h7: "Presse und Erfahrungsberichte: Kontext, nie Anspruchsgrundlage"
+    hierarchy_note: Eine niedrigere Stufe widerlegt nie eine höhere. Ein Presseartikel ist nie Beleg für eine Frist, einen Betrag oder eine Voraussetzung.
+    cycles_title: Prüfzyklen
+    c1: Offene Förderaufrufe
+    c1_v: wöchentlich während der Laufzeit
+    c2: Aufenthalt, Steuern, Versicherung
+    c2_v: monatliche Änderungssichtung
+    c3: Kommunale Massnahmen
+    c3_v: quartalsweise und bei Beschlüssen
+    c4: Kontakte und Einrichtungen
+    c4_v: halbjährlich
+    cycles_note: Ein verpasster Prüftermin erzeugt eine Warnung, keine stillschweigende Weiterverwendung.
+    roles_title: Wer verantwortlich ist
+    role_product: Produktverantwortung
+    role_tech: Technische Verantwortung
+    role_review: Fachprüfung Recht und Steuern
+    role_review_v: "Teststufe: gibt nichts frei. Gesucht ist eine kroatische Fachperson für die namentliche Freigabe jeder Rechtsregel."
+    placeholder: Platzhalter
+    open: offen
+    role_editorial: Kroatischsprachige Fachredaktion
+    role_errors: Fehlerkontakt
+    role_errors_v: Sichtung binnen zwei Werktagen
+    stage_title: Teststufe
+    stage_text: Es gibt keine fachlich freigegebene Rechtsregel. Der Kurzcheck läuft mit gekennzeichneten Beispielregeln, damit das Portal geprüft werden kann. Kein Ergebnis ist eine Aussage über Ihre tatsächliche Lage. Eine Prüfung durch ein KI-System ersetzt keine qualifizierte unabhängige Fachperson.
+    join_title: Mitmachen
+    join_municipality: Gemeinde eintragen
+    join_expert: Fachperson werden
+    join_report: Fehler melden
+    request: Anfrage
+    mail: Mail
+  search:
+    title: "Suche: povratnik.com"
+    description: Suche über Themen, Rubriken, Orte und Amtsbegriffe. Läuft im Browser.
+    heading: Suche
+    lede: Themen, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe. Die Suche läuft in Ihrem Browser, kein Suchbegriff wird übertragen.
+    label: Suchbegriff
+    placeholder: OIB, Krankenversicherung, Apostille, Biram Hrvatsku
+    button: Suchen
+    entries: "{n} Einträge"
+    entry: "{n} Eintrag"
+    for: für «{q}»
+    empty: Nichts gefunden. Das heisst nicht, dass es das Thema nicht gibt, nur dass wir noch keine Seite dazu haben.
+    empty_link: Sagen Sie uns, was Sie gesucht haben.
+    kind_topic: Themenseite
+    kind_rubric: Rubrik
+    kind_situation: Lebenssituation
+    kind_country: Herkunftsland
+    kind_place: Ort (fiktiv)
+    kind_term: Amtsbegriff
+  figures:
+    title: "Zahlen und Fakten: povratnik.com"
+    description: Rückkehr und Zuwanderung nach Kroatien in Zahlen, mit Stand und Quelle.
+    heading: Zahlen und Fakten
+    lede: Jede Zahl trägt Stand und Quelle. Wo eine Zahl fehlt, steht das dort, statt einer Schätzung.
+    figure: Kennzahl
+    value: Wert
+    stand: Stand
+    source: Quelle
+    unknown: unbekannt
+    checked: geprüft {date}
+    next_check: Nächste Prüfung {date}
+  contacts:
+    title: "Anlaufstellen: povratnik.com"
+    description: Behörden in Kroatien, Konsulate, kommunale Willkommensstellen und Vereine, mit den Themen, für die sie zuständig sind.
+    heading: Anlaufstellen
+    lede: Welche Stelle wofür zuständig ist, mit Einstieg zur Behörde und den Themenseiten, die auf sie verweisen.
+    authorities_title: Behörden in Kroatien
+    authorities_help: Einstiegsseiten der Behörden. Die genaue Fundstelle steht auf jeder Themenseite.
+    consulates_title: Konsulate und Vertretungen
+    consulates_text: Die kroatischen Vertretungen im Herkunftsland stellen Empfehlungsschreiben aus, nehmen OIB-Anträge entgegen und beglaubigen. Adressen und Zuständigkeiten werden mit jeder Vertretung bestätigt und dann auf der Länderseite eingetragen.
+    confirmed: bestätigt
+    not_collected: nicht erhoben
+    municipal_title: Kommunale Willkommensstellen
+    recorded: erfasst
+    unknown: unbekannt
+    clubs_title: Vereine und Diaspora-Netzwerke
+    clubs_text: Werden je Ort und Herkunftsland erhoben.
+    wip: im Aufbau
+  weg:
+    title: "Mein Weg nach Kroatien: Kurzcheck"
+    description: Sechs Fragen, dann Ihr erster Plan. Antworten bleiben im Browser.
+    promise_1: Ohne Konto, ohne Anmeldung
+    promise_2: Antworten bleiben in diesem Browser
+    promise_3: Jede Angabe im Plan mit Quelle und Prüfdatum
+    promise_4: «Weiss ich noch nicht» ist immer eine Antwort
+  map:
+    title: Übersichtskarte Kroatiens mit Gespanschaften und erfassten Orten
+    hover_default: Gespanschaft antippen oder mit dem Zeiger berühren
+    source: "Grenzen: {source}. Orte auf der Teststufe fiktiv platziert."
+    section_title: Karte
+    section_help: Gespanschaften und erfasste Orte. Die Liste darunter ist die vollständige Ansicht.
+    toggle: Karte anzeigen
+    region_crumb: Region
+    region_title: "Gespanschaft {name}"
+    region_lede: Lebensrealität statt Tourismus, für die Ortswahl. Arbeitsmarkt, Versorgung, Erreichbarkeit, Preise, Schulen, Kliniken, Verbindungen, regionale Programme, und ein ehrlicher Abschnitt zu den Nachteilen.
+    region_places: Erfasste Orte in dieser Gespanschaft
+    region_places_empty: Für diese Gespanschaft ist noch kein Ort erfasst. Das heisst nicht, dass es keine Angebote gibt.
+    region_facts: Was hier stehen wird
+    region_fact_1: Arbeitsmarkt und Pendelziele
+    region_fact_2: Versorgung mit Ärzten, Apotheken und Kliniken
+    region_fact_3: Erreichbarkeit und Verbindungen
+    region_fact_4: Preisniveau für Miete und Kauf
+    region_fact_5: Schul- und Klinikdichte
+    region_fact_6: Regionale Programme mit Zustand
+    region_fact_7: Nachteile der Region, ehrlich benannt
+    region_wip: nicht erhoben
+    region_others: Andere Gespanschaften
+  notfound:
+    title: Seite nicht gefunden
+    text: Diese Adresse gibt es nicht oder nicht mehr. Die Startseite führt zu allen drei Wegen.
+    home: Zur Startseite

@@ -1,0 +1,97 @@
+---
+// Übersicht Wissen: die zwölf Rubriken (inhaltskonzept.md 4.1) mit der Zahl ihrer
+// Themenseiten; Rubriken ohne Seite tragen ihren Zustand sichtbar.
+import Base from "../../layouts/Base.astro";
+import { RUBRICS, rubricText } from "../../lib/rubrics.ts";
+import { loadPages } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
+
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
+const count = (slug: string) => pages.filter((x) => x.category === slug).length;
+---
+
+<Base title={`${u("wissen.title")}: povratnik.com`} description={u("wissen.description")} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("wissen.title")}</h1>
+        <p class="lede">{u("wissen.lede")}</p>
+      </div>
+      <div class="hero__media hero__media--plain" aria-hidden="true">
+        <p class="hero__claim">{u("wissen.claim")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <ul class="cards">
+        {RUBRICS.map((r) => {
+          const tx = rubricText(r, texts);
+          const n = count(r.slug);
+          return (
+            <li class="card card--link">
+              <div class="card__body">
+                <span class="card__num">{r.number}</span>
+                <h3><a href={p(`/wissen/${r.slug}`)}>{tx.title}</a></h3>
+                <p>{tx.intro}</p>
+                {n > 0 ? (
+                  <span class="arrow-link">{u(n === 1 ? "wissen.pages_one" : "wissen.pages_many", { n })}</span>
+                ) : (
+                  <span class="state state--unknown">{u("wissen.topics_wip", { n: r.topics.length })}</span>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("wissen.depth_title")}</h2>
+        <p>{u("wissen.depth_text")}</p>
+        <p class="notice" role="note">
+          <strong>{u("wissen.state_title")}</strong>
+          {u("wissen.state_text")}
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>{u("wissen.more_title")}</h3>
+        <ul class="topics">
+          <li><span>{u("wissen.more_situations")}</span><a class="arrow-link" href={p("/wissen/situation/familie")}>{u("wissen.more_situations_link")}</a></li>
+          <li><span>{u("wissen.more_glossary")}</span><a class="arrow-link" href={p("/wissen/glossar")}>{u("wissen.more_glossary_link")}</a></li>
+          <li><span>{u("wissen.more_countries")}</span><a class="arrow-link" href={p("/wissen/land/argentinien")}>{u("wissen.more_countries_link")}</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .hero__claim {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+    line-height: 1.35;
+    color: var(--on-brand-soft);
+    max-width: 26ch;
+    margin: 0;
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+</style>

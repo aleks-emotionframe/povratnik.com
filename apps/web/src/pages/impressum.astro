@@ -2,9 +2,15 @@
 // Betreiberangaben nach dem Impressum von emotionframe.ch und Entscheidung der
 // Produktverantwortung vom 14.09.2026 (verantwortlich: die Gesellschaft, keine Person).
 import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { lang, u } = pageContext(Astro);
 ---
 
 <Base title="Impressum: povratnik.com" description="Verantwortliche Stelle für povratnik.com.">
+  {lang !== "de" && (
+    <div class="container"><p class="notice" role="note">{u("shell.legal_note")}</p></div>
+  )}
   <section class="band">
     <div class="container grid">
       <div class="col-main">

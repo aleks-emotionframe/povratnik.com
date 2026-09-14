@@ -1,0 +1,101 @@
+---
+// Zahlen und Fakten (inhaltskonzept.md 10): jede Zahl mit Stand und Quelle, eine fehlende
+// Zahl als Zustand. Keine Zahlenstreifen, sondern eine Tabelle mit Datenstand.
+import Base from "../layouts/Base.astro";
+import { loadPages, loadSources } from "../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../lib/page.ts";
+
+const { lang, u } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang, "figures");
+const sources = loadSources(CONTENT_DIR);
+const stateOf = (x: (typeof pages)[number]) => (x.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") });
+const fallback = pages.some((x) => x.fallback);
+---
+
+<Base title={u("figures.title")} description={u("figures.description")} current="wissen" fallback={fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("figures.heading")}</h1>
+        <p class="lede">{u("figures.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  {pages.map((page) => (
+    <section class="band band--surface">
+      <div class="container">
+        <div class="band__head">
+          <h2>{page.title}</h2>
+          <span class={`state state--${stateOf(page).key}`}>{stateOf(page).label}</span>
+        </div>
+        <p class="lede">{page.short_answer}</p>
+        <div class="table-wrap">
+          <table class="figures">
+            <thead>
+              <tr><th scope="col">{u("figures.figure")}</th><th scope="col">{u("figures.value")}</th><th scope="col">{u("figures.stand")}</th><th scope="col">{u("figures.source")}</th></tr>
+            </thead>
+            <tbody>
+              {(page.figures ?? []).map((f) => (
+                <tr>
+                  <th scope="row">{f.label}{f.note && <span class="note">{f.note}</span>}</th>
+                  <td>{f.state === "known" ? <strong>{f.value}</strong> : <span class="state state--unknown">{u("figures.unknown")}</span>}</td>
+                  <td class="mono">{f.as_of ?? ""}</td>
+                  <td><a href={sources[f.source]?.url} rel="noopener">{sources[f.source]?.publisher ?? f.source}</a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="datenstand">
+          {page.sources.map((s) => <span>{sources[s.id]?.title ?? s.id}: {s.reference}, {u("figures.checked", { date: fmtDate(s.checked) })}</span>)}
+          <span>{u("figures.next_check", { date: fmtDate(page.review.next_check) })}</span>
+        </p>
+      </div>
+    </section>
+  ))}
+</Base>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    margin-top: 1rem;
+  }
+  .figures {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 640px;
+    font-size: 0.9375rem;
+  }
+  .figures th,
+  .figures td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .figures thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: var(--surface-blue);
+  }
+  .figures tbody th {
+    font-weight: 400;
+    max-width: 28rem;
+  }
+  .figures strong {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    color: var(--brand);
+  }
+  .note {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+</style>

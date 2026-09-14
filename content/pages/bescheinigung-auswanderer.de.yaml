@@ -1,0 +1,76 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 2), fachlich nicht geprüft.
+id: bescheinigung-auswanderer
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: status-und-staatsangehoerigkeit
+covers: [Aufenthalt für Auswanderer und Nachkommen, Familiennachzug, Verlängerung]
+title: Bescheinigung für Auswanderer und Aufenthalt zur Rückkehr
+short_answer: Mit der Bescheinigung des Ministeriums für Demografie und Einwanderung gelten Auswanderer und ihre Nachkommen nach dem neuen Ausländergesetz nicht mehr als gewöhnliche Ausländer. Sie können einen vorübergehenden Aufenthalt zum Zweck der Einwanderung und Rückkehr regeln, bis zu zwei Jahre, verlängerbar. Nach drei Jahren ist ein Daueraufenthalt möglich.
+terms:
+  - term_hr: Potvrda za hrvatske iseljenike
+    term_explained:
+      de: Bescheinigung für kroatische Auswanderer. Sie bestätigt die Zugehörigkeit zur Auswanderergruppe und öffnet den erleichterten Aufenthaltsweg.
+  - term_hr: privremeni boravak u svrhu useljenja i povratka
+    term_explained:
+      de: Vorübergehender Aufenthalt zum Zweck der Einwanderung und Rückkehr. Der Aufenthaltstitel, der mit der Bescheinigung beantragt wird.
+  - term_hr: Zakon o strancima
+    term_explained:
+      de: Das Ausländergesetz, in dieser Fassung in Kraft seit 15.3.2025. Die Durchführungsverordnung ist Pravilnik NN 53/2026 vom 22.5.2026.
+sections:
+  applies_to: Auswanderer, ihre Nachkommen und deren Familienangehörige, die keine kroatische Staatsangehörigkeit haben oder das Staatsangehörigkeitsverfahren nicht abwarten wollen.
+  not_applies_to: Kroatische Staatsbürger, sie brauchen keinen Aufenthaltstitel. EU-, EWR- und Schweizer Bürger ohne Wurzeln, sie melden sich nach der Freizügigkeit an.
+  authority: Bescheinigung durch das Ministarstvo demografije i useljeništva (Kontakt useljenistvo@mdu.hr). Aufenthalt durch die Polizeiverwaltung des Innenministeriums.
+  prerequisites:
+    - Nachweis der Auswandererherkunft, in der Regel über die Urkundenkette und ein Empfehlungsschreiben der kroatischen Vertretung
+    - Kein Nachweis von Unterhaltsmitteln nötig
+    - Kein Nachweis einer Krankenversicherung nötig
+  steps:
+    - Urkundenkette und Empfehlungsschreiben der Vertretung beschaffen
+    - Bescheinigung beim Ministerium beantragen
+    - Aufenthalt zum Zweck der Einwanderung und Rückkehr bei der Polizeiverwaltung beantragen, bei Visumpflicht ist der Antrag auch in Kroatien möglich
+    - Nach der Bewilligung Wohnsitz melden, OIB beantragen, Krankenversicherung regeln
+  documents:
+    - Reisepass
+    - Urkunden zur Abstammung mit Apostille und Übersetzung
+    - Empfehlungsschreiben der kroatischen Vertretung
+    - Bescheinigung des Ministeriums
+  duration_costs: Aufenthalt bis zwei Jahre, verlängerbar. Bearbeitungsdauer und Gebühren sind nicht belegt.
+  deadlines:
+    - Verlängerung vor Ablauf des laufenden Aufenthalts beantragen. Die genaue Vorlauffrist ist am Primärtext zu prüfen.
+    - Daueraufenthalt nach drei Jahren ununterbrochenen Aufenthalts möglich
+  common_mistake: Die Bescheinigung mit der Staatsangehörigkeit verwechseln. Die Bescheinigung ist ein Aufenthaltsweg, keine Einbürgerung. Beides kann parallel laufen.
+  not_decided_here: Ob eine Person zur Auswanderergruppe zählt, entscheidet das Ministerium anhand der Unterlagen. Die Bewilligung des Aufenthalts trifft die Polizeiverwaltung.
+  open_points:
+    - Bearbeitungsdauer beider Stellen nicht belegt
+    - Vorlauffrist für die Verlängerung nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [apostille-und-uebersetzung]
+  followed_by_pages: [wohnsitz-anmelden, oib, krankenversicherung]
+sources:
+  - id: hr-mdu
+    reference: Potvrda za hrvatske iseljenike, Pravilnik NN 53/2026 vom 22.5.2026, Zakon o strancima in Kraft seit 15.3.2025
+    checked: 2026-09-12
+  - id: hr-mup
+    reference: Privremeni boravak u svrhu useljenja i povratka, Voraussetzungen und Unterlagen
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

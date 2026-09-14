@@ -1,0 +1,54 @@
+---
+// Ein Fachwert in der Oberfläche (designsystem.md 4, Vokabular A): bekannt zeigt den
+// Wert, unbekannt ist ein sichtbarer Zustand mit Wortlaut, nie eine leere Zelle.
+// veraltet zeigt den Wert mit Stand und dem Hinweis, dass die aktuelle Höhe ungeklärt ist.
+// Wortlaute aus dem Katalog (ui.place.fact_*), damit sie in jeder Sprache stimmen.
+import type { Fact } from "../lib/places.ts";
+import { formatDate } from "../lib/places.ts";
+import { pageContext } from "../lib/page.ts";
+
+interface Props {
+  fact: Fact | undefined;
+}
+const { fact } = Astro.props;
+const { u } = pageContext(Astro);
+const f: Fact = fact ?? { state: "not_collected" };
+---
+
+{f.state === "known" && (
+  <span class="fact">
+    {f.value}
+    {f.as_of && <span class="fact__meta mono">{u("place.fact_stand", { date: formatDate(f.as_of) })}</span>}
+    {f.note && <span class="fact__note">{f.note}</span>}
+  </span>
+)}
+{f.state === "outdated" && (
+  <span class="fact">
+    {f.value}
+    <span class="state state--unknown">{u("place.fact_outdated")}</span>
+    <span class="fact__note">{u("place.fact_outdated_note", { date: f.as_of ? formatDate(f.as_of) : u("place.fact_unknown") })}{f.note && ` ${f.note}`}</span>
+  </span>
+)}
+{(f.state === "unknown" || f.state === "not_collected" || f.state === "not_applicable" || f.state === "not_present") && (
+  <span class="fact">
+    <span class={`state state--${f.state === "unknown" ? "unknown" : "closed"}`}>{u(`place.fact_${f.state}`)}</span>
+    {f.state === "not_collected" && <span class="fact__note">{f.note ?? u("place.fact_clarify")}</span>}
+    {f.state !== "not_collected" && f.note && <span class="fact__note">{f.note}</span>}
+  </span>
+)}
+
+<style>
+  .fact {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    align-items: flex-start;
+  }
+  .fact__meta {
+    color: var(--muted);
+  }
+  .fact__note {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+</style>

@@ -1,0 +1,106 @@
+---
+// Glossar der Amtsbegriffe: gesammelt aus den Themenseiten (CLAUDE.md 3: das Original
+// verschwindet nie, das Verstehen darf daran nicht scheitern). Jeder Begriff verweist
+// auf die Seite, die ihn erklärt.
+import Base from "../../layouts/Base.astro";
+import { loadPages, pagePath } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
+
+const { lang, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
+const entries = new Map<string, { term: string; explained: string; pages: { title: string; href: string }[] }>();
+for (const x of pages) {
+  for (const t of x.terms) {
+    const e = entries.get(t.term_hr) ?? { term: t.term_hr, explained: t.term_explained[lang] ?? t.term_explained.de, pages: [] };
+    e.pages.push({ title: x.title, href: p(pagePath(x)) });
+    entries.set(t.term_hr, e);
+  }
+}
+const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "hr"));
+---
+
+<Base title={`${u("glossary.title")}: povratnik.com`} description={u("glossary.description")} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("glossary.crumb")}</p>
+        <h1>{u("glossary.title")}</h1>
+        <p class="lede">{u("glossary.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-wide">
+        <p class="count mono">{u("glossary.count", { n: list.length, pages: pages.length })}</p>
+        <dl class="glossary">
+          {list.map((e) => (
+            <div class="glossary__entry">
+              <dt lang="hr">{e.term}</dt>
+              <dd>
+                <p>{e.explained}</p>
+                <p class="glossary__links">
+                  {e.pages.map((x) => <a class="arrow-link" href={x.href}>{x.title}</a>)}
+                </p>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .glossary {
+    margin: 0;
+    max-width: none;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .glossary__entry {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.1rem 1.25rem;
+    display: grid;
+    gap: 0.25rem 2rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .glossary__entry {
+      grid-template-columns: minmax(12rem, 16rem) 1fr;
+    }
+  }
+  .glossary dt {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
+    color: var(--accent-deep);
+    font-weight: 600;
+  }
+  .glossary dd {
+    margin: 0;
+  }
+  .glossary dd p {
+    margin: 0 0 0.35rem;
+  }
+  .glossary__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: 0.875rem;
+  }
+</style>

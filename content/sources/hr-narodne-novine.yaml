@@ -1,0 +1,16 @@
+# Reale Quelle, Stufe 1. Einstieg beim Herausgeber; die genaue Fundstelle steht je Seite
+# im Feld reference und in docs/recherche-faktenbasis.md. Vor Fachfreigabe am Primärtext prüfen.
+id: hr-narodne-novine
+synthetic: false
+url: https://narodne-novine.nn.hr
+title: "Narodne novine, amtliche Rechtsveröffentlichung"
+publisher: "Narodne novine"
+tier: 1
+published_at: null
+fetched_at: 2026-09-14
+content_checked_at: 2026-09-12
+content_checked_by: Recherche vom 12.09.2026 (docs/recherche-faktenbasis.md), Fachprüfung Platzhalter (ADR-0004)
+reuse_rights: official_free
+changelog:
+  - date: 2026-09-14
+    note: "Angelegt als Einstieg für Gesetze und Verordnungen (NN-Nummern in den Seiten). Erreichbarkeit geprüft, die einzelnen Fundstellen sind noch nicht am Volltext geprüft."

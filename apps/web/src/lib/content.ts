@@ -7,6 +7,8 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 import type { Rule } from "@povratnik/engine";
+import type { ReadingPage } from "./reading.ts";
+import type { CountrySummary, PlaceSummary } from "./summary.ts";
 
 type Doc = Record<string, any>;
 type I18n = { de: string; [lang: string]: string | undefined };
@@ -37,9 +39,17 @@ export type Bundle = {
   holidays: string[];
   calendars: CalendarView[];
   texts: Doc;
+  // Themenseiten für die Leseempfehlung im Plan (lib/reading.ts); leer, wenn keine sichtbar.
+  pages: ReadingPage[];
+  // Zielorte für die vertiefende Frage nach der Gemeinde (auf der Teststufe fiktiv).
+  places: PlaceSummary[];
+  // Länderseiten für «Wer Ihnen weiterhilft».
+  countries: CountrySummary[];
+  // Themenseiten mit befristeter Gültigkeit für die Fristenliste.
+  dated: { title: string; path: string; until: string }[];
 };
 
-export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; calendars: Doc[]; texts: Doc };
+export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; calendars: Doc[]; texts: Doc; pages?: ReadingPage[]; places?: PlaceSummary[]; countries?: CountrySummary[]; dated?: { title: string; path: string; until: string }[] };
 
 function loadDir(dir: string): Doc[] {
   return readdirSync(dir)
@@ -91,5 +101,9 @@ export function bundleFor(mode: "build" | "dev", content: Content): Bundle {
     holidays,
     calendars: calendars.map((c) => ({ id: c.id, title: c.title, checked: c.sources?.[0]?.checked ?? "" })),
     texts: content.texts,
+    pages: content.pages ?? [],
+    places: content.places ?? [],
+    countries: content.countries ?? [],
+    dated: content.dated ?? [],
   };
 }

@@ -1,0 +1,99 @@
+---
+// Regionenseite je Gespanschaft (inhaltskonzept.md 5.4): Karte mit hervorgehobener
+// Gespanschaft, erfasste Orte, und die Abschnitte, die hier stehen werden, als Zustand.
+// Keine erfundenen Werte für reale Regionen (CLAUDE.md 10).
+import Base from "../../../layouts/Base.astro";
+import MapHr from "../../../components/MapHr.astro";
+import { COUNTIES, countyByIso, countySlug } from "../../../lib/map.ts";
+import { loadPlaces, placeName } from "../../../lib/places.ts";
+import { pageContext } from "../../../lib/page.ts";
+
+export function getStaticPaths() {
+  return COUNTIES.map((c) => ({ params: { iso: countySlug(c) } }));
+}
+
+const { u, p } = pageContext(Astro);
+const county = countyByIso(Astro.params.iso!)!;
+// Auf der Teststufe sind die Orte fiktiv und keiner realen Gespanschaft zugeordnet.
+const places = loadPlaces().filter((pl) => !pl.fictional);
+const dots = places.filter((pl) => pl.map).map((pl) => ({ id: pl.id, name: placeName(pl), lon: pl.map!.lon, lat: pl.map!.lat, href: p(`/orte/${pl.id}`) }));
+---
+
+<Base title={`${u("map.region_title", { name: county.name })}: povratnik.com`} description={u("map.region_lede")} current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {u("map.region_crumb")}</p>
+        <h1>{u("map.region_title", { name: county.name })}</h1>
+        <p class="lede">{u("map.region_lede")}</p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <ul class="chips chips--on-brand">
+          {COUNTIES.filter((c) => c.iso !== county.iso).map((c) => <li><a href={p(`/orte/region/${countySlug(c)}`)}>{c.name}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <MapHr highlight={county.iso} places={dots} />
+      </div>
+      <aside class="col-aside">
+        <h2 class="side-title">{u("map.region_places")}</h2>
+        {places.length === 0 ? (
+          <p><span class="state state--closed">{u("map.region_wip")}</span> {u("map.region_places_empty")}</p>
+        ) : (
+          <ul class="topics">{places.map((pl) => <li><a href={p(`/orte/${pl.id}`)}>{placeName(pl)}</a></li>)}</ul>
+        )}
+        <h2 class="side-title">{u("map.region_facts")}</h2>
+        <ul class="topics">
+          {[1, 2, 3, 4, 5, 6, 7].map((i) => <li><span>{u(`map.region_fact_${i}`)}</span><span class="state state--closed">{u("map.region_wip")}</span></li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .hero__media--plain .chips a {
+    font-size: 0.8125rem;
+    min-height: 36px;
+    padding-block: 0.3rem;
+  }
+  .side-title {
+    font-size: 1.125rem;
+    margin-top: 1.5rem;
+  }
+  .side-title:first-child {
+    margin-top: 0;
+  }
+  .topics a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+</style>

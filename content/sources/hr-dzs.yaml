@@ -1,0 +1,15 @@
+# Reale Quelle, Stufe 2. Amtliche Statistik; genaue Tabellen je Zahl im Feld reference.
+id: hr-dzs
+synthetic: false
+url: https://dzs.gov.hr
+title: "Državni zavod za statistiku: Migration, Löhne"
+publisher: "Državni zavod za statistiku Republike Hrvatske"
+tier: 2
+published_at: null
+fetched_at: 2026-09-14
+content_checked_at: 2026-09-12
+content_checked_by: Recherche vom 12.09.2026 (docs/recherche-faktenbasis.md 11), Fachprüfung Platzhalter (ADR-0004)
+reuse_rights: official_free
+changelog:
+  - date: 2026-09-14
+    note: "Angelegt für Zu- und Wegzüge 2023 bis 2025 und Löhne August 2025. Erreichbarkeit geprüft, Tabellen noch nicht am Original geprüft."

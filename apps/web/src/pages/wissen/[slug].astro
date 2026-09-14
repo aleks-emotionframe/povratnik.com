@@ -1,0 +1,231 @@
+---
+// Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenseiten,
+// verbleibende Themen mit Zustand, Abhängigkeiten zu anderen Rubriken.
+import Base from "../../layouts/Base.astro";
+import { RUBRICS, rubricBySlug, rubricText } from "../../lib/rubrics.ts";
+import { loadPages, pagePath, type PageView } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
+
+export function getStaticPaths() {
+  return RUBRICS.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const { lang, texts, u, p } = pageContext(Astro);
+const rubric = rubricBySlug(Astro.params.slug!)!;
+const tx = rubricText(rubric, texts);
+const pages: PageView[] = loadPages(CONTENT_DIR, lang).filter((x) => x.category === rubric.slug);
+// Abdeckung nach den deutschen Themennamen (Struktur), Anzeige in der Sprache.
+const covered = new Set(pages.flatMap((x) => x.covers));
+const remaining = rubric.topics.map((t, i) => ({ de: t, label: tx.topics[i] })).filter((t) => !covered.has(t.de));
+const requires = rubric.requires.map((s) => rubricBySlug(s)!);
+const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
+const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") });
+---
+
+<Base title={`${tx.title}: povratnik.com`} description={tx.intro} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("wissen.crumb_rubric", { n: rubric.number })}</p>
+        <h1>{tx.title}</h1>
+        <p class="lede">{tx.intro}</p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <div>
+          <h2 class="questions__title">{u("wissen.questions")}</h2>
+          <ul class="questions">
+            {tx.questions.map((q) => <li>{q}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("wissen.topics_title")}</h2>
+        {pages.length > 0 && (
+          <ul class="cards cards--topics">
+            {pages.map((x) => (
+              <li class="card card--link">
+                <div class="card__body">
+                  <h3><a href={p(pagePath(x))}>{x.title}</a></h3>
+                  <p>{x.short_answer}</p>
+                  <p class="card__states">
+                    <span class={`state state--${stateOf(x).key}`}>{stateOf(x).label}</span>
+                    {x.fallback && <span class="state state--unknown">{u("shell.working_copy_title")}</span>}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {remaining.length > 0 && (
+          <>
+            <h3 class="remaining">{pages.length > 0 ? u("wissen.remaining_more") : u("wissen.remaining_only")}</h3>
+            <p class="soft">{u("wissen.remaining_help")}</p>
+            <ul class="topics">
+              {remaining.map((t) => (
+                <li>
+                  <span>{t.label}</span>
+                  <span class="state state--unknown">{u("wissen.wip")}</span>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
+      <aside class="col-aside">
+        {requires.length > 0 && (
+          <div class="side">
+            <h3>{u("wissen.requires")}</h3>
+            <ul class="side__list">
+              {requires.map((r) => <li><a href={p(`/wissen/${r.slug}`)}>{r.number} {rubricText(r, texts).title}</a></li>)}
+            </ul>
+          </div>
+        )}
+        {followed.length > 0 && (
+          <div class="side">
+            <h3>{u("wissen.followed")}</h3>
+            <ul class="side__list">
+              {followed.map((r) => <li><a href={p(`/wissen/${r.slug}`)}>{r.number} {rubricText(r, texts).title}</a></li>)}
+            </ul>
+          </div>
+        )}
+        <div class="side side--cta">
+          <h3>{u("wissen.cta_title")}</h3>
+          <p>{u("wissen.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("wissen.mask_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("wissen.mask_answer")}</dt><dd>{u("wissen.mask_answer_v")}</dd>
+          <dt>{u("wissen.mask_for")}</dt><dd>{u("wissen.mask_for_v")}</dd>
+          <dt>{u("wissen.mask_notfor")}</dt><dd>{u("wissen.mask_notfor_v")}</dd>
+          <dt>{u("wissen.mask_authority")}</dt><dd>{u("wissen.mask_authority_v")}</dd>
+          <dt>{u("wissen.mask_state")}</dt><dd>{u("wissen.mask_state_v")}</dd>
+          <dt>{u("wissen.mask_mistake")}</dt><dd>{u("wissen.mask_mistake_v")}</dd>
+          <dt>{u("wissen.mask_notdecided")}</dt><dd>{u("wissen.mask_notdecided_v")}</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cards--topics {
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+  }
+  .cards--topics .card__body p {
+    font-size: 1rem;
+  }
+  .card__states {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+  .remaining {
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
+  }
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .questions__title {
+    font-size: 1rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .questions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+    color: var(--on-brand);
+    max-width: 34ch;
+  }
+  .questions li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .questions li::before {
+    content: "?";
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    color: var(--brand-deep);
+    font-size: 0.875rem;
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+</style>

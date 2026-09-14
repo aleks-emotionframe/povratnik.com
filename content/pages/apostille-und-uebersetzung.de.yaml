@@ -1,0 +1,72 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 3), fachlich nicht geprüft.
+id: apostille-und-uebersetzung
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [Personenstandsurkunden, Abstammungskette über Generationen, Apostille, Beglaubigte Übersetzung, Namensabweichungen und Schreibweisen, Matrikel- und Pfarrbücher]
+title: Urkunden aus dem Ausland, Apostille und beglaubigte Übersetzung
+short_answer: Ausländische Urkunden brauchen für kroatische Behörden eine Apostille aus dem Ausstellungsland und danach eine Übersetzung durch eine gerichtlich beeidigte Übersetzerin oder einen Übersetzer. Die Reihenfolge ist zwingend, Original, Apostille, Übersetzung.
+terms:
+  - term_hr: Apostille
+    term_explained:
+      de: Beglaubigungsstempel nach dem Haager Übereinkommen. Er bestätigt, dass die Urkunde echt ist, und ersetzt die Legalisation über Konsulate.
+  - term_hr: sudski tumač
+    term_explained:
+      de: Gerichtlich beeidigte Übersetzerin oder Übersetzer. Nur diese Übersetzungen gelten vor kroatischen Behörden als beglaubigt.
+  - term_hr: matične knjige
+    term_explained:
+      de: Personenstandsregister, in Kroatien die Geburts-, Heirats- und Sterberegister. Für ältere Jahrgänge oft nur Pfarrbücher.
+sections:
+  applies_to: Alle, die ausländische Personenstandsurkunden, Zeugnisse oder Vollmachten in einem kroatischen Verfahren vorlegen. Argentinien, Chile, Brasilien, Australien, die USA, Kanada und alle EU-Staaten sind Vertragsstaaten des Haager Übereinkommens.
+  not_applies_to: Urkunden aus Staaten, die dem Haager Übereinkommen nicht angehören. Dort läuft die Legalisation über das Konsulat und ist ein anderes Verfahren.
+  authority: Apostille durch die zuständige Stelle des Ausstellungslands. Übersetzung durch eine in Kroatien beeidigte Person. Konsulate stellen Empfehlungsschreiben aus, die für die Bescheinigung für Auswanderer verlangt werden.
+  prerequisites:
+    - Die Urkunde liegt im Original oder als beglaubigte Abschrift vor
+    - Das Ausstellungsland ist Vertragsstaat des Haager Übereinkommens
+  steps:
+    - Urkunde im Ausstellungsland als Original oder beglaubigte Abschrift beschaffen
+    - Apostille bei der zuständigen Stelle des Ausstellungslands anbringen lassen
+    - Urkunde samt Apostille durch eine beeidigte Übersetzerin oder einen Übersetzer ins Kroatische übersetzen lassen
+    - Bei Abstammungsketten alle Zwischengenerationen gleich behandeln, jede Urkunde einzeln
+  documents:
+    - Geburts-, Heirats- und Sterbeurkunden der betroffenen Personen
+    - Bei kroatischen Vorfahren Auszüge aus kroatischen Matrikel- oder Pfarrbüchern, diese brauchen keine Apostille
+  duration_costs: Kosten und Dauer hängen vom Ausstellungsland ab. Belegte Zahlen fehlen, der Wert ist unbekannt.
+  deadlines:
+    - Keine gesetzliche Frist. Manche Behörden verlangen Urkunden, die nicht älter als sechs Monate sind. Ob das für ein konkretes Verfahren gilt, ist beim Verfahren zu prüfen.
+  common_mistake: Zuerst übersetzen, dann die Apostille holen. Die Apostille muss mitübersetzt sein, sonst gilt die Übersetzung als unvollständig. Zweiter häufiger Fehler, Namen, die in verschiedenen Urkunden unterschiedlich geschrieben sind, ohne ergänzenden Nachweis vorzulegen.
+  not_decided_here: Ob eine Urkunde mit abweichender Schreibweise als Nachweis derselben Person gilt, entscheidet die Behörde im jeweiligen Verfahren.
+  open_points:
+    - Gebühren für Apostille je Land nicht belegt
+    - Preisspanne beeidigter Übersetzungen nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [staatsangehoerigkeit-abstammung, bescheinigung-auswanderer]
+sources:
+  - id: hcch-apostille
+    reference: Convention of 5 October 1961 Abolishing the Requirement of Legalisation for Foreign Public Documents, Status table
+    checked: 2026-09-12
+  - id: hr-mup
+    reference: Hinweise zu Urkunden und Übersetzungen in Verfahren zu Staatsangehörigkeit und Aufenthalt
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

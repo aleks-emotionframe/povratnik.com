@@ -1,0 +1,200 @@
+---
+// Länderseite (inhaltskonzept.md 4.3): die Ausreiseanforderungen des bisherigen Wohnlands,
+// getrennt vom kroatischen Prozess. Jedes Feld ist ein Fachwert mit Zustand.
+import Base from "../../../layouts/Base.astro";
+import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
+
+export function getStaticPaths() {
+  return loadPages(CONTENT_DIR, "de", "country").map((page) => ({ params: { slug: page.id.replace(/^land-/, "") } }));
+}
+
+const { lang, u, p } = pageContext(Astro);
+const countries = loadPages(CONTENT_DIR, lang, "country");
+const page = countries.find((x) => x.id === `land-${Astro.params.slug}`)!;
+const topics = loadPages(CONTENT_DIR, lang);
+const sources = loadSources(CONTENT_DIR);
+const c = page.country!;
+const state = page.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") };
+const byId = new Map(topics.map((x) => [x.id, x]));
+const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const rows: [string, keyof typeof c][] = [
+  [u("country.representation"), "representation"],
+  [u("country.apostille"), "apostille"],
+  [u("country.social_security"), "social_security"],
+  [u("country.double_taxation"), "double_taxation"],
+  [u("country.deregistration"), "deregistration"],
+  [u("country.duration"), "duration"],
+];
+const labels: Record<string, string> = { unknown: u("country.unknown"), not_collected: u("country.not_collected"), outdated: u("country.outdated") };
+const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From (the )?|Desde (los |la )?)/, "").replace(/ (nach Kroatien|u Hrvatsku|to Croatia|a Croacia)$/, "");
+---
+
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen" fallback={page.fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("country.crumb")}</p>
+        <h1>{page.title}</h1>
+        <p class="lede">{page.short_answer}</p>
+        <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span></p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <div>
+          <h2 class="others__title">{u("country.others")}</h2>
+          <ul class="chips chips--on-brand">
+            {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={p(pagePath(x))}>{shortName(x.title)}</a></li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("country.what_title")}</h2>
+        <p class="soft">{u("country.what_help")}</p>
+        <dl class="open-field country">
+          {rows.map(([label, key]) => (
+            <>
+              <dt>{label}</dt>
+              <dd>
+                {c[key].state === "known" ? (
+                  <span>{c[key].value}</span>
+                ) : (
+                  <span class={`state state--${c[key].state === "unknown" ? "unknown" : "closed"}`}>{labels[c[key].state]}</span>
+                )}
+                {c[key].note && <span class="note">{c[key].note}</span>}
+              </dd>
+            </>
+          ))}
+        </dl>
+      </div>
+      <aside class="col-aside">
+        <div class="side">
+          <h3>{u("country.followed")}</h3>
+          <ul class="side__list">{followed.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
+        </div>
+        <div class="side side--cta">
+          <h3>{u("country.cta_title")}</h3>
+          <p>{u("country.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="stand">
+        <h3>{u("topic.stand_title")}</h3>
+        <dl class="open-field">
+          <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>{u("topic.source")}</dt>
+          <dd>
+            {page.sources.map((src) => (
+              <p class="stand__source">
+                <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
+                <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
+              </p>
+            ))}
+          </dd>
+          <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
+          <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__state {
+    margin: 1.25rem 0 0;
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .others__title {
+    font-size: 1rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .country {
+    max-width: none;
+  }
+  .country dd {
+    display: grid;
+    gap: 0.25rem;
+    justify-items: start;
+  }
+  .note {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .stand h3 {
+    font-size: 1.125rem;
+  }
+  .stand .open-field {
+    max-width: none;
+  }
+  .stand__source {
+    margin: 0 0 0.5rem;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .stand__source .mono {
+    color: var(--muted);
+  }
+</style>

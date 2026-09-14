@@ -1,46 +1,107 @@
 ---
-// Wizard-Seite. Das Regelpaket entsteht zur Bauzeit; im Build nur freigegebene Regeln
-// (src/lib/content.ts). Die Insel ist die einzige Stelle mit JavaScript.
-import { join } from "node:path";
+// Wizard-Seite. Das Regelpaket entsteht zur Bauzeit; welche Regeln hinein dürfen,
+// entscheidet die Stufe (src/lib/stage.ts, ADR-0004) über src/lib/content.ts. Der Katalog
+// der Sprache geht als texts in die Insel; sie ist die einzige Stelle mit JavaScript.
 import Base from "../layouts/Base.astro";
 import { Wizard } from "../islands/Wizard.tsx";
 import { bundleFor, loadContent } from "../lib/content.ts";
+import { bundleMode } from "../lib/stage.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
 import "../styles/wizard.css";
 
-const contentDir = join(process.cwd(), "..", "..", "content");
-const bundle = bundleFor(import.meta.env.PROD ? "build" : "dev", loadContent(contentDir));
-const texts = bundle.texts as Record<string, any>;
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang).map((x) => ({ id: x.id, title: x.title, path: p(pagePath(x)), category: x.category ?? "", documents: x.sections.documents ?? [], terms: x.terms.map((t) => ({ term_hr: t.term_hr, explained: t.term_explained[lang] ?? t.term_explained.de })) }));
+const places = loadPlaces().map((pl) => ({
+  id: pl.id,
+  name: placeName(pl),
+  benefits: pl.benefits.map((b) => ({ title: b.title, state: b.program_state, until: b.application.until, target: b.target })),
+  arrival: { office: pl.arrival.office.value ? String(pl.arrival.office.value) : "", function: pl.arrival.function, languages: pl.arrival.languages, channel: pl.arrival.channel },
+}));
+const countries = loadPages(CONTENT_DIR, lang, "country").map((x) => ({ code: x.id, title: x.title, path: p(pagePath(x)), representation: { state: x.country!.representation.state, value: x.country!.representation.value } }));
+const dated = loadPages(CONTENT_DIR, lang).filter((x) => x.validity.valid_until.kind === "date").map((x) => ({ title: x.title, path: p(pagePath(x)), until: x.validity.valid_until.date! }));
+const bundle = bundleFor(bundleMode(import.meta.env.PROD), { ...loadContent(CONTENT_DIR), texts, pages, places, countries, dated });
+const w = texts.wizard as Record<string, string>;
 ---
 
-<Base title="Mein Weg nach Kroatien: Kurzcheck" description="Sechs Fragen, dann Ihr erster Plan. Antworten bleiben im Browser." current="mein-weg">
-  <section class="band">
-    <div class="container grid">
-      <div class="col-wide">
-        <h1>{texts.wizard.title}</h1>
-        <p class="soft">{texts.wizard.intro}</p>
-        {bundle.synthetic && (
-          <p class="notice" role="note">
-            <strong>{texts.wizard.synthetic_banner}</strong>
-            {texts.wizard.synthetic_text}
-          </p>
-        )}
-        {bundle.rules.length === 0 && (
-          <p class="notice" role="note">
-            <strong>{texts.wizard.no_rules_title}</strong>
-            {texts.wizard.no_rules_text}
-          </p>
-        )}
+<Base title={u("weg.title")} description={u("weg.description")} current="mein-weg">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{w.title}</h1>
+        <p class="lede">{w.intro}</p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <ul class="promises">
+          {[1, 2, 3, 4].map((i) => <li>{u(`weg.promise_${i}`)}</li>)}
+        </ul>
       </div>
     </div>
   </section>
   <section class="band band--surface">
-    <div class="container grid">
-      <div class="col-wide">
+    <div class="container">
+      {bundle.synthetic && (
+        <p class="notice wizard__notice" role="note">
+          <strong>{w.synthetic_banner}</strong>
+          {w.synthetic_text}
+        </p>
+      )}
+      {bundle.rules.length === 0 && (
+        <p class="notice wizard__notice" role="note">
+          <strong>{w.no_rules_title}</strong>
+          {w.no_rules_text}
+        </p>
+      )}
+      <div class="wizard-card">
         <noscript>
-          <p class="notice"><strong>JavaScript</strong>{texts.wizard.no_js}</p>
+          <p class="notice"><strong>JavaScript</strong>{w.no_js}</p>
         </noscript>
         <Wizard client:load bundle={bundle} />
       </div>
     </div>
   </section>
 </Base>
+
+<style>
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .promises {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--on-brand);
+  }
+  .promises li::before {
+    content: "✓";
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.6rem;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    color: var(--brand-deep);
+    font-size: 0.8rem;
+  }
+  .wizard__notice {
+    max-width: 52rem;
+    margin-bottom: 1.25rem;
+  }
+</style>

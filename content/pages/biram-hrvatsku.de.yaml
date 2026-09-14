@@ -1,0 +1,77 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 7), fachlich nicht geprüft.
+# Beträge und Fristen 2026 vor Freigabe am HZZ-Primärdokument prüfen.
+id: biram-hrvatsku
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: leistungen-und-foerderung
+covers: [Staatliche Leistungen, Gründung, Anspruch, Bindungen]
+title: Biram Hrvatsku, die Rückkehrförderung für Selbständige
+short_answer: Kroatische Staatsbürger bis 60 Jahre, die mindestens 12 der letzten 24 Monate im Ausland gearbeitet oder studiert haben und sich in Kroatien selbständig machen, erhalten 7.000 EUR. Der Antrag muss binnen 7 Tagen nach der Wohnsitzanmeldung oder 30 Tagen nach der Selbstbeschäftigung gestellt werden. Die Frist für 2026 läuft bis 30.9.2026 oder bis die Mittel ausgeschöpft sind.
+terms:
+  - term_hr: Biram Hrvatsku
+    term_explained:
+      de: Wörtlich «Ich wähle Kroatien». Massnahme der Arbeitsverwaltung HZZ zur Förderung der Rückkehr und der internen Mobilität.
+  - term_hr: HZZ
+    term_explained:
+      de: Hrvatski zavod za zapošljavanje, die Arbeitsverwaltung. Sie führt das Programm.
+  - term_hr: Javni poziv
+    term_explained:
+      de: Öffentlicher Aufruf. Das jährliche Dokument mit den verbindlichen Bedingungen und Fristen.
+sections:
+  applies_to: Kroatische Staatsbürger bis 60 Jahre mit mindestens 12 von 24 Monaten Arbeit oder Studium im EWR, in der Schweiz, im Vereinigten Königreich, in Nord- oder Südamerika, Australien oder Neuseeland, die sich selbständig machen. Rückkehrdatum frühestens 1.1.2025.
+  not_applies_to: Angestellte ohne eigene Tätigkeit. Personen, die die Förderung schon einmal bezogen haben. Tätigkeiten in ausgeschlossenen Branchen, darunter Handel, Transport, Beherbergung und Gastronomie, Finanzen, Immobilien.
+  authority: Hrvatski zavod za zapošljavanje, Regionalstelle am Wohnort.
+  prerequisites:
+    - Kroatische Staatsangehörigkeit, Alter bis 60 Jahre
+    - Mindestens 12 der letzten 24 Monate im Ausland gearbeitet oder studiert
+    - Wohnsitz in Kroatien angemeldet, Rückkehr frühestens 1.1.2025
+    - Gründung einer eigenen Tätigkeit in einer zugelassenen Branche
+  steps:
+    - Vor der Gründung den aktuellen Javni poziv lesen, die Reihenfolge ist entscheidend
+    - Wohnsitz anmelden und das Datum festhalten
+    - Antrag bei der HZZ stellen, binnen 7 Tagen nach der Anmeldung oder 30 Tagen nach der Selbstbeschäftigung
+    - Nach Vertrag einmalige Auszahlung binnen 30 Tagen
+    - 24 Monate Betriebspflicht einhalten
+  documents:
+    - Nachweis der Auslandszeit, etwa Arbeitsverträge, Studienbestätigungen, Versicherungsnachweise
+    - Wohnsitzanmeldung mit Datum
+    - Geschäftsplan und Unterlagen zur Tätigkeit nach dem Javni poziv
+  duration_costs: 7.000 EUR für Rückkehrer, 3.500 EUR für interne Mobilität aus Gebieten mit Entwicklungsindex VII oder VIII in Gebiete I bis IV. Kombinierbar mit der Selbstbeschäftigungsbeihilfe, das Maximum wird je nach Jahr und Quelle mit 22.000 bis 27.000 EUR angegeben.
+  deadlines:
+    - Antrag binnen 7 Tagen nach der Wohnsitzanmeldung oder 30 Tagen nach der Selbstbeschäftigung
+    - Aufruf 2026 bis 30.9.2026 oder bis zur Ausschöpfung der Mittel
+    - 24 Monate Betriebspflicht nach Auszahlung
+  common_mistake: Zuerst gründen, dann lesen. Wer die Tätigkeit anmeldet und den Antrag später als 30 Tage danach stellt, hat den Anspruch verloren. Dasselbe gilt für die 7 Tage nach der Wohnsitzanmeldung.
+  not_decided_here: Ob eine konkrete Tätigkeit förderfähig ist und ob die Auslandszeit anerkannt wird, entscheidet die HZZ. Die Kombination mit anderen Beihilfen ist im Einzelfall zu klären.
+  open_points:
+    - Kombinationsmaximum 2026, 22.000 gegen 27.000 EUR je nach Quelle
+    - Beträge der Selbstbeschäftigungsbeihilfe für paušalni obrt variieren je Quelle
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-hzz
+    reference: Biram Hrvatsku 2026, Javni poziv, Uvjeti, Iznos potpore, Rok za podnošenje zahtjeva
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: date
+    date: 2026-09-30
+  supersedes: null
+  superseded_by: null
+  transitional:
+    de: Der Aufruf 2026 endet am 30.9.2026 oder früher bei Ausschöpfung der Mittel. Ein Aufruf 2027 ist nicht belegt.
+review:
+  next_check: 2026-09-21
+  cycle: weekly

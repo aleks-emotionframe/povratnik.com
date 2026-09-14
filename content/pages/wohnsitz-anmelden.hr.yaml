@@ -1,0 +1,81 @@
+# Radna verzija na hrvatskom od wohnsitz-anmelden.de.yaml, verzija 1. Bez stručne provjere.
+# Tri različita postupka s vlastitim pravnim osnovama, ovdje namjerno prikazana odvojeno.
+id: wohnsitz-anmelden
+lang: hr
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [Personalausweis, e-Bürger-Zugang]
+translation:
+  of_version: 1
+  status: current
+title: Prijaviti prebivalište i boravak
+short_answer: Prijava nije jedan postupak, nego tri. Hrvatski državljani prijavljuju prebivalište, osobe s privremenim boravkom boravište, osobe sa stalnim ili dugotrajnim boravkom svaku promjenu. Sva tri idu preko policijske uprave, u pravilu u roku od 15 dana, i pokreću rokove u drugim postupcima.
+terms:
+  - term_hr: prijava prebivališta
+    term_explained:
+      de: Wohnsitzanmeldung für kroatische Staatsbürger. Sie ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
+      hr: Prijava za hrvatske državljane. Kod mnogih je potpora mjerodavan datum, ne dolazak.
+  - term_hr: prijava boravišta
+    term_explained:
+      de: Meldung des Aufenthaltsorts für Personen mit vorübergehendem Aufenthalt. Seit NN 55/2026 binnen 15 Tagen statt zuvor drei.
+      hr: Prijava za osobe s privremenim boravkom. Od NN 55/2026 u roku od 15 dana umjesto dotadašnja tri.
+  - term_hr: stalni boravak, dugotrajni boravak
+    term_explained:
+      de: Daueraufenthalt und Langzeitaufenthalt. Änderungen der Adresse sind binnen 15 Tagen zu melden.
+      hr: Promjene adrese prijavljuju se u roku od 15 dana.
+sections:
+  applies_to: Svi koji žive u Hrvatskoj. Koji od tri postupka vrijedi, ovisi o statusu.
+  not_applies_to: Turisti i kratki boravci. Prijava smještaja od strane najmodavca četvrti je, zaseban postupak i ne zamjenjuje nijednu od tri prijave.
+  authority: Ministarstvo unutarnjih poslova, policijska uprava ili policijska postaja u mjestu stanovanja.
+  prerequisites:
+    - Razjašnjen status, dakle državljanstvo ili odobren boravak
+    - Dokaz o stanovanju, dovoljan je ugovor o najmu ovjeren kod javnog bilježnika
+    - OIB
+  steps:
+    - Razjasniti koji od tri postupka vrijedi
+    - Pribaviti dokaz o stanovanju, kod najma ugovor ovjeriti kod javnog bilježnika
+    - Doći u policijsku upravu i obaviti prijavu
+    - Zabilježiti datum prijave, on pokreće rokove za potpore, vozačku dozvolu i selidbene stvari
+  documents:
+    - Putovnica ili osobna iskaznica, kod državljana domovnica
+    - Dokaz o stanovanju, primjerice ovjereni ugovor o najmu ili zemljišnoknjižni izvadak
+    - Dozvola boravka, gdje postoji
+    - OIB
+  duration_costs: Prijava se obavlja na šalteru. Pristojbe nisu dokumentirane.
+  deadlines:
+    - Prebivalište hrvatskih državljana, u pravilu u roku od 15 dana od useljenja
+    - Boravište kod privremenog boravka, u roku od 15 dana (NN 55/2026)
+    - Promjene kod stalnog ili dugotrajnog boravka, u roku od 15 dana od promjene
+  common_mistake: Odgađati prijavu jer još nema konačnog stana. Kod mjere Biram Hrvatsku rok za zahtjev teče od dana prijave, a oslobođenje od poreza na dohodak veže se uz prijavu povratka. Tko se kasno prijavi, ne odgađa samo prijavu, nego sve što o njoj ovisi.
+  not_decided_here: Je li određeni dokaz o stanovanju dovoljan, odlučuje policijska uprava. Koji rok vrijedi u pojedinom slučaju, ovisi o statusu i kod nesigurnosti treba stručno razjasniti.
+  open_points:
+    - Pristojbe nisu dokumentirane
+    - Točnu formulaciju roka za državljane provjeriti u izvornom tekstu
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib]
+  followed_by_pages: [krankenversicherung, biram-hrvatsku, fuehrerschein-umschreiben]
+sources:
+  - id: hr-mup
+    reference: Prijava prebivališta i boravišta, Zakon o prebivalištu, Zakon o strancima, izmjena NN 55/2026
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

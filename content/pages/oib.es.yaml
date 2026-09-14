@@ -1,0 +1,68 @@
+# Versión de trabajo en español de oib.de.yaml, versión 1. Sin revisión profesional.
+id: oib
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [OIB]
+translation:
+  of_version: 1
+  status: current
+title: "OIB, el número de identificación personal"
+short_answer: El OIB es el número que exigen todas las administraciones, los bancos y los arrendadores. Se solicita en la administración tributaria, es gratuito y, con la documentación completa, suele asignarse en el acto si se acude en persona. Sin OIB casi nada se puede tramitar.
+terms:
+  - term_hr: osobni identifikacijski broj (OIB)
+    term_explained:
+      de: Persönliche Identifikationsnummer, elf Ziffern. Sie begleitet jede Person lebenslang in allen Verfahren, ähnlich einer Steuernummer, aber breiter genutzt.
+      es: Número de identificación personal, once cifras. Acompaña a cada persona de por vida en todos los trámites, parecido a un número fiscal pero de uso más amplio.
+  - term_hr: Porezna uprava
+    term_explained:
+      de: Die Steuerverwaltung des Finanzministeriums. Sie vergibt die OIB.
+      es: La administración tributaria del Ministerio de Finanzas. Es la que asigna el OIB.
+sections:
+  applies_to: Todas las personas que quieran abrir una cuenta, alquilar, trabajar, presentar una solicitud o adquirir una propiedad en Croacia, con independencia de la nacionalidad.
+  not_applies_to: Nadie está exento. Quien ya recibió un OIB alguna vez, por ejemplo de niño o en una estancia anterior, lo conserva y no solicita uno nuevo.
+  authority: Porezna uprava, cualquier oficina. Desde el extranjero por correo electrónico a OIB@porezna-uprava.hr o a través de la representación croata.
+  prerequisites:
+    - Pasaporte o documento de identidad válido
+    - Un motivo para la asignación, por ejemplo residencia, trabajo, cuenta bancaria o propiedad
+  steps:
+    - Rellenar el formulario de solicitud
+    - Acudir en persona a una oficina, o presentar la solicitud por correo electrónico o a través del consulado
+    - Recibir el certificado del OIB y tenerlo a mano para todos los trámites siguientes
+  documents:
+    - Pasaporte o documento de identidad, copia si se solicita desde el extranjero
+    - Formulario de solicitud
+    - Si solicita una persona apoderada, un poder
+  duration_costs: Gratuito. En persona y con documentación completa, en el acto; plazo administrativo de 15 días laborables; a través del consulado, a menudo varias semanas.
+  deadlines:
+    - No hay plazo para la solicitud. Pero el OIB se necesita para casi todos los pasos siguientes, por eso va al principio.
+  common_mistake: Solicitar el OIB solo después de llegar y esperar semanas para la cuenta, el contrato de alquiler y el seguro. Quien lo solicita en el consulado antes de partir se ahorra esa espera.
+  not_decided_here: Nada profesional. La asignación es un acto administrativo sin margen de discrecionalidad si la documentación está completa.
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [wohnsitz-anmelden, krankenversicherung]
+sources:
+  - id: hr-porezna-uprava
+    reference: OIB, Dodjela OIB-a stranim osobama, solicitud en persona, por correo electrónico o a través del consulado, plazo de 15 días laborables
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

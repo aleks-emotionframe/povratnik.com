@@ -1,0 +1,361 @@
+---
+// Themenseite mit der festen Maske aus inhaltskonzept.md 4.2 (designsystem.md 3, Typ 3).
+// Inhalt aus content/pages in der Sprache der Adresse, sonst die deutsche Fassung mit
+// Hinweis (lib/pages.ts). Fehlende Felder erscheinen als Zustand, nie als leere Stelle.
+import Base from "../../../layouts/Base.astro";
+import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
+import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
+
+export function getStaticPaths() {
+  // Pfade aus der deutschen Struktur; die Sprache kommt zur Laufzeit aus der Adresse.
+  return loadPages(CONTENT_DIR, "de").map((page) => ({ params: { rubrik: page.category, thema: page.id } }));
+}
+
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
+const page = pages.find((x) => x.id === Astro.params.thema)!;
+const sources = loadSources(CONTENT_DIR);
+const rubric = rubricBySlug(page.category!)!;
+const s = page.sections;
+const state = page.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") };
+const byId = new Map(pages.map((x) => [x.id, x]));
+const requires = page.links.requires_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
+const missing = u("topic.missing");
+const explained = (t: { term_explained: Record<string, string | undefined> }) => t.term_explained[lang] ?? t.term_explained.de;
+---
+
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen" fallback={page.fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / <a href={p(`/wissen/${rubric.slug}`)}>{rubricText(rubric, texts).title}</a></p>
+        <h1>{page.title}</h1>
+        <p class="lede">{page.short_answer}</p>
+        <p class="hero__state">
+          <span class={`state state--${state.key}`}>{state.label}</span>
+          <span class="mono">{u("topic.stand", { date: fmtDate(page.sources[0]?.checked ?? page.validity.valid_from) })}</span>
+          {lang !== "de" && !page.fallback && <span class="mono">{u("shell.translation_note")}</span>}
+        </p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <dl class="glance">
+          <dt>{u("topic.applies")}</dt><dd>{s.applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>{u("topic.not_applies")}</dt><dd>{s.not_applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>{u("topic.authority")}</dt><dd>{s.authority ?? <span class="state state--unknown">{missing}</span>}</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main mask">
+        <h2>{u("topic.prerequisites")}</h2>
+        {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>{u("topic.steps")}</h2>
+        {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>{u("topic.documents")}</h2>
+        {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+
+        <h2>{u("topic.duration")}</h2>
+        <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
+
+        <h2>{u("topic.deadlines")}</h2>
+        {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+      </div>
+      <aside class="col-aside">
+        {page.terms.length > 0 && (
+          <div class="side">
+            <h3>{u("topic.terms")}</h3>
+            <dl class="terms">
+              {page.terms.map((t) => (
+                <>
+                  <dt lang="hr">{t.term_hr}</dt>
+                  <dd>{explained(t)}</dd>
+                </>
+              ))}
+            </dl>
+          </div>
+        )}
+        {requires.length > 0 && (
+          <div class="side">
+            <h3>{u("topic.requires")}</h3>
+            <ul class="side__list">{requires.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
+          </div>
+        )}
+        {followed.length > 0 && (
+          <div class="side">
+            <h3>{u("topic.followed")}</h3>
+            <ul class="side__list">{followed.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
+          </div>
+        )}
+        <div class="side side--cta">
+          <h3>{u("topic.cta_title")}</h3>
+          <p>{u("topic.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <ul class="cards cards--two">
+        <li class="card card--mistake">
+          <div class="card__body">
+            <h3>{u("topic.mistake")}</h3>
+            <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
+          </div>
+        </li>
+        <li class="card">
+          <div class="card__body">
+            <h3>{u("topic.not_decided")}</h3>
+            <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
+          </div>
+        </li>
+      </ul>
+      {s.open_points && (
+        <div class="open-points">
+          <h3>{u("topic.open_points")}</h3>
+          <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
+        </div>
+      )}
+      {page.validity.transitional && <p class="notice" role="note"><strong>{u("topic.validity")}</strong>{page.validity.transitional[lang] ?? page.validity.transitional.de}</p>}
+
+      <div class="stand">
+        <h3>{u("topic.stand_title")}</h3>
+        <dl class="open-field">
+          <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>{u("topic.source")}</dt>
+          <dd>
+            {page.sources.map((src) => (
+              <p class="stand__source">
+                <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
+                <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
+              </p>
+            ))}
+          </dd>
+          <dt>{u("topic.valid_from")}</dt><dd class="mono">{fmtDate(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` ${u("topic.valid_until", { date: fmtDate(page.validity.valid_until.date!) })}`}</dd>
+          <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
+          <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__state {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1.25rem 0 0;
+    color: var(--on-brand-soft);
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .glance {
+    margin: 0;
+    display: grid;
+    gap: 0.35rem 1.25rem;
+    grid-template-columns: max-content 1fr;
+    max-width: none;
+    font-size: 0.9375rem;
+  }
+  .glance dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--on-brand-soft);
+    padding-top: 0.15rem;
+  }
+  .glance dd {
+    margin: 0 0 0.6rem;
+    color: var(--on-brand);
+  }
+  .glance .state {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--on-brand-soft);
+  }
+  .mask h2 {
+    font-size: 1.375rem;
+    margin-top: 1.75rem;
+  }
+  .mask h2:first-child {
+    margin-top: 0;
+  }
+  .checks,
+  .steps,
+  .deadlines {
+    padding: 0;
+    margin: 0 0 0.5rem;
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .checks li {
+    padding-left: 1.75rem;
+    position: relative;
+  }
+  .checks li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background: var(--surface-blue);
+    color: var(--accent);
+    font-size: 0.75rem;
+    display: grid;
+    place-items: center;
+    margin-top: 0.15rem;
+  }
+  .checks--doc li::before {
+    content: "▪";
+  }
+  .checks--open li::before {
+    content: none;
+  }
+  .checks--open li {
+    padding-left: 0;
+  }
+  .steps {
+    counter-reset: step;
+  }
+  .steps li {
+    counter-increment: step;
+    padding-left: 2.5rem;
+    position: relative;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    display: grid;
+    place-items: center;
+  }
+  .deadlines .deadline {
+    font-family: var(--font-text);
+    font-size: 1rem;
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    border-left: 3px solid var(--accent);
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .terms {
+    margin: 0;
+  }
+  .terms dt {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--accent-deep);
+    margin-top: 0.6rem;
+  }
+  .terms dd {
+    margin: 0.15rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .cards--two {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    margin-bottom: 2rem;
+  }
+  .card--mistake {
+    background: var(--st-unknown-bg);
+    border-color: transparent;
+  }
+  .card--mistake p,
+  .card p {
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .open-points {
+    margin-bottom: 2rem;
+  }
+  .open-points h3 {
+    font-size: 1.125rem;
+  }
+  .stand {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .stand h3 {
+    font-size: 1.125rem;
+  }
+  .stand .open-field {
+    max-width: none;
+  }
+  .stand__source {
+    margin: 0 0 0.5rem;
+    display: grid;
+    gap: 0.15rem;
+  }
+  .stand__source .mono {
+    color: var(--muted);
+  }
+</style>

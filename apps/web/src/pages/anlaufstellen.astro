@@ -1,0 +1,106 @@
+---
+// Anlaufstellen (inhaltskonzept.md 8): Behördenverzeichnis aus dem Quellenregister, mit den
+// Themenseiten, die auf jede Stelle verweisen. Konsulate, kommunale Stellen und Vereine
+// folgen; ihr Zustand steht sichtbar.
+import Base from "../layouts/Base.astro";
+import { loadPages, loadSources, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+
+const { lang, u, p } = pageContext(Astro);
+const topics = loadPages(CONTENT_DIR, lang);
+const sources = loadSources(CONTENT_DIR);
+const authorities = Object.values(sources)
+  .filter((s) => s.id.startsWith("hr-") && s.tier === 2)
+  .map((s) => ({ ...s, pages: topics.filter((x) => x.sources.some((r) => r.id === s.id)) }));
+const places = loadPlaces();
+const countries = loadPages(CONTENT_DIR, lang, "country").map((c) => ({ title: c.title, href: p(pagePath(c)), known: c.country?.representation.state === "known" }));
+---
+
+<Base title={u("contacts.title")} description={u("contacts.description")} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("contacts.heading")}</h1>
+        <p class="lede">{u("contacts.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("contacts.authorities_title")}</h2>
+        <p class="soft">{u("contacts.authorities_help")}</p>
+      </div>
+      <ul class="cards">
+        {authorities.map((a) => (
+          <li class="card">
+            <div class="card__body">
+              <h3><a href={a.url} rel="noopener">{a.publisher}</a></h3>
+              <p>{a.title}</p>
+              {a.pages.length > 0 && (
+                <ul class="plain">
+                  {a.pages.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
+                </ul>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("contacts.consulates_title")}</h2>
+        <p>{u("contacts.consulates_text")}</p>
+        <ul class="topics">
+          {countries.map((c) => (
+            <li><a href={c.href}>{c.title}</a><span class={`state state--${c.known ? "matches" : "closed"}`}>{c.known ? u("contacts.confirmed") : u("contacts.not_collected")}</span></li>
+          ))}
+        </ul>
+      </div>
+      <aside class="col-aside">
+        <h3>{u("contacts.municipal_title")}</h3>
+        <ul class="topics">
+          {places.map((pl) => (
+            <li><a href={p(`/orte/${pl.id}`)}>{placeName(pl)}</a><span class={`state state--${pl.arrival.office.state === "known" ? "matches" : "unknown"}`}>{pl.arrival.office.state === "known" ? u("contacts.recorded") : u("contacts.unknown")}</span></li>
+          ))}
+        </ul>
+        <h3>{u("contacts.clubs_title")}</h3>
+        <p><span class="state state--unknown">{u("contacts.wip")}</span> {u("contacts.clubs_text")}</p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    font-size: 0.9375rem;
+  }
+  .plain li {
+    padding: 0.2rem 0;
+  }
+  .plain a {
+    text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+  }
+  .topics a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .col-aside h3 {
+    margin-top: 1.5rem;
+  }
+  .col-aside h3:first-child {
+    margin-top: 0;
+  }
+</style>

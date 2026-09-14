@@ -1,0 +1,322 @@
+---
+// Ortsprofil (designsystem.md 3, Typ 5; inhaltskonzept.md 5.1): dieselben Abschnitte für
+// jeden Ort, jeder Fachwert mit Zustand, jede Leistung mit Programmzustand, Antrags-
+// zeitraum und Prüfdatum. Datentiefe als eigener Balken. Ortsdaten liegen auf der
+// Teststufe nur auf Deutsch vor; Beschriftungen kommen aus dem Katalog.
+import Base from "../../layouts/Base.astro";
+import Fact from "../../components/Fact.astro";
+import MapHr from "../../components/MapHr.astro";
+import { PROGRAM_STATE, formatDate, loadPlaces, placeName, type Place } from "../../lib/places.ts";
+import { pageContext } from "../../lib/page.ts";
+
+export function getStaticPaths() {
+  return loadPlaces().map((place) => ({ params: { id: place.id }, props: { place } }));
+}
+
+const { place } = Astro.props as { place: Place };
+const { u, p } = pageContext(Astro);
+const depth = Math.round((100 * place.data_depth.collected) / place.data_depth.total);
+const period = (b: Place["benefits"][number]) =>
+  b.application.from || b.application.until
+    ? u("place.period_range", { from: b.application.from ? formatDate(b.application.from) : u("place.period_open"), until: b.application.until ? formatDate(b.application.until) : u("place.period_running") })
+    : u("place.period_unknown");
+const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announced" ? "announced" : "closed");
+---
+
+<Base title={`${placeName(place)}: povratnik.com`} description={place.summary} current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {place.county}</p>
+        <h1>{placeName(place)}</h1>
+        <p class="lede">{place.summary}</p>
+        <div class="depth">
+          <span>{u("orte.depth", { n: place.data_depth.collected, total: place.data_depth.total })}</span>
+          <div class="depth__bar"><div class="depth__fill" style={`width:${depth}%`}></div></div>
+        </div>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <dl class="glance">
+          <dt>{u("place.location")}</dt><dd>{u(place.region === "coast" ? "orte.coast" : "orte.inland")}, {place.county}</dd>
+          <dt>{u("place.population")}</dt><dd><Fact fact={place.population} /></dd>
+          <dt>{u("place.index")}</dt><dd><Fact fact={place.development_index} /></dd>
+          <dt>{u("place.arrival")}</dt><dd><Fact fact={place.arrival.office} /></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>{u("place.fictional_title")}</strong>
+        {u("place.fictional_text")}
+      </p>
+      <div class="band__head">
+        <h2>{u("place.benefits_title")}</h2>
+        <p class="soft">{u("place.benefits_help")}</p>
+      </div>
+      {place.benefits.length === 0 ? (
+        <p><span class="state state--unknown">{u("place.fact_not_collected")}</span> {u("place.benefits_empty")}</p>
+      ) : (
+        <ul class="cards cards--benefits">
+          {place.benefits.map((b) => (
+            <li class="card">
+              <div class="card__body">
+                <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span></p>
+                <h3>{b.title}</h3>
+                <dl class="benefit">
+                  <dt>{u("place.target")}</dt><dd>{b.target}</dd>
+                  <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
+                  <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
+                  <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
+                  <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
+                  <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
+                </dl>
+                <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main profile">
+        <h2>{u("place.family_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("place.kindergarten")}</dt><dd><Fact fact={place.family_education.kindergarten} /></dd>
+          <dt>{u("place.kindergarten_capacity")}</dt><dd><Fact fact={place.family_education.kindergarten_capacity} /></dd>
+          <dt>{u("place.primary")}</dt><dd><Fact fact={place.family_education.primary_school} /></dd>
+          <dt>{u("place.secondary")}</dt><dd><Fact fact={place.family_education.secondary_school} /></dd>
+          <dt>{u("place.language_support")}</dt><dd><Fact fact={place.family_education.language_support} /></dd>
+          <dt>{u("place.costs")}</dt><dd><Fact fact={place.family_education.costs} /></dd>
+        </dl>
+
+        <h2>{u("place.health_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("place.gp")}</dt><dd><Fact fact={place.health.gp} /></dd>
+          <dt>{u("place.gp_accepting")}</dt><dd><Fact fact={place.health.gp_accepting} /></dd>
+          <dt>{u("place.pediatrician")}</dt><dd><Fact fact={place.health.pediatrician} /></dd>
+          <dt>{u("place.pharmacy")}</dt><dd><Fact fact={place.health.pharmacy} /></dd>
+          <dt>{u("place.clinic")}</dt><dd><Fact fact={place.health.clinic} /></dd>
+        </dl>
+
+        <h2>{u("place.housing_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("place.rent")}</dt><dd><Fact fact={place.housing.long_term_rent} /></dd>
+          <dt>{u("place.price")}</dt><dd><Fact fact={place.housing.price_level} /></dd>
+          <dt>{u("place.municipal")}</dt><dd><Fact fact={place.housing.municipal_housing} /></dd>
+          <dt>{u("place.land")}</dt><dd><Fact fact={place.housing.building_land} /></dd>
+        </dl>
+
+        <h2>{u("place.work_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("place.sectors")}</dt><dd>{place.work.sectors.join(", ")}</dd>
+          <dt>{u("place.commute")}</dt><dd>{place.work.commute.map((c) => `${c.to} ${u("place.minutes", { n: c.minutes })}`).join(", ")} <span class="fact__note">{u("place.commute_note")}</span></dd>
+          <dt>{u("place.employers")}</dt><dd><Fact fact={place.work.employers} /></dd>
+        </dl>
+
+        <h2>{u("place.daily_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("place.internet")}</dt><dd><Fact fact={place.daily.internet} /></dd>
+          <dt>{u("place.transport")}</dt><dd><Fact fact={place.daily.transport} /></dd>
+          <dt>{u("place.courses")}</dt><dd><Fact fact={place.daily.language_courses} /></dd>
+          <dt>{u("place.clubs")}</dt><dd>{place.daily.clubs.length ? place.daily.clubs.join(", ") : <span class="state state--closed">{u("place.not_collected")}</span>}</dd>
+          <dt>{u("place.church")}</dt><dd><Fact fact={place.daily.church} /></dd>
+          <dt>{u("place.shopping")}</dt><dd><Fact fact={place.daily.shopping} /></dd>
+        </dl>
+
+        <h2>{u("place.surroundings_title")}</h2>
+        {place.surroundings.length === 0 ? (
+          <p><span class="state state--closed">{u("place.not_collected")}</span></p>
+        ) : (
+          <ul class="topics">
+            {place.surroundings.map((s) => <li><span>{s.what}</span><span class="mono">{s.where}, {u("place.minutes", { n: s.minutes })}</span></li>)}
+          </ul>
+        )}
+      </div>
+
+      <aside class="col-aside">
+        <div class="side">
+          <h3>{u("place.arrival_title")}</h3>
+          <dl class="side__dl">
+            <dt>{u("place.office")}</dt><dd><Fact fact={place.arrival.office} /></dd>
+            <dt>{u("place.function")}</dt><dd>{place.arrival.function}</dd>
+            <dt>{u("place.languages")}</dt><dd>{place.arrival.languages.length ? place.arrival.languages.join(", ") : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
+            <dt>{u("place.channel")}</dt><dd>{place.arrival.channel}</dd>
+          </dl>
+        </div>
+        <div class="side">
+          <h3>{u("place.changes_title")}</h3>
+          {place.changes.length === 0 ? (
+            <p><span class="state state--closed">{u("place.not_collected")}</span></p>
+          ) : (
+            <ul class="changes">
+              {place.changes.map((c) => <li><span class={`state state--${changeCss(c.state)}`}>{u(`place.change_${c.state}`)}</span> {c.title} <span class="mono muted">{formatDate(c.as_of)}</span></li>)}
+            </ul>
+          )}
+          <p class="fact__note">{u("place.changes_note")}</p>
+        </div>
+        {place.map && (
+          <div class="side">
+            <MapHr compact places={[{ id: place.id, name: placeName(place), lon: place.map.lon, lat: place.map.lat, href: p(`/orte/${place.id}`) }]} />
+            <p class="fact__note">{u("map.source", { source: "Natural Earth" })}</p>
+          </div>
+        )}
+        <div class="side side--cta">
+          <h3>{u("place.cta_title")}</h3>
+          <p>{u("place.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="arrow-link" href={p("/orte/vergleich")}>{u("place.cta_compare")}</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero .depth {
+    margin-top: 1.25rem;
+    max-width: 28rem;
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .glance {
+    margin: 0;
+    display: grid;
+    gap: 0.35rem 1.25rem;
+    grid-template-columns: max-content 1fr;
+    max-width: none;
+    font-size: 0.9375rem;
+  }
+  .glance dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--on-brand-soft);
+    padding-top: 0.15rem;
+  }
+  .glance dd {
+    margin: 0 0 0.6rem;
+    color: var(--on-brand);
+  }
+  .glance .state {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--on-brand-soft);
+  }
+  .cards--benefits {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  }
+  .benefit__state {
+    margin: 0;
+  }
+  .benefit {
+    margin: 0.5rem 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.15rem 1rem;
+    font-size: 0.9375rem;
+  }
+  @media (min-width: 480px) {
+    .benefit {
+      grid-template-columns: minmax(7rem, 9rem) 1fr;
+    }
+  }
+  .benefit dt {
+    color: var(--muted);
+  }
+  .benefit dd {
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .plain {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .plain li::before {
+    content: "· ";
+    color: var(--accent);
+  }
+  .card .datenstand {
+    margin-top: 0.75rem;
+  }
+  .profile h2 {
+    font-size: 1.375rem;
+    margin-top: 2rem;
+  }
+  .profile h2:first-child {
+    margin-top: 0;
+  }
+  .profile .open-field {
+    max-width: none;
+    align-items: start;
+  }
+  .fact__note {
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .side__dl {
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+  .side__dl dt {
+    color: var(--muted);
+    margin-top: 0.5rem;
+  }
+  .side__dl dd {
+    margin: 0;
+  }
+  .changes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 0.5rem;
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+  }
+  .side--cta {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+    border-bottom: 0;
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+  }
+  .side--cta p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+</style>

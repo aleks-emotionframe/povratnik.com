@@ -1,0 +1,66 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 2), fachlich nicht geprüft.
+# Widerspruch in den Quellen: ältere MUP-Seiten nennen zwölf Monate ohne Verlängerung.
+id: digitaler-nomade
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: short
+category: status-und-staatsangehoerigkeit
+covers: [Digitaler Nomade]
+title: Aufenthalt als digitaler Nomade
+short_answer: Drittstaatsangehörige, die für einen Arbeitgeber oder eigene Kunden ausserhalb Kroatiens arbeiten, können einen Aufenthalt als digitaler Nomade beantragen. Nach der Verordnung vom 30.4.2026 gilt er bis zu 18 Monate, verlängerbar um höchstens sechs Monate. Einkünfte aus diesem Status unterliegen nicht der kroatischen Einkommensteuer.
+terms:
+  - term_hr: digitalni nomad
+    term_explained:
+      de: Aufenthaltszweck für ortsunabhängig Arbeitende mit Auftraggebern ausserhalb Kroatiens. Rechtsgrundlage Pravilnik NN 43/2026.
+sections:
+  applies_to: Drittstaatsangehörige mit Arbeitgeber oder Kunden ausserhalb Kroatiens.
+  not_applies_to: EU-, EWR- und Schweizer Bürger, sie brauchen diesen Status nicht. Personen, die für einen kroatischen Arbeitgeber arbeiten wollen, das ist ein Arbeitsaufenthalt.
+  authority: Ministarstvo unutarnjih poslova, Polizeiverwaltung.
+  prerequisites:
+    - Arbeit für Auftraggeber ausserhalb Kroatiens
+    - Nachweis von Mitteln, nach MUP-Praxis 3.622,50 EUR im Monat, Formel 2,5 Durchschnittsnettolöhne des Vorjahres plus 0,1 je weiterem Familienmitglied
+    - Krankenversicherung und Wohnadresse in Kroatien
+  steps:
+    - Unterlagen sammeln, Antrag online oder bei der Polizeiverwaltung stellen
+    - Nach Bewilligung Wohnsitz und OIB regeln
+  documents:
+    - Reisepass
+    - Nachweis der Tätigkeit für Auftraggeber im Ausland
+    - Nachweis der Mittel
+    - Krankenversicherung
+    - Wohnnachweis
+  duration_costs: Bis 18 Monate, Verlängerung höchstens sechs Monate, Neuantrag nach sechs Monaten Pause. Gebühren nicht belegt.
+  deadlines:
+    - Verlängerung vor Ablauf beantragen
+  common_mistake: Annehmen, der Status führe zum Daueraufenthalt. Die Zeit als digitaler Nomade zählt dafür nicht in gleicher Weise wie andere Aufenthalte. Vor einer langfristigen Planung fachlich klären.
+  not_decided_here: Ob eine konkrete Tätigkeit als Arbeit für Auftraggeber im Ausland gilt, entscheidet die Polizeiverwaltung. Die steuerliche Behandlung anderer Einkünfte ist eine Frage für eine Steuerfachperson.
+  open_points:
+    - Widerspruch in den MUP-Seiten, zwölf gegen achtzehn Monate, vor Freigabe am Primärtext prüfen
+    - Anrechnung auf den Daueraufenthalt nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [wohnsitz-anmelden, oib]
+sources:
+  - id: hr-mup
+    reference: Digitalni nomadi, Pravilnik NN 43/2026 in Kraft seit 30.4.2026, Mindestmittel nach MUP-Praxis
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

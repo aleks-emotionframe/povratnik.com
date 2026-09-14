@@ -1,0 +1,1101 @@
+# Katalog na hrvatskom. Radna verzija (CLAUDE.md 3): njemačka verzija je mjerodavna,
+# hrvatski pravni tekstovi vrijede u izvorniku. Ključevi kojih ovdje nema prikazuju
+# se na njemačkom (apps/web/src/lib/i18n.ts).
+results:
+  unclear: Za provjeru još nedostaje ova informacija.
+  condition_missing: Prema vašim podacima trenutačno ne ispunjavate ovaj uvjet.
+  unchecked: Ovo područje prema vašim podacima još nije konačno provjereno.
+  rule_conflict: Ova točka zahtijeva stručno razjašnjenje. Nadležno je navedeno tijelo.
+rules:
+  example_address_report:
+    matches: Prema vašim podacima primjerna prijava dolazi u obzir. O prijavi odlučuje primjerno tijelo (fiktivno).
+  example_conflict_a:
+    matches: Prema vašim podacima fiktivno pravilo A dolazi u obzir.
+  example_conflict_b:
+    matches: Prema vašim podacima fiktivno pravilo B dolazi u obzir.
+  example_priority_a:
+    matches: Prema vašim podacima fiktivno pravilo s prioritetom 1 dolazi u obzir.
+  example_priority_b:
+    matches: Prema vašim podacima fiktivno pravilo s prioritetom 2 dolazi u obzir.
+  example_skip_rule:
+    matches: Prema vašim podacima fiktivno pravilo s dodatnim uvjetom dolazi u obzir.
+  example_accommodation_rule:
+    matches: Prema vašim podacima primjerna prijava smještaja dolazi u obzir.
+  example_passport_check:
+    matches: Prema vašim podacima u fiktivnom primjeru dolazi u obzir provjera putne isprave.
+  example_eea_registration:
+    matches: Prema vašim podacima u fiktivnom primjeru dolazi u obzir prijava nakon ulaska. O prijavi odlučuje primjerno tijelo (fiktivno).
+  example_descent_check:
+    matches: Prema vašim podacima u fiktivnom primjeru dolazi u obzir provjera lanca podrijetla. Jesu li isprave dostatne, odlučuje primjerno tijelo (fiktivno).
+  example_remote_work_check:
+    matches: Prema vašim podacima u fiktivnom primjeru dolazi u obzir put za rad na daljinu. O zahtjevu odlučuje primjerno tijelo (fiktivno).
+wizard:
+  title: Moj put u Hrvatsku
+  intro: Šest pitanja, zatim vaš prvi plan. Vaši odgovori ostaju u ovom pregledniku.
+  progress: Pitanje {n} od {total}
+  for_person: Za {person}
+  unknown: Još ne znam
+  back: Natrag
+  next: Dalje
+  finish: Prikaži plan
+  restart: Početi ispočetka
+  remove: ukloni
+  household_label: Kućanstvo
+  add: Dodaj
+  edit: Promijeni
+  print: Ispis kao PDF
+  no_js: Brza provjera treba JavaScript, jer se obrada odvija u vašem pregledniku i vaši se odgovori nikamo ne šalju. Uključite JavaScript ili upotrijebite drugi preglednik.
+  no_rules_title: Nema odobrenog pravila
+  no_rules_text: Trenutačno ne postoji stručno odobreno i objavljeno pravilo. Brza provjera zato još ne može izraditi plan.
+  synthetic_banner: Sintetička primjerna pravila
+  synthetic_text: Ovaj plan počiva na izmišljenim primjernim pravilima bez stručnog odobrenja. Ne govori ništa o vašoj stvarnoj situaciji.
+  roles:
+    self: Vi
+    partner: Partnerica ili partner
+    child: Dijete
+    other: Druga osoba
+  q:
+    stage:
+      title: Gdje se trenutačno nalazite?
+      help: Tko je već ušao u Hrvatsku, prvo dobiva provjeru rokova koji teku.
+      options:
+        exploring: Još istražujem
+        planning: Konkretno planiram
+        arrived: Već sam u Hrvatskoj
+    household:
+      title: Tko se seli s vama?
+      help: Svaka osoba dobiva vlastiti put. Partnerica i dijete mogu imati drukčije uvjete od vas.
+      options:
+        alone: Sam ili sama
+        partner: S partnericom ili partnerom
+        partner_children: S partnerom i djecom
+        alone_children: Sam ili sama s djecom
+        others: S drugim osobama
+    country:
+      title: Gdje ova osoba danas živi?
+      help: Određuje put isprava, ovjeru, prijevod i obveze odjave.
+      options:
+        ar: Argentina
+        cl: Čile
+        de: Njemačka
+        ch: Švicarska
+        at: Austrija
+        ca: Kanada
+        other: Druga država
+    citizenship:
+      title: Koja državljanstva ima ova osoba?
+      help: Višestruki odabir. Pita se za državljanstvo, ne za putovnicu. Istekla putovnica ne mijenja državljanstvo.
+      options:
+        hr: Hrvatsko
+        eea: EU ili EGP
+        ch: Švicarska
+        other: Drugo
+        stateless: Bez državljanstva
+    link:
+      title: Postoji li veza s Hrvatskom?
+      help: Veza otvara putove preko podrijetla, bez obećanja. Je li dokaz dostatan, odlučuje tijelo.
+      options:
+        parent: Jedan roditelj jest ili je bio hrvatski državljanin
+        ancestor: Bake, djedovi ili raniji preci bili su Hrvati
+        former_residence: Ranije je sama živjela u Hrvatskoj
+        partner: Partnerica ili partner s hrvatskom vezom
+        none: Nema veze
+    horizon:
+      title: Kada bi se selidba trebala dogoditi?
+      help: Određuje redoslijed, ne sadržaj. Zajednički termin je scenarij, ne datum.
+      options:
+        within_6_months: U roku od 6 mjeseci
+        6_to_12_months: Za 6 do 12 mjeseci
+        later_or_unclear: Kasnije ili još nije jasno
+    income:
+      title: Od čega će ova osoba živjeti u Hrvatskoj?
+      help: Aktivira pitanja o radu, obrazovanju i financijama.
+      options:
+        employment: Zaposlenje u Hrvatskoj
+        self_employment: Vlastita djelatnost ili osnivanje
+        remote_employer_abroad: Rad za poslodavca u inozemstvu
+        pension_or_assets: Mirovina ili imovina
+        study: Studij
+    residence:
+      title: Koji boravišni status ova osoba ima u Hrvatskoj?
+      help: Status odlučuje koja se pravila uopće primjenjuju. To je nešto drugo od državljanstva.
+      options:
+        eea_registered: Prijavljen kao građanin EU-a, EGP-a ili Švicarske
+        temporary_residence: Privremeni boravak
+        diaspora_certificate: Boravak za iseljenike i potomke
+        digital_nomad: Digitalni nomad
+        permanent_residence: Stalni boravak
+        long_term_residence: Dugotrajno boravište
+        none: Još nema statusa
+    entry:
+      title: Kada je ova osoba ušla u Hrvatsku?
+      help: Datum ulaska pokreće rokove. Bez datuma rokovi se mogu izračunati tek kada bude potvrđen.
+  refine:
+    unknown: Ne znam
+    children:
+      title: "{person}: dob i jezik"
+      help: Utječe na školu, jezičnu potporu i vremenski plan.
+      age:
+        label: Dob
+        0_5: 0 do 5 godina
+        6_14: 6 do 14 godina
+        15_18: 15 do 18 godina
+      croatian:
+        label: Govori hrvatski
+        "yes": Da
+        some: Malo
+        "no": Ne
+    founding:
+      title: Vaše osnivanje
+      help: Utječe na pravo na potporu i na zamku redoslijeda.
+      sector:
+        label: Djelatnost prema javnom pozivu
+        allowed: Dopuštena djelatnost
+        excluded: Isključena djelatnost (trgovina, prijevoz, smještaj, ugostiteljstvo, financije, nekretnine)
+      founded:
+        label: Već osnovano
+        "yes": Da
+        "no": Ne
+    place:
+      title: Koja općina?
+      help: Prikazuje općinske mjere u planu. U testnoj fazi fiktivne testne općine.
+      place:
+        label: Odredište
+        none: Još nema odredišta
+    property:
+      title: Stanovanje na odredištu
+      help: Utječe na zemljišne knjige, nasljedstvo i suglasnost za kupnju.
+      property:
+        label: Planirano je
+        buy: Kupnja
+        rent: Najam
+        inherited: Naslijeđena obiteljska imovina
+    pension:
+      title: "{person}: mirovina"
+      help: Utječe na priznavanje razdoblja i oporezivanje.
+      pension:
+        label: Iz koje države
+        ar: Argentina
+        cl: Čile
+        br: Brazil
+        de: Njemačka
+        ch: Švicarska
+        at: Austrija
+        us: SAD
+        ca: Kanada
+        other: Druga država
+    regulated:
+      title: "{person}: regulirana profesija"
+      help: Primjerice zdravstvene, obrazovne i pravne profesije. Priznavanje je zaseban prethodni korak.
+      regulated:
+        label: Profesija je regulirana
+        "yes": Da
+        "no": Ne
+    care:
+      title: Njega i trajno liječenje
+      help: Utječe na skrb na odredištu i prijelazno pokriće.
+      care:
+        label: Trajna medicinska potreba u kućanstvu
+        "yes": Da
+        "no": Ne
+facts:
+  person:
+    stage: Gdje se trenutačno nalazite
+    move_horizon: Vrijeme selidbe
+    country: Današnja država stanovanja
+    citizenship_status: Državljanstvo
+    croatian_link: Veza s Hrvatskom
+    income_source: Prihod u Hrvatskoj
+    residence_status: Boravišni status u Hrvatskoj
+  event:
+    entry: Datum ulaska
+plan:
+  title: Vaš plan
+  situation: Vaša početna situacija
+  next: Sljedeći koraci
+  next_help: Najviše tri. Sve ostalo je u planu puta ispod.
+  next_empty: Za ovo područje trenutačno nisu vidljivi daljnji koraci.
+  roadmap: Vaš plan puta po fazama
+  open: Što je još otvoreno
+  open_help: Ovaj je popis namjerno vidljiv. Pokazuje što još ne znamo, umjesto da glumi sigurnost.
+  open_empty: Trenutačno ništa nije otvoreno.
+  missing: "još nedostaje {fact}"
+  conflict: Za postupak «{procedure}» primjenjuje se više pravila. Ova točka zahtijeva stručno razjašnjenje.
+  why: Zašto mi se ovo prikazuje?
+  used_facts: Korišteni podaci
+  rule: Pravilo
+  source: Izvor
+  checked: provjereno
+  documents: Isprave
+  authority: Nadležno tijelo
+  purpose: Čemu služi
+  provisional: Prema današnjem stanju, jer datum ulaska još nedostaje.
+  datenstand: Stanje podataka
+  reference_date: Izrađeno
+  rule_versions: Verzije pravila
+  recheck: Prije podnošenja zahtjeva ponovno provjerite je li se stanje promijenilo.
+  errors: Tehničke pogreške pri obradi
+  no_holidays: bez praznika, jer još nema odobrenog kalendara praznika
+  with_holidays: "Kalendar {calendar}, stanje {date}"
+  calendars: Praznici
+  none: nema
+  reading: Znanje za vaš put
+  reading_help: Tematske stranice koje prema vašim podacima odgovaraju vašem kućanstvu. To je preporuka za čitanje, ne provjera.
+  reading_for: "vrijedi za {persons}"
+  reading_state: Osnove postoje, stručno neprovjereno
+  documents_all: Isprave koje ćete vjerojatno trebati
+  documents_help: Sastavljeno iz gornjih tematskih stranica. Koje od njih vaše tijelo traži u pojedinom slučaju, odlučuje to tijelo.
+  different: Što je kod vas drukčije nego kod drugih
+  different_help: Prema vašim podacima. To je razvrstavanje, ne provjera.
+  chain: Vaš put u jednoj slici
+  chain_help: Četiri ključa, ovim redom. Usko grlo je označeno.
+  deadlines: Vaši rokovi
+  deadlines_help: Sve što ima datum, na jednom mjestu. Nepotvrđeni termin nikada ne pokreće odbrojavanje.
+  deadlines_empty: Prema vašim podacima trenutačno ne teče nijedan izračunati rok.
+  deadline_kind_legal: zakonski rok (primjerno pravilo)
+  deadline_kind_funding: rok potpore
+  deadline_awaiting: izračunljiv tek kad datum koji ga pokreće bude potvrđen
+  deadline_unknown: razdoblje prijave nepoznato
+  place_benefits: Mjere na vašem odredištu
+  place_benefits_help: Sa stanjem i razdobljem prijave. O zahtjevu odlučuje općina.
+  place_benefits_empty: Za ovo mjesto nisu evidentirane mjere. To ne znači da ih nema.
+  terms: Riječi za šalter
+  terms_help: Hrvatski službeni pojmovi vašeg puta, za ponijeti na termin kod tijela.
+  helpers: Tko vam pomaže
+  helpers_help: Odvojeno na javno i komercijalno. Stručni partneri slijede čim postoji imenik.
+  helpers_public: Javna tijela
+  helpers_place: Dolazak na odredište
+  helpers_country: Hrvatsko predstavništvo u zemlji podrijetla
+  helpers_country_unknown: Adresa i nadležnost potvrđuju se s predstavništvom i zatim upisuju.
+  helpers_country_none: Za ovu državu još nema stranice.
+  helpers_partners: Stručni partneri
+  helpers_partners_empty: Imenik po struci i jeziku još nije izgrađen.
+  checklist_arrive: Popis za dolazak za prvih osam tjedana
+  checklist_stay: Popis za ostanak od trećeg do dvadeset četvrtog mjeseca
+  checklist_help: Za označavanje i ispis. Stanje ostaje u ovom pregledniku.
+  refine: Precizirati podatke
+  refine_help: Dobrovoljno. Svaki odgovor izoštrava preporuku za čitanje, popis razjašnjenja i odredište, ali ne mijenja obradu pravila.
+  refine_progress: "{n} od {total} odgovoreno"
+phases:
+  orient: Orijentacija
+  prepare: Priprema
+  move: Selidba
+  arrive: Dolazak
+  stay: Ostanak
+eligibility:
+  matches: prema podacima odgovara
+  condition_missing: nedostaje uvjet
+  unclear: nejasno
+  unchecked: neprovjereno
+deadline:
+  due: Rok do {date}
+  awaiting: Termin je izračunljiv čim se potvrdi datum događaja «{event}».
+  kinds:
+    statutory: zakonski rok
+    funding: rok potpore
+    recommended: preporučeno vrijeme pripreme
+    user_reminder: vlastiti podsjetnik
+  adjusted:
+    weekend: pomaknuto zbog vikenda
+    holiday: pomaknuto zbog praznika
+events:
+  entry: Ulazak
+  address_change: Promjena adrese
+  residence_registration: Prijava boravka
+  application_submitted: Podnošenje zahtjeva
+  decision_served: Dostava rješenja
+  permit_expiry: Istek dozvole
+  employment_start: Početak zaposlenja
+  business_registration: Osnivanje
+  insurance_end_abroad: Prestanak dosadašnjeg osiguranja
+summary:
+  different:
+    status_unknown: "Državljanstvo osobe {person} još je otvoreno. Prije statusa ništa se ne može odlučiti, zato je razjašnjenje na prvom mjestu."
+    mixed_household: Nemaju sve osobe u vašem kućanstvu isto državljanstvo. Svaka osoba zato ide vlastitim putem, a rokovi teku odvojeno.
+    arrived: Već ste u Hrvatskoj. Rokovi teku od ulaska i prijave, ne od dana kada čitate ovu stranicu.
+    self_employed_tax: Planirate vlastitu djelatnost. Petogodišnje oslobođenje od poreza na dohodak vrijedi za plaće iz nesamostalnog rada; hoće li i kako vrijediti kod vas, razjašnjava porezni stručnjak.
+    remote: Rad za poslodavca u inozemstvu. Boravišni put ovisi o državljanstvu, porezno pitanje o rezidentnosti. Nijedno nije standardni slučaj.
+    children: Djeca u kućanstvu. Škola i pedijatar ovise o prebivalištu i osiguranju roditelja; redoslijed roditelja određuje redoslijed djece.
+    already_founded: Već ste osnovali djelatnost. Neke potpore zahtijevaju zahtjev prije ili ubrzo nakon osnivanja; je li neki rok još otvoren, treba odmah provjeriti.
+  chain:
+    status: Status
+    oib: OIB
+    registration: Prijava
+    insurance: Osiguranje
+    clear: razjašnjeno
+    open: za razjasniti
+    next: slijedi
+    bottleneck: usko grlo
+  clarify:
+    founded_deadline: "Već osnovano: odmah u HZZ-u razjasniti je li rok za zahtjev Biram Hrvatsku (30 dana nakon samozapošljavanja) još otvoren."
+    sector_excluded: Vaša djelatnost prema vašim podacima spada među isključene. Vrijedi li iznimka, odlučuje HZZ prema važećem javnom pozivu.
+    sector_unknown: Je li vaša djelatnost prihvatljiva, piše u važećem javnom pozivu HZZ-a. Provjeriti prije osnivanja.
+    regulated: "Priznavanje profesije ({person}): zaseban prethodni korak preko nadležne komore (PISK). Koja komora, ovisi o profesiji."
+    care: "Trajna medicinska potreba: prije odlaska razjasniti skrb na odredištu i prijelazno pokriće, u HZZO-u i ordinaciji na licu mjesta."
+    inherited: "Naslijeđena obiteljska imovina: prije svakog koraka odvjetnik u Hrvatskoj treba provjeriti stanje u zemljišnim knjigama i suvlasnike."
+    buy: "Kupnja nekretnine: smijete li kupiti kao stranac i postoji li uzajamnost, odlučuje Ministarstvo pravosuđa."
+    child_language: "Jezična potpora ({person}): ponuda i nadležnost ovise o školskom okrugu; raspitati se u školi na odredištu."
+    pension_no_agreement: "Mirovina ({person}): s tom državom ne postoji ugovor o izbjegavanju dvostrukog oporezivanja. Obvezu prijave i oporezivanje razjasniti s poreznim stručnjakom."
+checklists:
+  arrive:
+    a1: Prijaviti prebivalište ili boravište u policijskoj upravi, zabilježiti datum
+    a2: Predočiti ili zatražiti OIB za svaku osobu
+    a3: Urediti zdravstveno osiguranje u HZZO-u, provjeriti dopunsko osiguranje
+    a4: Otvoriti bankovni račun
+    a5: Upisati djecu u vrtić ili školu
+    a6: Pronaći liječnika opće prakse i pedijatra, potvrditi upis
+    a7: Prijaviti struju, vodu, internet, telefon
+    a8: Zamijeniti vozačku dozvolu, paziti na rok od ulaska
+    a9: Uvesti i registrirati vozilo
+    a10: Podnijeti zahtjeve za potpore čiji rok ovisi o prijavi
+  stay:
+    s1: Produljiti boravak, paziti na rok za podnošenje
+    s2: Ispunjavati obveze iz potpora, čuvati dokaze
+    s3: Graditi razinu jezika, provjeriti tečaj ili stipendiju
+    s4: Uključivanje obitelji, udruge i škola
+    s5: Porezna prijava u prvoj punoj godini, provjeriti oslobođenje od poreza
+    s6: Paziti na obveze prijave inozemnih mirovina do 31.1.
+    s7: Dati priznati svjedodžbe i diplome, ako je još otvoreno
+    s8: Nakon dvanaest mjeseci ponovno provjeriti plan, jer se pravila mijenjaju svake godine
+rubrics:
+  status-und-staatsangehoerigkeit:
+    title: Status i državljanstvo
+    intro: "Prije statusa ništa se ne može odlučiti: on određuje boravišni put, pristup radu, školi i potporama."
+    q1: Dobivam li preko bake i djeda hrvatsko državljanstvo?
+    q2: Što je potvrda za iseljenike i što mi donosi?
+    q3: Smijem li zadržati dvije putovnice?
+    t1: Podrijetlo
+    t2: Stjecanje državljanstva po pravilu za iseljenike
+    t3: Boravak za iseljenike i potomke
+    t4: Sloboda kretanja u EU-u
+    t5: Boravak radi rada za treće zemlje
+    t6: Digitalni nomad
+    t7: Spajanje obitelji
+    t8: Produljenje
+    t9: Dvojno državljanstvo
+  dokumente-und-behoerden:
+    title: Isprave i tijela
+    intro: "OIB je ključ za gotovo svaki zahtjev. Prije njega dolazi lanac isprava: izvornik, apostille, ovjereni prijevod, tim redom."
+    q1: Što je OIB i gdje ga dobivam?
+    q2: Kako dokazujem podrijetlo kroz tri generacije?
+    q3: Moje je ime u ispravama različito napisano. Što sad?
+    t1: OIB
+    t2: Isprave o osobnom stanju
+    t3: Lanac podrijetla kroz generacije
+    t4: Apostille
+    t5: Ovjereni prijevod
+    t6: Odstupanja i načini pisanja imena
+    t7: Matične i župne knjige
+    t8: Domovnica
+    t9: Osobna iskaznica
+    t10: Pristup e-Građani
+  das-bisherige-wohnland-verlassen:
+    title: Napustiti dosadašnju državu stanovanja
+    intro: Odjava, porezno zaključenje i prestanak osiguranja u zemlji podrijetla imaju vlastite rokove koji nemaju veze s hrvatskim postupkom.
+    q1: Kada se odjavljujem u Švicarskoj ili Argentini?
+    q2: Koje isprave moram osigurati prije odlaska?
+    q3: Što se događa s mojom mirovinom i računom?
+    t1: Odjava
+    t2: Porezno zaključenje
+    t3: Prestanak osiguranja
+    t4: Otkaz ugovora
+    t5: Osigurati mirovinske dokumente
+    t6: Zatražiti školske svjedodžbe
+    t7: Bankovni račun
+    t8: Punomoći
+  arbeit-und-qualifikation:
+    title: Rad i kvalifikacija
+    intro: Mora li se diploma priznati i kako se čita ugovor o radu u Hrvatskoj, odlučuje o prvim mjesecima.
+    q1: Priznaje li se moja diploma u Hrvatskoj?
+    q2: Koliko od bruto plaće ostaje neto?
+    q3: Je li moja profesija regulirana?
+    t1: Tržište rada
+    t2: Traženje posla
+    t3: Razumjeti ugovor o radu
+    t4: Bruto i neto
+    t5: Priznavanje akademskih kvalifikacija
+    t6: Regulirane profesije
+    t7: Radna prava
+    t8: Traženje posla partnera
+    t9: Jezik na poslu
+  unternehmen-gruenden:
+    title: Osnivanje i samostalni rad
+    intro: Neke potpore zahtijevaju zahtjev prije osnivanja. Tko prvo osnuje, a zatim podnese zahtjev, gubi pravo.
+    q1: Koji mi pravni oblik odgovara?
+    q2: Što je paušalni obrt?
+    q3: Moram li potporu zatražiti prije ili nakon osnivanja?
+    t1: Usporedba pravnih oblika
+    t2: Paušalni obrt
+    t3: Knjigovodstvene obveze
+    t4: Doprinosi
+    t5: Dozvole
+    t6: Redoslijed u odnosu na potpore
+    t7: Elektronički račun
+    t8: Tekuće obveze
+  steuern-geld-und-pension:
+    title: Porezi, novac i mirovina
+    intro: Porezna rezidentnost, dvostruko oporezivanje i priznavanje inozemnih mirovina teme su kod kojih treba uključiti hrvatskog stručnjaka.
+    q1: Gdje sam porezni obveznik ako se selim usred godine?
+    q2: Oporezuje li se moja inozemna mirovina u Hrvatskoj?
+    q3: Kako otvaram bankovni račun?
+    t1: Porezna rezidentnost
+    t2: Dvostruko oporezivanje
+    t3: Petogodišnje oslobođenje od poreza na dohodak
+    t4: Inozemni prihodi
+    t5: Inozemne mirovine
+    t6: Priznavanje mirovinskog staža
+    t7: Ugovori o socijalnom osiguranju
+    t8: Bankovni račun
+    t9: Prijenos novca
+  gesundheit-und-pflege:
+    title: Zdravlje i njega
+    intro: Osiguranje počinje ovisno o osnovi na drugi dan. Tko ne isplanira prazninu unaprijed, prvih je tjedana bez pokrića.
+    q1: Od kada sam zdravstveno osiguran u Hrvatskoj?
+    q2: Kako premostiti vrijeme između?
+    q3: Kako pronaći liječnika opće prakse ili pedijatra?
+    t1: Početak osiguranja prema osnovi
+    t2: Prijelazno pokriće
+    t3: Dopunsko osiguranje
+    t4: Pronaći liječnika opće prakse i pedijatra
+    t5: Lijekovi
+    t6: Trudnoća
+    t7: Kronična bolest
+    t8: Njega
+    t9: Pristupačnost
+  kinder-schule-und-ausbildung:
+    title: Djeca, škola i obrazovanje
+    intro: Upis, školski okrug i jezična potpora ovise o prijavi prebivališta. Svjedodžbe iz inozemstva trebaju zaseban postupak.
+    q1: Kako upisujem dijete u školu?
+    q2: Priznaju li se svjedodžbe?
+    q3: Postoji li jezična potpora za djecu bez hrvatskog?
+    t1: Vrtić
+    t2: Upis
+    t3: Školski okrug
+    t4: Priznavanje svjedodžbi
+    t5: Jezična potpora
+    t6: Posebne obrazovne potrebe
+    t7: Troškovi
+    t8: Strukovno obrazovanje
+    t9: Studij
+    t10: Stipendije
+  wohnen-und-regionen:
+    title: Stanovanje i regije
+    intro: Dugoročni najam u obalnim je regijama sezonski oskudan. Naslijeđeno obiteljsko zemljište često ima neraščišćene suvlasnike u zemljišnim knjigama.
+    q1: Smijem li kao stranac kupovati u Hrvatskoj?
+    q2: Što piše u zemljišnim knjigama i zašto je to važno?
+    q3: Kako pronaći godišnji najam na obali?
+    t1: Dugoročni najam
+    t2: Sezonska dostupnost
+    t3: Polog
+    t4: Režije
+    t5: Provjera prije kupnje
+    t6: Kupnja od strane stranaca
+    t7: Zemljišne knjige
+    t8: Naslijeđeno obiteljsko zemljište
+    t9: Neraščišćeni suvlasnici
+    t10: Legalizacija
+    t11: Gradnja
+    t12: Općinski stambeni prostor
+  sprache-und-gemeinschaft:
+    title: Jezik i zajednica
+    intro: "Povratak rijetko propada na prijavi, često na uključivanju: jezik, udruge, ljudi koji vas povedu."
+    q1: Gdje učim hrvatski, online i uživo?
+    q2: Postoje li stipendije za jezične tečajeve?
+    q3: Kako se partner i djeca uključuju?
+    t1: Tečajevi online i uživo
+    t2: Stipendije
+    t3: Razine jezika
+    t4: Svakodnevni jezik
+    t5: Udruge
+    t6: Crkva
+    t7: Sport
+    t8: Mentorstvo
+    t9: Uključivanje partnera i djece
+  umzug-und-mobilitaet:
+    title: Selidba i mobilnost
+    intro: Selidbene stvari, uvoz vozila i vozačka dozvola imaju svaki vlastite rokove od prijave. Prijevoz je najmanji problem.
+    q1: Jesu li moje kućanske stvari oslobođene carine?
+    q2: Mogu li povesti svoj automobil?
+    q3: Moram li zamijeniti vozačku dozvolu?
+    t1: Kućanske stvari
+    t2: Carina i selidbene stvari
+    t3: Uvoz vozila
+    t4: Zamjena vozačke dozvole
+    t5: Kućni ljubimci
+    t6: Prijevoznici
+    t7: Putovanje
+    t8: Struja, voda, internet, telefon
+  leistungen-und-foerderung:
+    title: Mjere i potpore
+    intro: Država, županije i općine potiču povratak, ali rascjepkano. Svaka mjera kod nas nosi stanje, izvor i datum provjere.
+    q1: Koje potpore postoje za povratnike?
+    q2: Smijem li kombinirati više mjera?
+    q3: Koje obveze i obveze povrata postoje?
+    t1: Državne mjere
+    t2: Regionalne i općinske mjere
+    t3: Obitelj
+    t4: Stanovanje
+    t5: Obrazovanje
+    t6: Mobilnost
+    t7: Osnivanje
+    t8: Pravo na potporu
+    t9: Dokazi
+    t10: Kumulacija
+    t11: Obveze
+    t12: Obveze povrata
+situations:
+  familie:
+    title: Dolazim s obitelji
+    intro: Partner i djeca mogu imati različita državljanstva i osnove osiguranja. Svaka osoba ima vlastiti put, kućanstvo je okvir.
+    trap: Zdravstveno osiguranje djece ovisi o osnovi roditelja. Tko prazninu ne isplanira unaprijed, prvih je tjedana bez pedijatra.
+  selbstaendig:
+    title: Želim osnovati djelatnost
+    intro: Neke potpore zahtijevaju zahtjev prije osnivanja, druge unutar nekoliko dana nakon njega. Redoslijed odlučuje o pravu.
+    trap: Prvo osnovati, pa čitati. Tko prijavi djelatnost i zahtjev podnese prekasno, izgubio je potporu za povratnike.
+  pensioniert:
+    title: U mirovini sam
+    intro: Mirovina iz inozemstva, zdravstveno osiguranje bez poslodavca, dvostruko oporezivanje. Kod poreza i socijalnog osiguranja treba uključiti hrvatskog stručnjaka.
+    trap: Sa SAD-om, Argentinom i Brazilom ne postoji ugovor o izbjegavanju dvostrukog oporezivanja. Mirovine iz tih država prijavljuju se do 31.1. za prethodnu godinu.
+  ohne-pass:
+    title: Nemam hrvatsku putovnicu
+    intro: "Bez hrvatskog državljanstva sve ovisi o boravišnom putu: sloboda kretanja za EU, EGP i Švicarsku, potvrda za potomke iseljenika, inače boravak radi rada ili digitalni nomad."
+    trap: Zamijeniti potvrdu za iseljenike sa stjecanjem državljanstva. Ona je boravišni put i može teći usporedno s postupkom za državljanstvo.
+  allein:
+    title: Dolazim sam
+    intro: "Najkraći put: status, OIB, prijava, osiguranje. Nakon toga važno je uključivanje, jer ondje povratak najčešće propada."
+    trap: Petu fazu, ostanak, svi izostavljaju. Jezik, udruge i ljudi koji vas povedu od početka spadaju u plan.
+  arbeitgeber-im-ausland:
+    title: Radim za poslodavca u inozemstvu
+    intro: Tko iz Hrvatske radi za poslodavca u inozemstvu, ovisno o državljanstvu treba drukčiji boravišni put, a porezno pitanje nije trivijalno.
+    trap: Porezna rezidentnost nakon 183 dana. Tko se seli tijekom godine, možda je porezni obveznik u dvije države. To razjašnjava porezni stručnjak, ne ova stranica.
+cases:
+  familie:
+    name: Lucía, 32, Buenos Aires
+    line: Pradjedovi iz Dalmacije, bez hrvatske putovnice, partner bez veze, jedno dijete školske dobi.
+    shapes: Status je otvoren, a lanac isprava kroz četiri generacije najdulji je pojedinačni korak. Njezin partner ide potpuno drugim putem.
+    first: Dati provjeriti može li se lanac podrijetla potpuno dokazati. Ne zdravstveno osiguranje koje je tražila.
+  selbstaendig:
+    name: Marko, 41, Stuttgart
+    line: Hrvatska putovnica, partnerica također, dvoje djece, želi postati samostalan.
+    shapes: Status je razjašnjen, put je kratak. Odlučujući su redoslijed između zahtjeva za potporu i osnivanja te to da oslobođenje od poreza kod samostalne djelatnosti možda uopće ne vrijedi.
+    first: Pročitati važeći javni poziv prije nego što se išta prijavi.
+  arbeitgeber-im-ausland:
+    name: Anna, 29, Beč
+    line: Građanka EU-a bez hrvatskih korijena, sama, iz Hrvatske radi za austrijskog poslodavca.
+    shapes: "Boravak nije kompliciran. Njezin je rizik porezni: rezidentnost, dvostruko oporezivanje i socijalno osiguranje pri radu za inozemnog poslodavca, s povratnim učinkom."
+    first: Ovo razjasniti prije selidbe, ne poslije.
+  pensioniert:
+    name: Ivan, 58, Toronto
+    line: Hrvatska putovnica, partnerica bez nje, živi od kanadske mirovine, selidba otvorena.
+    shapes: Njegova partnerica ide drugim putem od njega. Zdravstveno osiguranje kod njega ne proizlazi iz zaposlenja; ondje nastaju praznine. Potpore za povratnike za rad i osnivanje na njega se ne odnose.
+    first: Razjasniti priznavanje mirovinskog staža i osnovu osiguranja, uz ugovor između Kanade i Hrvatske.
+  ohne-pass:
+    name: Sofía, 26, Santiago de Chile
+    line: Ne zna je li njezina baka imala državljanstvo. Sama, selidba kasnije ili neodređeno.
+    shapes: Plan se gotovo isključivo sastoji od zadataka razjašnjenja, i to je ispravno. Pokazuje joj koje tri informacije treba prije nego što se išta može planirati.
+    first: Tri konkretna, izvediva koraka umjesto uvjerenja da bi već mogla planirati.
+ui:
+  shell:
+    tagline: Život u Hrvatskoj
+    stage: Testna faza
+    stage_text: Primjerna pravila bez stručnog odobrenja, stručna provjera kao rezervirano mjesto. Nije namijenjeno korisnicima.
+    report: Prijavi pogrešku
+    skip: Skoči na sadržaj
+    nav_wissen: Znanje
+    nav_orte: Mjesta
+    nav_weg: Moj put
+    nav_about: O nama
+    nav_search: Pretraga
+    cta: Pokreni brzu provjeru
+    language: Jezik
+    contact_title: Pronašli ste nešto što nije točno?
+    contact_text: "Pogrešan rok, pogrešan podatak, mrtva poveznica: svaku prijavu pregledamo u roku od dva radna dana."
+    contact_how: Kako radimo
+    foot_claim: "Život u Hrvatskoj: redoslijed za povratak i useljenje, osoba po osoba."
+    foot_disclaimer: Ova stranica ne zamjenjuje pravno ni porezno savjetovanje. O zahtjevima uvijek odlučuje nadležno tijelo.
+    foot_stage: Testna faza. Primjerna pravila bez stručnog odobrenja (ADR-0004).
+    foot_wissen: Znanje
+    foot_all: Svih dvanaest rubrika
+    foot_glossary: Pojmovnik
+    foot_figures: Brojke i činjenice
+    foot_tools: Alati
+    foot_check: "Brza provjera: moj put"
+    foot_places: Otkrij mjesta
+    foot_benefits: Baza mjera
+    foot_contacts: Kontaktna mjesta
+    foot_search: Pretraga
+    foot_about: O nama
+    foot_mission: Zadaća i neovisnost
+    foot_principles: Urednička načela
+    foot_contact: Kontakt
+    working_copy_title: Radna verzija nedostaje
+    working_copy_text: Ova stranica još ne postoji na vašem jeziku. Vidite njemačku verziju.
+    translation_note: Radna verzija. Mjerodavna je njemačka verzija; hrvatski pravni tekstovi vrijede u izvorniku.
+    legal_note: Pravni tekstovi postoje samo na njemačkom.
+  home:
+    title: "povratnik.com: Život u Hrvatskoj"
+    description: "Povratak i useljenje u Hrvatsku pravim redoslijedom: boravak, prijava, osiguranje, obitelj, potpore. Osobni plan u pregledniku, bez računa."
+    hero_title: Natrag u Hrvatsku ili prvi put u nju. Pravim redoslijedom.
+    hero_lede: "Boravak, prijava, osiguranje, škola, potpore: što dolazi prvo, nigdje ne piše. Ovdje dobivate redoslijed za svoje kućanstvo, osoba po osoba."
+    hero_wissen: Znanje po temama
+    hero_note: Bez računa. Vaši odgovori ostaju u vašem pregledniku.
+    hero_alt: Žena i njezin otac razvrstavaju dokumente za stolom u starom gradu.
+    quick_title: Tražite nešto određeno?
+    ways_title: Tri puta do istog znanja
+    ways_help: Po temi, po mjestu ili po vašem redoslijedu.
+    way_check_title: Moj put
+    way_check_text: "Šest pitanja o vašem kućanstvu, zatim prvi plan: što prvo, koji rok što pokreće, što ostaje otvoreno."
+    way_wissen_title: Znanje po temama
+    way_wissen_text: "Dvanaest rubrika, od statusa do potpora. Svaka tematska stranica s istom maskom: kratak odgovor, za koga vrijedi, nadležno tijelo, stanje."
+    way_wissen_link: Na rubrike
+    way_orte_title: Otkrij mjesta
+    way_orte_text: Općine sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem, datumom provjere i dubinom podataka, bez rang-liste.
+    way_orte_link: Mjesta i mjere
+    keys_title: Gotovo sve ovisi o četiri ključa
+    keys_help: I to ovim redom. To je crvena nit cijele stranice.
+    key1_title: Status
+    key1_sub: Tko sam pravno?
+    key1_text: Odlučuje o boravišnom putu, pristupu radu, školi i potporama.
+    key2_title: OIB
+    key2_text: Porezni broj. Bez njega nema bankovnog računa, ugovora o najmu, zahtjeva ni ugovora o radu.
+    key3_title: Prijava
+    key3_text: Pokreće rokove i kod mnogih je potpora mjerodavan datum, ne dolazak.
+    key4_title: Osiguranje
+    key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
+    phases_title: Pet faza, jednu svi izostavljaju
+    phases_help: "Peta je najvažnija: ondje povratak propada, ne na prijavi."
+    phase1_time: 12 do 6 mjeseci prije
+    phase1_text: Je li izvedivo? Koji statusni put? Koje mjesto? Je li novca dovoljno?
+    phase2_time: 9 do 2 mjeseca prije
+    phase2_text: Isprave, boravak, osiguranje, škola, stan, zemlja podrijetla.
+    phase3_time: 4 tjedna prije do dolaska
+    phase3_text: Prijevoz, prijelazno pokriće, putovanje, prvi termini.
+    phase4_time: prvih 8 tjedana
+    phase4_text: Prijava, osiguranje, rad, škola, svakodnevica.
+    phase5_time: od 3. do 24. mjeseca
+    phase5_text: Produljenja, obveze iz potpora, jezik, uključivanje.
+    running_title: Što trenutačno teče
+    running_help: Otvoreni rokovi i aktualne mjere, sa stanjem i datumom provjere.
+    running_state: teče
+    running_national: državno
+    running_until: do {date}
+    running_checked: provjereno {date}
+    running_note: Općinski unosi u testnoj fazi potječu iz fiktivnih testnih općina.
+    running_all: Sve mjere
+    why_title: Zašto iznos sam po sebi ništa ne govori
+    why_text: Potpora može biti otvorena, najavljena ili iscrpljena. Vrijednost može biti poznata, dokumentirana i ipak zastarjela. Zato kod nas svaki podatak nosi izvor, datum provjere i stanje. Gdje nešto ne znamo, to piše vidljivo, umjesto praznine.
+    why_note: O zahtjevima uvijek odlučuje nadležno tijelo. Plan pokazuje put, ne rezultat.
+    states_title: Kako čitati stanja
+    state_matches: Uvjeti prema vašim podacima odgovaraju.
+    state_unclear: Nedostaje podatak ili mora odlučiti stručnjak.
+    state_missing: Uvjet trenutačno nije ispunjen.
+    state_unknown: Ovu vrijednost još ne znamo.
+    situations_title: Ulazi prema životnoj situaciji
+    situations_help: Iste teme, redoslijedom koji vama odgovara.
+    cases_title: Pet primjernih putova
+    cases_help: Fiktivni profili iz koncepta. Prava iskustva slijede čim testne osobe upotrijebe plan.
+    cases_label: Primjer, fiktivno
+    cases_first: "Prvi korak:"
+  wissen:
+    title: Znanje po temama
+    description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
+    lede: "Dvanaest rubrika, od statusa do potpora. Svaka tematska stranica ima istu masku: kratak odgovor, za koga vrijedi, za koga ne vrijedi, nadležno tijelo, stanje. Nakon druge stranice znate gdje tražiti."
+    claim: Stranice tijela objašnjavaju svoj vlastiti isječak. Mi objašnjavamo kojim redoslijedom isječci idu zajedno.
+    pages_one: "{n} tematska stranica"
+    pages_many: "{n} tematskih stranica"
+    topics_wip: "{n} tema u pripremi"
+    depth_title: Dvije razine dubine, prepoznatljive
+    depth_text: "Oko dvadeset tema razrađuje se potpuno: one na kojima ljudi propadaju ili o kojima ovisi novac. Sve ostale dobivaju provjereni sažetak s ulazom, nadležnošću i izravnom poveznicom. Obje su razine označene, a nijedna stranica ne ide online bez izvora, datuma provjere i stručnog odobrenja."
+    state_title: Stanje rubrika
+    state_text: Struktura stoji, tematske su stranice u pripremi. Do stručnog odobrenja svaka rubrika pokazuje koje teme dolaze i na koja će pitanja odgovoriti.
+    more_title: Daljnji ulazi
+    more_situations: Prema životnoj situaciji
+    more_situations_link: Šest ulaza
+    more_glossary: Pojmovnik službenih pojmova
+    more_glossary_link: Pojmovnik
+    more_countries: Prema zemlji podrijetla
+    more_countries_link: Šest zemalja
+    crumb: Znanje
+    crumb_rubric: Rubrika {n}
+    questions: Tipična pitanja
+    topics_title: Teme u ovoj rubrici
+    remaining_more: Daljnje teme, još u pripremi
+    remaining_only: Teme, još u pripremi
+    remaining_help: Svaka se tema pojavljuje čim ima izvor i datum provjere.
+    wip: u pripremi
+    requires: Prije potrebno
+    followed: Zatim slijedi
+    cta_title: Što vrijedi za mene?
+    cta_text: "Brza provjera razvrstava teme prema vašem kućanstvu: tko ima koji put i što dolazi prvo."
+    mask_title: Tako je izgrađena svaka tematska stranica
+    mask_answer: Kratak odgovor
+    mask_answer_v: u dvije do tri rečenice
+    mask_for: Vrijedi za
+    mask_for_v: ciljna skupina, izričito
+    mask_notfor: Ne vrijedi za
+    mask_notfor_v: najčešća zamjena
+    mask_authority: Nadležno
+    mask_authority_v: tijelo ili ustanova
+    mask_state: Stanje
+    mask_state_v: datum provjere, izvor, stanje
+    mask_mistake: Česta zabluda
+    mask_mistake_v: pogreška koju mnogi rade
+    mask_notdecided: Što se ovdje ne odlučuje
+    mask_notdecided_v: što odlučuje stručnjak
+  topic:
+    state_checked: stručno provjereno
+    state_draft: Osnove postoje, stručno neprovjereno
+    stand: Stanje {date}
+    missing: još nije istraženo
+    applies: Vrijedi za
+    not_applies: Ne vrijedi za
+    authority: Nadležno
+    prerequisites: Uvjeti
+    steps: Postupak
+    documents: Isprave
+    duration: Trajanje i troškovi
+    deadlines: Rokovi
+    terms: Službeni pojmovi
+    requires: Prije potrebno
+    followed: Zatim slijedi
+    cta_title: Vrijedi li to za mene?
+    cta_text: Brza provjera smješta ovu temu u vaš put, osoba po osoba.
+    mistake: Česta zabluda
+    not_decided: Što se ovdje ne odlučuje
+    open_points: Otvorene točke
+    open: otvoreno
+    validity: Valjanost
+    stand_title: Stanje i izvori
+    label: Oznaka
+    source: Izvorni izvor
+    source_meta: "{publisher}, razina {tier}. Mjesto: {reference}. Provjereno {date}."
+    valid_from: Vrijedi od
+    valid_until: do {date}
+    next_check: Sljedeća provjera
+    report: Prijavi pogrešku
+    report_subject: "Pogreška: {title}"
+  country:
+    crumb: Prema zemlji podrijetla
+    others: Druge zemlje podrijetla
+    what_title: Što je važno za odlazak
+    what_help: Hrvatski postupak i zahtjevi zemlje podrijetla dvije su različite stvari.
+    representation: Hrvatsko predstavništvo
+    apostille: Apostille
+    social_security: Socijalno osiguranje
+    double_taxation: Dvostruko oporezivanje
+    deregistration: Obveze odjave
+    duration: Realna trajanja
+    unknown: nepoznato
+    not_collected: nije prikupljeno
+    outdated: zastarjelo
+    followed: Zatim slijedi u Hrvatskoj
+    cta_title: Vaš put, osoba po osoba
+    cta_text: Brza provjera pita za zemlju podrijetla svake osobe u kućanstvu.
+  situation:
+    crumb: Životna situacija
+    trap_title: Gdje ovdje često zapne
+    path_title: Vaš put ovim redoslijedom
+    rubrics_title: Ove rubrike dodatno vrijede
+    cta_title: Osobno umjesto općenito
+    cta_text: Brza provjera od ovog puta radi vaš plan, osoba po osoba, s rokovima.
+  glossary:
+    title: Pojmovnik službenih pojmova
+    description: "Hrvatski službeni pojmovi u izvorniku, razumljivo objašnjeni: OIB, prebivalište, domovnica, HZZO i više."
+    crumb: Pojmovnik
+    lede: Hrvatski pojam ostaje, jer ga trebate na šalteru. Pokraj njega piše što znači.
+    count: "{n} pojmova iz {pages} tematskih stranica"
+  orte:
+    title: Otkrij mjesta
+    description: Općine u Hrvatskoj sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem i datumom provjere.
+    lede: Koja općina potiče povratnike, gdje pedijatar još prima pacijente, gdje ima godišnjeg najma? Profili mjesta sa stanjem i datumom provjere, bez rang-liste.
+    all_benefits: Sve mjere
+    compare: Usporedi mjesta
+    image_alt: Glavni trg malog grada u Hrvatskoj s općinskom zgradom i pekarnicom.
+    fictional_title: Fiktivne testne općine
+    fictional_text: Mjesta na ovoj stranici su izmišljena i pokazuju kako izgleda profil mjesta, sa svim stanjima. Prave općine slijede s bazom podataka. Nijedna se vrijednost ne odnosi na stvarno mjesto. Podaci o mjestima u testnoj fazi postoje samo na njemačkom.
+    filter_label: Filtriraj mjesta
+    filter_region: Položaj
+    filter_all: sva
+    coast: Obala
+    inland: Unutrašnjost
+    filter_target: Mjere za
+    target_families: Obitelji
+    target_returnees: Povratnike i osnivače
+    target_housing: Stanovanje
+    filter_state: Stanje
+    only_open: samo s otvorenim mjerama
+    no_js: Bez JavaScripta popis prikazuje sva mjesta.
+    count_one: "{n} mjesto"
+    count_many: "{n} mjesta"
+    open_one: "{n} otvorena mjera"
+    open_many: "{n} otvorenih mjera"
+    more: "{n} daljnjih"
+    depth: Dubina podataka {n} od {total} podataka prikupljeno
+    empty: Nijedno mjesto ne odgovara ovom odabiru. To ne znači da nema ponuda, samo da ih nismo prikupili.
+    ranking_title: Bez rang-liste, bez ukupne ocjene
+    ranking_text: Dva do tri mjesta mogu se usporediti jedno pokraj drugog, kao sirova informacija. Ukupna bi vrijednost uvijek nametnula naše vaganje, a ne vaše. Što nedostaje, piše kao «nepoznato», a ne kao prazno polje. Mjesto s malo podataka nikad ne izgleda kao mjesto bez ponuda, zato svako mjesto pokazuje svoju dubinu podataka.
+    to_compare: Na usporedbu
+    municipality_title: Zastupate općinu?
+    municipality_text: Upišite svoje mjere za povratnike. Svaki se podatak prikazuje s izvorom, datumom provjere i stanjem.
+    municipality_cta: Upiši općinu
+    crumb: Mjesta
+  place:
+    location: Položaj
+    population: Stanovnici
+    index: Indeks razvijenosti
+    arrival: Dolazak
+    fictional_title: Fiktivna testna općina
+    fictional_text: Ovo je mjesto izmišljeno. Pokazuje strukturu profila mjesta sa svim stanjima. Nijedna se vrijednost ne odnosi na stvarno mjesto.
+    benefits_title: Mjere općine
+    benefits_help: Četiri vremenska podatka, jedno stanje. O zahtjevu odlučuje općina.
+    benefits_empty: Za ovo mjesto nisu evidentirane mjere. To ne znači da ih nema.
+    target: Za koga
+    amount: Iznos
+    conditions: Uvjeti
+    period: Razdoblje prijave
+    period_unknown: Razdoblje prijave nepoznato
+    period_range: "od {from} do {until}"
+    period_open: otvoreno
+    period_running: u tijeku
+    budget: Proračun
+    binding: Obveza
+    source: "Izvor: {source}"
+    checked: Provjereno {date}
+    family_title: Obitelj i obrazovanje
+    kindergarten: Vrtić
+    kindergarten_capacity: Slobodna mjesta
+    primary: Osnovna škola
+    secondary: Srednja škola
+    language_support: Jezična potpora
+    costs: Troškovi
+    health_title: Zdravlje
+    gp: Liječnik opće prakse
+    gp_accepting: Prima nove pacijente
+    pediatrician: Pedijatar
+    pharmacy: Ljekarna
+    clinic: Najbliža bolnica
+    housing_title: Stanovanje
+    rent: Godišnji najam
+    price: Razina cijena
+    municipal: Općinski stanovi
+    land: Građevinsko zemljište
+    work_title: Rad
+    sectors: Djelatnosti
+    commute: Putovanje na posao
+    commute_note: Vrijeme vožnje, ne zračna linija
+    minutes: "{n} minuta"
+    employers: Poslodavci
+    daily_title: Svakodnevica i uključivanje
+    internet: Internet
+    transport: Javni prijevoz
+    courses: Jezični tečajevi
+    clubs: Udruge
+    church: Crkva
+    shopping: Kupovina
+    surroundings_title: Dostupna okolica
+    not_collected: nije prikupljeno
+    unknown: nije poznato
+    arrival_title: Dolazak
+    office: Ured
+    function: Funkcija
+    languages: Jezici
+    channel: Način odgovora
+    changes_title: Promjene
+    changes_note: Najava nije stanje. Tek «u radu» se računa.
+    cta_title: Odgovara li ovo mjesto mom putu?
+    cta_text: Brza provjera pokazuje koje mjere prema vašim podacima dolaze u obzir.
+    cta_compare: Usporedi s drugim mjestima
+    state_open: otvoreno
+    state_announced: najavljeno
+    state_closed: zatvoreno
+    state_exhausted: iscrpljeno
+    state_unconfirmed: nepotvrđeno
+    state_budget_unknown: proračun nepoznat
+    change_announced: najavljeno
+    change_decided: odlučeno
+    change_funded: financirano
+    change_under_construction: u izgradnji
+    change_operating: u radu
+    fact_unknown: nepoznato
+    fact_not_collected: nije prikupljeno
+    fact_outdated: zastarjelo
+    fact_not_applicable: nije primjenjivo
+    fact_not_present: ne postoji
+    fact_stand: Stanje {date}
+    fact_outdated_note: Stanje {date}. Trenutačna visina nije razjašnjena.
+    fact_clarify: "Tako se može razjasniti: upit općini, odgovor se ovdje pojavljuje s datumom."
+  compare:
+    title: Usporedi mjesta
+    description: Dva do tri mjesta jedno pokraj drugog, kao sirova informacija bez ukupne ocjene.
+    crumb: Usporedba
+    lede: Sirova informacija jedna pokraj druge, bez ukupne ocjene. Ukupna bi vrijednost nametnula naše vaganje, a ne vaše.
+    fictional_text: Sva mjesta u ovoj usporedbi su izmišljena. Pokazuju prikaz, ne stvarne prilike.
+    feature: Obilježje
+    location: Položaj
+    population: Stanovnici
+    index: Indeks razvijenosti
+    open_benefits: Otvorene mjere
+    of: "{n} od {total}"
+    kindergarten: Vrtić, slobodna mjesta
+    primary: Osnovna škola
+    secondary: Srednja škola
+    gp: Liječnik opće prakse prima nove pacijente
+    pediatrician: Pedijatar
+    clinic: Najbliža bolnica
+    rent: Godišnji najam
+    price: Razina cijena
+    land: Građevinsko zemljište
+    commute: Putovanje na posao
+    internet: Internet
+    transport: Javni prijevoz
+    courses: Jezični tečajevi
+    depth: Dubina podataka
+  benefits:
+    title: Mjere i potpore
+    description: Sve evidentirane potpore sa stanjem, razdobljem prijave i datumom provjere, bez zaobilaženja preko karte.
+    crumb: Mjere
+    lede: Za sve koji znaju što traže, ali još ne gdje. Svaki unos sa stanjem, razdobljem prijave i datumom provjere.
+    fictional_text: Sve mjere ovdje su izmišljene. Državni programi poput Biram Hrvatsku nalaze se pod
+    filter_label: Filtriraj mjere
+    filter_state: Stanje
+    count_one: "{n} mjera"
+    count_many: "{n} mjera"
+    empty: Nijedna mjera u ovom stanju nije evidentirana.
+  about:
+    title: "O nama: povratnik.com"
+    description: Tko stoji iza povratnik.com, kako se financiramo, kako provjeravamo i zašto plaćene usluge ne mijenjaju sadržaje.
+    hero: Razumjeti, usporediti, doći.
+    lede: Stranice tijela objašnjavaju svaka svoj isječak. Nitko ne objašnjava kojim redoslijedom isječci idu zajedno i što o čemu ovisi. Upravo to preuzimamo mi.
+    mission_title: Zadaća i neovisnost
+    mission_1: "povratnik.com vodi EmotionFrame GmbH u Švicarskoj. Orijentacija je besplatna: opće informacije, osnovni profil svake općine, činjenične ispravke i neutralni usporedni podaci ne koštaju ništa i nikad se ne stavljaju iza naplate."
+    mission_2: "Plaćaju se usluge održavanja: općine koje daju strukturirano pripremiti, prevesti i stalno provjeravati svoje ponude, stručni partneri s transparentnim profilom, poslodavci s aktualnim radnim mjestima. Općina koja ne plaća ne drži se umjetno nepotpunom. Plaćene usluge ne mijenjaju stručne rezultate, nema plaćenog pozicioniranja, a oglašavanje se označava."
+    households_title: Kućanstva umjesto pojedinaca
+    households_text: Partner i djeca mogu imati različita državljanstva, boravišne putove i osnove osiguranja. Zato je kod nas osoba jedinica planiranja, a kućanstvo okvir.
+    stay_title: Ostati nakon dolaska
+    stay_text: "Prvih dvanaest mjeseci dio je proizvoda: učenje jezika, promjena škole, uključivanje, traženje posla partnera, produljenja. Uspjeh ne završava prijavom."
+    always_title: Što uvijek vrijedi
+    always_1: Bez naplate ispred ključnih informacija
+    always_2: Bez plaćenog pozicioniranja
+    always_3: Bez rang-liste općina
+    always_4: Nijedan odgovor ne napušta preglednik
+    always_5: Nijedno pravilo bez poimeničnog stručnog odobrenja
+    check_title: Kako provjeravamo
+    check_text: "Svaka je izjava jedna od tri vrste i tako se označava: nalaz s navedenim izvorom i datumom provjere, pravilo proizvoda koje iz njega izvodimo, ili otvorena točka koja treba razjašnjenje pojedinačnog slučaja ili tijela. Nepronađena ponuda nikad se ne prikazuje kao nepostojeća."
+    hierarchy_title: Hijerarhija izvora
+    h1: Službena pravna objava u izvorniku, čitana sa svojim izmjenama
+    h2: Nadležno hrvatsko tijelo
+    h3: Izvorna općinska odluka ili natječaj
+    h4: Nadležno tijelo dosadašnje države stanovanja
+    h5: Pisana stručna obavijest tijela, s datumom i pretpostavkama slučaja
+    h6: Stručne publikacije i savjetodavni prilozi
+    h7: "Tisak i iskustva: kontekst, nikad osnova za pravo"
+    hierarchy_note: Niža razina nikad ne opovrgava višu. Novinski članak nikad nije dokaz roka, iznosa ili uvjeta.
+    cycles_title: Ciklusi provjere
+    c1: Otvoreni javni pozivi
+    c1_v: tjedno tijekom trajanja
+    c2: Boravak, porezi, osiguranje
+    c2_v: mjesečni pregled promjena
+    c3: Općinske mjere
+    c3_v: tromjesečno i kod odluka
+    c4: Kontakti i ustanove
+    c4_v: polugodišnje
+    cycles_note: Propušteni termin provjere stvara upozorenje, ne prešutno daljnje korištenje.
+    roles_title: Tko je odgovoran
+    role_product: Odgovornost za proizvod
+    role_tech: Tehnička odgovornost
+    role_review: Stručna provjera prava i poreza
+    role_review_v: "Testna faza: ništa ne odobrava. Traži se hrvatski stručnjak za poimenično odobrenje svakog pravnog pravila."
+    placeholder: Rezervirano mjesto
+    open: otvoreno
+    role_editorial: Stručna redakcija na hrvatskom
+    role_errors: Kontakt za pogreške
+    role_errors_v: pregled u roku od dva radna dana
+    stage_title: Testna faza
+    stage_text: Ne postoji stručno odobreno pravno pravilo. Brza provjera radi s označenim primjernim pravilima kako bi se portal mogao provjeriti. Nijedan rezultat ne govori o vašoj stvarnoj situaciji. Provjera sustavom umjetne inteligencije ne zamjenjuje kvalificiranog neovisnog stručnjaka.
+    join_title: Sudjelujte
+    join_municipality: Upiši općinu
+    join_expert: Postani stručni provjeravatelj
+    join_report: Prijavi pogrešku
+    request: Upit
+    mail: E-pošta
+  search:
+    title: "Pretraga: povratnik.com"
+    description: Pretraga po temama, rubrikama, mjestima i službenim pojmovima. Radi u pregledniku.
+    heading: Pretraga
+    lede: Teme, rubrike, životne situacije, zemlje, mjesta i službeni pojmovi. Pretraga radi u vašem pregledniku, nijedan se pojam ne šalje.
+    label: Pojam za pretragu
+    placeholder: OIB, zdravstveno osiguranje, apostille, Biram Hrvatsku
+    button: Traži
+    entries: "{n} unosa"
+    entry: "{n} unos"
+    for: za «{q}»
+    empty: Ništa nije pronađeno. To ne znači da tema ne postoji, samo da još nemamo stranicu o njoj.
+    empty_link: Recite nam što ste tražili.
+    kind_topic: Tematska stranica
+    kind_rubric: Rubrika
+    kind_situation: Životna situacija
+    kind_country: Zemlja podrijetla
+    kind_place: Mjesto (fiktivno)
+    kind_term: Službeni pojam
+  figures:
+    title: "Brojke i činjenice: povratnik.com"
+    description: Povratak i useljenje u Hrvatsku u brojkama, sa stanjem i izvorom.
+    heading: Brojke i činjenice
+    lede: Svaka brojka nosi stanje i izvor. Gdje brojka nedostaje, to piše, umjesto procjene.
+    figure: Pokazatelj
+    value: Vrijednost
+    stand: Stanje
+    source: Izvor
+    unknown: nepoznato
+    checked: provjereno {date}
+    next_check: Sljedeća provjera {date}
+  contacts:
+    title: "Kontaktna mjesta: povratnik.com"
+    description: Tijela u Hrvatskoj, konzulati, općinski uredi za dobrodošlicu i udruge, s temama za koje su nadležni.
+    heading: Kontaktna mjesta
+    lede: Koje je tijelo za što nadležno, s ulazom prema tijelu i tematskim stranicama koje na njega upućuju.
+    authorities_title: Tijela u Hrvatskoj
+    authorities_help: Ulazne stranice tijela. Točno mjesto u propisu stoji na svakoj tematskoj stranici.
+    consulates_title: Konzulati i predstavništva
+    consulates_text: Hrvatska predstavništva u zemlji podrijetla izdaju pisma preporuke, zaprimaju zahtjeve za OIB i ovjeravaju. Adrese i nadležnosti potvrđuju se sa svakim predstavništvom i zatim upisuju na stranicu zemlje.
+    confirmed: potvrđeno
+    not_collected: nije prikupljeno
+    municipal_title: Općinski uredi za dobrodošlicu
+    recorded: evidentirano
+    unknown: nepoznato
+    clubs_title: Udruge i mreže dijaspore
+    clubs_text: Prikupljaju se po mjestu i zemlji podrijetla.
+    wip: u pripremi
+  weg:
+    title: "Moj put u Hrvatsku: brza provjera"
+    description: Šest pitanja, zatim vaš prvi plan. Odgovori ostaju u pregledniku.
+    promise_1: Bez računa, bez registracije
+    promise_2: Odgovori ostaju u ovom pregledniku
+    promise_3: Svaki podatak u planu s izvorom i datumom provjere
+    promise_4: «Još ne znam» uvijek je odgovor
+  map:
+    title: Pregledna karta Hrvatske sa županijama i evidentiranim mjestima
+    hover_default: Dodirnite županiju ili prijeđite pokazivačem
+    source: "Granice: {source}. Mjesta su u testnoj fazi fiktivno smještena."
+    section_title: Karta
+    section_help: Županije i evidentirana mjesta. Popis ispod je potpuni prikaz.
+    toggle: Prikaži kartu
+    region_crumb: Regija
+    region_title: "{name} županija"
+    region_lede: Životna stvarnost umjesto turizma, za odabir mjesta. Tržište rada, opskrba, dostupnost, cijene, škole, bolnice, veze, regionalni programi i iskren odjeljak o nedostacima.
+    region_places: Evidentirana mjesta u ovoj županiji
+    region_places_empty: Za ovu županiju još nije evidentirano nijedno mjesto. To ne znači da nema ponuda.
+    region_facts: Što će ovdje stajati
+    region_fact_1: Tržište rada i odredišta putovanja na posao
+    region_fact_2: Opskrba liječnicima, ljekarnama i bolnicama
+    region_fact_3: Dostupnost i veze
+    region_fact_4: Razina cijena za najam i kupnju
+    region_fact_5: Gustoća škola i bolnica
+    region_fact_6: Regionalni programi sa stanjem
+    region_fact_7: Nedostaci regije, iskreno imenovani
+    region_wip: nije prikupljeno
+    region_others: Druge županije
+  notfound:
+    title: Stranica nije pronađena
+    text: Ova adresa ne postoji ili više ne postoji. Početna stranica vodi do sva tri puta.
+    home: Na početnu stranicu

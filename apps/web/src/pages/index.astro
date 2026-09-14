@@ -1,104 +1,348 @@
 ---
-// Startseite, reduziert auf das, was in M2a existiert. Wissen und Orte werden als
-// sichtbar im Aufbau gezeigt, nicht als Attrappe (designsystem.md 3, CLAUDE.md 10).
+// Startseite nach inhaltskonzept.md 3 und designsystem.md 2.0: Aufmacher mit Foto,
+// Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
+// läuft, die Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
+// Sprache (ui.home.*), Pfade mit Sprachpräfix.
+import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
+import { RUBRICS, rubricText } from "../lib/rubrics.ts";
+import { SITUATIONS, situationText } from "../lib/situations.ts";
+import { CASES, caseText } from "../lib/cases.ts";
+import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+import hero from "../assets/hero-dokumente.webp";
+import ort from "../assets/ort-hauptplatz.webp";
+
+const { lang, texts, u, p } = pageContext(Astro);
+const heroImg = await getImage({ src: hero, width: 960, format: "webp", quality: 62 });
+const pages = loadPages(CONTENT_DIR, lang);
+const byId = new Map(pages.map((x) => [x.id, x]));
+// Schnelleinstiege: Themenseiten, in der Sprache oder als deutsche Fassung.
+const chips = ["oib", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "wohnsitz-anmelden", "krankenversicherung", "lohnsteuerbefreiung", "biram-hrvatsku", "schule-und-zeugnisse", "fuehrerschein-umschreiben"]
+  .map((id) => byId.get(id))
+  .filter((x): x is NonNullable<typeof x> => !!x);
+
+// Was gerade läuft: offene und angekündigte Leistungen mit Antragszeitraum, dazu
+// Themenseiten mit befristeter Gültigkeit. Der Block ist der Grund für Wiederbesuche.
+const places = loadPlaces();
+const running = places
+  .flatMap((pl) => pl.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(pl), href: p(`/orte/${pl.id}`), until: b.application.until, state: b.program_state, checked: b.checked })))
+  .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
+const dated = pages.filter((x) => x.validity.valid_until.kind === "date");
+const stateLabel = (s: string) => u(`place.state_${s}`);
+const elig = texts.eligibility as Record<string, string>;
+const phaseNames = texts.phases as Record<string, string>;
 ---
 
-<Base
-  title="povratnik.com: Leben in Kroatien"
-  description="Rückkehr und Auswanderung nach Kroatien in der richtigen Reihenfolge: Aufenthalt, Meldung, Versicherung, Familie, Förderung. Persönlicher Plan im Browser, ohne Konto."
-  current="start"
->
-  <section class="band">
-    <div class="container grid">
-      <div class="col-wide">
-        <h1>Nach Kroatien zurück oder neu dorthin: in der richtigen Reihenfolge.</h1>
-        <p class="lede">
-          Wer nach Kroatien zieht, muss Aufenthalt, Meldung, Versicherung, Schule und
-          Förderung in einer bestimmten Reihenfolge angehen. Diese Reihenfolge steht
-          nirgends. Hier bekommen Sie sie für Ihren Haushalt, Person für Person.
-        </p>
-        <p>
-          <a class="button button--primary" href="/mein-weg">Kurzcheck starten, sechs Fragen</a>
-        </p>
-        <p class="soft">
-          Ohne Konto. Ihre Antworten bleiben in Ihrem Browser und werden nirgendwohin
-          übertragen.
-        </p>
+<Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
+  <section class="hero">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("home.hero_title")}</h1>
+        <p class="lede">{u("home.hero_lede")}</p>
+        <div class="hero__actions">
+          <a class="button button--light" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button button--outline-light" href={p("/wissen")}>{u("home.hero_wissen")}</a>
+        </div>
+        <p class="hero__note">{u("home.hero_note")}</p>
+      </div>
+      <div class="hero__media">
+        <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
       </div>
     </div>
   </section>
 
+  <section class="band band--surface quick">
+    <div class="container">
+      <h2 class="quick__title">{u("home.quick_title")}</h2>
+      <ul class="chips">
+        {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.ways_title")}</h2>
+        <p class="soft">{u("home.ways_help")}</p>
+      </div>
+      <ul class="cards cards--ways">
+        <li class="card card--link">
+          <div class="card__media">
+            <Image src={hero} alt="" width={640} height={427} format="webp" loading="lazy" />
+          </div>
+          <div class="card__body">
+            <h3><a href={p("/mein-weg")}>{u("home.way_check_title")}</a></h3>
+            <p>{u("home.way_check_text")}</p>
+            <span class="arrow-link">{u("shell.cta")}</span>
+          </div>
+        </li>
+        <li class="card card--link">
+          <div class="card__media card__media--list" aria-hidden="true">
+            <ol>
+              {RUBRICS.slice(0, 5).map((r) => <li><span class="mono">{r.number}</span> {rubricText(r, texts).title}</li>)}
+            </ol>
+          </div>
+          <div class="card__body">
+            <h3><a href={p("/wissen")}>{u("home.way_wissen_title")}</a></h3>
+            <p>{u("home.way_wissen_text")}</p>
+            <span class="arrow-link">{u("home.way_wissen_link")}</span>
+          </div>
+        </li>
+        <li class="card card--link">
+          <div class="card__media">
+            <Image src={ort} alt="" width={640} height={427} format="webp" loading="lazy" />
+          </div>
+          <div class="card__body">
+            <h3><a href={p("/orte")}>{u("home.way_orte_title")}</a></h3>
+            <p>{u("home.way_orte_text")}</p>
+            <span class="arrow-link">{u("home.way_orte_link")}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
   <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.keys_title")}</h2>
+        <p class="soft">{u("home.keys_help")}</p>
+      </div>
+      <ol class="keys">
+        <li class="key">
+          <h3>{u("home.key1_title")}</h3>
+          <span class="key__hr">{u("home.key1_sub")}</span>
+          <p>{u("home.key1_text")}</p>
+        </li>
+        <li class="key">
+          <h3>{u("home.key2_title")}</h3>
+          <span class="key__hr" lang="hr">osobni identifikacijski broj</span>
+          <p>{u("home.key2_text")}</p>
+        </li>
+        <li class="key">
+          <h3>{u("home.key3_title")}</h3>
+          <span class="key__hr" lang="hr">prijava prebivališta</span>
+          <p>{u("home.key3_text")}</p>
+        </li>
+        <li class="key">
+          <h3>{u("home.key4_title")}</h3>
+          <span class="key__hr" lang="hr">zdravstveno osiguranje</span>
+          <p>{u("home.key4_text")}</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.phases_title")}</h2>
+        <p class="soft">{u("home.phases_help")}</p>
+      </div>
+      <ol class="phases">
+        {(["orient", "prepare", "move", "arrive", "stay"] as const).map((ph, i) => (
+          <li class="phase-step"><h3>{phaseNames[ph]}</h3><span class="mono">{u(`home.phase${i + 1}_time`)}</span><p>{u(`home.phase${i + 1}_text`)}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.running_title")}</h2>
+        <p class="soft">{u("home.running_help")}</p>
+      </div>
+      <ul class="running">
+        {dated.map((x) => (
+          <li class="running__item">
+            <span class="state state--matches">{u("home.running_state")}</span>
+            <a href={p(pagePath(x))}>{x.title}</a>
+            <span class="running__where">{u("home.running_national")}</span>
+            <span class="mono">{u("home.running_until", { date: formatDate(x.validity.valid_until.date!) })}</span>
+            <span class="mono muted">{u("home.running_checked", { date: formatDate(x.sources[0]?.checked ?? x.validity.valid_from) })}</span>
+          </li>
+        ))}
+        {running.map((r) => (
+          <li class="running__item">
+            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{stateLabel(r.state)}</span>
+            <a href={r.href}>{r.title}</a>
+            <span class="running__where">{r.where}</span>
+            <span class="mono">{r.until ? u("home.running_until", { date: formatDate(r.until) }) : u("place.period_unknown")}</span>
+            <span class="mono muted">{u("home.running_checked", { date: formatDate(r.checked) })}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="soft running__note">{u("home.running_note")} <a class="arrow-link" href={p("/orte/leistungen")}>{u("home.running_all")}</a></p>
+    </div>
+  </section>
+
+  <section class="band band--brand">
     <div class="container grid">
       <div class="col-main">
-        <h2>Was Sie hier bekommen</h2>
-        <p>
-          Einen Plan, der zu Ihrer Lage passt: Wer im Haushalt welchen Weg hat, was zuerst
-          erledigt gehört, welche Frist wodurch ausgelöst wird, und was noch offen ist,
-          weil eine Behörde entscheidet.
-        </p>
-        <p>
-          Jede Angabe trägt Quelle und Prüfdatum. Wo wir etwas nicht wissen, steht das
-          dort, sichtbar, statt einer Lücke. Über Anträge entscheidet immer die zuständige
-          Stelle; der Plan zeigt den Weg, nicht das Ergebnis.
-        </p>
+        <h2>{u("home.why_title")}</h2>
+        <p>{u("home.why_text")}</p>
+        <p class="soft">{u("home.why_note")}</p>
       </div>
-      <aside class="col-aside">
-        <h3>So lesen Sie Zustände</h3>
+      <aside class="col-aside states-aside">
+        <h3>{u("home.states_title")}</h3>
         <ul class="state-list">
-          <li><span class="state state--matches">nach Angaben passend</span> Die Voraussetzungen treffen nach Ihren Angaben zu.</li>
-          <li><span class="state state--unclear">unklar</span> Eine Angabe fehlt oder eine Fachperson muss entscheiden.</li>
-          <li><span class="state state--condition_missing">Bedingung fehlt</span> Eine Voraussetzung ist nach Ihren Angaben derzeit nicht erfüllt.</li>
-          <li><span class="state state--unknown">unbekannt</span> Diesen Wert kennen wir noch nicht.</li>
+          <li><span class="state state--matches">{elig.matches}</span> {u("home.state_matches")}</li>
+          <li><span class="state state--unclear">{elig.unclear}</span> {u("home.state_unclear")}</li>
+          <li><span class="state state--condition_missing">{elig.condition_missing}</span> {u("home.state_missing")}</li>
+          <li><span class="state state--unknown">{u("place.fact_unknown")}</span> {u("home.state_unknown")}</li>
         </ul>
       </aside>
     </div>
   </section>
 
   <section class="band">
-    <div class="container grid">
-      <div class="col-main">
-        <h2>Was gerade im Aufbau ist</h2>
-        <p>
-          Die Website wird in Etappen gebaut. Heute funktioniert der Kurzcheck mit
-          Beispielregeln. Das Wissen nach Thema, die Orte mit Karte und die geprüften
-          Rechtsregeln folgen, sobald sie fachlich freigegeben sind.
-        </p>
-        <dl class="open-field">
-          <dt>Mein Weg</dt>
-          <dd>Kurzcheck läuft, mit synthetischen Beispielregeln <span class="state state--unknown">Regeln nicht freigegeben</span></dd>
-          <dt>Wissen nach Thema</dt>
-          <dd><span class="state state--unknown">im Aufbau</span></dd>
-          <dt>Orte entdecken</dt>
-          <dd><span class="state state--unknown">im Aufbau</span></dd>
-        </dl>
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.situations_title")}</h2>
+        <p class="soft">{u("home.situations_help")}</p>
       </div>
+      <ul class="chips">
+        {SITUATIONS.map((s) => <li><a href={p(`/wissen/situation/${s.slug}`)}>{situationText(s, texts).title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.cases_title")}</h2>
+        <p class="soft">{u("home.cases_help")}</p>
+      </div>
+      <ul class="cards cases">
+        {CASES.map((raw) => {
+          const c = caseText(raw, texts);
+          return (
+            <li class="card card--link">
+              <div class="card__body">
+                <span class="card__num">{u("home.cases_label")}</span>
+                <h3><a href={p(`/wissen/situation/${c.situation}`)}>{c.name}</a></h3>
+                <p class="cases__line">{c.line}</p>
+                <p>{c.shapes}</p>
+                <p class="cases__first"><strong>{u("home.cases_first")}</strong> {c.first}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   </section>
 </Base>
 
 <style>
-  .lede {
-    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
-    line-height: 1.4;
-    color: var(--ink-soft);
-    max-width: 44ch;
+  .quick {
+    padding-block: clamp(1.75rem, 4vw, 2.75rem);
   }
-  .state-list {
+  .quick__title {
+    font-size: 1.0625rem;
+    margin-bottom: 0.9rem;
+  }
+  .card__media--list {
+    padding: 1.25rem 1.35rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  @media (min-width: 900px) {
+    .cards--ways {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .card__media--list ol {
     list-style: none;
     padding: 0;
     margin: 0;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    line-height: 1.3;
+    color: var(--brand);
     display: grid;
-    gap: 0.75rem;
+    gap: 0.45rem;
   }
-  .state-list li {
+  .card__media--list .mono {
+    color: var(--accent);
+    margin-right: 0.35rem;
+  }
+  .running {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .running__item {
     display: grid;
-    gap: 0.25rem;
+    grid-template-columns: auto 1fr;
+    gap: 0.25rem 1rem;
+    align-items: center;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--line);
     font-size: 0.9375rem;
-    color: var(--ink-soft);
   }
-  .state-list .state {
-    justify-self: start;
+  .running__item:last-child {
+    border-bottom: 0;
+  }
+  .running__item a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .running__item a:hover {
+    color: var(--accent);
+  }
+  .running__where {
+    color: var(--ink-soft);
+    grid-column: 2;
+  }
+  .running__item .mono {
+    grid-column: 2;
+  }
+  @media (min-width: 900px) {
+    .running__item {
+      grid-template-columns: 9rem 1fr 12rem 9rem 9rem;
+    }
+    .running__where,
+    .running__item .mono {
+      grid-column: auto;
+    }
+  }
+  .running__note {
+    margin: 1rem 0 0;
+    font-size: 0.9375rem;
+  }
+  .cases {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  }
+  .cases__line {
+    color: var(--ink) !important;
+  }
+  .cases__first {
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
+    margin-top: auto !important;
+  }
+  .states-aside {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .states-aside h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .states-aside .state-list li {
+    color: var(--on-brand-soft);
   }
 </style>

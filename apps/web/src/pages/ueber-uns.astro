@@ -1,0 +1,102 @@
+---
+// Über uns (inhaltskonzept.md 11): Auftrag und Unabhängigkeit, Redaktionsgrundsätze,
+// Fehler melden, Gemeinde eintragen. Inhalte aus docs/strategie.md, rollen.md und
+// redaktionsgrundsaetze.md; die Dokumente sind massgeblich. Texte aus dem Katalog.
+import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { u, p } = pageContext(Astro);
+---
+
+<Base title={u("about.title")} description={u("about.description")} current="ueber-uns">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("about.hero")}</h1>
+        <p class="lede">{u("about.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("about.mission_title")}</h2>
+        <p>{u("about.mission_1")}</p>
+        <p>{u("about.mission_2")}</p>
+        <h3>{u("about.households_title")}</h3>
+        <p>{u("about.households_text")}</p>
+        <h3>{u("about.stay_title")}</h3>
+        <p>{u("about.stay_text")}</p>
+      </div>
+      <aside class="col-aside">
+        <h3>{u("about.always_title")}</h3>
+        <ul class="topics">
+          {[1, 2, 3, 4, 5].map((i) => <li><span>{u(`about.always_${i}`)}</span></li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band band--surface" id="grundsaetze">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("about.check_title")}</h2>
+        <p>{u("about.check_text")}</p>
+        <h3>{u("about.hierarchy_title")}</h3>
+        <ol class="sources">
+          {[1, 2, 3, 4, 5, 6, 7].map((i) => <li>{u(`about.h${i}`)}</li>)}
+        </ol>
+        <p>{u("about.hierarchy_note")}</p>
+      </div>
+      <aside class="col-aside">
+        <h3>{u("about.cycles_title")}</h3>
+        <dl class="open-field">
+          {[1, 2, 3, 4].map((i) => <><dt>{u(`about.c${i}`)}</dt><dd>{u(`about.c${i}_v`)}</dd></>)}
+        </dl>
+        <p class="soft">{u("about.cycles_note")}</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>{u("about.roles_title")}</h2>
+        <dl class="open-field">
+          <dt>{u("about.role_product")}</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>{u("about.role_tech")}</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>{u("about.role_review")}</dt><dd><span class="state state--unknown">{u("about.placeholder")}</span> {u("about.role_review_v")}</dd>
+          <dt>{u("about.role_editorial")}</dt><dd><span class="state state--unknown">{u("about.open")}</span></dd>
+          <dt>{u("about.role_errors")}</dt><dd><a href="mailto:kontakt@povratnik.com">kontakt@povratnik.com</a>, {u("about.role_errors_v")}</dd>
+        </dl>
+        <p class="notice" role="note">
+          <strong>{u("about.stage_title")}</strong>
+          {u("about.stage_text")}
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>{u("about.join_title")}</h3>
+        <ul class="topics">
+          <li><span>{u("about.join_municipality")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">{u("about.request")}</a></li>
+          <li><span>{u("about.join_expert")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fachpr%C3%BCfung">{u("about.request")}</a></li>
+          <li><span>{u("about.join_report")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fehler%20melden">{u("about.mail")}</a></li>
+        </ul>
+        <p class="soft"><a href={p("/impressum")}>Impressum</a>, <a href={p("/datenschutz")}>Datenschutz</a>, <a href={p("/agb")}>AGB</a></p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sources {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .sources li::marker {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--accent);
+  }
+</style>

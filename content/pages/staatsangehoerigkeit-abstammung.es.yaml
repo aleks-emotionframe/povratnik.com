@@ -1,0 +1,84 @@
+# Versión de trabajo en español de staatsangehoerigkeit-abstammung.de.yaml, versión 1. Sin revisión profesional.
+id: staatsangehoerigkeit-abstammung
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: status-und-staatsangehoerigkeit
+covers: [Abstammung, Einbürgerung über die Auswandererregelung, Doppelte Staatsbürgerschaft]
+translation:
+  of_version: 1
+  status: current
+title: Nacionalidad croata por ascendencia
+short_answer: Los descendientes de emigrantes croatas pueden solicitar la nacionalidad, desde la reforma del 1.1.2020 sin límite de generaciones en línea directa. No hay examen de idioma ni prueba cultural para emigrantes, sus descendientes y cónyuges. Sobre la solicitud decide el Ministerio del Interior.
+terms:
+  - term_hr: Zakon o hrvatskom državljanstvu
+    term_explained:
+      de: Das kroatische Staatsangehörigkeitsgesetz. Artikel 11 regelt Auswanderer und ihre Nachkommen, Artikel 16 die Zugehörigkeit zum kroatischen Volk.
+      es: La ley croata de nacionalidad. El artículo 11 regula a los emigrantes y sus descendientes, el artículo 16 la pertenencia al pueblo croata.
+  - term_hr: Domovnica
+    term_explained:
+      de: Die Urkunde über die kroatische Staatsangehörigkeit. Sie ist der Nachweis, den Behörden verlangen.
+      es: El certificado de nacionalidad croata. Es la prueba que exigen las administraciones.
+  - term_hr: MUP
+    term_explained:
+      de: Ministarstvo unutarnjih poslova, das Innenministerium. Es führt das Verfahren.
+      es: Ministarstvo unutarnjih poslova, el Ministerio del Interior. Lleva el procedimiento.
+sections:
+  applies_to: Personas que descienden en línea directa de una emigrante o un emigrante croata, y sus cónyuges.
+  not_applies_to: Personas sin antepasados croatas, por ejemplo ciudadanos de la UE sin raíces. Para ellos rige la libre circulación en la UE, no este procedimiento.
+  authority: Ministarstvo unutarnjih poslova (MUP), en el extranjero a través de la representación croata competente.
+  prerequisites:
+    - Edad mínima de 18 años
+    - Prueba de la ascendencia de una emigrante o un emigrante, mediante certificados de todas las generaciones intermedias
+    - Respeto del ordenamiento jurídico croata, sin impedimentos de seguridad
+    - Cargas públicas pagadas, si las hay
+  steps:
+    - Aclarar la cadena de ascendencia, qué persona emigró y a través de qué generaciones pasa la línea
+    - Obtener los certificados de nacimiento, matrimonio y, en su caso, defunción de todas las personas de la línea, del país de origen y de los registros parroquiales o civiles croatas
+    - Apostillar los certificados extranjeros y hacerlos traducir por un traductor jurado
+    - Presentar la solicitud en la representación croata del país de residencia o en la administración policial en Croacia
+    - Tras la resolución, obtener la Domovnica, luego el OIB y el pasaporte
+  documents:
+    - Certificado de nacimiento propio
+    - Certificados de padres, abuelos y demás antepasados hasta la persona emigrada
+    - Prueba del origen croata de la persona emigrada, por ejemplo extracto del registro croata de nacimientos
+    - Pasaporte o documento de identidad
+    - En caso de diferencias en los nombres, pruebas complementarias
+  duration_costs: La duración varía según la representación y la integridad de los certificados. Faltan cifras documentadas; el valor es desconocido.
+  deadlines:
+    - Sin plazo de solicitud. La solicitud puede presentarse en cualquier momento.
+  common_mistake: Traducir primero los certificados y apostillarlos después. El orden es original, luego apostilla, luego traducción jurada. Si no, hay que repetir la traducción.
+  not_decided_here: Si la cadena de certificados presentada basta en el caso concreto, sobre todo con grafías distintas o registros que faltan, lo decide el Ministerio del Interior. Si hay lagunas en la cadena, hay que consultar a un profesional croata.
+  open_points:
+    - Duración del trámite según la representación, sin documentar
+    - Tasas de la solicitud y de la Domovnica, sin documentar
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [apostille-und-uebersetzung]
+  followed_by_pages: [oib, wohnsitz-anmelden]
+sources:
+  - id: hr-mup
+    reference: Hrvatsko državljanstvo, Zakon o hrvatskom državljanstvu, art. 11 y art. 16, reforma en vigor desde el 1.1.2020
+    checked: 2026-09-12
+  - id: hr-narodne-novine
+    reference: Zakon o hrvatskom državljanstvu, versión consolidada con modificaciones desde 2020
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

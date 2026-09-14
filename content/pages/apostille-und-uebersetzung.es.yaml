@@ -1,0 +1,78 @@
+# Versión de trabajo en español de apostille-und-uebersetzung.de.yaml, versión 1. Sin revisión profesional.
+id: apostille-und-uebersetzung
+lang: es
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: dokumente-und-behoerden
+covers: [Personenstandsurkunden, Abstammungskette über Generationen, Apostille, Beglaubigte Übersetzung, Namensabweichungen und Schreibweisen, Matrikel- und Pfarrbücher]
+translation:
+  of_version: 1
+  status: current
+title: Documentos del extranjero, apostilla y traducción jurada
+short_answer: Los documentos extranjeros necesitan, para las administraciones croatas, una apostilla del país emisor y después una traducción por un traductor jurado ante los tribunales croatas. El orden es obligatorio, original, apostilla, traducción.
+terms:
+  - term_hr: Apostille
+    term_explained:
+      de: Beglaubigungsstempel nach dem Haager Übereinkommen. Er bestätigt, dass die Urkunde echt ist, und ersetzt die Legalisation über Konsulate.
+      es: Sello de legalización según el Convenio de La Haya. Confirma que el documento es auténtico y sustituye la legalización consular.
+  - term_hr: sudski tumač
+    term_explained:
+      de: Gerichtlich beeidigte Übersetzerin oder Übersetzer. Nur diese Übersetzungen gelten vor kroatischen Behörden als beglaubigt.
+      es: Traductora o traductor jurado ante los tribunales. Solo estas traducciones valen como juradas ante las administraciones croatas.
+  - term_hr: matične knjige
+    term_explained:
+      de: Personenstandsregister, in Kroatien die Geburts-, Heirats- und Sterberegister. Für ältere Jahrgänge oft nur Pfarrbücher.
+      es: Registros del estado civil, en Croacia los registros de nacimientos, matrimonios y defunciones. Para años más antiguos, a menudo solo libros parroquiales.
+sections:
+  applies_to: Todas las personas que presenten certificados del estado civil, títulos o poderes extranjeros en un procedimiento croata. Argentina, Chile, Brasil, Australia, Estados Unidos, Canadá y todos los Estados de la UE son parte del Convenio de La Haya.
+  not_applies_to: Documentos de Estados que no forman parte del Convenio de La Haya. Ahí la legalización se hace a través del consulado y es otro procedimiento.
+  authority: Apostilla por la autoridad competente del país emisor. Traducción por una persona jurada en Croacia. Los consulados emiten cartas de recomendación que se exigen para el certificado de emigrantes.
+  prerequisites:
+    - El documento existe en original o como copia certificada
+    - El país emisor es parte del Convenio de La Haya
+  steps:
+    - Obtener el documento en el país emisor como original o copia certificada
+    - Hacer poner la apostilla en la autoridad competente del país emisor
+    - Hacer traducir al croata el documento con la apostilla por un traductor jurado
+    - En cadenas de ascendencia, tratar igual todas las generaciones intermedias, cada documento por separado
+  documents:
+    - Certificados de nacimiento, matrimonio y defunción de las personas afectadas
+    - Con antepasados croatas, extractos de los registros parroquiales o civiles croatas; estos no necesitan apostilla
+  duration_costs: Los costes y la duración dependen del país emisor. Faltan cifras documentadas; el valor es desconocido.
+  deadlines:
+    - Sin plazo legal. Algunas administraciones exigen documentos de no más de seis meses. Si eso rige para un procedimiento concreto, hay que comprobarlo en ese procedimiento.
+  common_mistake: Traducir primero y apostillar después. La apostilla debe estar incluida en la traducción; si no, la traducción se considera incompleta. Segundo error frecuente, presentar nombres escritos de forma distinta en varios documentos sin una prueba complementaria.
+  not_decided_here: Si un documento con una grafía distinta vale como prueba de la misma persona lo decide la administración en cada procedimiento.
+  open_points:
+    - Tasas de la apostilla por país, sin documentar
+    - Rango de precios de las traducciones juradas, sin documentar
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: [staatsangehoerigkeit-abstammung, bescheinigung-auswanderer]
+sources:
+  - id: hcch-apostille
+    reference: Convention of 5 October 1961 Abolishing the Requirement of Legalisation for Foreign Public Documents, Status table
+    checked: 2026-09-12
+  - id: hr-mup
+    reference: Indicaciones sobre documentos y traducciones en los procedimientos de nacionalidad y residencia
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

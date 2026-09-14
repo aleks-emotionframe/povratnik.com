@@ -1,0 +1,228 @@
+# SYNTHETISCH. Drei vollständig fiktive Testgemeinden für die Teststufe (ADR-0004).
+# Sie zeigen die Struktur eines Ortsprofils nach inhaltskonzept.md 5.1 mit allen
+# Zuständen. Nach ADR-0001 werden echte Orte in der Datenbank gepflegt (M5); diese
+# Datei wird dann gelöscht. Kein Wert hier hat einen Bezug zu einem realen Ort.
+#
+# Fachwerte tragen vier Dimensionen (CLAUDE.md 2.4): value, state, as_of, source.
+# state: known, unknown, not_collected, outdated, not_applicable, not_present.
+# Programmzustand (Vokabular B): open, announced, closed, exhausted, unconfirmed, budget_unknown.
+# map: fiktive Lage nur zur Darstellung auf der Übersichtskarte (ADR-0005).
+
+- id: dolina-mira
+  fictional: true
+  map: { lon: 16.42, lat: 45.62 }
+  name: Dolina Mira
+  county: Gespanschaft Zelena (fiktiv)
+  region: inland
+  population: { value: 3420, state: known, as_of: 2025-12-31, source: Fiktive Volkszählung }
+  development_index: { value: III, state: known, as_of: 2024-01-01 }
+  summary: Kleine Gemeinde im Landesinneren, eine Stunde von einer Regionalstadt entfernt. Landwirtschaft, ein Sägewerk und Pendler. Die Gemeinde wirbt aktiv um junge Familien.
+  benefits:
+    - id: dm-wohnen
+      title: Zuschuss für die erste Wohnlösung junger Familien
+      target: Paare, bei denen ein Partner unter 40 ist, mit Wohnsitz in der Gemeinde
+      amount: { value: bis 4.000 EUR oder 50 Prozent der Kosten, state: known, as_of: 2026-03-01 }
+      conditions: [Wohnsitzanmeldung in der Gemeinde, erste Lösung des Wohnproblems, keine andere kommunale Förderung im selben Jahr]
+      application: { from: 2026-03-01, until: 2026-11-30 }
+      program_state: open
+      budget: { value: 40.000 EUR gesamt, state: known, as_of: 2026-03-01 }
+      binding: Wohnsitz mindestens fünf Jahre, sonst anteilige Rückzahlung
+      checked: 2026-09-10
+      source: Fiktiver Gemeinderatsbeschluss 12/2026
+    - id: dm-kindergarten
+      title: Erlass des Kindergartenbeitrags im ersten Jahr
+      target: Neu zugezogene Familien mit Kindern im Kindergartenalter
+      amount: { value: null, state: unknown, note: "Die Höhe hängt vom Beitragssatz ab, der 2026 neu beschlossen wird" }
+      conditions: [Wohnsitzanmeldung, Platz im Gemeindekindergarten]
+      application: { from: null, until: null }
+      program_state: announced
+      budget: { value: null, state: unknown }
+      binding: keine
+      checked: 2026-09-10
+      source: Fiktive Ankündigung des Gemeindevorstehers, Frühjahr 2026
+    - id: dm-gruender
+      title: Starthilfe für Gewerbe im Ortskern
+      target: Neue Gewerbe in leerstehenden Ladenlokalen
+      amount: { value: 2.000 EUR einmalig, state: known, as_of: 2025-05-01 }
+      conditions: [Ladenlokal im Ortskern, Betrieb mindestens zwei Jahre]
+      application: { from: 2025-05-01, until: 2025-12-31 }
+      program_state: closed
+      budget: { value: 10.000 EUR gesamt, state: known, as_of: 2025-05-01 }
+      binding: zwei Jahre Betrieb
+      checked: 2026-09-10
+      source: Fiktiver Aufruf 2025
+  family_education:
+    kindergarten: { value: 1 Gemeindekindergarten, state: known, as_of: 2026-09-01 }
+    kindergarten_capacity: { value: null, state: not_collected, note: Freie Plätze werden nur mit vereinbarter Frequenz erhoben }
+    primary_school: { value: "Grundschule im Ort, Klassen 1 bis 8", state: known, as_of: 2026-09-01 }
+    secondary_school: { value: "Gymnasium und Berufsschule in der Regionalstadt, 45 Minuten Bus", state: known, as_of: 2026-09-01 }
+    language_support: { value: null, state: unknown }
+    costs: { value: Kindergarten 90 EUR im Monat, state: outdated, as_of: 2024-09-01, note: Beitragssatz wird 2026 neu beschlossen }
+  health:
+    gp: { value: 1 Hausarztpraxis, state: known, as_of: 2026-06-01 }
+    gp_accepting: { value: null, state: not_collected, note: Aufnahme neuer Patienten nur mit Bestätigung der Praxis }
+    pediatrician: { value: null, state: not_present, note: Nächster Kinderarzt in der Regionalstadt }
+    pharmacy: { value: 1 Apotheke, state: known, as_of: 2026-06-01 }
+    clinic: { value: "Kreisspital 38 km, 40 Minuten", state: known, as_of: 2026-06-01 }
+  housing:
+    long_term_rent: { value: null, state: unknown, note: Keine belastbare Auswertung von Inseraten }
+    price_level: { value: Miete 5 bis 7 EUR je Quadratmeter, state: outdated, as_of: 2024-06-01 }
+    municipal_housing: { value: "4 Gemeindewohnungen, davon 1 frei", state: known, as_of: 2026-08-01 }
+    building_land: { value: Gemeindebauland ab 15 EUR je Quadratmeter, state: known, as_of: 2026-03-01 }
+  work:
+    sectors: [Landwirtschaft, Holzverarbeitung, Kleingewerbe]
+    commute: [{ to: Regionalstadt, minutes: 55 }, { to: Autobahnanschluss, minutes: 25 }]
+    employers: { value: Sägewerk mit rund 80 Beschäftigten, state: known, as_of: 2026-01-01 }
+  daily:
+    internet: { value: "Glasfaser im Ortskern, ausserhalb Mobilfunk", state: known, as_of: 2026-01-01 }
+    transport: { value: "Bus in die Regionalstadt viermal täglich, sonntags nicht", state: known, as_of: 2026-01-01 }
+    language_courses: { value: null, state: not_present, note: Nächster Kurs in der Regionalstadt }
+    clubs: [Fussballverein, Freiwillige Feuerwehr, Kulturverein mit Folkloregruppe]
+    church: { value: Pfarrei im Ort, state: known }
+    shopping: { value: "Zwei Lebensmittelläden, Wochenmarkt samstags", state: known, as_of: 2026-06-01 }
+  surroundings:
+    - { what: Kinderarzt, where: Regionalstadt, minutes: 55 }
+    - { what: Sprachkurs Kroatisch für Erwachsene, where: Regionalstadt, minutes: 55 }
+    - { what: Bahnhof, where: Nachbargemeinde, minutes: 20 }
+  arrival:
+    office: { value: "Gemeindeamt, Schalter für Zuzug", state: known }
+    function: Sachbearbeiterin Zuzug und Familie
+    languages: [Kroatisch, Deutsch]
+    channel: E-Mail und Telefon, Antwort in der Regel binnen drei Werktagen
+  changes:
+    - { title: Neubau Kindergarten mit 40 Plätzen, state: funded, as_of: 2026-05-01 }
+    - { title: Glasfaser für die Aussenweiler, state: announced, as_of: 2026-02-01 }
+  data_depth: { collected: 21, total: 30 }
+
+- id: kamenik-gornji
+  fictional: true
+  map: { lon: 16.05, lat: 43.62 }
+  name: Kamenik Gornji
+  county: Gespanschaft Kamena (fiktiv)
+  region: coast
+  population: { value: 1180, state: known, as_of: 2025-12-31, source: Fiktive Volkszählung }
+  development_index: { value: VI, state: known, as_of: 2024-01-01 }
+  summary: Küstengemeinde mit Altstadt, im Sommer voll, im Winter still. Jahresmieten sind knapp, das Gesundheitsangebot dünn. Die Gemeinde hat wenig eigene Programme, aber Bauland.
+  benefits:
+    - id: kg-bauland
+      title: Vergünstigtes Gemeindebauland für Rückkehrer
+      target: Personen mit Auswandererbescheinigung oder kroatischer Staatsangehörigkeit, die aus dem Ausland zuziehen
+      amount: { value: 50 Prozent unter Marktwert, state: known, as_of: 2026-01-15 }
+      conditions: [Bau binnen drei Jahren, Wohnsitz mindestens zehn Jahre]
+      application: { from: 2026-01-15, until: null }
+      program_state: open
+      budget: { value: "6 Parzellen, davon 2 vergeben", state: known, as_of: 2026-08-01 }
+      binding: Rückübertragung bei Nichtbebauung
+      checked: 2026-09-05
+      source: Fiktiver Beschluss 3/2026
+    - id: kg-miete
+      title: Mietzuschuss für Familien mit Kindern
+      target: Familien mit mindestens einem Kind unter 15
+      amount: { value: 200 EUR im Monat, state: known, as_of: 2025-09-01 }
+      conditions: [Jahresmietvertrag, Wohnsitz in der Gemeinde]
+      application: { from: 2025-09-01, until: 2026-08-31 }
+      program_state: exhausted
+      budget: { value: "24.000 EUR gesamt, ausgeschöpft seit Mai 2026", state: known, as_of: 2026-05-15 }
+      binding: keine
+      checked: 2026-09-05
+      source: Fiktiver Aufruf 2025/2026
+  family_education:
+    kindergarten: { value: Kindergartengruppe in der Grundschule, state: known, as_of: 2026-09-01 }
+    kindergarten_capacity: { value: 3 freie Plätze, state: known, as_of: 2026-09-01, note: Bestätigt durch die Schule am 1.9.2026 }
+    primary_school: { value: "Grundschule Klassen 1 bis 4, danach Nachbargemeinde", state: known, as_of: 2026-09-01 }
+    secondary_school: { value: "In der Kreisstadt, 35 Minuten", state: known, as_of: 2026-09-01 }
+    language_support: { value: Vorbereitungsklasse in der Kreisstadt, state: known, as_of: 2026-09-01 }
+    costs: { value: Kindergarten kostenlos für Gemeindebewohner, state: known, as_of: 2026-09-01 }
+  health:
+    gp: { value: Hausarzt zweimal wöchentlich im Ort, state: known, as_of: 2026-06-01 }
+    gp_accepting: { value: Nimmt neue Patienten auf, state: known, as_of: 2026-06-01, note: Bestätigt durch die Praxis }
+    pediatrician: { value: null, state: not_present, note: Kinderarzt in der Kreisstadt }
+    pharmacy: { value: "Apotheke nur im Sommer täglich, im Winter dreimal wöchentlich", state: known, as_of: 2026-06-01 }
+    clinic: { value: "Kreisspital 30 km, 35 Minuten", state: known, as_of: 2026-06-01 }
+  housing:
+    long_term_rent: { value: "Sehr knapp, Jahresmieten meist nur Oktober bis Mai", state: known, as_of: 2026-06-01 }
+    price_level: { value: "Miete 9 bis 12 EUR je Quadratmeter, Kauf 2.800 bis 4.000 EUR je Quadratmeter", state: known, as_of: 2026-06-01 }
+    municipal_housing: { value: null, state: not_present }
+    building_land: { value: "6 Gemeindeparzellen, siehe Leistung", state: known, as_of: 2026-08-01 }
+  work:
+    sectors: [Tourismus, Fischerei, Bau]
+    commute: [{ to: Kreisstadt, minutes: 35 }, { to: Fähre, minutes: 15 }]
+    employers: { value: null, state: unknown }
+  daily:
+    internet: { value: Glasfaser, state: known, as_of: 2026-01-01 }
+    transport: { value: "Bus in die Kreisstadt, im Sommer stündlich, im Winter dreimal täglich", state: known, as_of: 2026-01-01 }
+    language_courses: { value: null, state: unknown }
+    clubs: [Bocciaclub, Klapa-Gesangsgruppe, Segelclub]
+    church: { value: Pfarrei im Ort, state: known }
+    shopping: { value: "Ein Laden ganzjährig, im Sommer drei", state: known, as_of: 2026-06-01 }
+  surroundings:
+    - { what: Kinderarzt, where: Kreisstadt, minutes: 35 }
+    - { what: Grundschule Klassen 5 bis 8, where: Nachbargemeinde, minutes: 15 }
+  arrival:
+    office: { value: "Gemeindeamt, keine eigene Zuzugsstelle", state: known }
+    function: Gemeindesekretariat
+    languages: [Kroatisch, Italienisch, Englisch]
+    channel: Telefon, E-Mail wird unregelmässig beantwortet
+  changes:
+    - { title: Ganzjähriger Kinderarzt, state: announced, as_of: 2026-04-01 }
+    - { title: Sanierung der Grundschule, state: under_construction, as_of: 2026-07-01 }
+  data_depth: { collected: 26, total: 30 }
+
+- id: luka-sveta
+  fictional: true
+  map: { lon: 17.35, lat: 45.30 }
+  name: Luka Sveta
+  county: Gespanschaft Zelena (fiktiv)
+  region: inland
+  population: { value: null, state: unknown, note: Letzte fiktive Zählung nicht übernommen }
+  development_index: { value: null, state: unknown }
+  summary: Gemeinde am Fluss mit Bahnhof und Industriegebiet. Wenig Programme, aber Arbeit und Schulen vor Ort. Erst grob erfasst.
+  benefits:
+    - id: ls-schule
+      title: Schulstartpaket für zugezogene Kinder
+      target: Kinder, die während des Schuljahres zuziehen
+      amount: { value: null, state: unknown }
+      conditions: []
+      application: { from: null, until: null }
+      program_state: unconfirmed
+      budget: { value: null, state: unknown }
+      binding: unbekannt
+      checked: 2026-08-20
+      source: Fiktive Erwähnung im Gemeindeblatt, nicht bestätigt
+  family_education:
+    kindergarten: { value: 2 Kindergärten, state: known, as_of: 2026-08-01 }
+    kindergarten_capacity: { value: null, state: not_collected }
+    primary_school: { value: Grundschule Klassen 1 bis 8, state: known, as_of: 2026-08-01 }
+    secondary_school: { value: Technische Mittelschule im Ort, state: known, as_of: 2026-08-01 }
+    language_support: { value: null, state: not_collected }
+    costs: { value: null, state: not_collected }
+  health:
+    gp: { value: 3 Hausarztpraxen, state: known, as_of: 2026-08-01 }
+    gp_accepting: { value: null, state: not_collected }
+    pediatrician: { value: 1 Kinderarztpraxis, state: known, as_of: 2026-08-01 }
+    pharmacy: { value: 2 Apotheken, state: known, as_of: 2026-08-01 }
+    clinic: { value: Spital im Ort, state: known, as_of: 2026-08-01 }
+  housing:
+    long_term_rent: { value: null, state: not_collected }
+    price_level: { value: null, state: not_collected }
+    municipal_housing: { value: null, state: unknown }
+    building_land: { value: null, state: not_collected }
+  work:
+    sectors: [Metallverarbeitung, Logistik, Verwaltung]
+    commute: [{ to: Landeshauptstadt, minutes: 70 }]
+    employers: { value: Industriegebiet mit rund 900 Arbeitsplätzen, state: known, as_of: 2026-08-01 }
+  daily:
+    internet: { value: null, state: not_collected }
+    transport: { value: Bahnhof mit Regionalzügen, state: known, as_of: 2026-08-01 }
+    language_courses: { value: "Volkshochschule, Kroatisch für Zugezogene", state: known, as_of: 2026-08-01 }
+    clubs: []
+    church: { value: null, state: not_collected }
+    shopping: { value: Supermärkte und Wochenmarkt, state: known, as_of: 2026-08-01 }
+  surroundings: []
+  arrival:
+    office: { value: null, state: unknown }
+    function: unbekannt
+    languages: []
+    channel: unbekannt
+  changes: []
+  data_depth: { collected: 12, total: 30 }

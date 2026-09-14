@@ -1,0 +1,70 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 9), fachlich nicht geprüft.
+id: schule-und-zeugnisse
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: short
+category: kinder-schule-und-ausbildung
+covers: [Einschreibung, Zeugnisanerkennung, Studium]
+title: Schule, Zeugnisse und Hochschulabschlüsse anerkennen lassen
+short_answer: Schulkinder werden über die aufnehmende Schule eingestuft, die bisherigen Schuljahre werden dort anerkannt. Schulzeugnisse für den Hochschulzugang und ausländische Hochschulabschlüsse laufen über die Agentur AZVO, für Hochschulabschlüsse über das ENIC/NARIC-Büro, Verfahren im besten Fall 60 Tage, Antrag nur per Post.
+terms:
+  - term_hr: AZVO
+    term_explained:
+      de: Agencija za znanost i visoko obrazovanje, die Agentur für Wissenschaft und Hochschulbildung. Zuständig für die Anerkennung ausländischer Zeugnisse und Abschlüsse.
+  - term_hr: ENIC/NARIC ured
+    term_explained:
+      de: Das nationale Anerkennungsbüro innerhalb der AZVO, seit 25.6.2022 zuständig für Hochschulqualifikationen.
+  - term_hr: upis u školu
+    term_explained:
+      de: Einschreibung in die Schule. Zuständig ist die Schule des Schulbezirks am Wohnsitz.
+sections:
+  applies_to: Familien mit schulpflichtigen Kindern, Studierende und Berufstätige mit ausländischen Abschlüssen.
+  not_applies_to: Reglementierte Berufe, etwa Gesundheitsberufe. Dort läuft die Anerkennung über das PISK-System der zuständigen Kammer, ein eigenes Verfahren.
+  authority: Schule des Schulbezirks am Wohnsitz. AZVO für Zeugnisse zum Hochschulzugang und für Hochschulabschlüsse.
+  prerequisites:
+    - Angemeldeter Wohnsitz, er bestimmt den Schulbezirk
+    - Zeugnisse im Original mit Apostille und beglaubigter Übersetzung
+  steps:
+    - Vor der Abreise alle Zeugnisse und Schulbestätigungen im Herkunftsland anfordern
+    - Apostille und Übersetzung veranlassen
+    - Nach der Wohnsitzanmeldung die Schule des Bezirks kontaktieren und das Kind einschreiben, die Schule stuft ein
+    - Für Hochschulzugang oder Abschlussanerkennung Antrag bei der AZVO per Post stellen
+  documents:
+    - Zeugnisse aller Schuljahre, Abschlusszeugnisse, Diplome
+    - Apostille und beglaubigte Übersetzung
+    - Wohnsitznachweis, Geburtsurkunde des Kindes
+  duration_costs: Anerkennung von Hochschulqualifikationen im besten Fall 60 Tage. Das Ministerium für Demografie und Einwanderung finanziert die Übersetzung ausländischer Hochschulqualifikationen. Gebühren nicht belegt.
+  deadlines:
+    - Einschreibung vor Schuljahresbeginn, die Termine setzt die Schule
+  common_mistake: Zeugnisse erst nach der Ankunft anfordern. Aus Südamerika dauert das Wochen, und die Apostille muss im Ausstellungsland angebracht werden.
+  not_decided_here: Die Einstufung des Kindes trifft die Schule. Die Gleichwertigkeit eines Abschlusses stellt die AZVO fest.
+  open_points:
+    - Sprachförderung für Kinder ohne Kroatisch, Umfang und Zuständigkeit nicht belegt
+    - Gebühren der AZVO nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [apostille-und-uebersetzung, wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-azvo
+    reference: Priznavanje inozemnih visokoškolskih kvalifikacija, Nacionalni ENIC/NARIC ured, Verfahren seit 25.6.2022, Antrag per Post
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-14
+  cycle: quarterly

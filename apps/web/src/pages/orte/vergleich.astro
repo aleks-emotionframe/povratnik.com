@@ -1,0 +1,115 @@
+---
+// Vergleich (designsystem.md 3, Typ 6; inhaltskonzept.md 5.3): Rohinformation nebeneinander,
+// ohne Gesamtnote. Was fehlt, steht als Zustand und nicht als leere Zelle.
+import Base from "../../layouts/Base.astro";
+import Fact from "../../components/Fact.astro";
+import { loadPlaces, openBenefits, placeName, type Place } from "../../lib/places.ts";
+import { pageContext } from "../../lib/page.ts";
+
+const { u, p } = pageContext(Astro);
+const places = loadPlaces();
+const rows: { label: string; get: (x: Place) => any; fact?: boolean }[] = [
+  { label: u("compare.location"), get: (x) => `${u(x.region === "coast" ? "orte.coast" : "orte.inland")}, ${x.county}` },
+  { label: u("compare.population"), get: (x) => x.population, fact: true },
+  { label: u("compare.index"), get: (x) => x.development_index, fact: true },
+  { label: u("compare.open_benefits"), get: (x) => u("compare.of", { n: openBenefits(x), total: x.benefits.length }) },
+  { label: u("compare.kindergarten"), get: (x) => x.family_education.kindergarten_capacity, fact: true },
+  { label: u("compare.primary"), get: (x) => x.family_education.primary_school, fact: true },
+  { label: u("compare.secondary"), get: (x) => x.family_education.secondary_school, fact: true },
+  { label: u("compare.gp"), get: (x) => x.health.gp_accepting, fact: true },
+  { label: u("compare.pediatrician"), get: (x) => x.health.pediatrician, fact: true },
+  { label: u("compare.clinic"), get: (x) => x.health.clinic, fact: true },
+  { label: u("compare.rent"), get: (x) => x.housing.long_term_rent, fact: true },
+  { label: u("compare.price"), get: (x) => x.housing.price_level, fact: true },
+  { label: u("compare.land"), get: (x) => x.housing.building_land, fact: true },
+  { label: u("compare.commute"), get: (x) => x.work.commute.map((c) => `${c.to} ${u("place.minutes", { n: c.minutes })}`).join(", ") },
+  { label: u("compare.internet"), get: (x) => x.daily.internet, fact: true },
+  { label: u("compare.transport"), get: (x) => x.daily.transport, fact: true },
+  { label: u("compare.courses"), get: (x) => x.daily.language_courses, fact: true },
+  { label: u("compare.depth"), get: (x) => u("compare.of", { n: x.data_depth.collected, total: x.data_depth.total }) },
+];
+---
+
+<Base title={`${u("compare.title")}: povratnik.com`} description={u("compare.description")} current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {u("compare.crumb")}</p>
+        <h1>{u("compare.title")}</h1>
+        <p class="lede">{u("compare.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>{u("orte.fictional_title")}</strong>
+        {u("compare.fictional_text")}
+      </p>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th scope="col">{u("compare.feature")}</th>
+              {places.map((x) => <th scope="col"><a href={p(`/orte/${x.id}`)}>{placeName(x)}</a></th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <th scope="row">{r.label}</th>
+                {places.map((x) => <td>{r.fact ? <Fact fact={r.get(x)} /> : r.get(x)}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 1.5rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .compare {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 720px;
+    font-size: 0.9375rem;
+  }
+  .compare th,
+  .compare td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .compare thead th {
+    font-family: var(--font-display);
+    font-weight: 600;
+    background: var(--surface-blue);
+  }
+  .compare thead th a {
+    text-decoration: none;
+    color: var(--brand);
+  }
+  .compare tbody th {
+    font-weight: 400;
+    color: var(--muted);
+    width: 14rem;
+  }
+</style>

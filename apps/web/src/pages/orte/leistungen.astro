@@ -1,0 +1,170 @@
+---
+// Leistungsdatenbank (designsystem.md 3, Typ 7; inhaltskonzept.md 5.2): alle Leistungen,
+// auch ohne Karte durchsuchbar, dieselben Felder wie im Ortsprofil. Filter blendet aus,
+// ohne JavaScript steht die vollständige Liste.
+import Base from "../../layouts/Base.astro";
+import Fact from "../../components/Fact.astro";
+import { PROGRAM_STATE, formatDate, loadPlaces, placeName } from "../../lib/places.ts";
+import { pageContext } from "../../lib/page.ts";
+
+const { u, p } = pageContext(Astro);
+const places = loadPlaces();
+const items = places.flatMap((pl) => pl.benefits.map((b) => ({ place: pl, b })));
+const order = ["open", "announced", "unconfirmed", "budget_unknown", "exhausted", "closed"];
+items.sort((x, y) => order.indexOf(x.b.program_state) - order.indexOf(y.b.program_state));
+const period = (b: (typeof items)[number]["b"]) =>
+  b.application.from || b.application.until
+    ? u("place.period_range", { from: b.application.from ? formatDate(b.application.from) : u("place.period_open"), until: b.application.until ? formatDate(b.application.until) : u("place.period_running") })
+    : u("place.fact_unknown");
+---
+
+<Base title={`${u("benefits.title")}: povratnik.com`} description={u("benefits.description")} current="orte">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {u("benefits.crumb")}</p>
+        <h1>{u("benefits.title")}</h1>
+        <p class="lede">{u("benefits.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <p class="notice" role="note">
+        <strong>{u("orte.fictional_title")}</strong>
+        {u("benefits.fictional_text")} <a href={p("/wissen/leistungen-und-foerderung")}>{u("shell.nav_wissen")}</a>
+      </p>
+      <form class="filters" id="filters" aria-label={u("benefits.filter_label")}>
+        <fieldset>
+          <legend>{u("benefits.filter_state")}</legend>
+          {Object.keys(PROGRAM_STATE).map((key) => (
+            <label><input type="checkbox" name="state" value={key} /> {u(`place.state_${key}`)}</label>
+          ))}
+        </fieldset>
+      </form>
+      <p class="count mono" id="count" aria-live="polite" data-one={u("benefits.count_one", { n: "{n}" })} data-many={u("benefits.count_many", { n: "{n}" })}>{u("benefits.count_many", { n: items.length })}</p>
+      <ul class="cards cards--benefits" id="items">
+        {items.map(({ place, b }) => (
+          <li class="card" data-state={b.program_state}>
+            <div class="card__body">
+              <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span> <a class="benefit__place" href={p(`/orte/${place.id}`)}>{placeName(place)}</a></p>
+              <h3>{b.title}</h3>
+              <dl class="benefit">
+                <dt>{u("place.target")}</dt><dd>{b.target}</dd>
+                <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
+                <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
+                <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
+              </dl>
+              <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="empty" id="empty" hidden>{u("benefits.empty")}</p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var form = document.getElementById("filters");
+      var cards = Array.prototype.slice.call(document.querySelectorAll("#items > li"));
+      var count = document.getElementById("count");
+      var empty = document.getElementById("empty");
+      form.addEventListener("change", function () {
+        var states = Array.prototype.map.call(form.querySelectorAll('input[name="state"]:checked'), function (i) { return i.value; });
+        var shown = 0;
+        cards.forEach(function (c) {
+          var ok = states.length === 0 || states.indexOf(c.dataset.state) !== -1;
+          c.hidden = !ok;
+          if (ok) shown++;
+        });
+        count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown);
+        empty.hidden = shown > 0;
+      });
+    })();
+  </script>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .filters {
+    margin: 1.5rem 0 1rem;
+  }
+  .filters fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+  .filters legend {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0;
+    margin-bottom: 0.35rem;
+    float: left;
+    width: 100%;
+  }
+  .filters label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 44px;
+    font-size: 0.9375rem;
+  }
+  .filters input {
+    accent-color: var(--accent);
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .count {
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .cards--benefits {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  }
+  .benefit__state {
+    margin: 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .benefit__place {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .benefit {
+    margin: 0.5rem 0 0;
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) 1fr;
+    gap: 0.15rem 1rem;
+    font-size: 0.9375rem;
+  }
+  .benefit dt {
+    color: var(--muted);
+  }
+  .benefit dd {
+    margin: 0 0 0.4rem;
+    color: var(--ink);
+  }
+  .card .datenstand {
+    margin-top: 0.75rem;
+  }
+  .empty {
+    color: var(--ink-soft);
+  }
+</style>

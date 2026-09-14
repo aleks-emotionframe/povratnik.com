@@ -1,0 +1,72 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 6), fachlich nicht geprüft.
+id: pauschalgewerbe
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: short
+category: unternehmen-gruenden
+covers: [Pauschalgewerbe, Beiträge, Elektronische Rechnung, Reihenfolge gegenüber Förderungen]
+title: Pauschalgewerbe, der einfache Einstieg in die Selbständigkeit
+short_answer: Das Pauschalgewerbe ist die einfachste Rechtsform für kleine Tätigkeiten bis 60.000 EUR Jahresumsatz, zugleich die Mehrwertsteuerschwelle. Die Steuer ist eine Pauschale in sieben Stufen von 203,40 bis 1.080 EUR im Jahr, die Sozialbeiträge als Haupttätigkeit 290,98 EUR im Monat für 2026. Wer Förderungen will, muss die Reihenfolge beachten, der Antrag kommt oft vor der Gründung.
+terms:
+  - term_hr: paušalni obrt
+    term_explained:
+      de: Gewerbe mit pauschaler Besteuerung. Keine doppelte Buchführung, Umsatzgrenze 60.000 EUR.
+  - term_hr: paušalni porez
+    term_explained:
+      de: Die Pauschalsteuer, gestaffelt nach Umsatz in sieben Stufen.
+  - term_hr: eRačun
+    term_explained:
+      de: Elektronische Rechnung. Empfang seit 1.1.2026 Pflicht, eigene Ausstellung ab 1.1.2027.
+sections:
+  applies_to: Kleinunternehmerinnen und Kleinunternehmer mit einer Tätigkeit, die als Gewerbe zulässig ist, bis 60.000 EUR Umsatz.
+  not_applies_to: Tätigkeiten über der Umsatzgrenze, reglementierte Berufe mit eigener Kammer, Gesellschaften.
+  authority: Gewerbeamt der Gespanschaft oder Stadt für die Eintragung, Steuerverwaltung für die Pauschale, HZMO und HZZO für die Beiträge.
+  prerequisites:
+    - OIB und angemeldeter Wohnsitz oder Aufenthalt mit Arbeitsberechtigung
+    - Bei Förderung, Antrag vor der Gründung nach den Regeln des jeweiligen Aufrufs
+  steps:
+    - Förderaufrufe lesen und die verlangte Reihenfolge klären, Biram Hrvatsku verlangt den Antrag binnen 30 Tagen nach der Selbstbeschäftigung
+    - Gewerbe beim Gewerbeamt eintragen
+    - Pauschalbesteuerung bei der Steuerverwaltung anmelden
+    - Beiträge bei HZMO und HZZO regeln
+    - Empfang elektronischer Rechnungen einrichten
+  documents:
+    - Ausweis, OIB
+    - Nachweis der Berechtigung zur Tätigkeit, wo verlangt
+    - Adresse des Geschäftssitzes
+  duration_costs: Pauschalsteuer 203,40 bis 1.080 EUR im Jahr. Beiträge als Haupttätigkeit 290,98 EUR im Monat für 2026. Eintragungsgebühren nicht belegt.
+  deadlines:
+    - Antrag auf Biram Hrvatsku binnen 30 Tagen nach der Selbstbeschäftigung
+    - Eigene Ausstellung elektronischer Rechnungen ab 1.1.2027 Pflicht
+  common_mistake: Zuerst das Gewerbe eintragen, dann nach Förderungen suchen. Manche Beihilfen verlangen den Antrag vor der Gründung, andere binnen weniger Tage danach. Wer die Reihenfolge nicht kennt, verliert den Anspruch.
+  not_decided_here: Ob eine Tätigkeit als Gewerbe oder als freier Beruf gilt und welche Steuerform am Ende günstiger ist, klärt eine Steuerberaterin oder ein Steuerberater in Kroatien.
+  open_points:
+    - Eintragungsgebühren nicht belegt
+    - Beiträge als Nebentätigkeit nicht belegt
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [oib]
+  followed_by_pages: [biram-hrvatsku]
+sources:
+  - id: hr-porezna-uprava
+    reference: Paušalno oporezivanje obrta, Umsatzgrenze 60.000 EUR, Stufen der Pauschalsteuer, Beiträge 2026, eRačun
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

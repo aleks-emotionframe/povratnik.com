@@ -1,0 +1,71 @@
+# Themenseite, Grundlagen vorhanden (docs/recherche-faktenbasis.md 6), fachlich nicht geprüft.
+id: lohnsteuerbefreiung
+lang: de
+version: 1
+synthetic: false
+type: topic
+depth: full
+category: steuern-geld-und-pension
+covers: [Fünfjährige Lohnsteuerbefreiung]
+title: Fünf Jahre keine Lohnsteuer für Rückkehrer
+short_answer: Kroatische Staatsbürger, die ab 1.1.2025 die Rückkehr melden und vorher mindestens zwei Jahre ununterbrochen im Ausland waren, zahlen fünf Jahre lang keine Jahreseinkommensteuer auf Löhne aus unselbständiger Arbeit. Die Steuerverwaltung stellt das Recht von Amts wegen fest. Es gibt keine Bleibepflicht.
+terms:
+  - term_hr: Zakon o porezu na dohodak
+    term_explained:
+      de: Das Einkommensteuergesetz. Die Befreiung ist eine Änderung, in Kraft ab 1.1.2025.
+  - term_hr: Rješenje
+    term_explained:
+      de: Der Bescheid der Steuerverwaltung, hier über die Befreiung, spätestens bis 30.6. für das Vorjahr.
+  - term_hr: ZPP-DOH
+    term_explained:
+      de: Formular für die Jahresmeldung, mit dem sich das Recht bis Ende Februar auch selbst nachweisen lässt.
+sections:
+  applies_to: Kroatische Staatsbürger, die ab 1.1.2025 die Rückkehr melden, nachdem sie mindestens zwei Jahre ununterbrochen im Ausland gelebt haben. Auch Staatsbürger, die nie einen Wohnsitz in Kroatien hatten, sowie Auswanderer, deren Familienangehörige und Nachkommen.
+  not_applies_to: Einkünfte aus selbständiger Tätigkeit, Renten oder Vermietung. Personen ohne kroatische Staatsangehörigkeit, sofern sie nicht zur Auswanderergruppe zählen.
+  authority: Porezna uprava, von Amts wegen. Bei Nachweis über ZPP-DOH oder Einspruch die zuständige Dienststelle.
+  prerequisites:
+    - Kroatische Staatsangehörigkeit oder Zugehörigkeit zur Auswanderergruppe
+    - Mindestens zwei Jahre ununterbrochen im Ausland vor der Rückkehr
+    - Rückkehr ab 1.1.2025 gemeldet
+    - Lohn aus unselbständiger Arbeit in Kroatien
+  steps:
+    - Rückkehr durch Wohnsitzanmeldung melden
+    - Arbeit aufnehmen, der Arbeitgeber zieht die Lohnsteuer zunächst ab
+    - Die Steuerverwaltung stellt die Befreiung von Amts wegen fest, Bescheid bis 30.6. für das Vorjahr, erste Rückzahlungen im Mai
+    - Falls kein Bescheid kommt, Nachweis über ZPP-DOH bis Ende Februar einreichen oder Einspruch bis 31.7.
+  documents:
+    - Nachweis des Auslandsaufenthalts von mindestens zwei Jahren
+    - Wohnsitzanmeldung mit Datum
+    - Bei Auswanderernachkommen Nachweis der Zugehörigkeit
+  duration_costs: Fünf Jahre. Wirkung im Schnitt rund 2.700 EUR im Jahr, über fünf Jahre bis rund 14.000 EUR, abhängig vom Lohn.
+  deadlines:
+    - Bescheid der Steuerverwaltung bis 30.6. für das Vorjahr
+    - Eigener Nachweis über ZPP-DOH bis Ende Februar
+    - Einspruch bis 31.7.
+  common_mistake: Die Befreiung mit der Gemeindeermässigung für Gebiete der I. Gruppe und Grad Vukovar oder mit der Jahresermässigung für unter 30-Jährige kombinieren wollen. Das ist ausgeschlossen, es gilt nur eine.
+  not_decided_here: Ob der Auslandsaufenthalt als ununterbrochen gilt und ob eine Person zur Auswanderergruppe zählt, entscheidet die Steuerverwaltung. Bei Doppelbesteuerung oder Einkünften aus mehreren Ländern ist eine Steuerfachperson beizuziehen.
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: [wohnsitz-anmelden]
+  followed_by_pages: []
+sources:
+  - id: hr-porezna-uprava
+    reference: Oslobođenje od poreza na dohodak za povratnike, Zakon o porezu na dohodak, Änderung in Kraft ab 1.1.2025, Rješenje bis 30.6., ZPP-DOH, Prigovor bis 31.7.
+    checked: 2026-09-12
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-14
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-10-14
+  cycle: monthly

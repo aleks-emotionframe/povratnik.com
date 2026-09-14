@@ -1,0 +1,132 @@
+---
+// Übersichtskarte Kroatiens als Inline-SVG (ADR-0005): Gespanschaften als Flächen mit
+// Namen, Orte als Punkte mit Link zum Profil. Ohne JavaScript vollständig lesbar; das
+// kleine Skript zeigt nur den Namen der Gespanschaft unter dem Zeiger an.
+import { COUNTIES, MAP_HEIGHT, MAP_SOURCE, MAP_WIDTH, countySlug, project } from "../lib/map.ts";
+import { pageContext } from "../lib/page.ts";
+
+interface Props {
+  places?: { id: string; name: string; lon: number; lat: number; href: string }[];
+  /** ISO-Code der hervorgehobenen Gespanschaft, etwa auf einer Regionenseite. */
+  highlight?: string;
+  /** Kompakte Darstellung ohne Legende, etwa im Ortsprofil. */
+  compact?: boolean;
+}
+const { places = [], highlight, compact = false } = Astro.props;
+const { u, p } = pageContext(Astro);
+const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<figure class={`map${compact ? " map--compact" : ""}`}>
+  <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} role="img" aria-labelledby={`${uid}-title`} class="map__svg">
+    <title id={`${uid}-title`}>{u("map.title")}</title>
+    <g class="map__counties">
+      {COUNTIES.map((c) => (
+        <a href={p(`/orte/region/${countySlug(c)}`)} class={`map__county${highlight === c.iso ? " map__county--active" : ""}`} data-name={c.name}>
+          <path d={c.path} />
+          <title>{c.name}</title>
+        </a>
+      ))}
+    </g>
+    <g class="map__places">
+      {places.map((pl) => {
+        const { x, y } = project(pl.lon, pl.lat);
+        return (
+          <a href={pl.href} class="map__place" aria-label={pl.name}>
+            <circle cx={x} cy={y} r="14" />
+            <text x={x + 22} y={y + 6}>{pl.name}</text>
+            <title>{pl.name}</title>
+          </a>
+        );
+      })}
+    </g>
+  </svg>
+  {!compact && (
+    <figcaption class="map__caption">
+      <span class="map__hover mono" data-default={u("map.hover_default")}>{u("map.hover_default")}</span>
+      <span class="muted">{u("map.source", { source: MAP_SOURCE })}</span>
+    </figcaption>
+  )}
+</figure>
+
+<script is:inline>
+  (function () {
+    var fig = document.currentScript.previousElementSibling;
+    if (!fig) return;
+    var out = fig.querySelector(".map__hover");
+    if (!out) return;
+    fig.querySelectorAll(".map__county").forEach(function (c) {
+      var show = function () { out.textContent = c.dataset.name; };
+      var reset = function () { out.textContent = out.dataset.default; };
+      c.addEventListener("mouseenter", show);
+      c.addEventListener("focus", show);
+      c.addEventListener("mouseleave", reset);
+      c.addEventListener("blur", reset);
+    });
+  })();
+</script>
+
+<style>
+  .map {
+    margin: 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+  }
+  .map--compact {
+    padding: 0.5rem;
+  }
+  .map__svg {
+    width: 100%;
+    height: auto;
+    max-height: 70vh;
+  }
+  .map__county path {
+    fill: var(--surface-blue);
+    stroke: var(--paper);
+    stroke-width: 2;
+    transition: fill var(--dur) var(--ease);
+  }
+  .map__county:hover path,
+  .map__county:focus path {
+    fill: var(--accent-bright);
+  }
+  .map__county:focus {
+    outline: none;
+  }
+  .map__county--active path {
+    fill: var(--accent);
+  }
+  .map__place circle {
+    fill: var(--croatia-red);
+    stroke: var(--paper);
+    stroke-width: 4;
+  }
+  .map__place text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 26px;
+    fill: var(--ink);
+    paint-order: stroke;
+    stroke: var(--paper);
+    stroke-width: 6px;
+    stroke-linejoin: round;
+  }
+  .map__place:hover circle,
+  .map__place:focus circle {
+    r: 18;
+  }
+  .map__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+  }
+  .map__hover {
+    color: var(--ink);
+    min-height: 1.2em;
+  }
+</style>
