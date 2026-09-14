@@ -11,10 +11,11 @@ ein Wizard nach Zeit und Reihenfolge.
 
 ## Stand
 
-M2a. Es gibt Schemas, einen Validator, CI, die Regel-Engine als eigenes Paket
+M2b-1. Es gibt Schemas, einen Validator, CI, die Regel-Engine als eigenes Paket
 (`packages/engine`, 13 Abnahmefälle) und die Website (`apps/web`): Startseite,
 Rechtsseiten, Kurzcheck mit Haushalt, Auswertung im Browser, Abschlussplan mit
-Druckansicht. Es gibt noch keine fachlich freigegebene Regel; der Kurzcheck läuft
+Druckansicht, dazu den Feiertagskalender Kroatien als belegten Datensatz und den
+dokumentierten Redaktionsdurchlauf. Es gibt noch keine fachlich freigegebene Regel; der Kurzcheck läuft
 lokal mit synthetischen Beispielregeln und sagt das sichtbar. Ein Produktionsbuild
 enthält keine synthetische Regel (Test). Alle Datensätze unter `content/` sind
 synthetische Beispiele und als solche gekennzeichnet.
@@ -22,7 +23,7 @@ synthetische Beispiele und als solche gekennzeichnet.
 ## Struktur
 
 ```
-content/          Regeln, Aufgaben, Verfahren, Seiten, Quellen, Abnahmefälle, Texte (YAML)
+content/          Regeln, Aufgaben, Verfahren, Seiten, Kalender, Quellen, Abnahmefälle, Texte (YAML)
 schemas/          JSON Schema je Datensatztyp, abgeleitet aus docs/datenmodell.md
 scripts/          Validator und seine Tests
 packages/engine/  Regel-Engine: Operatoren, Fristen, Fassungswahl, Konflikte, Fixture-Harness

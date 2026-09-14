@@ -84,11 +84,11 @@ bevor eine echte Regel ihn geht. Ergebnis je Schritt:
 | 4 Pull Request | siehe Link unten |
 | 5 CI | grün |
 | 6 Technisches Review | formal, Rolle noch nicht benannt |
-| 7 Fachfreigabe | nicht möglich, Rolle unbesetzt. Fassung bleibt `draft`; synthetische Fassungen dürfen nie `approved` werden, der Validator erzwingt das |
+| 7 Fachfreigabe | nicht möglich, Rolle unbesetzt. Fassung bleibt `in_review`; synthetische Fassungen dürfen nie `approved` werden, der Validator erzwingt das |
 | 8 Veröffentlichung | nicht möglich, wie 7. Merge in den Arbeitsbranch als Beleg für die Schritte 2 bis 6 |
 | 9 Auslieferung | Build-Test bestätigt: keine synthetische Fassung im Build |
 
-Pull Request: wird nach dem Lauf hier eingetragen.
+Pull Request: https://github.com/aleks-emotionframe/povratnik.com/pull/3 (CI grün, gemerged in den Arbeitsbranch von M2b-1).
 
 Offen nach dem Probelauf: Rollen benennen (`rollen.md`), Branch-Schutz aktivieren,
 Rücknahme einmal proben.

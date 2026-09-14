@@ -21,6 +21,8 @@ Zuwanderer nach Kroatien.
 | `designsystem.md` | Tokens, Seitentypen, Zustandsdarstellung, Formulare, Mobil | v1.2 |
 | `adr/0001-quelle-und-abgeleitete-kopie.md` | Welcher Bestand wird im Repository, welcher in der Datenbank gepflegt | entschieden |
 | `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket, Nachtrag Preact | entschieden |
+| `redaktionsdurchlauf.md` | Regeländerung von der Quelle bis zur Veröffentlichung und Rücknahme, Protokoll des Probelaufs | v1.0 |
+| `adr/0003-hosting.md` | Hosting-Optionen für Site, Node und Datenbank, Empfehlung | vorgelegt, Entscheidung offen |
 | `rollen.md` | Besetzung der Rollen, wer gibt was frei | v1, Namen einzutragen |
 | `recherche-faktenbasis.md` | Rechtslage, Förderungen, Zahlen, Wettbewerb, mit Quellen und Stand | v1 |
 | `review-claude-md.md` | Review der Entwicklungsanweisung v1, Grundlage für v2 | v1, P0 und P1 abgearbeitet |
@@ -91,11 +93,14 @@ Aus der Umsetzung hinzugekommen:
 
 **Stand M2a (14.09.2026):** Astro-Website mit Startseite, Rechtsseiten (Betreiberangaben
 offen), Kurzcheck als Preact-Insel, Auswertung im Browser, Abschlussplan mit
-Druckansicht. Ausschliesslich synthetische Regeln. Offen für **M2b:** Ortsprofil
-(braucht Datenlizenz und Datenbank nach ADR-0001), Hosting-Entscheidung (EU,
-Node-fähig; Optionen vorlegen), Redaktionsdurchlauf (eine Regeländerung über Pull
-Request bis zur Freigabe dokumentiert durchspielen), Feiertagsdatensatz mit Quelle,
-Test mit echten Testpersonen.
+Druckansicht. Ausschliesslich synthetische Regeln.
+
+**Stand M2b-1 (14.09.2026):** Feiertagskalender Kroatien 2026 und 2027 als belegter
+Datensatz (`content/calendars/hr.yaml`, Quelle NN 110/2019, Entwurf bis zur
+Fachfreigabe), Redaktionsdurchlauf dokumentiert und mit PR #3 einmal durchgespielt,
+Hosting als ADR-0003 vorgelegt. Offen für **M2b-2:** Hosting-Entscheidung durch die
+Produktverantwortung, Ortsprofil (braucht Datenlizenz und Datenbank nach ADR-0001),
+Fachfreigabe des Kalenders, Probe der Rücknahme, Test mit echten Testpersonen.
 
 Entschieden am 13.09.2026 durch die Produktverantwortung: Der Kurzcheck fragt nach
 Staatsangehörigkeiten (Mehrfachauswahl) und Bezug zu Kroatien, nicht nach dem Pass.

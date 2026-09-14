@@ -9,7 +9,7 @@ funktionieren muss, und wie Qualität gemessen wird.
 
 | Bereich | Anforderung |
 |---|---|
-| Rücknahme einer falschen Regel | Sofortige Sperre der betroffenen Ausgabe durch eine benannte Person, Korrektur, nachvollziehbare Wiederfreigabe. Einmal erprobt, bevor öffentlich. |
+| Rücknahme einer falschen Regel | Sofortige Sperre der betroffenen Ausgabe durch eine benannte Person, Korrektur, nachvollziehbare Wiederfreigabe. Einmal erprobt, bevor öffentlich. Ablauf in `redaktionsdurchlauf.md` Abschnitt 2. |
 | Sicherung | Inhalte, Regeln, Quellen, Freigaben, Betriebsdaten. Wiederherstellung tatsächlich durchgeführt, nicht nur konfiguriert. |
 | Zugriff | Rollen getrennt, starke Anmeldung für Redaktion und Gemeindezugang, dokumentierter Umgang mit kompromittierten Konten. |
 | Updates | Benannte Verantwortung für Abhängigkeiten und Sicherheitsaktualisierungen. |
