@@ -1,0 +1,140 @@
+---
+// Über uns (inhaltskonzept.md 11): Auftrag und Unabhängigkeit, Redaktionsgrundsätze,
+// Fehler melden, Gemeinde eintragen. Inhalte aus docs/strategie.md, rollen.md und
+// redaktionsgrundsaetze.md; die Dokumente sind massgeblich.
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Über uns: povratnik.com" description="Wer hinter povratnik.com steht, wie wir finanziert werden, wie wir prüfen und warum bezahlte Leistungen keine Inhalte verändern." current="ueber-uns">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Verstehen, vergleichen, ankommen.</h1>
+        <p class="lede">
+          Behördenseiten erklären jeweils ihren eigenen Ausschnitt. Niemand erklärt, in welcher
+          Reihenfolge die Ausschnitte zusammengehören und was wovon abhängt. Genau das nehmen
+          wir Ihnen ab.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Auftrag und Unabhängigkeit</h2>
+        <p>
+          povratnik.com wird von der EmotionFrame GmbH in der Schweiz betrieben. Die Orientierung
+          ist frei: allgemeine Informationen, das Basisprofil jeder Gemeinde, sachliche Korrekturen
+          und neutrale Vergleichsdaten kosten nichts und werden nie hinter eine Bezahlschranke
+          gestellt.
+        </p>
+        <p>
+          Bezahlt werden Pflegeleistungen: Gemeinden, die ihre Angebote strukturiert aufbereiten,
+          übersetzen und laufend prüfen lassen, Fachpartner mit einem transparenten Profil,
+          Arbeitgeber mit aktuellen Stellen. Eine Gemeinde, die nichts bezahlt, wird nicht
+          künstlich unvollständig gehalten. Bezahlte Leistungen verändern keine fachlichen
+          Ergebnisse, es gibt keine bezahlte Platzierung, und Werbung wird gekennzeichnet.
+        </p>
+        <h3>Haushalte statt Einzelpersonen</h3>
+        <p>
+          Partner und Kinder können unterschiedliche Staatsangehörigkeiten, Aufenthaltswege und
+          Versicherungsgrundlagen haben. Deshalb ist bei uns die Person die Planungseinheit und
+          der Haushalt die Klammer.
+        </p>
+        <h3>Bleiben nach dem Ankommen</h3>
+        <p>
+          Die ersten zwölf Monate gehören zum Produkt: Spracherwerb, Schulwechsel, Anschluss,
+          Arbeitssuche des Partners, Verlängerungen. Erfolg endet nicht mit der Anmeldung.
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>Was immer gilt</h3>
+        <ul class="topics">
+          <li><span>Keine Bezahlschranke vor Kerninformationen</span></li>
+          <li><span>Keine bezahlte Platzierung</span></li>
+          <li><span>Keine Rangliste von Gemeinden</span></li>
+          <li><span>Keine Antworten, die den Browser verlassen</span></li>
+          <li><span>Keine Regel ohne namentliche Fachfreigabe</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band band--surface" id="grundsaetze">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Wie wir prüfen</h2>
+        <p>
+          Jede Aussage ist eine von drei Arten und wird so gekennzeichnet: ein Befund mit
+          benannter Quelle und Prüfdatum, eine Produktregel, die wir daraus ableiten, oder ein
+          offener Punkt, der eine Einzelfall- oder Behördenklärung braucht. Ein nicht gefundenes
+          Angebot wird nie als nicht existent ausgewiesen.
+        </p>
+        <h3>Quellenhierarchie</h3>
+        <ol class="sources">
+          <li>Amtliche Rechtsveröffentlichung im Original, mit ihren Änderungen gelesen</li>
+          <li>Zuständige kroatische Behörde</li>
+          <li>Kommunaler Originalbeschluss oder Ausschreibung</li>
+          <li>Zuständige Behörde des bisherigen Wohnlands</li>
+          <li>Schriftliche Fachauskunft einer Behörde, mit Datum und Fallannahmen</li>
+          <li>Fachpublikationen und Beratungsbeiträge</li>
+          <li>Presse und Erfahrungsberichte: Kontext, nie Anspruchsgrundlage</li>
+        </ol>
+        <p>Eine niedrigere Stufe widerlegt nie eine höhere. Ein Presseartikel ist nie Beleg für eine Frist, einen Betrag oder eine Voraussetzung.</p>
+      </div>
+      <aside class="col-aside">
+        <h3>Prüfzyklen</h3>
+        <dl class="open-field">
+          <dt>Offene Förderaufrufe</dt><dd>wöchentlich während der Laufzeit</dd>
+          <dt>Aufenthalt, Steuern, Versicherung</dt><dd>monatliche Änderungssichtung</dd>
+          <dt>Kommunale Massnahmen</dt><dd>quartalsweise und bei Beschlüssen</dd>
+          <dt>Kontakte und Einrichtungen</dt><dd>halbjährlich</dd>
+        </dl>
+        <p class="soft">Ein verpasster Prüftermin erzeugt eine Warnung, keine stillschweigende Weiterverwendung.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Wer verantwortlich ist</h2>
+        <dl class="open-field">
+          <dt>Produktverantwortung</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>Technische Verantwortung</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>Fachprüfung Recht und Steuern</dt><dd><span class="state state--unknown">offen</span> Kroatische Fachperson, namentliche Freigabe jeder Rechtsregel</dd>
+          <dt>Kroatischsprachige Fachredaktion</dt><dd><span class="state state--unknown">offen</span></dd>
+          <dt>Fehlerkontakt</dt><dd><a href="mailto:kontakt@povratnik.com">kontakt@povratnik.com</a>, Sichtung binnen zwei Werktagen</dd>
+        </dl>
+        <p class="notice" role="note">
+          <strong>Solange die Fachprüfung offen ist</strong>
+          Es gibt keine veröffentlichte Rechtsregel. Der Kurzcheck läuft mit gekennzeichneten
+          Beispielregeln. Eine Prüfung durch ein KI-System ersetzt keine qualifizierte
+          unabhängige Fachperson.
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>Mitmachen</h3>
+        <ul class="topics">
+          <li><span>Gemeinde eintragen</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">Anfrage</a></li>
+          <li><span>Fachperson werden</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fachpr%C3%BCfung">Anfrage</a></li>
+          <li><span>Fehler melden</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fehler%20melden">Mail</a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sources {
+    padding-left: 1.25rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .sources li::marker {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,93 @@
+---
+// Übersicht Wissen: die zwölf Rubriken (inhaltskonzept.md 4.1). Themenseiten folgen
+// in M4 als geprüfte Inhalte; bis dahin trägt jede Rubrik ihren Zustand sichtbar.
+import Base from "../../layouts/Base.astro";
+import { RUBRICS } from "../../lib/rubrics.ts";
+---
+
+<Base title="Wissen nach Thema: povratnik.com" description="Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung." current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>Wissen nach Thema</h1>
+        <p class="lede">
+          Zwölf Rubriken, von Status bis Förderung. Jede Themenseite hat dieselbe Maske: kurze
+          Antwort, gilt für, gilt nicht für, zuständig, Stand. Nach der zweiten Seite wissen Sie,
+          wo Sie suchen müssen.
+        </p>
+      </div>
+      <div class="hero__media hero__media--plain" aria-hidden="true">
+        <p class="hero__claim">Behördenseiten erklären ihren eigenen Ausschnitt. Wir erklären, in welcher Reihenfolge die Ausschnitte zusammengehören.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <ul class="cards">
+        {RUBRICS.map((r) => (
+          <li class="card card--link">
+            <div class="card__body">
+              <span class="card__num">{r.number}</span>
+              <h3><a href={`/wissen/${r.slug}`}>{r.title}</a></h3>
+              <p>{r.intro}</p>
+              <span class="arrow-link">{r.topics.length} Themen</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Zwei Tiefen, für Sie erkennbar</h2>
+        <p>
+          Etwa zwanzig Themen werden vollständig ausgearbeitet: die, an denen Menschen scheitern
+          oder an denen Geld hängt. Alle anderen bekommen eine geprüfte Kurzfassung mit Einstieg,
+          Zuständigkeit und Direktlink. Beide Stufen sind gekennzeichnet, und keine Seite geht
+          ohne Quelle, Prüfdatum und fachliche Freigabe online.
+        </p>
+        <p class="notice" role="note">
+          <strong>Stand der Rubriken</strong>
+          Die Struktur steht, die Themenseiten sind in Arbeit. Bis zur fachlichen Freigabe zeigt
+          jede Rubrik, welche Themen kommen und welche Fragen sie beantworten wird.
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>Weitere Zugänge</h3>
+        <ul class="topics">
+          <li><span>Nach Herkunftsland</span><span class="state state--unknown">im Aufbau</span></li>
+          <li><span>Nach Lebenssituation</span><span class="state state--unknown">im Aufbau</span></li>
+          <li><span>Glossar der Amtsbegriffe</span><span class="state state--unknown">im Aufbau</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .hero__claim {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+    line-height: 1.35;
+    color: var(--on-brand-soft);
+    max-width: 26ch;
+    margin: 0;
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+</style>

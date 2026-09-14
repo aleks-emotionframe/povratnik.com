@@ -1,18 +1,24 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
-// Der EmotionFrame Footer steht als letztes Element ausserhalb des Containers.
+// Kopf nach designsystem.md 2.0: Aufbaustufe als schmale Leiste, Wortmarke mit
+// Schachbrett, Hauptnavigation, hervorgehobener Kurzcheck. Der EmotionFrame Footer
+// steht als letztes Element ausserhalb des Containers.
 import "../styles/base.css";
 
 interface Props {
   title: string;
   description: string;
   /** Aktueller Navigationspunkt für aria-current. */
-  current?: "start" | "mein-weg";
+  current?: "start" | "wissen" | "orte" | "mein-weg" | "ueber-uns";
+  /** Aufmacherbild vorladen (LCP). */
+  preload?: string;
 }
-const { title, description, current } = Astro.props;
+const { title, description, current, preload } = Astro.props;
 const nav = [
-  { href: "/", label: "Start", key: "start" },
+  { href: "/wissen", label: "Wissen", key: "wissen" },
+  { href: "/orte", label: "Orte", key: "orte" },
   { href: "/mein-weg", label: "Mein Weg", key: "mein-weg" },
+  { href: "/ueber-uns", label: "Über uns", key: "ueber-uns" },
 ];
 ---
 
@@ -24,22 +30,38 @@ const nav = [
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light" />
-    <!-- Aufbaustufe: nicht indexieren, bis Impressum und erste freigegebene Regel da sind. -->
+    <meta name="theme-color" content="#14213d" />
+    <!-- Aufbaustufe: nicht indexieren, bis die erste freigegebene Regel da ist. -->
     <meta name="robots" content="noindex, nofollow" />
+    <link rel="preload" href="/fonts/montserrat-600-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {preload && <link rel="preload" href={preload} as="image" />}
     <link rel="stylesheet" href="/ef-signature/ef-signature.css" />
     <script src="/ef-signature/ef-signature.js" defer is:inline></script>
   </head>
   <body>
-    <p class="notice notice--stage" role="note">
-      <strong>Aufbaustufe</strong>
-      Diese Website ist im Aufbau. Der Kurzcheck arbeitet noch ohne fachlich freigegebene Regeln.
-    </p>
+    <div class="topbar">
+      <div class="container">
+        <p role="note"><strong>Aufbaustufe</strong> <span class="topbar__text">Der Kurzcheck arbeitet noch ohne fachlich freigegebene Regeln.</span></p>
+        <a href="mailto:kontakt@povratnik.com">Fehler melden</a>
+      </div>
+    </div>
     <header class="site-head">
       <div class="container">
-        <a class="brand" href="/">povratnik.com <small>Leben in Kroatien</small></a>
+        <a class="brand" href="/" aria-label="povratnik.com, Startseite">
+          <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
+            <rect width="28" height="28" rx="5" fill="#fff" stroke="#14213d" stroke-width="1.5" />
+            <g fill="#b3202b">
+              <rect x="4" y="4" width="6.7" height="6.7" /><rect x="17.3" y="4" width="6.7" height="6.7" />
+              <rect x="10.7" y="10.7" width="6.7" height="6.7" />
+              <rect x="4" y="17.3" width="6.7" height="6.7" /><rect x="17.3" y="17.3" width="6.7" height="6.7" />
+            </g>
+          </svg>
+          <span>povratnik<small>.com</small></span>
+        </a>
         <nav class="site-nav" aria-label="Hauptnavigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
         </nav>
+        <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
       </div>
     </header>
 
@@ -47,13 +69,62 @@ const nav = [
       <slot />
     </main>
 
+    <section class="band band--brand contact">
+      <div class="container">
+        <div>
+          <h2>Haben Sie etwas gefunden, das nicht stimmt?</h2>
+          <p>Falsche Frist, falsche Angabe, toter Link: Wir sichten jede Meldung innert zwei Werktagen.</p>
+        </div>
+        <div class="contact__actions">
+          <a class="button button--light" href="mailto:kontakt@povratnik.com">Fehler melden</a>
+          <a class="button button--outline-light" href="/ueber-uns">Wie wir arbeiten</a>
+        </div>
+      </div>
+    </section>
+
     <footer class="site-foot">
       <div class="container">
-        <p>
-          Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer
-          die zuständige Stelle.
-        </p>
-        <p class="datenstand">Aufbaustufe M2a. Es gibt noch keine fachlich freigegebene Regel.</p>
+        <div>
+          <a class="brand" href="/">
+            <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
+              <rect width="28" height="28" rx="5" fill="#fff" />
+              <g fill="#b3202b">
+                <rect x="4" y="4" width="6.7" height="6.7" /><rect x="17.3" y="4" width="6.7" height="6.7" />
+                <rect x="10.7" y="10.7" width="6.7" height="6.7" />
+                <rect x="4" y="17.3" width="6.7" height="6.7" /><rect x="17.3" y="17.3" width="6.7" height="6.7" />
+              </g>
+            </svg>
+            <span>povratnik<small>.com</small></span>
+          </a>
+          <p>Leben in Kroatien: die Reihenfolge für Rückkehr und Auswanderung, Person für Person.</p>
+          <p>Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer die zuständige Stelle.</p>
+          <p class="datenstand">Aufbaustufe M2a. Es gibt noch keine fachlich freigegebene Regel.</p>
+        </div>
+        <div>
+          <h3>Wissen</h3>
+          <ul>
+            <li><a href="/wissen/status-und-staatsangehoerigkeit">Status und Staatsangehörigkeit</a></li>
+            <li><a href="/wissen/dokumente-und-behoerden">Dokumente und Behörden</a></li>
+            <li><a href="/wissen/gesundheit-und-pflege">Gesundheit und Pflege</a></li>
+            <li><a href="/wissen/leistungen-und-foerderung">Leistungen und Förderung</a></li>
+            <li><a href="/wissen">Alle zwölf Rubriken</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Werkzeuge</h3>
+          <ul>
+            <li><a href="/mein-weg">Kurzcheck: Mein Weg</a></li>
+            <li><a href="/orte">Orte entdecken</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Über uns</h3>
+          <ul>
+            <li><a href="/ueber-uns">Auftrag und Unabhängigkeit</a></li>
+            <li><a href="/ueber-uns#grundsaetze">Redaktionsgrundsätze</a></li>
+            <li><a href="mailto:kontakt@povratnik.com">Kontakt</a></li>
+          </ul>
+        </div>
       </div>
     </footer>
 

@@ -1,0 +1,184 @@
+---
+// Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenliste mit
+// Zustand, Abhängigkeiten zu anderen Rubriken. Keine Fachwerte: Die Themenseiten
+// entstehen in M4 als geprüfte Inhalte mit Quelle, Prüfdatum und Freigabe.
+import Base from "../../layouts/Base.astro";
+import { RUBRICS, rubricBySlug } from "../../lib/rubrics.ts";
+
+export function getStaticPaths() {
+  return RUBRICS.map((r) => ({ params: { slug: r.slug } }));
+}
+
+const rubric = rubricBySlug(Astro.params.slug!)!;
+const requires = rubric.requires.map((s) => rubricBySlug(s)!);
+const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
+---
+
+<Base title={`${rubric.title}: povratnik.com`} description={rubric.intro} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href="/wissen">Wissen</a> / Rubrik {rubric.number}</p>
+        <h1>{rubric.title}</h1>
+        <p class="lede">{rubric.intro}</p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <div>
+          <h2 class="questions__title">Typische Fragen</h2>
+          <ul class="questions">
+            {rubric.questions.map((q) => <li>{q}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Themen in dieser Rubrik</h2>
+        <p class="soft">Jedes Thema erscheint, sobald es Quelle, Prüfdatum und fachliche Freigabe trägt.</p>
+        <ul class="topics">
+          {rubric.topics.map((t) => (
+            <li>
+              <span>{t}</span>
+              <span class="state state--unknown">in Arbeit</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <aside class="col-aside">
+        {requires.length > 0 && (
+          <div class="side">
+            <h3>Vorher nötig</h3>
+            <ul class="side__list">
+              {requires.map((r) => <li><a href={`/wissen/${r.slug}`}>{r.number} {r.title}</a></li>)}
+            </ul>
+          </div>
+        )}
+        {followed.length > 0 && (
+          <div class="side">
+            <h3>Danach folgt</h3>
+            <ul class="side__list">
+              {followed.map((r) => <li><a href={`/wissen/${r.slug}`}>{r.number} {r.title}</a></li>)}
+            </ul>
+          </div>
+        )}
+        <div class="side side--cta">
+          <h3>Was gilt für mich?</h3>
+          <p>Der Kurzcheck ordnet die Themen nach Ihrem Haushalt: Wer welchen Weg hat und was zuerst kommt.</p>
+          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>So wird jede Themenseite aufgebaut</h2>
+        <dl class="open-field">
+          <dt>Kurze Antwort</dt><dd>in zwei bis drei Sätzen</dd>
+          <dt>Gilt für</dt><dd>Zielgruppe, ausdrücklich</dd>
+          <dt>Gilt nicht für</dt><dd>die häufigste Verwechslung</dd>
+          <dt>Zuständig</dt><dd>Behörde oder Stelle</dd>
+          <dt>Stand</dt><dd>Prüfdatum, Quelle, Zustand</dd>
+          <dt>Häufiger Irrtum</dt><dd>der Fehler, den viele machen</dd>
+          <dt>Was hier nicht entschieden wird</dt><dd>was eine Fachperson entscheidet</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .crumbs {
+    font-size: 0.875rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .crumbs a {
+    color: var(--on-brand);
+  }
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .questions__title {
+    font-size: 1rem;
+    color: var(--on-brand-soft);
+    margin-bottom: 0.75rem;
+  }
+  .questions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1.35;
+    color: var(--on-brand);
+    max-width: 34ch;
+  }
+  .questions li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .questions li::before {
+    content: "?";
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    color: var(--brand-deep);
+    font-size: 0.875rem;
+  }
+  .side {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .side h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .side__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .side__list li {
+    padding: 0.35rem 0;
+  }
+  .side__list a {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .side--cta {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
+  }
+  .side--cta p {
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+</style>

@@ -13,29 +13,37 @@ const texts = bundle.texts as Record<string, any>;
 ---
 
 <Base title="Mein Weg nach Kroatien: Kurzcheck" description="Sechs Fragen, dann Ihr erster Plan. Antworten bleiben im Browser." current="mein-weg">
-  <section class="band">
-    <div class="container grid">
-      <div class="col-wide">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
         <h1>{texts.wizard.title}</h1>
-        <p class="soft">{texts.wizard.intro}</p>
-        {bundle.synthetic && (
-          <p class="notice" role="note">
-            <strong>{texts.wizard.synthetic_banner}</strong>
-            {texts.wizard.synthetic_text}
-          </p>
-        )}
-        {bundle.rules.length === 0 && (
-          <p class="notice" role="note">
-            <strong>{texts.wizard.no_rules_title}</strong>
-            {texts.wizard.no_rules_text}
-          </p>
-        )}
+        <p class="lede">{texts.wizard.intro}</p>
+      </div>
+      <div class="hero__media hero__media--plain">
+        <ul class="promises">
+          <li>Ohne Konto, ohne Anmeldung</li>
+          <li>Antworten bleiben in diesem Browser</li>
+          <li>Jede Angabe im Plan mit Quelle und Prüfdatum</li>
+          <li>«Weiss ich noch nicht» ist immer eine Antwort</li>
+        </ul>
       </div>
     </div>
   </section>
   <section class="band band--surface">
-    <div class="container grid">
-      <div class="col-wide">
+    <div class="container">
+      {bundle.synthetic && (
+        <p class="notice wizard__notice" role="note">
+          <strong>{texts.wizard.synthetic_banner}</strong>
+          {texts.wizard.synthetic_text}
+        </p>
+      )}
+      {bundle.rules.length === 0 && (
+        <p class="notice wizard__notice" role="note">
+          <strong>{texts.wizard.no_rules_title}</strong>
+          {texts.wizard.no_rules_text}
+        </p>
+      )}
+      <div class="wizard-card">
         <noscript>
           <p class="notice"><strong>JavaScript</strong>{texts.wizard.no_js}</p>
         </noscript>
@@ -44,3 +52,46 @@ const texts = bundle.texts as Record<string, any>;
     </div>
   </section>
 </Base>
+
+<style>
+  .hero__media--plain {
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+    min-height: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  @media (min-width: 860px) {
+    .hero__media--plain {
+      border-top: 0;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+  .promises {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--on-brand);
+  }
+  .promises li::before {
+    content: "✓";
+    display: inline-grid;
+    place-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-right: 0.6rem;
+    border-radius: 50%;
+    background: var(--accent-bright);
+    color: var(--brand-deep);
+    font-size: 0.8rem;
+  }
+  .wizard__notice {
+    max-width: 52rem;
+    margin-bottom: 1.25rem;
+  }
+</style>

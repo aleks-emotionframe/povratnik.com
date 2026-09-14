@@ -1,30 +1,32 @@
 # Designsystem
 
-Version 1.2, 13.09.2026. Verbindliche Gestaltungsgrundlage.
+Version 2.0, 14.09.2026. Verbindliche Gestaltungsgrundlage. Ersetzt Version 1.2.
 
-`prototyp.html` im Wurzelverzeichnis ist die erste Referenzansicht für Farbe,
-Typografie, Raster und Zustandsdarstellung. **Er ist ausdrücklich keine Codebasis.**
-Es handelt sich um eine Einzeldatei mit per JavaScript umgeschalteten Ansichten, also
-das Gegenteil der Vorgabe aus CLAUDE.md 2.6, wonach Informationsseiten serverseitig
-gerendert und ohne JavaScript lesbar sein müssen. Übernommen werden die
-Gestaltungsentscheidungen, nicht die Umsetzung.
+Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
+folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich
+sind dort: eine dunkle Markenfarbe mit einer helleren Akzentfarbe derselben Familie,
+grosse Fotografie im Aufmacher, eine geometrische Groteske für Titel, weisse Karten
+auf hellen Flächen, ein Kopf mit klarer Hauptnavigation und einer hervorgehobenen
+Handlung, Schnelleinstiege als Chips, ein Kontaktband vor dem Fuss. Die
+Zustandsdarstellung aus Version 1 bleibt unverändert, weil sie der fachliche Kern ist.
+
+`prototyp.html` im Wurzelverzeichnis ist seit Version 2.0 nur noch Referenz für die
+Zustandsdarstellung, nicht mehr für Farbe und Typografie. **Er ist keine Codebasis.**
 
 ---
 
 ## 1. Haltung
 
-Swiss International Style als Grundlage, ein Element aus datendichter technischer
-Gestaltung geborgt. Die Seite muss gleichzeitig einem Ministerium Seriosität und einer
-Familie in Buenos Aires Orientierung geben. Beides entsteht aus sichtbarer Struktur und
-Nachweisbarkeit, nicht aus Atmosphäre.
+Seriös wie eine Bank, verständlich wie ein guter Schalterbeamter. Die Seite muss
+gleichzeitig einem Ministerium Seriosität und einer Familie in Buenos Aires
+Orientierung geben. Vertrauen entsteht aus sichtbarer Struktur, dokumentarischen
+Fotografien von Menschen und Orten und aus Nachweisbarkeit: Quelle, Prüfdatum und
+Zustand sind gestaltete Bestandteile jeder Information, und «unbekannt» ist ein
+sichtbarer Zustand statt einer Lücke.
 
-Das gestalterische Erkennungsmerkmal ist der Datenstand: Quelle, Prüfdatum und Zustand
-sind gestaltete Bestandteile jeder Information, und «unbekannt» ist ein sichtbarer
-Zustand statt einer Lücke.
-
-Ausgeschlossen: zentrierter Aufmacher mit Etikett darüber, drei gleichrangige
-Feature-Kacheln mit Symbol oben, farbige Akzentränder an Karten, Sonnenuntergangsfotos
-mit Segelbooten.
+Ausgeschlossen bleiben: Etiketten über Titeln, Zahlenstreifen mit Kennzahlen,
+farbige Akzentränder an Karten, Sonnenuntergänge mit Segelbooten, erfundene Werte
+für reale Orte.
 
 ---
 
@@ -32,31 +34,43 @@ mit Segelbooten.
 
 | Rolle | Wert |
 |---|---|
-| Papier | `oklch(99.2% 0.002 25)` |
-| Fläche | `oklch(97.2% 0.004 25)` |
-| Tinte | `oklch(21% 0.012 240)` |
-| Tinte weich | `oklch(43% 0.012 240)` |
-| Gedämpft | `oklch(56% 0.010 240)` |
-| Linie | `oklch(89% 0.006 25)` |
-| Linie stark | `oklch(58% 0.012 25)` |
-| Akzent | `oklch(48% 0.152 22)` |
-| Zustand offen (Programm) | `oklch(45% 0.105 155)` auf `oklch(96% 0.024 155)` |
-| Zustand angekündigt (Programm) | `oklch(45% 0.090 250)` auf `oklch(96% 0.020 250)` |
-| Zustand geschlossen (Programm) | `oklch(47% 0.020 240)` auf `oklch(95% 0.004 240)` |
-| Zustand unbekannt (Fachwert) | `oklch(50% 0.030 85)` auf `oklch(96% 0.030 85)` |
+| Papier | `#fff` |
+| Fläche | `oklch(96.5% 0.004 80)` warmes Hellgrau |
+| Fläche blau | `oklch(96% 0.015 240)` Karten und Chips auf Markenflächen |
+| Marke | `oklch(28% 0.09 262)` Nachtblau: Aufmacher, Fuss, Kontaktband |
+| Marke tief | `oklch(22% 0.08 262)` |
+| Tinte | `oklch(24% 0.06 262)` Titel und Lauftext |
+| Tinte weich | `oklch(40% 0.03 262)` |
+| Gedämpft | `oklch(52% 0.02 262)` |
+| Linie | `oklch(90% 0.005 262)` |
+| Linie stark | `oklch(60% 0.02 262)` |
+| Akzent | `oklch(50% 0.16 255)` Blau: Links, primäre Schaltflächen |
+| Akzent tief | `oklch(42% 0.15 255)` |
+| Akzent hell | `oklch(72% 0.13 230)` Links auf dunklem Grund |
+| Zustände | unverändert aus Version 1.2, siehe Abschnitt 4 |
 
-Alle tatsächlich verwendeten Paarungen erreichen mindestens AA. Linie stark wird als
-Rand von Bedienelementen eingesetzt und erreicht 3:1 gegen Papier.
+Alle tatsächlich verwendeten Paarungen erreichen mindestens AA.
 
-**Typografie:** eine neutrale Groteske für Display und Text, dazu eine dicktengleiche
-Schrift für Metadaten, Beträge und Fristen. Keine Webfonts, Systemstack: Die Zielgruppe
-sitzt an schwachen Verbindungen. Zeilenlänge im Lauftext höchstens 70 Zeichen.
+**Typografie:** Montserrat 600, selbst ausgeliefert als woff2 (Skill webfonts, nur
+diese eine Stärke, Zeichensätze latin und latin-ext für kroatische Amtsbegriffe), für
+Titel, Navigation und Schaltflächen. Lauftext im Systemstack (Segoe UI, Roboto,
+Helvetica), damit die Startressourcen im Budget bleiben. Metadaten, Beträge und Fristen
+dicktengleich im Systemstack. Zeilenlänge im Lauftext höchstens 70 Zeichen.
 
-**Raster:** zwölf Spalten, grosszügiger Weissraum, linksbündig. Struktur entsteht durch
-Raster und Abstand, nicht durch Rahmen und Farbe.
+**Wortmarke:** «povratnik» mit einem kleinen rot-weissen Schachbrett als Bildmarke,
+daneben «.com» in Tinte weich. Das Schachbrett ist der einzige Ort, an dem Rot vorkommt.
 
-**Rhythmus:** Bänder mit wechselnder Dichte statt gleichförmiger Abschnitte. Der
-Aufmacher ist asymmetrisch.
+**Raster:** zwölf Spalten, Breite bis 1320 Pixel, linksbündig. Karten weiss mit
+8 Pixel Radius auf hellen Flächen, ohne Schatten, mit dünner Linie. Schaltflächen mit
+6 Pixel Radius, gefüllt in Akzent, auf dunklem Grund weiss.
+
+**Rhythmus:** Bänder wechseln zwischen Papier, Fläche und Marke. Der Aufmacher ist
+zweigeteilt: Markenfläche mit Titel links, Fotografie rechts, auf schmalen Geräten
+untereinander.
+
+**Fotografie:** dokumentarisch wirkende Bilder von Menschen und Orten, natürliches
+Licht, gedeckte Farben, kein Stock-Lächeln. Jedes Bild als WebP in mehreren Breiten,
+mit fester Breite und Höhe, das Aufmacherbild vorgeladen.
 
 ---
 
