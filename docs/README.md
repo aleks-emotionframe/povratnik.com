@@ -23,7 +23,9 @@ Zuwanderer nach Kroatien.
 | `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket, Nachtrag Preact | entschieden |
 | `redaktionsdurchlauf.md` | Regeländerung von der Quelle bis zur Veröffentlichung und Rücknahme, Protokoll des Probelaufs | v1.0 |
 | `adr/0003-hosting.md` | Hosting: statische Website auf Hostpoint (Schweiz), Datenbank-Hosting wird bei M2b-2 entschieden | entschieden |
-| `rollen.md` | Besetzung der Rollen, wer gibt was frei | v1, Namen einzutragen |
+| `rollen.md` | Besetzung der Rollen, wer gibt was frei | v1.1, Fachprüfung und Fachredaktion offen |
+| `anfragen-datenlizenz.md` | Entwürfe der Anfragen an MDU (Massnahmen) und DGU (Grenzen, Kennungen), kroatisch und deutsch | v1.0, zum Versand |
+| `testleitfaden.md` | Ablauf, Fragen, Profile und Protokoll für den Test mit Testpersonen | v1.0 |
 | `recherche-faktenbasis.md` | Rechtslage, Förderungen, Zahlen, Wettbewerb, mit Quellen und Stand | v1 |
 | `review-claude-md.md` | Review der Entwicklungsanweisung v1, Grundlage für v2 | v1, P0 und P1 abgearbeitet |
 
@@ -65,11 +67,9 @@ Diese fünf Punkte blockieren. Keiner davon ist technisch.
 5. **Pilotgemeinden.** Drei bis fünf, mit verbindlicher Zusage und benannter
    Ansprechperson.
 
-Technisch offen: Namen in `rollen.md` eintragen und den Branch-Schutz für `main`
-aktivieren (Pull Request erforderlich, Status-Check `validate`). Der Branch-Schutz ist
-auf dem kostenlosen GitHub-Plan für private Repositories nicht verfügbar (geprüft am
-14.09.2026): entweder Repository öffentlich stellen oder GitHub Pro. Bis dahin gilt die
-Regel «nur über Pull Request» als Vereinbarung, nicht als technische Sperre.
+Technisch erledigt am 14.09.2026: Namen in `rollen.md` eingetragen (Fachprüfung und
+Fachredaktion offen), Repository öffentlich, Branch-Schutz für `main` aktiv
+(Status-Check `validate` Pflicht).
 
 Zusätzlich zu klären, weil es eine Ausbaustufe betrifft: eine lizenzierbare Quelle für
 regionale Lohn-, Miet- und Lebenshaltungskosten. Ohne sie ist die Simulation nicht
