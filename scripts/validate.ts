@@ -217,9 +217,10 @@ export function validateContent(contentDir: string): Issue[] {
     }
   }
 
-  // Validity windows of one rule id must not overlap, otherwise version selection is ambiguous
-  // (datenmodell.md 2.4). An open or unknown end counts as unbounded.
-  const rulesById = new Map<string, { file: string; from: string; until: string | undefined }[]>();
+  // Versions of one rule id form one obligation (datenmodell.md 2.4): same trigger, same
+  // procedure, and validity windows that do not overlap, otherwise version selection is
+  // ambiguous. An open or unknown end counts as unbounded.
+  const rulesById = new Map<string, { file: string; d: Dataset; from: string; until: string | undefined }[]>();
   for (const [file, d] of data.get("rules")!) {
     const validity = obj(d.validity);
     const from = str(validity?.valid_from);
@@ -227,16 +228,23 @@ export function validateContent(contentDir: string): Issue[] {
     if (!from || !untilObj) continue;
     const until = untilObj.kind === "date" ? str(untilObj.date) : undefined;
     const list = rulesById.get(String(d.id)) ?? [];
-    list.push({ file, from, until });
+    list.push({ file, d, from, until });
     rulesById.set(String(d.id), list);
   }
   for (const windows of rulesById.values()) {
     windows.sort((a, b) => a.from.localeCompare(b.from));
+    const first = windows[0]!;
     for (let i = 1; i < windows.length; i++) {
       const prev = windows[i - 1]!;
       const cur = windows[i]!;
       if (prev.until === undefined || prev.until >= cur.from) {
         issues.push({ file: cur.file, path: "/validity/valid_from", message: `validity window overlaps ${prev.file}` });
+      }
+      if (cur.d.trigger !== first.d.trigger) {
+        issues.push({ file: cur.file, path: "/trigger", message: `all versions of "${cur.d.id}" must share trigger "${first.d.trigger}"` });
+      }
+      if (obj(cur.d.scope)?.procedure !== obj(first.d.scope)?.procedure) {
+        issues.push({ file: cur.file, path: "/scope/procedure", message: `all versions of "${cur.d.id}" must share procedure "${obj(first.d.scope)?.procedure}"` });
       }
     }
   }

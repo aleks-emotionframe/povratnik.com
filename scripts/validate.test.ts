@@ -155,6 +155,13 @@ test("validity windows of one rule id must not overlap", () => {
   assertIssue(open, RULE2, "/validity/valid_from", "validity window overlaps");
 });
 
+test("versions of one rule id share trigger and procedure", () => {
+  const trigger = broken(RULE2, (d) => { d.trigger = "address_change"; d.result.deadline.trigger = "address_change"; });
+  assertIssue(trigger, RULE2, "/trigger", 'must share trigger "entry"');
+  const procedure = broken(RULE2, (d) => { d.scope.procedure = "example-accommodation-report"; });
+  assertIssue(procedure, RULE2, "/scope/procedure", 'must share procedure "example-registration"');
+});
+
 test("file name must match id and version", () => {
   const issues = withCopy((dir) => {
     renameSync(join(dir, RULE2), join(dir, "rules/renamed.2.yaml"));

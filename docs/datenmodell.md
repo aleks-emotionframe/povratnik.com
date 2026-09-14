@@ -175,8 +175,10 @@ gewählt.
 **Ablauf der Fassungswahl.** Massgeblich ist das Datum des Ereignisses, das die Regel
 in `trigger` benennt, nie das heutige Datum. Eine Fassung ist Kandidat, wenn
 `valid_from` nicht nach dem Ereignisdatum liegt und `valid_until` es nicht
-ausschliesst (`open_ended` und `unknown` schliessen nichts aus). Gültigkeitsfenster
-einer Regel-Id dürfen sich nicht überschneiden; der Validator lehnt das ab. Findet
+ausschliesst (`open_ended` und `unknown` schliessen nichts aus). Alle Fassungen einer
+Regel-Id beschreiben dieselbe Pflicht: gleicher `trigger`, gleiches Verfahren, und
+Gültigkeitsfenster, die sich nicht überschneiden. Ändert sich das Ereignis oder das
+Verfahren, ist das eine neue Regel-Id. Der Validator lehnt Verstösse ab. Findet
 sich keine Fassung, ist die Regel für dieses Ereignis nicht in Kraft und liefert kein
 Ergebnis. Ist das Ereignisdatum unbekannt, wählt die Engine die am Referenzdatum
 gültige Fassung, kennzeichnet die Wahl als provisorisch, stuft das Ergebnis höchstens
@@ -240,9 +242,9 @@ review:
 Ausdrücke in YAML. Braucht ein Fall eine Operation, die nicht in der Liste steht, ist
 das eine Erweiterung der Auswertungslogik im Code und keine Notlösung in den Daten.
 
-Bedeutung der Operatoren: `in` (der Wert, bei Listenwerten jedes Element, steht in der
-Liste), `eq`, `gte`, `lte` (Zahlen oder ISO-Daten), `between` (beide Grenzen
-eingeschlossen), `exists` (der Wert ist bekannt). Ein Typkonflikt zwischen Faktwert und
+Bedeutung der Operatoren: `in` (der Wert steht in der Liste; bei Listenwerten genügt
+ein Element), `eq` (nur Einzelwerte), `gte`, `lte` (Zahlen oder ISO-Daten), `between`
+(beide Grenzen eingeschlossen), `exists` (der Wert ist bekannt). Ein Typkonflikt zwischen Faktwert und
 Vergleichswert ist ein Datenfehler und wird von der Engine gemeldet, nie stillschweigend
 als «nicht erfüllt» gewertet.
 
