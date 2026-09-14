@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Version 2.1, 13.09.2026. Ersetzt Version 1. Projektanweisung für die Entwicklung, wird
+Version 2.2, 14.09.2026. Ersetzt Version 1. Änderung in 2.2: Hosting in Abschnitt 8. Projektanweisung für die Entwicklung, wird
 zu Beginn jeder Sitzung gelesen und ist verbindlich. Bei Konflikt zwischen dieser
 Datei und einer Einzelanweisung im Chat: nachfragen, nicht stillschweigend abweichen.
 
@@ -244,7 +244,8 @@ Entschieden. ADR-0001 legt fest, welcher Bestand wo gepflegt wird: PostgreSQL mi
 PostGIS und mehrsprachiger Volltextsuche, Übertragungsschritt bei jeder Freigabe.
 ADR-0002 legt Astro mit TypeScript für Website und Redaktion fest, die Regel-Engine
 als eigenes TypeScript-Paket ohne Framework-Abhängigkeit, das im Browser und in Node
-läuft. Offen bleibt nur der Hosting-Anbieter (EU, Node-fähig), Entscheidung in M2.
+läuft. Hosting: ADR-0003 (statische Website auf Hostpoint, Schweiz; Datenbank- und
+Node-Hosting wird entschieden, sobald das Ortsprofil sie braucht).
 
 Bei der Umsetzung der Redaktionsoberfläche (M3) zu prüfen: gleichzeitige Bearbeitung
 derselben Datei, Übersetzungsfreigabe je Sprachfassung, Rollen in der Oberfläche und
@@ -257,7 +258,9 @@ Die Kriterien, nach denen entschieden wurde, in dieser Gewichtung:
 2. Informationsseiten statisch oder serverseitig gerendert.
 3. Räumliche Abfragen und mehrsprachige Volltextsuche in einem System.
 4. Kein proprietäres Inhaltsformat, vollständiger Export.
-5. Hosting in der EU.
+5. Hosting in der EU oder in der Schweiz (Änderung vom 14.09.2026 durch die
+   Produktverantwortung: die Schweiz hat einen Angemessenheitsbeschluss der EU, das
+   DSG gilt, und Schweizer Nutzer sind eine benannte Zielgruppe).
 
 Der Vorschlag benennt ausdrücklich, was die Wahl teuer macht.
 
