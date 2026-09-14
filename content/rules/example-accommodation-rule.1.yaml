@@ -1,0 +1,45 @@
+# SYNTHETISCH. Fiktive Regel im zweiten Verfahren, Unterkunftsmeldung innerhalb eines Monats.
+id: example-accommodation-rule
+version: 1
+synthetic: true
+trigger: entry
+title:
+  de: Fiktive Regel im zweiten Verfahren, Unterkunftsmeldung innerhalb eines Monats.
+scope:
+  applies_to_persons:
+    citizenship_status: [hr_citizen]
+    residence_status: [temporary_residence]
+  procedure: example-accommodation-report
+conditions:
+  - field: event.entry
+    operator: exists
+    on_unknown: clarify
+result:
+  task: example-report-accommodation
+  deadline:
+    trigger: entry
+    interval: 1
+    unit: months
+    counting_starts: same_day
+    weekend_holiday_rule: extend_to_next_working_day
+    kind: recommended
+  status_text_key: rules.example_accommodation_rule.matches
+sources:
+  - id: example-source
+    reference: Art. 1
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

@@ -1,0 +1,41 @@
+# SYNTHETISCH. Texttest: bei unclear darf der Regeltext nicht erscheinen.
+id: t13-text-never-stronger
+synthetic: true
+title:
+  de: Zwei Angaben fehlen, Ergebnistext bleibt beim Zustand
+covers: [text-no-stronger-claim]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [third_country]
+      croatian_link: none
+      residence_status: temporary_residence
+      facts:
+        person.age:
+          availability: unknown
+          evidence: self_reported
+          currency: current
+          checked_at: 2026-09-13
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: unknown
+        date: null
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: [missing:event.entry, missing:person.age]
+  forbidden_texts: ["kein Anspruch", "Anspruch besteht", "kommt die Beispielmeldung infrage"]
+  results:
+    - person: p1
+      rule: example-address-report@2
+      eligibility: unclear

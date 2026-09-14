@@ -1,6 +1,6 @@
 # Leben in Kroatien: Dokumentenübersicht
 
-Stand 13.09.2026. Informationsplattform für Rückkehrer, Nachkommen und neue
+Stand 14.09.2026. Informationsplattform für Rückkehrer, Nachkommen und neue
 Zuwanderer nach Kroatien.
 
 ---
@@ -14,7 +14,7 @@ Zuwanderer nach Kroatien.
 | `inhaltskonzept.md` | Sitemap, Seitentypen, zwölf Rubriken, Checklisten, Prozessdarstellung | v1.1 |
 | `wizard-konzept.md` | Fragenpfad, Statusgabelung, Fallprofile, Zusammenfassung | v1.2, Kurzcheck an Q01 bis Q09 angeglichen |
 | `wizard-recherche.md` | Fragenkatalog Q01 bis Q48, Routen R0 bis R7, Entscheidungslogik L01 bis L09, 18 Abnahmefälle, 13 Klärungspunkte | v1, fachlich führend |
-| `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell | v1.1 |
+| `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell, Engine-Semantik | v1.2, M1 eingearbeitet |
 | `umsetzungskonzept.md` | Architektur, Komponenten, Technologiekriterien, Module, Rollen, Risiken | v1.1, an ADR-0001 und M0 bis M7 angeglichen |
 | `redaktionsgrundsaetze.md` | Quellenhierarchie, Prüfzyklen, Arbeitsablauf, Unabhängigkeit, Tonfall | v1 |
 | `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung | v1.1 |

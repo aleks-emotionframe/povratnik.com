@@ -1,0 +1,39 @@
+# SYNTHETISCH. Zwei Regeln mit verschiedener Priorität, die kleinere Zahl gewinnt.
+id: t07-priority-resolves
+synthetic: true
+title:
+  de: Priorität löst den Konflikt, unterlegene Regel entfällt
+covers: [cutoff-conflict-priority]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [stateless]
+      croatian_link: none
+      residence_status: temporary_residence
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: date
+        date: 2026-06-01
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: []
+  forbidden_texts: ["kein Anspruch", "Priorität 2"]
+  results:
+    - person: p1
+      rule: example-priority-a@1
+      eligibility: matches
+  deadlines:
+    - person: p1
+      rule: example-priority-a@1
+      due: 2026-06-11

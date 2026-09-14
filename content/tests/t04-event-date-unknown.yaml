@@ -1,0 +1,42 @@
+# SYNTHETISCH. Einreisedatum unbekannt: Fassung nach Referenzdatum, provisorisch, unclear.
+id: t04-event-date-unknown
+synthetic: true
+title:
+  de: Einreisedatum unbekannt, Fassung 2 provisorisch, eine Klärungsaufgabe
+covers: [cutoff-missing-event-date]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [third_country]
+      croatian_link: none
+      residence_status: temporary_residence
+      facts:
+        person.age:
+          value: 30
+          availability: known
+          evidence: self_reported
+          currency: current
+          checked_at: 2026-09-13
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: unknown
+        date: null
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: [missing:event.entry]
+  forbidden_texts: ["kein Anspruch"]
+  results:
+    - person: p1
+      rule: example-address-report@2
+      eligibility: unclear

@@ -1,0 +1,10 @@
+{
+  "name": "@povratnik/engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Regel-Engine: wertet versionierte Regeln aus content/ aus. Läuft im Browser und in Node, keine Abhängigkeiten.",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

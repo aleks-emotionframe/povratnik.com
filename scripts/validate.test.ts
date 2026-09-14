@@ -46,7 +46,7 @@ const RULE2 = "rules/example-address-report.2.yaml";
 const RULE1 = "rules/example-address-report.1.yaml";
 const TASK = "tasks/example-register-address.1.yaml";
 const PAGE = "pages/example-registration.de.yaml";
-const TEST = "tests/t00-example.yaml";
+const TEST = "tests/t04-event-date-unknown.yaml";
 
 test("the synthetic examples in content/ are valid", () => {
   assert.deepEqual(validateContent(CONTENT), []);
@@ -126,10 +126,10 @@ test("references: page links and test-case persons must exist", () => {
   assertIssue(page, PAGE, "/links/tasks/0", 'unknown task "ghost"');
   const tc = broken(TEST, (d) => {
     d.input.events[0].person = "p9";
-    d.expect.rule_versions = ["example-address-report@7"];
+    d.expect.results = [{ person: "p1", rule: "example-address-report@7", eligibility: "unclear" }];
   });
   assertIssue(tc, TEST, "/input/events/0/person", 'unknown person "p9"');
-  assertIssue(tc, TEST, "/expect/rule_versions/0", 'unknown rule version');
+  assertIssue(tc, TEST, "/expect/results/0/rule", "unknown rule version");
 });
 
 test("version chain: supersedes must point to a lower version that points back", () => {
@@ -139,6 +139,27 @@ test("version chain: supersedes must point to a lower version that points back",
   assert.ok(higher.some((i) => i.message.includes("file name must be")));
   const unknown = broken(RULE2, (d) => { d.validity.supersedes = "example-address-report@5"; });
   assertIssue(unknown, RULE2, "/validity/supersedes", 'unknown version');
+});
+
+test("trigger: deadline trigger must equal the rule trigger", () => {
+  const issues = broken(RULE2, (d) => { d.result.deadline.trigger = "address_change"; });
+  assertIssue(issues, RULE2, "/result/deadline/trigger", 'must equal rule trigger "entry"');
+  const missing = broken(RULE2, (d) => { delete d.trigger; });
+  assertIssue(missing, RULE2, "/", "must have required property 'trigger'");
+});
+
+test("validity windows of one rule id must not overlap", () => {
+  const overlap = broken(RULE1, (d) => { d.validity.valid_until = { kind: "date", date: "2026-06-01" }; });
+  assertIssue(overlap, RULE2, "/validity/valid_from", "validity window overlaps rules/example-address-report.1.yaml");
+  const open = broken(RULE1, (d) => { d.validity.valid_until = { kind: "unknown", date: null }; });
+  assertIssue(open, RULE2, "/validity/valid_from", "validity window overlaps");
+});
+
+test("versions of one rule id share trigger and procedure", () => {
+  const trigger = broken(RULE2, (d) => { d.trigger = "address_change"; d.result.deadline.trigger = "address_change"; });
+  assertIssue(trigger, RULE2, "/trigger", 'must share trigger "entry"');
+  const procedure = broken(RULE2, (d) => { d.scope.procedure = "example-accommodation-report"; });
+  assertIssue(procedure, RULE2, "/scope/procedure", 'must share procedure "example-registration"');
 });
 
 test("file name must match id and version", () => {

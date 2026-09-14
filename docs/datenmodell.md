@@ -1,7 +1,10 @@
 # Datenmodell
 
 Verbindliche Grundlage für Schema, Zustände, Zeitlogik und Haushaltsmodell.
-Version 1.1, 13.09.2026. Referenziert aus CLAUDE.md Abschnitt 2.2, 2.3, 2.4 und 4.
+Version 1.2, 14.09.2026. Referenziert aus CLAUDE.md Abschnitt 2.2, 2.3, 2.4 und 4.
+Änderungen in 1.2 (M1): Zählregeln in 2.3, Fassungswahl bei unbekanntem Ereignisdatum
+in 2.4, Konfliktdefinition und Prioritätsrichtung in 2.5, Feld `trigger`, Semantik von
+`on_unknown` und Fakten-Pfade in 3.
 
 ---
 
@@ -129,6 +132,23 @@ Kein globales «Datum plus X». Fehlt das auslösende Ereignis, gibt das System 
 werden in der Oberfläche sichtbar unterschieden; eine empfohlene Vorlaufzeit darf nie
 wie eine gesetzliche Frist aussehen.
 
+**Zählregeln der Engine.** Sie sind allgemeine Definitionen, keine Fachwerte; welche
+Kombination eine konkrete Regel braucht, steht in der Regel selbst. Fachlich zu
+bestätigen ist nur, dass die Definitionen die kroatischen Fristvorschriften abbilden
+können.
+
+- `first` ist der Ereignistag (`same_day`) oder der Folgetag (`day_after`).
+- `calendar_days`: Fristende = `first` + `interval` − 1 Tage. Beispiel: Einreise am
+  1., `day_after`, 30 Tage → Ende am 31.
+- `working_days`: Fristende = der `interval`-te Werktag ab `first`, `first` zählt mit,
+  wenn er ein Werktag ist. Werktag = nicht Samstag, nicht Sonntag, nicht Feiertag.
+- `months`: Fristende = `first` + `interval` Monate mit gleichem Tag; existiert der Tag
+  im Zielmonat nicht, gilt der letzte Tag des Zielmonats.
+- `interval: 0` bedeutet: fällig am Ereignistag.
+- `extend_to_next_working_day`: fällt das Ende auf Samstag, Sonntag oder Feiertag,
+  verschiebt es sich auf den nächsten Werktag. Die Feiertagsliste ist ein Datensatz
+  und wird der Engine als Eingabe übergeben; sie steht nie im Code.
+
 ### 2.4 Fassungswahl
 
 Drei Felder, die nie vermischt werden:
@@ -152,12 +172,35 @@ Eine heute ersetzte Fassung bleibt für ein historisches Ereignis auswertbar. Si
 verschwindet nicht aus dem Bestand, sie wird nur für neue Ereignisse nicht mehr
 gewählt.
 
+**Ablauf der Fassungswahl.** Massgeblich ist das Datum des Ereignisses, das die Regel
+in `trigger` benennt, nie das heutige Datum. Eine Fassung ist Kandidat, wenn
+`valid_from` nicht nach dem Ereignisdatum liegt und `valid_until` es nicht
+ausschliesst (`open_ended` und `unknown` schliessen nichts aus). Alle Fassungen einer
+Regel-Id beschreiben dieselbe Pflicht: gleicher `trigger`, gleiches Verfahren, und
+Gültigkeitsfenster, die sich nicht überschneiden. Ändert sich das Ereignis oder das
+Verfahren, ist das eine neue Regel-Id. Der Validator lehnt Verstösse ab. Findet
+sich keine Fassung, ist die Regel für dieses Ereignis nicht in Kraft und liefert kein
+Ergebnis. Ist das Ereignisdatum unbekannt, wählt die Engine die am Referenzdatum
+gültige Fassung, kennzeichnet die Wahl als provisorisch, stuft das Ergebnis höchstens
+als `unclear` ein und erzeugt eine Klärungsaufgabe für das fehlende Datum.
+
+Öffentlich ausgewertet werden nur Fassungen mit `synthetic: false`,
+`approval.state: approved` und `publication.state: published`. Eine zurückgezogene
+Fassung (`withdrawn`) wird nie ausgewertet, auch nicht für historische Ereignisse.
+
 ### 2.5 Konflikte
 
 Treffen mehrere Regeln gleichzeitig zu, wird der Konflikt nie stillschweigend
 aufgelöst. Entweder ist eine ausdrückliche Priorität hinterlegt, oder es entsteht eine
 benannte Klärungsaufgabe. Findet sich keine passende Regel, lautet das Ergebnis
 `unchecked` oder `clarification_required`, niemals «nicht berechtigt».
+
+**Definition.** Ein Konflikt liegt vor, wenn für dieselbe Person im selben Verfahren
+mehr als eine Regel ein Ergebnis `matches` oder `unclear` liefert. Er ist nur
+aufgelöst, wenn alle beteiligten Regeln eine `priority` tragen und diese verschieden
+sind; dann gilt die kleinste Zahl (1 ist die höchste Priorität), die übrigen Regeln
+entfallen. Andernfalls werden alle beteiligten Ergebnisse auf `unclear` gesetzt und es
+entsteht die Klärungsaufgabe `rule_conflict:<verfahren>`.
 
 ---
 
@@ -166,6 +209,7 @@ benannte Klärungsaufgabe. Findet sich keine passende Regel, lautet das Ergebnis
 ```yaml
 id: <kebab-case>
 version: <int>
+trigger: <ereignisart aus 2.1>     # das Ereignis, das die Regel auslöst; steuert Fassungswahl
 scope:
   applies_to_persons:
     citizenship_status: [<aus kontrollierter Liste>]
@@ -177,6 +221,7 @@ conditions:
     operator: <in | eq | gte | lte | between | exists>
     value: <wert>
     on_unknown: clarify              # clarify | skip | fail
+priority: <int, optional>          # 1 ist die höchste, siehe 2.5
 result:
   task: <task-id>
   deadline: { ... }                  # Schema aus 2.3
@@ -196,6 +241,40 @@ review:
 **Erlaubte Operatoren sind abschliessend aufgezählt.** Es gibt keine frei ausführbaren
 Ausdrücke in YAML. Braucht ein Fall eine Operation, die nicht in der Liste steht, ist
 das eine Erweiterung der Auswertungslogik im Code und keine Notlösung in den Daten.
+
+Bedeutung der Operatoren: `in` (der Wert steht in der Liste; bei Listenwerten genügt
+ein Element), `eq` (nur Einzelwerte), `gte`, `lte` (Zahlen oder ISO-Daten), `between`
+(beide Grenzen eingeschlossen), `exists` (der Wert ist bekannt). Ein Typkonflikt zwischen Faktwert und
+Vergleichswert ist ein Datenfehler und wird von der Engine gemeldet, nie stillschweigend
+als «nicht erfüllt» gewertet.
+
+**Fakten-Pfade.** Bedingungen, Fassungswahl und Fristen lesen dieselben Fakten. Jeder
+Fakt trägt die Dimensionen aus Abschnitt 1; die Engine wertet `availability` und
+`value` aus.
+
+- `person.<name>` für Angaben zur Person, darunter immer `person.citizenship_status`
+  (Liste der Status), `person.residence_status` und `person.croatian_link`.
+- `event.<ereignisart>` für das Datum eines Ereignisses aus 2.1. So erzeugt ein
+  fehlendes Einreisedatum genau eine Klärungsaufgabe, egal ob es die Fassungswahl, die
+  Frist oder eine Bedingung betrifft.
+- Ein fehlender Pfad gilt als `not_collected`, also unbekannt. `not_applicable` und
+  `not_existing` sind dagegen bekannte Aussagen «kein Wert»: eine Bedingung darauf ist
+  nicht erfüllt, nie unklar.
+
+**Bedeutung von `on_unknown`,** wenn der Fakt einer Bedingung unbekannt ist:
+
+| Wert | Ergebnis der Regel | Klärungsaufgabe |
+|---|---|---|
+| `clarify` | `unclear` | ja, `missing:<pfad>` |
+| `skip` | `unchecked`; die Regel wird für diese Person nicht abschliessend geprüft | nein |
+| `fail` | kein Fachergebnis; die Engine meldet einen Fehler, weil der Wert Pflichteingabe ist | nein |
+
+Eine bekannt nicht erfüllte Bedingung führt immer zu `condition_missing`, auch wenn
+andere Bedingungen unbekannt sind: eine bekannte Hürde wird nie als Informationslücke
+beschönigt. Sind alle Bedingungen erfüllt, ist das Ergebnis `matches`. Nur dann wird
+der `status_text_key` der Regel verwendet; in allen anderen Zuständen kommt der
+generische Text zum Zustand aus CLAUDE.md Abschnitt 9. Damit kann kein Regeltext eine
+stärkere Aussage treffen als das Regelergebnis.
 
 **Trennlinie Daten und Code:**
 

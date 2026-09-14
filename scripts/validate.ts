@@ -211,6 +211,42 @@ export function validateContent(contentDir: string): Issue[] {
     if (key && !hasI18nKey(catalogueDe, key)) {
       issues.push({ file, path: "/result/status_text_key", message: `key "${key}" missing in i18n/de.yaml` });
     }
+    const deadlineTrigger = obj(result?.deadline)?.trigger;
+    if (deadlineTrigger !== undefined && deadlineTrigger !== d.trigger) {
+      issues.push({ file, path: "/result/deadline/trigger", message: `must equal rule trigger "${d.trigger}"` });
+    }
+  }
+
+  // Versions of one rule id form one obligation (datenmodell.md 2.4): same trigger, same
+  // procedure, and validity windows that do not overlap, otherwise version selection is
+  // ambiguous. An open or unknown end counts as unbounded.
+  const rulesById = new Map<string, { file: string; d: Dataset; from: string; until: string | undefined }[]>();
+  for (const [file, d] of data.get("rules")!) {
+    const validity = obj(d.validity);
+    const from = str(validity?.valid_from);
+    const untilObj = obj(validity?.valid_until);
+    if (!from || !untilObj) continue;
+    const until = untilObj.kind === "date" ? str(untilObj.date) : undefined;
+    const list = rulesById.get(String(d.id)) ?? [];
+    list.push({ file, d, from, until });
+    rulesById.set(String(d.id), list);
+  }
+  for (const windows of rulesById.values()) {
+    windows.sort((a, b) => a.from.localeCompare(b.from));
+    const first = windows[0]!;
+    for (let i = 1; i < windows.length; i++) {
+      const prev = windows[i - 1]!;
+      const cur = windows[i]!;
+      if (prev.until === undefined || prev.until >= cur.from) {
+        issues.push({ file: cur.file, path: "/validity/valid_from", message: `validity window overlaps ${prev.file}` });
+      }
+      if (cur.d.trigger !== first.d.trigger) {
+        issues.push({ file: cur.file, path: "/trigger", message: `all versions of "${cur.d.id}" must share trigger "${first.d.trigger}"` });
+      }
+      if (obj(cur.d.scope)?.procedure !== obj(first.d.scope)?.procedure) {
+        issues.push({ file: cur.file, path: "/scope/procedure", message: `all versions of "${cur.d.id}" must share procedure "${obj(first.d.scope)?.procedure}"` });
+      }
+    }
   }
 
   for (const [file, d] of data.get("tasks")!) {
@@ -250,9 +286,11 @@ export function validateContent(contentDir: string): Issue[] {
     for (const field of ["tasks", "tasks_absent"]) {
       for (const [i, id] of arr(expect[field]).entries()) requireId(file, `/expect/${field}/${i}`, id, taskIds, "task");
     }
-    for (const [i, ref] of arr(expect.rule_versions).entries()) {
+    for (const [i, r] of arr(expect.results).entries()) {
+      requireId(file, `/expect/results/${i}/person`, obj(r)?.person, persons, "person");
+      const ref = obj(r)?.rule;
       if (typeof ref === "string" && !ruleVersions.has(ref)) {
-        issues.push({ file, path: `/expect/rule_versions/${i}`, message: `unknown rule version "${ref}"` });
+        issues.push({ file, path: `/expect/results/${i}/rule`, message: `unknown rule version "${ref}"` });
       }
     }
   }

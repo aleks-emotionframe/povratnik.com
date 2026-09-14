@@ -1,0 +1,46 @@
+# SYNTHETISCH. Stichtagstest, Tag vor dem Fassungswechsel.
+id: t01-cutoff-day-before
+synthetic: true
+title:
+  de: Einreise am Tag vor dem Stichtag, Fassung 1 mit 30 Tagen
+covers: [cutoff-day-before]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [third_country]
+      croatian_link: none
+      residence_status: temporary_residence
+      facts:
+        person.age:
+          value: 30
+          availability: known
+          evidence: self_reported
+          currency: current
+          checked_at: 2026-09-13
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: date
+        date: 2026-05-31
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: []
+  forbidden_texts: ["kein Anspruch"]
+  results:
+    - person: p1
+      rule: example-address-report@1
+      eligibility: matches
+  deadlines:
+    - person: p1
+      rule: example-address-report@1
+      due: 2026-06-30

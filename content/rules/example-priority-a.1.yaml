@@ -1,50 +1,46 @@
-# SYNTHETISCH. Fiktive Regel, Fassung 2. Alle Werte erfunden.
-id: example-address-report
-version: 2
+# SYNTHETISCH. Fiktive Regel mit Priorität 1, gewinnt gegen Priorität 2.
+id: example-priority-a
+version: 1
 synthetic: true
 trigger: entry
 title:
-  de: Beispielmeldung innerhalb von 42 Tagen (fiktive neue Fassung)
+  de: Fiktive Regel mit Priorität 1, gewinnt gegen Priorität 2.
 scope:
   applies_to_persons:
-    citizenship_status: [third_country]
+    citizenship_status: [stateless]
     residence_status: [temporary_residence]
   procedure: example-registration
 conditions:
   - field: event.entry
     operator: exists
     on_unknown: clarify
-  - field: person.age
-    operator: gte
-    value: 18
-    on_unknown: clarify
+priority: 1
 result:
   task: example-register-address
   deadline:
     trigger: entry
-    interval: 42
+    interval: 10
     unit: calendar_days
     counting_starts: day_after
-    weekend_holiday_rule: extend_to_next_working_day
+    weekend_holiday_rule: none
     kind: statutory
-  status_text_key: rules.example_address_report.matches
+  status_text_key: rules.example_priority_a.matches
 sources:
   - id: example-source
-    reference: Art. 1 Abs. 1
+    reference: Art. 1
     checked: 2026-09-13
 approval:
   state: draft
 publication:
   state: unpublished
 validity:
-  valid_from: 2026-06-01
+  valid_from: 2026-01-01
   valid_until:
     kind: open_ended
     date: null
-  supersedes: example-address-report@1
+  supersedes: null
   superseded_by: null
-  transitional:
-    de: Für Einreisen vor dem 01.06.2026 gilt Fassung 1 (fiktiv).
+  transitional: null
 review:
   next_check: 2026-12-01
   cycle: monthly

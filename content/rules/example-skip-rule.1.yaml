@@ -1,0 +1,39 @@
+# SYNTHETISCH. Fiktive Regel mit einer Nebenbedingung, die bei Unbekannt übersprungen wird.
+id: example-skip-rule
+version: 1
+synthetic: true
+trigger: entry
+title:
+  de: Fiktive Regel mit einer Nebenbedingung, die bei Unbekannt übersprungen wird.
+scope:
+  applies_to_persons:
+    citizenship_status: [eea_citizen]
+    residence_status: [eea_registered]
+  procedure: example-registration
+conditions:
+  - field: person.employer_registered
+    operator: eq
+    value: true
+    on_unknown: skip
+result:
+  task: example-register-address
+  status_text_key: rules.example_skip_rule.matches
+sources:
+  - id: example-source
+    reference: Art. 1
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

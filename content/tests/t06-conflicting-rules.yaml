@@ -1,0 +1,38 @@
+# SYNTHETISCH. Zwei Regeln ohne Priorität treffen im selben Verfahren zu.
+id: t06-conflicting-rules
+synthetic: true
+title:
+  de: Zwei widersprüchliche Regeln, Klärungsaufgabe statt stiller Auflösung
+covers: [cutoff-conflict]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [ch_citizen]
+      croatian_link: none
+      residence_status: temporary_residence
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: date
+        date: 2026-06-01
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: [rule_conflict:example-registration]
+  forbidden_texts: ["kein Anspruch", "kommt die fiktive Regel"]
+  results:
+    - person: p1
+      rule: example-conflict-a@1
+      eligibility: unclear
+    - person: p1
+      rule: example-conflict-b@1
+      eligibility: unclear

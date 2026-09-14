@@ -1,0 +1,35 @@
+# SYNTHETISCH. on_unknown skip: Regel bleibt unchecked, keine Klärungsaufgabe.
+id: t12-skip-unchecked
+synthetic: true
+title:
+  de: Nebenbedingung unbekannt, Regel nicht abschliessend geprüft
+covers: [on-unknown-skip]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [eea_citizen]
+      croatian_link: none
+      residence_status: eea_registered
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: date
+        date: 2026-06-01
+expect:
+  routes: []
+  routes_absent: []
+  tasks: []
+  tasks_absent: [example-register-address]
+  clarifications: []
+  forbidden_texts: ["kein Anspruch", "kommt die fiktive Regel"]
+  results:
+    - person: p1
+      rule: example-skip-rule@1
+      eligibility: unchecked

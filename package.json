@@ -9,7 +9,7 @@
   },
   "scripts": {
     "validate": "node --experimental-strip-types scripts/validate.ts",
-    "test": "node --experimental-strip-types --test scripts/*.test.ts",
+    "test": "node --experimental-strip-types --test \"scripts/*.test.ts\" \"packages/engine/**/*.test.ts\"",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -20,5 +20,8 @@
   "devDependencies": {
     "@types/node": "^22.18.0",
     "typescript": "^5.9.2"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
