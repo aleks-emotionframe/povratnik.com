@@ -132,6 +132,75 @@ wizard:
     entry:
       title: Wann ist diese Person eingereist?
       help: Das Einreisedatum löst Fristen aus. Ohne Datum sind Fristen erst berechenbar, wenn es bestätigt ist.
+  # Vertiefende Fragen (wizard-konzept.md 2.3, lib/refine.ts). Freiwillig, nach der Zusammenfassung.
+  refine:
+    unknown: Weiss ich nicht
+    children:
+      title: "{person}: Alter und Sprache"
+      help: Wirkt auf Schule, Sprachförderung und Zeitplan.
+      age:
+        label: Alter
+        0_5: 0 bis 5 Jahre
+        6_14: 6 bis 14 Jahre
+        15_18: 15 bis 18 Jahre
+      croatian:
+        label: Spricht Kroatisch
+        "yes": Ja
+        some: Etwas
+        "no": Nein
+    founding:
+      title: Ihre Gründung
+      help: Wirkt auf Förderfähigkeit und die Reihenfolgefalle.
+      sector:
+        label: Branche laut Förderaufruf
+        allowed: Zugelassene Branche
+        excluded: Ausgeschlossene Branche (Handel, Transport, Beherbergung, Gastronomie, Finanzen, Immobilien)
+      founded:
+        label: Bereits gegründet
+        "yes": Ja
+        "no": Nein
+    place:
+      title: Welche Gemeinde?
+      help: Blendet die kommunalen Leistungen in den Plan ein. Auf der Teststufe fiktive Testgemeinden.
+      place:
+        label: Zielort
+        none: Noch kein Zielort
+    property:
+      title: Wohnen am Zielort
+      help: Wirkt auf Grundbuch, Erbschaft und Kaufgenehmigung.
+      property:
+        label: Geplant ist
+        buy: Kauf
+        rent: Miete
+        inherited: Geerbtes Familieneigentum
+    pension:
+      title: "{person}: Rente"
+      help: Wirkt auf Anrechnung und Besteuerung.
+      pension:
+        label: Aus welchem Land
+        ar: Argentinien
+        cl: Chile
+        br: Brasilien
+        de: Deutschland
+        ch: Schweiz
+        at: Österreich
+        us: USA
+        ca: Kanada
+        other: Anderes Land
+    regulated:
+      title: "{person}: Reglementierter Beruf"
+      help: Etwa Gesundheits-, Lehr- und Rechtsberufe. Die Anerkennung ist ein eigener Vorschritt.
+      regulated:
+        label: Beruf ist reglementiert
+        "yes": Ja
+        "no": Nein
+    care:
+      title: Pflege und laufende Behandlung
+      help: Wirkt auf Versorgung am Zielort und Übergangsdeckung.
+      care:
+        label: Laufender medizinischer Bedarf im Haushalt
+        "yes": Ja
+        "no": Nein
 facts:
   person:
     stage: Wo Sie gerade stehen
@@ -179,6 +248,37 @@ plan:
   reading_state: Grundlagen vorhanden, fachlich nicht geprüft
   documents_all: Unterlagen, die Sie voraussichtlich brauchen
   documents_help: Zusammengestellt aus den Themenseiten oben. Welche davon Ihre Stelle im Einzelfall verlangt, entscheidet diese Stelle.
+  different: Was für Sie anders ist als für andere
+  different_help: Nach Ihren Angaben. Das ist eine Einordnung, keine Prüfung.
+  chain: Ihr Weg in einem Bild
+  chain_help: Vier Schlüssel, in dieser Reihenfolge. Die Engstelle ist markiert.
+  deadlines: Ihre Fristen
+  deadlines_help: Alles Datumsgebundene an einem Ort. Ein unbestätigter Termin löst nie einen Countdown aus.
+  deadlines_empty: Nach Ihren Angaben läuft derzeit keine berechnete Frist.
+  deadline_kind_legal: gesetzliche Frist (Beispielregel)
+  deadline_kind_funding: Förderfrist
+  deadline_awaiting: erst berechenbar, wenn das auslösende Datum bestätigt ist
+  deadline_unknown: Antragszeitraum unbekannt
+  place_benefits: Leistungen an Ihrem Zielort
+  place_benefits_help: Mit Zustand und Antragszeitraum. Über den Antrag entscheidet die Gemeinde.
+  place_benefits_empty: Für diesen Ort sind keine Leistungen erfasst. Das heisst nicht, dass es keine gibt.
+  terms: Wörter für den Schalter
+  terms_help: Die kroatischen Amtsbegriffe zu Ihrem Weg, zum Mitnehmen an den Behördentermin.
+  helpers: Wer Ihnen weiterhilft
+  helpers_help: Getrennt nach öffentlich und kommerziell. Fachpartner folgen, sobald das Verzeichnis steht.
+  helpers_public: Öffentliche Stellen
+  helpers_place: Ankommen am Zielort
+  helpers_country: Kroatische Vertretung im Herkunftsland
+  helpers_country_unknown: Adresse und Zuständigkeit werden mit der Vertretung bestätigt und dann eingetragen.
+  helpers_country_none: Für dieses Land gibt es noch keine Länderseite.
+  helpers_partners: Fachpartner
+  helpers_partners_empty: Das Verzeichnis nach Fachgebiet und Sprache ist noch nicht aufgebaut.
+  checklist_arrive: Ankommensliste für die ersten acht Wochen
+  checklist_stay: Bleibeliste für Monat drei bis vierundzwanzig
+  checklist_help: Abhakbar und druckbar. Der Stand bleibt in diesem Browser.
+  refine: Angaben verfeinern
+  refine_help: Freiwillig. Jede Antwort schärft Leseempfehlung, Klärungsliste und Zielort, ändert aber keine Regelauswertung.
+  refine_progress: "{n} von {total} beantwortet"
 phases:
   orient: Orientieren
   prepare: Vorbereiten
@@ -211,3 +311,54 @@ events:
   employment_start: Beschäftigungsbeginn
   business_registration: Gründung
   insurance_end_abroad: Ende der bisherigen Versicherung
+# Produktregeln der Zusammenfassung (lib/summary.ts): Einordnung, keine Prüfung.
+summary:
+  different:
+    status_unknown: "Bei {person} ist die Staatsangehörigkeit noch offen. Vor dem Status ist nichts entscheidbar, deshalb steht die Klärung an erster Stelle."
+    mixed_household: Nicht alle Personen in Ihrem Haushalt haben dieselbe Staatsangehörigkeit. Jede Person geht deshalb einen eigenen Weg, und die Fristen laufen getrennt.
+    arrived: Sie sind bereits in Kroatien. Fristen laufen ab Einreise und Anmeldung, nicht ab dem Tag, an dem Sie diese Seite lesen.
+    self_employed_tax: Sie planen eine eigene Tätigkeit. Die fünfjährige Lohnsteuerbefreiung gilt für Löhne aus unselbständiger Arbeit; ob und wie sie bei Ihnen greift, klärt eine Steuerfachperson.
+    remote: Arbeit für einen Arbeitgeber im Ausland. Der Aufenthaltsweg hängt von der Staatsangehörigkeit ab, die Steuerfrage von der Ansässigkeit. Beides ist kein Standardfall.
+    children: Kinder im Haushalt. Schule und Kinderarzt hängen an Wohnsitz und Versicherung der Eltern; die Reihenfolge der Eltern bestimmt die der Kinder.
+    already_founded: Sie haben bereits gegründet. Manche Förderungen verlangen den Antrag vor oder kurz nach der Gründung; ob eine Frist noch offen ist, gehört sofort geprüft.
+  chain:
+    status: Status
+    oib: OIB
+    registration: Anmeldung
+    insurance: Versicherung
+    clear: geklärt
+    open: zu klären
+    next: folgt
+    bottleneck: Engstelle
+  clarify:
+    founded_deadline: "Bereits gegründet: Ob die Antragsfrist von Biram Hrvatsku (30 Tage nach der Selbstbeschäftigung) noch offen ist, sofort bei der HZZ klären."
+    sector_excluded: Ihre Branche gehört nach Ihren Angaben zu den ausgeschlossenen. Ob eine Ausnahme greift, entscheidet die HZZ anhand des aktuellen Aufrufs.
+    sector_unknown: Ob Ihre Branche förderfähig ist, steht im aktuellen Aufruf der HZZ. Vor der Gründung prüfen.
+    regulated: "Anerkennung des Berufs ({person}): eigener Vorschritt über die zuständige Kammer (PISK). Welche Kammer, hängt vom Beruf ab."
+    care: "Laufender medizinischer Bedarf: Versorgung am Zielort und Übergangsdeckung vor der Abreise klären, bei der HZZO und der Praxis vor Ort."
+    inherited: "Geerbtes Familieneigentum: Grundbuchstand und Miteigentümer vor jedem Schritt durch eine Anwältin oder einen Anwalt in Kroatien prüfen lassen."
+    buy: "Immobilienkauf: Ob Sie als Ausländer kaufen dürfen und ob Gegenseitigkeit besteht, entscheidet das Justizministerium."
+    child_language: "Sprachförderung ({person}): Angebot und Zuständigkeit hängen vom Schulbezirk ab; bei der Schule am Zielort erfragen."
+    pension_no_agreement: "Rente ({person}): Mit diesem Land besteht kein Doppelbesteuerungsabkommen. Meldepflicht und Besteuerung mit einer Steuerfachperson klären."
+# Ankommens- und Bleibeliste (inhaltskonzept.md 6.2 E und F), abhakbar im Plan.
+checklists:
+  arrive:
+    a1: Wohnsitz oder Aufenthalt bei der Polizeiverwaltung anmelden, Datum notieren
+    a2: OIB für jede Person vorlegen oder beantragen
+    a3: Krankenversicherung bei der HZZO regeln, Zusatzversicherung prüfen
+    a4: Bankkonto eröffnen
+    a5: Kinder in Kindergarten oder Schule einschreiben
+    a6: Hausarzt und Kinderarzt finden, Aufnahme bestätigen lassen
+    a7: Strom, Wasser, Internet, Telefon anmelden
+    a8: Führerschein umschreiben, Frist ab Einreise beachten
+    a9: Fahrzeug einführen und anmelden
+    a10: Förderanträge stellen, deren Frist an der Anmeldung hängt
+  stay:
+    s1: Aufenthalt verlängern, Vorlauffrist beachten
+    s2: Förderbindungen einhalten, Nachweise aufbewahren
+    s3: Sprachniveau aufbauen, Kurs oder Stipendium prüfen
+    s4: Anschluss der Familie, Vereine und Schule
+    s5: Steuererklärung im ersten vollen Jahr, Lohnsteuerbefreiung prüfen
+    s6: Meldepflichten für Auslandsrenten bis 31.1. beachten
+    s7: Zeugnisse und Abschlüsse anerkennen lassen, falls noch offen
+    s8: Nach zwölf Monaten den Plan erneut prüfen, weil sich Regeln jährlich ändern

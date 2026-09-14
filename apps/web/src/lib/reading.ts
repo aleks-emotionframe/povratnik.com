@@ -5,7 +5,7 @@
 
 import type { Answers, PersonAnswers } from "./questions.ts";
 
-export type ReadingPage = { id: string; title: string; path: string; category: string; documents: string[] };
+export type ReadingPage = { id: string; title: string; path: string; category: string; documents: string[]; terms: { term_hr: string; explained: string }[] };
 
 const ALWAYS = ["oib", "wohnsitz-anmelden", "krankenversicherung"];
 
@@ -29,6 +29,9 @@ function pagesFor(p: PersonAnswers, a: Answers): string[] {
   if (has(p, "hr") || citizenshipUnknown(p)) ids.push("lohnsteuerbefreiung");
   if (p.role === "child") ids.push("schule-und-zeugnisse");
   if (a.stage === "arrived" && p.role !== "child") ids.push("fuehrerschein-umschreiben");
+  // Vertiefende Angaben (wizard-konzept.md 2.3) erweitern die Liste, nie verengen sie.
+  const property = a.refine?.property;
+  if (p.role !== "child" && (property === "buy" || property === "inherited" || property === "unknown")) ids.push("immobilienkauf");
   return ids;
 }
 
@@ -49,4 +52,11 @@ export function readingFor(a: Answers, pages: ReadingPage[]): { page: ReadingPag
 
 export function documentsFor(reading: { page: ReadingPage }[]): string[] {
   return [...new Set(reading.flatMap((r) => r.page.documents))];
+}
+
+/** Wörter für den Schalter: kroatische Amtsbegriffe der empfohlenen Seiten, je einmal. */
+export function termsFor(reading: { page: ReadingPage }[]): { term_hr: string; explained: string }[] {
+  const seen = new Map<string, { term_hr: string; explained: string }>();
+  for (const r of reading) for (const t of r.page.terms) if (!seen.has(t.term_hr)) seen.set(t.term_hr, t);
+  return [...seen.values()];
 }

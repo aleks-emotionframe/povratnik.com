@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import { documentsFor, readingFor, type ReadingPage } from "../src/lib/reading.ts";
 
 const ids = ["oib", "wohnsitz-anmelden", "krankenversicherung", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "apostille-und-uebersetzung", "digitaler-nomade", "pauschalgewerbe", "biram-hrvatsku", "lohnsteuerbefreiung", "schule-und-zeugnisse", "fuehrerschein-umschreiben"];
-const pages: ReadingPage[] = ids.map((id) => ({ id, title: id, path: `/wissen/x/${id}`, category: "x", documents: [`Dok ${id}`, "Reisepass"] }));
+const pages: ReadingPage[] = ids.map((id) => ({ id, title: id, path: `/wissen/x/${id}`, category: "x", documents: [`Dok ${id}`, "Reisepass"], terms: [] }));
 const pick = (r: ReturnType<typeof readingFor>) => r.map((x) => x.page.id).sort();
 
 test("base pages always, status pages when citizenship is unknown", () => {

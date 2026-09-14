@@ -5,7 +5,9 @@ import type { RuleResult } from "@povratnik/engine";
 import type { Bundle } from "../lib/content.ts";
 import type { Plan, PlanItem } from "../lib/plan.ts";
 import { UNKNOWN, answerOf, stepsFor, type Answers, type PersonAnswers, type Step } from "../lib/questions.ts";
-import { documentsFor, readingFor } from "../lib/reading.ts";
+import { documentsFor, readingFor, termsFor } from "../lib/reading.ts";
+import { PROGRAM_LABEL, chain, countryFor, deadlines, differences, refinements } from "../lib/summary.ts";
+import { Refine } from "./Refine.tsx";
 import { i18n, t, type Texts } from "./text.ts";
 
 type Props = {
@@ -15,6 +17,9 @@ type Props = {
   personLabel: (p: PersonAnswers) => string;
   onEdit: (stepIndex: number) => void;
   onRestart: () => void;
+  onRefine: (next: Answers) => void;
+  checks: Record<string, boolean>;
+  onCheck: (id: string, done: boolean) => void;
 };
 
 function formatDate(iso: string): string {
@@ -112,7 +117,7 @@ function Item({ item, texts, bundle, personLabel }: { item: PlanItem; texts: Tex
   );
 }
 
-export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart }: Props) {
+export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart, onRefine, checks, onCheck }: Props) {
   const texts = bundle.texts;
   const steps = stepsFor(answers);
   const byId = new Map(answers.persons.map((p) => [p.id, p]));
@@ -122,6 +127,16 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
   };
   const reading = readingFor(answers, bundle.pages);
   const documents = documentsFor(reading);
+  const terms = termsFor(reading);
+  const different = differences(answers);
+  const keys = chain(answers);
+  const bottleneck = keys.find((k) => k.state === "open")?.key;
+  const extra = refinements(answers);
+  const place = bundle.places.find((p) => p.id === answers.refine?.place);
+  const dates = deadlines(plan, place, bundle.dated);
+  const authorities = [...new Map(plan.phases.flatMap((g) => g.items).map((i) => [i.task.authority.key, i18n(i.task.authority.name)])).values()];
+  const origins = [...new Set(answers.persons.map((p) => p.country).filter((c): c is string => !!c && c !== "unknown"))];
+  const checklist = (phase: "arrive" | "stay") => Object.entries((texts as any).checklists?.[phase] ?? {}) as [string, string][];
 
   return (
     <div class="plan">
@@ -150,6 +165,30 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
           ))}
         </dl>
       </section>
+
+      <section class="plan__section">
+        <h3>{t(texts, "plan.chain")}</h3>
+        <p class="soft">{t(texts, "plan.chain_help")}</p>
+        <ol class="chain">
+          {keys.map((k) => (
+            <li class={`chain__key chain__key--${k.state}${k.key === bottleneck ? " chain__key--bottleneck" : ""}`} key={k.key}>
+              <span class="chain__name">{t(texts, `summary.chain.${k.key}`)}</span>
+              <span class="mono">{t(texts, `summary.chain.${k.state}`)}{k.key === bottleneck && `, ${t(texts, "summary.chain.bottleneck")}`}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {different.length > 0 && (
+        <section class="plan__section">
+          <h3>{t(texts, "plan.different")}</h3>
+          <p class="soft">{t(texts, "plan.different_help")}</p>
+          <ul class="different">
+            {different.map((d) => <li key={`${d.key}-${d.person ?? ""}`}>{t(texts, `summary.different.${d.key}`, { person: d.person ? label(d.person) : "" })}</li>)}
+          </ul>
+        </section>
+      )}
+
 
       <section class="plan__section">
         <h3>{t(texts, "plan.next")}</h3>
@@ -182,12 +221,60 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
             </div>
           </details>
         ))}
+        {(["arrive", "stay"] as const).map((phase) => (
+          <details class="phase" key={`check-${phase}`}>
+            <summary>
+              <span>{t(texts, `plan.checklist_${phase}`)}</span> <span class="mono muted">{checklist(phase).filter(([id]) => checks[id]).length}/{checklist(phase).length}</span>
+            </summary>
+            <p class="soft">{t(texts, "plan.checklist_help")}</p>
+            <ul class="checklist">
+              {checklist(phase).map(([id, text]) => (
+                <li key={id}>
+                  <label class={checks[id] ? "checklist__item checklist__item--done" : "checklist__item"}>
+                    <input type="checkbox" checked={!!checks[id]} onChange={(e) => onCheck(id, (e.currentTarget as HTMLInputElement).checked)} />
+                    <span>{text}</span>
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </section>
+
+      <section class="plan__section">
+        <h3>{t(texts, "plan.deadlines")}</h3>
+        <p class="soft">{t(texts, "plan.deadlines_help")}</p>
+        {dates.length === 0 ? (
+          <p>{t(texts, "plan.deadlines_empty")}</p>
+        ) : (
+          <ul class="dates">
+            {dates.map((d, i) => (
+              <li class={`dates__item dates__item--${d.kind}`} key={i}>
+                <span class="mono dates__date">{d.date ? formatDate(d.date) : t(texts, d.note === "awaiting" ? "plan.deadline_awaiting" : "plan.deadline_unknown")}</span>
+                <span class="dates__label">
+                  {d.href ? <a href={d.href}>{d.label}</a> : d.label}
+                  {d.person && <span class="mono muted"> {label(d.person)}</span>}
+                </span>
+                <span class="state state--unchecked">{t(texts, `plan.deadline_kind_${d.kind}`)}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section class="plan__section">
         <h3>{t(texts, "plan.open")}</h3>
         <p class="soft">{t(texts, "plan.open_help")}</p>
-        {plan.open.length === 0 ? (
+        {extra.length > 0 && (
+          <ul class="open">
+            {extra.map((e, i) => (
+              <li key={`x${i}`}>
+                <span class="state state--unclear">{t(texts, "eligibility.unclear")}</span> {t(texts, `summary.clarify.${e.key}`, { person: e.person ? label(e.person) : "" })}
+              </li>
+            ))}
+          </ul>
+        )}
+        {plan.open.length === 0 && extra.length === 0 ? (
           <p>{t(texts, "plan.open_empty")}</p>
         ) : (
           <ul class="open">
@@ -232,6 +319,82 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
           )}
         </section>
       )}
+
+      {terms.length > 0 && (
+        <section class="plan__section">
+          <h3>{t(texts, "plan.terms")}</h3>
+          <p class="soft">{t(texts, "plan.terms_help")}</p>
+          <dl class="terms">
+            {terms.map((x) => (
+              <div class="terms__row" key={x.term_hr}>
+                <dt lang="hr">{x.term_hr}</dt>
+                <dd>{x.explained}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
+      {place && (
+        <section class="plan__section">
+          <h3>{t(texts, "plan.place_benefits")}</h3>
+          <p class="soft">{place.name}. {t(texts, "plan.place_benefits_help")}</p>
+          {place.benefits.length === 0 ? (
+            <p>{t(texts, "plan.place_benefits_empty")}</p>
+          ) : (
+            <ul class="open">
+              {place.benefits.map((b, i) => (
+                <li key={i}>
+                  <span class={`state state--${PROGRAM_LABEL[b.state]?.css ?? "unknown"}`}>{PROGRAM_LABEL[b.state]?.label ?? b.state}</span>{" "}
+                  <a href={`/orte/${place.id}`}>{b.title}</a> <span class="muted">{b.target}</span>
+                  {b.until && <span class="mono muted"> bis {formatDate(b.until)}</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+      )}
+
+      <section class="plan__section">
+        <h3>{t(texts, "plan.helpers")}</h3>
+        <p class="soft">{t(texts, "plan.helpers_help")}</p>
+        <dl class="helpers">
+          <dt>{t(texts, "plan.helpers_public")}</dt>
+          <dd>{authorities.length > 0 ? authorities.join(", ") : t(texts, "plan.none")}</dd>
+          {place && (
+            <>
+              <dt>{t(texts, "plan.helpers_place")}</dt>
+              <dd>
+                {place.arrival.office ? `${place.arrival.office}, ${place.arrival.function}` : <span class="state state--unknown">unbekannt</span>}
+                {place.arrival.languages.length > 0 && <span class="muted"> ({place.arrival.languages.join(", ")})</span>}
+                <span class="muted"> {place.arrival.channel}</span>
+              </dd>
+            </>
+          )}
+          {origins.map((code) => {
+            const country = countryFor(code, bundle.countries);
+            return (
+              <>
+                <dt key={`c${code}`}>{t(texts, "plan.helpers_country")}, {t(texts, `wizard.q.country.options.${code}`)}</dt>
+                <dd key={`d${code}`}>
+                  {country ? (
+                    <>
+                      {country.representation.state === "known" ? country.representation.value : <><span class="state state--closed">nicht erhoben</span> {t(texts, "plan.helpers_country_unknown")}</>}
+                      {" "}<a href={country.path}>{country.title}</a>
+                    </>
+                  ) : (
+                    <><span class="state state--unknown">unbekannt</span> {t(texts, "plan.helpers_country_none")}</>
+                  )}
+                </dd>
+              </>
+            );
+          })}
+          <dt>{t(texts, "plan.helpers_partners")}</dt>
+          <dd><span class="state state--unknown">im Aufbau</span> {t(texts, "plan.helpers_partners_empty")}</dd>
+        </dl>
+      </section>
+
+      <Refine answers={answers} texts={texts} places={bundle.places} personLabel={label} onChange={onRefine} />
 
       {plan.errors.length > 0 && (
         <section class="plan__section notice">

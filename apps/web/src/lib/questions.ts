@@ -20,11 +20,25 @@ export type PersonAnswers = {
   entry?: string;
 };
 
+/** Vertiefende Angaben nach der Zusammenfassung (wizard-konzept.md 2.3). Alle freiwillig,
+    «weiss ich nicht» ist überall gültig. Sie wirken auf Leseempfehlung, Klärungsliste und
+    Zielort, nie auf die Regelauswertung selbst. */
+export type Refine = {
+  children?: Record<string, { age?: string; croatian?: string }>;
+  founding?: { sector?: string; founded?: string };
+  place?: string;
+  property?: string;
+  pension?: Record<string, string>;
+  regulated?: Record<string, string>;
+  care?: string;
+};
+
 export type Answers = {
   stage?: Stage;
   household?: Household;
   horizon?: Horizon;
   persons: PersonAnswers[];
+  refine?: Refine;
 };
 
 export type Question = {

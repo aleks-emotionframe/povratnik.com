@@ -7,11 +7,20 @@ import { Wizard } from "../islands/Wizard.tsx";
 import { bundleFor, loadContent } from "../lib/content.ts";
 import { bundleMode } from "../lib/stage.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
+import { loadPlaces, placeName } from "../lib/places.ts";
 import "../styles/wizard.css";
 
 const contentDir = join(process.cwd(), "..", "..", "content");
-const pages = loadPages(contentDir).map((p) => ({ id: p.id, title: p.title, path: pagePath(p), category: p.category ?? "", documents: p.sections.documents ?? [] }));
-const bundle = bundleFor(bundleMode(import.meta.env.PROD), { ...loadContent(contentDir), pages });
+const pages = loadPages(contentDir).map((p) => ({ id: p.id, title: p.title, path: pagePath(p), category: p.category ?? "", documents: p.sections.documents ?? [], terms: p.terms.map((t) => ({ term_hr: t.term_hr, explained: t.term_explained.de })) }));
+const places = loadPlaces().map((p) => ({
+  id: p.id,
+  name: placeName(p),
+  benefits: p.benefits.map((b) => ({ title: b.title, state: b.program_state, until: b.application.until, target: b.target })),
+  arrival: { office: p.arrival.office.value ? String(p.arrival.office.value) : "", function: p.arrival.function, languages: p.arrival.languages, channel: p.arrival.channel },
+}));
+const countries = loadPages(contentDir, "de", "country").map((p) => ({ code: p.id, title: p.title, path: pagePath(p), representation: { state: p.country!.representation.state, value: p.country!.representation.value } }));
+const dated = loadPages(contentDir).filter((p) => p.validity.valid_until.kind === "date").map((p) => ({ title: p.title, path: pagePath(p), until: p.validity.valid_until.date! }));
+const bundle = bundleFor(bundleMode(import.meta.env.PROD), { ...loadContent(contentDir), pages, places, countries, dated });
 const texts = bundle.texts as Record<string, any>;
 ---
 

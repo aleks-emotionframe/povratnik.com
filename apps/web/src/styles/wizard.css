@@ -395,3 +395,207 @@
   left: 0;
   color: var(--accent);
 }
+
+/* Kette der vier Schlüssel mit Engstelle */
+.chain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.5rem;
+  counter-reset: key;
+}
+.chain__key {
+  counter-increment: key;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.9rem 0.75rem 2.6rem;
+  position: relative;
+  display: grid;
+  gap: 0.15rem;
+}
+.chain__key::before {
+  content: counter(key);
+  position: absolute;
+  left: 0.75rem;
+  top: 0.8rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--brand);
+  color: var(--on-brand);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: grid;
+  place-items: center;
+}
+.chain__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.chain__key .mono {
+  color: var(--muted);
+}
+.chain__key--clear {
+  border-color: var(--st-open);
+  background: var(--st-open-bg);
+}
+.chain__key--bottleneck {
+  border-color: var(--st-unknown);
+  background: var(--st-unknown-bg);
+}
+.chain__key--bottleneck .mono {
+  color: var(--st-unknown);
+}
+.different {
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.different li::marker {
+  color: var(--accent);
+}
+
+/* Checklisten, Fristen, Wörter, Helfer */
+.checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  display: grid;
+  gap: 0.25rem;
+}
+.checklist__item {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  min-height: 44px;
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+}
+.checklist__item input {
+  margin: 0.2rem 0 0;
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--accent);
+  flex: none;
+}
+.checklist__item--done span {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+.dates {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.dates__item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem 1rem;
+  align-items: baseline;
+  padding: 0.6rem 0.85rem;
+  border-left: 3px solid var(--line-strong);
+  background: var(--surface);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.dates__item--legal {
+  border-left-color: var(--accent);
+}
+.dates__item--funding {
+  border-left-color: var(--st-open);
+}
+.dates__date {
+  color: var(--ink);
+}
+.dates__label a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (min-width: 640px) {
+  .dates__item {
+    grid-template-columns: 9rem 1fr auto;
+  }
+}
+.terms {
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+.terms__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem 1.25rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 640px) {
+  .terms__row {
+    grid-template-columns: minmax(10rem, 14rem) 1fr;
+  }
+}
+.terms dt {
+  font-family: var(--font-mono);
+  font-size: 0.9375rem;
+  color: var(--accent-deep);
+  font-weight: 600;
+}
+.terms dd {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+.helpers {
+  margin: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+.helpers dt {
+  color: var(--muted);
+  font-size: 0.875rem;
+  margin-top: 0.6rem;
+}
+.helpers dd {
+  margin: 0;
+}
+
+/* Vertiefende Fragen */
+.refine__q {
+  border-top: 1px solid var(--line);
+  padding-block: 0.5rem;
+}
+.refine__q summary {
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.refine__field {
+  border: 0;
+  padding: 0;
+  margin: 0 0 0.75rem;
+}
+.refine__field legend {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+  padding: 0;
+}
+.options--inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.option--compact {
+  min-height: 40px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9375rem;
+  border-radius: 999px;
+}

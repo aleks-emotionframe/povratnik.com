@@ -15,7 +15,7 @@ import { t } from "./text.ts";
 
 const STORAGE_KEY = "povratnik.kurzcheck";
 
-type Saved = { answers: Answers; step: number; view: "questions" | "plan" };
+type Saved = { answers: Answers; step: number; view: "questions" | "plan"; checks?: Record<string, boolean> };
 
 function load(): Saved | undefined {
   try {
@@ -45,6 +45,8 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
   const [step, setStep] = useState(0);
   const [view, setView] = useState<"questions" | "plan">("questions");
   const [restored, setRestored] = useState(false);
+  // Abgehakte Punkte der Ankommens- und Bleibeliste, nur in diesem Browser.
+  const [checks, setChecks] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     const saved = load();
@@ -52,12 +54,13 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
       setAnswers(saved.answers);
       setStep(saved.step);
       setView(saved.view);
+      setChecks(saved.checks ?? {});
     }
     setRestored(true);
   }, []);
   useEffect(() => {
-    if (restored) save({ answers, step, view });
-  }, [answers, step, view, restored]);
+    if (restored) save({ answers, step, view, checks });
+  }, [answers, step, view, checks, restored]);
 
   const steps = stepsFor(answers);
   const current = steps[Math.min(step, steps.length - 1)];
@@ -117,6 +120,7 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
     setAnswers({ persons: [] });
     setStep(0);
     setView("questions");
+    setChecks({});
   };
 
   if (view === "plan" && plan) {
@@ -131,6 +135,9 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
           setView("questions");
         }}
         onRestart={restart}
+        onRefine={setAnswers}
+        checks={checks}
+        onCheck={(id, done) => setChecks((c) => ({ ...c, [id]: done }))}
       />
     );
   }
