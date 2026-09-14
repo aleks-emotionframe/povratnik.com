@@ -17,7 +17,7 @@ Zuwanderer nach Kroatien.
 | `datenmodell.md` | Schema, drei Zustandsvokabulare, Zeit- und Fristmodell, Haushaltsmodell, Engine-Semantik | v1.3, M1 und M2a eingearbeitet |
 | `umsetzungskonzept.md` | Architektur, Komponenten, Technologiekriterien, Module, Rollen, Risiken | v1.1, an ADR-0001 und M0 bis M7 angeglichen |
 | `redaktionsgrundsaetze.md` | Quellenhierarchie, Prüfzyklen, Arbeitsablauf, Unabhängigkeit, Tonfall | v1 |
-| `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung | v1.1 |
+| `betrieb.md` | Messprofile, Sicherung, Rücknahme, Datenschutz nach Bereichen, Positivliste Telemetrie, Abdeckung, Server-Checkliste | v1.2 |
 | `designsystem.md` | Tokens, Seitentypen, Zustandsdarstellung, Formulare, Mobil | v1.2 |
 | `adr/0001-quelle-und-abgeleitete-kopie.md` | Welcher Bestand wird im Repository, welcher in der Datenbank gepflegt | entschieden |
 | `adr/0002-technologiewahl.md` | Astro mit TypeScript, PostgreSQL mit PostGIS, Engine als eigenes Paket, Nachtrag Preact | entschieden |
@@ -65,9 +65,11 @@ Diese fünf Punkte blockieren. Keiner davon ist technisch.
 5. **Pilotgemeinden.** Drei bis fünf, mit verbindlicher Zusage und benannter
    Ansprechperson.
 
-Technisch offen, vor M2 zu erledigen: Namen in `rollen.md` eintragen und den
-Branch-Schutz für `main` auf GitHub aktivieren (Pull Request erforderlich,
-Status-Check `validate`). Bis dahin sind direkte Pushes auf `main` bewusst erlaubt.
+Technisch offen: Namen in `rollen.md` eintragen und den Branch-Schutz für `main`
+aktivieren (Pull Request erforderlich, Status-Check `validate`). Der Branch-Schutz ist
+auf dem kostenlosen GitHub-Plan für private Repositories nicht verfügbar (geprüft am
+14.09.2026): entweder Repository öffentlich stellen oder GitHub Pro. Bis dahin gilt die
+Regel «nur über Pull Request» als Vereinbarung, nicht als technische Sperre.
 
 Zusätzlich zu klären, weil es eine Ausbaustufe betrifft: eine lizenzierbare Quelle für
 regionale Lohn-, Miet- und Lebenshaltungskosten. Ohne sie ist die Simulation nicht
@@ -98,9 +100,10 @@ Druckansicht. Ausschliesslich synthetische Regeln.
 **Stand M2b-1 (14.09.2026):** Feiertagskalender Kroatien 2026 und 2027 als belegter
 Datensatz (`content/calendars/hr.yaml`, Quelle NN 110/2019, Entwurf bis zur
 Fachfreigabe), Redaktionsdurchlauf dokumentiert und mit PR #3 einmal durchgespielt,
-Hosting als ADR-0003 vorgelegt. Offen für **M2b-2:** Hetzner-Konto und Server
-(braucht Zahlungsmittel der Betreiberin), Ortsprofil (braucht Datenlizenz und Datenbank nach ADR-0001),
-Fachfreigabe des Kalenders, Probe der Rücknahme, Test mit echten Testpersonen.
+Hosting mit ADR-0003 entschieden (Hetzner), Rücknahme mit PR #5 geprobt, alles in
+`main`. Offen für **M2b-2:** Hetzner-Konto und Server nach `betrieb.md` 7 (braucht
+Zahlungsmittel der Betreiberin), Ortsprofil (braucht Datenlizenz und Datenbank nach
+ADR-0001), Fachfreigabe des Kalenders, Test mit echten Testpersonen.
 
 Entschieden am 13.09.2026 durch die Produktverantwortung: Der Kurzcheck fragt nach
 Staatsangehörigkeiten (Mehrfachauswahl) und Bezug zu Kroatien, nicht nach dem Pass.

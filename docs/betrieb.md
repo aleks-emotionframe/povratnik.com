@@ -1,6 +1,6 @@
 # Betrieb
 
-Version 1.1, 13.09.2026. Was vor der ersten öffentlichen Veröffentlichung
+Version 1.2, 14.09.2026. Was vor der ersten öffentlichen Veröffentlichung
 funktionieren muss, und wie Qualität gemessen wird.
 
 ---
@@ -133,3 +133,28 @@ unvollständig gehalten.
 
 Der Pflegeaufwand je Gemeinde wird im Pilot über vier Wochen real gemessen. Preis und
 Paketumfang werden daraus abgeleitet, nicht umgekehrt.
+
+---
+
+## 7. Server-Einrichtung nach ADR-0003
+
+Checkliste für den ersten Server bei Hetzner Cloud. Reihenfolge ist verbindlich;
+jeder Punkt wird mit Datum und Person in diesem Abschnitt abgehakt, sobald erledigt.
+Bis dahin ist kein Schritt erledigt, auch wenn er «vorbereitet» ist.
+
+| Schritt | Inhalt | Erledigt |
+|---|---|---|
+| 1 Konto | Hetzner-Konto auf die Betreiberin, Zahlungsmittel, Zwei-Faktor-Anmeldung, zweite Person mit Zugriff (Vertretung) | offen |
+| 2 Server | kleinster Cloud-Server, Standort Falkenstein oder Nürnberg, aktuelles Ubuntu LTS, nur SSH-Schlüssel, kein Passwort, Root-Anmeldung aus | offen |
+| 3 Grundhärtung | `unattended-upgrades` an, Firewall nur 22, 80, 443, `fail2ban` für SSH, eigener Nutzer mit `sudo` | offen |
+| 4 Auslieferung | Caddy als Webserver mit automatischem Zertifikat, `apps/web/dist` als Wurzel, Domain auf die Server-Adresse | offen |
+| 5 Deploy | Build in der CI, Übertragung per `rsync` über SSH mit eigenem Deploy-Schlüssel (nur Lesen des Repos, nur Schreiben ins Zielverzeichnis). Erst einrichten, wenn 1 bis 4 stehen | offen |
+| 6 Datenbank | ab M2b-2: PostgreSQL und PostGIS aus den Ubuntu-Paketen, nur lokal erreichbar, eigene Rolle je Dienst | offen |
+| 7 Sicherung | täglich `pg_dump` plus Kopie von `content/` und Konfiguration auf eine Hetzner Storage Box (SFTP), 30 Tage Vorhaltung, zusätzlich wöchentlicher Server-Snapshot | offen |
+| 8 Wiederherstellung | einmal auf einem frischen Server aus der Sicherung wiederherstellen, Zeit messen, hier protokollieren. Ohne diesen Eintrag kein Pilot (Abschnitt 1) | offen |
+| 9 Protokolle | Caddy-Zugriffsprotokoll ohne IP-Adressen oder mit gekürzten Adressen, Aufbewahrung 14 Tage; kein Zugriff auf Wizard-Antworten, weil es keinen Endpunkt gibt | offen |
+| 10 Datenschutzseite | Anbieter, Standort, Protokolle und Aufbewahrung in `apps/web/src/pages/datenschutz.astro` eintragen | offen |
+| 11 Fehlerkontakt | Adresse einrichten, in Impressum und Datenschutz eintragen, Sofortweg nach `redaktionsdurchlauf.md` 2 bekannt | offen |
+
+Was hier bewusst fehlt: Docker, Kubernetes, ein zweiter Server. Für den Pilot ist ein
+Server mit geprobter Wiederherstellung sicherer als zwei ohne.
