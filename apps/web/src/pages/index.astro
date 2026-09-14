@@ -5,8 +5,8 @@
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS } from "../lib/rubrics.ts";
-import hero from "../assets/hero-dokumente.png";
-import ort from "../assets/ort-hauptplatz.png";
+import hero from "../assets/hero-dokumente.webp";
+import ort from "../assets/ort-hauptplatz.webp";
 
 const heroImg = await getImage({ src: hero, width: 960, format: "webp", quality: 62 });
 const chips = [
