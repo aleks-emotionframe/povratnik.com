@@ -1,14 +1,15 @@
 ---
-// Wizard-Seite. Das Regelpaket entsteht zur Bauzeit; im Build nur freigegebene Regeln
-// (src/lib/content.ts). Die Insel ist die einzige Stelle mit JavaScript.
+// Wizard-Seite. Das Regelpaket entsteht zur Bauzeit; welche Regeln hinein dürfen,
+// entscheidet die Stufe (src/lib/stage.ts, ADR-0004) über src/lib/content.ts. Die Insel ist die einzige Stelle mit JavaScript.
 import { join } from "node:path";
 import Base from "../layouts/Base.astro";
 import { Wizard } from "../islands/Wizard.tsx";
 import { bundleFor, loadContent } from "../lib/content.ts";
+import { bundleMode } from "../lib/stage.ts";
 import "../styles/wizard.css";
 
 const contentDir = join(process.cwd(), "..", "..", "content");
-const bundle = bundleFor(import.meta.env.PROD ? "build" : "dev", loadContent(contentDir));
+const bundle = bundleFor(bundleMode(import.meta.env.PROD), loadContent(contentDir));
 const texts = bundle.texts as Record<string, any>;
 ---
 

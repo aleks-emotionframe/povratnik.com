@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Version 2.2, 14.09.2026. Ersetzt Version 1. Änderung in 2.2: Hosting in Abschnitt 8. Projektanweisung für die Entwicklung, wird
+Version 2.3, 14.09.2026. Ersetzt Version 1. Änderung in 2.2: Hosting in Abschnitt 8. Änderung in 2.3: Teststufe in Abschnitt 4 (ADR-0004). Projektanweisung für die Entwicklung, wird
 zu Beginn jeder Sitzung gelesen und ist verbindlich. Bei Konflikt zwischen dieser
 Datei und einer Einzelanweisung im Chat: nachfragen, nicht stillschweigend abweichen.
 
@@ -32,7 +32,7 @@ Fachliche Wahrheit liegt in `docs/`:
 - `docs/datenmodell.md` Zustände, Zeitmodell, Haushalts- und Beziehungsmodell
 - `docs/designsystem.md` Typografie, Raster, Seitentypen, Zustände in der Oberfläche
 - `docs/betrieb.md` Sicherung, Wiederherstellung, Rücknahme, Rechte, Messprofile, Positivliste erlaubter Telemetrie-Ereignisse
-- `docs/adr/` Architekturentscheide: ADR-0001 Quelle und abgeleitete Kopie, ADR-0002 Technologiewahl
+- `docs/adr/` Architekturentscheide: ADR-0001 Quelle und abgeleitete Kopie, ADR-0002 Technologiewahl, ADR-0003 Hosting, ADR-0004 Teststufe
 - `docs/rollen.md` Besetzung der Rollen, wer gibt was frei
 
 Widerspricht der Code diesen Dokumenten, sind die Dokumente massgeblich. Ändert sich
@@ -150,6 +150,15 @@ Datenbank. Format YAML, Felder Englisch, Werte mehrsprachig. Das verbindliche Sc
 
 Die Validierung läuft in der Continuous Integration und lehnt unvollständige
 Datensätze ab. Nicht fachlich freigegebene Regeln werden öffentlich nie ausgewertet.
+
+**Teststufe (ADR-0004, Entscheid vom 14.09.2026):** Bis zur ersten Fachfreigabe läuft die
+Website auf der Stufe `test`, festgelegt an genau einer Stelle in
+`apps/web/src/lib/stage.ts`. Dort wertet der Kurzcheck auch synthetische und nicht
+freigegebene Regeln aus, jede Seite ist als Teststufe gekennzeichnet und nicht
+indexierbar, und der Build-Test erzwingt die Kennzeichnung. Der Link wird auf dieser
+Stufe an niemanden ausserhalb des Teams herausgegeben. Der Wechsel auf `public` ist
+ein Pull Request und setzt eine benannte Fachprüfung in `docs/rollen.md` voraus; ab
+dann gilt der Satz davor wieder ohne Ausnahme.
 
 **Beispieldateien sind als synthetisch zu kennzeichnen und dürfen nicht produktiv
 geladen werden.** Ein Beispiel trägt niemals den Status einer fachlichen Freigabe.

@@ -4,6 +4,7 @@
 // Schachbrett, Hauptnavigation, hervorgehobener Kurzcheck. Der EmotionFrame Footer
 // steht als letztes Element ausserhalb des Containers.
 import "../styles/base.css";
+import { STAGE } from "../lib/stage.ts";
 
 interface Props {
   title: string;
@@ -23,7 +24,7 @@ const nav = [
 ---
 
 <!doctype html>
-<html lang="de">
+<html lang="de" data-stage={STAGE}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,8 +32,8 @@ const nav = [
     <meta name="description" content={description} />
     <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#14213d" />
-    <!-- Aufbaustufe: nicht indexieren, bis die erste freigegebene Regel da ist. -->
-    <meta name="robots" content="noindex, nofollow" />
+    {/* Teststufe (ADR-0004): nicht indexieren, bis die erste freigegebene Regel da ist. */}
+    {STAGE === "test" && <meta name="robots" content="noindex, nofollow" />}
     <link rel="preload" href="/fonts/montserrat-600-latin.woff2" as="font" type="font/woff2" crossorigin />
     {preload && <link rel="preload" href={preload} as="image" />}
     <link rel="stylesheet" href="/ef-signature/ef-signature.css" />
@@ -41,7 +42,11 @@ const nav = [
   <body>
     <div class="topbar">
       <div class="container">
-        <p role="note"><strong>Aufbaustufe</strong> <span class="topbar__text">Der Kurzcheck arbeitet noch ohne fachlich freigegebene Regeln.</span></p>
+        {STAGE === "test" ? (
+          <p role="note"><strong>Teststufe</strong> <span class="topbar__text">Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.</span></p>
+        ) : (
+          <p>Leben in Kroatien</p>
+        )}
         <a href="mailto:kontakt@povratnik.com">Fehler melden</a>
       </div>
     </div>
@@ -98,7 +103,7 @@ const nav = [
           </a>
           <p>Leben in Kroatien: die Reihenfolge für Rückkehr und Auswanderung, Person für Person.</p>
           <p>Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer die zuständige Stelle.</p>
-          <p class="datenstand">Aufbaustufe M2a. Es gibt noch keine fachlich freigegebene Regel.</p>
+          {STAGE === "test" && <p class="datenstand">Teststufe. Beispielregeln ohne fachliche Freigabe (ADR-0004).</p>}
         </div>
         <div>
           <h3>Wissen</h3>

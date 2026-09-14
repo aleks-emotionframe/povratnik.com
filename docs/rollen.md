@@ -16,7 +16,7 @@ Platzhalter in spitzen Klammern werden durch die Produktverantwortung ausgefüll
 | Produktverantwortung | Entscheidungen, Priorisierung, Partner, Freigabe von Produktentscheidungen und ADRs | Daniel Gasic, EmotionFrame GmbH | 14.09.2026 | offen |
 | Technische Verantwortung | Architektur, Umsetzung, Betrieb, Sicherheitsaktualisierungen, Sicherung und Wiederherstellung | Daniel Gasic, EmotionFrame GmbH | 14.09.2026 | offen |
 | Technisches Review | Zweites Augenpaar für Code und Datenstruktur. Erkennt technische Fehler, ist nicht zur rechtlichen Prüfung befähigt | Daniel Gasic (vorläufig; ein zweites Augenpaar ist noch zu benennen, sonst prüft der Autor sich selbst) | 14.09.2026 | offen |
-| Fachprüfung Recht und Steuern | Namentliche Freigabe jeder produktiv geladenen Rechtsregel. Kroatische Fachperson, nicht intern besetzbar | offen | | |
+| Fachprüfung Recht und Steuern | Namentliche Freigabe jeder produktiv geladenen Rechtsregel. Kroatische Fachperson, nicht intern besetzbar | Platzhalter «Fachprüfung (Teststufe)», gibt nichts frei (ADR-0004) | 14.09.2026 | offen |
 | Kroatischsprachige Fachredaktion | Regeln und Inhalte pflegen, Quellen prüfen, Behördenkontakt | offen | | |
 | Fehlerkontakt | Erste Sichtung von Fehlermeldungen binnen zwei Werktagen, Sofortweg bei falschen Fristen | Daniel Gasic, kontakt@povratnik.com | 14.09.2026 | offen |
 
