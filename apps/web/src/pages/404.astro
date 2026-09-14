@@ -1,13 +1,17 @@
 ---
 import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { u, p } = pageContext(Astro);
 ---
 
-<Base title="Seite nicht gefunden: povratnik.com" description="Diese Seite gibt es nicht oder nicht mehr.">
+<Base title={`${u("notfound.title")}: povratnik.com`} description={u("notfound.text")}>
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h1>Diese Seite gibt es nicht.</h1>
-        <p>Die Adresse ist falsch oder die Seite wurde entfernt. Zurück zur <a href="/">Startseite</a> oder zum <a href="/mein-weg">Kurzcheck</a>.</p>
+        <h1>{u("notfound.title")}</h1>
+        <p>{u("notfound.text")}</p>
+        <p><a class="button button--primary" href={p("/")}>{u("notfound.home")}</a></p>
       </div>
     </div>
   </section>

@@ -3,37 +3,37 @@
 // Der Index entsteht zur Bauzeit und liegt in der Seite; die Suche läuft im Browser,
 // ohne Anfrage an einen Server (CLAUDE.md 2.5 gilt sinngemäss: kein Suchbegriff verlässt
 // den Browser). Ohne JavaScript bleibt die Liste aller Einträge lesbar.
-import { join } from "node:path";
 import Base from "../layouts/Base.astro";
-import { RUBRICS } from "../lib/rubrics.ts";
-import { SITUATIONS } from "../lib/situations.ts";
+import { RUBRICS, rubricText } from "../lib/rubrics.ts";
+import { SITUATIONS, situationText } from "../lib/situations.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
 import { loadPlaces, placeName } from "../lib/places.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
 
-const contentDir = join(process.cwd(), "..", "..", "content");
-const topics = loadPages(contentDir);
-const countries = loadPages(contentDir, "de", "country");
+const { lang, texts, u, p } = pageContext(Astro);
+const topics = loadPages(CONTENT_DIR, lang);
+const countries = loadPages(CONTENT_DIR, lang, "country");
 type Entry = { kind: string; title: string; text: string; href: string; terms?: string };
 const index: Entry[] = [
-  ...topics.map((p) => ({ kind: "Themenseite", title: p.title, text: p.short_answer, href: pagePath(p), terms: [...p.covers, ...p.terms.map((t) => t.term_hr)].join(" ") })),
-  ...RUBRICS.map((r) => ({ kind: "Rubrik", title: r.title, text: r.intro, href: `/wissen/${r.slug}`, terms: r.topics.join(" ") })),
-  ...SITUATIONS.map((s) => ({ kind: "Lebenssituation", title: s.title, text: s.intro, href: `/wissen/situation/${s.slug}` })),
-  ...countries.map((p) => ({ kind: "Herkunftsland", title: p.title, text: p.short_answer, href: pagePath(p) })),
-  ...loadPlaces().map((p) => ({ kind: "Ort (fiktiv)", title: placeName(p), text: p.summary, href: `/orte/${p.id}`, terms: p.benefits.map((b) => b.title).join(" ") })),
-  ...topics.flatMap((p) => p.terms.map((t) => ({ kind: "Amtsbegriff", title: t.term_hr, text: t.term_explained.de, href: pagePath(p) }))),
+  ...topics.map((x) => ({ kind: u("search.kind_topic"), title: x.title, text: x.short_answer, href: p(pagePath(x)), terms: [...x.covers, ...x.terms.map((t) => t.term_hr)].join(" ") })),
+  ...RUBRICS.map((r) => { const tx = rubricText(r, texts); return { kind: u("search.kind_rubric"), title: tx.title, text: tx.intro, href: p(`/wissen/${r.slug}`), terms: tx.topics.join(" ") }; }),
+  ...SITUATIONS.map((s) => { const tx = situationText(s, texts); return { kind: u("search.kind_situation"), title: tx.title, text: tx.intro, href: p(`/wissen/situation/${s.slug}`) }; }),
+  ...countries.map((x) => ({ kind: u("search.kind_country"), title: x.title, text: x.short_answer, href: p(pagePath(x)) })),
+  ...loadPlaces().map((pl) => ({ kind: u("search.kind_place"), title: placeName(pl), text: pl.summary, href: p(`/orte/${pl.id}`), terms: pl.benefits.map((b) => b.title).join(" ") })),
+  ...topics.flatMap((x) => x.terms.map((t) => ({ kind: u("search.kind_term"), title: t.term_hr, text: t.term_explained[lang] ?? t.term_explained.de, href: p(pagePath(x)) }))),
 ];
 ---
 
-<Base title="Suche: povratnik.com" description="Suche über Themen, Rubriken, Orte und Amtsbegriffe. Läuft im Browser." current="suche">
+<Base title={u("search.title")} description={u("search.description")} current="suche">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Suche</h1>
-        <p class="lede">Themen, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe. Die Suche läuft in Ihrem Browser, kein Suchbegriff wird übertragen.</p>
-        <form class="search" role="search" id="search" action="/suche" method="get">
-          <label class="visually-hidden" for="q">Suchbegriff</label>
-          <input id="q" name="q" type="search" placeholder="OIB, Krankenversicherung, Apostille, Biram Hrvatsku" autocomplete="off" />
-          <button class="button button--light" type="submit">Suchen</button>
+        <h1>{u("search.heading")}</h1>
+        <p class="lede">{u("search.lede")}</p>
+        <form class="search" role="search" id="search" action={p("/suche")} method="get">
+          <label class="visually-hidden" for="q">{u("search.label")}</label>
+          <input id="q" name="q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
+          <button class="button button--light" type="submit">{u("search.button")}</button>
         </form>
       </div>
     </div>
@@ -41,7 +41,7 @@ const index: Entry[] = [
 
   <section class="band band--surface">
     <div class="container">
-      <p class="count mono" id="count" aria-live="polite">{index.length} Einträge</p>
+      <p class="count mono" id="count" aria-live="polite" data-one={u("search.entry", { n: "{n}" })} data-many={u("search.entries", { n: "{n}" })} data-for={u("search.for", { q: "{q}" })}>{u("search.entries", { n: index.length })}</p>
       <ul class="results" id="results">
         {index.map((e) => (
           <li class="result" data-title={e.title.toLowerCase()} data-text={`${e.text} ${e.terms ?? ""}`.toLowerCase()}>
@@ -51,7 +51,7 @@ const index: Entry[] = [
           </li>
         ))}
       </ul>
-      <p class="empty" id="empty" hidden>Nichts gefunden. Das heisst nicht, dass es das Thema nicht gibt, nur dass wir noch keine Seite dazu haben. <a href="mailto:kontakt@povratnik.com?subject=Suchbegriff%20ohne%20Treffer">Sagen Sie uns, was Sie gesucht haben.</a></p>
+      <p class="empty" id="empty" hidden>{u("search.empty")} <a href="mailto:kontakt@povratnik.com?subject=Suche">{u("search.empty_link")}</a></p>
     </div>
   </section>
 
@@ -75,7 +75,7 @@ const index: Entry[] = [
           li.classList.toggle("result--strong", strong);
           if (ok) shown++;
         });
-        count.textContent = shown + (shown === 1 ? " Eintrag" : " Einträge") + (q ? " für «" + input.value.trim() + "»" : "");
+        count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown) + (q ? " " + count.dataset.for.replace("{q}", input.value.trim()) : "");
         empty.hidden = shown > 0;
       }
       // Der Suchbegriff wird bewusst nicht in die Adresse geschrieben.

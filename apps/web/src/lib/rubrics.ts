@@ -131,3 +131,14 @@ export const RUBRICS: Rubric[] = [
 export function rubricBySlug(slug: string): Rubric | undefined {
   return RUBRICS.find((r) => r.slug === slug);
 }
+
+/** Texte einer Rubrik in der Sprache des Katalogs (rubrics.<slug>.*), Rückfall Deutsch. */
+export function rubricText(r: Rubric, texts: Record<string, unknown>): { title: string; intro: string; questions: string[]; topics: string[] } {
+  const node = ((texts.rubrics as Record<string, any>) ?? {})[r.slug] ?? {};
+  return {
+    title: node.title ?? r.title,
+    intro: node.intro ?? r.intro,
+    questions: r.questions.map((q, i) => node[`q${i + 1}`] ?? q),
+    topics: r.topics.map((t, i) => node[`t${i + 1}`] ?? t),
+  };
+}

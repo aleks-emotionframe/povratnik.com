@@ -2,29 +2,30 @@
 // Glossar der Amtsbegriffe: gesammelt aus den Themenseiten (CLAUDE.md 3: das Original
 // verschwindet nie, das Verstehen darf daran nicht scheitern). Jeder Begriff verweist
 // auf die Seite, die ihn erklärt.
-import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
 import { loadPages, pagePath } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
 
-const pages = loadPages(join(process.cwd(), "..", "..", "content"));
+const { lang, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
 const entries = new Map<string, { term: string; explained: string; pages: { title: string; href: string }[] }>();
-for (const p of pages) {
-  for (const t of p.terms) {
-    const e = entries.get(t.term_hr) ?? { term: t.term_hr, explained: t.term_explained.de, pages: [] };
-    e.pages.push({ title: p.title, href: pagePath(p) });
+for (const x of pages) {
+  for (const t of x.terms) {
+    const e = entries.get(t.term_hr) ?? { term: t.term_hr, explained: t.term_explained[lang] ?? t.term_explained.de, pages: [] };
+    e.pages.push({ title: x.title, href: p(pagePath(x)) });
     entries.set(t.term_hr, e);
   }
 }
 const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "hr"));
 ---
 
-<Base title="Glossar der Amtsbegriffe: povratnik.com" description="Kroatische Amtsbegriffe im Original, verständlich erklärt: OIB, prebivalište, Domovnica, HZZO und mehr." current="wissen">
+<Base title={`${u("glossary.title")}: povratnik.com`} description={u("glossary.description")} current="wissen">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/wissen">Wissen</a> / Glossar</p>
-        <h1>Glossar der Amtsbegriffe</h1>
-        <p class="lede">Der kroatische Begriff bleibt stehen, weil Sie ihn am Schalter brauchen. Daneben steht, was er bedeutet.</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("glossary.crumb")}</p>
+        <h1>{u("glossary.title")}</h1>
+        <p class="lede">{u("glossary.lede")}</p>
       </div>
     </div>
   </section>
@@ -32,7 +33,7 @@ const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "
   <section class="band band--surface">
     <div class="container grid">
       <div class="col-wide">
-        <p class="count mono">{list.length} Begriffe aus {pages.length} Themenseiten</p>
+        <p class="count mono">{u("glossary.count", { n: list.length, pages: pages.length })}</p>
         <dl class="glossary">
           {list.map((e) => (
             <div class="glossary__entry">
@@ -40,7 +41,7 @@ const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "
               <dd>
                 <p>{e.explained}</p>
                 <p class="glossary__links">
-                  {e.pages.map((p) => <a class="arrow-link" href={p.href}>{p.title}</a>)}
+                  {e.pages.map((x) => <a class="arrow-link" href={x.href}>{x.title}</a>)}
                 </p>
               </dd>
             </div>

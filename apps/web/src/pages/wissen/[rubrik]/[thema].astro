@@ -1,47 +1,49 @@
 ---
 // Themenseite mit der festen Maske aus inhaltskonzept.md 4.2 (designsystem.md 3, Typ 3).
-// Inhalt aus content/pages, Sichtbarkeit nach Stufe (lib/pages.ts). Fehlende Felder
-// erscheinen als Zustand «noch nicht recherchiert», nie als leere Stelle.
-import { join } from "node:path";
+// Inhalt aus content/pages in der Sprache der Adresse, sonst die deutsche Fassung mit
+// Hinweis (lib/pages.ts). Fehlende Felder erscheinen als Zustand, nie als leere Stelle.
 import Base from "../../../layouts/Base.astro";
-import { rubricBySlug } from "../../../lib/rubrics.ts";
-import { loadPages, loadSources, pagePath, pageState, type PageView } from "../../../lib/pages.ts";
+import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
+import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
 
 export function getStaticPaths() {
-  const contentDir = join(process.cwd(), "..", "..", "content");
-  const pages = loadPages(contentDir);
-  const sources = loadSources(contentDir);
-  return pages.map((page) => ({
-    params: { rubrik: page.category, thema: page.id },
-    props: { page, pages, sources },
-  }));
+  // Pfade aus der deutschen Struktur; die Sprache kommt zur Laufzeit aus der Adresse.
+  return loadPages(CONTENT_DIR, "de").map((page) => ({ params: { rubrik: page.category, thema: page.id } }));
 }
 
-const { page, pages, sources } = Astro.props as { page: PageView; pages: PageView[]; sources: Record<string, any> };
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
+const page = pages.find((x) => x.id === Astro.params.thema)!;
+const sources = loadSources(CONTENT_DIR);
 const rubric = rubricBySlug(page.category!)!;
 const s = page.sections;
-const state = pageState(page);
-const byId = new Map(pages.map((p) => [p.id, p]));
+const state = page.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") };
+const byId = new Map(pages.map((x) => [x.id, x]));
 const requires = page.links.requires_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
 const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
-const fmt = (iso: string) => iso.split("-").reverse().join(".");
-const missing = "noch nicht recherchiert";
+const missing = u("topic.missing");
+const explained = (t: { term_explained: Record<string, string | undefined> }) => t.term_explained[lang] ?? t.term_explained.de;
 ---
 
-<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen">
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen" fallback={page.fallback}>
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/wissen">Wissen</a> / <a href={`/wissen/${rubric.slug}`}>{rubric.title}</a></p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / <a href={p(`/wissen/${rubric.slug}`)}>{rubricText(rubric, texts).title}</a></p>
         <h1>{page.title}</h1>
         <p class="lede">{page.short_answer}</p>
-        <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span> <span class="mono">Stand {fmt(page.sources[0]?.checked ?? page.validity.valid_from)}</span></p>
+        <p class="hero__state">
+          <span class={`state state--${state.key}`}>{state.label}</span>
+          <span class="mono">{u("topic.stand", { date: fmtDate(page.sources[0]?.checked ?? page.validity.valid_from) })}</span>
+          {lang !== "de" && !page.fallback && <span class="mono">{u("shell.translation_note")}</span>}
+        </p>
       </div>
       <div class="hero__media hero__media--plain">
         <dl class="glance">
-          <dt>Gilt für</dt><dd>{s.applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
-          <dt>Gilt nicht für</dt><dd>{s.not_applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
-          <dt>Zuständig</dt><dd>{s.authority ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>{u("topic.applies")}</dt><dd>{s.applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>{u("topic.not_applies")}</dt><dd>{s.not_applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
+          <dt>{u("topic.authority")}</dt><dd>{s.authority ?? <span class="state state--unknown">{missing}</span>}</dd>
         </dl>
       </div>
     </div>
@@ -50,30 +52,30 @@ const missing = "noch nicht recherchiert";
   <section class="band band--surface">
     <div class="container grid">
       <div class="col-main mask">
-        <h2>Voraussetzungen</h2>
+        <h2>{u("topic.prerequisites")}</h2>
         {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
 
-        <h2>Ablauf</h2>
+        <h2>{u("topic.steps")}</h2>
         {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
 
-        <h2>Unterlagen</h2>
+        <h2>{u("topic.documents")}</h2>
         {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
 
-        <h2>Dauer und Kosten</h2>
+        <h2>{u("topic.duration")}</h2>
         <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
 
-        <h2>Fristen</h2>
+        <h2>{u("topic.deadlines")}</h2>
         {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
       </div>
       <aside class="col-aside">
         {page.terms.length > 0 && (
           <div class="side">
-            <h3>Amtsbegriffe</h3>
+            <h3>{u("topic.terms")}</h3>
             <dl class="terms">
               {page.terms.map((t) => (
                 <>
                   <dt lang="hr">{t.term_hr}</dt>
-                  <dd>{t.term_explained.de}</dd>
+                  <dd>{explained(t)}</dd>
                 </>
               ))}
             </dl>
@@ -81,20 +83,20 @@ const missing = "noch nicht recherchiert";
         )}
         {requires.length > 0 && (
           <div class="side">
-            <h3>Vorher nötig</h3>
-            <ul class="side__list">{requires.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+            <h3>{u("topic.requires")}</h3>
+            <ul class="side__list">{requires.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
           </div>
         )}
         {followed.length > 0 && (
           <div class="side">
-            <h3>Danach folgt</h3>
-            <ul class="side__list">{followed.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+            <h3>{u("topic.followed")}</h3>
+            <ul class="side__list">{followed.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
           </div>
         )}
         <div class="side side--cta">
-          <h3>Gilt das für mich?</h3>
-          <p>Der Kurzcheck ordnet dieses Thema in Ihren Weg ein, Person für Person.</p>
-          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+          <h3>{u("topic.cta_title")}</h3>
+          <p>{u("topic.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>
@@ -105,41 +107,41 @@ const missing = "noch nicht recherchiert";
       <ul class="cards cards--two">
         <li class="card card--mistake">
           <div class="card__body">
-            <h3>Häufiger Irrtum</h3>
+            <h3>{u("topic.mistake")}</h3>
             <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
           </div>
         </li>
         <li class="card">
           <div class="card__body">
-            <h3>Was hier nicht entschieden wird</h3>
+            <h3>{u("topic.not_decided")}</h3>
             <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
           </div>
         </li>
       </ul>
       {s.open_points && (
         <div class="open-points">
-          <h3>Offene Punkte</h3>
-          <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">offen</span> {x}</li>)}</ul>
+          <h3>{u("topic.open_points")}</h3>
+          <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
         </div>
       )}
-      {page.validity.transitional && <p class="notice" role="note"><strong>Gültigkeit</strong>{page.validity.transitional.de}</p>}
+      {page.validity.transitional && <p class="notice" role="note"><strong>{u("topic.validity")}</strong>{page.validity.transitional[lang] ?? page.validity.transitional.de}</p>}
 
       <div class="stand">
-        <h3>Stand und Quellen</h3>
+        <h3>{u("topic.stand_title")}</h3>
         <dl class="open-field">
-          <dt>Kennzeichnung</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
-          <dt>Originalquelle</dt>
+          <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>{u("topic.source")}</dt>
           <dd>
             {page.sources.map((src) => (
               <p class="stand__source">
                 <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
-                <span class="mono">{sources[src.id]?.publisher}, Stufe {sources[src.id]?.tier}. Fundstelle: {src.reference}. Geprüft {fmt(src.checked)}.</span>
+                <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
               </p>
             ))}
           </dd>
-          <dt>Gültig ab</dt><dd class="mono">{fmt(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` bis ${fmt(page.validity.valid_until.date!)}`}</dd>
-          <dt>Nächste Prüfung</dt><dd class="mono">{fmt(page.review.next_check)}</dd>
-          <dt>Fehler melden</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent("Fehler: " + page.title)}`}>kontakt@povratnik.com</a></dd>
+          <dt>{u("topic.valid_from")}</dt><dd class="mono">{fmtDate(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` ${u("topic.valid_until", { date: fmtDate(page.validity.valid_until.date!) })}`}</dd>
+          <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
+          <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
         </dl>
       </div>
     </div>

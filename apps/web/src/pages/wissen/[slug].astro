@@ -1,38 +1,40 @@
 ---
-// Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenliste mit
-// Zustand, Abhängigkeiten zu anderen Rubriken. Keine Fachwerte: Die Themenseiten
-// entstehen in M4 als geprüfte Inhalte mit Quelle, Prüfdatum und Freigabe.
-import { join } from "node:path";
+// Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenseiten,
+// verbleibende Themen mit Zustand, Abhängigkeiten zu anderen Rubriken.
 import Base from "../../layouts/Base.astro";
-import { RUBRICS, rubricBySlug } from "../../lib/rubrics.ts";
-import { loadPages, pagePath, pageState, type PageView } from "../../lib/pages.ts";
+import { RUBRICS, rubricBySlug, rubricText } from "../../lib/rubrics.ts";
+import { loadPages, pagePath, type PageView } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
 
 export function getStaticPaths() {
-  const pages = loadPages(join(process.cwd(), "..", "..", "content"));
-  return RUBRICS.map((r) => ({ params: { slug: r.slug }, props: { pages: pages.filter((p) => p.category === r.slug) } }));
+  return RUBRICS.map((r) => ({ params: { slug: r.slug } }));
 }
 
-const { pages } = Astro.props as { pages: PageView[] };
+const { lang, texts, u, p } = pageContext(Astro);
 const rubric = rubricBySlug(Astro.params.slug!)!;
-const covered = new Set(pages.flatMap((p) => p.covers));
-const remaining = rubric.topics.filter((t) => !covered.has(t));
+const tx = rubricText(rubric, texts);
+const pages: PageView[] = loadPages(CONTENT_DIR, lang).filter((x) => x.category === rubric.slug);
+// Abdeckung nach den deutschen Themennamen (Struktur), Anzeige in der Sprache.
+const covered = new Set(pages.flatMap((x) => x.covers));
+const remaining = rubric.topics.map((t, i) => ({ de: t, label: tx.topics[i] })).filter((t) => !covered.has(t.de));
 const requires = rubric.requires.map((s) => rubricBySlug(s)!);
 const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
+const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") });
 ---
 
-<Base title={`${rubric.title}: povratnik.com`} description={rubric.intro} current="wissen">
+<Base title={`${tx.title}: povratnik.com`} description={tx.intro} current="wissen">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/wissen">Wissen</a> / Rubrik {rubric.number}</p>
-        <h1>{rubric.title}</h1>
-        <p class="lede">{rubric.intro}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("wissen.crumb_rubric", { n: rubric.number })}</p>
+        <h1>{tx.title}</h1>
+        <p class="lede">{tx.intro}</p>
       </div>
       <div class="hero__media hero__media--plain">
         <div>
-          <h2 class="questions__title">Typische Fragen</h2>
+          <h2 class="questions__title">{u("wissen.questions")}</h2>
           <ul class="questions">
-            {rubric.questions.map((q) => <li>{q}</li>)}
+            {tx.questions.map((q) => <li>{q}</li>)}
           </ul>
         </div>
       </div>
@@ -42,15 +44,18 @@ const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
   <section class="band band--surface">
     <div class="container grid">
       <div class="col-main">
-        <h2>Themen in dieser Rubrik</h2>
+        <h2>{u("wissen.topics_title")}</h2>
         {pages.length > 0 && (
           <ul class="cards cards--topics">
-            {pages.map((p) => (
+            {pages.map((x) => (
               <li class="card card--link">
                 <div class="card__body">
-                  <h3><a href={pagePath(p)}>{p.title}</a></h3>
-                  <p>{p.short_answer}</p>
-                  <span class={`state state--${pageState(p).key}`}>{pageState(p).label}</span>
+                  <h3><a href={p(pagePath(x))}>{x.title}</a></h3>
+                  <p>{x.short_answer}</p>
+                  <p class="card__states">
+                    <span class={`state state--${stateOf(x).key}`}>{stateOf(x).label}</span>
+                    {x.fallback && <span class="state state--unknown">{u("shell.working_copy_title")}</span>}
+                  </p>
                 </div>
               </li>
             ))}
@@ -58,13 +63,13 @@ const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
         )}
         {remaining.length > 0 && (
           <>
-            <h3 class="remaining">{pages.length > 0 ? "Weitere Themen, noch in Arbeit" : "Themen, noch in Arbeit"}</h3>
-            <p class="soft">Jedes Thema erscheint, sobald es Quelle und Prüfdatum trägt.</p>
+            <h3 class="remaining">{pages.length > 0 ? u("wissen.remaining_more") : u("wissen.remaining_only")}</h3>
+            <p class="soft">{u("wissen.remaining_help")}</p>
             <ul class="topics">
               {remaining.map((t) => (
                 <li>
-                  <span>{t}</span>
-                  <span class="state state--unknown">in Arbeit</span>
+                  <span>{t.label}</span>
+                  <span class="state state--unknown">{u("wissen.wip")}</span>
                 </li>
               ))}
             </ul>
@@ -74,24 +79,24 @@ const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
       <aside class="col-aside">
         {requires.length > 0 && (
           <div class="side">
-            <h3>Vorher nötig</h3>
+            <h3>{u("wissen.requires")}</h3>
             <ul class="side__list">
-              {requires.map((r) => <li><a href={`/wissen/${r.slug}`}>{r.number} {r.title}</a></li>)}
+              {requires.map((r) => <li><a href={p(`/wissen/${r.slug}`)}>{r.number} {rubricText(r, texts).title}</a></li>)}
             </ul>
           </div>
         )}
         {followed.length > 0 && (
           <div class="side">
-            <h3>Danach folgt</h3>
+            <h3>{u("wissen.followed")}</h3>
             <ul class="side__list">
-              {followed.map((r) => <li><a href={`/wissen/${r.slug}`}>{r.number} {r.title}</a></li>)}
+              {followed.map((r) => <li><a href={p(`/wissen/${r.slug}`)}>{r.number} {rubricText(r, texts).title}</a></li>)}
             </ul>
           </div>
         )}
         <div class="side side--cta">
-          <h3>Was gilt für mich?</h3>
-          <p>Der Kurzcheck ordnet die Themen nach Ihrem Haushalt: Wer welchen Weg hat und was zuerst kommt.</p>
-          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+          <h3>{u("wissen.cta_title")}</h3>
+          <p>{u("wissen.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>
@@ -100,15 +105,15 @@ const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>So wird jede Themenseite aufgebaut</h2>
+        <h2>{u("wissen.mask_title")}</h2>
         <dl class="open-field">
-          <dt>Kurze Antwort</dt><dd>in zwei bis drei Sätzen</dd>
-          <dt>Gilt für</dt><dd>Zielgruppe, ausdrücklich</dd>
-          <dt>Gilt nicht für</dt><dd>die häufigste Verwechslung</dd>
-          <dt>Zuständig</dt><dd>Behörde oder Stelle</dd>
-          <dt>Stand</dt><dd>Prüfdatum, Quelle, Zustand</dd>
-          <dt>Häufiger Irrtum</dt><dd>der Fehler, den viele machen</dd>
-          <dt>Was hier nicht entschieden wird</dt><dd>was eine Fachperson entscheidet</dd>
+          <dt>{u("wissen.mask_answer")}</dt><dd>{u("wissen.mask_answer_v")}</dd>
+          <dt>{u("wissen.mask_for")}</dt><dd>{u("wissen.mask_for_v")}</dd>
+          <dt>{u("wissen.mask_notfor")}</dt><dd>{u("wissen.mask_notfor_v")}</dd>
+          <dt>{u("wissen.mask_authority")}</dt><dd>{u("wissen.mask_authority_v")}</dd>
+          <dt>{u("wissen.mask_state")}</dt><dd>{u("wissen.mask_state_v")}</dd>
+          <dt>{u("wissen.mask_mistake")}</dt><dd>{u("wissen.mask_mistake_v")}</dd>
+          <dt>{u("wissen.mask_notdecided")}</dt><dd>{u("wissen.mask_notdecided_v")}</dd>
         </dl>
       </div>
     </div>
@@ -122,6 +127,13 @@ const followed = RUBRICS.filter((r) => r.requires.includes(rubric.slug));
   }
   .cards--topics .card__body p {
     font-size: 1rem;
+  }
+  .card__states {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+    padding-top: 0.5rem;
   }
   .remaining {
     font-size: 1.125rem;

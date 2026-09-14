@@ -41,3 +41,9 @@ export const CASES: Case[] = [
     situation: "ohne-pass",
   },
 ];
+
+/** Texte eines Fallprofils in der Sprache des Katalogs (cases.<situation>.*), Rückfall Deutsch. */
+export function caseText(c: Case, texts: Record<string, unknown>): Case {
+  const node = ((texts.cases as Record<string, any>) ?? {})[c.situation] ?? {};
+  return { ...c, name: node.name ?? c.name, line: node.line ?? c.line, shapes: node.shapes ?? c.shapes, first: node.first ?? c.first };
+}

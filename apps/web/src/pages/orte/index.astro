@@ -4,13 +4,15 @@
 // fiktive Testgemeinden (ADR-0004), die Karte folgt mit der Datenbank (M5).
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
-import { loadPlaces, placeName, openBenefits, REGION } from "../../lib/places.ts";
+import { loadPlaces, placeName, openBenefits } from "../../lib/places.ts";
+import { pageContext } from "../../lib/page.ts";
 import ort from "../../assets/ort-hauptplatz.webp";
 
+const { u, p } = pageContext(Astro);
 const places = loadPlaces();
-const targets = (p: (typeof places)[number]) => {
+const targets = (pl: (typeof places)[number]) => {
   const t = new Set<string>();
-  for (const b of p.benefits) {
+  for (const b of pl.benefits) {
     const s = `${b.title} ${b.target}`.toLowerCase();
     if (/famil|kind|partner/.test(s)) t.add("families");
     if (/gewerbe|gründ|rückkehrer|auswanderer/.test(s)) t.add("returnees");
@@ -20,22 +22,19 @@ const targets = (p: (typeof places)[number]) => {
 };
 ---
 
-<Base title="Orte entdecken: povratnik.com" description="Gemeinden in Kroatien mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum." current="orte">
+<Base title={`${u("orte.title")}: povratnik.com`} description={u("orte.description")} current="orte">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Orte entdecken</h1>
-        <p class="lede">
-          Welche Gemeinde fördert Rückkehrer, wo nimmt der Kinderarzt noch Patienten auf, wo
-          gibt es Jahresmieten? Ortsprofile mit Zustand und Prüfdatum, ohne Rangliste.
-        </p>
+        <h1>{u("orte.title")}</h1>
+        <p class="lede">{u("orte.lede")}</p>
         <div class="hero__actions">
-          <a class="button button--light" href="/orte/leistungen">Alle Leistungen</a>
-          <a class="button button--outline-light" href="/orte/vergleich">Orte vergleichen</a>
+          <a class="button button--light" href={p("/orte/leistungen")}>{u("orte.all_benefits")}</a>
+          <a class="button button--outline-light" href={p("/orte/vergleich")}>{u("orte.compare")}</a>
         </div>
       </div>
       <div class="hero__media">
-        <Image src={ort} alt="Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei." widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" />
+        <Image src={ort} alt={u("orte.image_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" />
       </div>
     </div>
   </section>
@@ -43,72 +42,66 @@ const targets = (p: (typeof places)[number]) => {
   <section class="band band--surface">
     <div class="container">
       <p class="notice" role="note">
-        <strong>Fiktive Testgemeinden</strong>
-        Die Orte auf dieser Seite sind erfunden und zeigen, wie ein Ortsprofil aussieht, mit allen
-        Zuständen. Echte Gemeinden folgen mit der Datenbank. Kein Wert bezieht sich auf einen realen Ort.
+        <strong>{u("orte.fictional_title")}</strong>
+        {u("orte.fictional_text")}
       </p>
 
-      <form class="filters" id="filters" aria-label="Orte filtern">
+      <form class="filters" id="filters" aria-label={u("orte.filter_label")}>
         <fieldset>
-          <legend>Lage</legend>
-          <label><input type="radio" name="region" value="" checked /> alle</label>
-          <label><input type="radio" name="region" value="coast" /> Küste</label>
-          <label><input type="radio" name="region" value="inland" /> Landesinneres</label>
+          <legend>{u("orte.filter_region")}</legend>
+          <label><input type="radio" name="region" value="" checked /> {u("orte.filter_all")}</label>
+          <label><input type="radio" name="region" value="coast" /> {u("orte.coast")}</label>
+          <label><input type="radio" name="region" value="inland" /> {u("orte.inland")}</label>
         </fieldset>
         <fieldset>
-          <legend>Leistungen für</legend>
-          <label><input type="checkbox" name="target" value="families" /> Familien</label>
-          <label><input type="checkbox" name="target" value="returnees" /> Rückkehrer und Gründer</label>
-          <label><input type="checkbox" name="target" value="housing" /> Wohnen</label>
+          <legend>{u("orte.filter_target")}</legend>
+          <label><input type="checkbox" name="target" value="families" /> {u("orte.target_families")}</label>
+          <label><input type="checkbox" name="target" value="returnees" /> {u("orte.target_returnees")}</label>
+          <label><input type="checkbox" name="target" value="housing" /> {u("orte.target_housing")}</label>
         </fieldset>
         <fieldset>
-          <legend>Zustand</legend>
-          <label><input type="checkbox" name="open" value="1" /> nur mit offenen Leistungen</label>
+          <legend>{u("orte.filter_state")}</legend>
+          <label><input type="checkbox" name="open" value="1" /> {u("orte.only_open")}</label>
         </fieldset>
-        <noscript><p class="soft">Ohne JavaScript zeigt die Liste alle Orte.</p></noscript>
+        <noscript><p class="soft">{u("orte.no_js")}</p></noscript>
       </form>
 
-      <p class="count mono" id="count" aria-live="polite">{places.length} Orte</p>
+      <p class="count mono" id="count" aria-live="polite" data-one={u("orte.count_one", { n: "{n}" })} data-many={u("orte.count_many", { n: "{n}" })}>{u("orte.count_many", { n: places.length })}</p>
       <ul class="cards cards--places" id="places">
-        {places.map((p) => (
-          <li class="card card--link" data-region={p.region} data-targets={targets(p)} data-open={openBenefits(p)}>
+        {places.map((pl) => (
+          <li class="card card--link" data-region={pl.region} data-targets={targets(pl)} data-open={openBenefits(pl)}>
             <div class="card__body">
-              <span class="card__num">{p.county} · {REGION[p.region]}</span>
-              <h3><a href={`/orte/${p.id}`}>{placeName(p)}</a></h3>
-              <p>{p.summary}</p>
+              <span class="card__num">{pl.county} · {u(pl.region === "coast" ? "orte.coast" : "orte.inland")}</span>
+              <h3><a href={p(`/orte/${pl.id}`)}>{placeName(pl)}</a></h3>
+              <p>{pl.summary}</p>
               <p class="card__facts">
-                <span class={`state state--${openBenefits(p) > 0 ? "matches" : "closed"}`}>{openBenefits(p)} {openBenefits(p) === 1 ? "offene Leistung" : "offene Leistungen"}</span>
-                <span class="state state--closed">{p.benefits.length - openBenefits(p)} weitere</span>
+                <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
+                <span class="state state--closed">{u("orte.more", { n: pl.benefits.length - openBenefits(pl) })}</span>
               </p>
               <div class="depth">
-                <span>Datentiefe {p.data_depth.collected} von {p.data_depth.total} Angaben erfasst</span>
-                <div class="depth__bar"><div class="depth__fill" style={`width:${Math.round((100 * p.data_depth.collected) / p.data_depth.total)}%`}></div></div>
+                <span>{u("orte.depth", { n: pl.data_depth.collected, total: pl.data_depth.total })}</span>
+                <div class="depth__bar"><div class="depth__fill" style={`width:${Math.round((100 * pl.data_depth.collected) / pl.data_depth.total)}%`}></div></div>
               </div>
             </div>
           </li>
         ))}
       </ul>
-      <p class="empty" id="empty" hidden>Kein Ort passt zu dieser Auswahl. Das heisst nicht, dass es keine Angebote gibt, nur dass wir keine erfasst haben.</p>
+      <p class="empty" id="empty" hidden>{u("orte.empty")}</p>
     </div>
   </section>
 
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>Kein Ranking, keine Gesamtnote</h2>
-        <p>
-          Zwei bis drei Orte lassen sich nebeneinander vergleichen, als Rohinformation. Ein
-          Gesamtwert würde immer unsere Gewichtung durchsetzen und nicht Ihre. Was fehlt, steht
-          als «unbekannt» und nicht als leere Zelle. Ein Ort mit wenig Daten sieht nie aus wie ein
-          Ort ohne Angebote, deshalb zeigt jeder Ort seine Datentiefe.
-        </p>
-        <p><a class="arrow-link" href="/orte/vergleich">Zum Vergleich</a></p>
+        <h2>{u("orte.ranking_title")}</h2>
+        <p>{u("orte.ranking_text")}</p>
+        <p><a class="arrow-link" href={p("/orte/vergleich")}>{u("orte.to_compare")}</a></p>
       </div>
       <aside class="col-aside">
         <div class="side--cta">
-          <h3>Sie vertreten eine Gemeinde?</h3>
-          <p>Tragen Sie Ihre Leistungen für Rückkehrer ein. Jede Angabe erscheint mit Quelle, Prüfdatum und Zustand.</p>
-          <a class="button button--primary" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">Gemeinde eintragen</a>
+          <h3>{u("orte.municipality_title")}</h3>
+          <p>{u("orte.municipality_text")}</p>
+          <a class="button button--primary" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">{u("orte.municipality_cta")}</a>
         </div>
       </aside>
     </div>
@@ -133,7 +126,7 @@ const targets = (p: (typeof places)[number]) => {
           c.hidden = !ok;
           if (ok) shown++;
         });
-        count.textContent = shown + (shown === 1 ? " Ort" : " Orte");
+        count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown);
         empty.hidden = shown > 0;
       }
       form.addEventListener("change", apply);

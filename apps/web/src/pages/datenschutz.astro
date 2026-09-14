@@ -3,9 +3,15 @@
 // der Wizard-Antworten, keine Auswertung. Die vollständige Erklärung nach DSG und DSGVO
 // wird mit den Betreiberangaben ergänzt.
 import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { lang, u } = pageContext(Astro);
 ---
 
 <Base title="Datenschutz: povratnik.com" description="Wie povratnik.com mit Daten umgeht: Wizard-Antworten bleiben im Browser.">
+  {lang !== "de" && (
+    <div class="container"><p class="notice" role="note">{u("shell.legal_note")}</p></div>
+  )}
   <section class="band">
     <div class="container grid">
       <div class="col-main">

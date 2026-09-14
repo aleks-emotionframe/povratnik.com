@@ -1,28 +1,25 @@
 ---
 // Übersicht Wissen: die zwölf Rubriken (inhaltskonzept.md 4.1) mit der Zahl ihrer
 // Themenseiten; Rubriken ohne Seite tragen ihren Zustand sichtbar.
-import { join } from "node:path";
 import Base from "../../layouts/Base.astro";
-import { RUBRICS } from "../../lib/rubrics.ts";
+import { RUBRICS, rubricText } from "../../lib/rubrics.ts";
 import { loadPages } from "../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
 
-const pages = loadPages(join(process.cwd(), "..", "..", "content"));
-const count = (slug: string) => pages.filter((p) => p.category === slug).length;
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
+const count = (slug: string) => pages.filter((x) => x.category === slug).length;
 ---
 
-<Base title="Wissen nach Thema: povratnik.com" description="Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung." current="wissen">
+<Base title={`${u("wissen.title")}: povratnik.com`} description={u("wissen.description")} current="wissen">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Wissen nach Thema</h1>
-        <p class="lede">
-          Zwölf Rubriken, von Status bis Förderung. Jede Themenseite hat dieselbe Maske: kurze
-          Antwort, gilt für, gilt nicht für, zuständig, Stand. Nach der zweiten Seite wissen Sie,
-          wo Sie suchen müssen.
-        </p>
+        <h1>{u("wissen.title")}</h1>
+        <p class="lede">{u("wissen.lede")}</p>
       </div>
       <div class="hero__media hero__media--plain" aria-hidden="true">
-        <p class="hero__claim">Behördenseiten erklären ihren eigenen Ausschnitt. Wir erklären, in welcher Reihenfolge die Ausschnitte zusammengehören.</p>
+        <p class="hero__claim">{u("wissen.claim")}</p>
       </div>
     </div>
   </section>
@@ -30,20 +27,24 @@ const count = (slug: string) => pages.filter((p) => p.category === slug).length;
   <section class="band band--surface">
     <div class="container">
       <ul class="cards">
-        {RUBRICS.map((r) => (
-          <li class="card card--link">
-            <div class="card__body">
-              <span class="card__num">{r.number}</span>
-              <h3><a href={`/wissen/${r.slug}`}>{r.title}</a></h3>
-              <p>{r.intro}</p>
-              {count(r.slug) > 0 ? (
-                <span class="arrow-link">{count(r.slug)} {count(r.slug) === 1 ? "Themenseite" : "Themenseiten"}</span>
-              ) : (
-                <span class="state state--unknown">{r.topics.length} Themen in Arbeit</span>
-              )}
-            </div>
-          </li>
-        ))}
+        {RUBRICS.map((r) => {
+          const tx = rubricText(r, texts);
+          const n = count(r.slug);
+          return (
+            <li class="card card--link">
+              <div class="card__body">
+                <span class="card__num">{r.number}</span>
+                <h3><a href={p(`/wissen/${r.slug}`)}>{tx.title}</a></h3>
+                <p>{tx.intro}</p>
+                {n > 0 ? (
+                  <span class="arrow-link">{u(n === 1 ? "wissen.pages_one" : "wissen.pages_many", { n })}</span>
+                ) : (
+                  <span class="state state--unknown">{u("wissen.topics_wip", { n: r.topics.length })}</span>
+                )}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>
@@ -51,25 +52,19 @@ const count = (slug: string) => pages.filter((p) => p.category === slug).length;
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>Zwei Tiefen, für Sie erkennbar</h2>
-        <p>
-          Etwa zwanzig Themen werden vollständig ausgearbeitet: die, an denen Menschen scheitern
-          oder an denen Geld hängt. Alle anderen bekommen eine geprüfte Kurzfassung mit Einstieg,
-          Zuständigkeit und Direktlink. Beide Stufen sind gekennzeichnet, und keine Seite geht
-          ohne Quelle, Prüfdatum und fachliche Freigabe online.
-        </p>
+        <h2>{u("wissen.depth_title")}</h2>
+        <p>{u("wissen.depth_text")}</p>
         <p class="notice" role="note">
-          <strong>Stand der Rubriken</strong>
-          Die Struktur steht, die Themenseiten sind in Arbeit. Bis zur fachlichen Freigabe zeigt
-          jede Rubrik, welche Themen kommen und welche Fragen sie beantworten wird.
+          <strong>{u("wissen.state_title")}</strong>
+          {u("wissen.state_text")}
         </p>
       </div>
       <aside class="col-aside">
-        <h3>Weitere Zugänge</h3>
+        <h3>{u("wissen.more_title")}</h3>
         <ul class="topics">
-          <li><span>Nach Lebenssituation</span><a class="arrow-link" href="/wissen/situation/familie">Sechs Einstiege</a></li>
-          <li><span>Glossar der Amtsbegriffe</span><a class="arrow-link" href="/wissen/glossar">Glossar</a></li>
-          <li><span>Nach Herkunftsland</span><a class="arrow-link" href="/wissen/land/argentinien">Sechs Länder</a></li>
+          <li><span>{u("wissen.more_situations")}</span><a class="arrow-link" href={p("/wissen/situation/familie")}>{u("wissen.more_situations_link")}</a></li>
+          <li><span>{u("wissen.more_glossary")}</span><a class="arrow-link" href={p("/wissen/glossar")}>{u("wissen.more_glossary_link")}</a></li>
+          <li><span>{u("wissen.more_countries")}</span><a class="arrow-link" href={p("/wissen/land/argentinien")}>{u("wissen.more_countries_link")}</a></li>
         </ul>
       </aside>
     </div>

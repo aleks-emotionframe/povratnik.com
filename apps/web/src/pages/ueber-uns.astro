@@ -1,20 +1,19 @@
 ---
 // Über uns (inhaltskonzept.md 11): Auftrag und Unabhängigkeit, Redaktionsgrundsätze,
 // Fehler melden, Gemeinde eintragen. Inhalte aus docs/strategie.md, rollen.md und
-// redaktionsgrundsaetze.md; die Dokumente sind massgeblich.
+// redaktionsgrundsaetze.md; die Dokumente sind massgeblich. Texte aus dem Katalog.
 import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { u, p } = pageContext(Astro);
 ---
 
-<Base title="Über uns: povratnik.com" description="Wer hinter povratnik.com steht, wie wir finanziert werden, wie wir prüfen und warum bezahlte Leistungen keine Inhalte verändern." current="ueber-uns">
+<Base title={u("about.title")} description={u("about.description")} current="ueber-uns">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Verstehen, vergleichen, ankommen.</h1>
-        <p class="lede">
-          Behördenseiten erklären jeweils ihren eigenen Ausschnitt. Niemand erklärt, in welcher
-          Reihenfolge die Ausschnitte zusammengehören und was wovon abhängt. Genau das nehmen
-          wir Ihnen ab.
-        </p>
+        <h1>{u("about.hero")}</h1>
+        <p class="lede">{u("about.lede")}</p>
       </div>
     </div>
   </section>
@@ -22,40 +21,18 @@ import Base from "../layouts/Base.astro";
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>Auftrag und Unabhängigkeit</h2>
-        <p>
-          povratnik.com wird von der EmotionFrame GmbH in der Schweiz betrieben. Die Orientierung
-          ist frei: allgemeine Informationen, das Basisprofil jeder Gemeinde, sachliche Korrekturen
-          und neutrale Vergleichsdaten kosten nichts und werden nie hinter eine Bezahlschranke
-          gestellt.
-        </p>
-        <p>
-          Bezahlt werden Pflegeleistungen: Gemeinden, die ihre Angebote strukturiert aufbereiten,
-          übersetzen und laufend prüfen lassen, Fachpartner mit einem transparenten Profil,
-          Arbeitgeber mit aktuellen Stellen. Eine Gemeinde, die nichts bezahlt, wird nicht
-          künstlich unvollständig gehalten. Bezahlte Leistungen verändern keine fachlichen
-          Ergebnisse, es gibt keine bezahlte Platzierung, und Werbung wird gekennzeichnet.
-        </p>
-        <h3>Haushalte statt Einzelpersonen</h3>
-        <p>
-          Partner und Kinder können unterschiedliche Staatsangehörigkeiten, Aufenthaltswege und
-          Versicherungsgrundlagen haben. Deshalb ist bei uns die Person die Planungseinheit und
-          der Haushalt die Klammer.
-        </p>
-        <h3>Bleiben nach dem Ankommen</h3>
-        <p>
-          Die ersten zwölf Monate gehören zum Produkt: Spracherwerb, Schulwechsel, Anschluss,
-          Arbeitssuche des Partners, Verlängerungen. Erfolg endet nicht mit der Anmeldung.
-        </p>
+        <h2>{u("about.mission_title")}</h2>
+        <p>{u("about.mission_1")}</p>
+        <p>{u("about.mission_2")}</p>
+        <h3>{u("about.households_title")}</h3>
+        <p>{u("about.households_text")}</p>
+        <h3>{u("about.stay_title")}</h3>
+        <p>{u("about.stay_text")}</p>
       </div>
       <aside class="col-aside">
-        <h3>Was immer gilt</h3>
+        <h3>{u("about.always_title")}</h3>
         <ul class="topics">
-          <li><span>Keine Bezahlschranke vor Kerninformationen</span></li>
-          <li><span>Keine bezahlte Platzierung</span></li>
-          <li><span>Keine Rangliste von Gemeinden</span></li>
-          <li><span>Keine Antworten, die den Browser verlassen</span></li>
-          <li><span>Keine Regel ohne namentliche Fachfreigabe</span></li>
+          {[1, 2, 3, 4, 5].map((i) => <li><span>{u(`about.always_${i}`)}</span></li>)}
         </ul>
       </aside>
     </div>
@@ -64,34 +41,20 @@ import Base from "../layouts/Base.astro";
   <section class="band band--surface" id="grundsaetze">
     <div class="container grid">
       <div class="col-main">
-        <h2>Wie wir prüfen</h2>
-        <p>
-          Jede Aussage ist eine von drei Arten und wird so gekennzeichnet: ein Befund mit
-          benannter Quelle und Prüfdatum, eine Produktregel, die wir daraus ableiten, oder ein
-          offener Punkt, der eine Einzelfall- oder Behördenklärung braucht. Ein nicht gefundenes
-          Angebot wird nie als nicht existent ausgewiesen.
-        </p>
-        <h3>Quellenhierarchie</h3>
+        <h2>{u("about.check_title")}</h2>
+        <p>{u("about.check_text")}</p>
+        <h3>{u("about.hierarchy_title")}</h3>
         <ol class="sources">
-          <li>Amtliche Rechtsveröffentlichung im Original, mit ihren Änderungen gelesen</li>
-          <li>Zuständige kroatische Behörde</li>
-          <li>Kommunaler Originalbeschluss oder Ausschreibung</li>
-          <li>Zuständige Behörde des bisherigen Wohnlands</li>
-          <li>Schriftliche Fachauskunft einer Behörde, mit Datum und Fallannahmen</li>
-          <li>Fachpublikationen und Beratungsbeiträge</li>
-          <li>Presse und Erfahrungsberichte: Kontext, nie Anspruchsgrundlage</li>
+          {[1, 2, 3, 4, 5, 6, 7].map((i) => <li>{u(`about.h${i}`)}</li>)}
         </ol>
-        <p>Eine niedrigere Stufe widerlegt nie eine höhere. Ein Presseartikel ist nie Beleg für eine Frist, einen Betrag oder eine Voraussetzung.</p>
+        <p>{u("about.hierarchy_note")}</p>
       </div>
       <aside class="col-aside">
-        <h3>Prüfzyklen</h3>
+        <h3>{u("about.cycles_title")}</h3>
         <dl class="open-field">
-          <dt>Offene Förderaufrufe</dt><dd>wöchentlich während der Laufzeit</dd>
-          <dt>Aufenthalt, Steuern, Versicherung</dt><dd>monatliche Änderungssichtung</dd>
-          <dt>Kommunale Massnahmen</dt><dd>quartalsweise und bei Beschlüssen</dd>
-          <dt>Kontakte und Einrichtungen</dt><dd>halbjährlich</dd>
+          {[1, 2, 3, 4].map((i) => <><dt>{u(`about.c${i}`)}</dt><dd>{u(`about.c${i}_v`)}</dd></>)}
         </dl>
-        <p class="soft">Ein verpasster Prüftermin erzeugt eine Warnung, keine stillschweigende Weiterverwendung.</p>
+        <p class="soft">{u("about.cycles_note")}</p>
       </aside>
     </div>
   </section>
@@ -99,29 +62,27 @@ import Base from "../layouts/Base.astro";
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>Wer verantwortlich ist</h2>
+        <h2>{u("about.roles_title")}</h2>
         <dl class="open-field">
-          <dt>Produktverantwortung</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
-          <dt>Technische Verantwortung</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
-          <dt>Fachprüfung Recht und Steuern</dt><dd><span class="state state--unknown">Platzhalter</span> Teststufe: gibt nichts frei. Gesucht ist eine kroatische Fachperson für die namentliche Freigabe jeder Rechtsregel.</dd>
-          <dt>Kroatischsprachige Fachredaktion</dt><dd><span class="state state--unknown">offen</span></dd>
-          <dt>Fehlerkontakt</dt><dd><a href="mailto:kontakt@povratnik.com">kontakt@povratnik.com</a>, Sichtung binnen zwei Werktagen</dd>
+          <dt>{u("about.role_product")}</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>{u("about.role_tech")}</dt><dd>Daniel Gasic, EmotionFrame GmbH</dd>
+          <dt>{u("about.role_review")}</dt><dd><span class="state state--unknown">{u("about.placeholder")}</span> {u("about.role_review_v")}</dd>
+          <dt>{u("about.role_editorial")}</dt><dd><span class="state state--unknown">{u("about.open")}</span></dd>
+          <dt>{u("about.role_errors")}</dt><dd><a href="mailto:kontakt@povratnik.com">kontakt@povratnik.com</a>, {u("about.role_errors_v")}</dd>
         </dl>
         <p class="notice" role="note">
-          <strong>Teststufe</strong>
-          Es gibt keine fachlich freigegebene Rechtsregel. Der Kurzcheck läuft mit gekennzeichneten
-          Beispielregeln, damit das Portal geprüft werden kann. Kein Ergebnis ist eine Aussage über
-          Ihre tatsächliche Lage. Eine Prüfung durch ein KI-System ersetzt keine qualifizierte
-          unabhängige Fachperson.
+          <strong>{u("about.stage_title")}</strong>
+          {u("about.stage_text")}
         </p>
       </div>
       <aside class="col-aside">
-        <h3>Mitmachen</h3>
+        <h3>{u("about.join_title")}</h3>
         <ul class="topics">
-          <li><span>Gemeinde eintragen</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">Anfrage</a></li>
-          <li><span>Fachperson werden</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fachpr%C3%BCfung">Anfrage</a></li>
-          <li><span>Fehler melden</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fehler%20melden">Mail</a></li>
+          <li><span>{u("about.join_municipality")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Gemeinde%20eintragen">{u("about.request")}</a></li>
+          <li><span>{u("about.join_expert")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fachpr%C3%BCfung">{u("about.request")}</a></li>
+          <li><span>{u("about.join_report")}</span><a class="arrow-link" href="mailto:kontakt@povratnik.com?subject=Fehler%20melden">{u("about.mail")}</a></li>
         </ul>
+        <p class="soft"><a href={p("/impressum")}>Impressum</a>, <a href={p("/datenschutz")}>Datenschutz</a>, <a href={p("/agb")}>AGB</a></p>
       </aside>
     </div>
   </section>

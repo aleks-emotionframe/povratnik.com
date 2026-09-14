@@ -1,36 +1,38 @@
 ---
 // Einstieg nach Lebenssituation (inhaltskonzept.md 4.3): ein kuratierter Pfad durch
 // bestehende Themenseiten, kein neuer Inhalt.
-import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
-import { SITUATIONS, situationBySlug } from "../../../lib/situations.ts";
-import { rubricBySlug } from "../../../lib/rubrics.ts";
-import { loadPages, pagePath, pageState, type PageView } from "../../../lib/pages.ts";
+import { SITUATIONS, situationBySlug, situationText } from "../../../lib/situations.ts";
+import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
+import { loadPages, pagePath, type PageView } from "../../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../../lib/page.ts";
 
 export function getStaticPaths() {
-  const pages = loadPages(join(process.cwd(), "..", "..", "content"));
-  return SITUATIONS.map((s) => ({ params: { slug: s.slug }, props: { pages } }));
+  return SITUATIONS.map((s) => ({ params: { slug: s.slug } }));
 }
 
-const { pages } = Astro.props as { pages: PageView[] };
+const { lang, texts, u, p } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang);
 const situation = situationBySlug(Astro.params.slug!)!;
-const byId = new Map(pages.map((p) => [p.id, p]));
+const tx = situationText(situation, texts);
+const byId = new Map(pages.map((x) => [x.id, x]));
 const steps = situation.path.map((id) => byId.get(id)).filter(Boolean) as PageView[];
 const rubrics = situation.rubrics.map((s) => rubricBySlug(s)!);
+const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") });
 ---
 
-<Base title={`${situation.title}: povratnik.com`} description={situation.intro} current="wissen">
+<Base title={`${tx.title}: povratnik.com`} description={tx.intro} current="wissen">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/wissen">Wissen</a> / Lebenssituation</p>
-        <h1>{situation.title}</h1>
-        <p class="lede">{situation.intro}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("situation.crumb")}</p>
+        <h1>{tx.title}</h1>
+        <p class="lede">{tx.intro}</p>
       </div>
       <div class="hero__media hero__media--plain">
         <div>
-          <h2 class="trap__title">Woran es hier oft scheitert</h2>
-          <p class="trap">{situation.trap}</p>
+          <h2 class="trap__title">{u("situation.trap_title")}</h2>
+          <p class="trap">{tx.trap}</p>
         </div>
       </div>
     </div>
@@ -39,28 +41,28 @@ const rubrics = situation.rubrics.map((s) => rubricBySlug(s)!);
   <section class="band band--surface">
     <div class="container grid">
       <div class="col-main">
-        <h2>Ihr Weg in dieser Reihenfolge</h2>
+        <h2>{u("situation.path_title")}</h2>
         <ol class="path">
-          {steps.map((p) => (
+          {steps.map((x) => (
             <li class="path__step">
-              <a href={pagePath(p)}>{p.title}</a>
-              <p>{p.short_answer}</p>
-              <span class={`state state--${pageState(p).key}`}>{pageState(p).label}</span>
+              <a href={p(pagePath(x))}>{x.title}</a>
+              <p>{x.short_answer}</p>
+              <span class={`state state--${stateOf(x).key}`}>{stateOf(x).label}</span>
             </li>
           ))}
         </ol>
       </div>
       <aside class="col-aside">
         <div class="side">
-          <h3>Diese Rubriken zählen zusätzlich</h3>
+          <h3>{u("situation.rubrics_title")}</h3>
           <ul class="side__list">
-            {rubrics.map((r) => <li><a href={`/wissen/${r.slug}`}>{r.number} {r.title}</a></li>)}
+            {rubrics.map((r) => <li><a href={p(`/wissen/${r.slug}`)}>{r.number} {rubricText(r, texts).title}</a></li>)}
           </ul>
         </div>
         <div class="side side--cta">
-          <h3>Persönlich statt allgemein</h3>
-          <p>Der Kurzcheck macht aus diesem Pfad Ihren Plan, Person für Person, mit Fristen.</p>
-          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+          <h3>{u("situation.cta_title")}</h3>
+          <p>{u("situation.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>

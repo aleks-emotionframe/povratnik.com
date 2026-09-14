@@ -1,49 +1,49 @@
 ---
 // Länderseite (inhaltskonzept.md 4.3): die Ausreiseanforderungen des bisherigen Wohnlands,
 // getrennt vom kroatischen Prozess. Jedes Feld ist ein Fachwert mit Zustand.
-import { join } from "node:path";
 import Base from "../../../layouts/Base.astro";
-import { loadPages, loadSources, pagePath, pageState, type PageView } from "../../../lib/pages.ts";
+import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
 
 export function getStaticPaths() {
-  const contentDir = join(process.cwd(), "..", "..", "content");
-  const countries = loadPages(contentDir, "de", "country");
-  const topics = loadPages(contentDir);
-  const sources = loadSources(contentDir);
-  return countries.map((page) => ({ params: { slug: page.id.replace(/^land-/, "") }, props: { page, countries, topics, sources } }));
+  return loadPages(CONTENT_DIR, "de", "country").map((page) => ({ params: { slug: page.id.replace(/^land-/, "") } }));
 }
 
-const { page, countries, topics, sources } = Astro.props as { page: PageView; countries: PageView[]; topics: PageView[]; sources: Record<string, any> };
+const { lang, u, p } = pageContext(Astro);
+const countries = loadPages(CONTENT_DIR, lang, "country");
+const page = countries.find((x) => x.id === `land-${Astro.params.slug}`)!;
+const topics = loadPages(CONTENT_DIR, lang);
+const sources = loadSources(CONTENT_DIR);
 const c = page.country!;
-const state = pageState(page);
-const fmt = (iso: string) => iso.split("-").reverse().join(".");
-const byId = new Map(topics.map((p) => [p.id, p]));
+const state = page.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") };
+const byId = new Map(topics.map((x) => [x.id, x]));
 const followed = page.links.followed_by_pages.map((id) => byId.get(id)).filter(Boolean) as PageView[];
 const rows: [string, keyof typeof c][] = [
-  ["Kroatische Vertretung", "representation"],
-  ["Apostille", "apostille"],
-  ["Sozialversicherung", "social_security"],
-  ["Doppelbesteuerung", "double_taxation"],
-  ["Abmeldepflichten", "deregistration"],
-  ["Realistische Laufzeiten", "duration"],
+  [u("country.representation"), "representation"],
+  [u("country.apostille"), "apostille"],
+  [u("country.social_security"), "social_security"],
+  [u("country.double_taxation"), "double_taxation"],
+  [u("country.deregistration"), "deregistration"],
+  [u("country.duration"), "duration"],
 ];
-const labels = { known: "", unknown: "unbekannt", not_collected: "nicht erhoben", outdated: "veraltet" };
+const labels: Record<string, string> = { unknown: u("country.unknown"), not_collected: u("country.not_collected"), outdated: u("country.outdated") };
+const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From (the )?|Desde (los |la )?)/, "").replace(/ (nach Kroatien|u Hrvatsku|to Croatia|a Croacia)$/, "");
 ---
 
-<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen">
+<Base title={`${page.title}: povratnik.com`} description={page.short_answer.slice(0, 155)} current="wissen" fallback={page.fallback}>
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/wissen">Wissen</a> / Nach Herkunftsland</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("country.crumb")}</p>
         <h1>{page.title}</h1>
         <p class="lede">{page.short_answer}</p>
         <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span></p>
       </div>
       <div class="hero__media hero__media--plain">
         <div>
-          <h2 class="others__title">Andere Herkunftsländer</h2>
+          <h2 class="others__title">{u("country.others")}</h2>
           <ul class="chips chips--on-brand">
-            {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={pagePath(x)}>{x.title.replace(/^Aus (der |den )?/, "").replace(/ nach Kroatien$/, "")}</a></li>)}
+            {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={p(pagePath(x))}>{shortName(x.title)}</a></li>)}
           </ul>
         </div>
       </div>
@@ -53,8 +53,8 @@ const labels = { known: "", unknown: "unbekannt", not_collected: "nicht erhoben"
   <section class="band band--surface">
     <div class="container grid">
       <div class="col-main">
-        <h2>Was für die Ausreise zählt</h2>
-        <p class="soft">Der kroatische Prozess und die Anforderungen des Herkunftslands sind zwei verschiedene Dinge.</p>
+        <h2>{u("country.what_title")}</h2>
+        <p class="soft">{u("country.what_help")}</p>
         <dl class="open-field country">
           {rows.map(([label, key]) => (
             <>
@@ -73,13 +73,13 @@ const labels = { known: "", unknown: "unbekannt", not_collected: "nicht erhoben"
       </div>
       <aside class="col-aside">
         <div class="side">
-          <h3>Danach folgt in Kroatien</h3>
-          <ul class="side__list">{followed.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}</ul>
+          <h3>{u("country.followed")}</h3>
+          <ul class="side__list">{followed.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
         </div>
         <div class="side side--cta">
-          <h3>Ihr Weg, Person für Person</h3>
-          <p>Der Kurzcheck fragt nach dem Herkunftsland jeder Person im Haushalt.</p>
-          <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+          <h3>{u("country.cta_title")}</h3>
+          <p>{u("country.cta_text")}</p>
+          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>
@@ -88,20 +88,20 @@ const labels = { known: "", unknown: "unbekannt", not_collected: "nicht erhoben"
   <section class="band">
     <div class="container">
       <div class="stand">
-        <h3>Stand und Quellen</h3>
+        <h3>{u("topic.stand_title")}</h3>
         <dl class="open-field">
-          <dt>Kennzeichnung</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
-          <dt>Originalquelle</dt>
+          <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+          <dt>{u("topic.source")}</dt>
           <dd>
             {page.sources.map((src) => (
               <p class="stand__source">
                 <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
-                <span class="mono">{sources[src.id]?.publisher}, Stufe {sources[src.id]?.tier}. Fundstelle: {src.reference}. Geprüft {fmt(src.checked)}.</span>
+                <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
               </p>
             ))}
           </dd>
-          <dt>Nächste Prüfung</dt><dd class="mono">{fmt(page.review.next_check)}</dd>
-          <dt>Fehler melden</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent("Fehler: " + page.title)}`}>kontakt@povratnik.com</a></dd>
+          <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
+          <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
         </dl>
       </div>
     </div>

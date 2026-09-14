@@ -68,3 +68,9 @@ export const SITUATIONS: Situation[] = [
 export function situationBySlug(slug: string): Situation | undefined {
   return SITUATIONS.find((s) => s.slug === slug);
 }
+
+/** Texte einer Situation in der Sprache des Katalogs (situations.<slug>.*), Rückfall Deutsch. */
+export function situationText(s: Situation, texts: Record<string, unknown>): { title: string; intro: string; trap: string } {
+  const node = ((texts.situations as Record<string, any>) ?? {})[s.slug] ?? {};
+  return { title: node.title ?? s.title, intro: node.intro ?? s.intro, trap: node.trap ?? s.trap };
+}

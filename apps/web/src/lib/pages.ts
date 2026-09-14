@@ -45,6 +45,8 @@ export type PageView = {
   publication: { state: string };
   validity: { valid_from: string; valid_until: { kind: string; date: string | null }; transitional: I18n | null };
   review: { next_check: string; cycle: string };
+  /** true, wenn in der gewünschten Sprache keine Fassung existiert und die deutsche gezeigt wird. */
+  fallback?: boolean;
 };
 
 export type SourceView = { id: string; url: string; title: string; publisher: string; tier: number };
@@ -63,10 +65,15 @@ function visible(p: PageView): boolean {
 }
 
 export function loadPages(contentDir: string, lang = "de", type: "topic" | "country" | "figures" = "topic"): PageView[] {
-  return (loadDir(join(contentDir, "pages")) as PageView[])
-    .filter((p) => p.lang === lang && p.type === type)
+  const all = (loadDir(join(contentDir, "pages")) as PageView[])
+    .filter((p) => p.type === type)
     .map((p) => ({ ...p, covers: p.covers ?? [], sections: p.sections ?? {}, terms: p.terms ?? [] }))
     .filter(visible);
+  // Je id die Fassung der Sprache, sonst die deutsche als gekennzeichneter Rückfall.
+  const base = all.filter((p) => p.lang === "de");
+  if (lang === "de") return base;
+  const own = new Map(all.filter((p) => p.lang === lang).map((p) => [p.id, p]));
+  return base.map((p) => own.get(p.id) ?? { ...p, fallback: true });
 }
 
 export function loadSources(contentDir: string): Record<string, SourceView> {

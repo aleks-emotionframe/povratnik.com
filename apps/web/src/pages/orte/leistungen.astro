@@ -5,20 +5,26 @@
 import Base from "../../layouts/Base.astro";
 import Fact from "../../components/Fact.astro";
 import { PROGRAM_STATE, formatDate, loadPlaces, placeName } from "../../lib/places.ts";
+import { pageContext } from "../../lib/page.ts";
 
+const { u, p } = pageContext(Astro);
 const places = loadPlaces();
-const items = places.flatMap((p) => p.benefits.map((b) => ({ place: p, b })));
+const items = places.flatMap((pl) => pl.benefits.map((b) => ({ place: pl, b })));
 const order = ["open", "announced", "unconfirmed", "budget_unknown", "exhausted", "closed"];
 items.sort((x, y) => order.indexOf(x.b.program_state) - order.indexOf(y.b.program_state));
+const period = (b: (typeof items)[number]["b"]) =>
+  b.application.from || b.application.until
+    ? u("place.period_range", { from: b.application.from ? formatDate(b.application.from) : u("place.period_open"), until: b.application.until ? formatDate(b.application.until) : u("place.period_running") })
+    : u("place.fact_unknown");
 ---
 
-<Base title="Leistungen für Rückkehrer: povratnik.com" description="Alle erfassten Förderungen mit Zustand, Antragszeitraum und Prüfdatum, ohne Kartenumweg." current="orte">
+<Base title={`${u("benefits.title")}: povratnik.com`} description={u("benefits.description")} current="orte">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href="/orte">Orte</a> / Leistungen</p>
-        <h1>Leistungen und Förderungen</h1>
-        <p class="lede">Für alle, die wissen, was sie suchen, aber noch nicht wo. Jeder Eintrag mit Zustand, Antragszeitraum und Prüfdatum.</p>
+        <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {u("benefits.crumb")}</p>
+        <h1>{u("benefits.title")}</h1>
+        <p class="lede">{u("benefits.lede")}</p>
       </div>
     </div>
   </section>
@@ -26,36 +32,36 @@ items.sort((x, y) => order.indexOf(x.b.program_state) - order.indexOf(y.b.progra
   <section class="band band--surface">
     <div class="container">
       <p class="notice" role="note">
-        <strong>Fiktive Testgemeinden</strong>
-        Alle Leistungen hier sind erfunden. Staatliche Programme wie Biram Hrvatsku stehen im <a href="/wissen/leistungen-und-foerderung">Wissen</a>.
+        <strong>{u("orte.fictional_title")}</strong>
+        {u("benefits.fictional_text")} <a href={p("/wissen/leistungen-und-foerderung")}>{u("shell.nav_wissen")}</a>
       </p>
-      <form class="filters" id="filters" aria-label="Leistungen filtern">
+      <form class="filters" id="filters" aria-label={u("benefits.filter_label")}>
         <fieldset>
-          <legend>Zustand</legend>
-          {Object.entries(PROGRAM_STATE).map(([key, s]) => (
-            <label><input type="checkbox" name="state" value={key} /> {s.label}</label>
+          <legend>{u("benefits.filter_state")}</legend>
+          {Object.keys(PROGRAM_STATE).map((key) => (
+            <label><input type="checkbox" name="state" value={key} /> {u(`place.state_${key}`)}</label>
           ))}
         </fieldset>
       </form>
-      <p class="count mono" id="count" aria-live="polite">{items.length} Leistungen</p>
+      <p class="count mono" id="count" aria-live="polite" data-one={u("benefits.count_one", { n: "{n}" })} data-many={u("benefits.count_many", { n: "{n}" })}>{u("benefits.count_many", { n: items.length })}</p>
       <ul class="cards cards--benefits" id="items">
         {items.map(({ place, b }) => (
           <li class="card" data-state={b.program_state}>
             <div class="card__body">
-              <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{PROGRAM_STATE[b.program_state].label}</span> <a class="benefit__place" href={`/orte/${place.id}`}>{placeName(place)}</a></p>
+              <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span> <a class="benefit__place" href={p(`/orte/${place.id}`)}>{placeName(place)}</a></p>
               <h3>{b.title}</h3>
               <dl class="benefit">
-                <dt>Für wen</dt><dd>{b.target}</dd>
-                <dt>Betrag</dt><dd><Fact fact={b.amount} /></dd>
-                <dt>Antragszeitraum</dt><dd class="mono">{b.application.from || b.application.until ? `${b.application.from ? formatDate(b.application.from) : "offen"} bis ${b.application.until ? formatDate(b.application.until) : "laufend"}` : "unbekannt"}</dd>
-                <dt>Bindung</dt><dd>{b.binding}</dd>
+                <dt>{u("place.target")}</dt><dd>{b.target}</dd>
+                <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
+                <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
+                <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
               </dl>
-              <p class="datenstand"><span>Quelle: {b.source}</span><span>Geprüft {formatDate(b.checked)}</span></p>
+              <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
             </div>
           </li>
         ))}
       </ul>
-      <p class="empty" id="empty" hidden>Keine Leistung in diesem Zustand erfasst.</p>
+      <p class="empty" id="empty" hidden>{u("benefits.empty")}</p>
     </div>
   </section>
 
@@ -73,7 +79,7 @@ items.sort((x, y) => order.indexOf(x.b.program_state) - order.indexOf(y.b.progra
           c.hidden = !ok;
           if (ok) shown++;
         });
-        count.textContent = shown + (shown === 1 ? " Leistung" : " Leistungen");
+        count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown);
         empty.hidden = shown > 0;
       });
     })();

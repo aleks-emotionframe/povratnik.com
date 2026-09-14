@@ -1,71 +1,63 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.0: Aufmacher mit Foto,
-// Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, die Zustände,
-// Einstiege nach Lebenssituation. Wissen und Orte tragen ihren Zustand sichtbar.
-import { join } from "node:path";
+// Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
+// läuft, die Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
+// Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
-import { RUBRICS } from "../lib/rubrics.ts";
-import { SITUATIONS } from "../lib/situations.ts";
-import { CASES } from "../lib/cases.ts";
+import { RUBRICS, rubricText } from "../lib/rubrics.ts";
+import { SITUATIONS, situationText } from "../lib/situations.ts";
+import { CASES, caseText } from "../lib/cases.ts";
 import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
 import hero from "../assets/hero-dokumente.webp";
 import ort from "../assets/ort-hauptplatz.webp";
 
+const { lang, texts, u, p } = pageContext(Astro);
 const heroImg = await getImage({ src: hero, width: 960, format: "webp", quality: 62 });
-const chips = [
-  ["OIB", "dokumente-und-behoerden/oib"],
-  ["Staatsangehörigkeit über Abstammung", "status-und-staatsangehoerigkeit/staatsangehoerigkeit-abstammung"],
-  ["Bescheinigung für Auswanderer", "status-und-staatsangehoerigkeit/bescheinigung-auswanderer"],
-  ["Wohnsitz anmelden", "dokumente-und-behoerden/wohnsitz-anmelden"],
-  ["Krankenversicherung", "gesundheit-und-pflege/krankenversicherung"],
-  ["Fünf Jahre keine Lohnsteuer", "steuern-geld-und-pension/lohnsteuerbefreiung"],
-  ["Biram Hrvatsku", "leistungen-und-foerderung/biram-hrvatsku"],
-  ["Schule und Zeugnisse", "kinder-schule-und-ausbildung/schule-und-zeugnisse"],
-  ["Führerschein", "umzug-und-mobilitaet/fuehrerschein-umschreiben"],
-];
+const pages = loadPages(CONTENT_DIR, lang);
+const byId = new Map(pages.map((x) => [x.id, x]));
+// Schnelleinstiege: Themenseiten, in der Sprache oder als deutsche Fassung.
+const chips = ["oib", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "wohnsitz-anmelden", "krankenversicherung", "lohnsteuerbefreiung", "biram-hrvatsku", "schule-und-zeugnisse", "fuehrerschein-umschreiben"]
+  .map((id) => byId.get(id))
+  .filter((x): x is NonNullable<typeof x> => !!x);
 
 // Was gerade läuft: offene und angekündigte Leistungen mit Antragszeitraum, dazu
 // Themenseiten mit befristeter Gültigkeit. Der Block ist der Grund für Wiederbesuche.
 const places = loadPlaces();
 const running = places
-  .flatMap((p) => p.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(p), href: `/orte/${p.id}`, until: b.application.until, state: b.program_state, checked: b.checked })))
+  .flatMap((pl) => pl.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(pl), href: p(`/orte/${pl.id}`), until: b.application.until, state: b.program_state, checked: b.checked })))
   .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
-const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) => p.validity.valid_until.kind === "date");
+const dated = pages.filter((x) => x.validity.valid_until.kind === "date");
+const stateLabel = (s: string) => u(`place.state_${s}`);
+const elig = texts.eligibility as Record<string, string>;
+const phaseNames = texts.phases as Record<string, string>;
 ---
 
-<Base
-  title="povratnik.com: Leben in Kroatien"
-  description="Rückkehr und Auswanderung nach Kroatien in der richtigen Reihenfolge: Aufenthalt, Meldung, Versicherung, Familie, Förderung. Persönlicher Plan im Browser, ohne Konto."
-  current="start"
-  preload={heroImg.src}
->
+<Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
   <section class="hero">
     <div class="container">
       <div class="hero__text">
-        <h1>Nach Kroatien zurück oder neu dorthin. In der richtigen Reihenfolge.</h1>
-        <p class="lede">
-          Aufenthalt, Meldung, Versicherung, Schule, Förderung: Was zuerst kommt, steht
-          nirgends. Hier bekommen Sie die Reihenfolge für Ihren Haushalt, Person für Person.
-        </p>
+        <h1>{u("home.hero_title")}</h1>
+        <p class="lede">{u("home.hero_lede")}</p>
         <div class="hero__actions">
-          <a class="button button--light" href="/mein-weg">Kurzcheck starten</a>
-          <a class="button button--outline-light" href="/wissen">Wissen nach Thema</a>
+          <a class="button button--light" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button button--outline-light" href={p("/wissen")}>{u("home.hero_wissen")}</a>
         </div>
-        <p class="hero__note">Ohne Konto. Ihre Antworten bleiben in Ihrem Browser.</p>
+        <p class="hero__note">{u("home.hero_note")}</p>
       </div>
       <div class="hero__media">
-        <Image src={hero} alt="Eine Frau und ihr Vater sortieren an einem Tisch in einer Altstadt Unterlagen." widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
+        <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
       </div>
     </div>
   </section>
 
   <section class="band band--surface quick">
     <div class="container">
-      <h2 class="quick__title">Suchen Sie etwas Bestimmtes?</h2>
+      <h2 class="quick__title">{u("home.quick_title")}</h2>
       <ul class="chips">
-        {chips.map(([label, slug]) => <li><a href={`/wissen/${slug}`}>{label}</a></li>)}
+        {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
       </ul>
     </div>
   </section>
@@ -73,8 +65,8 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band">
     <div class="container">
       <div class="band__head">
-        <h2>Drei Wege zum selben Wissen</h2>
-        <p class="soft">Nach Thema, nach Ort oder nach Ihrer Reihenfolge.</p>
+        <h2>{u("home.ways_title")}</h2>
+        <p class="soft">{u("home.ways_help")}</p>
       </div>
       <ul class="cards cards--ways">
         <li class="card card--link">
@@ -82,21 +74,21 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
             <Image src={hero} alt="" width={640} height={427} format="webp" loading="lazy" />
           </div>
           <div class="card__body">
-            <h3><a href="/mein-weg">Mein Weg</a></h3>
-            <p>Sechs Fragen zu Ihrem Haushalt, dann ein erster Plan: was zuerst, welche Frist wodurch ausgelöst wird, was offen bleibt.</p>
-            <span class="arrow-link">Kurzcheck starten</span>
+            <h3><a href={p("/mein-weg")}>{u("home.way_check_title")}</a></h3>
+            <p>{u("home.way_check_text")}</p>
+            <span class="arrow-link">{u("shell.cta")}</span>
           </div>
         </li>
         <li class="card card--link">
           <div class="card__media card__media--list" aria-hidden="true">
             <ol>
-              {RUBRICS.slice(0, 5).map((r) => <li><span class="mono">{r.number}</span> {r.title}</li>)}
+              {RUBRICS.slice(0, 5).map((r) => <li><span class="mono">{r.number}</span> {rubricText(r, texts).title}</li>)}
             </ol>
           </div>
           <div class="card__body">
-            <h3><a href="/wissen">Wissen nach Thema</a></h3>
-            <p>Zwölf Rubriken, von Status bis Förderung. Jede Themenseite mit derselben Maske: kurze Antwort, gilt für, zuständig, Stand.</p>
-            <span class="arrow-link">Zu den Rubriken</span>
+            <h3><a href={p("/wissen")}>{u("home.way_wissen_title")}</a></h3>
+            <p>{u("home.way_wissen_text")}</p>
+            <span class="arrow-link">{u("home.way_wissen_link")}</span>
           </div>
         </li>
         <li class="card card--link">
@@ -104,9 +96,9 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
             <Image src={ort} alt="" width={640} height={427} format="webp" loading="lazy" />
           </div>
           <div class="card__body">
-            <h3><a href="/orte">Orte entdecken</a></h3>
-            <p>Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand, Prüfdatum und Datentiefe, ohne Rangliste.</p>
-            <span class="arrow-link">Orte und Leistungen</span>
+            <h3><a href={p("/orte")}>{u("home.way_orte_title")}</a></h3>
+            <p>{u("home.way_orte_text")}</p>
+            <span class="arrow-link">{u("home.way_orte_link")}</span>
           </div>
         </li>
       </ul>
@@ -116,29 +108,29 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band band--surface">
     <div class="container">
       <div class="band__head">
-        <h2>Fast alles hängt an vier Schlüsseln</h2>
-        <p class="soft">Und zwar in dieser Reihenfolge. Das ist der rote Faden der ganzen Website.</p>
+        <h2>{u("home.keys_title")}</h2>
+        <p class="soft">{u("home.keys_help")}</p>
       </div>
       <ol class="keys">
         <li class="key">
-          <h3>Status</h3>
-          <span class="key__hr">Wer bin ich rechtlich?</span>
-          <p>Entscheidet über den Aufenthaltsweg, den Zugang zu Arbeit, Schule und Förderung.</p>
+          <h3>{u("home.key1_title")}</h3>
+          <span class="key__hr">{u("home.key1_sub")}</span>
+          <p>{u("home.key1_text")}</p>
         </li>
         <li class="key">
-          <h3>OIB</h3>
+          <h3>{u("home.key2_title")}</h3>
           <span class="key__hr" lang="hr">osobni identifikacijski broj</span>
-          <p>Die Steuernummer. Ohne sie kein Bankkonto, kein Mietvertrag, kein Antrag, kein Arbeitsvertrag.</p>
+          <p>{u("home.key2_text")}</p>
         </li>
         <li class="key">
-          <h3>Anmeldung</h3>
+          <h3>{u("home.key3_title")}</h3>
           <span class="key__hr" lang="hr">prijava prebivališta</span>
-          <p>Löst Fristen aus und ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.</p>
+          <p>{u("home.key3_text")}</p>
         </li>
         <li class="key">
-          <h3>Versicherung</h3>
+          <h3>{u("home.key4_title")}</h3>
           <span class="key__hr" lang="hr">zdravstveno osiguranje</span>
-          <p>Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.</p>
+          <p>{u("home.key4_text")}</p>
         </li>
       </ol>
     </div>
@@ -147,15 +139,13 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band">
     <div class="container">
       <div class="band__head">
-        <h2>Fünf Phasen, eine davon lassen alle weg</h2>
-        <p class="soft">Die fünfte ist die wichtigste: Dort scheitert die Rückkehr, nicht bei der Anmeldung.</p>
+        <h2>{u("home.phases_title")}</h2>
+        <p class="soft">{u("home.phases_help")}</p>
       </div>
       <ol class="phases">
-        <li class="phase-step"><h3>Orientieren</h3><span class="mono">12 bis 6 Monate vorher</span><p>Ist es machbar? Welcher Statusweg? Welcher Ort? Reicht das Geld?</p></li>
-        <li class="phase-step"><h3>Vorbereiten</h3><span class="mono">9 bis 2 Monate vorher</span><p>Dokumente, Aufenthalt, Versicherung, Schule, Wohnung, Herkunftsland.</p></li>
-        <li class="phase-step"><h3>Umziehen</h3><span class="mono">4 Wochen vorher bis Ankunft</span><p>Transport, Übergangsdeckung, Anreise, erste Termine.</p></li>
-        <li class="phase-step"><h3>Ankommen</h3><span class="mono">erste 8 Wochen</span><p>Anmeldung, Versicherung, Arbeit, Schule, Alltag.</p></li>
-        <li class="phase-step"><h3>Bleiben</h3><span class="mono">Monat 3 bis 24</span><p>Verlängerungen, Förderpflichten, Sprache, Anschluss.</p></li>
+        {(["orient", "prepare", "move", "arrive", "stay"] as const).map((ph, i) => (
+          <li class="phase-step"><h3>{phaseNames[ph]}</h3><span class="mono">{u(`home.phase${i + 1}_time`)}</span><p>{u(`home.phase${i + 1}_text`)}</p></li>
+        ))}
       </ol>
     </div>
   </section>
@@ -163,51 +153,47 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band band--surface">
     <div class="container">
       <div class="band__head">
-        <h2>Was gerade läuft</h2>
-        <p class="soft">Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.</p>
+        <h2>{u("home.running_title")}</h2>
+        <p class="soft">{u("home.running_help")}</p>
       </div>
       <ul class="running">
-        {dated.map((p) => (
+        {dated.map((x) => (
           <li class="running__item">
-            <span class="state state--matches">läuft</span>
-            <a href={pagePath(p)}>{p.title}</a>
-            <span class="running__where">staatlich</span>
-            <span class="mono">bis {formatDate(p.validity.valid_until.date!)}</span>
-            <span class="mono muted">geprüft {formatDate(p.sources[0]?.checked ?? p.validity.valid_from)}</span>
+            <span class="state state--matches">{u("home.running_state")}</span>
+            <a href={p(pagePath(x))}>{x.title}</a>
+            <span class="running__where">{u("home.running_national")}</span>
+            <span class="mono">{u("home.running_until", { date: formatDate(x.validity.valid_until.date!) })}</span>
+            <span class="mono muted">{u("home.running_checked", { date: formatDate(x.sources[0]?.checked ?? x.validity.valid_from) })}</span>
           </li>
         ))}
         {running.map((r) => (
           <li class="running__item">
-            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{PROGRAM_STATE[r.state].label}</span>
+            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{stateLabel(r.state)}</span>
             <a href={r.href}>{r.title}</a>
             <span class="running__where">{r.where}</span>
-            <span class="mono">{r.until ? `bis ${formatDate(r.until)}` : "Antragszeitraum unbekannt"}</span>
-            <span class="mono muted">geprüft {formatDate(r.checked)}</span>
+            <span class="mono">{r.until ? u("home.running_until", { date: formatDate(r.until) }) : u("place.period_unknown")}</span>
+            <span class="mono muted">{u("home.running_checked", { date: formatDate(r.checked) })}</span>
           </li>
         ))}
       </ul>
-      <p class="soft running__note">Kommunale Einträge stammen auf der Teststufe aus fiktiven Testgemeinden. <a class="arrow-link" href="/orte/leistungen">Alle Leistungen</a></p>
+      <p class="soft running__note">{u("home.running_note")} <a class="arrow-link" href={p("/orte/leistungen")}>{u("home.running_all")}</a></p>
     </div>
   </section>
 
   <section class="band band--brand">
     <div class="container grid">
       <div class="col-main">
-        <h2>Warum ein Betrag allein nichts sagt</h2>
-        <p>
-          Eine Förderung kann offen, angekündigt oder ausgeschöpft sein. Ein Wert kann bekannt,
-          belegt und trotzdem veraltet sein. Deshalb trägt bei uns jede Angabe Quelle, Prüfdatum
-          und Zustand. Wo wir etwas nicht wissen, steht das dort, sichtbar, statt einer Lücke.
-        </p>
-        <p class="soft">Über Anträge entscheidet immer die zuständige Stelle. Der Plan zeigt den Weg, nicht das Ergebnis.</p>
+        <h2>{u("home.why_title")}</h2>
+        <p>{u("home.why_text")}</p>
+        <p class="soft">{u("home.why_note")}</p>
       </div>
       <aside class="col-aside states-aside">
-        <h3>So lesen Sie Zustände</h3>
+        <h3>{u("home.states_title")}</h3>
         <ul class="state-list">
-          <li><span class="state state--matches">nach Angaben passend</span> Die Voraussetzungen treffen nach Ihren Angaben zu.</li>
-          <li><span class="state state--unclear">unklar</span> Eine Angabe fehlt oder eine Fachperson muss entscheiden.</li>
-          <li><span class="state state--condition_missing">Bedingung fehlt</span> Eine Voraussetzung ist derzeit nicht erfüllt.</li>
-          <li><span class="state state--unknown">unbekannt</span> Diesen Wert kennen wir noch nicht.</li>
+          <li><span class="state state--matches">{elig.matches}</span> {u("home.state_matches")}</li>
+          <li><span class="state state--unclear">{elig.unclear}</span> {u("home.state_unclear")}</li>
+          <li><span class="state state--condition_missing">{elig.condition_missing}</span> {u("home.state_missing")}</li>
+          <li><span class="state state--unknown">{u("place.fact_unknown")}</span> {u("home.state_unknown")}</li>
         </ul>
       </aside>
     </div>
@@ -216,11 +202,11 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band">
     <div class="container">
       <div class="band__head">
-        <h2>Einstiege nach Lebenssituation</h2>
-        <p class="soft">Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.</p>
+        <h2>{u("home.situations_title")}</h2>
+        <p class="soft">{u("home.situations_help")}</p>
       </div>
       <ul class="chips">
-        {SITUATIONS.map((s) => <li><a href={`/wissen/situation/${s.slug}`}>{s.title}</a></li>)}
+        {SITUATIONS.map((s) => <li><a href={p(`/wissen/situation/${s.slug}`)}>{situationText(s, texts).title}</a></li>)}
       </ul>
     </div>
   </section>
@@ -228,21 +214,24 @@ const dated = loadPages(join(process.cwd(), "..", "..", "content")).filter((p) =
   <section class="band band--surface">
     <div class="container">
       <div class="band__head">
-        <h2>Fünf Beispielwege</h2>
-        <p class="soft">Fiktive Fallprofile aus dem Konzept. Echte Erfahrungsberichte folgen, sobald Testpersonen den Plan benutzt haben.</p>
+        <h2>{u("home.cases_title")}</h2>
+        <p class="soft">{u("home.cases_help")}</p>
       </div>
       <ul class="cards cases">
-        {CASES.map((c) => (
-          <li class="card card--link">
-            <div class="card__body">
-              <span class="card__num">Beispiel, fiktiv</span>
-              <h3><a href={`/wissen/situation/${c.situation}`}>{c.name}</a></h3>
-              <p class="cases__line">{c.line}</p>
-              <p>{c.shapes}</p>
-              <p class="cases__first"><strong>Erster Schritt:</strong> {c.first}</p>
-            </div>
-          </li>
-        ))}
+        {CASES.map((raw) => {
+          const c = caseText(raw, texts);
+          return (
+            <li class="card card--link">
+              <div class="card__body">
+                <span class="card__num">{u("home.cases_label")}</span>
+                <h3><a href={p(`/wissen/situation/${c.situation}`)}>{c.name}</a></h3>
+                <p class="cases__line">{c.line}</p>
+                <p>{c.shapes}</p>
+                <p class="cases__first"><strong>{u("home.cases_first")}</strong> {c.first}</p>
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </section>

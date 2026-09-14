@@ -1,10 +1,12 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
-// Kopf nach designsystem.md 2.0: Aufbaustufe als schmale Leiste, Wortmarke mit
-// Schachbrett, Hauptnavigation, hervorgehobener Kurzcheck. Der EmotionFrame Footer
-// steht als letztes Element ausserhalb des Containers.
+// Kopf nach designsystem.md 2.0: Teststufe als schmale Leiste, Wortmarke mit
+// Schachbrett, Hauptnavigation, Sprachwahl, hervorgehobener Kurzcheck. Sprache aus
+// der Adresse (lib/i18n.ts). Der EmotionFrame Footer steht als letztes Element.
 import "../styles/base.css";
 import { STAGE } from "../lib/stage.ts";
+import { LOCALES, LOCALE_NAMES, localePath } from "../lib/i18n.ts";
+import { pageContext } from "../lib/page.ts";
 
 interface Props {
   title: string;
@@ -13,19 +15,24 @@ interface Props {
   current?: "start" | "wissen" | "orte" | "mein-weg" | "ueber-uns" | "suche";
   /** Aufmacherbild vorladen (LCP). */
   preload?: string;
+  /** Die Seite existiert in dieser Sprache nur als deutsche Fassung. */
+  fallback?: boolean;
 }
-const { title, description, current, preload } = Astro.props;
+const { title, description, current, preload, fallback } = Astro.props;
+const { lang, u, p } = pageContext(Astro);
 const nav = [
-  { href: "/wissen", label: "Wissen", key: "wissen" },
-  { href: "/orte", label: "Orte", key: "orte" },
-  { href: "/mein-weg", label: "Mein Weg", key: "mein-weg" },
-  { href: "/ueber-uns", label: "Über uns", key: "ueber-uns" },
-  { href: "/suche", label: "Suche", key: "suche" },
+  { href: p("/wissen"), label: u("shell.nav_wissen"), key: "wissen" },
+  { href: p("/orte"), label: u("shell.nav_orte"), key: "orte" },
+  { href: p("/mein-weg"), label: u("shell.nav_weg"), key: "mein-weg" },
+  { href: p("/ueber-uns"), label: u("shell.nav_about"), key: "ueber-uns" },
+  { href: p("/suche"), label: u("shell.nav_search"), key: "suche" },
 ];
+// Pfad ohne Sprachpräfix, für die Sprachwahl und hreflang.
+const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
 ---
 
 <!doctype html>
-<html lang="de" data-stage={STAGE}>
+<html lang={lang} data-stage={STAGE}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,26 +42,32 @@ const nav = [
     <meta name="theme-color" content="#14213d" />
     {/* Teststufe (ADR-0004): nicht indexieren, bis die erste freigegebene Regel da ist. */}
     {STAGE === "test" && <meta name="robots" content="noindex, nofollow" />}
+    {LOCALES.map((l) => <link rel="alternate" hreflang={l} href={localePath(l, bare)} />)}
+    <link rel="alternate" hreflang="x-default" href={bare} />
     <link rel="preload" href="/fonts/montserrat-600-latin.woff2" as="font" type="font/woff2" crossorigin />
     {preload && <link rel="preload" href={preload} as="image" />}
     <link rel="stylesheet" href="/ef-signature/ef-signature.css" />
     <script src="/ef-signature/ef-signature.js" defer is:inline></script>
   </head>
   <body>
-    <a class="skip" href="#inhalt">Zum Inhalt springen</a>
+    <a class="skip" href="#inhalt">{u("shell.skip")}</a>
     <div class="topbar">
       <div class="container">
         {STAGE === "test" ? (
-          <p role="note"><strong>Teststufe</strong> <span class="topbar__text">Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.</span></p>
+          <p role="note"><strong>{u("shell.stage")}</strong> <span class="topbar__text">{u("shell.stage_text")}</span></p>
         ) : (
-          <p>Leben in Kroatien</p>
+          <p>{u("shell.tagline")}</p>
         )}
-        <a href="mailto:kontakt@povratnik.com">Fehler melden</a>
+        <nav class="lang" aria-label={u("shell.language")}>
+          {LOCALES.map((l) => (
+            <a href={localePath(l, bare)} lang={l} hreflang={l} aria-current={l === lang ? "true" : undefined}>{LOCALE_NAMES[l]}</a>
+          ))}
+        </nav>
       </div>
     </div>
     <header class="site-head">
       <div class="container">
-        <a class="brand" href="/" aria-label="povratnik.com, Startseite">
+        <a class="brand" href={p("/")} aria-label="povratnik.com">
           <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
             <rect width="28" height="28" rx="5" fill="#fff" stroke="#14213d" stroke-width="1.5" />
             <g fill="#b3202b">
@@ -65,26 +78,34 @@ const nav = [
           </svg>
           <span>povratnik<small>.com</small></span>
         </a>
-        <nav class="site-nav" aria-label="Hauptnavigation">
+        <nav class="site-nav" aria-label="Navigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
         </nav>
-        <a class="button button--primary" href="/mein-weg">Kurzcheck starten</a>
+        <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
       </div>
     </header>
 
     <main id="inhalt">
+      {fallback && (
+        <div class="container">
+          <p class="notice notice--fallback" role="note">
+            <strong>{u("shell.working_copy_title")}</strong>
+            {u("shell.working_copy_text")}
+          </p>
+        </div>
+      )}
       <slot />
     </main>
 
     <section class="band band--brand contact">
       <div class="container">
         <div>
-          <h2>Haben Sie etwas gefunden, das nicht stimmt?</h2>
-          <p>Falsche Frist, falsche Angabe, toter Link: Wir sichten jede Meldung innert zwei Werktagen.</p>
+          <h2>{u("shell.contact_title")}</h2>
+          <p>{u("shell.contact_text")}</p>
         </div>
         <div class="contact__actions">
-          <a class="button button--light" href="mailto:kontakt@povratnik.com">Fehler melden</a>
-          <a class="button button--outline-light" href="/ueber-uns">Wie wir arbeiten</a>
+          <a class="button button--light" href="mailto:kontakt@povratnik.com">{u("shell.report")}</a>
+          <a class="button button--outline-light" href={p("/ueber-uns")}>{u("shell.contact_how")}</a>
         </div>
       </div>
     </section>
@@ -92,7 +113,7 @@ const nav = [
     <footer class="site-foot">
       <div class="container">
         <div>
-          <a class="brand" href="/">
+          <a class="brand" href={p("/")}>
             <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
               <rect width="28" height="28" rx="5" fill="#fff" />
               <g fill="#b3202b">
@@ -103,38 +124,34 @@ const nav = [
             </svg>
             <span>povratnik<small>.com</small></span>
           </a>
-          <p>Leben in Kroatien: die Reihenfolge für Rückkehr und Auswanderung, Person für Person.</p>
-          <p>Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer die zuständige Stelle.</p>
-          {STAGE === "test" && <p class="datenstand">Teststufe. Beispielregeln ohne fachliche Freigabe (ADR-0004).</p>}
+          <p>{u("shell.foot_claim")}</p>
+          <p>{u("shell.foot_disclaimer")}</p>
+          {STAGE === "test" && <p class="datenstand">{u("shell.foot_stage")}</p>}
         </div>
         <div>
-          <h3>Wissen</h3>
+          <h3>{u("shell.foot_wissen")}</h3>
           <ul>
-            <li><a href="/wissen/status-und-staatsangehoerigkeit">Status und Staatsangehörigkeit</a></li>
-            <li><a href="/wissen/dokumente-und-behoerden">Dokumente und Behörden</a></li>
-            <li><a href="/wissen/gesundheit-und-pflege">Gesundheit und Pflege</a></li>
-            <li><a href="/wissen/leistungen-und-foerderung">Leistungen und Förderung</a></li>
-            <li><a href="/wissen">Alle zwölf Rubriken</a></li>
-            <li><a href="/wissen/glossar">Glossar</a></li>
-            <li><a href="/zahlen">Zahlen und Fakten</a></li>
+            <li><a href={p("/wissen")}>{u("shell.foot_all")}</a></li>
+            <li><a href={p("/wissen/glossar")}>{u("shell.foot_glossary")}</a></li>
+            <li><a href={p("/zahlen")}>{u("shell.foot_figures")}</a></li>
+            <li><a href={p("/anlaufstellen")}>{u("shell.foot_contacts")}</a></li>
           </ul>
         </div>
         <div>
-          <h3>Werkzeuge</h3>
+          <h3>{u("shell.foot_tools")}</h3>
           <ul>
-            <li><a href="/mein-weg">Kurzcheck: Mein Weg</a></li>
-            <li><a href="/orte">Orte entdecken</a></li>
-            <li><a href="/orte/leistungen">Leistungsdatenbank</a></li>
-            <li><a href="/anlaufstellen">Anlaufstellen</a></li>
-            <li><a href="/suche">Suche</a></li>
+            <li><a href={p("/mein-weg")}>{u("shell.foot_check")}</a></li>
+            <li><a href={p("/orte")}>{u("shell.foot_places")}</a></li>
+            <li><a href={p("/orte/leistungen")}>{u("shell.foot_benefits")}</a></li>
+            <li><a href={p("/suche")}>{u("shell.foot_search")}</a></li>
           </ul>
         </div>
         <div>
-          <h3>Über uns</h3>
+          <h3>{u("shell.foot_about")}</h3>
           <ul>
-            <li><a href="/ueber-uns">Auftrag und Unabhängigkeit</a></li>
-            <li><a href="/ueber-uns#grundsaetze">Redaktionsgrundsätze</a></li>
-            <li><a href="mailto:kontakt@povratnik.com">Kontakt</a></li>
+            <li><a href={p("/ueber-uns")}>{u("shell.foot_mission")}</a></li>
+            <li><a href={p("/ueber-uns#grundsaetze")}>{u("shell.foot_principles")}</a></li>
+            <li><a href="mailto:kontakt@povratnik.com">{u("shell.foot_contact")}</a></li>
           </ul>
         </div>
       </div>

@@ -1,22 +1,23 @@
 ---
 // Zahlen und Fakten (inhaltskonzept.md 10): jede Zahl mit Stand und Quelle, eine fehlende
 // Zahl als Zustand. Keine Zahlenstreifen, sondern eine Tabelle mit Datenstand.
-import { join } from "node:path";
 import Base from "../layouts/Base.astro";
-import { loadPages, loadSources, pageState } from "../lib/pages.ts";
+import { loadPages, loadSources } from "../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../lib/page.ts";
 
-const contentDir = join(process.cwd(), "..", "..", "content");
-const pages = loadPages(contentDir, "de", "figures");
-const sources = loadSources(contentDir);
-const fmt = (iso: string) => iso.split("-").reverse().join(".");
+const { lang, u } = pageContext(Astro);
+const pages = loadPages(CONTENT_DIR, lang, "figures");
+const sources = loadSources(CONTENT_DIR);
+const stateOf = (x: (typeof pages)[number]) => (x.approval.state === "approved" ? { key: "matches", label: u("topic.state_checked") } : { key: "unclear", label: u("topic.state_draft") });
+const fallback = pages.some((x) => x.fallback);
 ---
 
-<Base title="Zahlen und Fakten: povratnik.com" description="Rückkehr und Zuwanderung nach Kroatien in Zahlen, mit Stand und Quelle." current="wissen">
+<Base title={u("figures.title")} description={u("figures.description")} current="wissen" fallback={fallback}>
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Zahlen und Fakten</h1>
-        <p class="lede">Jede Zahl trägt Stand und Quelle. Wo eine Zahl fehlt, steht das dort, statt einer Schätzung.</p>
+        <h1>{u("figures.heading")}</h1>
+        <p class="lede">{u("figures.lede")}</p>
       </div>
     </div>
   </section>
@@ -26,19 +27,19 @@ const fmt = (iso: string) => iso.split("-").reverse().join(".");
       <div class="container">
         <div class="band__head">
           <h2>{page.title}</h2>
-          <span class={`state state--${pageState(page).key}`}>{pageState(page).label}</span>
+          <span class={`state state--${stateOf(page).key}`}>{stateOf(page).label}</span>
         </div>
         <p class="lede">{page.short_answer}</p>
         <div class="table-wrap">
           <table class="figures">
             <thead>
-              <tr><th scope="col">Kennzahl</th><th scope="col">Wert</th><th scope="col">Stand</th><th scope="col">Quelle</th></tr>
+              <tr><th scope="col">{u("figures.figure")}</th><th scope="col">{u("figures.value")}</th><th scope="col">{u("figures.stand")}</th><th scope="col">{u("figures.source")}</th></tr>
             </thead>
             <tbody>
               {(page.figures ?? []).map((f) => (
                 <tr>
                   <th scope="row">{f.label}{f.note && <span class="note">{f.note}</span>}</th>
-                  <td>{f.state === "known" ? <strong>{f.value}</strong> : <span class="state state--unknown">unbekannt</span>}</td>
+                  <td>{f.state === "known" ? <strong>{f.value}</strong> : <span class="state state--unknown">{u("figures.unknown")}</span>}</td>
                   <td class="mono">{f.as_of ?? ""}</td>
                   <td><a href={sources[f.source]?.url} rel="noopener">{sources[f.source]?.publisher ?? f.source}</a></td>
                 </tr>
@@ -47,8 +48,8 @@ const fmt = (iso: string) => iso.split("-").reverse().join(".");
           </table>
         </div>
         <p class="datenstand">
-          {page.sources.map((s) => <span>{sources[s.id]?.title ?? s.id}: {s.reference}, geprüft {fmt(s.checked)}</span>)}
-          <span>Nächste Prüfung {fmt(page.review.next_check)}</span>
+          {page.sources.map((s) => <span>{sources[s.id]?.title ?? s.id}: {s.reference}, {u("figures.checked", { date: fmtDate(s.checked) })}</span>)}
+          <span>{u("figures.next_check", { date: fmtDate(page.review.next_check) })}</span>
         </p>
       </div>
     </section>

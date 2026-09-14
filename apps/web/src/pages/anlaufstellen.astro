@@ -2,27 +2,27 @@
 // Anlaufstellen (inhaltskonzept.md 8): Behördenverzeichnis aus dem Quellenregister, mit den
 // Themenseiten, die auf jede Stelle verweisen. Konsulate, kommunale Stellen und Vereine
 // folgen; ihr Zustand steht sichtbar.
-import { join } from "node:path";
 import Base from "../layouts/Base.astro";
 import { loadPages, loadSources, pagePath } from "../lib/pages.ts";
 import { loadPlaces, placeName } from "../lib/places.ts";
+import { CONTENT_DIR, pageContext } from "../lib/page.ts";
 
-const contentDir = join(process.cwd(), "..", "..", "content");
-const topics = loadPages(contentDir);
-const sources = loadSources(contentDir);
+const { lang, u, p } = pageContext(Astro);
+const topics = loadPages(CONTENT_DIR, lang);
+const sources = loadSources(CONTENT_DIR);
 const authorities = Object.values(sources)
   .filter((s) => s.id.startsWith("hr-") && s.tier === 2)
-  .map((s) => ({ ...s, pages: topics.filter((p) => p.sources.some((x) => x.id === s.id)) }));
+  .map((s) => ({ ...s, pages: topics.filter((x) => x.sources.some((r) => r.id === s.id)) }));
 const places = loadPlaces();
-const countries = loadPages(contentDir, "de", "country").map((c) => ({ title: c.title, href: pagePath(c), known: c.country?.representation.state === "known" }));
+const countries = loadPages(CONTENT_DIR, lang, "country").map((c) => ({ title: c.title, href: p(pagePath(c)), known: c.country?.representation.state === "known" }));
 ---
 
-<Base title="Anlaufstellen: povratnik.com" description="Behörden in Kroatien, Konsulate, kommunale Willkommensstellen und Vereine, mit den Themen, für die sie zuständig sind." current="wissen">
+<Base title={u("contacts.title")} description={u("contacts.description")} current="wissen">
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <h1>Anlaufstellen</h1>
-        <p class="lede">Welche Stelle wofür zuständig ist, mit Einstieg zur Behörde und den Themenseiten, die auf sie verweisen.</p>
+        <h1>{u("contacts.heading")}</h1>
+        <p class="lede">{u("contacts.lede")}</p>
       </div>
     </div>
   </section>
@@ -30,8 +30,8 @@ const countries = loadPages(contentDir, "de", "country").map((c) => ({ title: c.
   <section class="band band--surface">
     <div class="container">
       <div class="band__head">
-        <h2>Behörden in Kroatien</h2>
-        <p class="soft">Einstiegsseiten der Behörden. Die genaue Fundstelle steht auf jeder Themenseite.</p>
+        <h2>{u("contacts.authorities_title")}</h2>
+        <p class="soft">{u("contacts.authorities_help")}</p>
       </div>
       <ul class="cards">
         {authorities.map((a) => (
@@ -41,7 +41,7 @@ const countries = loadPages(contentDir, "de", "country").map((c) => ({ title: c.
               <p>{a.title}</p>
               {a.pages.length > 0 && (
                 <ul class="plain">
-                  {a.pages.map((p) => <li><a href={pagePath(p)}>{p.title}</a></li>)}
+                  {a.pages.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
                 </ul>
               )}
             </div>
@@ -54,27 +54,23 @@ const countries = loadPages(contentDir, "de", "country").map((c) => ({ title: c.
   <section class="band">
     <div class="container grid">
       <div class="col-main">
-        <h2>Konsulate und Vertretungen</h2>
-        <p>
-          Die kroatischen Vertretungen im Herkunftsland stellen Empfehlungsschreiben aus, nehmen
-          OIB-Anträge entgegen und beglaubigen. Adressen und Zuständigkeiten werden mit jeder
-          Vertretung bestätigt und dann auf der Länderseite eingetragen.
-        </p>
+        <h2>{u("contacts.consulates_title")}</h2>
+        <p>{u("contacts.consulates_text")}</p>
         <ul class="topics">
           {countries.map((c) => (
-            <li><a href={c.href}>{c.title}</a><span class={`state state--${c.known ? "matches" : "closed"}`}>{c.known ? "bestätigt" : "nicht erhoben"}</span></li>
+            <li><a href={c.href}>{c.title}</a><span class={`state state--${c.known ? "matches" : "closed"}`}>{c.known ? u("contacts.confirmed") : u("contacts.not_collected")}</span></li>
           ))}
         </ul>
       </div>
       <aside class="col-aside">
-        <h3>Kommunale Willkommensstellen</h3>
+        <h3>{u("contacts.municipal_title")}</h3>
         <ul class="topics">
-          {places.map((p) => (
-            <li><a href={`/orte/${p.id}`}>{placeName(p)}</a><span class={`state state--${p.arrival.office.state === "known" ? "matches" : "unknown"}`}>{p.arrival.office.state === "known" ? "erfasst" : "unbekannt"}</span></li>
+          {places.map((pl) => (
+            <li><a href={p(`/orte/${pl.id}`)}>{placeName(pl)}</a><span class={`state state--${pl.arrival.office.state === "known" ? "matches" : "unknown"}`}>{pl.arrival.office.state === "known" ? u("contacts.recorded") : u("contacts.unknown")}</span></li>
           ))}
         </ul>
-        <h3>Vereine und Diaspora-Netzwerke</h3>
-        <p><span class="state state--unknown">im Aufbau</span> Werden je Ort und Herkunftsland erhoben.</p>
+        <h3>{u("contacts.clubs_title")}</h3>
+        <p><span class="state state--unknown">{u("contacts.wip")}</span> {u("contacts.clubs_text")}</p>
       </aside>
     </div>
   </section>

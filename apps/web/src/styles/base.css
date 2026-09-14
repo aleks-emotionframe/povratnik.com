@@ -1013,3 +1013,17 @@ a:hover {
 .skip:focus {
   top: 1rem;
 }
+
+/* Sprachwahl in der Kopfleiste */
+.lang {
+  display: flex;
+  gap: 0.25rem 1rem;
+  flex-wrap: wrap;
+}
+.lang a[aria-current="true"] {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.notice--fallback {
+  margin: 1rem 0 0;
+}

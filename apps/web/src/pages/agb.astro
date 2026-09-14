@@ -1,9 +1,15 @@
 ---
 // Nutzungshinweise. Der rechtlich geprüfte Text wird mit den Betreiberangaben ergänzt.
 import Base from "../layouts/Base.astro";
+import { pageContext } from "../lib/page.ts";
+
+const { lang, u } = pageContext(Astro);
 ---
 
 <Base title="Nutzungshinweise: povratnik.com" description="Was povratnik.com leistet und was nicht.">
+  {lang !== "de" && (
+    <div class="container"><p class="notice" role="note">{u("shell.legal_note")}</p></div>
+  )}
   <section class="band">
     <div class="container grid">
       <div class="col-main">
