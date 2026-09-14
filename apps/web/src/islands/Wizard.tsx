@@ -106,7 +106,7 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
   const plan = useMemo(() => {
     if (view !== "plan") return undefined;
     const out = evaluate(
-      { reference_date: today(), persons: personsInput(answers), calendar: { holidays: [] } },
+      { reference_date: today(), persons: personsInput(answers), calendar: { holidays: bundle.holidays } },
       bundle.rules,
       bundle.synthetic ? { include: "all" } : {},
     );

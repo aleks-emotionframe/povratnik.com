@@ -162,6 +162,18 @@ test("versions of one rule id share trigger and procedure", () => {
   assertIssue(procedure, RULE2, "/scope/procedure", 'must share procedure "example-registration"');
 });
 
+test("calendar: dates must be unique and in order, publication needs approval", () => {
+  const CAL = "calendars/hr.yaml";
+  const dup = broken(CAL, (d) => { d.holidays[1].date = d.holidays[0].date; });
+  assertIssue(dup, CAL, "/holidays/1/date", "must be later than");
+  const order = broken(CAL, (d) => { d.holidays.push({ ...d.holidays[0] }); });
+  assert.ok(order.some((i) => i.file === CAL && i.message.includes("must be later than")));
+  const published = broken(CAL, (d) => { d.publication.state = "published"; });
+  assertIssue(published, CAL, "/publication/state", "published dataset must be approved");
+  const unknownSource = broken(CAL, (d) => { d.sources[0].id = "no-such-law"; });
+  assertIssue(unknownSource, CAL, "/sources/0/id", 'unknown source "no-such-law"');
+});
+
 test("file name must match id and version", () => {
   const issues = withCopy((dir) => {
     renameSync(join(dir, RULE2), join(dir, "rules/renamed.2.yaml"));

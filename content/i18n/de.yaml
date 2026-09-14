@@ -169,7 +169,9 @@ plan:
   rule_versions: Regelfassungen
   recheck: Vor einer Antragstellung erneut prüfen, ob sich der Stand geändert hat.
   errors: Technische Fehler bei der Auswertung
-  no_holidays: ohne Feiertage
+  no_holidays: ohne Feiertage, weil noch kein freigegebener Feiertagskalender vorliegt
+  with_holidays: "Kalender {calendar}, Stand {date}"
+  calendars: Feiertage
   none: keine
 phases:
   orient: Orientieren

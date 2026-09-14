@@ -30,7 +30,14 @@ function answerLabel(texts: Texts, step: Step, value: string | string[] | undefi
   return t(texts, `${base}.${value}`);
 }
 
-function Deadline({ result, texts }: { result: RuleResult; texts: Texts }) {
+function holidayNote(bundle: Bundle): string {
+  const texts = bundle.texts;
+  if (bundle.calendars.length === 0) return t(texts, "plan.no_holidays");
+  return bundle.calendars.map((c) => t(texts, "plan.with_holidays", { calendar: i18n(c.title), date: formatDate(c.checked) })).join("; ");
+}
+
+function Deadline({ result, bundle }: { result: RuleResult; bundle: Bundle }) {
+  const texts = bundle.texts;
   const d = result.deadline;
   if (!d) return null;
   if (d.status === "awaiting_event") {
@@ -39,7 +46,7 @@ function Deadline({ result, texts }: { result: RuleResult; texts: Texts }) {
   return (
     <p class="deadline">
       {t(texts, "deadline.due", { date: formatDate(d.due) })}, {t(texts, `deadline.kinds.${d.kind}`)}
-      {d.adjusted !== "none" && `, ${t(texts, `deadline.adjusted.${d.adjusted}`)}`}, {t(texts, "plan.no_holidays")}
+      {d.adjusted !== "none" && `, ${t(texts, `deadline.adjusted.${d.adjusted}`)}`}. {holidayNote(bundle)}
     </p>
   );
 }
@@ -56,7 +63,7 @@ function Item({ item, texts, bundle, personLabel }: { item: PlanItem; texts: Tex
       <p class="item__person mono">{personLabel}</p>
       <p>{t(texts, result.text_key)}</p>
       {result.version_selection === "by_reference_date_provisional" && <p class="soft">{t(texts, "plan.provisional")}</p>}
-      <Deadline result={result} texts={texts} />
+      <Deadline result={result} bundle={bundle} />
       <dl class="item__facts">
         <dt>{t(texts, "plan.purpose")}</dt>
         <dd>{i18n(task.purpose)}</dd>
@@ -216,6 +223,9 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
         <span>{t(texts, "plan.reference_date")} {formatDate(plan.reference_date)}</span>
         <span>
           {t(texts, "plan.rule_versions")}: {plan.rule_versions.length > 0 ? plan.rule_versions.join(", ") : t(texts, "plan.none")}
+        </span>
+        <span>
+          {t(texts, "plan.calendars")}: {bundle.calendars.length > 0 ? bundle.calendars.map((c) => `${i18n(c.title)} (${formatDate(c.checked)})`).join(", ") : t(texts, "plan.none")}
         </span>
         <span>{t(texts, "plan.recheck")}</span>
       </p>

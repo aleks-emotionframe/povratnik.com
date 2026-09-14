@@ -24,6 +24,8 @@ export type ProcedureView = { id: string; title: I18n; authority: { key: string;
 
 export type RuleView = Rule & { title: I18n; sources: { id: string; reference: string; checked: string }[] };
 
+export type CalendarView = { id: string; title: I18n; checked: string };
+
 export type Bundle = {
   // true, sobald eine aufgenommene Regel synthetisch ist. Die Seite zeigt dann das
   // Hinweisband, und die Insel wertet mit include: "all" aus.
@@ -31,10 +33,13 @@ export type Bundle = {
   rules: RuleView[];
   tasks: Record<string, TaskView>;
   procedures: Record<string, ProcedureView>;
+  // Feiertage aus den Kalendern, die denselben Filter bestehen wie die Regeln.
+  holidays: string[];
+  calendars: CalendarView[];
   texts: Doc;
 };
 
-export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; texts: Doc };
+export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; calendars: Doc[]; texts: Doc };
 
 function loadDir(dir: string): Doc[] {
   return readdirSync(dir)
@@ -48,18 +53,25 @@ export function loadContent(contentDir: string): Content {
     rules: loadDir(join(contentDir, "rules")) as RuleView[],
     tasks: loadDir(join(contentDir, "tasks")),
     procedures: loadDir(join(contentDir, "procedures")),
+    calendars: loadDir(join(contentDir, "calendars")),
     texts: parse(readFileSync(join(contentDir, "i18n", "de.yaml"), "utf8")),
   };
 }
 
-function isPublished(rule: Rule): boolean {
-  return !rule.synthetic && rule.approval.state === "approved" && rule.publication.state === "published";
+type Lifecycle = Pick<Rule, "synthetic" | "approval" | "publication">;
+
+function isPublished(d: Lifecycle): boolean {
+  return !d.synthetic && d.approval.state === "approved" && d.publication.state === "published";
+}
+
+function passes(mode: "build" | "dev", d: Lifecycle): boolean {
+  return mode === "build" ? isPublished(d) : d.publication.state !== "withdrawn";
 }
 
 export function bundleFor(mode: "build" | "dev", content: Content): Bundle {
-  const rules = content.rules.filter((r) =>
-    mode === "build" ? isPublished(r) : r.publication.state !== "withdrawn",
-  );
+  const rules = content.rules.filter((r) => passes(mode, r));
+  const calendars = content.calendars.filter((c) => passes(mode, c as Lifecycle));
+  const holidays = [...new Set(calendars.flatMap((c) => (c.holidays as Doc[]).map((h) => h.date as string)))].sort();
   const taskIds = new Set(rules.map((r) => r.result.task));
   const procedureIds = new Set(rules.map((r) => r.scope.procedure));
   const tasks: Record<string, TaskView> = {};
@@ -71,5 +83,13 @@ export function bundleFor(mode: "build" | "dev", content: Content): Bundle {
   for (const p of content.procedures) {
     if (procedureIds.has(p.id)) procedures[p.id] = { id: p.id, title: p.title, authority: p.authority };
   }
-  return { synthetic: rules.some((r) => r.synthetic), rules, tasks, procedures, texts: content.texts };
+  return {
+    synthetic: rules.some((r) => r.synthetic),
+    rules,
+    tasks,
+    procedures,
+    holidays,
+    calendars: calendars.map((c) => ({ id: c.id, title: c.title, checked: c.sources?.[0]?.checked ?? "" })),
+    texts: content.texts,
+  };
 }

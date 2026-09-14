@@ -16,7 +16,7 @@ const addFormats = addFormatsModule.default;
 export type Issue = { file: string; path: string; message: string };
 
 type Dataset = Record<string, unknown>;
-type Collection = "rules" | "tasks" | "procedures" | "pages" | "sources" | "tests" | "i18n";
+type Collection = "rules" | "tasks" | "procedures" | "pages" | "calendars" | "sources" | "tests" | "i18n";
 
 const SCHEMA_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "schemas");
 const SCHEMA_BASE = "https://leben-in-kroatien.example/schemas/";
@@ -26,13 +26,14 @@ const COLLECTIONS: Record<Collection, string> = {
   tasks: "task",
   procedures: "procedure",
   pages: "page",
+  calendars: "calendar",
   sources: "source",
   tests: "test-case",
   i18n: "i18n",
 };
 
 // Datasets that carry the lifecycle block (synthetic, approval, publication, validity).
-const LIFECYCLE: Collection[] = ["rules", "tasks", "procedures", "pages"];
+const LIFECYCLE: Collection[] = ["rules", "tasks", "procedures", "pages", "calendars"];
 
 function buildAjv() {
   const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false });
@@ -170,8 +171,8 @@ export function validateContent(contentDir: string): Issue[] {
       }
 
       // Version chain: supersedes points back to a lower version of the same id, and that
-      // version points forward to this one. Pages are not versioned by file, so they skip this.
-      if (collection === "pages") continue;
+      // version points forward to this one. Pages and calendars are not versioned by file.
+      if (collection === "pages" || collection === "calendars") continue;
       const self = `${d.id}@${d.version}`;
       const supersedes = str(validity.supersedes);
       if (supersedes) {
@@ -267,6 +268,16 @@ export function validateContent(contentDir: string): Issue[] {
     ];
     for (const [field, known, what] of targets) {
       for (const [i, id] of arr(links[field]).entries()) requireId(file, `/links/${field}/${i}`, id, known, what);
+    }
+  }
+
+  // Calendars: dates unique and in order, so a duplicated or misplaced year is caught.
+  for (const [file, d] of data.get("calendars")!) {
+    const dates = arr(d.holidays).map((h) => str(obj(h)?.date) ?? "");
+    for (const [i, date] of dates.entries()) {
+      if (i > 0 && date <= dates[i - 1]!) {
+        issues.push({ file, path: `/holidays/${i}/date`, message: `must be later than ${dates[i - 1]}` });
+      }
     }
   }
 

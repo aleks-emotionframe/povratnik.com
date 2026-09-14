@@ -67,3 +67,24 @@ test("phases keep the order orient, prepare, move, arrive, stay", () => {
   const seen = plan.phases.map((g) => order.indexOf(g.phase));
   assert.deepEqual(seen, [...seen].sort((a, b) => a - b));
 });
+
+// Fiktive EWR-Regel: 33 Kalendertage ab dem Folgetag, Verschiebung auf den nächsten
+// Werktag. Einreise 2026-04-28 → Ende 2026-05-31 (Sonntag) → 2026-06-01 (Montag).
+// Einreise 2026-05-01 → Ende 2026-06-03 (Mittwoch) → kein Feiertag → bleibt.
+// Einreise 2026-05-02 → Ende 2026-06-04 = Tijelovo → 2026-06-05.
+test("a deadline that ends on a holiday moves to the next working day when the calendar is in the bundle", () => {
+  const arrived = (entry: string): Answers => ({
+    stage: "arrived",
+    household: "alone",
+    horizon: "within_6_months",
+    persons: [{ id: "p1", role: "self", country: "de", citizenships: ["eea"], link: "none", income: "employment", residence: "none", entry }],
+  });
+  const due = (entry: string) => {
+    const out = evaluate({ reference_date: "2026-09-14", persons: personsInput(arrived(entry)), calendar: { holidays: bundle.holidays } }, bundle.rules, { include: "all" });
+    const r = out.persons[0]!.results.find((x) => x.rule === "example-eea-registration@1")!;
+    return r.deadline!.status === "computed" ? r.deadline : undefined;
+  };
+  assert.deepEqual(due("2026-05-01"), { status: "computed", due: "2026-06-03", kind: "statutory", adjusted: "none" });
+  assert.deepEqual(due("2026-05-02"), { status: "computed", due: "2026-06-05", kind: "statutory", adjusted: "holiday" });
+  assert.deepEqual(due("2026-04-28"), { status: "computed", due: "2026-06-01", kind: "statutory", adjusted: "weekend" });
+});
