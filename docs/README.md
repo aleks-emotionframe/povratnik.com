@@ -102,8 +102,8 @@ Datensatz (`content/calendars/hr.yaml`, Quelle NN 110/2019, Entwurf bis zur
 Fachfreigabe), Redaktionsdurchlauf dokumentiert und mit PR #3 einmal durchgespielt,
 Hosting mit ADR-0003 entschieden (statische Website auf dem bestehenden
 Hostpoint-Konto, Datenbank-Hosting erst bei Bedarf), Rücknahme mit PR #5 geprobt,
-alles in `main`. Offen für **M2b-2:** Auslieferung auf Hostpoint nach `betrieb.md` 7
-(braucht SSH-Zugang zum Konto), Ortsprofil (braucht Datenlizenz und Datenbank nach
+alles in `main`. Website seit 14.09.2026 unter https://www.povratnik.com ausgeliefert (Aufbaustufe,
+`noindex`), Repository öffentlich mit Branch-Schutz. Offen für **M2b-2:** Ortsprofil (braucht Datenlizenz und Datenbank nach
 ADR-0001), Fachfreigabe des Kalenders, Test mit echten Testpersonen.
 
 Entschieden am 13.09.2026 durch die Produktverantwortung: Der Kurzcheck fragt nach
