@@ -165,7 +165,7 @@ function resolveConflicts(results: RuleResult[], rulesByRef: Map<string, Rule>, 
       clarifications.push(`rule_conflict:${procedure}`);
       for (const r of live) {
         r.eligibility = "unclear";
-        r.text_key = "results.unclear";
+        r.text_key = "results.rule_conflict";
       }
     }
   }

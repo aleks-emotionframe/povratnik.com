@@ -1,0 +1,49 @@
+# SYNTHETISCH. Fiktive Aufgabe des zweiten fiktiven Verfahrens.
+id: example-report-accommodation
+version: 1
+synthetic: true
+title:
+  de: Beispielmeldung der Unterkunft einreichen
+purpose:
+  de: Gehört im fiktiven Beispiel zu einem anderen Verfahren als die Beispielmeldung.
+phase: arrive
+affects: person
+responsible: person
+prerequisites: []
+documents: []
+authority:
+  key: example-authority
+  name:
+    de: Beispielbehörde (fiktiv)
+duration:
+  availability: unknown
+  evidence: self_reported
+  currency: current
+  checked_at: 2026-09-13
+cost:
+  availability: unknown
+  evidence: self_reported
+  currency: current
+  checked_at: 2026-09-13
+completion_evidence:
+  de: Bestätigung der Beispielbehörde liegt vor.
+follow_ups: []
+sources:
+  - id: example-source
+    reference: Art. 1
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

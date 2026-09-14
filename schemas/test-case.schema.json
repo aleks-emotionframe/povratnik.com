@@ -92,6 +92,12 @@
             "required": ["person", "type", "date"],
             "additionalProperties": false
           }
+        },
+        "holidays": {
+          "description": "Synthetic holiday list passed to the engine as calendar data. Defaults to none.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/date" }
         }
       },
       "required": ["persons", "relationships", "events"],
@@ -150,6 +156,20 @@
               "eligibility": { "$ref": "vocabularies.schema.json#/$defs/eligibility_status" }
             },
             "required": ["person", "rule", "eligibility"],
+            "additionalProperties": false
+          }
+        },
+        "deadlines": {
+          "description": "Computed due dates to check, per person and rule version. Optional.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "person": { "$ref": "common.schema.json#/$defs/id" },
+              "rule": { "$ref": "common.schema.json#/$defs/version_ref" },
+              "due": { "$ref": "common.schema.json#/$defs/date" }
+            },
+            "required": ["person", "rule", "due"],
             "additionalProperties": false
           }
         }

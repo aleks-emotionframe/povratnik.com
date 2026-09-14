@@ -1,5 +1,24 @@
 # Ergebnistexte und Oberflächentexte, Ausgangssprache Deutsch.
-# Schlüssel unter rules.* werden von Regeln über status_text_key referenziert.
+# Schlüssel unter rules.* werden von Regeln über status_text_key referenziert und nur
+# bei Ergebnis matches verwendet. Schlüssel unter results.* sind die generischen Texte
+# je Zustand aus CLAUDE.md Abschnitt 9; die Engine wählt sie für alle anderen Zustände.
+results:
+  unclear: Für die Prüfung fehlt noch diese Information.
+  condition_missing: Diese Voraussetzung erfüllen Sie nach Ihren Angaben derzeit nicht.
+  unchecked: Dieser Bereich wurde nach Ihren Angaben noch nicht abschliessend geprüft.
+  rule_conflict: Dieser Punkt braucht eine fachliche Klärung. Zuständig ist die genannte Stelle.
 rules:
   example_address_report:
     matches: Nach Ihren Angaben kommt die Beispielmeldung infrage. Über die Meldung entscheidet die Beispielbehörde (fiktiv).
+  example_conflict_a:
+    matches: Nach Ihren Angaben kommt die fiktive Regel A infrage.
+  example_conflict_b:
+    matches: Nach Ihren Angaben kommt die fiktive Regel B infrage.
+  example_priority_a:
+    matches: Nach Ihren Angaben kommt die fiktive Regel mit Priorität 1 infrage.
+  example_priority_b:
+    matches: Nach Ihren Angaben kommt die fiktive Regel mit Priorität 2 infrage.
+  example_skip_rule:
+    matches: Nach Ihren Angaben kommt die fiktive Regel mit Nebenbedingung infrage.
+  example_accommodation_rule:
+    matches: Nach Ihren Angaben kommt die Beispielmeldung der Unterkunft infrage.

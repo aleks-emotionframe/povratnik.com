@@ -11,17 +11,20 @@ ein Wizard nach Zeit und Reihenfolge.
 
 ## Stand
 
-M0 Grundlage. Es gibt Schemas, einen Validator und CI. Es gibt noch keine Website,
-keine Regel-Engine und keine fachlich freigegebene Regel. Alle Datensätze unter
-`content/` sind synthetische Beispiele und als solche gekennzeichnet.
+M1 Machbarkeitsnachweis. Es gibt Schemas, einen Validator, CI und die Regel-Engine
+als eigenes Paket (`packages/engine`), geprüft mit 13 Abnahmefällen gegen
+synthetische Regeln. Es gibt noch keine Website und keine fachlich freigegebene Regel.
+Alle Datensätze unter `content/` sind synthetische Beispiele und als solche
+gekennzeichnet.
 
 ## Struktur
 
 ```
-content/     Regeln, Aufgaben, Verfahren, Seiten, Quellen, Abnahmefälle, Texte (YAML)
-schemas/     JSON Schema je Datensatztyp, abgeleitet aus docs/datenmodell.md
-scripts/     Validator und seine Tests
-docs/        Konzept, Datenmodell, Designsystem, Betrieb, ADRs
+content/          Regeln, Aufgaben, Verfahren, Seiten, Quellen, Abnahmefälle, Texte (YAML)
+schemas/          JSON Schema je Datensatztyp, abgeleitet aus docs/datenmodell.md
+scripts/          Validator und seine Tests
+packages/engine/  Regel-Engine: Operatoren, Fristen, Fassungswahl, Konflikte, Fixture-Harness
+docs/             Konzept, Datenmodell, Designsystem, Betrieb, ADRs
 ```
 
 Orte, Einrichtungen und Leistungen liegen nicht im Repository, sondern in der
@@ -34,7 +37,7 @@ Voraussetzung: Node 22.6 oder neuer.
 ```bash
 npm ci
 npm run validate   # prüft content/ gegen Schemas und Querbezüge
-npm test           # Tests des Validators
+npm test           # Tests des Validators, der Engine und alle Abnahmefälle in content/tests
 npm run typecheck
 ```
 

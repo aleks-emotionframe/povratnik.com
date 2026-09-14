@@ -158,7 +158,7 @@ test("conflict: two live results in one procedure without priorities become uncl
   const a = rule({ id: "a" });
   const b = rule({ id: "b", result: { task: "task-b", status_text_key: "rules.b.matches" } });
   const out = run([a, b]);
-  assert.deepEqual(out.results.map((r) => [r.rule, r.eligibility, r.text_key]), [["a@1", "unclear", "results.unclear"], ["b@1", "unclear", "results.unclear"]]);
+  assert.deepEqual(out.results.map((r) => [r.rule, r.eligibility, r.text_key]), [["a@1", "unclear", "results.rule_conflict"], ["b@1", "unclear", "results.rule_conflict"]]);
   assert.deepEqual(out.clarifications, ["rule_conflict:proc-a"]);
   // Equal priorities do not resolve anything.
   const same = run([rule({ id: "a", priority: 1 }), rule({ id: "b", priority: 1 })]);

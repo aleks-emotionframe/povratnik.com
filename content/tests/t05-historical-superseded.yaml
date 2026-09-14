@@ -1,0 +1,46 @@
+# SYNTHETISCH. Stichtagstest, historisches Ereignis wählt die ersetzte Fassung.
+id: t05-historical-superseded
+synthetic: true
+title:
+  de: Einreise 2021, ersetzte Fassung 1 bleibt auswertbar
+covers: [cutoff-historical-version]
+reference_date: 2026-09-13
+input:
+  persons:
+    - id: p1
+      citizenships:
+        - country: xx
+          availability: known
+          evidence: document
+      citizenship_status: [third_country]
+      croatian_link: none
+      residence_status: temporary_residence
+      facts:
+        person.age:
+          value: 30
+          availability: known
+          evidence: self_reported
+          currency: current
+          checked_at: 2026-09-13
+  relationships: []
+  events:
+    - person: p1
+      type: entry
+      date:
+        kind: date
+        date: 2021-03-15
+expect:
+  routes: []
+  routes_absent: []
+  tasks: [example-register-address]
+  tasks_absent: []
+  clarifications: []
+  forbidden_texts: ["kein Anspruch", "42 Tagen"]
+  results:
+    - person: p1
+      rule: example-address-report@1
+      eligibility: matches
+  deadlines:
+    - person: p1
+      rule: example-address-report@1
+      due: 2021-04-14

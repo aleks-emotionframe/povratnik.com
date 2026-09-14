@@ -1,0 +1,45 @@
+# SYNTHETISCH. Fiktive Regel B ohne Priorität, kollidiert mit Regel A.
+id: example-conflict-b
+version: 1
+synthetic: true
+trigger: entry
+title:
+  de: Fiktive Regel B ohne Priorität, kollidiert mit Regel A.
+scope:
+  applies_to_persons:
+    citizenship_status: [ch_citizen]
+    residence_status: [temporary_residence]
+  procedure: example-registration
+conditions:
+  - field: event.entry
+    operator: exists
+    on_unknown: clarify
+result:
+  task: example-register-address
+  deadline:
+    trigger: entry
+    interval: 20
+    unit: calendar_days
+    counting_starts: day_after
+    weekend_holiday_rule: none
+    kind: statutory
+  status_text_key: rules.example_conflict_b.matches
+sources:
+  - id: example-source
+    reference: Art. 1
+    checked: 2026-09-13
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly
