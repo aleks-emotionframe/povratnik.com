@@ -1,0 +1,343 @@
+/* Frageansicht und Abschlussplan (designsystem.md 3, Typen 8 und 9; 5 Formulare; 6 Mobil). */
+
+.wizard {
+  max-width: 44rem;
+}
+.wizard__progress {
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+/* Haushaltsleiste: zeigt, für wen die Frage gilt. */
+.household {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.household__person {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  color: var(--ink-soft);
+}
+.household__person--current {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.question {
+  border: 0;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  min-inline-size: 0;
+}
+.question legend {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+.question__person {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+.question__title {
+  display: block;
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.question__help {
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+
+.options {
+  display: grid;
+  gap: 0.5rem;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.option:hover {
+  background: var(--surface-deep);
+}
+.option:has(input:checked) {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.option:has(input:focus-visible) {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.option input {
+  margin: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
+  flex: none;
+}
+.option--date {
+  padding: 0.35rem 0.9rem;
+}
+.option--date input[type="date"] {
+  width: auto;
+  height: auto;
+  font: inherit;
+  font-family: var(--font-mono);
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  min-height: 32px;
+}
+
+.persons {
+  margin: -0.5rem 0 1.5rem;
+}
+.persons__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  display: grid;
+  gap: 0.25rem;
+}
+.persons__list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.persons__add {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.wizard__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+.button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Plan */
+.plan {
+  max-width: 52rem;
+}
+.plan__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.plan__actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.plan__section {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.plan__section h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.situation {
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+.situation__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 700px) {
+  .situation__row {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  }
+}
+.situation dt {
+  color: var(--ink-soft);
+}
+.situation dd {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.next {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  counter-reset: next;
+}
+.next > li {
+  counter-increment: next;
+  position: relative;
+  padding-left: 2.25rem;
+}
+.next > li::before {
+  content: counter(next);
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--paper);
+  background: var(--ink);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.1rem;
+  background: var(--paper);
+}
+.item__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  flex-wrap: wrap;
+}
+.item__title {
+  font-size: 1.0625rem;
+  margin: 0;
+}
+.item__person {
+  color: var(--accent);
+  margin: 0.25rem 0 0.5rem;
+}
+.item p {
+  margin-bottom: 0.5rem;
+}
+.item__facts {
+  margin: 0.5rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.1rem 1rem;
+  font-size: 0.9375rem;
+}
+@media (min-width: 480px) {
+  .item__facts {
+    grid-template-columns: minmax(6rem, 9rem) 1fr;
+    gap: 0.2rem 1rem;
+  }
+}
+.item__facts dt {
+  color: var(--muted);
+}
+.item__facts dd {
+  margin: 0 0 0.35rem;
+}
+.deadline {
+  color: var(--ink);
+  border-left: 2px solid var(--accent);
+  padding-left: 0.6rem;
+}
+.deadline--awaiting {
+  color: var(--st-unknown);
+  border-left-color: var(--st-unknown);
+}
+.why {
+  margin-top: 0.75rem;
+  font-size: 0.9375rem;
+}
+.why summary {
+  cursor: pointer;
+  color: var(--ink-soft);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.phase {
+  border-top: 1px solid var(--line);
+  padding-block: 0.5rem;
+}
+.phase summary {
+  cursor: pointer;
+  font-weight: 600;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.phase__items {
+  display: grid;
+  gap: 0.75rem;
+  padding-block: 0.5rem 1rem;
+}
+
+.open {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+.open li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media print {
+  .plan {
+    max-width: none;
+  }
+  .item {
+    break-inside: avoid;
+    border-color: #999;
+  }
+  .why {
+    display: none;
+  }
+  .phase[open] summary {
+    list-style: none;
+  }
+  .deadline {
+    border-left-color: #000;
+  }
+}

@@ -1,0 +1,30 @@
+---
+// Betreiberangaben werden nicht erfunden. Offene Felder tragen den Zustand «wird ergänzt».
+import Base from "../layouts/Base.astro";
+const open = '<span class="state state--unknown">wird ergänzt</span>';
+---
+
+<Base title="Impressum: povratnik.com" description="Verantwortliche Stelle für povratnik.com.">
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h1>Impressum</h1>
+        <p>Die Betreiberangaben werden vor der Veröffentlichung eingetragen. Bis dahin ist die Website nicht öffentlich.</p>
+        <dl class="open-field">
+          <dt>Betreiberin</dt>
+          <dd set:html={open} />
+          <dt>Adresse</dt>
+          <dd set:html={open} />
+          <dt>Kontakt</dt>
+          <dd set:html={open} />
+          <dt>Verantwortlich für den Inhalt</dt>
+          <dd set:html={open} />
+          <dt>Fehler melden</dt>
+          <dd set:html={open} />
+        </dl>
+        <h2>Umsetzung</h2>
+        <p>Konzept, Gestaltung und Entwicklung: <a href="https://emotionframe.ch" rel="noopener">EmotionFrame GmbH</a>, Schweiz.</p>
+      </div>
+    </div>
+  </section>
+</Base>

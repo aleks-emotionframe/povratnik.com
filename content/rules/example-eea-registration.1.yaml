@@ -1,0 +1,42 @@
+# SYNTHETISCH. Fiktive Pilotregel für den Kurzcheck in M2a. Alle Werte erfunden.
+id: example-eea-registration
+version: 1
+synthetic: true
+trigger: entry
+title:
+  de: Beispiel, Anmeldung nach Einreise innerhalb von 33 Tagen (fiktiv)
+scope:
+  applies_to_persons:
+    citizenship_status: [eea_citizen, ch_citizen]
+    residence_status: [none]
+  procedure: example-preparation
+conditions: []
+result:
+  task: example-register-stay
+  deadline:
+    trigger: entry
+    interval: 33
+    unit: calendar_days
+    counting_starts: day_after
+    weekend_holiday_rule: extend_to_next_working_day
+    kind: statutory
+  status_text_key: rules.example_eea_registration.matches
+sources:
+  - id: example-source
+    reference: Art. 3 (fiktiv)
+    checked: 2026-09-14
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

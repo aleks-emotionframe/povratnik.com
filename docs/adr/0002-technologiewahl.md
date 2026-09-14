@@ -102,3 +102,23 @@ das Budget ohne Gegenarbeit einhält.
 
 Prüfpunkt: Wenn in M3 die Redaktionsoberfläche mehr als die Hälfte des Aufwands von
 M2 kostet, wird diese Entscheidung erneut vorgelegt. Bis dahin gilt sie.
+
+---
+
+## Nachtrag 14.09.2026: Insel-Bibliothek und Redaktionsmuster
+
+Entschieden in M2a: **Preact** für die interaktiven Inseln. Gemessen am Build der
+Wizard-Seite: Preact mit Hooks und Signals 20,8 KB, Astro-Client 2,7 KB, Wizard-Insel
+samt Engine 21,6 KB, zusammen 45 KB unkomprimiert und rund 17 KB komprimiert. Die
+Startseite lädt kein JavaScript ausser dem EmotionFrame Footer (2,4 KB). Budget
+`betrieb.md` Abschnitt 2 eingehalten; ein Test in `apps/web/test/build.test.ts`
+wacht darüber.
+
+Regelpaket: `apps/web/src/lib/content.ts` liest `content/` zur Bauzeit. Im Build
+gelangen nur freigegebene, veröffentlichte, nicht synthetische Regeln in die Seite;
+`astro dev` zeigt alle nicht zurückgezogenen Regeln mit sichtbarem Hinweisband. Ein
+Test durchsucht `dist/` nach synthetischen oder unveröffentlichten Regeln.
+
+PDF: Druckansicht des Browsers mit `@media print`, keine Bibliothek. Erst wenn
+Testpersonen damit scheitern, wird eine Bibliothek geprüft (Budget 400 KB, nur auf
+Aktion geladen).

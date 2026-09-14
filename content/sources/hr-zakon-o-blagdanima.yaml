@@ -1,0 +1,15 @@
+# Reale Quelle. Amtliche Veröffentlichung des kroatischen Feiertagsgesetzes.
+id: hr-zakon-o-blagdanima
+synthetic: false
+url: https://narodne-novine.nn.hr/clanci/sluzbeni/2019_11_110_2212.html
+title: Zakon o blagdanima, spomendanima i neradnim danima u Republici Hrvatskoj (NN 110/2019)
+publisher: Narodne novine, Hrvatski sabor
+tier: 1
+published_at: 2019-11-15
+fetched_at: 2026-09-14
+content_checked_at: 2026-09-14
+content_checked_by: technische Verantwortung, Fachprüfung offen
+reuse_rights: official_free
+changelog:
+  - date: 2026-09-14
+    note: Angelegt. Artikel 1 (Blagdani i neradni dani) gelesen und in content/calendars/hr.yaml übernommen. Spätere Änderungen des Gesetzes sind nicht geprüft.

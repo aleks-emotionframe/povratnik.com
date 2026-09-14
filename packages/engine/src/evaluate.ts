@@ -121,8 +121,11 @@ function evaluateRuleGroup(versions: Rule[], facts: Facts, reference_date: IsoDa
     }
   }
   let eligibility: Eligibility = notMet ? "condition_missing" : clarify ? "unclear" : skip ? "unchecked" : "matches";
-  // Everything derived from a provisional version or an unknown scope is unclear.
-  if (provisional || scopeUnknown) eligibility = "unclear";
+  // An unknown scope makes everything unclear: the rule may not apply at all. A
+  // provisional version caps a positive or unchecked result at unclear, but a known
+  // hurdle stays a known hurdle (CLAUDE.md 9: never beautified into an information gap).
+  if (scopeUnknown) eligibility = "unclear";
+  else if (provisional && eligibility !== "condition_missing") eligibility = "unclear";
 
   // 4. Deadline.
   let deadline: DeadlineResult | undefined;

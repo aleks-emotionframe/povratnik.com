@@ -9,8 +9,11 @@
   },
   "scripts": {
     "validate": "node --experimental-strip-types scripts/validate.ts",
-    "test": "node --experimental-strip-types --test \"scripts/*.test.ts\" \"packages/engine/**/*.test.ts\"",
-    "typecheck": "tsc --noEmit"
+    "test": "node --experimental-strip-types --test \"scripts/*.test.ts\" \"packages/engine/**/*.test.ts\" \"apps/web/test/*.test.ts\"",
+    "typecheck": "tsc --noEmit",
+    "dev": "npm run dev -w apps/web",
+    "build": "npm run build -w apps/web",
+    "check:web": "npm run check -w apps/web"
   },
   "dependencies": {
     "ajv": "^8.17.1",
@@ -22,6 +25,7 @@
     "typescript": "^5.9.2"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "apps/*"
   ]
 }

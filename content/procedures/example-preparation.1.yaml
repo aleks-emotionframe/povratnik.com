@@ -1,0 +1,38 @@
+# SYNTHETISCH. Fiktives Vorbereitungsverfahren für den Kurzcheck in M2a.
+id: example-preparation
+version: 1
+synthetic: true
+title:
+  de: Beispielvorbereitung vor der Einreise (fiktiv)
+term:
+  term_hr: primjer pripreme
+  term_explained:
+    de: Fiktiver Begriff, dient nur der Veranschaulichung.
+authority:
+  key: example-authority
+  name:
+    de: Beispielbehörde (fiktiv)
+legal_basis: Beispielgesetz Art. 3 (fiktiv)
+prerequisites: []
+steps:
+  - de: Unterlagen sichten.
+forms: []
+sources:
+  - id: example-source
+    reference: Art. 3 (fiktiv)
+    checked: 2026-09-14
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

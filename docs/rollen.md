@@ -43,4 +43,4 @@ Die Fachredaktion ist die Dauerressource, an der das Projekt steht oder fällt
 | Sicherheitsrelevant | technisches Review |
 | Reversibles Detail in Oberfläche oder Text | Autor selbst, dokumentiert im Pull Request |
 | Neue wesentliche Produktentscheidung | Produktverantwortung, als ADR oder Änderung in `docs/` |
-| Rücknahme einer falschen Fachausgabe | Fehlerkontakt sofort, Wiederfreigabe durch Fachprüfung |
+| Rücknahme einer falschen Fachausgabe | Fehlerkontakt sofort per `publication.state: withdrawn`, Selbstmerge nur dafür erlaubt (`redaktionsdurchlauf.md` 2), Wiederfreigabe durch Fachprüfung |

@@ -1,10 +1,10 @@
-# SYNTHETISCH. Fiktive Regel, Fassung 2. Alle Werte erfunden.
+# SYNTHETISCH. Fiktive Regel, Fassung 3, angelegt im Probelauf des Redaktionsdurchlaufs. Alle Werte erfunden.
 id: example-address-report
-version: 2
+version: 3
 synthetic: true
 trigger: entry
 title:
-  de: Beispielmeldung innerhalb von 42 Tagen (fiktive neue Fassung)
+  de: Beispielmeldung innerhalb von 50 Tagen (fiktive Fassung 3, Probelauf)
 scope:
   applies_to_persons:
     citizenship_status: [third_country]
@@ -22,7 +22,7 @@ result:
   task: example-register-address
   deadline:
     trigger: entry
-    interval: 42
+    interval: 50
     unit: calendar_days
     counting_starts: day_after
     weekend_holiday_rule: extend_to_next_working_day
@@ -30,21 +30,21 @@ result:
   status_text_key: rules.example_address_report.matches
 sources:
   - id: example-source
-    reference: Art. 1 Abs. 1
-    checked: 2026-09-13
+    reference: Art. 1 Abs. 1, Fassung ab 2027 (fiktiv)
+    checked: 2026-09-14
 approval:
-  state: draft
+  state: in_review
 publication:
   state: unpublished
 validity:
-  valid_from: 2026-06-01
+  valid_from: 2027-01-01
   valid_until:
-    kind: date
-    date: 2026-12-31
-  supersedes: example-address-report@1
-  superseded_by: example-address-report@3
+    kind: open_ended
+    date: null
+  supersedes: example-address-report@2
+  superseded_by: null
   transitional:
-    de: Für Einreisen vor dem 01.06.2026 gilt Fassung 1 (fiktiv).
+    de: Für Einreisen vor dem 01.01.2027 gilt Fassung 2 (fiktiv). Probelauf des Redaktionsdurchlaufs.
 review:
   next_check: 2026-12-01
   cycle: monthly

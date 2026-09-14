@@ -1,0 +1,52 @@
+---
+// Beschreibt wahrheitsgemäss den heutigen Stand (M2a): keine Cookies, keine Übertragung
+// der Wizard-Antworten, keine Auswertung. Die vollständige Erklärung nach DSG und DSGVO
+// wird mit den Betreiberangaben ergänzt.
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Datenschutz: povratnik.com" description="Wie povratnik.com mit Daten umgeht: Wizard-Antworten bleiben im Browser.">
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h1>Datenschutz</h1>
+        <p>Der wichtigste Punkt zuerst: Ihre Antworten im Kurzcheck verlassen Ihren Browser nicht.</p>
+
+        <h2>Kurzcheck und Plan</h2>
+        <p>
+          Die Auswertung läuft vollständig in Ihrem Browser. Es gibt keinen Server, der Ihre
+          Antworten entgegennimmt, keinen Link mit kodierten Antworten und keine Speicherung
+          auf unserer Seite. Damit die Antworten beim Neuladen der Seite erhalten bleiben,
+          legt der Browser sie im Sitzungsspeicher ab; er wird beim Schliessen des Fensters
+          gelöscht. Das PDF erzeugen Sie mit der Druckfunktion Ihres Browsers, ebenfalls
+          lokal.
+        </p>
+
+        <h2>Cookies und Messung</h2>
+        <p>
+          Diese Website setzt keine Cookies und misst keine Nutzung. Deshalb gibt es auch
+          keinen Cookie-Hinweis. Sollte später eine anonyme, aggregierte Auswertung
+          eingeführt werden, steht hier vorher genau, was erhoben wird und was nicht.
+        </p>
+
+        <h2>Server-Protokolle und Hosting</h2>
+        <dl class="open-field">
+          <dt>Hosting</dt>
+          <dd><span class="state state--unknown">wird ergänzt</span> Anbieter in der EU, Entscheidung vor der Veröffentlichung.</dd>
+          <dt>Protokolle</dt>
+          <dd><span class="state state--unknown">wird ergänzt</span> Was der Anbieter technisch protokolliert, steht hier nach der Entscheidung.</dd>
+          <dt>Verantwortliche Stelle</dt>
+          <dd><span class="state state--unknown">wird ergänzt</span> Siehe <a href="/impressum">Impressum</a>.</dd>
+        </dl>
+
+        <h2>Ihre Rechte</h2>
+        <p>
+          Sie haben nach dem Schweizer Datenschutzgesetz und der DSGVO das Recht auf
+          Auskunft, Berichtigung und Löschung. Da wir im Kurzcheck keine Personendaten
+          erhalten, gibt es dort nichts, was wir über Sie gespeichert hätten. Für Anfragen
+          gilt die Kontaktadresse im Impressum, sobald sie eingetragen ist.
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

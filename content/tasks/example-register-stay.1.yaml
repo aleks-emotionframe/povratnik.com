@@ -1,0 +1,53 @@
+# SYNTHETISCH. Fiktive Aufgabe für den Kurzcheck in M2a.
+id: example-register-stay
+version: 1
+synthetic: true
+title:
+  de: Beispiel, Aufenthalt bei der Beispielbehörde anmelden
+purpose:
+  de: Im fiktiven Beispiel wird der Aufenthalt nach der Einreise angemeldet.
+phase: arrive
+affects: person
+responsible: person
+prerequisites: []
+documents:
+  - name:
+      de: Reisedokument
+  - name:
+      de: Nachweis der Unterkunft (fiktiv)
+authority:
+  key: example-authority
+  name:
+    de: Beispielbehörde (fiktiv)
+duration:
+  availability: unknown
+  evidence: self_reported
+  currency: current
+  checked_at: 2026-09-14
+cost:
+  availability: unknown
+  evidence: self_reported
+  currency: current
+  checked_at: 2026-09-14
+completion_evidence:
+  de: Bestätigung der Beispielbehörde liegt vor.
+follow_ups: []
+sources:
+  - id: example-source
+    reference: Art. 3 (fiktiv)
+    checked: 2026-09-14
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

@@ -1,0 +1,35 @@
+# SYNTHETISCH. Fiktive Pilotregel für den Kurzcheck in M2a. Alle Werte erfunden.
+id: example-passport-check
+version: 1
+synthetic: true
+trigger: entry
+title:
+  de: Beispiel, Reisedokument prüfen (fiktiv)
+scope:
+  applies_to_persons:
+    citizenship_status: [hr_citizen]
+    residence_status: [none]
+  procedure: example-passport-procedure
+conditions: []
+result:
+  task: example-check-passport
+  status_text_key: rules.example_passport_check.matches
+sources:
+  - id: example-source
+    reference: Art. 3 (fiktiv)
+    checked: 2026-09-14
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-01
+  cycle: monthly

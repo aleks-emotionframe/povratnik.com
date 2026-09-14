@@ -1,0 +1,170 @@
+# Feiertage Kroatien nach Art. 1 Zakon o blagdanima, spomendanima i neradnim danima
+# (NN 110/2019). Bewegliche Feiertage (Uskrs, Uskrsni ponedjeljak, Tijelovo) werden je
+# Jahr als Datum eingetragen; es gibt keinen Ostercode im Repository. Jahre werden von
+# der Redaktion ergänzt. Entwurf bis zur Fachfreigabe; im Produktionsbuild erst danach.
+id: hr
+synthetic: false
+title:
+  de: Feiertage Kroatien
+country: hr
+legal_basis: Zakon o blagdanima, spomendanima i neradnim danima u Republici Hrvatskoj, NN 110/2019, čl. 1
+holidays:
+  - date: 2026-01-01
+    name_hr: Nova godina
+    name:
+      de: Neujahr
+    movable: false
+  - date: 2026-01-06
+    name_hr: Bogojavljenje ili Sveta tri kralja
+    name:
+      de: Dreikönigstag
+    movable: false
+  - date: 2026-04-05
+    name_hr: Uskrs
+    name:
+      de: Ostersonntag
+    movable: true
+  - date: 2026-04-06
+    name_hr: Uskrsni ponedjeljak
+    name:
+      de: Ostermontag
+    movable: true
+  - date: 2026-05-01
+    name_hr: Praznik rada
+    name:
+      de: Tag der Arbeit
+    movable: false
+  - date: 2026-05-30
+    name_hr: Dan državnosti
+    name:
+      de: Tag der Staatlichkeit
+    movable: false
+  - date: 2026-06-04
+    name_hr: Tijelovo
+    name:
+      de: Fronleichnam
+    movable: true
+  - date: 2026-06-22
+    name_hr: Dan antifašističke borbe
+    name:
+      de: Tag des antifaschistischen Kampfes
+    movable: false
+  - date: 2026-08-05
+    name_hr: Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja
+    name:
+      de: Tag des Sieges und der heimatlichen Dankbarkeit, Tag der kroatischen Verteidiger
+    movable: false
+  - date: 2026-08-15
+    name_hr: Velika Gospa
+    name:
+      de: Mariä Himmelfahrt
+    movable: false
+  - date: 2026-11-01
+    name_hr: Svi sveti
+    name:
+      de: Allerheiligen
+    movable: false
+  - date: 2026-11-18
+    name_hr: Dan sjećanja na žrtve Domovinskog rata i Dan sjećanja na žrtvu Vukovara i Škabrnje
+    name:
+      de: Gedenktag für die Opfer des Heimatkriegs, Gedenktag für Vukovar und Škabrnja
+    movable: false
+  - date: 2026-12-25
+    name_hr: Božić
+    name:
+      de: Weihnachten
+    movable: false
+  - date: 2026-12-26
+    name_hr: Sveti Stjepan
+    name:
+      de: Stephanstag
+    movable: false
+  - date: 2027-01-01
+    name_hr: Nova godina
+    name:
+      de: Neujahr
+    movable: false
+  - date: 2027-01-06
+    name_hr: Bogojavljenje ili Sveta tri kralja
+    name:
+      de: Dreikönigstag
+    movable: false
+  - date: 2027-03-28
+    name_hr: Uskrs
+    name:
+      de: Ostersonntag
+    movable: true
+  - date: 2027-03-29
+    name_hr: Uskrsni ponedjeljak
+    name:
+      de: Ostermontag
+    movable: true
+  - date: 2027-05-01
+    name_hr: Praznik rada
+    name:
+      de: Tag der Arbeit
+    movable: false
+  - date: 2027-05-27
+    name_hr: Tijelovo
+    name:
+      de: Fronleichnam
+    movable: true
+  - date: 2027-05-30
+    name_hr: Dan državnosti
+    name:
+      de: Tag der Staatlichkeit
+    movable: false
+  - date: 2027-06-22
+    name_hr: Dan antifašističke borbe
+    name:
+      de: Tag des antifaschistischen Kampfes
+    movable: false
+  - date: 2027-08-05
+    name_hr: Dan pobjede i domovinske zahvalnosti i Dan hrvatskih branitelja
+    name:
+      de: Tag des Sieges und der heimatlichen Dankbarkeit, Tag der kroatischen Verteidiger
+    movable: false
+  - date: 2027-08-15
+    name_hr: Velika Gospa
+    name:
+      de: Mariä Himmelfahrt
+    movable: false
+  - date: 2027-11-01
+    name_hr: Svi sveti
+    name:
+      de: Allerheiligen
+    movable: false
+  - date: 2027-11-18
+    name_hr: Dan sjećanja na žrtve Domovinskog rata i Dan sjećanja na žrtvu Vukovara i Škabrnje
+    name:
+      de: Gedenktag für die Opfer des Heimatkriegs, Gedenktag für Vukovar und Škabrnja
+    movable: false
+  - date: 2027-12-25
+    name_hr: Božić
+    name:
+      de: Weihnachten
+    movable: false
+  - date: 2027-12-26
+    name_hr: Sveti Stjepan
+    name:
+      de: Stephanstag
+    movable: false
+sources:
+  - id: hr-zakon-o-blagdanima
+    reference: Članak 1., stavak 1.
+    checked: 2026-09-14
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-01-01
+  valid_until:
+    kind: date
+    date: 2027-12-31
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2027-03-01
+  cycle: biannual

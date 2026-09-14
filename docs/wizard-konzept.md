@@ -2,7 +2,9 @@
 
 ## Mein Weg nach Kroatien: Fragenpfad, Verzweigungslogik und persönliche Zusammenfassung
 
-Ergänzung zum Inhaltskonzept, Bereich 3. Version 1.2, Stand 13.09.2026.
+Ergänzung zum Inhaltskonzept, Bereich 3. Version 1.3, Stand 14.09.2026. Änderungen in
+1.3 (M2a): Antwortoptionen von Frage 4 an das Vokabular angeglichen, Zusatzfragen für
+bereits Eingereiste in 2.2, Abbildung auf Fakten in `datenmodell.md` Abschnitt 3.
 
 ---
 
@@ -71,10 +73,15 @@ Umzug getrennt leben kann.
 
 **Frage 4: Welche Staatsangehörigkeiten hat jede Person, und besteht ein Bezug zu
 Kroatien?** (Q05 und Q06)
-Staatsangehörigkeiten als Mehrfachauswahl: Kroatisch / EU, EWR oder Schweiz / Andere
-/ Staatenlos / Weiss ich nicht. Dazu der Bezug: Eltern oder Grosseltern kroatisch /
-Weiter zurückliegende Vorfahren / Früher selbst in Kroatien gelebt / Partnerin oder
+Staatsangehörigkeiten als Mehrfachauswahl: Kroatisch / EU oder EWR / Schweiz / Andere
+/ Staatenlos / Weiss ich nicht. Dazu der Bezug: Ein Elternteil kroatisch / Grosseltern
+oder frühere Vorfahren kroatisch / Früher selbst in Kroatien gelebt / Partnerin oder
 Partner mit kroatischem Bezug / Kein Bezug / Unklar
+
+Entschieden am 14.09.2026 durch die Produktverantwortung: «EU, EWR oder Schweiz» wird
+in zwei Optionen getrennt, weil das Vokabular `eea_citizen` und `ch_citizen`
+unterscheidet und Regeln sich auf genau einen davon beziehen können. Aus demselben Grund
+werden Eltern (`parent`) und frühere Vorfahren (`ancestor`) getrennt gefragt.
 
 Das ist die wichtigste Frage der ganzen Website. Sie entscheidet über Aufenthalt,
 Arbeitszugang, Förderfähigkeit und die Dauer der Vorbereitung. Gefragt wird nach der
@@ -99,6 +106,13 @@ Arbeitgeber im Ausland / Rente oder Vermögen / Studium / noch offen
 Nach Frage 6 erscheint das erste Ergebnis: mögliche Wege je Person, die wichtigsten
 offenen Fragen, Themen für die Ortswahl. Erst hier wird der Zielort angeboten (Q09);
 der Plan funktioniert auch ohne Ortswahl.
+
+**Zusatzfragen nur bei «Ich bin bereits in Kroatien».** Je Person werden dann der
+Aufenthaltsstatus in Kroatien (Vokabular, mit «weiss ich nicht») und das Einreisedatum
+(Datum oder «weiss ich nicht») gefragt. Ohne diese beiden Angaben lässt sich keine
+Regel mit Aufenthaltsbezug auswerten und keine Frist berechnen. Wer noch nicht
+eingereist ist, hat bekanntermassen keinen Status in Kroatien und noch kein
+Einreisedatum; das wird nicht gefragt, sondern gesetzt.
 
 ### 2.3 Vertiefende Fragen, die nur bei Bedarf erscheinen
 
