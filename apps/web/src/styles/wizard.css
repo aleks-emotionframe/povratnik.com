@@ -350,3 +350,48 @@
     border-left-color: #000;
   }
 }
+
+/* Leseempfehlung und Unterlagen im Plan */
+.reading {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.reading li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.reading a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-decoration: none;
+}
+.plan__section h4 {
+  font-size: 1.0625rem;
+  margin: 1rem 0 0.25rem;
+}
+.docs {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.35rem;
+  columns: 2;
+}
+.docs li {
+  padding-left: 1.25rem;
+  position: relative;
+  font-size: 0.9375rem;
+}
+.docs li::before {
+  content: "▪";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}

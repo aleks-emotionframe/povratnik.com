@@ -173,6 +173,12 @@ plan:
   with_holidays: "Kalender {calendar}, Stand {date}"
   calendars: Feiertage
   none: keine
+  reading: Wissen zu Ihrem Weg
+  reading_help: Themenseiten, die nach Ihren Angaben zu Ihrem Haushalt passen. Das ist eine Leseempfehlung, keine Prüfung.
+  reading_for: "gilt für {persons}"
+  reading_state: Grundlagen vorhanden, fachlich nicht geprüft
+  documents_all: Unterlagen, die Sie voraussichtlich brauchen
+  documents_help: Zusammengestellt aus den Themenseiten oben. Welche davon Ihre Stelle im Einzelfall verlangt, entscheidet diese Stelle.
 phases:
   orient: Orientieren
   prepare: Vorbereiten

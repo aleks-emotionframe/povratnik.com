@@ -7,6 +7,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 import type { Rule } from "@povratnik/engine";
+import type { ReadingPage } from "./reading.ts";
 
 type Doc = Record<string, any>;
 type I18n = { de: string; [lang: string]: string | undefined };
@@ -37,9 +38,11 @@ export type Bundle = {
   holidays: string[];
   calendars: CalendarView[];
   texts: Doc;
+  // Themenseiten für die Leseempfehlung im Plan (lib/reading.ts); leer, wenn keine sichtbar.
+  pages: ReadingPage[];
 };
 
-export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; calendars: Doc[]; texts: Doc };
+export type Content = { rules: RuleView[]; tasks: Doc[]; procedures: Doc[]; calendars: Doc[]; texts: Doc; pages?: ReadingPage[] };
 
 function loadDir(dir: string): Doc[] {
   return readdirSync(dir)
@@ -91,5 +94,6 @@ export function bundleFor(mode: "build" | "dev", content: Content): Bundle {
     holidays,
     calendars: calendars.map((c) => ({ id: c.id, title: c.title, checked: c.sources?.[0]?.checked ?? "" })),
     texts: content.texts,
+    pages: content.pages ?? [],
   };
 }

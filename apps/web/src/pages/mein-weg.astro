@@ -6,10 +6,12 @@ import Base from "../layouts/Base.astro";
 import { Wizard } from "../islands/Wizard.tsx";
 import { bundleFor, loadContent } from "../lib/content.ts";
 import { bundleMode } from "../lib/stage.ts";
+import { loadPages, pagePath } from "../lib/pages.ts";
 import "../styles/wizard.css";
 
 const contentDir = join(process.cwd(), "..", "..", "content");
-const bundle = bundleFor(bundleMode(import.meta.env.PROD), loadContent(contentDir));
+const pages = loadPages(contentDir).map((p) => ({ id: p.id, title: p.title, path: pagePath(p), category: p.category ?? "", documents: p.sections.documents ?? [] }));
+const bundle = bundleFor(bundleMode(import.meta.env.PROD), { ...loadContent(contentDir), pages });
 const texts = bundle.texts as Record<string, any>;
 ---
 

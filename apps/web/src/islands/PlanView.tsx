@@ -5,6 +5,7 @@ import type { RuleResult } from "@povratnik/engine";
 import type { Bundle } from "../lib/content.ts";
 import type { Plan, PlanItem } from "../lib/plan.ts";
 import { UNKNOWN, answerOf, stepsFor, type Answers, type PersonAnswers, type Step } from "../lib/questions.ts";
+import { documentsFor, readingFor } from "../lib/reading.ts";
 import { i18n, t, type Texts } from "./text.ts";
 
 type Props = {
@@ -119,6 +120,8 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
     const p = byId.get(id);
     return p ? personLabel(p) : id;
   };
+  const reading = readingFor(answers, bundle.pages);
+  const documents = documentsFor(reading);
 
   return (
     <div class="plan">
@@ -205,6 +208,30 @@ export function PlanView({ plan, answers, bundle, personLabel, onEdit, onRestart
           </ul>
         )}
       </section>
+
+      {reading.length > 0 && (
+        <section class="plan__section">
+          <h3>{t(texts, "plan.reading")}</h3>
+          <p class="soft">{t(texts, "plan.reading_help")}</p>
+          <ul class="reading">
+            {reading.map((r) => (
+              <li key={r.page.id}>
+                <a href={r.page.path}>{r.page.title}</a>
+                {answers.persons.length > 1 && <span class="mono muted">{t(texts, "plan.reading_for", { persons: r.persons.map(label).join(", ") })}</span>}
+              </li>
+            ))}
+          </ul>
+          {documents.length > 0 && (
+            <>
+              <h4>{t(texts, "plan.documents_all")}</h4>
+              <p class="soft">{t(texts, "plan.documents_help")}</p>
+              <ul class="docs">
+                {documents.map((d) => <li key={d}>{d}</li>)}
+              </ul>
+            </>
+          )}
+        </section>
+      )}
 
       {plan.errors.length > 0 && (
         <section class="plan__section notice">
