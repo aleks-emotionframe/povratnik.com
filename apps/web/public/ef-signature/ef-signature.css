@@ -1,0 +1,235 @@
+/* ============================================================
+   EmotionFrame Footer
+   Version 2.3
+
+   Der schwarze Balken unter jeder Website, die wir bauen.
+   Immer dieselbe Farbe, immer dieselbe Höhe, immer dasselbe Logo,
+   immer dieselbe Verlaufslinie an der Oberkante.
+   Vom Kunden übernommen wird einzig die Schrift, damit der Balken
+   zur Seite gehört und nicht wie ein Fremdkörper wirkt.
+
+   WICHTIG: Diese Datei wird pro Projekt NICHT verändert.
+   Anpassungen laufen ausschliesslich über die Variablen in
+   .ef-sig (siehe README.md, Abschnitt Stellschrauben).
+   ============================================================ */
+
+.ef-sig {
+  /* ---- Fest. Diese Werte machen die Wiedererkennung aus und
+          werden pro Projekt nicht angefasst. ---- */
+  --ef-bg:          #0a0a0a;
+  --ef-fg:          #ffffff;
+  --ef-rule:        2px;        /* Stärke der Verlaufslinie */
+  --ef-logo-h:      16px;       /* Höhe des Logos, Breite folgt im Verhältnis 4:1 */
+
+  /* ---- Stellschrauben ---- */
+  --ef-maxw:        1280px;     /* Inhaltsbreite, auf die Container der Website setzen */
+  --ef-gutter:      clamp(1.25rem, 5vw, 4.5rem);  /* Seitenabstand der Website */
+  --ef-size:        0.8125rem;  /* Schriftgrösse der Leiste */
+  --ef-pad:         1.125rem;   /* Luft ober- und unterhalb der Zeile */
+  --ef-logo-alpha:  0.9;        /* Deckkraft des Logos in Ruhe */
+  --ef-muted-alpha: 0.6;        /* Deckkraft der Nebentexte */
+  --ef-accent:      #f0892a;    /* Fokusring */
+
+  /* ---- intern, nicht überschreiben ---- */
+  --ef-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  background: var(--ef-bg);
+  color: var(--ef-fg);
+  font-size: var(--ef-size);
+  line-height: 1.5;
+  padding-block: var(--ef-pad);
+  /* font-family bleibt bewusst geerbt */
+}
+
+.ef-sig *,
+.ef-sig *::before,
+.ef-sig *::after { box-sizing: border-box; }
+
+/* ============================================================
+   Die Verlaufslinie an der Oberkante
+
+   Der Farbverlauf im Logo läuft einmal um das Viereck herum. Hier
+   ist derselbe Kreis auf eine Gerade abgerollt: er beginnt links in
+   Orange und endet rechts wieder in Orange, wirkt also geschlossen,
+   obwohl die Linie gerade ist.
+
+   Die acht Stützfarben sind aus dem Logo gemessen, in der
+   Reihenfolge des Umlaufs. Sie liegen bewusst eng beieinander,
+   sonst kippt der Verlauf zwischen den Ecken ins Graue.
+   Sie dürfen nicht verändert werden.
+   ============================================================ */
+.ef-sig::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--ef-rule);
+  background: linear-gradient(
+    90deg,
+    #f0892a   0%,    /* Orange   , obere Kante links */
+    #7cdfa0  14%,    /* Grün     , obere Kante rechts */
+    #52fecb  28%,    /* Mint     , rechte Kante oben */
+    #4388ee  42%,    /* Hellblau , rechte Kante unten */
+    #3e5bfb  56%,    /* Blau     , untere Kante rechts */
+    #c716d2  70%,    /* Magenta  , untere Kante links */
+    #ae3796  84%,    /* Violett  , linke Kante oben */
+    #f0892a 100%     /* zurück zu Orange, linke Kante unten */
+  );
+}
+
+/* ---------- Inhalt ---------- */
+.ef-sig__inner {
+  max-width: var(--ef-maxw);
+  margin-inline: auto;
+  padding-inline: var(--ef-gutter);
+}
+
+.ef-sig__row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+}
+
+/* Beide Aussenspalten teilen sich den Restplatz zu gleichen Teilen.
+   Dadurch sitzt die Signatur exakt in der optischen Mitte, egal wie
+   lang Firmenname oder Rechtslinks beim jeweiligen Kunden sind. */
+.ef-sig__copy,
+.ef-sig__legal { flex: 1 1 0; min-width: 0; }
+
+.ef-sig__copy {
+  margin: 0;
+  opacity: var(--ef-muted-alpha);
+}
+
+.ef-sig__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem 1.25rem;
+}
+
+.ef-sig__legal a {
+  color: inherit;
+  text-decoration: none;
+  opacity: var(--ef-muted-alpha);
+  transition: opacity 0.25s var(--ef-ease);
+}
+.ef-sig__legal a:hover,
+.ef-sig__legal a:focus-visible { opacity: 1; }
+
+/* ---------- Die Signatur ---------- */
+.ef-sig__by {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.ef-sig__by-label {
+  opacity: calc(var(--ef-muted-alpha) * 0.85);
+  transition: opacity 0.35s var(--ef-ease);
+}
+.ef-sig__by:hover .ef-sig__by-label { opacity: var(--ef-muted-alpha); }
+
+.ef-sig__by:focus-visible {
+  outline: 2px solid var(--ef-accent);
+  outline-offset: 4px;
+}
+
+/* ---------- Logo ----------
+   Originaldatei, Seitenverhältnis 4:1. Weil der Balken immer dunkel
+   ist, gibt es genau eine Datei und keine Variante zu wählen.
+   Breite und Höhe stehen fest, damit beim Laden nichts springt. */
+.ef-sig__logo {
+  display: block;
+  flex: 0 0 auto;
+  width: calc(var(--ef-logo-h) * 4);
+  height: var(--ef-logo-h);
+  opacity: var(--ef-logo-alpha);
+  transition: opacity 0.35s var(--ef-ease), transform 0.5s var(--ef-ease);
+}
+.ef-sig__by:hover .ef-sig__logo,
+.ef-sig__by:focus-visible .ef-sig__logo { opacity: 1; }
+
+/* ============================================================
+   Auftritt beim ersten Sichtbarwerden
+
+   Die Verlaufslinie zieht aus der Mitte nach aussen auf, danach
+   blendet der Inhalt ein.
+
+   Der Startzustand wird ausschliesslich unter .ef-sig--js gesetzt.
+   Diese Klasse vergibt das Script. Ohne JavaScript ist der Balken
+   sofort und vollständig sichtbar.
+   ============================================================ */
+
+.ef-sig--js::before        { clip-path: inset(0 50% 0 50%); }
+.ef-sig--js .ef-sig__logo  { opacity: 0; transform: scale(0.92); }
+.ef-sig--js .ef-sig__copy  { opacity: 0; transform: translateY(6px); }
+.ef-sig--js .ef-sig__by    { opacity: 0; transform: translateY(6px); }
+.ef-sig--js .ef-sig__legal { opacity: 0; transform: translateY(6px); }
+
+.ef-sig.is-visible::before {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 0.7s var(--ef-ease);
+}
+.ef-sig.is-visible .ef-sig__logo {
+  opacity: var(--ef-logo-alpha);
+  transform: none;
+  transition: opacity 0.5s var(--ef-ease) 0.3s, transform 0.6s var(--ef-ease) 0.3s;
+}
+.ef-sig.is-visible .ef-sig__copy,
+.ef-sig.is-visible .ef-sig__by,
+.ef-sig.is-visible .ef-sig__legal {
+  transform: translateY(0);
+  transition: opacity 0.55s var(--ef-ease), transform 0.55s var(--ef-ease);
+}
+.ef-sig.is-visible .ef-sig__by    { opacity: 1;                     transition-delay: 0.22s; }
+.ef-sig.is-visible .ef-sig__copy  { opacity: var(--ef-muted-alpha); transition-delay: 0.32s; }
+.ef-sig.is-visible .ef-sig__legal { opacity: 1;                     transition-delay: 0.38s; }
+
+/* ---------- Mobile ----------
+   Gestapelt, die Signatur steht ganz unten und ist damit das Letzte,
+   was auf der Seite zu sehen ist. */
+@media (max-width: 720px) {
+  .ef-sig__row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    text-align: center;
+  }
+  .ef-sig__copy,
+  .ef-sig__legal { flex: 0 0 auto; }
+  .ef-sig__legal { order: 1; justify-content: center; }
+  .ef-sig__copy  { order: 2; }
+  .ef-sig__by    { order: 3; }
+}
+
+/* ---------- Bewegung reduziert ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .ef-sig--js::before        { clip-path: inset(0 0 0 0); }
+  .ef-sig--js .ef-sig__logo  { opacity: var(--ef-logo-alpha); transform: none; }
+  .ef-sig--js .ef-sig__copy  { opacity: var(--ef-muted-alpha); transform: none; }
+  .ef-sig--js .ef-sig__by,
+  .ef-sig--js .ef-sig__legal { opacity: 1; transform: none; }
+  .ef-sig *                  { transition: none !important; }
+}
+
+/* ---------- Druck ----------
+   Der Balken wird mitgedruckt, sonst wäre das weisse Logo auf dem
+   Papier unsichtbar. */
+@media print {
+  .ef-sig {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .ef-sig--js::before,
+  .ef-sig--js .ef-sig__logo,
+  .ef-sig--js .ef-sig__copy,
+  .ef-sig--js .ef-sig__by,
+  .ef-sig--js .ef-sig__legal { opacity: 1; transform: none; clip-path: none; }
+}

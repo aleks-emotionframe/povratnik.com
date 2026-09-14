@@ -22,3 +22,11 @@ rules:
     matches: Nach Ihren Angaben kommt die fiktive Regel mit Nebenbedingung infrage.
   example_accommodation_rule:
     matches: Nach Ihren Angaben kommt die Beispielmeldung der Unterkunft infrage.
+  example_passport_check:
+    matches: Nach Ihren Angaben kommt im fiktiven Beispiel die Prüfung des Reisedokuments infrage.
+  example_eea_registration:
+    matches: Nach Ihren Angaben kommt im fiktiven Beispiel die Anmeldung nach der Einreise infrage. Über die Anmeldung entscheidet die Beispielbehörde (fiktiv).
+  example_descent_check:
+    matches: Nach Ihren Angaben kommt im fiktiven Beispiel die Prüfung der Abstammungskette infrage. Ob die Urkunden ausreichen, entscheidet die Beispielbehörde (fiktiv).
+  example_remote_work_check:
+    matches: Nach Ihren Angaben kommt im fiktiven Beispiel der Weg für Fernarbeit infrage. Über den Antrag entscheidet die Beispielbehörde (fiktiv).

@@ -1,0 +1,81 @@
+---
+// Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
+// Der EmotionFrame Footer steht als letztes Element ausserhalb des Containers.
+import "../styles/base.css";
+
+interface Props {
+  title: string;
+  description: string;
+  /** Aktueller Navigationspunkt für aria-current. */
+  current?: "start" | "mein-weg";
+}
+const { title, description, current } = Astro.props;
+const nav = [
+  { href: "/", label: "Start", key: "start" },
+  { href: "/mein-weg", label: "Mein Weg", key: "mein-weg" },
+];
+---
+
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="light" />
+    <link rel="stylesheet" href="/ef-signature/ef-signature.css" />
+    <script src="/ef-signature/ef-signature.js" defer is:inline></script>
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="container">
+        <a class="brand" href="/">povratnik.com <small>Leben in Kroatien</small></a>
+        <nav class="site-nav" aria-label="Hauptnavigation">
+          {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main id="inhalt">
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="container">
+        <p>
+          Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer
+          die zuständige Stelle.
+        </p>
+        <p class="datenstand">Aufbaustufe M2a. Es gibt noch keine fachlich freigegebene Regel.</p>
+      </div>
+    </footer>
+
+    <div class="ef-sig" data-ef-v="2.3">
+      <div class="ef-sig__inner">
+        <div class="ef-sig__row">
+          <p class="ef-sig__copy">
+            &copy; <span class="ef-sig__year">2026</span> povratnik.com. Alle Rechte vorbehalten.
+          </p>
+          <a class="ef-sig__by" href="https://emotionframe.ch/webdesign" target="_blank" rel="noopener">
+            <span class="ef-sig__by-label">Umsetzung</span>
+            <img
+              class="ef-sig__logo"
+              src="/ef-signature/ef-logo-on-dark.webp"
+              alt="EmotionFrame"
+              width="64"
+              height="16"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+          <nav class="ef-sig__legal" aria-label="Rechtliches">
+            <a href="/impressum">Impressum</a>
+            <a href="/datenschutz">Datenschutz</a>
+            <a href="/agb">AGB</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

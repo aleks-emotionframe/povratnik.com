@@ -1,0 +1,341 @@
+/* Grundgestaltung nach docs/designsystem.md: Swiss International Style, Struktur durch
+   Raster und Abstand, Zustände immer mit Text, Datenstand als gestaltetes Element. */
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-text);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: var(--paper);
+  font-feature-settings: "kern", "liga";
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Typografie */
+h1,
+h2,
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.12;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 {
+  font-size: clamp(2rem, 1.2rem + 3.6vw, 3.75rem);
+}
+h2 {
+  font-size: clamp(1.4rem, 1rem + 1.6vw, 2rem);
+  margin-top: 0;
+}
+h3 {
+  font-size: 1.125rem;
+}
+p,
+ul,
+ol {
+  margin: 0 0 1em;
+  max-width: var(--measure);
+}
+a {
+  color: var(--accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+a:hover {
+  color: var(--accent-deep);
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.mono,
+.datenstand,
+.deadline,
+.state {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+}
+.soft {
+  color: var(--ink-soft);
+}
+.muted {
+  color: var(--muted);
+}
+
+/* Raster: zwölf Spalten, linksbündig. */
+.container {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(1rem, 2.5vw, 2.5rem);
+  row-gap: 1.5rem;
+}
+.col-main {
+  grid-column: 1 / -1;
+}
+.col-aside {
+  grid-column: 1 / -1;
+}
+@media (min-width: 860px) {
+  .col-main {
+    grid-column: 1 / 9;
+  }
+  .col-aside {
+    grid-column: 9 / -1;
+  }
+  .col-wide {
+    grid-column: 1 / 10;
+  }
+}
+
+/* Bänder mit wechselnder Dichte */
+.band {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+.band + .band {
+  border-top: 1px solid var(--line);
+}
+.band--surface {
+  background: var(--surface);
+}
+
+/* Kopf */
+.site-head {
+  border-bottom: 1px solid var(--line);
+}
+.site-head .container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  flex-wrap: wrap;
+  padding-block: 1rem;
+}
+.brand {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1.125rem;
+}
+.brand small {
+  display: block;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.site-nav {
+  display: flex;
+  gap: 0.25rem 1.5rem;
+  flex-wrap: wrap;
+}
+.site-nav a {
+  color: var(--ink-soft);
+  text-decoration: none;
+  padding-block: 0.5rem;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+/* Fuss der Website, über dem EmotionFrame Balken */
+.site-foot {
+  border-top: 1px solid var(--line);
+  padding-block: 2rem 2.5rem;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+.site-foot p {
+  margin: 0 0 0.5rem;
+}
+
+/* EmotionFrame Footer: nur diese zwei Variablen sind projektseitig anpassbar. */
+.ef-sig {
+  --ef-maxw: var(--maxw);
+  --ef-gutter: var(--gutter);
+}
+
+/* Bedienelemente */
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.button:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+.button--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+.button--primary:hover {
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: var(--accent-ink);
+}
+.button--quiet {
+  border-color: transparent;
+  color: var(--ink-soft);
+  padding-inline: 0.6rem;
+}
+.button--quiet:hover {
+  color: var(--ink);
+}
+
+/* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). */
+.state {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  padding: 0.15em 0.55em;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+.state::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  flex: none;
+}
+.state--matches {
+  color: var(--st-open);
+  background: var(--st-open-bg);
+}
+.state--matches::before {
+  background: currentColor;
+}
+.state--unclear,
+.state--unknown {
+  color: var(--st-unknown);
+  background: var(--st-unknown-bg);
+}
+.state--condition_missing,
+.state--unchecked {
+  color: var(--st-closed);
+  background: var(--st-closed-bg);
+}
+.state--condition_missing::before {
+  background: linear-gradient(90deg, currentColor 50%, transparent 50%);
+}
+
+/* Datenstand-Zeile: Quelle, Prüfdatum, Fassung, immer an derselben Stelle. */
+.datenstand {
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 0.5rem;
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+
+/* Hinweisband für synthetische Regeln: darf nie übersehen werden. */
+.notice {
+  border: 1px solid var(--st-unknown);
+  background: var(--st-unknown-bg);
+  color: var(--ink);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  max-width: none;
+}
+.notice strong {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--st-unknown);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+/* Offene Angaben auf Rechtsseiten */
+.open-field {
+  display: grid;
+  grid-template-columns: minmax(8rem, 12rem) 1fr;
+  gap: 0.25rem 1rem;
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--line);
+  max-width: var(--measure);
+}
+.open-field dt {
+  color: var(--ink-soft);
+}
+.open-field dd {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media print {
+  .site-head,
+  .site-foot,
+  .ef-sig,
+  .no-print {
+    display: none !important;
+  }
+  body {
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+  }
+  a {
+    color: #000;
+    text-decoration: none;
+  }
+  .band {
+    padding-block: 1rem;
+  }
+}

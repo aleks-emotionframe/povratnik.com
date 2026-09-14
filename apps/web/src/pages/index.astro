@@ -1,0 +1,104 @@
+---
+// Startseite, reduziert auf das, was in M2a existiert. Wissen und Orte werden als
+// sichtbar im Aufbau gezeigt, nicht als Attrappe (designsystem.md 3, CLAUDE.md 10).
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="povratnik.com: Leben in Kroatien"
+  description="Rückkehr und Auswanderung nach Kroatien in der richtigen Reihenfolge: Aufenthalt, Meldung, Versicherung, Familie, Förderung. Persönlicher Plan im Browser, ohne Konto."
+  current="start"
+>
+  <section class="band">
+    <div class="container grid">
+      <div class="col-wide">
+        <h1>Nach Kroatien zurück oder neu dorthin: in der richtigen Reihenfolge.</h1>
+        <p class="lede">
+          Wer nach Kroatien zieht, muss Aufenthalt, Meldung, Versicherung, Schule und
+          Förderung in einer bestimmten Reihenfolge angehen. Diese Reihenfolge steht
+          nirgends. Hier bekommen Sie sie für Ihren Haushalt, Person für Person.
+        </p>
+        <p>
+          <a class="button button--primary" href="/mein-weg">Kurzcheck starten, sechs Fragen</a>
+        </p>
+        <p class="soft">
+          Ohne Konto. Ihre Antworten bleiben in Ihrem Browser und werden nirgendwohin
+          übertragen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Was Sie hier bekommen</h2>
+        <p>
+          Einen Plan, der zu Ihrer Lage passt: Wer im Haushalt welchen Weg hat, was zuerst
+          erledigt gehört, welche Frist wodurch ausgelöst wird, und was noch offen ist,
+          weil eine Behörde entscheidet.
+        </p>
+        <p>
+          Jede Angabe trägt Quelle und Prüfdatum. Wo wir etwas nicht wissen, steht das
+          dort, sichtbar, statt einer Lücke. Über Anträge entscheidet immer die zuständige
+          Stelle; der Plan zeigt den Weg, nicht das Ergebnis.
+        </p>
+      </div>
+      <aside class="col-aside">
+        <h3>So lesen Sie Zustände</h3>
+        <ul class="state-list">
+          <li><span class="state state--matches">nach Angaben passend</span> Die Voraussetzungen treffen nach Ihren Angaben zu.</li>
+          <li><span class="state state--unclear">unklar</span> Eine Angabe fehlt oder eine Fachperson muss entscheiden.</li>
+          <li><span class="state state--condition_missing">Bedingung fehlt</span> Eine Voraussetzung ist nach Ihren Angaben derzeit nicht erfüllt.</li>
+          <li><span class="state state--unknown">unbekannt</span> Diesen Wert kennen wir noch nicht.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <div class="col-main">
+        <h2>Was gerade im Aufbau ist</h2>
+        <p>
+          Die Website wird in Etappen gebaut. Heute funktioniert der Kurzcheck mit
+          Beispielregeln. Das Wissen nach Thema, die Orte mit Karte und die geprüften
+          Rechtsregeln folgen, sobald sie fachlich freigegeben sind.
+        </p>
+        <dl class="open-field">
+          <dt>Mein Weg</dt>
+          <dd>Kurzcheck läuft, mit synthetischen Beispielregeln <span class="state state--unknown">Regeln nicht freigegeben</span></dd>
+          <dt>Wissen nach Thema</dt>
+          <dd><span class="state state--unknown">im Aufbau</span></dd>
+          <dt>Orte entdecken</dt>
+          <dd><span class="state state--unknown">im Aufbau</span></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lede {
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+    line-height: 1.4;
+    color: var(--ink-soft);
+    max-width: 44ch;
+  }
+  .state-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+  }
+  .state-list li {
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  .state-list .state {
+    justify-self: start;
+  }
+</style>
