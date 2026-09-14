@@ -32,7 +32,7 @@ Fachliche Wahrheit liegt in `docs/`:
 - `docs/datenmodell.md` Zustände, Zeitmodell, Haushalts- und Beziehungsmodell
 - `docs/designsystem.md` Typografie, Raster, Seitentypen, Zustände in der Oberfläche
 - `docs/betrieb.md` Sicherung, Wiederherstellung, Rücknahme, Rechte, Messprofile, Positivliste erlaubter Telemetrie-Ereignisse
-- `docs/adr/` Architekturentscheide: ADR-0001 Quelle und abgeleitete Kopie, ADR-0002 Technologiewahl, ADR-0003 Hosting, ADR-0004 Teststufe
+- `docs/adr/` Architekturentscheide: ADR-0001 Quelle und abgeleitete Kopie, ADR-0002 Technologiewahl, ADR-0003 Hosting, ADR-0004 Teststufe, ADR-0005 Karte
 - `docs/rollen.md` Besetzung der Rollen, wer gibt was frei
 
 Widerspricht der Code diesen Dokumenten, sind die Dokumente massgeblich. Ändert sich

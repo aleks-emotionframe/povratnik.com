@@ -843,6 +843,28 @@ ui:
     promise_2: Antworten bleiben in diesem Browser
     promise_3: Jede Angabe im Plan mit Quelle und Prüfdatum
     promise_4: «Weiss ich noch nicht» ist immer eine Antwort
+  map:
+    title: Übersichtskarte Kroatiens mit Gespanschaften und erfassten Orten
+    hover_default: Gespanschaft antippen oder mit dem Zeiger berühren
+    source: "Grenzen: {source}. Orte auf der Teststufe fiktiv platziert."
+    section_title: Karte
+    section_help: Gespanschaften und erfasste Orte. Die Liste darunter ist die vollständige Ansicht.
+    toggle: Karte anzeigen
+    region_crumb: Region
+    region_title: "Gespanschaft {name}"
+    region_lede: Lebensrealität statt Tourismus, für die Ortswahl. Arbeitsmarkt, Versorgung, Erreichbarkeit, Preise, Schulen, Kliniken, Verbindungen, regionale Programme, und ein ehrlicher Abschnitt zu den Nachteilen.
+    region_places: Erfasste Orte in dieser Gespanschaft
+    region_places_empty: Für diese Gespanschaft ist noch kein Ort erfasst. Das heisst nicht, dass es keine Angebote gibt.
+    region_facts: Was hier stehen wird
+    region_fact_1: Arbeitsmarkt und Pendelziele
+    region_fact_2: Versorgung mit Ärzten, Apotheken und Kliniken
+    region_fact_3: Erreichbarkeit und Verbindungen
+    region_fact_4: Preisniveau für Miete und Kauf
+    region_fact_5: Schul- und Klinikdichte
+    region_fact_6: Regionale Programme mit Zustand
+    region_fact_7: Nachteile der Region, ehrlich benannt
+    region_wip: nicht erhoben
+    region_others: Andere Gespanschaften
   notfound:
     title: Seite nicht gefunden
     text: Diese Adresse gibt es nicht oder nicht mehr. Die Startseite führt zu allen drei Wegen.

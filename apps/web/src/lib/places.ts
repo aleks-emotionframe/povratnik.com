@@ -35,6 +35,8 @@ export type Benefit = {
 export type Place = {
   id: string;
   fictional: boolean;
+  /** Lage für die Übersichtskarte (ADR-0005); auf der Teststufe fiktiv. */
+  map?: { lon: number; lat: number };
   name: string;
   county: string;
   region: "coast" | "inland";

@@ -1073,6 +1073,28 @@ ui:
     promise_2: Answers stay in this browser
     promise_3: Every fact in the plan with source and check date
     promise_4: «I do not know yet» is always an answer
+  map:
+    title: Overview map of Croatia with counties and recorded places
+    hover_default: Tap a county or hover over it
+    source: "Boundaries: {source}. Places are positioned fictionally during the test stage."
+    section_title: Map
+    section_help: Counties and recorded places. The list below is the complete view.
+    toggle: Show map
+    region_crumb: Region
+    region_title: "{name} County"
+    region_lede: Real life instead of tourism, for choosing a place. Labour market, healthcare, accessibility, prices, schools, hospitals, connections, regional programmes, and an honest section on the drawbacks.
+    region_places: Recorded places in this county
+    region_places_empty: No place is recorded for this county yet. That does not mean there are no offers.
+    region_facts: What will appear here
+    region_fact_1: Labour market and commuting destinations
+    region_fact_2: Doctors, pharmacies and hospitals
+    region_fact_3: Accessibility and connections
+    region_fact_4: Price level for renting and buying
+    region_fact_5: Density of schools and hospitals
+    region_fact_6: Regional programmes with status
+    region_fact_7: Drawbacks of the region, honestly named
+    region_wip: not collected
+    region_others: Other counties
   notfound:
     title: Page not found
     text: This address does not exist or no longer exists. The start page leads to all three ways.

@@ -4,12 +4,14 @@
 // fiktive Testgemeinden (ADR-0004), die Karte folgt mit der Datenbank (M5).
 import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
+import MapHr from "../../components/MapHr.astro";
 import { loadPlaces, placeName, openBenefits } from "../../lib/places.ts";
 import { pageContext } from "../../lib/page.ts";
 import ort from "../../assets/ort-hauptplatz.webp";
 
 const { u, p } = pageContext(Astro);
 const places = loadPlaces();
+const dots = places.filter((pl) => pl.map).map((pl) => ({ id: pl.id, name: placeName(pl), lon: pl.map!.lon, lat: pl.map!.lat, href: p(`/orte/${pl.id}`) }));
 const targets = (pl: (typeof places)[number]) => {
   const t = new Set<string>();
   for (const b of pl.benefits) {
@@ -45,6 +47,14 @@ const targets = (pl: (typeof places)[number]) => {
         <strong>{u("orte.fictional_title")}</strong>
         {u("orte.fictional_text")}
       </p>
+
+      <details class="map-toggle" open>
+        <summary>
+          <span class="map-toggle__title">{u("map.section_title")}</span>
+          <span class="soft">{u("map.section_help")}</span>
+        </summary>
+        <MapHr places={dots} />
+      </details>
 
       <form class="filters" id="filters" aria-label={u("orte.filter_label")}>
         <fieldset>
@@ -136,6 +146,23 @@ const targets = (pl: (typeof places)[number]) => {
 </Base>
 
 <style>
+  .map-toggle {
+    margin: 1.5rem 0;
+  }
+  .map-toggle summary {
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem 1rem;
+    flex-wrap: wrap;
+    align-items: baseline;
+    min-height: 44px;
+    margin-bottom: 0.75rem;
+  }
+  .map-toggle__title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
   .filters {
     display: flex;
     flex-wrap: wrap;

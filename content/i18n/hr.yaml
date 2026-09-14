@@ -1073,6 +1073,28 @@ ui:
     promise_2: Odgovori ostaju u ovom pregledniku
     promise_3: Svaki podatak u planu s izvorom i datumom provjere
     promise_4: «Još ne znam» uvijek je odgovor
+  map:
+    title: Pregledna karta Hrvatske sa županijama i evidentiranim mjestima
+    hover_default: Dodirnite županiju ili prijeđite pokazivačem
+    source: "Granice: {source}. Mjesta su u testnoj fazi fiktivno smještena."
+    section_title: Karta
+    section_help: Županije i evidentirana mjesta. Popis ispod je potpuni prikaz.
+    toggle: Prikaži kartu
+    region_crumb: Regija
+    region_title: "{name} županija"
+    region_lede: Životna stvarnost umjesto turizma, za odabir mjesta. Tržište rada, opskrba, dostupnost, cijene, škole, bolnice, veze, regionalni programi i iskren odjeljak o nedostacima.
+    region_places: Evidentirana mjesta u ovoj županiji
+    region_places_empty: Za ovu županiju još nije evidentirano nijedno mjesto. To ne znači da nema ponuda.
+    region_facts: Što će ovdje stajati
+    region_fact_1: Tržište rada i odredišta putovanja na posao
+    region_fact_2: Opskrba liječnicima, ljekarnama i bolnicama
+    region_fact_3: Dostupnost i veze
+    region_fact_4: Razina cijena za najam i kupnju
+    region_fact_5: Gustoća škola i bolnica
+    region_fact_6: Regionalni programi sa stanjem
+    region_fact_7: Nedostaci regije, iskreno imenovani
+    region_wip: nije prikupljeno
+    region_others: Druge županije
   notfound:
     title: Stranica nije pronađena
     text: Ova adresa ne postoji ili više ne postoji. Početna stranica vodi do sva tri puta.

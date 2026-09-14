@@ -1073,6 +1073,28 @@ ui:
     promise_2: Las respuestas se quedan en este navegador
     promise_3: Cada dato del plan con fuente y fecha de comprobación
     promise_4: «Todavía no lo sé» siempre es una respuesta
+  map:
+    title: Mapa general de Croacia con condados y lugares registrados
+    hover_default: Toque o pase el cursor por un condado
+    source: "Límites: {source}. Lugares situados de forma ficticia en la fase de prueba."
+    section_title: Mapa
+    section_help: Condados y lugares registrados. La lista de abajo es la vista completa.
+    toggle: Mostrar el mapa
+    region_crumb: Región
+    region_title: "Condado de {name}"
+    region_lede: Vida real en vez de turismo, para elegir el lugar. Mercado laboral, atención sanitaria, accesibilidad, precios, escuelas, hospitales, conexiones, programas regionales y una sección honesta sobre las desventajas.
+    region_places: Lugares registrados en este condado
+    region_places_empty: Para este condado todavía no hay ningún lugar registrado. Eso no significa que no haya ofertas.
+    region_facts: Qué figurará aquí
+    region_fact_1: Mercado laboral y destinos de desplazamiento
+    region_fact_2: Atención con médicos, farmacias y hospitales
+    region_fact_3: Accesibilidad y conexiones
+    region_fact_4: Nivel de precios de alquiler y compra
+    region_fact_5: Densidad de escuelas y hospitales
+    region_fact_6: Programas regionales con estado
+    region_fact_7: Desventajas de la región, nombradas con honestidad
+    region_wip: no recopilado
+    region_others: Otros condados
   notfound:
     title: Página no encontrada
     text: Esta dirección no existe o ya no existe. La página de inicio lleva a los tres caminos.

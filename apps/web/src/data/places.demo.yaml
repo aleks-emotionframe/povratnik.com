@@ -6,9 +6,11 @@
 # Fachwerte tragen vier Dimensionen (CLAUDE.md 2.4): value, state, as_of, source.
 # state: known, unknown, not_collected, outdated, not_applicable, not_present.
 # Programmzustand (Vokabular B): open, announced, closed, exhausted, unconfirmed, budget_unknown.
+# map: fiktive Lage nur zur Darstellung auf der Übersichtskarte (ADR-0005).
 
 - id: dolina-mira
   fictional: true
+  map: { lon: 16.42, lat: 45.62 }
   name: Dolina Mira
   county: Gespanschaft Zelena (fiktiv)
   region: inland
@@ -94,6 +96,7 @@
 
 - id: kamenik-gornji
   fictional: true
+  map: { lon: 16.05, lat: 43.62 }
   name: Kamenik Gornji
   county: Gespanschaft Kamena (fiktiv)
   region: coast
@@ -167,6 +170,7 @@
 
 - id: luka-sveta
   fictional: true
+  map: { lon: 17.35, lat: 45.30 }
   name: Luka Sveta
   county: Gespanschaft Zelena (fiktiv)
   region: inland

@@ -5,6 +5,7 @@
 // Teststufe nur auf Deutsch vor; Beschriftungen kommen aus dem Katalog.
 import Base from "../../layouts/Base.astro";
 import Fact from "../../components/Fact.astro";
+import MapHr from "../../components/MapHr.astro";
 import { PROGRAM_STATE, formatDate, loadPlaces, placeName, type Place } from "../../lib/places.ts";
 import { pageContext } from "../../lib/page.ts";
 
@@ -159,6 +160,12 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           )}
           <p class="fact__note">{u("place.changes_note")}</p>
         </div>
+        {place.map && (
+          <div class="side">
+            <MapHr compact places={[{ id: place.id, name: placeName(place), lon: place.map.lon, lat: place.map.lat, href: p(`/orte/${place.id}`) }]} />
+            <p class="fact__note">{u("map.source", { source: "Natural Earth" })}</p>
+          </div>
+        )}
         <div class="side side--cta">
           <h3>{u("place.cta_title")}</h3>
           <p>{u("place.cta_text")}</p>
