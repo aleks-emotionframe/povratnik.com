@@ -672,9 +672,6 @@ ui:
     title: "Znanje"
     description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
     lede: "Odgovori o boravku, dokumentima, radu, porezima, zdravstvu, školi i stanovanju."
-    pages_one: "{n} tematska stranica"
-    pages_many: "{n} tematskih stranica"
-    topics_wip: "{n} tema u pripremi"
     group_basics: Osnove
     group_work_money: Rad i novac
     group_family_life: Obitelj i svakodnevica
