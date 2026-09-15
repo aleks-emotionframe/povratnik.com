@@ -2,6 +2,7 @@
 // Länderseite (inhaltskonzept.md 4.3): die Ausreiseanforderungen des bisherigen Wohnlands,
 // getrennt vom kroatischen Prozess. Jedes Feld ist ein Fachwert mit Zustand.
 import Base from "../../../layouts/Base.astro";
+import HeroAside from "../../../components/HeroAside.astro";
 import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
 import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
 
@@ -34,19 +35,16 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("country.crumb")}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a><span class="crumbs__here"> / {u("country.crumb")}</span></p>
         <h1>{page.title}</h1>
         <p class="lede">{page.short_answer}</p>
         <p class="hero__state"><span class={`state state--${state.key}`}>{state.label}</span></p>
       </div>
-      <div class="hero__media hero__media--plain">
-        <div>
-          <h2 class="others__title">{u("country.others")}</h2>
-          <ul class="others">
-            {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={p(pagePath(x))}>{shortName(x.title)}</a></li>)}
-          </ul>
-        </div>
-      </div>
+      <HeroAside title={u("country.others")}>
+        <ul class="topics">
+          {countries.filter((x) => x.id !== page.id).map((x) => <li><a class="arrow-link" href={p(pagePath(x))}>{shortName(x.title)}</a></li>)}
+        </ul>
+      </HeroAside>
     </div>
   </section>
 
@@ -126,61 +124,8 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
     border-top: 0;
     padding-top: 0;
   }
-  /* Andere Herkunftsländer als Felder mit Rand, keine Pillen. */
-  .others {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-  .others a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 0.5rem 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    border-radius: var(--radius-sm);
-    color: var(--on-brand);
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-  }
-  .others a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.7);
-  }
-  .crumbs {
-    font-size: 0.875rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .crumbs a {
-    color: var(--on-brand);
-  }
   .hero__state {
     margin: 1.25rem 0 0;
-  }
-  .hero__media--plain {
-    display: flex;
-    align-items: center;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    min-height: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  @media (min-width: 860px) {
-    .hero__media--plain {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
-  }
-  .others__title {
-    font-size: 1rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
   }
   .country {
     max-width: none;

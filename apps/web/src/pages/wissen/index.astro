@@ -2,6 +2,7 @@
 // Übersicht Wissen: die vier Bereiche (inhaltskonzept.md 4.1) als Karten, jede mit
 // den Namen ihrer Rubriken; die Rubriken selbst stehen auf der Bereichsseite.
 import Base from "../../layouts/Base.astro";
+import HeroAside from "../../components/HeroAside.astro";
 import { RUBRIC_GROUPS, rubricBySlug, rubricText } from "../../lib/rubrics.ts";
 import { pageContext } from "../../lib/page.ts";
 
@@ -15,13 +16,12 @@ const { texts, u, p } = pageContext(Astro);
         <h1>{u("wissen.title")}</h1>
         <p class="lede">{u("wissen.lede")}</p>
       </div>
-      <nav class="hero__media hero__aside" aria-label={u("wissen.more_title")}>
-        <h2>{u("wissen.more_title")}</h2>
+      <HeroAside title={u("wissen.more_title")}>
         <ul class="topics">
           <li><span>{u("wissen.more_situations")}</span><a class="arrow-link" href={p("/wissen/situation")}>{u("wissen.more_situations_link")}</a></li>
           <li><span>{u("wissen.more_glossary")}</span><a class="arrow-link" href={p("/wissen/glossar")}>{u("wissen.more_glossary_link")}</a></li>
         </ul>
-      </nav>
+      </HeroAside>
     </div>
   </section>
 
@@ -79,28 +79,5 @@ const { texts, u, p } = pageContext(Astro);
     border-radius: 50%;
     background: var(--accent);
     margin-top: 0.35em;
-  }
-  /* Rechts im Aufmacher: die Liste der weiteren Zugänge, zum direkten Wechseln. */
-  .hero__aside {
-    min-height: 0;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    align-self: center;
-  }
-  .hero__aside h2 {
-    font-size: 1.125rem;
-    color: var(--on-brand);
-    margin-bottom: 0.75rem;
-  }
-  .hero__aside .topics li {
-    border-color: rgba(255, 255, 255, 0.2);
-    color: var(--on-brand);
-  }
-  .hero__aside .arrow-link {
-    color: var(--accent-bright);
-  }
-  @media (min-width: 860px) {
-    .hero__aside {
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
   }
 </style>

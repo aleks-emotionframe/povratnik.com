@@ -2,6 +2,7 @@
 // Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenseiten,
 // verbleibende Themen mit Zustand, Abhängigkeiten zu anderen Rubriken.
 import Base from "../../layouts/Base.astro";
+import HeroAside from "../../components/HeroAside.astro";
 import { RUBRICS, rubricBySlug, rubricGroup, rubricText } from "../../lib/rubrics.ts";
 import { loadPages, pagePath, type PageView } from "../../lib/pages.ts";
 import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
@@ -27,18 +28,15 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / <a href={p(`/wissen/bereich/${group.slug}`)}>{u(`wissen.group_${group.key}`)}</a> / {tx.title}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / <a href={p(`/wissen/bereich/${group.slug}`)}>{u(`wissen.group_${group.key}`)}</a><span class="crumbs__here"> / {tx.title}</span></p>
         <h1>{tx.title}</h1>
         <p class="lede">{tx.intro}</p>
       </div>
-      <div class="hero__media hero__media--plain">
-        <div>
-          <h2 class="questions__title">{u("wissen.questions")}</h2>
-          <ul class="questions">
-            {tx.questions.map((q) => <li>{q}</li>)}
-          </ul>
-        </div>
-      </div>
+      <HeroAside title={u("wissen.questions")}>
+        <ul class="topics">
+          {tx.questions.map((q) => <li><span>{q}</span></li>)}
+        </ul>
+      </HeroAside>
     </div>
   </section>
 
@@ -123,61 +121,5 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
   .remaining {
     font-size: 1.125rem;
     margin-bottom: 0.25rem;
-  }
-  .crumbs {
-    font-size: 0.875rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .crumbs a {
-    color: var(--on-brand);
-  }
-  .hero__media--plain {
-    display: flex;
-    align-items: center;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    min-height: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  @media (min-width: 860px) {
-    .hero__media--plain {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
-  }
-  .questions__title {
-    font-size: 1rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .questions {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.0625rem;
-    line-height: 1.35;
-    color: var(--on-brand);
-    max-width: 34ch;
-  }
-  .questions li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-  .questions li::before {
-    content: "?";
-    flex: none;
-    display: inline-grid;
-    place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    border-radius: 50%;
-    background: var(--accent-bright);
-    color: var(--brand-deep);
-    font-size: 0.875rem;
   }
 </style>

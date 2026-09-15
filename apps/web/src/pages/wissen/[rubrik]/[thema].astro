@@ -4,6 +4,7 @@
 // Hinweis (lib/pages.ts). Fehlende Felder erscheinen als Zustand, nie als leere Stelle.
 // Aufbau wie das Ortsprofil: Sprungleiste, Abschnitte als Tafeln, Seitenspalte als Tafeln.
 import Base from "../../../layouts/Base.astro";
+import HeroAside from "../../../components/HeroAside.astro";
 import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
 import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
 import { CONTENT_DIR, fmtDate, pageContext } from "../../../lib/page.ts";
@@ -40,13 +41,13 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
           {lang !== "de" && !page.fallback && <span class="mono">{u("shell.translation_note")}</span>}
         </p>
       </div>
-      <div class="hero__media hero__media--plain">
-        <dl class="glance">
+      <HeroAside title={u("topic.glance_title")}>
+        <dl>
           <dt>{u("topic.applies")}</dt><dd>{s.applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
           <dt>{u("topic.not_applies")}</dt><dd>{s.not_applies_to ?? <span class="state state--unknown">{missing}</span>}</dd>
           <dt>{u("topic.authority")}</dt><dd>{s.authority ?? <span class="state state--unknown">{missing}</span>}</dd>
         </dl>
-      </div>
+      </HeroAside>
     </div>
   </section>
 
@@ -157,65 +158,12 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
 </Base>
 
 <style>
-  .crumbs {
-    font-size: 0.875rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .crumbs a {
-    color: var(--on-brand);
-  }
   .hero__state {
     display: flex;
     gap: 1rem;
     align-items: center;
     flex-wrap: wrap;
     margin: 1.25rem 0 0;
-    color: var(--on-brand-soft);
-  }
-  .hero__media--plain {
-    display: flex;
-    align-items: center;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    min-height: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  @media (min-width: 860px) {
-    .hero__media--plain {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
-  }
-  /* Gilt für, gilt nicht für, zuständig: als Tabelle auf Nachtblau. */
-  .glance {
-    margin: 0;
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    column-gap: 1.25rem;
-    max-width: none;
-    font-size: 0.9375rem;
-    width: 100%;
-  }
-  .glance dt,
-  .glance dd {
-    margin: 0;
-    padding: 0.6rem 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-  }
-  .glance dt:first-of-type,
-  .glance dd:first-of-type {
-    border-top: 0;
-    padding-top: 0;
-  }
-  .glance dt {
-    font-family: var(--font-display);
-    font-weight: 600;
-    color: var(--on-brand-soft);
-  }
-  .glance dd {
-    color: var(--on-brand);
-  }
-  .glance .state {
     color: var(--on-brand-soft);
   }
   /* Sprungleiste unter dem Aufmacher. */

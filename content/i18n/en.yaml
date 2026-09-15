@@ -715,6 +715,7 @@ ui:
     state_draft: "not yet professionally checked"
     stand: Status {date}
     missing: not yet researched
+    glance_title: At a glance
     applies: Applies to
     not_applies: Does not apply to
     authority: Competent body
@@ -1059,6 +1060,7 @@ ui:
   weg:
     title: "My way to Croatia: quick check"
     description: "A few questions, then your first plan."
+    promises_title: How the quick check works
     promise_1: No account, no registration
     promise_2: Answers stay in this browser
     promise_3: Every fact in the plan with source and check date

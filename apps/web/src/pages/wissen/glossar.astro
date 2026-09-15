@@ -25,7 +25,7 @@ const anchor = (term: string) => term.toLowerCase().normalize("NFD").replace(/[Ì
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("glossary.crumb")}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a><span class="crumbs__here"> / {u("glossary.crumb")}</span></p>
         <h1>{u("glossary.title")}</h1>
         <p class="lede">{u("glossary.lede")}</p>
       </div>
@@ -55,14 +55,6 @@ const anchor = (term: string) => term.toLowerCase().normalize("NFD").replace(/[Ì
 </Base>
 
 <style>
-  .crumbs {
-    font-size: 0.875rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .crumbs a {
-    color: var(--on-brand);
-  }
   .count {
     color: var(--muted);
     margin-bottom: 1rem;
