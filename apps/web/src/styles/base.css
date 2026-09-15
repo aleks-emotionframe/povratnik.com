@@ -465,6 +465,9 @@ a:hover {
   right: 0;
   bottom: 0;
   z-index: 30;
+  /* Eigene Ebene, damit Safari auf iOS die feste Leiste beim Scrollen nicht verliert. */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
   grid-template-columns: repeat(4, 1fr);
   background: var(--paper);
   border-top: 1px solid var(--line);
