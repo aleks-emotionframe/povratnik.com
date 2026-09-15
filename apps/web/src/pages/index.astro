@@ -87,7 +87,6 @@ const keys = [
     <div class="container">
       <div class="band__head">
         <h2>{u("home.ways_title")}</h2>
-        <p class="soft">{u("home.ways_help")}</p>
       </div>
       <ul class="cards cards--ways">
         <li class="card card--link">
@@ -130,7 +129,6 @@ const keys = [
     <div class="container">
       <div class="band__head">
         <h2>{u("home.keys_title")}</h2>
-        <p class="soft">{u("home.keys_help")}</p>
       </div>
       <ol class="keys">
         {keys.map((k, i) => (
@@ -150,7 +148,6 @@ const keys = [
     <div class="container">
       <div class="band__head">
         <h2>{u("home.situations_title")}</h2>
-        <p class="soft">{u("home.situations_help")}</p>
       </div>
       <ul class="chips">
         {SITUATIONS.map((s) => <li><a href={p(`/wissen/situation/${s.slug}`)}>{situationText(s, texts).title}</a></li>)}
@@ -162,7 +159,6 @@ const keys = [
     <div class="container">
       <div class="band__head">
         <h2>{u("home.cases_title")}</h2>
-        <p class="soft">{u("home.cases_help")}</p>
       </div>
       <ul class="cards cases">
         {CASES.map((raw) => {

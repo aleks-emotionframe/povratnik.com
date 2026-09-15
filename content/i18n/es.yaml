@@ -642,7 +642,6 @@ ui:
     hero_alt: Una mujer y su padre ordenan documentos en una mesa en un casco antiguo.
     quick_title: Búsquedas frecuentes
     ways_title: Tres caminos al mismo conocimiento
-    ways_help: Por tema, por lugar o según su orden.
     way_check_title: Mi camino
     way_check_text: "Seis preguntas sobre su hogar y luego un primer plan: qué va primero, qué plazo activa cada cosa, qué queda abierto."
     way_wissen_title: Conocimiento por tema
@@ -652,7 +651,6 @@ ui:
     way_orte_text: Municipios con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado, fecha de comprobación y profundidad de datos, sin ranking.
     way_orte_link: Lugares y ayudas
     keys_title: Casi todo depende de cuatro claves
-    keys_help: Y en este orden. Es el hilo conductor de toda la web.
     key_link: Ir al tema
     key1_title: Estatus
     key1_sub: ¿Quién soy legalmente?
@@ -664,9 +662,7 @@ ui:
     key4_title: Seguro
     key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
     situations_title: Entradas por situación de vida
-    situations_help: Los mismos temas, en el orden que le corresponde.
     cases_title: Cinco caminos de ejemplo
-    cases_help: Perfiles ficticios del concepto. Los testimonios reales llegarán cuando personas de prueba hayan usado el plan.
     cases_label: Ejemplo, ficticio
     cases_first: "Primer paso:"
   wissen:

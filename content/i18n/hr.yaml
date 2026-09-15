@@ -642,7 +642,6 @@ ui:
     hero_alt: Žena i njezin otac razvrstavaju dokumente za stolom u starom gradu.
     quick_title: Često traženo
     ways_title: Tri puta do istog znanja
-    ways_help: Po temi, po mjestu ili po vašem redoslijedu.
     way_check_title: Moj put
     way_check_text: "Šest pitanja o vašem kućanstvu, zatim prvi plan: što prvo, koji rok što pokreće, što ostaje otvoreno."
     way_wissen_title: Znanje po temama
@@ -652,7 +651,6 @@ ui:
     way_orte_text: Općine sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem, datumom provjere i dubinom podataka, bez rang-liste.
     way_orte_link: Mjesta i mjere
     keys_title: Gotovo sve ovisi o četiri ključa
-    keys_help: I to ovim redom. To je crvena nit cijele stranice.
     key_link: Na temu
     key1_title: Status
     key1_sub: Tko sam pravno?
@@ -664,9 +662,7 @@ ui:
     key4_title: Osiguranje
     key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
     situations_title: Ulazi prema životnoj situaciji
-    situations_help: Iste teme, redoslijedom koji vama odgovara.
     cases_title: Pet primjernih putova
-    cases_help: Fiktivni profili iz koncepta. Prava iskustva slijede čim testne osobe upotrijebe plan.
     cases_label: Primjer, fiktivno
     cases_first: "Prvi korak:"
   wissen:

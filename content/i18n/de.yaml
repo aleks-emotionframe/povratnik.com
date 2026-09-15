@@ -412,7 +412,6 @@ ui:
     hero_alt: Eine Frau und ihr Vater sortieren an einem Tisch in einer Altstadt Unterlagen.
     quick_title: Häufig gesucht
     ways_title: Drei Wege zum selben Wissen
-    ways_help: Nach Thema, nach Ort oder nach Ihrer Reihenfolge.
     way_check_title: Mein Weg
     way_check_text: "Sechs Fragen zu Ihrem Haushalt, dann ein erster Plan: was zuerst, welche Frist wodurch ausgelöst wird, was offen bleibt."
     way_wissen_title: Wissen nach Thema
@@ -422,7 +421,6 @@ ui:
     way_orte_text: Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand, Prüfdatum und Datentiefe, ohne Rangliste.
     way_orte_link: Orte und Leistungen
     keys_title: Fast alles hängt an vier Schlüsseln
-    keys_help: Und zwar in dieser Reihenfolge. Das ist der rote Faden der ganzen Website.
     key_link: Zum Thema
     key1_title: Status
     key1_sub: Wer bin ich rechtlich?
@@ -434,9 +432,7 @@ ui:
     key4_title: Versicherung
     key4_text: Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.
     situations_title: Einstiege nach Lebenssituation
-    situations_help: Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.
     cases_title: Fünf Beispielwege
-    cases_help: Fiktive Fallprofile aus dem Konzept. Echte Erfahrungsberichte folgen, sobald Testpersonen den Plan benutzt haben.
     cases_label: Beispiel, fiktiv
     cases_first: "Erster Schritt:"
   wissen:
