@@ -741,6 +741,9 @@ ui:
     report_subject: "Pogreška: {title}"
   country:
     crumb: Prema zemlji podrijetla
+    title: "Po zemlji podrijetla"
+    description: "Što morate riješiti u dosadašnjoj zemlji boravka prije selidbe u Hrvatsku, za šest zemalja."
+    lede: "Što morate riješiti u dosadašnjoj zemlji boravka prije odlaska u Hrvatsku: odjava, apostille, socijalno osiguranje, porezi. Hrvatski dio je odvojen."
     others: Druge zemlje podrijetla
     what_title: Što je važno za odlazak
     what_help: Hrvatski postupak i zahtjevi zemlje podrijetla dvije su različite stvari.
@@ -758,6 +761,9 @@ ui:
     cta_text: Brza provjera pita za zemlju podrijetla svake osobe u kućanstvu.
   situation:
     crumb: Životna situacija
+    title: "Ulazi po životnoj situaciji"
+    description: "Šest tipičnih polaznih situacija za povratak i iseljavanje u Hrvatsku, svaka sa svojim putem pravim redoslijedom."
+    lede: "Šest tipičnih polaznih situacija, od selidbe s obitelji do mirovine. Svaka vas vodi kroz teme odgovarajućim redoslijedom."
     trap_title: Gdje ovdje često zapne
     path_title: Vaš put ovim redoslijedom
     rubrics_title: Ove rubrike dodatno vrijede

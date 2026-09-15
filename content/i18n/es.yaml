@@ -741,6 +741,9 @@ ui:
     report_subject: "Error: {title}"
   country:
     crumb: Por país de origen
+    title: "Por país de origen"
+    description: "Lo que debe resolver en su país de residencia actual antes de mudarse a Croacia, para seis países."
+    lede: "Lo que debe resolver en su país de residencia actual antes de partir a Croacia: baja, apostilla, seguridad social, impuestos. La parte croata es aparte."
     others: Otros países de origen
     what_title: Qué cuenta para la salida
     what_help: El procedimiento croata y los requisitos del país de origen son dos cosas distintas.
@@ -758,6 +761,9 @@ ui:
     cta_text: El chequeo rápido pregunta por el país de origen de cada persona del hogar.
   situation:
     crumb: Situación de vida
+    title: "Entradas por situación de vida"
+    description: "Seis puntos de partida típicos para el retorno y la emigración a Croacia, cada uno con su camino en el orden correcto."
+    lede: "Seis puntos de partida típicos, desde la mudanza con familia hasta la jubilación. Cada uno le guía por los temas en el orden adecuado."
     trap_title: Dónde suele fracasar
     path_title: Su camino en este orden
     rubrics_title: Estas secciones también cuentan

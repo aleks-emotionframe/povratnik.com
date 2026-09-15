@@ -741,6 +741,9 @@ ui:
     report_subject: "Error: {title}"
   country:
     crumb: By country of origin
+    title: "By country of origin"
+    description: "What you need to settle in your current country before moving to Croatia, for six countries."
+    lede: "What you need to settle in your current country before leaving for Croatia: deregistration, apostille, social security, taxes. The Croatian part is separate."
     others: Other countries of origin
     what_title: What counts for leaving
     what_help: The Croatian procedure and the requirements of the country of origin are two different things.
@@ -758,6 +761,9 @@ ui:
     cta_text: The quick check asks for the country of origin of every person in the household.
   situation:
     crumb: Life situation
+    title: "Entry points by life situation"
+    description: "Six typical starting points for returning or emigrating to Croatia, each with its path in the right order."
+    lede: "Six typical starting points, from moving with a family to retirement. Each leads you through the topics in the order that fits."
     trap_title: Where it often fails here
     path_title: Your way in this order
     rubrics_title: These sections also count

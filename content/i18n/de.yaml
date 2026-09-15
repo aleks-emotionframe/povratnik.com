@@ -512,6 +512,9 @@ ui:
     report_subject: "Fehler: {title}"
   country:
     crumb: Nach Herkunftsland
+    title: "Nach Herkunftsland"
+    description: "Was Sie im bisherigen Wohnland vor dem Umzug nach Kroatien erledigen müssen, für sechs Länder."
+    lede: "Was Sie im bisherigen Wohnland erledigen müssen, bevor es nach Kroatien geht: Abmeldung, Apostille, Sozialversicherung, Steuern. Der kroatische Teil ist davon getrennt."
     others: Andere Herkunftsländer
     what_title: Was für die Ausreise zählt
     what_help: Der kroatische Prozess und die Anforderungen des Herkunftslands sind zwei verschiedene Dinge.
@@ -529,6 +532,9 @@ ui:
     cta_text: Der Kurzcheck fragt nach dem Herkunftsland jeder Person im Haushalt.
   situation:
     crumb: Lebenssituation
+    title: "Einstiege nach Lebenssituation"
+    description: "Sechs typische Ausgangslagen für Rückkehr und Auswanderung nach Kroatien, jede mit ihrem Weg in der richtigen Reihenfolge."
+    lede: "Sechs typische Ausgangslagen, vom Umzug mit Familie bis zur Pension. Jede führt Sie in der passenden Reihenfolge durch die Themen."
     trap_title: Woran es hier oft scheitert
     path_title: Ihr Weg in dieser Reihenfolge
     rubrics_title: Diese Rubriken zählen zusätzlich
