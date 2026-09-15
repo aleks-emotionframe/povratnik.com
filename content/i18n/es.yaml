@@ -709,30 +709,31 @@ ui:
     mask_notdecided_v: lo que decide un profesional
   topic:
     state_checked: revisado profesionalmente
+    jump_label: "Secciones de esta página"
     state_draft: "aún sin revisión profesional"
     stand: Estado {date}
     missing: todavía sin investigar
     applies: Aplica a
     not_applies: No aplica a
     authority: Entidad competente
-    prerequisites: Requisitos
-    steps: Procedimiento
-    documents: Documentos
-    duration: Duración y costes
-    deadlines: Plazos
-    terms: Términos oficiales
-    requires: Necesario antes
-    followed: Después viene
-    cta_title: ¿Se aplica a mí?
+    prerequisites: "Lo que necesita"
+    steps: "Cómo funciona"
+    documents: "Documentos que necesita"
+    duration: "Duración y costes"
+    deadlines: "Plazos"
+    terms: "Términos en la ventanilla"
+    requires: "Haga esto primero"
+    followed: "Después"
+    cta_title: "¿Me afecta esto?"
     cta_text: "El chequeo rápido muestra si este tema le afecta y cuándo toca."
-    mistake: Error frecuente
-    not_decided: Qué no se decide aquí
-    open_points: Puntos abiertos
+    mistake: "Error frecuente"
+    not_decided: "Lo que aclara un profesional"
+    open_points: "Puntos abiertos"
     open: abierto
     validity: Vigencia
-    stand_title: Estado y fuentes
-    label: Marcado
-    source: Fuente original
+    stand_title: "Estado y fuentes"
+    label: "Estado de revisión"
+    source: "Fuente"
     source_meta: "{publisher}. {reference}. Revisado el {date}."
     valid_from: Vigente desde
     valid_until: hasta el {date}

@@ -480,30 +480,31 @@ ui:
     mask_notdecided_v: was eine Fachperson entscheidet
   topic:
     state_checked: fachlich geprüft
+    jump_label: "Abschnitte dieser Seite"
     state_draft: "fachlich noch nicht geprüft"
     stand: Stand {date}
     missing: noch nicht recherchiert
     applies: Gilt für
     not_applies: Gilt nicht für
     authority: Zuständig
-    prerequisites: Voraussetzungen
-    steps: Ablauf
-    documents: Unterlagen
-    duration: Dauer und Kosten
-    deadlines: Fristen
-    terms: Amtsbegriffe
-    requires: Vorher nötig
-    followed: Danach folgt
-    cta_title: Gilt das für mich?
+    prerequisites: "Das brauchen Sie"
+    steps: "So läuft es ab"
+    documents: "Diese Unterlagen brauchen Sie"
+    duration: "Dauer und Kosten"
+    deadlines: "Fristen"
+    terms: "Begriffe am Schalter"
+    requires: "Zuerst erledigen"
+    followed: "Danach"
+    cta_title: "Gilt das für mich?"
     cta_text: "Der Kurzcheck zeigt, ob dieses Thema für Sie gilt und wann es dran ist."
-    mistake: Häufiger Irrtum
-    not_decided: Was hier nicht entschieden wird
-    open_points: Offene Punkte
+    mistake: "Häufiger Fehler"
+    not_decided: "Das klärt eine Fachperson"
+    open_points: "Offene Punkte"
     open: offen
     validity: Gültigkeit
-    stand_title: Stand und Quellen
-    label: Kennzeichnung
-    source: Originalquelle
+    stand_title: "Stand und Quellen"
+    label: "Prüfstatus"
+    source: "Quelle"
     source_meta: "{publisher}. {reference}. Geprüft {date}."
     valid_from: Gültig ab
     valid_until: bis {date}

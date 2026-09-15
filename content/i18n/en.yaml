@@ -709,30 +709,31 @@ ui:
     mask_notdecided_v: what a professional decides
   topic:
     state_checked: professionally checked
+    jump_label: "Sections of this page"
     state_draft: "not yet professionally checked"
     stand: Status {date}
     missing: not yet researched
     applies: Applies to
     not_applies: Does not apply to
     authority: Competent body
-    prerequisites: Requirements
-    steps: Procedure
-    documents: Documents
-    duration: Duration and costs
-    deadlines: Deadlines
-    terms: Official terms
-    requires: Needed first
-    followed: Followed by
-    cta_title: Does this apply to me?
+    prerequisites: "What you need"
+    steps: "How it works"
+    documents: "Documents you need"
+    duration: "Time and costs"
+    deadlines: "Deadlines"
+    terms: "Terms at the counter"
+    requires: "Do this first"
+    followed: "Afterwards"
+    cta_title: "Does this apply to me?"
     cta_text: "The quick check shows whether this topic applies to you and when it is due."
-    mistake: Common mistake
-    not_decided: What is not decided here
-    open_points: Open points
+    mistake: "Common mistake"
+    not_decided: "What a professional decides"
+    open_points: "Open points"
     open: open
     validity: Validity
-    stand_title: Status and sources
-    label: Label
-    source: Original source
+    stand_title: "Status and sources"
+    label: "Check status"
+    source: "Source"
     source_meta: "{publisher}. {reference}. Checked {date}."
     valid_from: Valid from
     valid_until: until {date}

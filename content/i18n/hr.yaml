@@ -709,30 +709,31 @@ ui:
     mask_notdecided_v: što odlučuje stručnjak
   topic:
     state_checked: stručno provjereno
+    jump_label: "Dijelovi ove stranice"
     state_draft: "stručno još nije provjereno"
     stand: Stanje {date}
     missing: još nije istraženo
     applies: Vrijedi za
     not_applies: Ne vrijedi za
     authority: Nadležno
-    prerequisites: Uvjeti
-    steps: Postupak
-    documents: Isprave
-    duration: Trajanje i troškovi
-    deadlines: Rokovi
-    terms: Službeni pojmovi
-    requires: Prije potrebno
-    followed: Zatim slijedi
-    cta_title: Vrijedi li to za mene?
+    prerequisites: "Što vam treba"
+    steps: "Kako to ide"
+    documents: "Ovi dokumenti su vam potrebni"
+    duration: "Trajanje i troškovi"
+    deadlines: "Rokovi"
+    terms: "Pojmovi na šalteru"
+    requires: "Prvo riješiti"
+    followed: "Zatim"
+    cta_title: "Vrijedi li to za mene?"
     cta_text: "Brza provjera pokazuje vrijedi li ova tema za vas i kada je na redu."
-    mistake: Česta zabluda
-    not_decided: Što se ovdje ne odlučuje
-    open_points: Otvorene točke
+    mistake: "Česta pogreška"
+    not_decided: "To razjašnjava stručna osoba"
+    open_points: "Otvorene točke"
     open: otvoreno
     validity: Valjanost
-    stand_title: Stanje i izvori
-    label: Oznaka
-    source: Izvorni izvor
+    stand_title: "Stanje i izvori"
+    label: "Status provjere"
+    source: "Izvor"
     source_meta: "{publisher}. {reference}. Provjereno {date}."
     valid_from: Vrijedi od
     valid_until: do {date}
