@@ -599,7 +599,6 @@ ui:
     tagline: Living in Croatia
     stage: Test stage
     stage_text: Example rules without professional approval, professional review as a placeholder. Not intended for customers.
-    report: Report an error
     skip: Skip to content
     nav_wissen: Knowledge
     nav_orte: Places
@@ -608,9 +607,6 @@ ui:
     nav_search: Search
     cta: Start the quick check
     language: Language
-    contact_title: Found something that is not right?
-    contact_text: "A wrong deadline, a wrong fact, a dead link: we review every report within two working days."
-    contact_how: How we work
     foot_claim: "Living in Croatia: the right order for returning or emigrating, person by person."
     foot_disclaimer: This website does not replace legal or tax advice. The competent body always decides on applications.
     foot_stage: Test stage. Example rules without professional approval (ADR-0004).

@@ -599,7 +599,6 @@ ui:
     tagline: Život u Hrvatskoj
     stage: Testna faza
     stage_text: Primjerna pravila bez stručnog odobrenja, stručna provjera kao rezervirano mjesto. Nije namijenjeno korisnicima.
-    report: Prijavi pogrešku
     skip: Skoči na sadržaj
     nav_wissen: Znanje
     nav_orte: Mjesta
@@ -608,9 +607,6 @@ ui:
     nav_search: Pretraga
     cta: Pokreni brzu provjeru
     language: Jezik
-    contact_title: Pronašli ste nešto što nije točno?
-    contact_text: "Pogrešan rok, pogrešan podatak, mrtva poveznica: svaku prijavu pregledamo u roku od dva radna dana."
-    contact_how: Kako radimo
     foot_claim: "Život u Hrvatskoj: redoslijed za povratak i useljenje, osoba po osoba."
     foot_disclaimer: Ova stranica ne zamjenjuje pravno ni porezno savjetovanje. O zahtjevima uvijek odlučuje nadležno tijelo.
     foot_stage: Testna faza. Primjerna pravila bez stručnog odobrenja (ADR-0004).

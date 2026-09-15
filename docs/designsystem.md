@@ -9,17 +9,20 @@ Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
 Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
 Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
 und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
-Aufmacher erreichbar). Die Einstiege nach Lebenssituation stehen im Aufmacher der
-Startseite unter dem Suchfeld: breit in drei Spalten, schmal als Liste in einer Zeile je
-Situation; dafür entfällt schmal der Vorspann, damit Titel, Suche und alle sechs
-Einstiege ohne Scrollen bedienbar sind.
+Aufmacher erreichbar). Die Suche steht im Kopf (breit als Feld mit Lupe, schmal als
+Lupe, die zur Suchseite führt); der Navigationspunkt «Suche» entfällt. Die Einstiege
+nach Lebenssituation stehen im Aufmacher der Startseite unter dem Vorspann: breit in
+drei Spalten, schmal als Liste in einer Zeile je Situation, alles ohne Scrollen
+bedienbar.
 
 Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
 folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich
 sind dort: eine dunkle Markenfarbe mit einer helleren Akzentfarbe derselben Familie,
 grosse Fotografie im Aufmacher, eine geometrische Groteske für Titel, weisse Karten
 auf hellen Flächen, ein Kopf mit klarer Hauptnavigation und einer hervorgehobenen
-Handlung, Schnelleinstiege als Chips, ein Kontaktband vor dem Fuss. Die
+Handlung, Schnelleinstiege als Chips, ein Kontaktband vor dem Fuss (das Kontaktband
+ist am 15.09.2026 auf Entscheid der Produktverantwortung entfallen; der Fehlerkontakt
+steht im Fuss und im Impressum). Die
 Zustandsdarstellung aus Version 1 bleibt unverändert, weil sie der fachliche Kern ist.
 
 `prototyp.html` im Wurzelverzeichnis ist seit Version 2.0 nur noch Referenz für die
@@ -88,8 +91,8 @@ Startseite füllt den Bildschirm unter dem Kopf: auf breiten Geräten liegt die
 Fotografie hinter dem ganzen Aufmacher bis zum Rand, links ein Verlauf in
 Markenfarbe, darauf Titel, Suchfeld und Handlungen; auf schmalen Geräten Text und
 Fotografie untereinander, zusammen genau ein Bildschirm. Andere Aufmacher bleiben
-Markenfläche mit Titel. Auf der Startseite steht unter dem Titel ein Suchfeld; es führt zur
-Suchseite, ohne den Suchbegriff in die Adresse oder an den Server zu schreiben.
+Markenfläche mit Titel. Das Suchfeld im Kopf führt zur Suchseite, ohne den Suchbegriff
+in die Adresse oder an den Server zu schreiben.
 
 **Fotografie:** dokumentarisch wirkende Bilder von Menschen und Orten, natürliches
 Licht, gedeckte Farben, kein Stock-Lächeln. Jedes Bild als WebP in mehreren Breiten,

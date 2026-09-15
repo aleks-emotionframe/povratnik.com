@@ -599,7 +599,6 @@ ui:
     tagline: Vivir en Croacia
     stage: Fase de prueba
     stage_text: Reglas de ejemplo sin revisión profesional, revisión profesional como marcador de posición. No destinado a clientes.
-    report: Informar de un error
     skip: Saltar al contenido
     nav_wissen: Conocimiento
     nav_orte: Lugares
@@ -608,9 +607,6 @@ ui:
     nav_search: Buscar
     cta: Iniciar el chequeo rápido
     language: Idioma
-    contact_title: ¿Ha encontrado algo que no es correcto?
-    contact_text: "Un plazo erróneo, un dato erróneo, un enlace roto: revisamos cada aviso en dos días laborables."
-    contact_how: Cómo trabajamos
     foot_claim: "Vivir en Croacia: el orden correcto para regresar o emigrar, persona por persona."
     foot_disclaimer: Esta web no sustituye el asesoramiento jurídico ni fiscal. Sobre las solicitudes decide siempre la entidad competente.
     foot_stage: Fase de prueba. Reglas de ejemplo sin revisión profesional (ADR-0004).

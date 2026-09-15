@@ -312,8 +312,8 @@ a:hover {
   .site-head .container {
     padding-block: 0.7rem 0;
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.5rem 1rem;
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem 0.5rem;
   }
   /* Zeile 1: Logo und Sprachwahl, Zeile 2: Navigation scrollt über die volle Breite.
      Die Handlung im Kopf entfällt hier; der Kurzcheck ist über «Mein Weg» und den
@@ -327,9 +327,8 @@ a:hover {
   }
   .lang {
     grid-row: 1;
-    grid-column: 2;
+    grid-column: 3;
     align-self: center;
-    margin-left: 0;
   }
   .lang a {
     min-width: 32px;
@@ -470,8 +469,7 @@ a:hover {
   position: relative;
   z-index: 1;
   margin-inline: var(--gutter);
-  padding: 1.1rem 0 clamp(1.5rem, 5vh, 3rem);
-  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.75rem 0 clamp(1.5rem, 5vh, 3rem);
 }
 .hero__situations h2 {
   font-size: 0.9375rem;
@@ -529,14 +527,12 @@ a:hover {
     font-size: 1.75rem;
     margin-bottom: 0.6rem;
   }
-  /* Der Vorspann entfällt schmal: Titel, Suche und die sechs Lebenssituationen
-     sollen ohne Scrollen bedienbar sein, jede Situation in einer Zeile. */
+  /* Schmal: Titel, Vorspann und die sechs Lebenssituationen auf einem Bildschirm,
+     jede Situation in einer Zeile. */
   .hero--full .lede {
-    display: none;
-  }
-  .hero--full .search {
-    margin-top: 0.5rem;
-    flex-wrap: nowrap;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    margin: 0;
   }
   .hero__situations ul {
     grid-template-columns: minmax(0, 1fr);
@@ -564,7 +560,7 @@ a:hover {
       linear-gradient(90deg, var(--brand) 0%, var(--brand) 32%, oklch(28% 0.09 262 / 0.75) 52%, oklch(28% 0.09 262 / 0.15) 72%, transparent 88%);
   }
   .hero__situations {
-    padding: 1.35rem 0 clamp(2rem, 6vh, 3.5rem);
+    padding: 1rem 0 clamp(2rem, 6vh, 3.5rem);
   }
   .hero__situations ul {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -947,27 +943,6 @@ a:hover {
   }
 }
 
-/* Kontaktband vor dem Fuss */
-.contact .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
-  flex-wrap: wrap;
-}
-.contact h2 {
-  margin-bottom: 0.25rem;
-}
-.contact p {
-  margin: 0;
-  color: var(--on-brand-soft);
-}
-.contact__actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
 /* Fuss der Website, über dem EmotionFrame Balken */
 .site-foot {
   background: var(--brand-deep);
@@ -1076,11 +1051,70 @@ a:hover {
   top: 1rem;
 }
 
+/* Suche im Kopf: breit ein Feld mit Lupe, schmal nur die Lupe als Link zur Suchseite. */
+.head-search {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--paper);
+  transition: border-color var(--dur) var(--ease);
+}
+.head-search:focus-within {
+  border-color: var(--accent);
+}
+.head-search input {
+  width: 12rem;
+  min-height: 40px;
+  padding: 0.4rem 0.75rem;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+.head-search input:focus-visible {
+  outline: none;
+}
+.head-search button {
+  width: 40px;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.head-search button:hover {
+  color: var(--accent);
+}
+.head-search-link {
+  display: none;
+  width: 44px;
+  min-height: 44px;
+  place-items: center;
+  color: var(--ink-soft);
+}
+.head-search-link:hover {
+  color: var(--ink);
+}
+@media (max-width: 720px) {
+  .head-search {
+    display: none;
+  }
+  .head-search-link {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
 /* Sprachwahl im Kopf: Kürzel, aktuelle Sprache gefüllt */
 .lang {
   display: flex;
   gap: 0.15rem;
-  margin-left: auto;
 }
 .lang a {
   font-family: var(--font-display);

@@ -1,6 +1,6 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
-// Suchfeld und Lebenssituationen, Schnelleinstiege, die drei Wege, die vier Schlüssel,
+// Lebenssituationen (die Suche steht im Kopf), Schnelleinstiege, die drei Wege, die vier Schlüssel,
 // Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
@@ -37,11 +37,6 @@ const keys = [
       <div class="hero__text">
         <h1>{u("home.hero_title")}</h1>
         <p class="lede">{u("home.hero_lede")}</p>
-        <form class="search" action={p("/suche")} method="get" data-search>
-          <label class="visually-hidden" for="hero-q">{u("search.label")}</label>
-          <input id="hero-q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
-          <button class="button button--outline-light" type="submit">{u("search.button")}</button>
-        </form>
       </div>
       <nav class="hero__situations" aria-label={u("home.situations_title")}>
         <h2>{u("home.situations_title")}</h2>
@@ -54,17 +49,6 @@ const keys = [
       </div>
     </div>
   </section>
-  <script is:inline>
-    // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.
-    (function () {
-      var form = document.querySelector("[data-search]");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var q = form.querySelector("input").value.trim();
-        location.href = form.getAttribute("action") + (q ? "#q=" + encodeURIComponent(q) : "");
-      });
-    })();
-  </script>
 
   <section class="band band--surface">
     <div class="container">
