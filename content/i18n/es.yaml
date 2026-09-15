@@ -31,7 +31,7 @@ rules:
     matches: Según sus datos, en el ejemplo ficticio podría aplicarse la vía para el trabajo remoto. Sobre la solicitud decide la autoridad de ejemplo (ficticia).
 wizard:
   title: Mi camino a Croacia
-  intro: Seis preguntas y luego su primer plan. Sus respuestas se quedan en este navegador.
+  intro: "Unas preguntas y luego su primer plan. Sus respuestas se quedan en este navegador."
   progress: Pregunta {n} de {total}
   for_person: Para {person}
   unknown: Todavía no lo sé
@@ -639,7 +639,7 @@ ui:
     quick_title: Búsquedas frecuentes
     ways_title: Tres caminos al mismo conocimiento
     way_check_title: Mi camino
-    way_check_text: "Seis preguntas sobre su hogar y luego un primer plan: qué va primero, qué plazo activa cada cosa, qué queda abierto."
+    way_check_text: "Responda unas preguntas sobre su situación. Recibirá un plan con los próximos pasos, los plazos y lo que queda por aclarar."
     way_wissen_title: Conocimiento por tema
     way_wissen_text: "Respuestas claras sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda."
     way_wissen_link: A las secciones

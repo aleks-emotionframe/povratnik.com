@@ -31,7 +31,7 @@ rules:
     matches: According to your answers, in the fictional example the remote work route may apply. The example authority (fictional) decides on the application.
 wizard:
   title: My way to Croatia
-  intro: Six questions, then your first plan. Your answers stay in this browser.
+  intro: "A few questions, then your first plan. Your answers stay in this browser."
   progress: Question {n} of {total}
   for_person: For {person}
   unknown: I do not know yet
@@ -639,7 +639,7 @@ ui:
     quick_title: Frequently searched
     ways_title: Three ways to the same knowledge
     way_check_title: My way
-    way_check_text: "Six questions about your household, then a first plan: what comes first, which deadline is triggered by what, what remains open."
+    way_check_text: "Answer a few questions about your situation. You get a plan with the next steps, the deadlines and what still needs clarifying."
     way_wissen_title: Knowledge by topic
     way_wissen_text: "Clear answers on residence, documents, work, taxes, health, school and housing."
     way_wissen_link: To the sections

@@ -31,7 +31,7 @@ rules:
     matches: Prema vašim podacima u fiktivnom primjeru dolazi u obzir put za rad na daljinu. O zahtjevu odlučuje primjerno tijelo (fiktivno).
 wizard:
   title: Moj put u Hrvatsku
-  intro: Šest pitanja, zatim vaš prvi plan. Vaši odgovori ostaju u ovom pregledniku.
+  intro: "Nekoliko pitanja, zatim vaš prvi plan. Vaši odgovori ostaju u ovom pregledniku."
   progress: Pitanje {n} od {total}
   for_person: Za {person}
   unknown: Još ne znam
@@ -639,7 +639,7 @@ ui:
     quick_title: Često traženo
     ways_title: Tri puta do istog znanja
     way_check_title: Moj put
-    way_check_text: "Šest pitanja o vašem kućanstvu, zatim prvi plan: što prvo, koji rok što pokreće, što ostaje otvoreno."
+    way_check_text: "Odgovorite na nekoliko pitanja o svojoj situaciji. Dobit ćete plan sa sljedećim koracima, rokovima i onim što još treba razjasniti."
     way_wissen_title: Znanje po temama
     way_wissen_text: "Razumljivi odgovori o boravku, dokumentima, radu, porezima, zdravstvu, školi i stanovanju."
     way_wissen_link: Na rubrike

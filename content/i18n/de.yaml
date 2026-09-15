@@ -33,7 +33,7 @@ rules:
 # Oberflächentexte des Kurzchecks und des Plans (wizard-konzept.md 2.2 und 6).
 wizard:
   title: Mein Weg nach Kroatien
-  intro: Sechs Fragen, dann Ihr erster Plan. Ihre Antworten bleiben in diesem Browser.
+  intro: "Ein paar Fragen, dann Ihr erster Plan. Ihre Antworten bleiben in diesem Browser."
   progress: Frage {n} von {total}
   for_person: Für {person}
   unknown: Weiss ich noch nicht
