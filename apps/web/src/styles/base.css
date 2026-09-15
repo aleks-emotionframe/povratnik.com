@@ -1253,28 +1253,40 @@ a:hover {
   top: 1rem;
 }
 
-/* Suche im Kopf: breit ein Feld mit Lupe, schmal nur die Lupe als Link zur Suchseite. */
+/* Suche im Kopf: breit zunächst nur die Lupe; mit Fokus im Feld (Klick auf die Lupe
+   oder Tab) öffnet sich das Feld. Schmal nur die Lupe als Link zur Suchseite. */
 .head-search {
   display: flex;
   align-items: center;
   margin-left: auto;
   border-radius: 999px;
-  background: var(--surface);
+  background: transparent;
   transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
-.head-search:focus-within {
-  background: var(--paper);
-  box-shadow: 0 0 0 2px var(--accent);
+.head-search__open {
+  width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 999px;
+}
+.head-search__open:hover {
+  color: var(--ink);
+  background: var(--surface);
 }
 .head-search input {
-  width: clamp(6rem, 9vw, 11rem);
-  min-height: 42px;
-  padding: 0.4rem 1rem 0.4rem 0;
+  width: 0;
+  min-height: 44px;
+  padding: 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   font: inherit;
   font-size: 0.9375rem;
+  opacity: 0;
+  transition: width var(--dur) var(--ease), padding var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 .head-search input::placeholder {
   color: var(--ink-soft);
@@ -1282,19 +1294,67 @@ a:hover {
 .head-search input:focus-visible {
   outline: none;
 }
-.head-search button {
-  order: -1;
-  width: 42px;
-  min-height: 42px;
-  border: 0;
-  background: transparent;
-  color: var(--ink-soft);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+.head-search:focus-within {
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--accent);
 }
-.head-search button:hover {
-  color: var(--accent);
+.head-search:focus-within .head-search__open {
+  color: var(--ink);
+}
+.head-search:focus-within input,
+.head-search input:not(:placeholder-shown) {
+  width: clamp(8rem, 12vw, 14rem);
+  padding-right: 1rem;
+  opacity: 1;
+}
+.head-search {
+  position: relative;
+}
+.head-search__results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(26rem, calc(100vw - 2 * var(--gutter)));
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  padding: 0.4rem;
+  z-index: 25;
+  text-align: left;
+}
+.head-search__results a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.head-search__results a:hover,
+.head-search__results a:focus-visible {
+  background: var(--surface-blue);
+}
+.head-search__kind {
+  font-family: var(--font-meta);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.head-search__results p {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.head-search__all {
+  border-top: 1px solid var(--line);
+  margin-top: 0.25rem;
+  color: var(--accent) !important;
 }
 .head-search-link {
   display: none;

@@ -9,8 +9,11 @@ Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
 Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
 Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
 und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
-Aufmacher erreichbar). Die Suche steht im Kopf (breit als Feld mit Lupe, schmal als
-Lupe, die zur Suchseite führt); der Navigationspunkt «Suche» entfällt. Die Einstiege
+Aufmacher erreichbar). Die Suche steht im Kopf: breit als Lupe, die per Klick das Feld
+öffnet, mit Treffern beim Tippen (Index als statische Datei, beim ersten Fokus geladen,
+kein Begriff verlässt den Browser); schmal als Lupe, die zur Suchseite führt, wo die
+Treffer ebenfalls beim Tippen erscheinen. Der Navigationspunkt «Suche» entfällt, «Start»
+kommt hinzu. Die Einstiege
 nach Lebenssituation und die häufig gesuchten Themen stehen als zwei Gruppen im
 Aufmacher der Startseite unter dem Vorspann: breit in drei Spalten, schmal als Liste, «Häufig gesucht» schmal
 zugeklappt (details, per Skript nach Bildschirmbreite, ohne JavaScript offen);

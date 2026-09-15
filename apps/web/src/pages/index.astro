@@ -171,7 +171,7 @@ const keys = [
             <li class="card card--link cases__card">
               <div class="card__body">
                 <h3><a href={p(`/wissen/situation/${c.situation}`)}>{c.name}</a></h3>
-                <span class="cases__meta">{c.age}, {c.place}</span>
+                <span class="cases__meta">{u("home.cases_meta", { age: c.age, place: c.place })}</span>
                 <dl class="cases__facts">
                   <dt>{u("home.cases_situation")}</dt>
                   <dd>{c.line}</dd>

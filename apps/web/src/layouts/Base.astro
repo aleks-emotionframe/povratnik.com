@@ -25,6 +25,7 @@ interface Props {
 const { title, description, current, preload, fallback } = Astro.props;
 const { lang, u, p } = pageContext(Astro);
 const nav = [
+  { href: p("/"), label: u("shell.nav_start"), key: "start" },
   { href: p("/wissen"), label: u("shell.nav_wissen"), key: "wissen" },
   { href: p("/orte"), label: u("shell.nav_orte"), key: "orte" },
   { href: p("/mein-weg"), label: u("shell.nav_weg"), key: "mein-weg" },
@@ -62,12 +63,15 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
         <nav class="site-nav" aria-label="Navigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
         </nav>
+        {/* Breit: nur die Lupe; ein Klick darauf (Beschriftung des Felds) öffnet das Feld,
+            Enter sucht. Ohne Fokus klappt es wieder zu. */}
         <form class="head-search" role="search" action={p("/suche")} method="get" data-search>
-          <label class="visually-hidden" for="head-q">{u("search.label")}</label>
-          <input id="head-q" type="search" placeholder={u("shell.nav_search")} autocomplete="off" />
-          <button type="submit" aria-label={u("search.button")}>
+          <label class="head-search__open" for="head-q" aria-label={u("shell.nav_search")}>
             <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
-          </button>
+          </label>
+          <input id="head-q" type="search" placeholder={u("shell.nav_search")} autocomplete="off" aria-controls="head-results" />
+          <button class="visually-hidden" type="submit">{u("search.button")}</button>
+          <div class="head-search__results" id="head-results" hidden data-all={u("search.all")} data-none={u("search.none")} data-lang={lang} data-index="/suche-index.json"></div>
         </form>
         <a class="head-search-link" href={p("/suche")} aria-label={u("shell.nav_search")}>
           <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
@@ -110,18 +114,53 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
     </nav>
 
     <script is:inline>
-      // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.
-      // Auf der Suchseite selbst wird das dortige Feld direkt gefüllt.
+      // Kopfsuche: Ergebnisse erscheinen beim Tippen. Der Index ist eine statische Datei und
+      // wird beim ersten Fokus geladen; der Suchbegriff bleibt im Browser (CLAUDE.md 2.5).
+      // Enter führt zur Suchseite, der Begriff reist nur als Fragment. Ohne JavaScript
+      // öffnet Enter die Suchseite leer.
       (function () {
         var form = document.querySelector("[data-search]");
+        var input = form.querySelector("input");
+        var box = document.getElementById("head-results");
+        var index = null;
+        function norm(s) { return s.toLowerCase().normalize("NFD").replace(/\p{M}/gu, ""); }
+        function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+        function load() {
+          if (index) return;
+          index = [];
+          fetch(box.dataset.index).then(function (r) { return r.json(); }).then(function (all) { index = all[box.dataset.lang] || []; render(); });
+        }
+        function render() {
+          var q = norm(input.value.trim());
+          if (!q) { box.hidden = true; box.innerHTML = ""; return; }
+          var words = q.split(/\s+/);
+          var hits = index.filter(function (e) {
+            var hay = norm(e.title + " " + e.text + " " + (e.terms || ""));
+            return words.every(function (w) { return hay.indexOf(w) !== -1; });
+          });
+          var inTitle = function (e) { return norm(e.title).indexOf(words[0]) !== -1 ? 1 : 0; };
+          hits.sort(function (a, b) { return inTitle(b) - inTitle(a); });
+          var html = hits.slice(0, 7).map(function (e) {
+            return '<a href="' + esc(e.href) + '"><span class="head-search__kind">' + esc(e.kind) + "</span>" + esc(e.title) + "</a>";
+          }).join("");
+          if (!hits.length) html = "<p>" + esc(box.dataset.none) + "</p>";
+          html += '<a class="head-search__all" href="' + esc(form.getAttribute("action")) + "#q=" + encodeURIComponent(input.value.trim()) + '">' + esc(box.dataset.all) + " (" + hits.length + ")</a>";
+          box.innerHTML = html;
+          box.hidden = false;
+        }
+        input.addEventListener("focus", load);
+        input.addEventListener("input", render);
+        document.addEventListener("click", function (e) { if (!form.contains(e.target)) box.hidden = true; });
+        input.addEventListener("keydown", function (e) { if (e.key === "Escape") { box.hidden = true; input.blur(); } });
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          var q = form.querySelector("input").value.trim();
+          var q = input.value.trim();
           var local = document.getElementById("q");
           if (local) {
             local.value = q;
             local.dispatchEvent(new Event("input"));
             local.focus();
+            box.hidden = true;
             return;
           }
           location.href = form.getAttribute("action") + (q ? "#q=" + encodeURIComponent(q) : "");

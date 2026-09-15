@@ -433,6 +433,7 @@ ui:
     news_title: "Aktuelles zu Rückkehr und Auswanderung"
     news_all: "Alle Meldungen"
     cases_label: Beispiel, fiktiv
+    cases_meta: "{age} Jahre alt, {place}"
     cases_situation: Ausgangslage
     cases_shapes: Was den Weg prägt
     cases_first: Erster Schritt
@@ -771,6 +772,8 @@ ui:
     for: für «{q}»
     empty: Nichts gefunden. Das heisst nicht, dass es das Thema nicht gibt, nur dass wir noch keine Seite dazu haben.
     empty_link: Sagen Sie uns, was Sie gesucht haben.
+    all: Alle Ergebnisse
+    none: Keine Treffer
     kind_topic: Themenseite
     kind_rubric: Rubrik
     kind_situation: Lebenssituation

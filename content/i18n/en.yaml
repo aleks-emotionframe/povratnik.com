@@ -662,6 +662,7 @@ ui:
     news_title: "News on returning and emigrating"
     news_all: "All news"
     cases_label: Example, fictional
+    cases_meta: "{age} years old, {place}"
     cases_situation: Starting point
     cases_shapes: What shapes the path
     cases_first: First step
@@ -1000,6 +1001,8 @@ ui:
     for: for «{q}»
     empty: Nothing found. That does not mean the topic does not exist, only that we do not have a page on it yet.
     empty_link: Tell us what you were looking for.
+    all: All results
+    none: No results
     kind_topic: Topic page
     kind_rubric: Section
     kind_situation: Life situation

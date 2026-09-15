@@ -1,27 +1,14 @@
 ---
 // Suche über Themenseiten, Rubriken, Lebenssituationen, Länder, Orte und Amtsbegriffe.
-// Der Index entsteht zur Bauzeit und liegt in der Seite; die Suche läuft im Browser,
+// Der Index (lib/search.ts) entsteht zur Bauzeit und liegt in der Seite; die Suche läuft im Browser,
 // ohne Anfrage an einen Server (CLAUDE.md 2.5 gilt sinngemäss: kein Suchbegriff verlässt
 // den Browser). Ohne JavaScript bleibt die Liste aller Einträge lesbar.
 import Base from "../layouts/Base.astro";
-import { RUBRICS, rubricText } from "../lib/rubrics.ts";
-import { SITUATIONS, situationText } from "../lib/situations.ts";
-import { loadPages, pagePath } from "../lib/pages.ts";
-import { loadPlaces, placeName } from "../lib/places.ts";
-import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+import { pageContext } from "../lib/page.ts";
+import { buildSearchIndex } from "../lib/search.ts";
 
-const { lang, texts, u, p } = pageContext(Astro);
-const topics = loadPages(CONTENT_DIR, lang);
-const countries = loadPages(CONTENT_DIR, lang, "country");
-type Entry = { kind: string; title: string; text: string; href: string; terms?: string };
-const index: Entry[] = [
-  ...topics.map((x) => ({ kind: u("search.kind_topic"), title: x.title, text: x.short_answer, href: p(pagePath(x)), terms: [...x.covers, ...x.terms.map((t) => t.term_hr)].join(" ") })),
-  ...RUBRICS.map((r) => { const tx = rubricText(r, texts); return { kind: u("search.kind_rubric"), title: tx.title, text: tx.intro, href: p(`/wissen/${r.slug}`), terms: tx.topics.join(" ") }; }),
-  ...SITUATIONS.map((s) => { const tx = situationText(s, texts); return { kind: u("search.kind_situation"), title: tx.title, text: tx.intro, href: p(`/wissen/situation/${s.slug}`) }; }),
-  ...countries.map((x) => ({ kind: u("search.kind_country"), title: x.title, text: x.short_answer, href: p(pagePath(x)) })),
-  ...loadPlaces().map((pl) => ({ kind: u("search.kind_place"), title: placeName(pl), text: pl.summary, href: p(`/orte/${pl.id}`), terms: pl.benefits.map((b) => b.title).join(" ") })),
-  ...topics.flatMap((x) => x.terms.map((t) => ({ kind: u("search.kind_term"), title: t.term_hr, text: t.term_explained[lang] ?? t.term_explained.de, href: p(pagePath(x)) }))),
-];
+const { u, p } = pageContext(Astro);
+const index = buildSearchIndex(pageContext(Astro).lang);
 ---
 
 <Base title={u("search.title")} description={u("search.description")} current="suche">

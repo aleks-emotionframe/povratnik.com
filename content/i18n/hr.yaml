@@ -662,6 +662,7 @@ ui:
     news_title: "Aktualno o povratku i iseljavanju"
     news_all: "Sve obavijesti"
     cases_label: Primjer, fiktivno
+    cases_meta: "dob {age}, {place}"
     cases_situation: Polazna situacija
     cases_shapes: Što određuje put
     cases_first: Prvi korak
@@ -1000,6 +1001,8 @@ ui:
     for: za «{q}»
     empty: Ništa nije pronađeno. To ne znači da tema ne postoji, samo da još nemamo stranicu o njoj.
     empty_link: Recite nam što ste tražili.
+    all: Svi rezultati
+    none: Nema rezultata
     kind_topic: Tematska stranica
     kind_rubric: Rubrika
     kind_situation: Životna situacija

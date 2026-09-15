@@ -662,6 +662,7 @@ ui:
     news_title: "Actualidad sobre el retorno y la emigración"
     news_all: "Todas las noticias"
     cases_label: Ejemplo, ficticio
+    cases_meta: "{age} años, {place}"
     cases_situation: Punto de partida
     cases_shapes: Lo que marca el camino
     cases_first: Primer paso
@@ -1000,6 +1001,8 @@ ui:
     for: para «{q}»
     empty: No se ha encontrado nada. Eso no significa que el tema no exista, solo que todavía no tenemos una página sobre él.
     empty_link: Díganos qué ha buscado.
+    all: Todos los resultados
+    none: Sin resultados
     kind_topic: Página temática
     kind_rubric: Sección
     kind_situation: Situación de vida
