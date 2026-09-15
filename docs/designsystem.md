@@ -12,7 +12,8 @@ und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und 
 Aufmacher erreichbar). Die Suche steht im Kopf (breit als Feld mit Lupe, schmal als
 Lupe, die zur Suchseite führt); der Navigationspunkt «Suche» entfällt. Die Einstiege
 nach Lebenssituation und die häufig gesuchten Themen stehen als zwei Gruppen im
-Aufmacher der Startseite unter dem Vorspann: breit in drei Spalten, schmal als Liste;
+Aufmacher der Startseite unter dem Vorspann: breit in drei Spalten, schmal als Liste, «Häufig gesucht» schmal
+zugeklappt (details, per Skript nach Bildschirmbreite, ohne JavaScript offen);
 der Aufmacher wächst mit dem Inhalt über die Bildschirmhöhe hinaus. Bis 1100 Pixel ist
 der Kopf zweizeilig (Logo, Lupe, Sprachen, Handlung; darunter die Navigation).
 

@@ -44,17 +44,31 @@ const keys = [
           {SITUATIONS.map((x) => <li><a href={p(`/wissen/situation/${x.slug}`)}>{situationText(x, texts).title}</a></li>)}
         </ul>
       </nav>
-      <nav class="hero__situations hero__quick" aria-label={u("home.quick_title")}>
-        <h2>{u("home.quick_title")}</h2>
-        <ul>
-          {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
-        </ul>
-      </nav>
+      {/* Schmal zugeklappt (details ohne open), breit immer offen; das Skript unten setzt
+          das Attribut nach Bildschirmbreite. Ohne JavaScript bleibt alles offen. */}
+      <details class="hero__situations hero__quick" open>
+        <summary><h2>{u("home.quick_title")}</h2></summary>
+        <nav aria-label={u("home.quick_title")}>
+          <ul>
+            {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
+          </ul>
+        </nav>
+      </details>
       <div class="hero__media">
         <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
       </div>
     </div>
   </section>
+  <script is:inline>
+    // «Häufig gesucht» ist auf schmalen Bildschirmen zugeklappt, auf breiten offen.
+    (function () {
+      var box = document.querySelector(".hero__quick");
+      var narrow = window.matchMedia("(max-width: 720px)");
+      function apply() { box.open = !narrow.matches; }
+      apply();
+      narrow.addEventListener("change", apply);
+    })();
+  </script>
 
   <section class="band">
     <div class="container">

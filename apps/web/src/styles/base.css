@@ -464,6 +464,45 @@ a:hover {
 .hero__situations + .hero__situations {
   padding-top: 0;
 }
+.hero__quick summary {
+  list-style: none;
+  cursor: default;
+}
+.hero__quick summary::-webkit-details-marker {
+  display: none;
+}
+.hero__quick summary h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+@media (max-width: 720px) {
+  /* Schmal ist der Titel die Klappe: 44 px hoch, Pfeil rechts, dreht sich beim Öffnen. */
+  .hero__quick summary {
+    cursor: pointer;
+  }
+  .hero__quick summary h2 {
+    min-height: 44px;
+    margin: 0;
+  }
+  .hero__quick summary h2::after {
+    content: "";
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right: 2px solid var(--on-brand);
+    border-bottom: 2px solid var(--on-brand);
+    transform: rotate(45deg);
+    margin-right: 0.35rem;
+    transition: transform var(--dur) var(--ease);
+  }
+  .hero__quick[open] summary h2::after {
+    transform: rotate(-135deg);
+  }
+  .hero__quick[open] summary h2 {
+    margin-bottom: 0.85rem;
+  }
+}
 .hero__situations.hero__quick a {
   background: var(--paper);
   border-color: var(--paper);
@@ -742,6 +781,8 @@ a:hover {
 .key {
   position: relative;
   padding-left: 3.75rem;
+  display: flex;
+  flex-direction: column;
 }
 .key__num {
   position: absolute;
@@ -797,6 +838,11 @@ a:hover {
   font-size: 0.9375rem;
   color: var(--on-brand-soft);
   max-width: 34ch;
+}
+/* Der Link steht in allen vier Spalten auf derselben Höhe, egal wie lang der Text ist. */
+.key .arrow-link {
+  margin-top: auto;
+  align-self: flex-start;
 }
 @media (min-width: 720px) and (max-width: 1079px) {
   .keys {
