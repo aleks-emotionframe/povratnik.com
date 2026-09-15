@@ -370,6 +370,7 @@ ui:
     stage: Teststufe
     stage_text: Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.
     skip: Zum Inhalt springen
+    nav_start: Start
     nav_wissen: Wissen
     nav_orte: Orte
     nav_weg: Mein Weg
@@ -432,25 +433,23 @@ ui:
     news_title: "Aktuelles zu Rückkehr und Auswanderung"
     news_all: "Alle Meldungen"
     cases_label: Beispiel, fiktiv
-    cases_first: "Erster Schritt:"
+    cases_meta: "{age} Jahre alt, {place}"
+    cases_situation: Ausgangslage
+    cases_shapes: Was den Weg prägt
+    cases_first: Erster Schritt
   wissen:
-    title: Wissen nach Thema
+    title: "Wissen"
     description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."
-    lede: "Zwölf Rubriken, von Status bis Förderung. Jede Themenseite hat dieselbe Maske: kurze Antwort, gilt für, gilt nicht für, zuständig, Stand. Nach der zweiten Seite wissen Sie, wo Sie suchen müssen."
-    claim: Behördenseiten erklären ihren eigenen Ausschnitt. Wir erklären, in welcher Reihenfolge die Ausschnitte zusammengehören.
+    lede: "Antworten zu Aufenthalt, Dokumenten, Arbeit, Steuern, Gesundheit, Schule und Wohnen. Jede Seite sagt, für wen sie gilt, wer zuständig ist und wann sie geprüft wurde."
     pages_one: "{n} Themenseite"
     pages_many: "{n} Themenseiten"
     topics_wip: "{n} Themen in Arbeit"
-    depth_title: Zwei Tiefen, für Sie erkennbar
-    depth_text: "Etwa zwanzig Themen werden vollständig ausgearbeitet: die, an denen Menschen scheitern oder an denen Geld hängt. Alle anderen bekommen eine geprüfte Kurzfassung mit Einstieg, Zuständigkeit und Direktlink. Beide Stufen sind gekennzeichnet, und keine Seite geht ohne Quelle, Prüfdatum und fachliche Freigabe online."
-    state_title: Stand der Rubriken
-    state_text: Die Struktur steht, die Themenseiten sind in Arbeit. Bis zur fachlichen Freigabe zeigt jede Rubrik, welche Themen kommen und welche Fragen sie beantworten wird.
-    more_title: Weitere Zugänge
+    more_title: "Weitere Wege zum Wissen"
     more_situations: Nach Lebenssituation
-    more_situations_link: Sechs Einstiege
     more_glossary: Glossar der Amtsbegriffe
-    more_glossary_link: Glossar
     more_countries: Nach Herkunftsland
+    more_situations_link: Sechs Einstiege
+    more_glossary_link: Glossar
     more_countries_link: Sechs Länder
     crumb: Wissen
     crumb_rubric: Rubrik {n}
@@ -513,6 +512,9 @@ ui:
     report_subject: "Fehler: {title}"
   country:
     crumb: Nach Herkunftsland
+    title: "Nach Herkunftsland"
+    description: "Was Sie im bisherigen Wohnland vor dem Umzug nach Kroatien erledigen müssen, für sechs Länder."
+    lede: "Was Sie im bisherigen Wohnland erledigen müssen, bevor es nach Kroatien geht: Abmeldung, Apostille, Sozialversicherung, Steuern. Der kroatische Teil ist davon getrennt."
     others: Andere Herkunftsländer
     what_title: Was für die Ausreise zählt
     what_help: Der kroatische Prozess und die Anforderungen des Herkunftslands sind zwei verschiedene Dinge.
@@ -530,6 +532,9 @@ ui:
     cta_text: Der Kurzcheck fragt nach dem Herkunftsland jeder Person im Haushalt.
   situation:
     crumb: Lebenssituation
+    title: "Einstiege nach Lebenssituation"
+    description: "Sechs typische Ausgangslagen für Rückkehr und Auswanderung nach Kroatien, jede mit ihrem Weg in der richtigen Reihenfolge."
+    lede: "Sechs typische Ausgangslagen, vom Umzug mit Familie bis zur Pension. Jede führt Sie in der passenden Reihenfolge durch die Themen."
     trap_title: Woran es hier oft scheitert
     path_title: Ihr Weg in dieser Reihenfolge
     rubrics_title: Diese Rubriken zählen zusätzlich
@@ -542,14 +547,15 @@ ui:
     lede: Der kroatische Begriff bleibt stehen, weil Sie ihn am Schalter brauchen. Daneben steht, was er bedeutet.
     count: "{n} Begriffe aus {pages} Themenseiten"
   orte:
-    title: Orte entdecken
+    title: "Orte"
     description: Gemeinden in Kroatien mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum.
-    lede: Welche Gemeinde fördert Rückkehrer, wo nimmt der Kinderarzt noch Patienten auf, wo gibt es Jahresmieten? Ortsprofile mit Zustand und Prüfdatum, ohne Rangliste.
+    lede: "Gemeinden in Kroatien mit ihren Förderungen, Schulen, Ärzten und Wohnangeboten. Auf der Karte oder in der Liste, ohne Rangliste."
     all_benefits: Alle Leistungen
     compare: Orte vergleichen
     image_alt: Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei.
     fictional_title: Fiktive Testgemeinden
     fictional_text: Die Orte auf dieser Seite sind erfunden und zeigen, wie ein Ortsprofil aussieht, mit allen Zuständen. Echte Gemeinden folgen mit der Datenbank. Kein Wert bezieht sich auf einen realen Ort. Die Ortsdaten liegen auf der Teststufe nur auf Deutsch vor.
+    fictional_line: "Teststufe: Die drei Orte sind fiktiv und zeigen, wie ein Ortsprofil aussieht. Echte Gemeinden folgen mit der Datenbank."
     filter_label: Orte filtern
     filter_region: Lage
     filter_all: alle
@@ -584,6 +590,8 @@ ui:
     fictional_title: Fiktive Testgemeinde
     fictional_text: Dieser Ort ist erfunden. Er zeigt die Struktur eines Ortsprofils mit allen Zuständen. Kein Wert bezieht sich auf einen realen Ort.
     benefits_title: Leistungen der Gemeinde
+    details: "Details"
+    jump_label: "Abschnitte dieses Ortsprofils"
     benefits_help: Vier Zeitangaben, ein Zustand. Über den Antrag entscheidet die Gemeinde.
     benefits_empty: Für diesen Ort sind keine Leistungen erfasst. Das heisst nicht, dass es keine gibt.
     target: Für wen
@@ -768,6 +776,8 @@ ui:
     for: für «{q}»
     empty: Nichts gefunden. Das heisst nicht, dass es das Thema nicht gibt, nur dass wir noch keine Seite dazu haben.
     empty_link: Sagen Sie uns, was Sie gesucht haben.
+    all: Alle Ergebnisse
+    none: Keine Treffer
     kind_topic: Themenseite
     kind_rubric: Rubrik
     kind_situation: Lebenssituation
@@ -822,6 +832,11 @@ ui:
     promise_4: «Weiss ich noch nicht» ist immer eine Antwort
   map:
     title: Übersichtskarte Kroatiens mit Gespanschaften und erfassten Orten
+    info_title: "Gespanschaft oder Ort antippen"
+    info_text: "{counties} Gespanschaften, {places} Orte erfasst."
+    info_region: "Gespanschaft"
+    info_region_link: "Region ansehen"
+    info_place_link: "Ortsprofil ansehen"
     hover_default: Gespanschaft antippen oder mit dem Zeiger berühren
     source: "Grenzen: {source}. Orte auf der Teststufe fiktiv platziert."
     section_title: Karte

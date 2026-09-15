@@ -26,7 +26,7 @@
   --brand-deep: oklch(22% 0.08 262);
   --ink: oklch(24% 0.06 262);
   --ink-soft: oklch(40% 0.03 262);
-  --muted: oklch(52% 0.02 262);
+  --muted: oklch(44% 0.025 262); /* auf Weiss rund 7:1 */
   --line: oklch(90% 0.005 262);
   --line-strong: oklch(60% 0.02 262);
   --accent: oklch(50% 0.16 255);

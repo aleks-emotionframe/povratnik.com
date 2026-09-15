@@ -1,0 +1,38 @@
+---
+// Übersicht der Lebenssituationen (inhaltskonzept.md 4.3): sechs kuratierte Einstiege.
+import Base from "../../../layouts/Base.astro";
+import { SITUATIONS, situationText } from "../../../lib/situations.ts";
+import { pageContext } from "../../../lib/page.ts";
+
+const { texts, u, p } = pageContext(Astro);
+---
+
+<Base title={`${u("situation.title")}: povratnik.com`} description={u("situation.description")} current="wissen">
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a></p>
+        <h1>{u("situation.title")}</h1>
+        <p class="lede">{u("situation.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <ul class="cards">
+        {SITUATIONS.map((s) => {
+          const tx = situationText(s, texts);
+          return (
+            <li class="card card--link">
+              <div class="card__body">
+                <h3><a href={p(`/wissen/situation/${s.slug}`)}>{tx.title}</a></h3>
+                <p>{tx.intro}</p>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+</Base>

@@ -9,8 +9,11 @@ Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
 Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
 Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
 und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
-Aufmacher erreichbar). Die Suche steht im Kopf (breit als Feld mit Lupe, schmal als
-Lupe, die zur Suchseite führt); der Navigationspunkt «Suche» entfällt. Die Einstiege
+Aufmacher erreichbar). Die Suche steht im Kopf: breit als Lupe, die per Klick das Feld
+öffnet, mit Treffern beim Tippen (Index als statische Datei, beim ersten Fokus geladen,
+kein Begriff verlässt den Browser); schmal als Lupe, die zur Suchseite führt, wo die
+Treffer ebenfalls beim Tippen erscheinen. Der Navigationspunkt «Suche» entfällt, «Start»
+kommt hinzu. Die Einstiege
 nach Lebenssituation und die häufig gesuchten Themen stehen als zwei Gruppen im
 Aufmacher der Startseite unter dem Vorspann: breit in drei Spalten, schmal als Liste, «Häufig gesucht» schmal
 zugeklappt (details, per Skript nach Bildschirmbreite, ohne JavaScript offen);
@@ -174,7 +177,11 @@ verwendeten Angaben und die Quelle nennt.
 
 ## 6. Mobil
 
-Mobil zuerst. Karte und Liste sind auf schmalen Geräten umschaltbar, die Liste ist
+Mobil zuerst. Auf schmalen Geräten (bis 720 Pixel) verhält sich die Website wie eine App
+(Entscheid vom 15.09.2026): eine schlanke, oben haftende Kopfzeile mit Logo, Lupe (Link zur
+Suche) und Sprachklappe mit dem aktuellen Kürzel; unten eine feste Tab-Leiste mit Start,
+Wissen, Orte und Mein Weg (Symbol und Wort, aktiver Tab in Akzentfarbe, Sicherheitsabstand
+für Geräte mit Gestenleiste). Die Handlung «Kurzcheck starten» ist dort der Tab «Mein Weg». Karte und Liste sind auf schmalen Geräten umschaltbar, die Liste ist
 vollwertig. Filter erscheinen in einer eigenen Fläche. Berührungsziele mindestens 44
 Pixel bei primären Aktionen. Kritische Fristen bleiben immer sichtbar und werden nie
 eingeklappt.

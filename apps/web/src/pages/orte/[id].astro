@@ -46,34 +46,44 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     </div>
   </section>
 
-  <section class="band band--surface">
+  <nav class="jump" aria-label={u("place.jump_label")}>
     <div class="container">
-      <p class="notice" role="note">
-        <strong>{u("place.fictional_title")}</strong>
-        {u("place.fictional_text")}
-      </p>
+      <a href="#leistungen">{u("place.benefits_title")}</a>
+      <a href="#familie">{u("place.family_title")}</a>
+      <a href="#gesundheit">{u("place.health_title")}</a>
+      <a href="#wohnen">{u("place.housing_title")}</a>
+      <a href="#arbeit">{u("place.work_title")}</a>
+      <a href="#alltag">{u("place.daily_title")}</a>
+      <a href="#umfeld">{u("place.surroundings_title")}</a>
+    </div>
+  </nav>
+
+  <section class="band band--surface band--tight-bottom panel-anchor" id="leistungen">
+    <div class="container">
       <div class="band__head">
         <h2>{u("place.benefits_title")}</h2>
-        <p class="soft">{u("place.benefits_help")}</p>
       </div>
       {place.benefits.length === 0 ? (
         <p><span class="state state--unknown">{u("place.fact_not_collected")}</span> {u("place.benefits_empty")}</p>
       ) : (
         <ul class="cards cards--benefits">
           {place.benefits.map((b) => (
-            <li class="card">
+            <li class="card benefit-card">
               <div class="card__body">
                 <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span></p>
                 <h3>{b.title}</h3>
-                <dl class="benefit">
-                  <dt>{u("place.target")}</dt><dd>{b.target}</dd>
-                  <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
-                  <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
-                  <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
-                  <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
-                  <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
-                </dl>
-                <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+                <p class="benefit__amount"><Fact fact={b.amount} /></p>
+                <p class="benefit__period">{b.application.from || b.application.until ? `${u("place.period")}: ${period(b)}` : period(b)}</p>
+                <details class="benefit__details">
+                  <summary>{u("place.details")}</summary>
+                  <dl class="benefit">
+                    <dt>{u("place.target")}</dt><dd>{b.target}</dd>
+                    <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
+                    <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
+                    <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
+                  </dl>
+                  <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+                </details>
               </div>
             </li>
           ))}
@@ -82,9 +92,10 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     </div>
   </section>
 
-  <section class="band">
-    <div class="container grid">
+  <section class="band band--surface band--tight">
+    <div class="container grid profile-grid">
       <div class="col-main profile">
+        <section class="panel" id="familie">
         <h2>{u("place.family_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.kindergarten")}</dt><dd><Fact fact={place.family_education.kindergarten} /></dd>
@@ -94,7 +105,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.language_support")}</dt><dd><Fact fact={place.family_education.language_support} /></dd>
           <dt>{u("place.costs")}</dt><dd><Fact fact={place.family_education.costs} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="gesundheit">
         <h2>{u("place.health_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.gp")}</dt><dd><Fact fact={place.health.gp} /></dd>
@@ -103,7 +116,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.pharmacy")}</dt><dd><Fact fact={place.health.pharmacy} /></dd>
           <dt>{u("place.clinic")}</dt><dd><Fact fact={place.health.clinic} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="wohnen">
         <h2>{u("place.housing_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.rent")}</dt><dd><Fact fact={place.housing.long_term_rent} /></dd>
@@ -111,14 +126,18 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.municipal")}</dt><dd><Fact fact={place.housing.municipal_housing} /></dd>
           <dt>{u("place.land")}</dt><dd><Fact fact={place.housing.building_land} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="arbeit">
         <h2>{u("place.work_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.sectors")}</dt><dd>{place.work.sectors.join(", ")}</dd>
           <dt>{u("place.commute")}</dt><dd>{place.work.commute.map((c) => `${c.to} ${u("place.minutes", { n: c.minutes })}`).join(", ")} <span class="fact__note">{u("place.commute_note")}</span></dd>
           <dt>{u("place.employers")}</dt><dd><Fact fact={place.work.employers} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="alltag">
         <h2>{u("place.daily_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.internet")}</dt><dd><Fact fact={place.daily.internet} /></dd>
@@ -128,7 +147,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.church")}</dt><dd><Fact fact={place.daily.church} /></dd>
           <dt>{u("place.shopping")}</dt><dd><Fact fact={place.daily.shopping} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="umfeld">
         <h2>{u("place.surroundings_title")}</h2>
         {place.surroundings.length === 0 ? (
           <p><span class="state state--closed">{u("place.not_collected")}</span></p>
@@ -137,6 +158,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
             {place.surroundings.map((s) => <li><span>{s.what}</span><span class="mono">{s.where}, {u("place.minutes", { n: s.minutes })}</span></li>)}
           </ul>
         )}
+        </section>
       </div>
 
       <aside class="col-aside">
@@ -163,7 +185,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         {place.map && (
           <div class="side">
             <MapHr compact places={[{ id: place.id, name: placeName(place), lon: place.map.lon, lat: place.map.lat, href: p(`/orte/${place.id}`) }]} />
-            <p class="fact__note">{u("map.source", { source: "Natural Earth" })}</p>
           </div>
         )}
         <div class="side side--cta">
@@ -225,62 +246,95 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     background: rgba(255, 255, 255, 0.12);
     color: var(--on-brand-soft);
   }
-  .cards--benefits {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  /* Sprungleiste unter dem Aufmacher: die Abschnitte des Profils, schmal scrollbar. */
+  .jump {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
   }
-  .benefit__state {
-    margin: 0;
+  .jump .container {
+    display: flex;
+    gap: 0 1.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-  .benefit {
-    margin: 0.5rem 0 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.15rem 1rem;
+  .jump a {
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 600;
     font-size: 0.9375rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding-block: 0.9rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
   }
-  @media (min-width: 480px) {
-    .benefit {
-      grid-template-columns: minmax(7rem, 9rem) 1fr;
+  .jump a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  .panel-anchor {
+    scroll-margin-top: 5rem;
+  }
+  /* Dieselben drei Spalten wie die Leistungskarten darüber: Tafeln über zwei, Seitenspalte
+     über eine, gleicher Zwischenraum, damit alle Kanten in einer Linie liegen. */
+  @media (min-width: 1100px) {
+    .profile-grid {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 1.25rem;
+    }
+    .profile-grid .col-main {
+      grid-column: 1 / 3;
+    }
+    .profile-grid .col-aside {
+      grid-column: 3;
     }
   }
-  .benefit dt {
-    color: var(--muted);
+  /* Abschnitte des Profils als weisse Tafeln mit Anker. */
+  .profile {
+    display: grid;
+    gap: 1.25rem;
   }
-  .benefit dd {
-    margin: 0 0 0.4rem;
-    color: var(--ink);
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem 1.5rem;
+    scroll-margin-top: 6rem;
   }
-  .plain {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .plain li::before {
-    content: "· ";
-    color: var(--accent);
-  }
-  .card .datenstand {
-    margin-top: 0.75rem;
-  }
-  .profile h2 {
-    font-size: 1.375rem;
-    margin-top: 2rem;
-  }
-  .profile h2:first-child {
-    margin-top: 0;
+  .panel h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
   }
   .profile .open-field {
     max-width: none;
     align-items: start;
+  }
+  .profile .open-field dt {
+    color: var(--muted);
+  }
+  .profile .open-field:last-child {
+    border-bottom: 0;
+  }
+  .profile .topics {
+    border-top: 0;
+  }
+  .profile .topics li:last-child {
+    border-bottom: 0;
   }
   .fact__note {
     font-size: 0.875rem;
     color: var(--ink-soft);
   }
   .side {
-    padding-bottom: 1.25rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
     margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
+  }
+  .side :global(.map) {
+    border: 0;
+    padding: 0;
   }
   .side h3 {
     font-size: 1rem;
@@ -306,17 +360,27 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     font-size: 0.9375rem;
   }
   .side--cta {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-    border-bottom: 0;
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--on-brand);
     display: grid;
     gap: 0.75rem;
     justify-items: start;
   }
+  .side--cta h3 {
+    color: var(--on-brand);
+  }
   .side--cta p {
     margin: 0;
     font-size: 0.9375rem;
-    color: var(--ink-soft);
+    color: var(--on-brand-soft);
+  }
+  .side--cta .button {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+  .side--cta .arrow-link {
+    color: var(--accent-bright);
   }
 </style>

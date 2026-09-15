@@ -1,0 +1,37 @@
+---
+// Übersicht der Herkunftsländer (inhaltskonzept.md 4.3): die Ausreiseanforderungen je Land.
+import Base from "../../../layouts/Base.astro";
+import { loadPages, pagePath } from "../../../lib/pages.ts";
+import { CONTENT_DIR, pageContext } from "../../../lib/page.ts";
+
+const { lang, u, p } = pageContext(Astro);
+const countries = loadPages(CONTENT_DIR, lang, "country");
+const fallback = countries.some((x) => x.fallback);
+---
+
+<Base title={`${u("country.title")}: povratnik.com`} description={u("country.description")} current="wissen" fallback={fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a></p>
+        <h1>{u("country.title")}</h1>
+        <p class="lede">{u("country.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      <ul class="cards">
+        {countries.map((x) => (
+          <li class="card card--link">
+            <div class="card__body">
+              <h3><a href={p(pagePath(x))}>{x.title}</a></h3>
+              <p>{x.short_answer}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

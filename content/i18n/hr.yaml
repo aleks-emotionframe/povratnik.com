@@ -359,7 +359,7 @@ checklists:
     s8: Nakon dvanaest mjeseci ponovno provjeriti plan, jer se pravila mijenjaju svake godine
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: Status i državljanstvo
+    title: "povratnik.com: Život u Hrvatskoj"
     intro: "Prije statusa ništa se ne može odlučiti: on određuje boravišni put, pristup radu, školi i potporama."
     q1: Dobivam li preko bake i djeda hrvatsko državljanstvo?
     q2: Što je potvrda za iseljenike i što mi donosi?
@@ -570,22 +570,26 @@ situations:
     trap: Porezna rezidentnost nakon 183 dana. Tko se seli tijekom godine, možda je porezni obveznik u dvije države. To razjašnjava porezni stručnjak, ne ova stranica.
 cases:
   familie:
-    name: Lucía, 32, Buenos Aires
+    name: Lucía
+    place: Buenos Aires
     line: Pradjedovi iz Dalmacije, bez hrvatske putovnice, partner bez veze, jedno dijete školske dobi.
     shapes: Status je otvoren, a lanac isprava kroz četiri generacije najdulji je pojedinačni korak. Njezin partner ide potpuno drugim putem.
     first: Dati provjeriti može li se lanac podrijetla potpuno dokazati. Ne zdravstveno osiguranje koje je tražila.
   selbstaendig:
-    name: Marko, 41, Stuttgart
+    name: Marko
+    place: Stuttgart
     line: Hrvatska putovnica, partnerica također, dvoje djece, želi postati samostalan.
     shapes: Status je razjašnjen, put je kratak. Odlučujući su redoslijed između zahtjeva za potporu i osnivanja te to da oslobođenje od poreza kod samostalne djelatnosti možda uopće ne vrijedi.
     first: Pročitati važeći javni poziv prije nego što se išta prijavi.
   arbeitgeber-im-ausland:
-    name: Anna, 29, Beč
+    name: Anna
+    place: Beč
     line: Građanka EU-a bez hrvatskih korijena, sama, iz Hrvatske radi za austrijskog poslodavca.
     shapes: "Boravak nije kompliciran. Njezin je rizik porezni: rezidentnost, dvostruko oporezivanje i socijalno osiguranje pri radu za inozemnog poslodavca, s povratnim učinkom."
     first: Ovo razjasniti prije selidbe, ne poslije.
   pensioniert:
-    name: Ivan, 58, Toronto
+    name: Ivan
+    place: Toronto
     line: Hrvatska putovnica, partnerica bez nje, živi od kanadske mirovine, selidba otvorena.
     shapes: Njegova partnerica ide drugim putem od njega. Zdravstveno osiguranje kod njega ne proizlazi iz zaposlenja; ondje nastaju praznine. Potpore za povratnike za rad i osnivanje na njega se ne odnose.
     first: Razjasniti priznavanje mirovinskog staža i osnovu osiguranja, uz ugovor između Kanade i Hrvatske.
@@ -595,6 +599,7 @@ ui:
     stage: Testna faza
     stage_text: Primjerna pravila bez stručnog odobrenja, stručna provjera kao rezervirano mjesto. Nije namijenjeno korisnicima.
     skip: Skoči na sadržaj
+    nav_start: Početna
     nav_wissen: Znanje
     nav_orte: Mjesta
     nav_weg: Moj put
@@ -657,25 +662,23 @@ ui:
     news_title: "Aktualno o povratku i iseljavanju"
     news_all: "Sve obavijesti"
     cases_label: Primjer, fiktivno
-    cases_first: "Prvi korak:"
+    cases_meta: "dob {age}, {place}"
+    cases_situation: Polazna situacija
+    cases_shapes: Što određuje put
+    cases_first: Prvi korak
   wissen:
-    title: Znanje po temama
+    title: "Znanje"
     description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
-    lede: "Dvanaest rubrika, od statusa do potpora. Svaka tematska stranica ima istu masku: kratak odgovor, za koga vrijedi, za koga ne vrijedi, nadležno tijelo, stanje. Nakon druge stranice znate gdje tražiti."
-    claim: Stranice tijela objašnjavaju svoj vlastiti isječak. Mi objašnjavamo kojim redoslijedom isječci idu zajedno.
+    lede: "Odgovori o boravku, dokumentima, radu, porezima, zdravstvu, školi i stanovanju. Svaka stranica kaže za koga vrijedi, tko je nadležan i kada je provjerena."
     pages_one: "{n} tematska stranica"
     pages_many: "{n} tematskih stranica"
     topics_wip: "{n} tema u pripremi"
-    depth_title: Dvije razine dubine, prepoznatljive
-    depth_text: "Oko dvadeset tema razrađuje se potpuno: one na kojima ljudi propadaju ili o kojima ovisi novac. Sve ostale dobivaju provjereni sažetak s ulazom, nadležnošću i izravnom poveznicom. Obje su razine označene, a nijedna stranica ne ide online bez izvora, datuma provjere i stručnog odobrenja."
-    state_title: Stanje rubrika
-    state_text: Struktura stoji, tematske su stranice u pripremi. Do stručnog odobrenja svaka rubrika pokazuje koje teme dolaze i na koja će pitanja odgovoriti.
-    more_title: Daljnji ulazi
+    more_title: "Drugi putovi do znanja"
     more_situations: Prema životnoj situaciji
-    more_situations_link: Šest ulaza
     more_glossary: Pojmovnik službenih pojmova
-    more_glossary_link: Pojmovnik
     more_countries: Prema zemlji podrijetla
+    more_situations_link: Šest ulaza
+    more_glossary_link: Pojmovnik
     more_countries_link: Šest zemalja
     crumb: Znanje
     crumb_rubric: Rubrika {n}
@@ -738,6 +741,9 @@ ui:
     report_subject: "Pogreška: {title}"
   country:
     crumb: Prema zemlji podrijetla
+    title: "Po zemlji podrijetla"
+    description: "Što morate riješiti u dosadašnjoj zemlji boravka prije selidbe u Hrvatsku, za šest zemalja."
+    lede: "Što morate riješiti u dosadašnjoj zemlji boravka prije odlaska u Hrvatsku: odjava, apostille, socijalno osiguranje, porezi. Hrvatski dio je odvojen."
     others: Druge zemlje podrijetla
     what_title: Što je važno za odlazak
     what_help: Hrvatski postupak i zahtjevi zemlje podrijetla dvije su različite stvari.
@@ -755,6 +761,9 @@ ui:
     cta_text: Brza provjera pita za zemlju podrijetla svake osobe u kućanstvu.
   situation:
     crumb: Životna situacija
+    title: "Ulazi po životnoj situaciji"
+    description: "Šest tipičnih polaznih situacija za povratak i iseljavanje u Hrvatsku, svaka sa svojim putem pravim redoslijedom."
+    lede: "Šest tipičnih polaznih situacija, od selidbe s obitelji do mirovine. Svaka vas vodi kroz teme odgovarajućim redoslijedom."
     trap_title: Gdje ovdje često zapne
     path_title: Vaš put ovim redoslijedom
     rubrics_title: Ove rubrike dodatno vrijede
@@ -767,14 +776,15 @@ ui:
     lede: Hrvatski pojam ostaje, jer ga trebate na šalteru. Pokraj njega piše što znači.
     count: "{n} pojmova iz {pages} tematskih stranica"
   orte:
-    title: Otkrij mjesta
+    title: "Mjesta"
     description: Općine u Hrvatskoj sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem i datumom provjere.
-    lede: Koja općina potiče povratnike, gdje pedijatar još prima pacijente, gdje ima godišnjeg najma? Profili mjesta sa stanjem i datumom provjere, bez rang-liste.
+    lede: "Općine u Hrvatskoj s potporama, školama, liječnicima i stanovanjem. Na karti ili u popisu, bez rang-liste."
     all_benefits: Sve mjere
     compare: Usporedi mjesta
     image_alt: Glavni trg malog grada u Hrvatskoj s općinskom zgradom i pekarnicom.
     fictional_title: Fiktivne testne općine
     fictional_text: Mjesta na ovoj stranici su izmišljena i pokazuju kako izgleda profil mjesta, sa svim stanjima. Prave općine slijede s bazom podataka. Nijedna se vrijednost ne odnosi na stvarno mjesto. Podaci o mjestima u testnoj fazi postoje samo na njemačkom.
+    fictional_line: "Testna faza: tri mjesta su izmišljena i pokazuju kako izgleda profil mjesta. Prave općine slijede s bazom podataka."
     filter_label: Filtriraj mjesta
     filter_region: Položaj
     filter_all: sva
@@ -809,6 +819,8 @@ ui:
     fictional_title: Fiktivna testna općina
     fictional_text: Ovo je mjesto izmišljeno. Pokazuje strukturu profila mjesta sa svim stanjima. Nijedna se vrijednost ne odnosi na stvarno mjesto.
     benefits_title: Mjere općine
+    details: "Pojedinosti"
+    jump_label: "Dijelovi profila mjesta"
     benefits_help: Četiri vremenska podatka, jedno stanje. O zahtjevu odlučuje općina.
     benefits_empty: Za ovo mjesto nisu evidentirane mjere. To ne znači da ih nema.
     target: Za koga
@@ -993,6 +1005,8 @@ ui:
     for: za «{q}»
     empty: Ništa nije pronađeno. To ne znači da tema ne postoji, samo da još nemamo stranicu o njoj.
     empty_link: Recite nam što ste tražili.
+    all: Svi rezultati
+    none: Nema rezultata
     kind_topic: Tematska stranica
     kind_rubric: Rubrika
     kind_situation: Životna situacija
@@ -1047,6 +1061,11 @@ ui:
     promise_4: «Još ne znam» uvijek je odgovor
   map:
     title: Pregledna karta Hrvatske sa županijama i evidentiranim mjestima
+    info_title: "Dodirnite županiju ili mjesto"
+    info_text: "{counties} županija, {places} mjesta zabilježeno."
+    info_region: "Županija"
+    info_region_link: "Pogledaj regiju"
+    info_place_link: "Pogledaj profil mjesta"
     hover_default: Dodirnite županiju ili prijeđite pokazivačem
     source: "Granice: {source}. Mjesta su u testnoj fazi fiktivno smještena."
     section_title: Karta

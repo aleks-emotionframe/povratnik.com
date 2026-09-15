@@ -94,6 +94,22 @@ a:hover {
 .muted {
   color: var(--muted);
 }
+/* Auf Markenflächen ist gedämpfter Text hell, nie grau auf Blau (Barrierefreiheit). */
+.hero .muted,
+.hero .fact__meta,
+.hero .fact__note,
+.band--brand .muted,
+.band--brand .fact__meta,
+.band--brand .fact__note {
+  color: var(--on-brand-soft);
+}
+/* Zwei Bänder derselben Fläche hintereinander: das zweite ohne oberen Abstand. */
+.band.band--tight {
+  padding-top: 0;
+}
+.band.band--tight-bottom {
+  padding-bottom: 2.5rem;
+}
 
 /* Raster: zwölf Spalten, linksbündig. */
 .container {
@@ -346,18 +362,133 @@ a:hover {
   }
 }
 @media (max-width: 720px) {
-  /* Schmal entfällt die Handlung im Kopf; der Kurzcheck bleibt über «Mein Weg» und
-     den Aufmacher erreichbar. */
+  /* Schmal wie eine App: eine schlanke Kopfzeile (Logo, Lupe, Sprachklappe), die
+     Navigation als Tab-Leiste unten, kein Knopf im Kopf. */
+  .site-head {
+    position: sticky;
+    top: 0;
+  }
   .site-head .container {
     grid-template-columns: 1fr auto auto;
-    gap: 0.5rem 0.5rem;
+    gap: 0 0.25rem;
+    padding-block: 0.6rem;
+    align-items: center;
   }
-  .site-head .button {
+  .site-nav,
+  .site-head .button,
+  .site-head .lang {
     display: none;
   }
   .brand img {
     height: 28px;
   }
+  .site-head .lang-menu {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+  }
+  nav.tabbar {
+    display: grid;
+  }
+}
+
+/* Sprachklappe (schmal) und Tab-Leiste (schmal); breit beides ausgeblendet. */
+.lang-menu {
+  display: none;
+  position: relative;
+  grid-row: 1;
+  grid-column: 3;
+}
+.lang-menu summary {
+  list-style: none;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: var(--surface-blue);
+  border-radius: var(--radius-sm);
+}
+.lang-menu summary::-webkit-details-marker {
+  display: none;
+}
+.lang-menu summary::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+.lang-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  min-width: 11rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+}
+.lang-menu li a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.lang-menu li a[aria-current="true"] {
+  background: var(--surface-blue);
+  color: var(--brand);
+  font-weight: 600;
+}
+.tabbar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 3.75rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.6875rem;
+}
+.tabbar svg {
+  width: 24px;
+  height: 24px;
+}
+.tabbar a[aria-current="page"] {
+  color: var(--accent);
 }
 
 /* Aufmacher: Markenfläche mit Titel, Fotografie daneben. */
@@ -598,7 +729,7 @@ a:hover {
 @media (max-width: 720px) {
   /* Schmal: Text kompakt, damit Titel, Suche und Lebenssituationen auf einen Bildschirm passen. */
   .hero--full {
-    --head-h: 6.9rem;
+    --head-h: 7.4rem; /* Kopfzeile 3.6rem plus Tab-Leiste 3.75rem */
   }
   .hero--full .hero__text {
     padding-block: 1.75rem 1.25rem;
@@ -924,6 +1055,126 @@ a:hover {
   opacity: 0.4;
 }
 
+/* Leistung einer Gemeinde als Karte (Ortsprofil, Leistungsdatenbank): kompakt.
+   Zustand, Titel, Betrag gross, Antragszeitraum; alles Weitere zugeklappt unter
+   «Details», damit die Karten klein bleiben, auch auf dem Handy. */
+.cards--benefits {
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  /* Karten wachsen einzeln beim Aufklappen; zugeklappt sind sie durch feste
+     Mindesthöhen der Zeilen gleich hoch, damit «Details» überall auf einer Linie liegt. */
+  align-items: start;
+}
+@media (min-width: 720px) {
+  .cards--benefits {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .cards--benefits {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+.benefit-card .card__body {
+  padding: 1rem 1.15rem 0.85rem;
+  gap: 0.3rem;
+}
+.benefit-card h3 {
+  font-size: 1.0625rem;
+  line-height: 1.3;
+  min-height: 2.6em;
+}
+.benefit__state {
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.benefit__place {
+  font-size: 0.8125rem;
+}
+.benefit__amount {
+  margin: 0.25rem 0 0 !important;
+  min-height: 3.6rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--ink) !important;
+}
+.benefit__amount .fact__meta,
+.benefit__amount .fact__note {
+  font-family: var(--font-text);
+  font-weight: 400;
+}
+.benefit__period {
+  margin: 0 !important;
+  font-size: 0.875rem;
+  color: var(--ink-soft) !important;
+  min-height: 1.4em;
+}
+.benefit__details {
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+.benefit__details summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+.benefit__details summary::-webkit-details-marker {
+  display: none;
+}
+.benefit__details summary::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--dur) var(--ease);
+}
+.benefit__details[open] summary::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+.benefit {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+.benefit dt {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+.benefit dd {
+  margin: 0.1rem 0 0.65rem;
+  color: var(--ink);
+}
+.benefit .plain {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.benefit .plain li {
+  padding-left: 0.9rem;
+  text-indent: -0.9rem;
+}
+.benefit .plain li::before {
+  content: "· ";
+  color: var(--accent);
+}
+.benefit__details .datenstand {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+}
+
 /* Datentiefe eines Orts: eigener Balken, damit ein dünn erfasster Ort nie wie ein Ort
    ohne Angebote aussieht (designsystem.md 4). */
 .depth {
@@ -1138,28 +1389,40 @@ a:hover {
   top: 1rem;
 }
 
-/* Suche im Kopf: breit ein Feld mit Lupe, schmal nur die Lupe als Link zur Suchseite. */
+/* Suche im Kopf: breit zunächst nur die Lupe; mit Fokus im Feld (Klick auf die Lupe
+   oder Tab) öffnet sich das Feld. Schmal nur die Lupe als Link zur Suchseite. */
 .head-search {
   display: flex;
   align-items: center;
   margin-left: auto;
   border-radius: 999px;
-  background: var(--surface);
+  background: transparent;
   transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
-.head-search:focus-within {
-  background: var(--paper);
-  box-shadow: 0 0 0 2px var(--accent);
+.head-search__open {
+  width: 44px;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--ink-soft);
+  cursor: pointer;
+  border-radius: 999px;
+}
+.head-search__open:hover {
+  color: var(--ink);
+  background: var(--surface);
 }
 .head-search input {
-  width: clamp(6rem, 9vw, 11rem);
-  min-height: 42px;
-  padding: 0.4rem 1rem 0.4rem 0;
+  width: 0;
+  min-height: 44px;
+  padding: 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   font: inherit;
   font-size: 0.9375rem;
+  opacity: 0;
+  transition: width var(--dur) var(--ease), padding var(--dur) var(--ease), opacity var(--dur) var(--ease);
 }
 .head-search input::placeholder {
   color: var(--ink-soft);
@@ -1167,19 +1430,67 @@ a:hover {
 .head-search input:focus-visible {
   outline: none;
 }
-.head-search button {
-  order: -1;
-  width: 42px;
-  min-height: 42px;
-  border: 0;
-  background: transparent;
-  color: var(--ink-soft);
-  display: grid;
-  place-items: center;
-  cursor: pointer;
+.head-search:focus-within {
+  background: var(--surface);
+  box-shadow: 0 0 0 2px var(--accent);
 }
-.head-search button:hover {
-  color: var(--accent);
+.head-search:focus-within .head-search__open {
+  color: var(--ink);
+}
+.head-search:focus-within input,
+.head-search input:not(:placeholder-shown) {
+  width: clamp(8rem, 12vw, 14rem);
+  padding-right: 1rem;
+  opacity: 1;
+}
+.head-search {
+  position: relative;
+}
+.head-search__results {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: min(26rem, calc(100vw - 2 * var(--gutter)));
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+  padding: 0.4rem;
+  z-index: 25;
+  text-align: left;
+}
+.head-search__results a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+.head-search__results a:hover,
+.head-search__results a:focus-visible {
+  background: var(--surface-blue);
+}
+.head-search__kind {
+  font-family: var(--font-meta);
+  font-weight: 400;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.head-search__results p {
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.head-search__all {
+  border-top: 1px solid var(--line);
+  margin-top: 0.25rem;
+  color: var(--accent) !important;
 }
 .head-search-link {
   display: none;

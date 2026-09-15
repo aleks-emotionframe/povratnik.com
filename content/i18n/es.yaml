@@ -359,7 +359,7 @@ checklists:
     s8: Revisar el plan a los doce meses, porque las reglas cambian cada año
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: Estatus y nacionalidad
+    title: "povratnik.com: Vivir en Croacia"
     intro: "Antes del estatus no se puede decidir nada: determina la vía de residencia, el acceso al trabajo, a la escuela y a las ayudas."
     q1: ¿Obtengo la nacionalidad croata a través de mis abuelos?
     q2: ¿Qué es el certificado para emigrantes y para qué me sirve?
@@ -570,22 +570,26 @@ situations:
     trap: Residencia fiscal a partir de 183 días. Quien se muda a lo largo del año puede tener que tributar en dos países. Eso lo aclara un asesor fiscal, no esta web.
 cases:
   familie:
-    name: Lucía, 32, Buenos Aires
+    name: Lucía
+    place: Buenos Aires
     line: Bisabuelos de Dalmacia, sin pasaporte croata, pareja sin vínculo, un hijo en edad escolar.
     shapes: El estatus está abierto, y la cadena de documentos a lo largo de cuatro generaciones es el paso individual más largo. Su pareja sigue un camino completamente distinto.
     first: Hacer comprobar si la cadena de ascendencia se puede documentar por completo. No el seguro de salud que había buscado.
   selbstaendig:
-    name: Marko, 41, Stuttgart
+    name: Marko
+    place: Stuttgart
     line: Pasaporte croata, la pareja también, dos hijos, quiere trabajar por cuenta propia.
     shapes: El estatus está aclarado, el camino es corto. Lo decisivo es el orden entre solicitud de ayuda y constitución, y que la exención del impuesto sobre el salario quizá no se aplique por cuenta propia.
     first: Leer la convocatoria vigente antes de registrar nada.
   arbeitgeber-im-ausland:
-    name: Anna, 29, Viena
+    name: Anna
+    place: Viena
     line: Ciudadana de la UE sin raíces croatas, sola, trabaja desde Croacia para un empleador austriaco.
     shapes: "La residencia no es complicada. Su riesgo es fiscal: residencia fiscal, doble imposición y seguridad social al trabajar para un empleador extranjero, con efecto retroactivo."
     first: Aclarar este punto antes de la mudanza, no después.
   pensioniert:
-    name: Ivan, 58, Toronto
+    name: Ivan
+    place: Toronto
     line: Pasaporte croata, pareja sin él, vive de una pensión canadiense, mudanza sin fecha.
     shapes: Su pareja sigue un camino distinto al suyo. En su caso el seguro de salud no deriva de un empleo; ahí surgen lagunas. Las ayudas al regreso para trabajo y emprendimiento no se aplican a él.
     first: Aclarar el cómputo de la pensión y la base del seguro, con el convenio entre Canadá y Croacia.
@@ -595,6 +599,7 @@ ui:
     stage: Fase de prueba
     stage_text: Reglas de ejemplo sin revisión profesional, revisión profesional como marcador de posición. No destinado a clientes.
     skip: Saltar al contenido
+    nav_start: Inicio
     nav_wissen: Conocimiento
     nav_orte: Lugares
     nav_weg: Mi camino
@@ -657,25 +662,23 @@ ui:
     news_title: "Actualidad sobre el retorno y la emigración"
     news_all: "Todas las noticias"
     cases_label: Ejemplo, ficticio
-    cases_first: "Primer paso:"
+    cases_meta: "{age} años, {place}"
+    cases_situation: Punto de partida
+    cases_shapes: Lo que marca el camino
+    cases_first: Primer paso
   wissen:
-    title: Conocimiento por tema
+    title: "Conocimiento"
     description: "Doce secciones sobre regresar o emigrar a Croacia: estatus, documentos, trabajo, impuestos, salud, escuela, vivienda, ayudas."
-    lede: "Doce secciones, del estatus a las ayudas. Cada página temática tiene la misma plantilla: respuesta breve, a quién aplica, a quién no, entidad competente, estado. A la segunda página ya sabe dónde buscar."
-    claim: Las webs de las administraciones explican su propio fragmento. Nosotros explicamos en qué orden encajan los fragmentos.
+    lede: "Respuestas sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda. Cada página dice a quién se aplica, quién es responsable y cuándo se revisó."
     pages_one: "{n} página temática"
     pages_many: "{n} páginas temáticas"
     topics_wip: "{n} temas en preparación"
-    depth_title: Dos niveles de profundidad, reconocibles
-    depth_text: "Unos veinte temas se desarrollan por completo: aquellos en los que la gente fracasa o de los que depende dinero. Los demás reciben un resumen comprobado con entrada, competencia y enlace directo. Ambos niveles están marcados, y ninguna página se publica sin fuente, fecha de comprobación y revisión profesional."
-    state_title: Estado de las secciones
-    state_text: La estructura está lista, las páginas temáticas están en preparación. Hasta la revisión profesional, cada sección muestra qué temas vendrán y qué preguntas responderá.
-    more_title: Otras entradas
+    more_title: "Otros caminos al conocimiento"
     more_situations: Por situación de vida
-    more_situations_link: Seis entradas
     more_glossary: Glosario de términos oficiales
-    more_glossary_link: Glosario
     more_countries: Por país de origen
+    more_situations_link: Seis entradas
+    more_glossary_link: Glosario
     more_countries_link: Seis países
     crumb: Conocimiento
     crumb_rubric: Sección {n}
@@ -738,6 +741,9 @@ ui:
     report_subject: "Error: {title}"
   country:
     crumb: Por país de origen
+    title: "Por país de origen"
+    description: "Lo que debe resolver en su país de residencia actual antes de mudarse a Croacia, para seis países."
+    lede: "Lo que debe resolver en su país de residencia actual antes de partir a Croacia: baja, apostilla, seguridad social, impuestos. La parte croata es aparte."
     others: Otros países de origen
     what_title: Qué cuenta para la salida
     what_help: El procedimiento croata y los requisitos del país de origen son dos cosas distintas.
@@ -755,6 +761,9 @@ ui:
     cta_text: El chequeo rápido pregunta por el país de origen de cada persona del hogar.
   situation:
     crumb: Situación de vida
+    title: "Entradas por situación de vida"
+    description: "Seis puntos de partida típicos para el retorno y la emigración a Croacia, cada uno con su camino en el orden correcto."
+    lede: "Seis puntos de partida típicos, desde la mudanza con familia hasta la jubilación. Cada uno le guía por los temas en el orden adecuado."
     trap_title: Dónde suele fracasar
     path_title: Su camino en este orden
     rubrics_title: Estas secciones también cuentan
@@ -767,14 +776,15 @@ ui:
     lede: El término croata se mantiene, porque lo necesita en la ventanilla. Al lado está lo que significa.
     count: "{n} términos de {pages} páginas temáticas"
   orte:
-    title: Descubrir lugares
+    title: "Lugares"
     description: Municipios de Croacia con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado y fecha de comprobación.
-    lede: ¿Qué municipio apoya a quienes regresan, dónde admite el pediatra nuevos pacientes, dónde hay alquileres anuales? Perfiles de lugares con estado y fecha de comprobación, sin ranking.
+    lede: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda. En el mapa o en la lista, sin clasificación."
     all_benefits: Todas las ayudas
     compare: Comparar lugares
     image_alt: Plaza principal de una pequeña ciudad de Croacia con el ayuntamiento y una panadería.
     fictional_title: Municipios de prueba ficticios
     fictional_text: Los lugares de esta página son inventados y muestran cómo es un perfil de lugar, con todos los estados. Los municipios reales llegarán con la base de datos. Ningún valor se refiere a un lugar real. En la fase de prueba, los datos de los lugares solo existen en alemán.
+    fictional_line: "Fase de prueba: los tres lugares son ficticios y muestran cómo es un perfil. Los municipios reales llegarán con la base de datos."
     filter_label: Filtrar lugares
     filter_region: Ubicación
     filter_all: todos
@@ -809,6 +819,8 @@ ui:
     fictional_title: Municipio de prueba ficticio
     fictional_text: Este lugar es inventado. Muestra la estructura de un perfil de lugar con todos los estados. Ningún valor se refiere a un lugar real.
     benefits_title: Ayudas del municipio
+    details: "Detalles"
+    jump_label: "Secciones de este perfil"
     benefits_help: Cuatro fechas, un estado. Sobre la solicitud decide el municipio.
     benefits_empty: Para este lugar no hay ayudas registradas. Eso no significa que no las haya.
     target: Para quién
@@ -993,6 +1005,8 @@ ui:
     for: para «{q}»
     empty: No se ha encontrado nada. Eso no significa que el tema no exista, solo que todavía no tenemos una página sobre él.
     empty_link: Díganos qué ha buscado.
+    all: Todos los resultados
+    none: Sin resultados
     kind_topic: Página temática
     kind_rubric: Sección
     kind_situation: Situación de vida
@@ -1047,6 +1061,11 @@ ui:
     promise_4: «Todavía no lo sé» siempre es una respuesta
   map:
     title: Mapa general de Croacia con condados y lugares registrados
+    info_title: "Toque un condado o un lugar"
+    info_text: "{counties} condados, {places} lugares registrados."
+    info_region: "Condado"
+    info_region_link: "Ver región"
+    info_place_link: "Ver perfil del lugar"
     hover_default: Toque o pase el cursor por un condado
     source: "Límites: {source}. Lugares situados de forma ficticia en la fase de prueba."
     section_title: Mapa
