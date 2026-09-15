@@ -427,6 +427,26 @@ a:hover {
 .hero--small .hero__text {
   padding-block: clamp(2rem, 5vw, 3.5rem);
 }
+/* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
+   --head-h ist die Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung
+   nach oben ist unschädlich, weil min-height nur ein Minimum setzt. */
+.hero--full {
+  --head-h: 4.6rem;
+}
+.hero--full .container {
+  min-height: calc(100svh - var(--head-h));
+  grid-template-rows: auto minmax(240px, 1fr);
+}
+@media (max-width: 720px) {
+  .hero--full {
+    --head-h: 6.3rem;
+  }
+}
+@media (min-width: 860px) {
+  .hero--full .container {
+    grid-template-rows: none;
+  }
+}
 
 /* Schnelleinstiege als Chips */
 .chips {
