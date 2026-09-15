@@ -576,8 +576,8 @@ ui:
     more: "{n} weitere"
     depth: "{n} von {total} Angaben erfasst"
     empty: "Kein Ort passt zu dieser Auswahl."
-    ranking_title: Kein Ranking, keine Gesamtnote
-    ranking_text: Zwei bis drei Orte lassen sich nebeneinander vergleichen, als Rohinformation. Ein Gesamtwert würde immer unsere Gewichtung durchsetzen und nicht Ihre. Was fehlt, steht als «unbekannt» und nicht als leere Zelle. Ein Ort mit wenig Daten sieht nie aus wie ein Ort ohne Angebote, deshalb zeigt jeder Ort seine Datentiefe.
+    ranking_title: "Orte direkt vergleichen"
+    ranking_text: "Stellen Sie bis zu drei Gemeinden nebeneinander: Förderungen, Schulen, Ärzte, Mieten und Anbindung auf einen Blick. So sehen Sie schnell, welcher Ort zu Ihrem Alltag passt."
     to_compare: Zum Vergleich
     municipality_title: Sie vertreten eine Gemeinde?
     municipality_text: "Tragen Sie die Angebote Ihrer Gemeinde für Rückkehrer ein."

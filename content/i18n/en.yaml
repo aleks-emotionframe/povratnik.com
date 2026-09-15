@@ -805,8 +805,8 @@ ui:
     more: "{n} more"
     depth: "{n} of {total} details recorded"
     empty: "No place matches this selection."
-    ranking_title: No ranking, no overall score
-    ranking_text: Two or three places can be compared side by side, as raw information. An overall score would always impose our weighting and not yours. What is missing is shown as «unknown» and not as an empty cell. A place with little data never looks like a place without offers, which is why every place shows its data depth.
+    ranking_title: "Compare places side by side"
+    ranking_text: "Put up to three municipalities next to each other: support schemes, schools, doctors, rents and connections at a glance. That way you quickly see which place fits your everyday life."
     to_compare: To the comparison
     municipality_title: Do you represent a municipality?
     municipality_text: "Enter your municipality's offers for returnees."
