@@ -1317,27 +1317,44 @@ a:hover {
 }
 
 /* Definitionslisten für Angaben */
+/* Angabenliste als Tabelle: Beschriftung links, Wert rechts, eine Linie je Zeile. */
 .open-field {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.25rem 1rem;
-  padding-block: 0.5rem;
-  border-bottom: 1px solid var(--line);
+  column-gap: 1rem;
   max-width: var(--measure);
+  margin: 0;
+}
+.open-field dt,
+.open-field dd {
+  margin: 0;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
 }
 .open-field dt {
   color: var(--ink-soft);
+  padding-bottom: 0.1rem;
+  border-top-color: var(--line);
 }
 .open-field dd {
-  margin: 0 0 0.5rem;
+  border-top: 0;
+  padding-top: 0;
 }
 @media (min-width: 600px) {
   .open-field {
-    grid-template-columns: minmax(8rem, 12rem) 1fr;
+    grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
+  }
+  .open-field dt {
+    padding-bottom: 0.6rem;
   }
   .open-field dd {
-    margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
   }
+}
+.open-field .fact__meta,
+.open-field .fact__note {
+  font-size: 0.8125rem;
 }
 
 /* Fuss der Website, über dem EmotionFrame Balken */
