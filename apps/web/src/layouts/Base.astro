@@ -1,9 +1,11 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
-// Kopf nach designsystem.md 2.0: Teststufe als schmale Leiste, Wortmarke mit
-// Schachbrett, Hauptnavigation, Sprachwahl, hervorgehobener Kurzcheck. Sprache aus
+// Kopf nach designsystem.md 2.1: Teststufe als schmale Leiste, Logo, Hauptnavigation,
+// Sprachwahl, hervorgehobener Kurzcheck. Im Fuss dasselbe Logo, per CSS weiss. Sprache aus
 // der Adresse (lib/i18n.ts). Der EmotionFrame Footer steht als letztes Element.
 import "../styles/base.css";
+import { Image } from "astro:assets";
+import logo from "../assets/povratnik-logo.webp";
 import { STAGE } from "../lib/stage.ts";
 import { LOCALES, LOCALE_NAMES, localePath } from "../lib/i18n.ts";
 import { pageContext } from "../lib/page.ts";
@@ -68,15 +70,7 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
     <header class="site-head">
       <div class="container">
         <a class="brand" href={p("/")} aria-label="povratnik.com">
-          <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
-            <rect width="28" height="28" rx="5" fill="#fff" stroke="#14213d" stroke-width="1.5" />
-            <g fill="#b3202b">
-              <rect x="4" y="4" width="6.7" height="6.7" /><rect x="17.3" y="4" width="6.7" height="6.7" />
-              <rect x="10.7" y="10.7" width="6.7" height="6.7" />
-              <rect x="4" y="17.3" width="6.7" height="6.7" /><rect x="17.3" y="17.3" width="6.7" height="6.7" />
-            </g>
-          </svg>
-          <span>povratnik<small>.com</small></span>
+          <Image src={logo} alt="" height={34} densities={[1, 2]} format="webp" loading="eager" />
         </a>
         <nav class="site-nav" aria-label="Navigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
@@ -113,16 +107,8 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
     <footer class="site-foot">
       <div class="container">
         <div>
-          <a class="brand" href={p("/")}>
-            <svg class="brand__mark" viewBox="0 0 28 28" aria-hidden="true">
-              <rect width="28" height="28" rx="5" fill="#fff" />
-              <g fill="#b3202b">
-                <rect x="4" y="4" width="6.7" height="6.7" /><rect x="17.3" y="4" width="6.7" height="6.7" />
-                <rect x="10.7" y="10.7" width="6.7" height="6.7" />
-                <rect x="4" y="17.3" width="6.7" height="6.7" /><rect x="17.3" y="17.3" width="6.7" height="6.7" />
-              </g>
-            </svg>
-            <span>povratnik<small>.com</small></span>
+          <a class="brand brand--on-dark" href={p("/")} aria-label="povratnik.com">
+            <Image src={logo} alt="" height={30} densities={[1, 2]} format="webp" loading="lazy" />
           </a>
           <p>{u("shell.foot_claim")}</p>
           <p>{u("shell.foot_disclaimer")}</p>

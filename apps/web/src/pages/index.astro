@@ -1,6 +1,6 @@
 ---
-// Startseite nach inhaltskonzept.md 3 und designsystem.md 2.0: Aufmacher mit Foto,
-// Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
+// Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
+// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
 // läuft, die Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
 // Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
@@ -41,6 +41,11 @@ const phaseNames = texts.phases as Record<string, string>;
       <div class="hero__text">
         <h1>{u("home.hero_title")}</h1>
         <p class="lede">{u("home.hero_lede")}</p>
+        <form class="search" action={p("/suche")} method="get" data-search>
+          <label class="visually-hidden" for="hero-q">{u("search.label")}</label>
+          <input id="hero-q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
+          <button class="button button--outline-light" type="submit">{u("search.button")}</button>
+        </form>
         <div class="hero__actions">
           <a class="button button--light" href={p("/mein-weg")}>{u("shell.cta")}</a>
           <a class="button button--outline-light" href={p("/wissen")}>{u("home.hero_wissen")}</a>
@@ -52,6 +57,17 @@ const phaseNames = texts.phases as Record<string, string>;
       </div>
     </div>
   </section>
+  <script is:inline>
+    // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.
+    (function () {
+      var form = document.querySelector("[data-search]");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var q = form.querySelector("input").value.trim();
+        location.href = form.getAttribute("action") + (q ? "#q=" + encodeURIComponent(q) : "");
+      });
+    })();
+  </script>
 
   <section class="band band--surface quick">
     <div class="container">

@@ -298,24 +298,16 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  color: var(--ink);
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.375rem;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 0;
 }
-.brand__mark {
-  width: 28px;
-  height: 28px;
-  flex: none;
+.brand img {
+  height: 34px;
+  width: auto;
 }
-.brand small {
-  font-weight: 600;
-  font-size: inherit;
-  color: var(--muted);
+/* Auf dunklem Grund wird das Logo weiss; die Datei bleibt dieselbe. */
+.brand--on-dark img {
+  height: 30px;
+  filter: brightness(0) invert(1);
 }
 .site-nav {
   display: flex;
@@ -373,8 +365,8 @@ a:hover {
     padding-inline: 1rem;
     white-space: nowrap;
   }
-  .brand {
-    font-size: 1.25rem;
+  .brand img {
+    height: 28px;
   }
   .topbar__text {
     display: none;
@@ -433,6 +425,31 @@ a:hover {
   .hero__media {
     min-height: 100%;
   }
+}
+/* Suchfeld auf Markenfläche (Startseite und Suchseite) */
+.search {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  max-width: 40rem;
+}
+.search input {
+  flex: 1 1 16rem;
+  min-height: 48px;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--on-brand);
+  font: inherit;
+}
+.search input::placeholder {
+  color: var(--on-brand-soft);
+}
+.search input:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
 }
 .hero--small .hero__text {
   padding-block: clamp(2rem, 5vw, 3.5rem);
@@ -947,11 +964,7 @@ a:hover {
   margin: 0 0 0.75rem;
 }
 .site-foot .brand {
-  color: var(--on-brand);
   margin-bottom: 1rem;
-}
-.site-foot .brand small {
-  color: var(--on-brand-soft);
 }
 .site-foot .datenstand {
   border-top-color: rgba(255, 255, 255, 0.15);

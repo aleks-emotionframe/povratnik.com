@@ -78,39 +78,22 @@ const index: Entry[] = [
         count.textContent = (shown === 1 ? count.dataset.one : count.dataset.many).replace("{n}", shown) + (q ? " " + count.dataset.for.replace("{q}", input.value.trim()) : "");
         empty.hidden = shown > 0;
       }
-      // Der Suchbegriff wird bewusst nicht in die Adresse geschrieben.
+      // Der Suchbegriff wird bewusst nicht in die Adresse geschrieben. Kommt er von der
+      // Startseite als Fragment (#q=...), wird er übernommen und die Adresse bereinigt.
       form.addEventListener("submit", function (e) { e.preventDefault(); apply(); });
       input.addEventListener("input", apply);
+      var m = /^#q=(.+)$/.exec(location.hash);
+      if (m) {
+        input.value = decodeURIComponent(m[1]);
+        history.replaceState(null, "", location.pathname);
+        apply();
+      }
       input.focus();
     })();
   </script>
 </Base>
 
 <style>
-  .search {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-    max-width: 40rem;
-  }
-  .search input {
-    flex: 1 1 16rem;
-    min-height: 48px;
-    padding: 0.6rem 0.9rem;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-radius: var(--radius-sm);
-    background: rgba(255, 255, 255, 0.08);
-    color: var(--on-brand);
-    font: inherit;
-  }
-  .search input::placeholder {
-    color: var(--on-brand-soft);
-  }
-  .search input:focus-visible {
-    outline: 2px solid var(--accent-bright);
-    outline-offset: 2px;
-  }
   .count {
     color: var(--muted);
     margin-bottom: 1rem;
