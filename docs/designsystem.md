@@ -3,8 +3,13 @@
 Version 2.1, 15.09.2026. Verbindliche Gestaltungsgrundlage. Ersetzt Version 1.2.
 
 Änderung in 2.1: Das provisorische Logo ersetzt die Wortmarke mit Schachbrett
-(Abschnitt 2), und der Aufmacher der Startseite trägt das Suchfeld aus dem
-Inhaltskonzept, Abschnitt 3.
+(Abschnitt 2), der Aufmacher der Startseite trägt das Suchfeld aus dem
+Inhaltskonzept, Abschnitt 3, und die schmale Leiste über dem Kopf entfällt: die
+Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
+Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
+Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
+und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
+Aufmacher erreichbar).
 
 Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
 folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich

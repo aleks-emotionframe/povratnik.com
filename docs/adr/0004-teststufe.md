@@ -34,8 +34,10 @@ Es gibt zwei Stufen, festgelegt in `apps/web/src/lib/stage.ts`:
 
 - `test`: Der Kurzcheck wertet alle nicht zurückgezogenen Regeln aus, auch
   synthetische und nicht freigegebene. Jede Seite trägt `data-stage="test"`, die
-  Kopfleiste «Teststufe», `robots: noindex, nofollow`, und der Kurzcheck zeigt das
-  Band «Synthetische Beispielregeln». Die Fachprüfung ist in `rollen.md` als
+  Zeile «Teststufe» im Fuss, `robots: noindex, nofollow`, und der Kurzcheck zeigt
+  das Band «Synthetische Beispielregeln». (Änderung vom 15.09.2026 durch die
+  Produktverantwortung: Kennzeichnung im Fuss statt als Kopfleiste; der Build-Test
+  prüft die Kennzeichnung weiterhin auf jeder Seite.) Die Fachprüfung ist in `rollen.md` als
   Platzhalter geführt.
 - `public`: Der Kurzcheck wertet nur freigegebene, veröffentlichte, nicht
   synthetische Regeln aus. Der Build-Test lehnt jede synthetische Regel und jeden

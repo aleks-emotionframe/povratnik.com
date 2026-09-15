@@ -1,7 +1,8 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
-// Kopf nach designsystem.md 2.1: Teststufe als schmale Leiste, Logo, Hauptnavigation,
-// Sprachwahl, hervorgehobener Kurzcheck. Im Fuss dasselbe Logo, per CSS weiss. Sprache aus
+// Kopf nach designsystem.md 2.1: Logo, Hauptnavigation, Sprachwahl als Kürzel,
+// hervorgehobener Kurzcheck. Die Teststufe (ADR-0004) steht im Fuss jeder Seite.
+// Im Fuss dasselbe Logo, per CSS weiss. Sprache aus
 // der Adresse (lib/i18n.ts). Der EmotionFrame Footer steht als letztes Element.
 import "../styles/base.css";
 import { Image } from "astro:assets";
@@ -53,20 +54,6 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
   </head>
   <body>
     <a class="skip" href="#inhalt">{u("shell.skip")}</a>
-    <div class="topbar">
-      <div class="container">
-        {STAGE === "test" ? (
-          <p role="note"><strong>{u("shell.stage")}</strong> <span class="topbar__text">{u("shell.stage_text")}</span></p>
-        ) : (
-          <p>{u("shell.tagline")}</p>
-        )}
-        <nav class="lang" aria-label={u("shell.language")}>
-          {LOCALES.map((l) => (
-            <a href={localePath(l, bare)} lang={l} hreflang={l} aria-current={l === lang ? "true" : undefined}>{LOCALE_NAMES[l]}</a>
-          ))}
-        </nav>
-      </div>
-    </div>
     <header class="site-head">
       <div class="container">
         <a class="brand" href={p("/")} aria-label="povratnik.com">
@@ -74,6 +61,11 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
         </a>
         <nav class="site-nav" aria-label="Navigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
+        </nav>
+        <nav class="lang" aria-label={u("shell.language")}>
+          {LOCALES.map((l) => (
+            <a href={localePath(l, bare)} lang={l} hreflang={l} aria-label={LOCALE_NAMES[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a>
+          ))}
         </nav>
         <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
       </div>

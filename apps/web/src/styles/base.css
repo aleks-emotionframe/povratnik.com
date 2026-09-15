@@ -246,40 +246,7 @@ a:hover {
   transform: translateX(3px);
 }
 
-/* Kopfzeile: Aufbaustufe als schmale Leiste, nicht als gelbes Band. */
-.topbar {
-  background: var(--brand-deep);
-  color: var(--on-brand-soft);
-  font-size: 0.8125rem;
-}
-.topbar .container {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  flex-wrap: wrap;
-  padding-block: 0.4rem;
-}
-.topbar p {
-  margin: 0;
-  max-width: none;
-}
-.topbar strong {
-  color: var(--on-brand);
-  font-weight: 600;
-  margin-right: 0.5rem;
-}
-.topbar a {
-  color: var(--on-brand);
-  text-decoration: none;
-  min-height: 28px;
-  display: inline-flex;
-  align-items: center;
-}
-.topbar a:hover {
-  text-decoration: underline;
-}
-
-/* Kopf mit Wortmarke, Hauptnavigation und hervorgehobener Handlung */
+/* Kopf mit Logo, Hauptnavigation, Sprachwahl und hervorgehobener Handlung */
 .site-head {
   background: var(--paper);
   border-bottom: 1px solid var(--line);
@@ -348,6 +315,9 @@ a:hover {
     grid-template-columns: 1fr auto;
     gap: 0.5rem 1rem;
   }
+  /* Zeile 1: Logo und Sprachwahl, Zeile 2: Navigation scrollt über die volle Breite.
+     Die Handlung im Kopf entfällt hier; der Kurzcheck ist über «Mein Weg» und den
+     Aufmacher erreichbar. */
   .site-nav {
     grid-column: 1 / -1;
     gap: 0 1.25rem;
@@ -355,21 +325,24 @@ a:hover {
     flex-wrap: nowrap;
     scrollbar-width: none;
   }
+  .lang {
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    margin-left: 0;
+  }
+  .lang a {
+    min-width: 32px;
+    padding-inline: 0.25rem;
+  }
   .site-nav a {
     white-space: nowrap;
   }
   .site-head .button {
-    grid-row: 1;
-    grid-column: 2;
-    font-size: 0.875rem;
-    padding-inline: 1rem;
-    white-space: nowrap;
+    display: none;
   }
   .brand img {
     height: 28px;
-  }
-  .topbar__text {
-    display: none;
   }
 }
 
@@ -1027,15 +1000,34 @@ a:hover {
   top: 1rem;
 }
 
-/* Sprachwahl in der Kopfleiste */
+/* Sprachwahl im Kopf: Kürzel, aktuelle Sprache gefüllt */
 .lang {
   display: flex;
-  gap: 0.25rem 1rem;
-  flex-wrap: wrap;
+  gap: 0.15rem;
+  margin-left: auto;
+}
+.lang a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  min-width: 36px;
+  min-height: 36px;
+  padding-inline: 0.4rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lang a:hover {
+  color: var(--ink);
+  background: var(--surface);
 }
 .lang a[aria-current="true"] {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  color: var(--brand);
+  background: var(--surface-blue);
 }
 .notice--fallback {
   margin: 1rem 0 0;
