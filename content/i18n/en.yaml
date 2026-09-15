@@ -689,7 +689,6 @@ ui:
     more_glossary_link: Glossary
     more_countries_link: Six countries
     crumb: Knowledge
-    crumb_rubric: Section {n}
     questions: Typical questions
     topics_title: Topics in this section
     remaining_more: Further topics, still in preparation
