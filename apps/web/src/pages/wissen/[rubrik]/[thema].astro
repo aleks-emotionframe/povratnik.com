@@ -62,6 +62,7 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       <a href="#dauer">{u("topic.duration")}</a>
       <a href="#fristen">{u("topic.deadlines")}</a>
       <a href="#fehler">{u("topic.mistake")}</a>
+      <a href="#klaerung">{u("topic.not_decided")}</a>
       <a href="#quellen">{u("topic.stand_title")}</a>
     </nav>
   </details>
@@ -77,43 +78,43 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
 
   <section class="band band--surface">
     <div class="container grid topic-grid">
-      <div class="col-main topic">
-        <section class="panel" id="voraussetzungen">
+      <article class="col-main topic">
+        <section class="topic__section" id="voraussetzungen">
           <h2>{u("topic.prerequisites")}</h2>
-          {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+          {s.prerequisites ? <ul class="rows">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
         </section>
-        <section class="panel" id="ablauf">
+        <section class="topic__section" id="ablauf">
           <h2>{u("topic.steps")}</h2>
-          {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
+          {s.steps ? <ol class="rows rows--numbered">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
         </section>
-        <section class="panel" id="unterlagen">
+        <section class="topic__section" id="unterlagen">
           <h2>{u("topic.documents")}</h2>
-          {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+          {s.documents ? <ul class="rows">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
         </section>
-        <section class="panel" id="dauer">
+        <section class="topic__section" id="dauer">
           <h2>{u("topic.duration")}</h2>
           <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
         </section>
-        <section class="panel" id="fristen">
+        <section class="topic__section" id="fristen">
           <h2>{u("topic.deadlines")}</h2>
-          {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+          {s.deadlines ? <ul class="rows">{s.deadlines.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
         </section>
-        <section class="panel panel--mistake" id="fehler">
+        <section class="topic__section" id="fehler">
           <h2>{u("topic.mistake")}</h2>
           <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
         </section>
-        <section class="panel">
+        <section class="topic__section" id="klaerung">
           <h2>{u("topic.not_decided")}</h2>
           <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
           {s.open_points && (
             <>
               <h3>{u("topic.open_points")}</h3>
-              <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
+              <ul class="rows">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
             </>
           )}
         </section>
         {page.validity.transitional && <p class="notice" role="note"><strong>{u("topic.validity")}</strong>{page.validity.transitional[lang] ?? page.validity.transitional.de}</p>}
-        <section class="panel" id="quellen">
+        <section class="topic__section" id="quellen">
           <h2>{u("topic.stand_title")}</h2>
           <dl class="open-field">
             <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
@@ -131,7 +132,7 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
             <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
           </dl>
         </section>
-      </div>
+      </article>
 
       <aside class="col-aside">
         {page.terms.length > 0 && (
@@ -264,107 +265,76 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       grid-column: 3;
     }
   }
+  /* Linke Spalte: ein Dokument mit Abschnitten, getrennt durch feine Linien; eine
+     Listenform für alles (Zeilen mit Trennlinie, keine Symbole). */
   .topic {
-    display: grid;
-    gap: 1.25rem;
-  }
-  .panel {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-    padding: 1.35rem 1.5rem 1.5rem;
+    padding-inline: clamp(1rem, 3vw, 2rem);
+  }
+  .topic__section {
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--line);
     scroll-margin-top: 6rem;
   }
-  .panel h2 {
-    font-size: 1.25rem;
-    margin: 0 0 0.85rem;
+  .topic__section:first-child {
+    border-top: 0;
   }
-  .panel h3 {
+  .topic__section h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
+  }
+  .topic__section h3 {
     font-size: 1rem;
     margin: 1.25rem 0 0.5rem;
   }
-  .panel > p {
+  .topic__section > p {
     margin: 0;
     max-width: none;
   }
-  .panel--mistake {
-    background: var(--st-unknown-bg);
-    border-color: oklch(88% 0.06 85);
+  .topic .notice {
+    margin-block: 0.5rem;
   }
-  .checks,
-  .steps,
-  .deadlines {
+  .rows {
+    list-style: none;
     padding: 0;
     margin: 0;
-    list-style: none;
-    display: grid;
-    gap: 0.6rem;
     max-width: none;
   }
-  .checks li {
-    padding-left: 1.85rem;
-    position: relative;
+  .rows li {
+    padding: 0.6rem 0;
+    border-top: 1px solid var(--line);
   }
-  .checks li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    top: 0.1rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 50%;
-    background: var(--surface-blue);
-    color: var(--accent);
-    font-size: 0.75rem;
-    display: grid;
-    place-items: center;
+  .rows li:first-child {
+    border-top: 0;
+    padding-top: 0;
   }
-  .checks--doc li::before {
-    content: "▪";
+  .rows li:last-child {
+    padding-bottom: 0;
   }
-  .checks--open li::before {
-    content: none;
-  }
-  .checks--open li {
-    padding-left: 0;
-  }
-  .steps {
+  /* Ablauf: die Reihenfolge als schlichte Zahl in Akzentfarbe am Zeilenanfang. */
+  .rows--numbered {
     counter-reset: step;
+  }
+  .rows--numbered li {
+    counter-increment: step;
+    display: flex;
     gap: 0.75rem;
   }
-  .steps li {
-    counter-increment: step;
-    padding-left: 2.5rem;
-    position: relative;
-    min-height: 1.75rem;
-  }
-  .steps li::before {
+  .rows--numbered li::before {
     content: counter(step);
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 50%;
-    background: var(--brand);
-    color: var(--on-brand);
+    flex: none;
+    min-width: 1.25rem;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.8125rem;
-    display: grid;
-    place-items: center;
+    color: var(--accent);
   }
-  .deadlines .deadline {
-    font-family: var(--font-text);
-    font-size: 1rem;
-    padding: 0.35rem 0 0.35rem 0.85rem;
-    border-left: 3px solid var(--accent);
-  }
-  .panel .open-field {
+  .topic .open-field {
     max-width: none;
   }
-  .panel .open-field dt:first-of-type,
-  .panel .open-field dd:first-of-type {
+  .topic .open-field dt:first-of-type,
+  .topic .open-field dd:first-of-type {
     border-top: 0;
     padding-top: 0;
   }
