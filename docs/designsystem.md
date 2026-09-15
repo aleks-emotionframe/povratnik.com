@@ -64,7 +64,9 @@ Alle tatsächlich verwendeten Paarungen erreichen mindestens AA.
 diese eine Stärke, Zeichensätze latin und latin-ext für kroatische Amtsbegriffe), für
 Titel, Navigation und Schaltflächen. Lauftext im Systemstack (Segoe UI, Roboto,
 Helvetica), damit die Startressourcen im Budget bleiben. Metadaten, Beträge und Fristen
-dicktengleich im Systemstack. Zeilenlänge im Lauftext höchstens 70 Zeichen.
+im selben Textstapel, kleiner und mit Tabellenziffern. Keine Schreibmaschinenschrift,
+nirgends (Entscheid der Produktverantwortung vom 15.09.2026, durch einen Test
+erzwungen). Zeilenlänge im Lauftext höchstens 70 Zeichen.
 
 **Logo:** provisorisch die Datei `apps/web/src/assets/povratnik-logo.webp` (blaue
 Bildmarke mit Haus im P, Schriftzug in Schwarz, Alpha-Kanal). Im Kopf 34 Pixel hoch

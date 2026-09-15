@@ -115,7 +115,7 @@
   width: auto;
   height: auto;
   font: inherit;
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   border: 0;
   background: transparent;
   color: var(--ink);
@@ -539,7 +539,7 @@
   }
 }
 .terms dt {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.9375rem;
   color: var(--accent-deep);
   font-weight: 600;

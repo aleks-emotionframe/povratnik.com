@@ -84,9 +84,9 @@ a:hover {
 .mono,
 .datenstand,
 .deadline {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
-  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
 }
 .soft {
   color: var(--ink-soft);
@@ -627,7 +627,7 @@ a:hover {
   border-color: transparent;
 }
 .card__num {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
   color: var(--muted);
 }
@@ -691,7 +691,7 @@ a:hover {
   text-underline-offset: 0.15em;
 }
 .key__hr {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
   color: var(--on-brand-soft);
   display: block;
@@ -787,7 +787,7 @@ a:hover {
 
 /* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). */
 .state {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
   letter-spacing: 0.01em;
   display: inline-flex;

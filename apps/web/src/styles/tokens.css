@@ -50,7 +50,10 @@
 
   --font-display: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-text: "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  /* Metadaten, Beträge, Fristen: derselbe Textstapel, nur mit Tabellenziffern.
+     Keine Schreibmaschinenschrift (Entscheid der Produktverantwortung, 15.09.2026);
+     fonts.test.ts erzwingt das. */
+  --font-meta: var(--font-text);
 
   --measure: 68ch;
   --maxw: 1600px;
