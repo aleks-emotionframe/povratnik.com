@@ -570,22 +570,26 @@ situations:
     trap: Tax residency after 183 days. Whoever moves during the year may be taxable in two countries. A tax professional clarifies that, not this website.
 cases:
   familie:
-    name: Lucía, 32, Buenos Aires
+    name: Lucía
+    place: Buenos Aires
     line: Great-grandparents from Dalmatia, no Croatian passport, partner without a link, one child of school age.
     shapes: The status is open, and the document chain across four generations is the longest single step. Her partner follows a completely different path.
     first: Have it checked whether the line of descent can be fully documented. Not the health insurance she had searched for.
   selbstaendig:
-    name: Marko, 41, Stuttgart
+    name: Marko
+    place: Stuttgart
     line: Croatian passport, partner too, two children, wants to become self-employed.
     shapes: The status is clear, the way is short. What matters is the order between support application and founding, and that the income tax exemption may not apply to self-employment at all.
     first: Read the current call before registering anything.
   arbeitgeber-im-ausland:
-    name: Anna, 29, Vienna
+    name: Anna
+    place: Vienna
     line: EU citizen without Croatian roots, alone, works from Croatia for an Austrian employer.
     shapes: "Residence is uncomplicated. Her real risk is tax: residency, double taxation and social security when working for a foreign employer, with retroactive effect."
     first: Clarify this point before the move, not after.
   pensioniert:
-    name: Ivan, 58, Toronto
+    name: Ivan
+    place: Toronto
     line: Croatian passport, partner without one, lives on a Canadian pension, move open.
     shapes: His partner follows a different path than he does. His health insurance does not follow from employment; that is where gaps arise. Return support for work and founding does not apply to him.
     first: Clarify pension crediting and the insurance basis, with the agreement between Canada and Croatia.
@@ -657,7 +661,9 @@ ui:
     news_title: "News on returning and emigrating"
     news_all: "All news"
     cases_label: Example, fictional
-    cases_first: "First step:"
+    cases_situation: Starting point
+    cases_shapes: What shapes the path
+    cases_first: First step
   wissen:
     title: Knowledge by topic
     description: "Twelve sections on returning or emigrating to Croatia: status, documents, work, taxes, health, school, housing, support."

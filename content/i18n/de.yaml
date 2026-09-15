@@ -432,7 +432,9 @@ ui:
     news_title: "Aktuelles zu Rückkehr und Auswanderung"
     news_all: "Alle Meldungen"
     cases_label: Beispiel, fiktiv
-    cases_first: "Erster Schritt:"
+    cases_situation: Ausgangslage
+    cases_shapes: Was den Weg prägt
+    cases_first: Erster Schritt
   wissen:
     title: Wissen nach Thema
     description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."

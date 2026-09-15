@@ -168,13 +168,21 @@ const keys = [
         {CASES.map((raw) => {
           const c = caseText(raw, texts);
           return (
-            <li class="card card--link">
+            <li class="card card--link cases__card">
               <div class="card__body">
-                <span class="card__num">{u("home.cases_label")}</span>
                 <h3><a href={p(`/wissen/situation/${c.situation}`)}>{c.name}</a></h3>
-                <p class="cases__line">{c.line}</p>
-                <p>{c.shapes}</p>
-                <p class="cases__first"><strong>{u("home.cases_first")}</strong> {c.first}</p>
+                <span class="cases__meta">{c.age}, {c.place}</span>
+                <dl class="cases__facts">
+                  <dt>{u("home.cases_situation")}</dt>
+                  <dd>{c.line}</dd>
+                  <dt>{u("home.cases_shapes")}</dt>
+                  <dd>{c.shapes}</dd>
+                </dl>
+                <div class="cases__first">
+                  <span class="cases__label">{u("home.cases_first")}</span>
+                  <p>{c.first}</p>
+                </div>
+                <span class="cases__example">{u("home.cases_label")}</span>
               </div>
             </li>
           );
@@ -233,15 +241,58 @@ const keys = [
     color: var(--accent);
     margin-right: 0.35rem;
   }
+  /* Beispielwege: Name gross, Alter und Ort darunter, dann Ausgangslage und Prägung als
+     beschriftete Absätze, der erste Schritt als hervorgehobener Block unten. */
   .cases {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
-  .cases__line {
-    color: var(--ink) !important;
+  .cases__card .card__body {
+    gap: 0;
+  }
+  .cases__card h3 {
+    font-size: 1.5rem;
+  }
+  .cases__meta {
+    font-family: var(--font-meta);
+    font-size: 0.9375rem;
+    color: var(--muted);
+    margin: 0.15rem 0 1.1rem;
+  }
+  .cases__facts {
+    margin: 0;
+  }
+  .cases__facts dt,
+  .cases__label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+  .cases__facts dd {
+    margin: 0 0 1rem;
+    font-size: 0.9375rem;
+    color: var(--ink);
   }
   .cases__first {
-    border-top: 1px solid var(--line);
-    padding-top: 0.6rem;
-    margin-top: auto !important;
+    margin-top: auto;
+    background: var(--surface-blue);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+  }
+  .cases__first .cases__label {
+    color: var(--accent-deep);
+    display: block;
+  }
+  .cases__first p {
+    margin: 0;
+    color: var(--ink);
+    font-size: 0.9375rem;
+  }
+  .cases__example {
+    font-family: var(--font-meta);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    margin-top: 0.85rem;
   }
 </style>

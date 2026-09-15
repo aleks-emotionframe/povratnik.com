@@ -570,22 +570,26 @@ situations:
     trap: Porezna rezidentnost nakon 183 dana. Tko se seli tijekom godine, možda je porezni obveznik u dvije države. To razjašnjava porezni stručnjak, ne ova stranica.
 cases:
   familie:
-    name: Lucía, 32, Buenos Aires
+    name: Lucía
+    place: Buenos Aires
     line: Pradjedovi iz Dalmacije, bez hrvatske putovnice, partner bez veze, jedno dijete školske dobi.
     shapes: Status je otvoren, a lanac isprava kroz četiri generacije najdulji je pojedinačni korak. Njezin partner ide potpuno drugim putem.
     first: Dati provjeriti može li se lanac podrijetla potpuno dokazati. Ne zdravstveno osiguranje koje je tražila.
   selbstaendig:
-    name: Marko, 41, Stuttgart
+    name: Marko
+    place: Stuttgart
     line: Hrvatska putovnica, partnerica također, dvoje djece, želi postati samostalan.
     shapes: Status je razjašnjen, put je kratak. Odlučujući su redoslijed između zahtjeva za potporu i osnivanja te to da oslobođenje od poreza kod samostalne djelatnosti možda uopće ne vrijedi.
     first: Pročitati važeći javni poziv prije nego što se išta prijavi.
   arbeitgeber-im-ausland:
-    name: Anna, 29, Beč
+    name: Anna
+    place: Beč
     line: Građanka EU-a bez hrvatskih korijena, sama, iz Hrvatske radi za austrijskog poslodavca.
     shapes: "Boravak nije kompliciran. Njezin je rizik porezni: rezidentnost, dvostruko oporezivanje i socijalno osiguranje pri radu za inozemnog poslodavca, s povratnim učinkom."
     first: Ovo razjasniti prije selidbe, ne poslije.
   pensioniert:
-    name: Ivan, 58, Toronto
+    name: Ivan
+    place: Toronto
     line: Hrvatska putovnica, partnerica bez nje, živi od kanadske mirovine, selidba otvorena.
     shapes: Njegova partnerica ide drugim putem od njega. Zdravstveno osiguranje kod njega ne proizlazi iz zaposlenja; ondje nastaju praznine. Potpore za povratnike za rad i osnivanje na njega se ne odnose.
     first: Razjasniti priznavanje mirovinskog staža i osnovu osiguranja, uz ugovor između Kanade i Hrvatske.
@@ -657,7 +661,9 @@ ui:
     news_title: "Aktualno o povratku i iseljavanju"
     news_all: "Sve obavijesti"
     cases_label: Primjer, fiktivno
-    cases_first: "Prvi korak:"
+    cases_situation: Polazna situacija
+    cases_shapes: Što određuje put
+    cases_first: Prvi korak
   wissen:
     title: Znanje po temama
     description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
