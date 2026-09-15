@@ -663,18 +663,6 @@ ui:
     key3_text: Pokreće rokove i kod mnogih je potpora mjerodavan datum, ne dolazak.
     key4_title: Osiguranje
     key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
-    phases_title: Pet faza, jednu svi izostavljaju
-    phases_help: "Peta je najvažnija: ondje povratak propada, ne na prijavi."
-    phase1_time: 12 do 6 mjeseci prije
-    phase1_text: Je li izvedivo? Koji statusni put? Koje mjesto? Je li novca dovoljno?
-    phase2_time: 9 do 2 mjeseca prije
-    phase2_text: Isprave, boravak, osiguranje, škola, stan, zemlja podrijetla.
-    phase3_time: 4 tjedna prije do dolaska
-    phase3_text: Prijevoz, prijelazno pokriće, putovanje, prvi termini.
-    phase4_time: prvih 8 tjedana
-    phase4_text: Prijava, osiguranje, rad, škola, svakodnevica.
-    phase5_time: od 3. do 24. mjeseca
-    phase5_text: Produljenja, obveze iz potpora, jezik, uključivanje.
     running_title: Što trenutačno teče
     running_help: Otvoreni rokovi i aktualne mjere, sa stanjem i datumom provjere.
     running_state: teče

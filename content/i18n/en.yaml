@@ -663,18 +663,6 @@ ui:
     key3_text: Triggers deadlines and for many support schemes is the decisive date, not arrival.
     key4_title: Insurance
     key4_text: Enables doctor visits, school enrolment, a childcare place. Has a gap if it was not planned in advance.
-    phases_title: Five phases, and everyone leaves one out
-    phases_help: "The fifth is the most important: that is where return fails, not at registration."
-    phase1_time: 12 to 6 months before
-    phase1_text: Is it feasible? Which status route? Which place? Is the money enough?
-    phase2_time: 9 to 2 months before
-    phase2_text: Documents, residence, insurance, school, housing, country of origin.
-    phase3_time: 4 weeks before until arrival
-    phase3_text: Transport, transitional cover, travel, first appointments.
-    phase4_time: first 8 weeks
-    phase4_text: Registration, insurance, work, school, everyday life.
-    phase5_time: months 3 to 24
-    phase5_text: Extensions, support commitments, language, integration.
     running_title: What is running now
     running_help: Open deadlines and current measures, with status and check date.
     running_state: running

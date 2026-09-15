@@ -663,18 +663,6 @@ ui:
     key3_text: Activa plazos y en muchas ayudas es la fecha que cuenta, no la llegada.
     key4_title: Seguro
     key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
-    phases_title: Cinco fases, y una la omiten todos
-    phases_help: "La quinta es la más importante: ahí fracasa el regreso, no en el registro."
-    phase1_time: de 12 a 6 meses antes
-    phase1_text: ¿Es viable? ¿Qué vía de estatus? ¿Qué lugar? ¿Alcanza el dinero?
-    phase2_time: de 9 a 2 meses antes
-    phase2_text: Documentos, residencia, seguro, escuela, vivienda, país de origen.
-    phase3_time: de 4 semanas antes hasta la llegada
-    phase3_text: Transporte, cobertura transitoria, viaje, primeras citas.
-    phase4_time: primeras 8 semanas
-    phase4_text: Registro, seguro, trabajo, escuela, vida cotidiana.
-    phase5_time: del mes 3 al 24
-    phase5_text: Prórrogas, obligaciones de las ayudas, idioma, integración.
     running_title: Qué está en curso
     running_help: Plazos abiertos y medidas actuales, con estado y fecha de comprobación.
     running_state: en curso

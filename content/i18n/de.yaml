@@ -433,18 +433,6 @@ ui:
     key3_text: Löst Fristen aus und ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
     key4_title: Versicherung
     key4_text: Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.
-    phases_title: Fünf Phasen, eine davon lassen alle weg
-    phases_help: "Die fünfte ist die wichtigste: Dort scheitert die Rückkehr, nicht bei der Anmeldung."
-    phase1_time: 12 bis 6 Monate vorher
-    phase1_text: Ist es machbar? Welcher Statusweg? Welcher Ort? Reicht das Geld?
-    phase2_time: 9 bis 2 Monate vorher
-    phase2_text: Dokumente, Aufenthalt, Versicherung, Schule, Wohnung, Herkunftsland.
-    phase3_time: 4 Wochen vorher bis Ankunft
-    phase3_text: Transport, Übergangsdeckung, Anreise, erste Termine.
-    phase4_time: erste 8 Wochen
-    phase4_text: Anmeldung, Versicherung, Arbeit, Schule, Alltag.
-    phase5_time: Monat 3 bis 24
-    phase5_text: Verlängerungen, Förderpflichten, Sprache, Anschluss.
     running_title: Was gerade läuft
     running_help: Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.
     running_state: läuft

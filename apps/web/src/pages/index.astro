@@ -1,7 +1,7 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
-// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
-// läuft, die Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
+// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, was gerade läuft, die
+// Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
 // Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
@@ -41,7 +41,6 @@ const keys = [
   { title: u("home.key4_title"), sub: "zdravstveno osiguranje", hr: true, text: u("home.key4_text"), href: topicHref("krankenversicherung") },
 ];
 const elig = texts.eligibility as Record<string, string>;
-const phaseNames = texts.phases as Record<string, string>;
 ---
 
 <Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
@@ -160,24 +159,6 @@ const phaseNames = texts.phases as Record<string, string>;
   </section>
 
   <section class="band band--surface">
-    <div class="container">
-      <div class="band__head">
-        <h2>{u("home.phases_title")}</h2>
-        <p class="soft">{u("home.phases_help")}</p>
-      </div>
-      <ol class="phases">
-        {(["orient", "prepare", "move", "arrive", "stay"] as const).map((ph, i) => (
-          <li class="phase-step">
-            <h3>{phaseNames[ph]}</h3>
-            <span class="phase-step__time">{u(`home.phase${i + 1}_time`)}</span>
-            <p>{u(`home.phase${i + 1}_text`)}</p>
-          </li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="band">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.running_title")}</h2>
