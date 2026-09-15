@@ -104,8 +104,11 @@ a:hover {
   color: var(--on-brand-soft);
 }
 /* Zwei Bänder derselben Fläche hintereinander: das zweite ohne oberen Abstand. */
-.band--tight {
+.band.band--tight {
   padding-top: 0;
+}
+.band.band--tight-bottom {
+  padding-bottom: 2.5rem;
 }
 
 /* Raster: zwölf Spalten, linksbündig. */
