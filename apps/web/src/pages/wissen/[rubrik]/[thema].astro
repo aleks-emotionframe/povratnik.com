@@ -130,6 +130,12 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       </article>
 
       <aside class="col-aside">
+        {requires.length > 0 && (
+          <div class="side">
+            <h3>{u("topic.requires")}</h3>
+            <ul class="side__list">{requires.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
+          </div>
+        )}
         <div class="side">
           <h3>{u("topic.mistake")}</h3>
           <p class="side__text">{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
@@ -145,12 +151,6 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
                 </>
               ))}
             </dl>
-          </div>
-        )}
-        {requires.length > 0 && (
-          <div class="side">
-            <h3>{u("topic.requires")}</h3>
-            <ul class="side__list">{requires.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}</ul>
           </div>
         )}
         {followed.length > 0 && (
