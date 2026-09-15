@@ -590,6 +590,7 @@ ui:
     fictional_title: Fiktive Testgemeinde
     fictional_text: Dieser Ort ist erfunden. Er zeigt die Struktur eines Ortsprofils mit allen Zuständen. Kein Wert bezieht sich auf einen realen Ort.
     benefits_title: Leistungen der Gemeinde
+    details: "Details"
     jump_label: "Abschnitte dieses Ortsprofils"
     benefits_help: Vier Zeitangaben, ein Zustand. Über den Antrag entscheidet die Gemeinde.
     benefits_empty: Für diesen Ort sind keine Leistungen erfasst. Das heisst nicht, dass es keine gibt.

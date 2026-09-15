@@ -1055,10 +1055,12 @@ a:hover {
   opacity: 0.4;
 }
 
-/* Leistung einer Gemeinde als Karte (Ortsprofil, Leistungsdatenbank): Zustand, Titel,
-   dann Angaben als Zeilen mit Linie, der Betrag hervorgehoben, Datenstand unten bündig. */
+/* Leistung einer Gemeinde als Karte (Ortsprofil, Leistungsdatenbank): kompakt.
+   Zustand, Titel, Betrag gross, Antragszeitraum; alles Weitere zugeklappt unter
+   «Details», damit die Karten klein bleiben, auch auf dem Handy. */
 .cards--benefits {
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 @media (min-width: 720px) {
   .cards--benefits {
@@ -1068,7 +1070,16 @@ a:hover {
 @media (min-width: 1100px) {
   .cards--benefits {
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
   }
+}
+.benefit-card .card__body {
+  padding: 1rem 1.15rem 0.85rem;
+  gap: 0.3rem;
+}
+.benefit-card h3 {
+  font-size: 1.0625rem;
+  line-height: 1.3;
 }
 .benefit__state {
   margin: 0;
@@ -1078,31 +1089,67 @@ a:hover {
   align-items: center;
 }
 .benefit__place {
+  font-size: 0.8125rem;
+}
+.benefit__amount {
+  margin: 0.25rem 0 0 !important;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--ink) !important;
+}
+.benefit__amount .fact__meta,
+.benefit__amount .fact__note {
+  font-family: var(--font-text);
+  font-weight: 400;
+}
+.benefit__period {
+  margin: 0 !important;
   font-size: 0.875rem;
+  color: var(--ink-soft) !important;
 }
-.benefit {
-  margin: 0.75rem 0 0;
-  display: grid;
-  grid-template-columns: 8.5rem 1fr;
-  column-gap: 1rem;
-  font-size: 0.9375rem;
-}
-.benefit dt,
-.benefit dd {
-  margin: 0;
-  padding: 0.55rem 0;
+.benefit__details {
+  margin-top: 0.5rem;
   border-top: 1px solid var(--line);
 }
+.benefit__details summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--accent);
+}
+.benefit__details summary::-webkit-details-marker {
+  display: none;
+}
+.benefit__details summary::after {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform var(--dur) var(--ease);
+}
+.benefit__details[open] summary::after {
+  transform: rotate(-135deg) translateY(-2px);
+}
+.benefit {
+  margin: 0;
+  font-size: 0.9375rem;
+}
 .benefit dt {
+  font-size: 0.8125rem;
   color: var(--ink-soft);
 }
 .benefit dd {
+  margin: 0.1rem 0 0.65rem;
   color: var(--ink);
-}
-.benefit dd.benefit__amount {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.0625rem;
 }
 .benefit .plain {
   list-style: none;
@@ -1117,9 +1164,9 @@ a:hover {
   content: "· ";
   color: var(--accent);
 }
-.card .datenstand {
-  margin-top: auto;
-  padding-top: 0.75rem;
+.benefit__details .datenstand {
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
 }
 
 /* Datentiefe eines Orts: eigener Balken, damit ein dünn erfasster Ort nie wie ein Ort

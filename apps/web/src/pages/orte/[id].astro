@@ -68,19 +68,22 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
       ) : (
         <ul class="cards cards--benefits">
           {place.benefits.map((b) => (
-            <li class="card">
+            <li class="card benefit-card">
               <div class="card__body">
                 <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span></p>
                 <h3>{b.title}</h3>
-                <dl class="benefit">
-                  <dt>{u("place.target")}</dt><dd>{b.target}</dd>
-                  <dt>{u("place.amount")}</dt><dd class="benefit__amount"><Fact fact={b.amount} /></dd>
-                  <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
-                  <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
-                  <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
-                  <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
-                </dl>
-                <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+                <p class="benefit__amount"><Fact fact={b.amount} /></p>
+                <p class="benefit__period">{b.application.from || b.application.until ? `${u("place.period")}: ${period(b)}` : period(b)}</p>
+                <details class="benefit__details">
+                  <summary>{u("place.details")}</summary>
+                  <dl class="benefit">
+                    <dt>{u("place.target")}</dt><dd>{b.target}</dd>
+                    <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
+                    <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
+                    <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
+                  </dl>
+                  <p class="datenstand"><span>{u("place.source", { source: b.source })}</span><span>{u("place.checked", { date: formatDate(b.checked) })}</span></p>
+                </details>
               </div>
             </li>
           ))}

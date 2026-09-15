@@ -819,6 +819,7 @@ ui:
     fictional_title: Fiktivna testna općina
     fictional_text: Ovo je mjesto izmišljeno. Pokazuje strukturu profila mjesta sa svim stanjima. Nijedna se vrijednost ne odnosi na stvarno mjesto.
     benefits_title: Mjere općine
+    details: "Pojedinosti"
     jump_label: "Dijelovi profila mjesta"
     benefits_help: Četiri vremenska podatka, jedno stanje. O zahtjevu odlučuje općina.
     benefits_empty: Za ovo mjesto nisu evidentirane mjere. To ne znači da ih nema.
