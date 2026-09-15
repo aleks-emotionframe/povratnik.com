@@ -1101,6 +1101,7 @@ a:hover {
   gap: 0.75rem;
   flex-wrap: wrap;
   align-items: center;
+  height: 1.5rem;
 }
 .benefit__place {
   font-size: 0.8125rem;
@@ -1113,10 +1114,38 @@ a:hover {
   font-size: 1.125rem;
   color: var(--ink) !important;
 }
-.benefit__amount .fact__meta,
-.benefit__amount .fact__note {
+.benefit__amount .fact__meta {
   font-family: var(--font-text);
   font-weight: 400;
+}
+/* Zugeklappt nur Wert und Stand; die Erläuterung zum Betrag steht in den Details. */
+.benefit__amount .fact__note {
+  display: none;
+}
+.benefit__amount {
+  height: 3.6rem;
+  overflow: hidden;
+}
+/* Jetzt beantragbar: die Karte selbst grün getönt, die Marke gross mit Haken. */
+.benefit-card--open {
+  background: var(--st-open-bg);
+  border-color: oklch(85% 0.08 155);
+}
+.benefit-card--open .benefit__state .state {
+  font-size: 0.9375rem;
+  font-family: var(--font-display);
+}
+.benefit-card--open .benefit__state .state::before {
+  width: 1.1em;
+  height: 1.1em;
+  border: 0;
+  border-radius: 50%;
+  background: var(--st-open);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='black'/%3E%3Cpath d='M5.5 10.5l3 3 6-6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='black'/%3E%3Cpath d='M5.5 10.5l3 3 6-6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.benefit-card--open .benefit__details {
+  border-top-color: oklch(85% 0.08 155);
 }
 .benefit__period {
   margin: 0 !important;

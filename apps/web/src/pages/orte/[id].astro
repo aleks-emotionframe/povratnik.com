@@ -63,7 +63,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
       ) : (
         <ul class="cards cards--benefits">
           {place.benefits.map((b) => (
-            <li class="card benefit-card">
+            <li class={`card benefit-card${b.program_state === "open" ? " benefit-card--open" : ""}`}>
               <div class="card__body">
                 <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span></p>
                 <h3>{b.title}</h3>
@@ -72,6 +72,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
                 <details class="benefit__details">
                   <summary>{u("place.details")}</summary>
                   <dl class="benefit">
+                    <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
                     <dt>{u("place.target")}</dt><dd>{b.target}</dd>
                     <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
                     <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
