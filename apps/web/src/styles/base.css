@@ -730,58 +730,69 @@ a:hover {
   }
 }
 
-/* Die fünf Phasen als Zeitleiste */
+/* Die fünf Phasen als Karten; die fünfte, die alle weglassen, in Markenfarbe. */
 .phases {
   list-style: none;
   padding: 0;
   margin: 0;
   max-width: none;
   display: grid;
-  gap: 0;
+  gap: 1rem;
   grid-template-columns: 1fr;
 }
 .phase-step {
-  padding: 1rem 0 1rem 1.5rem;
-  border-left: 3px solid var(--line);
-  position: relative;
-}
-.phase-step::before {
-  content: "";
-  position: absolute;
-  left: -0.5rem;
-  top: 1.35rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--paper);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1.35rem 1.35rem 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 .phase-step h3 {
-  margin: 0 0 0.1rem;
-  font-size: 1.125rem;
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
 }
-.phase-step .mono {
-  color: var(--muted);
-  display: block;
-  margin-bottom: 0.4rem;
+.phase-step__time {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-meta);
+  font-size: 0.8125rem;
+  color: var(--accent-deep);
+  background: var(--surface-blue);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  margin-bottom: 0.9rem;
 }
 .phase-step p {
   margin: 0;
   font-size: 0.9375rem;
   color: var(--ink-soft);
 }
-@media (min-width: 900px) {
+.phase-step:last-child {
+  background: var(--brand);
+  border-color: var(--brand);
+}
+.phase-step:last-child h3 {
+  color: var(--on-brand);
+}
+.phase-step:last-child p {
+  color: var(--on-brand-soft);
+}
+.phase-step:last-child .phase-step__time {
+  color: var(--on-brand);
+  background: rgba(255, 255, 255, 0.14);
+}
+@media (min-width: 720px) and (max-width: 1099px) {
+  .phases {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .phase-step:last-child {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1100px) {
   .phases {
     grid-template-columns: repeat(5, 1fr);
-  }
-  .phase-step {
-    border-left: 0;
-    border-top: 3px solid var(--line);
-    padding: 1.25rem 1.25rem 0 0;
-  }
-  .phase-step::before {
-    left: 0;
-    top: -0.55rem;
   }
 }
 

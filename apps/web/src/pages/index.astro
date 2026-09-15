@@ -159,7 +159,7 @@ const phaseNames = texts.phases as Record<string, string>;
     </div>
   </section>
 
-  <section class="band">
+  <section class="band band--surface">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.phases_title")}</h2>
@@ -167,13 +167,17 @@ const phaseNames = texts.phases as Record<string, string>;
       </div>
       <ol class="phases">
         {(["orient", "prepare", "move", "arrive", "stay"] as const).map((ph, i) => (
-          <li class="phase-step"><h3>{phaseNames[ph]}</h3><span class="mono">{u(`home.phase${i + 1}_time`)}</span><p>{u(`home.phase${i + 1}_text`)}</p></li>
+          <li class="phase-step">
+            <h3>{phaseNames[ph]}</h3>
+            <span class="phase-step__time">{u(`home.phase${i + 1}_time`)}</span>
+            <p>{u(`home.phase${i + 1}_text`)}</p>
+          </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="band band--surface">
+  <section class="band">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.running_title")}</h2>
