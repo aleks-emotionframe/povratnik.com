@@ -185,7 +185,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         <div class="side side--cta">
           <h3>{u("place.cta_title")}</h3>
           <p>{u("place.cta_text")}</p>
-          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button" href={p("/mein-weg")}>{u("shell.cta")}</a>
           <a class="arrow-link" href={p("/orte/vergleich")}>{u("place.cta_compare")}</a>
         </div>
       </aside>
@@ -318,20 +318,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     font-size: 0.875rem;
     color: var(--ink-soft);
   }
-  .side {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-    margin-bottom: 1.25rem;
-  }
   .side :global(.map) {
     border: 0;
     padding: 0;
-  }
-  .side h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
   }
   .side__dl {
     margin: 0;
@@ -376,29 +365,5 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   }
   .changes .muted {
     font-size: 0.8125rem;
-  }
-  .side--cta {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: var(--on-brand);
-    display: grid;
-    gap: 0.75rem;
-    justify-items: start;
-  }
-  .side--cta h3 {
-    color: var(--on-brand);
-  }
-  .side--cta p {
-    margin: 0;
-    font-size: 0.9375rem;
-    color: var(--on-brand-soft);
-  }
-  .side--cta .button {
-    background: var(--paper);
-    color: var(--ink);
-    border-color: var(--paper);
-  }
-  .side--cta .arrow-link {
-    color: var(--accent-bright);
   }
 </style>

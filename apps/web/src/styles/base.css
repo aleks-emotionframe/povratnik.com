@@ -100,7 +100,9 @@ a:hover {
 .hero .fact__note,
 .band--brand .muted,
 .band--brand .fact__meta,
-.band--brand .fact__note {
+.band--brand .fact__note,
+.hero .state,
+.band--brand .state {
   color: var(--on-brand-soft);
 }
 /* Zwei Bänder derselben Fläche hintereinander: das zweite ohne oberen Abstand. */
@@ -1355,6 +1357,64 @@ a:hover {
 .open-field .fact__meta,
 .open-field .fact__note {
   font-size: 0.8125rem;
+}
+
+/* Seitenspalte: jede Gruppe eine weisse Tafel, die Handlung in Markenfarbe. Gilt für
+   Rubriken, Lebenssituationen, Länder, Themen und Ortsprofile. */
+.side {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.25rem;
+}
+.side h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.side__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side__list li {
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--line);
+}
+.side__list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.side__list a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+.side--cta {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+.side--cta h3 {
+  color: var(--on-brand);
+  margin: 0;
+}
+.side--cta p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--on-brand-soft);
+}
+.side--cta .button {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+.side--cta .arrow-link {
+  color: var(--accent-bright);
 }
 
 /* Fuss der Website, über dem EmotionFrame Balken */

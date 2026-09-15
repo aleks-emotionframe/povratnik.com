@@ -42,7 +42,7 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
       <div class="hero__media hero__media--plain">
         <div>
           <h2 class="others__title">{u("country.others")}</h2>
-          <ul class="chips chips--on-brand">
+          <ul class="others">
             {countries.filter((x) => x.id !== page.id).map((x) => <li><a href={p(pagePath(x))}>{shortName(x.title)}</a></li>)}
           </ul>
         </div>
@@ -52,7 +52,7 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
 
   <section class="band band--surface">
     <div class="container grid">
-      <div class="col-main">
+      <div class="col-main panel">
         <h2>{u("country.what_title")}</h2>
         <p class="soft">{u("country.what_help")}</p>
         <dl class="open-field country">
@@ -79,7 +79,7 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
         <div class="side side--cta">
           <h3>{u("country.cta_title")}</h3>
           <p>{u("country.cta_text")}</p>
-          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>
@@ -109,6 +109,50 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
 </Base>
 
 <style>
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem 1.5rem;
+  }
+  .panel h2 {
+    font-size: 1.25rem;
+  }
+  .panel .open-field {
+    max-width: none;
+  }
+  .panel .open-field dt:first-of-type,
+  .panel .open-field dd:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+  /* Andere Herkunftsländer als Felder mit Rand, keine Pillen. */
+  .others {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .others a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: var(--radius-sm);
+    color: var(--on-brand);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+  .others a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
   .crumbs {
     font-size: 0.875rem;
     color: var(--on-brand-soft);
@@ -148,39 +192,6 @@ const shortName = (title: string) => title.replace(/^(Aus (der |den )?|Iz |From 
   }
   .note {
     font-size: 0.875rem;
-    color: var(--ink-soft);
-  }
-  .side {
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .side h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .side__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .side__list li {
-    padding: 0.35rem 0;
-  }
-  .side__list a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-  }
-  .side--cta {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-  }
-  .side--cta p {
-    font-size: 0.9375rem;
     color: var(--ink-soft);
   }
   .stand h3 {

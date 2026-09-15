@@ -62,7 +62,7 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
         <div class="side side--cta">
           <h3>{u("situation.cta_title")}</h3>
           <p>{u("situation.cta_text")}</p>
-          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
     </div>
@@ -153,39 +153,6 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
   }
   .path__step p {
     margin: 0;
-    font-size: 0.9375rem;
-    color: var(--ink-soft);
-  }
-  .side {
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .side h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .side__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .side__list li {
-    padding: 0.35rem 0;
-  }
-  .side__list a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-  }
-  .side--cta {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-  }
-  .side--cta p {
     font-size: 0.9375rem;
     color: var(--ink-soft);
   }
