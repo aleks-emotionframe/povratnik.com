@@ -359,7 +359,7 @@ checklists:
     s8: Review the plan after twelve months, because rules change every year
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: Status and citizenship
+    title: "povratnik.com: Living in Croatia"
     intro: "Nothing can be decided before the status: it determines the residence route and access to work, school and support."
     q1: Do I get Croatian citizenship through my grandparents?
     q2: What is the certificate for emigrants and what does it give me?
@@ -667,24 +667,19 @@ ui:
     cases_shapes: What shapes the path
     cases_first: First step
   wissen:
-    title: Knowledge by topic
+    title: "Knowledge"
     description: "Twelve sections on returning or emigrating to Croatia: status, documents, work, taxes, health, school, housing, support."
-    lede: "Twelve sections, from status to support. Every topic page has the same template: short answer, who it applies to, who it does not apply to, competent body, status. By the second page you know where to look."
-    claim: Authority websites explain their own slice. We explain in which order the slices belong together.
+    lede: "Answers on residence, documents, work, taxes, health, school and housing. Every page says who it applies to, who is responsible and when it was checked."
     pages_one: "{n} topic page"
     pages_many: "{n} topic pages"
     topics_wip: "{n} topics in preparation"
-    depth_title: Two depths, recognisable for you
-    depth_text: "About twenty topics are worked out in full: the ones where people fail or where money is at stake. All others get a checked summary with entry point, competence and direct link. Both levels are marked, and no page goes online without source, check date and professional approval."
-    state_title: Status of the sections
-    state_text: The structure stands, the topic pages are in preparation. Until professional approval, every section shows which topics are coming and which questions they will answer.
-    more_title: Further entry points
+    more_title: "More ways into the knowledge"
     more_situations: By life situation
-    more_situations_link: Six entry points
     more_glossary: Glossary of official terms
-    more_glossary_link: Glossary
     more_countries: By country of origin
-    more_countries_link: Six countries
+    more_situations_text: "Six typical cases, from moving with a family to retirement."
+    more_glossary_text: "OIB, prebivalište, Domovnica and other official terms, explained in plain words."
+    more_countries_text: "What you need to settle in your current country, for six countries."
     crumb: Knowledge
     crumb_rubric: Section {n}
     questions: Typical questions

@@ -438,24 +438,19 @@ ui:
     cases_shapes: Was den Weg prägt
     cases_first: Erster Schritt
   wissen:
-    title: Wissen nach Thema
+    title: "Wissen"
     description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."
-    lede: "Zwölf Rubriken, von Status bis Förderung. Jede Themenseite hat dieselbe Maske: kurze Antwort, gilt für, gilt nicht für, zuständig, Stand. Nach der zweiten Seite wissen Sie, wo Sie suchen müssen."
-    claim: Behördenseiten erklären ihren eigenen Ausschnitt. Wir erklären, in welcher Reihenfolge die Ausschnitte zusammengehören.
+    lede: "Antworten zu Aufenthalt, Dokumenten, Arbeit, Steuern, Gesundheit, Schule und Wohnen. Jede Seite sagt, für wen sie gilt, wer zuständig ist und wann sie geprüft wurde."
     pages_one: "{n} Themenseite"
     pages_many: "{n} Themenseiten"
     topics_wip: "{n} Themen in Arbeit"
-    depth_title: Zwei Tiefen, für Sie erkennbar
-    depth_text: "Etwa zwanzig Themen werden vollständig ausgearbeitet: die, an denen Menschen scheitern oder an denen Geld hängt. Alle anderen bekommen eine geprüfte Kurzfassung mit Einstieg, Zuständigkeit und Direktlink. Beide Stufen sind gekennzeichnet, und keine Seite geht ohne Quelle, Prüfdatum und fachliche Freigabe online."
-    state_title: Stand der Rubriken
-    state_text: Die Struktur steht, die Themenseiten sind in Arbeit. Bis zur fachlichen Freigabe zeigt jede Rubrik, welche Themen kommen und welche Fragen sie beantworten wird.
-    more_title: Weitere Zugänge
+    more_title: "Weitere Wege zum Wissen"
     more_situations: Nach Lebenssituation
-    more_situations_link: Sechs Einstiege
     more_glossary: Glossar der Amtsbegriffe
-    more_glossary_link: Glossar
     more_countries: Nach Herkunftsland
-    more_countries_link: Sechs Länder
+    more_situations_text: "Sechs typische Fälle, vom Umzug mit Familie bis zur Pension."
+    more_glossary_text: "OIB, prebivalište, Domovnica und weitere Amtsbegriffe, verständlich erklärt."
+    more_countries_text: "Was Sie im bisherigen Wohnland erledigen müssen, für sechs Länder."
     crumb: Wissen
     crumb_rubric: Rubrik {n}
     questions: Typische Fragen

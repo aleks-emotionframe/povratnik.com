@@ -359,7 +359,7 @@ checklists:
     s8: Nakon dvanaest mjeseci ponovno provjeriti plan, jer se pravila mijenjaju svake godine
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: Status i državljanstvo
+    title: "povratnik.com: Život u Hrvatskoj"
     intro: "Prije statusa ništa se ne može odlučiti: on određuje boravišni put, pristup radu, školi i potporama."
     q1: Dobivam li preko bake i djeda hrvatsko državljanstvo?
     q2: Što je potvrda za iseljenike i što mi donosi?
@@ -667,24 +667,19 @@ ui:
     cases_shapes: Što određuje put
     cases_first: Prvi korak
   wissen:
-    title: Znanje po temama
+    title: "Znanje"
     description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
-    lede: "Dvanaest rubrika, od statusa do potpora. Svaka tematska stranica ima istu masku: kratak odgovor, za koga vrijedi, za koga ne vrijedi, nadležno tijelo, stanje. Nakon druge stranice znate gdje tražiti."
-    claim: Stranice tijela objašnjavaju svoj vlastiti isječak. Mi objašnjavamo kojim redoslijedom isječci idu zajedno.
+    lede: "Odgovori o boravku, dokumentima, radu, porezima, zdravstvu, školi i stanovanju. Svaka stranica kaže za koga vrijedi, tko je nadležan i kada je provjerena."
     pages_one: "{n} tematska stranica"
     pages_many: "{n} tematskih stranica"
     topics_wip: "{n} tema u pripremi"
-    depth_title: Dvije razine dubine, prepoznatljive
-    depth_text: "Oko dvadeset tema razrađuje se potpuno: one na kojima ljudi propadaju ili o kojima ovisi novac. Sve ostale dobivaju provjereni sažetak s ulazom, nadležnošću i izravnom poveznicom. Obje su razine označene, a nijedna stranica ne ide online bez izvora, datuma provjere i stručnog odobrenja."
-    state_title: Stanje rubrika
-    state_text: Struktura stoji, tematske su stranice u pripremi. Do stručnog odobrenja svaka rubrika pokazuje koje teme dolaze i na koja će pitanja odgovoriti.
-    more_title: Daljnji ulazi
+    more_title: "Drugi putovi do znanja"
     more_situations: Prema životnoj situaciji
-    more_situations_link: Šest ulaza
     more_glossary: Pojmovnik službenih pojmova
-    more_glossary_link: Pojmovnik
     more_countries: Prema zemlji podrijetla
-    more_countries_link: Šest zemalja
+    more_situations_text: "Šest tipičnih slučajeva, od selidbe s obitelji do mirovine."
+    more_glossary_text: "OIB, prebivalište, domovnica i drugi službeni pojmovi, razumljivo objašnjeni."
+    more_countries_text: "Što morate riješiti u dosadašnjoj zemlji boravka, za šest zemalja."
     crumb: Znanje
     crumb_rubric: Rubrika {n}
     questions: Tipična pitanja
