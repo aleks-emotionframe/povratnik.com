@@ -684,10 +684,8 @@ ui:
     more_title: "More ways into the knowledge"
     more_situations: By life situation
     more_glossary: Glossary of official terms
-    more_countries: By country of origin
     more_situations_link: Six entry points
     more_glossary_link: Glossary
-    more_countries_link: Six countries
     crumb: Knowledge
     questions: Typical questions
     topics_title: Topics in this section
