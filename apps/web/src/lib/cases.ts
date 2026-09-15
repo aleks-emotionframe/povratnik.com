@@ -1,5 +1,6 @@
-// Fünf Fallprofile aus docs/wizard-konzept.md 4, fiktiv und dort ausdrücklich als
-// öffentliche Beispielwege freigegeben. Sie ersetzen Erfahrungsberichte, bis echte
+// Vier Fallprofile aus docs/wizard-konzept.md 4 (das fünfte, Sofía, zeigt die Startseite
+// seit 15.09.2026 nicht mehr), fiktiv und dort ausdrücklich als öffentliche Beispielwege
+// freigegeben. Sie ersetzen Erfahrungsberichte, bis echte
 // vorliegen, und sind als Beispiel gekennzeichnet.
 
 export type Case = { name: string; line: string; shapes: string; first: string; situation: string };
@@ -32,13 +33,6 @@ export const CASES: Case[] = [
     shapes: "Seine Partnerin hat einen anderen Weg als er. Die Krankenversicherung folgt bei ihm nicht aus einer Anstellung; dort entstehen Lücken. Rückkehrerförderungen für Arbeit und Gründung gelten für ihn nicht.",
     first: "Rentenanrechnung und Versicherungsgrundlage klären, mit dem Abkommen zwischen Kanada und Kroatien.",
     situation: "pensioniert",
-  },
-  {
-    name: "Sofía, 26, Santiago de Chile",
-    line: "Weiss nicht, ob ihre Grossmutter die Staatsbürgerschaft hatte. Allein, Umzug später oder unklar.",
-    shapes: "Der Plan besteht fast nur aus Klärungsaufgaben, und das ist richtig so. Er zeigt, welche drei Auskünfte sie braucht, bevor irgendetwas planbar ist.",
-    first: "Drei konkrete, erledigbare Schritte statt der Gewissheit, schon planen zu können.",
-    situation: "ohne-pass",
   },
 ];
 

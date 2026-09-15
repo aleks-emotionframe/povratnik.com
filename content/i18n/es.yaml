@@ -589,11 +589,6 @@ cases:
     line: Pasaporte croata, pareja sin él, vive de una pensión canadiense, mudanza sin fecha.
     shapes: Su pareja sigue un camino distinto al suyo. En su caso el seguro de salud no deriva de un empleo; ahí surgen lagunas. Las ayudas al regreso para trabajo y emprendimiento no se aplican a él.
     first: Aclarar el cómputo de la pensión y la base del seguro, con el convenio entre Canadá y Croacia.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: No sabe si su abuela tenía la nacionalidad. Sola, mudanza más adelante o sin definir.
-    shapes: El plan consiste casi solo en tareas de aclaración, y así debe ser. Muestra qué tres informaciones necesita antes de que nada sea planificable.
-    first: Tres pasos concretos y realizables, en vez de la certeza de que ya podría planificar.
 ui:
   shell:
     tagline: Vivir en Croacia

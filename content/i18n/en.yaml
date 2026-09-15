@@ -589,11 +589,6 @@ cases:
     line: Croatian passport, partner without one, lives on a Canadian pension, move open.
     shapes: His partner follows a different path than he does. His health insurance does not follow from employment; that is where gaps arise. Return support for work and founding does not apply to him.
     first: Clarify pension crediting and the insurance basis, with the agreement between Canada and Croatia.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: Does not know whether her grandmother held citizenship. Alone, move later or unclear.
-    shapes: The plan consists almost entirely of clarification tasks, and that is right. It shows her which three pieces of information she needs before anything can be planned.
-    first: Three concrete, doable steps instead of the certainty that she could already plan.
 ui:
   shell:
     tagline: Living in Croatia

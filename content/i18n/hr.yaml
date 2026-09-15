@@ -589,11 +589,6 @@ cases:
     line: Hrvatska putovnica, partnerica bez nje, živi od kanadske mirovine, selidba otvorena.
     shapes: Njegova partnerica ide drugim putem od njega. Zdravstveno osiguranje kod njega ne proizlazi iz zaposlenja; ondje nastaju praznine. Potpore za povratnike za rad i osnivanje na njega se ne odnose.
     first: Razjasniti priznavanje mirovinskog staža i osnovu osiguranja, uz ugovor između Kanade i Hrvatske.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: Ne zna je li njezina baka imala državljanstvo. Sama, selidba kasnije ili neodređeno.
-    shapes: Plan se gotovo isključivo sastoji od zadataka razjašnjenja, i to je ispravno. Pokazuje joj koje tri informacije treba prije nego što se išta može planirati.
-    first: Tri konkretna, izvediva koraka umjesto uvjerenja da bi već mogla planirati.
 ui:
   shell:
     tagline: Život u Hrvatskoj
