@@ -61,7 +61,6 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       <a href="#unterlagen">{u("topic.documents")}</a>
       <a href="#dauer">{u("topic.duration")}</a>
       <a href="#fristen">{u("topic.deadlines")}</a>
-      <a href="#fehler">{u("topic.mistake")}</a>
       <a href="#klaerung">{u("topic.not_decided")}</a>
       <a href="#quellen">{u("topic.stand_title")}</a>
     </nav>
@@ -99,10 +98,6 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
           <h2>{u("topic.deadlines")}</h2>
           {s.deadlines ? <ul class="rows">{s.deadlines.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
         </section>
-        <section class="topic__section" id="fehler">
-          <h2>{u("topic.mistake")}</h2>
-          <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
-        </section>
         <section class="topic__section" id="klaerung">
           <h2>{u("topic.not_decided")}</h2>
           <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
@@ -135,6 +130,10 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       </article>
 
       <aside class="col-aside">
+        <div class="side">
+          <h3>{u("topic.mistake")}</h3>
+          <p class="side__text">{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
+        </div>
         {page.terms.length > 0 && (
           <div class="side">
             <h3>{u("topic.terms")}</h3>
