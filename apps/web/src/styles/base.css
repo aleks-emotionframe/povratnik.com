@@ -258,9 +258,9 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 2rem;
+  gap: 0.5rem 1.25rem;
   flex-wrap: wrap;
-  padding-block: 0.9rem;
+  padding-block: 1rem;
 }
 .brand {
   display: inline-flex;
@@ -279,13 +279,14 @@ a:hover {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 0.25rem 1.75rem;
+  gap: 0.25rem clamp(1.1rem, 1.6vw, 2rem);
   flex-wrap: wrap;
+  margin-left: clamp(0.5rem, 1.5vw, 1.75rem);
 }
 .site-nav a {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--ink-soft);
   text-decoration: none;
   padding-block: 0.6rem;
@@ -305,37 +306,51 @@ a:hover {
   min-height: 44px;
   padding-block: 0.55rem;
 }
-@media (max-width: 720px) {
+@media (max-width: 1100px) {
+  /* Zweizeilig: Logo, Lupe, Sprachwahl und Handlung oben, die Navigation darunter
+     über die volle Breite (scrollt, wenn sie nicht passt). */
   .site-head {
     position: static;
   }
   .site-head .container {
     padding-block: 0.7rem 0;
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    gap: 0.5rem 0.5rem;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
   }
-  /* Zeile 1: Logo und Sprachwahl, Zeile 2: Navigation scrollt über die volle Breite.
-     Die Handlung im Kopf entfällt hier; der Kurzcheck ist über «Mein Weg» und den
-     Aufmacher erreichbar. */
   .site-nav {
     grid-column: 1 / -1;
     gap: 0 1.25rem;
     overflow-x: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
+    margin-left: 0;
+  }
+  .site-nav a {
+    white-space: nowrap;
   }
   .lang {
     grid-row: 1;
     grid-column: 3;
-    align-self: center;
+    padding-right: 0;
+    border-right: 0;
   }
   .lang a {
     min-width: 32px;
     padding-inline: 0.25rem;
   }
-  .site-nav a {
-    white-space: nowrap;
+  .site-head .button {
+    grid-row: 1;
+    grid-column: 4;
+  }
+}
+@media (max-width: 720px) {
+  /* Schmal entfällt die Handlung im Kopf; der Kurzcheck bleibt über «Mein Weg» und
+     den Aufmacher erreichbar. */
+  .site-head .container {
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem 0.5rem;
   }
   .site-head .button {
     display: none;
@@ -439,7 +454,14 @@ a:hover {
 .hero--full .container {
   min-height: calc(100svh - var(--head-h));
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr auto auto;
+}
+/* Zwei Gruppen untereinander: die erste gibt unten Platz ab. */
+.hero__situations:has(+ .hero__situations) {
+  padding-bottom: 1.5rem;
+}
+.hero__situations + .hero__situations {
+  padding-top: 0.25rem;
 }
 .hero--full .hero__text {
   position: relative;
@@ -472,9 +494,9 @@ a:hover {
   padding: 0.75rem 0 clamp(1.5rem, 5vh, 3rem);
 }
 .hero__situations h2 {
-  font-size: 0.9375rem;
-  color: var(--on-brand-soft);
-  margin: 0 0 0.7rem;
+  font-size: 1.25rem;
+  color: var(--on-brand);
+  margin: 0 0 0.85rem;
 }
 .hero__situations ul {
   list-style: none;
@@ -1056,30 +1078,34 @@ a:hover {
   display: flex;
   align-items: center;
   margin-left: auto;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-sm);
-  background: var(--paper);
-  transition: border-color var(--dur) var(--ease);
+  border-radius: 999px;
+  background: var(--surface);
+  transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .head-search:focus-within {
-  border-color: var(--accent);
+  background: var(--paper);
+  box-shadow: 0 0 0 2px var(--accent);
 }
 .head-search input {
-  width: 12rem;
-  min-height: 40px;
-  padding: 0.4rem 0.75rem;
+  width: clamp(6rem, 9vw, 11rem);
+  min-height: 42px;
+  padding: 0.4rem 1rem 0.4rem 0;
   border: 0;
   background: transparent;
   color: var(--ink);
   font: inherit;
   font-size: 0.9375rem;
 }
+.head-search input::placeholder {
+  color: var(--ink-soft);
+}
 .head-search input:focus-visible {
   outline: none;
 }
 .head-search button {
-  width: 40px;
-  min-height: 40px;
+  order: -1;
+  width: 42px;
+  min-height: 42px;
   border: 0;
   background: transparent;
   color: var(--ink-soft);
@@ -1100,7 +1126,7 @@ a:hover {
 .head-search-link:hover {
   color: var(--ink);
 }
-@media (max-width: 720px) {
+@media (max-width: 1100px) {
   .head-search {
     display: none;
   }
@@ -1115,6 +1141,8 @@ a:hover {
 .lang {
   display: flex;
   gap: 0.15rem;
+  padding-right: 1.25rem;
+  border-right: 1px solid var(--line);
 }
 .lang a {
   font-family: var(--font-display);

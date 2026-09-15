@@ -11,9 +11,10 @@ Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breit
 und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
 Aufmacher erreichbar). Die Suche steht im Kopf (breit als Feld mit Lupe, schmal als
 Lupe, die zur Suchseite führt); der Navigationspunkt «Suche» entfällt. Die Einstiege
-nach Lebenssituation stehen im Aufmacher der Startseite unter dem Vorspann: breit in
-drei Spalten, schmal als Liste in einer Zeile je Situation, alles ohne Scrollen
-bedienbar.
+nach Lebenssituation und die häufig gesuchten Themen stehen als zwei Gruppen im
+Aufmacher der Startseite unter dem Vorspann: breit in drei Spalten, schmal als Liste;
+der Aufmacher wächst mit dem Inhalt über die Bildschirmhöhe hinaus. Bis 1100 Pixel ist
+der Kopf zweizeilig (Logo, Lupe, Sprachen, Handlung; darunter die Navigation).
 
 Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
 folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich
