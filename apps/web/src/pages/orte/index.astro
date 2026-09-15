@@ -1,17 +1,17 @@
 ---
 // Orte entdecken (inhaltskonzept.md 5): Liste mit Filtern, vollwertig ohne JavaScript
 // (die Liste ist serverseitig gerendert, der Filter blendet nur aus). Auf der Teststufe
-// fiktive Testgemeinden (ADR-0004), die Karte folgt mit der Datenbank (M5).
-import { Image } from "astro:assets";
+// fiktive Testgemeinden (ADR-0004). Die Karte ist der Aufmacher: Gespanschaften und Orte
+// unter dem Zeiger erscheinen im Feld daneben, Klick führt zur Region oder zum Ort.
 import Base from "../../layouts/Base.astro";
 import MapHr from "../../components/MapHr.astro";
 import { loadPlaces, placeName, openBenefits } from "../../lib/places.ts";
 import { pageContext } from "../../lib/page.ts";
-import ort from "../../assets/ort-hauptplatz.webp";
+import { COUNTIES } from "../../lib/map.ts";
 
 const { u, p } = pageContext(Astro);
 const places = loadPlaces();
-const dots = places.filter((pl) => pl.map).map((pl) => ({ id: pl.id, name: placeName(pl), lon: pl.map!.lon, lat: pl.map!.lat, href: p(`/orte/${pl.id}`) }));
+const dots = places.filter((pl) => pl.map).map((pl) => ({ id: pl.id, name: placeName(pl), lon: pl.map!.lon, lat: pl.map!.lat, href: p(`/orte/${pl.id}`), summary: pl.summary, open: openBenefits(pl), county: pl.county }));
 const targets = (pl: (typeof places)[number]) => {
   const t = new Set<string>();
   for (const b of pl.benefits) {
@@ -25,36 +25,29 @@ const targets = (pl: (typeof places)[number]) => {
 ---
 
 <Base title={`${u("orte.title")}: povratnik.com`} description={u("orte.description")} current="orte">
-  <section class="hero hero--small">
+  <section class="hero hero--map">
     <div class="container">
       <div class="hero__text">
         <h1>{u("orte.title")}</h1>
         <p class="lede">{u("orte.lede")}</p>
-        <div class="hero__actions">
-          <a class="button button--light" href={p("/orte/leistungen")}>{u("orte.all_benefits")}</a>
-          <a class="button button--outline-light" href={p("/orte/vergleich")}>{u("orte.compare")}</a>
+        <div class="map-info" id="map-info" aria-live="polite">
+          <strong class="map-info__title" id="map-info-title" data-default={u("map.info_title")}>{u("map.info_title")}</strong>
+          <p class="map-info__text" id="map-info-text" data-default={u("map.info_text", { counties: COUNTIES.length, places: dots.length })}>{u("map.info_text", { counties: COUNTIES.length, places: dots.length })}</p>
+          <a class="arrow-link map-info__link" id="map-info-link" href="#" hidden data-region={u("map.info_region_link")} data-place={u("map.info_place_link")}></a>
         </div>
+        <p class="hero__tools">
+          <a href={p("/orte/leistungen")}>{u("orte.all_benefits")}</a>
+          <a href={p("/orte/vergleich")}>{u("orte.compare")}</a>
+        </p>
       </div>
-      <div class="hero__media">
-        <Image src={ort} alt={u("orte.image_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" />
+      <div class="hero__map">
+        <MapHr hero places={dots} />
       </div>
     </div>
   </section>
 
   <section class="band band--surface">
     <div class="container">
-      <p class="notice" role="note">
-        <strong>{u("orte.fictional_title")}</strong>
-        {u("orte.fictional_text")}
-      </p>
-
-      <details class="map-toggle" open>
-        <summary>
-          <span class="map-toggle__title">{u("map.section_title")}</span>
-          <span class="soft">{u("map.section_help")}</span>
-        </summary>
-        <MapHr places={dots} />
-      </details>
 
       <form class="filters" id="filters" aria-label={u("orte.filter_label")}>
         <fieldset>
@@ -76,6 +69,7 @@ const targets = (pl: (typeof places)[number]) => {
         <noscript><p class="soft">{u("orte.no_js")}</p></noscript>
       </form>
 
+      <p class="fictional">{u("orte.fictional_line")}</p>
       <p class="count mono" id="count" aria-live="polite" data-one={u("orte.count_one", { n: "{n}" })} data-many={u("orte.count_many", { n: "{n}" })}>{u("orte.count_many", { n: places.length })}</p>
       <ul class="cards cards--places" id="places">
         {places.map((pl) => (
@@ -118,6 +112,40 @@ const targets = (pl: (typeof places)[number]) => {
   </section>
 
   <script is:inline>
+    // Feld neben der Karte: zeigt Gespanschaft oder Ort unter dem Zeiger. Ohne JavaScript
+    // bleibt der Standardtext, Klicks auf der Karte führen ohnehin zur Seite.
+    (function () {
+      var title = document.getElementById("map-info-title");
+      var text = document.getElementById("map-info-text");
+      var link = document.getElementById("map-info-link");
+      if (!title) return;
+      function show(el, kind) {
+        title.textContent = el.dataset.name;
+        if (kind === "place") {
+          text.textContent = el.dataset.county + ". " + (el.dataset.summary || "");
+          link.textContent = link.dataset.place;
+        } else {
+          text.textContent = "";
+          link.textContent = link.dataset.region;
+        }
+        link.href = el.getAttribute("href");
+        link.hidden = false;
+      }
+      function reset() {
+        title.textContent = title.dataset.default;
+        text.textContent = text.dataset.default;
+        link.hidden = true;
+      }
+      document.querySelectorAll(".map__county, .map__place").forEach(function (el) {
+        var kind = el.classList.contains("map__place") ? "place" : "county";
+        el.addEventListener("mouseenter", function () { show(el, kind); });
+        el.addEventListener("focus", function () { show(el, kind); });
+        el.addEventListener("mouseleave", reset);
+        el.addEventListener("blur", reset);
+      });
+    })();
+  </script>
+  <script is:inline>
     // Filter blendet Karten aus; ohne JavaScript bleibt die vollständige Liste stehen.
     (function () {
       var form = document.getElementById("filters");
@@ -146,22 +174,82 @@ const targets = (pl: (typeof places)[number]) => {
 </Base>
 
 <style>
-  .map-toggle {
-    margin: 1.5rem 0;
+  /* Aufmacher: Text links, grosse Karte rechts auf Nachtblau. */
+  .hero--map .container {
+    padding-inline: var(--gutter);
+    align-items: center;
+    gap: 2rem;
+    padding-block: clamp(2rem, 5vw, 4rem);
   }
-  .map-toggle summary {
-    cursor: pointer;
+  .hero--map .hero__text {
+    padding: 0;
+  }
+  @media (min-width: 860px) {
+    .hero--map .container {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: 3rem;
+    }
+  }
+  .hero__map {
+    min-height: 0;
+  }
+  .map-info {
+    margin-top: 1.75rem;
+    padding: 1.1rem 1.25rem;
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    min-height: 7.5rem;
+  }
+  .map-info__title {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    color: var(--on-brand);
+  }
+  .map-info__text {
+    margin: 0.35rem 0 0;
+    font-size: 0.9375rem;
+    color: var(--on-brand-soft);
+  }
+  .map-info__link {
+    margin-top: 0.6rem;
+    color: var(--accent-bright);
+  }
+  .map-info__link[hidden] {
+    display: none;
+  }
+  .hero__tools {
+    margin: 1.25rem 0 0;
     display: flex;
-    gap: 0.5rem 1rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    align-items: baseline;
-    min-height: 44px;
-    margin-bottom: 0.75rem;
   }
-  .map-toggle__title {
+  .hero__tools a {
+    color: var(--on-brand);
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-color: rgba(255, 255, 255, 0.4);
+  }
+  .hero__tools a:hover {
+    text-decoration-color: currentColor;
+  }
+  /* Schmal gibt es keinen Zeiger: das Feld entfällt, Antippen führt direkt zur Seite. */
+  @media (max-width: 859px) {
+    .map-info {
+      display: none;
+    }
+    .hero__tools {
+      margin-top: 0.5rem;
+    }
+  }
+  .fictional {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    margin: 0 0 0.25rem;
   }
   .filters {
     display: flex;

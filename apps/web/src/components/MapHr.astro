@@ -1,39 +1,45 @@
 ---
 // Übersichtskarte Kroatiens als Inline-SVG (ADR-0005): Gespanschaften als Flächen mit
 // Namen, Orte als Punkte mit Link zum Profil. Ohne JavaScript vollständig lesbar; das
-// kleine Skript zeigt nur den Namen der Gespanschaft unter dem Zeiger an.
+// kleine Skript zeigt nur den Namen der Gespanschaft unter dem Zeiger an. In der
+// Variante «hero» (Seite Orte) liegt die Karte auf Nachtblau, die Gespanschaften bauen
+// sich beim Laden gestaffelt auf, Orte pulsieren, und ein Feld daneben zeigt, was unter
+// dem Zeiger liegt (das Feld liefert die Seite, die Karte meldet nur Ereignisse).
 import { COUNTIES, MAP_HEIGHT, MAP_SOURCE, MAP_WIDTH, countySlug, project } from "../lib/map.ts";
 import { pageContext } from "../lib/page.ts";
 
 interface Props {
-  places?: { id: string; name: string; lon: number; lat: number; href: string }[];
+  places?: { id: string; name: string; lon: number; lat: number; href: string; summary?: string; open?: number; county?: string }[];
   /** ISO-Code der hervorgehobenen Gespanschaft, etwa auf einer Regionenseite. */
   highlight?: string;
   /** Kompakte Darstellung ohne Legende, etwa im Ortsprofil. */
   compact?: boolean;
+  /** Grosse Darstellung auf dunklem Grund im Aufmacher der Seite Orte. */
+  hero?: boolean;
 }
-const { places = [], highlight, compact = false } = Astro.props;
+const { places = [], highlight, compact = false, hero = false } = Astro.props;
 const { u, p } = pageContext(Astro);
 const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
-<figure class={`map${compact ? " map--compact" : ""}`}>
+<figure class={`map${compact ? " map--compact" : ""}${hero ? " map--hero" : ""}`}>
   <svg viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`} role="img" aria-labelledby={`${uid}-title`} class="map__svg">
     <title id={`${uid}-title`}>{u("map.title")}</title>
     <g class="map__counties">
-      {COUNTIES.map((c) => (
-        <a href={p(`/orte/region/${countySlug(c)}`)} class={`map__county${highlight === c.iso ? " map__county--active" : ""}`} data-name={c.name}>
+      {COUNTIES.map((c, i) => (
+        <a href={p(`/orte/region/${countySlug(c)}`)} class={`map__county${highlight === c.iso ? " map__county--active" : ""}`} data-name={c.name} data-iso={c.iso} style={`--i:${i}`}>
           <path d={c.path} />
           <title>{c.name}</title>
         </a>
       ))}
     </g>
     <g class="map__places">
-      {places.map((pl) => {
+      {places.map((pl, i) => {
         const { x, y } = project(pl.lon, pl.lat);
         return (
-          <a href={pl.href} class="map__place" aria-label={pl.name}>
-            <circle cx={x} cy={y} r="14" />
+          <a href={pl.href} class="map__place" aria-label={pl.name} data-name={pl.name} data-summary={pl.summary} data-open={pl.open} data-county={pl.county} style={`--i:${i}`}>
+            {hero && <circle class="map__pulse" cx={x} cy={y} r="14" />}
+            <circle class="map__dot" cx={x} cy={y} r="14" />
             <text x={x + 22} y={y + 6}>{pl.name}</text>
             <title>{pl.name}</title>
           </a>
@@ -41,12 +47,13 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
       })}
     </g>
   </svg>
-  {!compact && (
+  {!compact && !hero && (
     <figcaption class="map__caption">
-      <span class="map__hover mono" data-default={u("map.hover_default")}>{u("map.hover_default")}</span>
+      <span class="map__hover" data-default={u("map.hover_default")}>{u("map.hover_default")}</span>
       <span class="muted">{u("map.source", { source: MAP_SOURCE })}</span>
     </figcaption>
   )}
+  {hero && <figcaption class="map__credit">{u("map.source", { source: MAP_SOURCE })}</figcaption>}
 </figure>
 
 <script is:inline>
@@ -98,10 +105,11 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
   .map__county--active path {
     fill: var(--accent);
   }
-  .map__place circle {
+  .map__dot {
     fill: var(--croatia-red);
     stroke: var(--paper);
     stroke-width: 4;
+    transition: r var(--dur) var(--ease);
   }
   .map__place text {
     font-family: var(--font-display);
@@ -113,8 +121,8 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
     stroke-width: 6px;
     stroke-linejoin: round;
   }
-  .map__place:hover circle,
-  .map__place:focus circle {
+  .map__place:hover .map__dot,
+  .map__place:focus .map__dot {
     r: 18;
   }
   .map__caption {
@@ -128,5 +136,82 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
   .map__hover {
     color: var(--ink);
     min-height: 1.2em;
+  }
+
+  /* Aufmacher-Variante: Nachtblau, feine helle Grenzen, gestaffelter Aufbau. */
+  .map--hero {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .map--hero .map__svg {
+    max-height: none;
+    overflow: visible;
+  }
+  .map--hero .map__county path {
+    fill: rgba(255, 255, 255, 0.07);
+    stroke: rgba(255, 255, 255, 0.45);
+    stroke-width: 1.5;
+    transition: fill var(--dur) var(--ease), stroke var(--dur) var(--ease);
+  }
+  .map--hero .map__county:hover path,
+  .map--hero .map__county:focus path {
+    fill: var(--accent-bright);
+    stroke: #fff;
+    filter: drop-shadow(0 0 14px oklch(72% 0.13 230 / 0.8));
+  }
+  .map--hero .map__county--active path {
+    fill: var(--accent);
+  }
+  .map--hero .map__dot {
+    fill: #fff;
+    stroke: var(--accent-bright);
+    stroke-width: 5;
+  }
+  .map--hero .map__pulse {
+    fill: none;
+    stroke: var(--accent-bright);
+    stroke-width: 3;
+    opacity: 0;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: map-pulse 2.4s var(--ease) infinite;
+    animation-delay: calc(var(--i) * 0.5s);
+  }
+  .map--hero .map__place text {
+    fill: #fff;
+    stroke: oklch(28% 0.09 262);
+    stroke-width: 7px;
+  }
+  .map--hero .map__place:hover .map__dot,
+  .map--hero .map__place:focus .map__dot {
+    r: 19;
+  }
+  .map--hero .map__credit {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--on-brand-soft);
+    text-align: right;
+  }
+  @keyframes map-pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    70% { transform: scale(3); opacity: 0; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+  @keyframes map-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .map--hero .map__county {
+      opacity: 0;
+      animation: map-rise 0.6s var(--ease) forwards;
+      animation-delay: calc(var(--i) * 45ms);
+    }
+    .map--hero .map__place {
+      opacity: 0;
+      animation: map-rise 0.6s var(--ease) forwards;
+      animation-delay: calc(1.1s + var(--i) * 120ms);
+    }
   }
 </style>

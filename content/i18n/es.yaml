@@ -776,14 +776,15 @@ ui:
     lede: El término croata se mantiene, porque lo necesita en la ventanilla. Al lado está lo que significa.
     count: "{n} términos de {pages} páginas temáticas"
   orte:
-    title: Descubrir lugares
+    title: "Lugares"
     description: Municipios de Croacia con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado y fecha de comprobación.
-    lede: ¿Qué municipio apoya a quienes regresan, dónde admite el pediatra nuevos pacientes, dónde hay alquileres anuales? Perfiles de lugares con estado y fecha de comprobación, sin ranking.
+    lede: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda. En el mapa o en la lista, sin clasificación."
     all_benefits: Todas las ayudas
     compare: Comparar lugares
     image_alt: Plaza principal de una pequeña ciudad de Croacia con el ayuntamiento y una panadería.
     fictional_title: Municipios de prueba ficticios
     fictional_text: Los lugares de esta página son inventados y muestran cómo es un perfil de lugar, con todos los estados. Los municipios reales llegarán con la base de datos. Ningún valor se refiere a un lugar real. En la fase de prueba, los datos de los lugares solo existen en alemán.
+    fictional_line: "Fase de prueba: los tres lugares son ficticios y muestran cómo es un perfil. Los municipios reales llegarán con la base de datos."
     filter_label: Filtrar lugares
     filter_region: Ubicación
     filter_all: todos
@@ -1058,6 +1059,11 @@ ui:
     promise_4: «Todavía no lo sé» siempre es una respuesta
   map:
     title: Mapa general de Croacia con condados y lugares registrados
+    info_title: "Toque un condado o un lugar"
+    info_text: "{counties} condados, {places} lugares registrados."
+    info_region: "Condado"
+    info_region_link: "Ver región"
+    info_place_link: "Ver perfil del lugar"
     hover_default: Toque o pase el cursor por un condado
     source: "Límites: {source}. Lugares situados de forma ficticia en la fase de prueba."
     section_title: Mapa

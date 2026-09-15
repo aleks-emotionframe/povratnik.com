@@ -776,14 +776,15 @@ ui:
     lede: The Croatian term stays, because you need it at the counter. Next to it is what it means.
     count: "{n} terms from {pages} topic pages"
   orte:
-    title: Discover places
+    title: "Places"
     description: Municipalities in Croatia with their measures for returnees, schools, doctors and housing. With status and check date.
-    lede: Which municipality supports returnees, where does the paediatrician still take patients, where are year-round rentals? Place profiles with status and check date, without ranking.
+    lede: "Municipalities in Croatia with their support schemes, schools, doctors and housing. On the map or in the list, without a ranking."
     all_benefits: All measures
     compare: Compare places
     image_alt: Main square of a small town in Croatia with the town hall and a bakery.
     fictional_title: Fictional test municipalities
     fictional_text: The places on this page are invented and show what a place profile looks like, with all states. Real municipalities follow with the database. No value refers to a real place. During the test stage the place data exists in German only.
+    fictional_line: "Test stage: the three places are fictitious and show what a place profile looks like. Real municipalities follow with the database."
     filter_label: Filter places
     filter_region: Location
     filter_all: all
@@ -1058,6 +1059,11 @@ ui:
     promise_4: «I do not know yet» is always an answer
   map:
     title: Overview map of Croatia with counties and recorded places
+    info_title: "Tap a county or a place"
+    info_text: "{counties} counties, {places} places recorded."
+    info_region: "County"
+    info_region_link: "View region"
+    info_place_link: "View place profile"
     hover_default: Tap a county or hover over it
     source: "Boundaries: {source}. Places are positioned fictionally during the test stage."
     section_title: Map

@@ -776,14 +776,15 @@ ui:
     lede: Hrvatski pojam ostaje, jer ga trebate na šalteru. Pokraj njega piše što znači.
     count: "{n} pojmova iz {pages} tematskih stranica"
   orte:
-    title: Otkrij mjesta
+    title: "Mjesta"
     description: Općine u Hrvatskoj sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem i datumom provjere.
-    lede: Koja općina potiče povratnike, gdje pedijatar još prima pacijente, gdje ima godišnjeg najma? Profili mjesta sa stanjem i datumom provjere, bez rang-liste.
+    lede: "Općine u Hrvatskoj s potporama, školama, liječnicima i stanovanjem. Na karti ili u popisu, bez rang-liste."
     all_benefits: Sve mjere
     compare: Usporedi mjesta
     image_alt: Glavni trg malog grada u Hrvatskoj s općinskom zgradom i pekarnicom.
     fictional_title: Fiktivne testne općine
     fictional_text: Mjesta na ovoj stranici su izmišljena i pokazuju kako izgleda profil mjesta, sa svim stanjima. Prave općine slijede s bazom podataka. Nijedna se vrijednost ne odnosi na stvarno mjesto. Podaci o mjestima u testnoj fazi postoje samo na njemačkom.
+    fictional_line: "Testna faza: tri mjesta su izmišljena i pokazuju kako izgleda profil mjesta. Prave općine slijede s bazom podataka."
     filter_label: Filtriraj mjesta
     filter_region: Položaj
     filter_all: sva
@@ -1058,6 +1059,11 @@ ui:
     promise_4: «Još ne znam» uvijek je odgovor
   map:
     title: Pregledna karta Hrvatske sa županijama i evidentiranim mjestima
+    info_title: "Dodirnite županiju ili mjesto"
+    info_text: "{counties} županija, {places} mjesta zabilježeno."
+    info_region: "Županija"
+    info_region_link: "Pogledaj regiju"
+    info_place_link: "Pogledaj profil mjesta"
     hover_default: Dodirnite županiju ili prijeđite pokazivačem
     source: "Granice: {source}. Mjesta su u testnoj fazi fiktivno smještena."
     section_title: Karta

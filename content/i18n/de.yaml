@@ -547,14 +547,15 @@ ui:
     lede: Der kroatische Begriff bleibt stehen, weil Sie ihn am Schalter brauchen. Daneben steht, was er bedeutet.
     count: "{n} Begriffe aus {pages} Themenseiten"
   orte:
-    title: Orte entdecken
+    title: "Orte"
     description: Gemeinden in Kroatien mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand und Prüfdatum.
-    lede: Welche Gemeinde fördert Rückkehrer, wo nimmt der Kinderarzt noch Patienten auf, wo gibt es Jahresmieten? Ortsprofile mit Zustand und Prüfdatum, ohne Rangliste.
+    lede: "Gemeinden in Kroatien mit ihren Förderungen, Schulen, Ärzten und Wohnangeboten. Auf der Karte oder in der Liste, ohne Rangliste."
     all_benefits: Alle Leistungen
     compare: Orte vergleichen
     image_alt: Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei.
     fictional_title: Fiktive Testgemeinden
     fictional_text: Die Orte auf dieser Seite sind erfunden und zeigen, wie ein Ortsprofil aussieht, mit allen Zuständen. Echte Gemeinden folgen mit der Datenbank. Kein Wert bezieht sich auf einen realen Ort. Die Ortsdaten liegen auf der Teststufe nur auf Deutsch vor.
+    fictional_line: "Teststufe: Die drei Orte sind fiktiv und zeigen, wie ein Ortsprofil aussieht. Echte Gemeinden folgen mit der Datenbank."
     filter_label: Orte filtern
     filter_region: Lage
     filter_all: alle
@@ -829,6 +830,11 @@ ui:
     promise_4: «Weiss ich noch nicht» ist immer eine Antwort
   map:
     title: Übersichtskarte Kroatiens mit Gespanschaften und erfassten Orten
+    info_title: "Gespanschaft oder Ort antippen"
+    info_text: "{counties} Gespanschaften, {places} Orte erfasst."
+    info_region: "Gespanschaft"
+    info_region_link: "Region ansehen"
+    info_place_link: "Ortsprofil ansehen"
     hover_default: Gespanschaft antippen oder mit dem Zeiger berühren
     source: "Grenzen: {source}. Orte auf der Teststufe fiktiv platziert."
     section_title: Karte
