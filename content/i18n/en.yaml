@@ -599,6 +599,7 @@ ui:
     stage: Test stage
     stage_text: Example rules without professional approval, professional review as a placeholder. Not intended for customers.
     skip: Skip to content
+    nav_start: Home
     nav_wissen: Knowledge
     nav_orte: Places
     nav_weg: My way

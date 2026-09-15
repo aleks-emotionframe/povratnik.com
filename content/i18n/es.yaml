@@ -599,6 +599,7 @@ ui:
     stage: Fase de prueba
     stage_text: Reglas de ejemplo sin revisión profesional, revisión profesional como marcador de posición. No destinado a clientes.
     skip: Saltar al contenido
+    nav_start: Inicio
     nav_wissen: Conocimiento
     nav_orte: Lugares
     nav_weg: Mi camino

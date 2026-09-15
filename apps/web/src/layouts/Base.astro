@@ -1,7 +1,8 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
 // Kopf nach designsystem.md 2.1: Logo, Hauptnavigation, Suchfeld (schmal ein Link zur
-// Suchseite), Sprachwahl als Kürzel, hervorgehobener Kurzcheck. Die Teststufe (ADR-0004) steht im Fuss jeder Seite.
+// Suchseite), Sprachwahl als Kürzel (schmal als Klappe), hervorgehobener Kurzcheck.
+// Schmal wie eine App: schlanke Kopfzeile, Tab-Leiste unten mit Start, Wissen, Orte, Mein Weg. Die Teststufe (ADR-0004) steht im Fuss jeder Seite.
 // Im Fuss dasselbe Logo, per CSS weiss. Sprache aus
 // der Adresse (lib/i18n.ts). Der EmotionFrame Footer steht als letztes Element.
 import "../styles/base.css";
@@ -76,9 +77,37 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
             <a href={localePath(l, bare)} lang={l} hreflang={l} aria-label={LOCALE_NAMES[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a>
           ))}
         </nav>
+        {/* Schmal: die Sprachwahl als Klappe mit dem aktuellen Kürzel (details, ohne JavaScript). */}
+        <details class="lang-menu">
+          <summary aria-label={u("shell.language")}>{lang.toUpperCase()}</summary>
+          <ul>
+            {LOCALES.map((l) => (
+              <li><a href={localePath(l, bare)} lang={l} hreflang={l} aria-current={l === lang ? "true" : undefined}>{LOCALE_NAMES[l]}</a></li>
+            ))}
+          </ul>
+        </details>
         <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
       </div>
     </header>
+    {/* Schmal: Tab-Leiste unten wie in einer App; breit ausgeblendet. */}
+    <nav class="tabbar" aria-label="Navigation">
+      <a href={p("/")} aria-current={current === "start" ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 10v9.5h13V10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+        <span>{u("shell.nav_start")}</span>
+      </a>
+      <a href={p("/wissen")} aria-current={current === "wissen" ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5h6.5a2 2 0 0 1 2 2V19a2 2 0 0 0-2-2H4zM20 5.5h-6.5a2 2 0 0 0-2 2V19a2 2 0 0 1 2-2H20z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" /></svg>
+        <span>{u("shell.nav_wissen")}</span>
+      </a>
+      <a href={p("/orte")} aria-current={current === "orte" ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.1-6.5-11a6.5 6.5 0 0 1 13 0c0 4.9-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.8" /><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.8" /></svg>
+        <span>{u("shell.nav_orte")}</span>
+      </a>
+      <a href={p("/mein-weg")} aria-current={current === "mein-weg" ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c4 0 4-12 8-12s4 12 8 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /><circle cx="4" cy="18" r="2" fill="currentColor" /><circle cx="20" cy="18" r="2" fill="currentColor" /></svg>
+        <span>{u("shell.nav_weg")}</span>
+      </a>
+    </nav>
 
     <script is:inline>
       // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.

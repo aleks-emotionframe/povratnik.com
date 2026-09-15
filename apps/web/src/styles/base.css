@@ -346,18 +346,133 @@ a:hover {
   }
 }
 @media (max-width: 720px) {
-  /* Schmal entfällt die Handlung im Kopf; der Kurzcheck bleibt über «Mein Weg» und
-     den Aufmacher erreichbar. */
+  /* Schmal wie eine App: eine schlanke Kopfzeile (Logo, Lupe, Sprachklappe), die
+     Navigation als Tab-Leiste unten, kein Knopf im Kopf. */
+  .site-head {
+    position: sticky;
+    top: 0;
+  }
   .site-head .container {
     grid-template-columns: 1fr auto auto;
-    gap: 0.5rem 0.5rem;
+    gap: 0 0.25rem;
+    padding-block: 0.6rem;
+    align-items: center;
   }
-  .site-head .button {
+  .site-nav,
+  .site-head .button,
+  .site-head .lang {
     display: none;
   }
   .brand img {
     height: 28px;
   }
+  .site-head .lang-menu {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(3.75rem + env(safe-area-inset-bottom));
+  }
+  nav.tabbar {
+    display: grid;
+  }
+}
+
+/* Sprachklappe (schmal) und Tab-Leiste (schmal); breit beides ausgeblendet. */
+.lang-menu {
+  display: none;
+  position: relative;
+  grid-row: 1;
+  grid-column: 3;
+}
+.lang-menu summary {
+  list-style: none;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  color: var(--brand);
+  background: var(--surface-blue);
+  border-radius: var(--radius-sm);
+}
+.lang-menu summary::-webkit-details-marker {
+  display: none;
+}
+.lang-menu summary::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+}
+.lang-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  min-width: 11rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 20;
+}
+.lang-menu li a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.lang-menu li a[aria-current="true"] {
+  background: var(--surface-blue);
+  color: var(--brand);
+  font-weight: 600;
+}
+.tabbar {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--paper);
+  border-top: 1px solid var(--line);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tabbar a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-height: 3.75rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.6875rem;
+}
+.tabbar svg {
+  width: 24px;
+  height: 24px;
+}
+.tabbar a[aria-current="page"] {
+  color: var(--accent);
 }
 
 /* Aufmacher: Markenfläche mit Titel, Fotografie daneben. */
@@ -598,7 +713,7 @@ a:hover {
 @media (max-width: 720px) {
   /* Schmal: Text kompakt, damit Titel, Suche und Lebenssituationen auf einen Bildschirm passen. */
   .hero--full {
-    --head-h: 6.9rem;
+    --head-h: 7.4rem; /* Kopfzeile 3.6rem plus Tab-Leiste 3.75rem */
   }
   .hero--full .hero__text {
     padding-block: 1.75rem 1.25rem;

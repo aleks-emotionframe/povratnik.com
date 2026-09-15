@@ -599,6 +599,7 @@ ui:
     stage: Testna faza
     stage_text: Primjerna pravila bez stručnog odobrenja, stručna provjera kao rezervirano mjesto. Nije namijenjeno korisnicima.
     skip: Skoči na sadržaj
+    nav_start: Početna
     nav_wissen: Znanje
     nav_orte: Mjesta
     nav_weg: Moj put

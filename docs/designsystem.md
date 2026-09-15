@@ -174,7 +174,11 @@ verwendeten Angaben und die Quelle nennt.
 
 ## 6. Mobil
 
-Mobil zuerst. Karte und Liste sind auf schmalen Geräten umschaltbar, die Liste ist
+Mobil zuerst. Auf schmalen Geräten (bis 720 Pixel) verhält sich die Website wie eine App
+(Entscheid vom 15.09.2026): eine schlanke, oben haftende Kopfzeile mit Logo, Lupe (Link zur
+Suche) und Sprachklappe mit dem aktuellen Kürzel; unten eine feste Tab-Leiste mit Start,
+Wissen, Orte und Mein Weg (Symbol und Wort, aktiver Tab in Akzentfarbe, Sicherheitsabstand
+für Geräte mit Gestenleiste). Die Handlung «Kurzcheck starten» ist dort der Tab «Mein Weg». Karte und Liste sind auf schmalen Geräten umschaltbar, die Liste ist
 vollwertig. Filter erscheinen in einer eigenen Fläche. Berührungsziele mindestens 44
 Pixel bei primären Aktionen. Kritische Fristen bleiben immer sichtbar und werden nie
 eingeklappt.

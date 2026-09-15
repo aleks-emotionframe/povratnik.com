@@ -370,6 +370,7 @@ ui:
     stage: Teststufe
     stage_text: Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.
     skip: Zum Inhalt springen
+    nav_start: Start
     nav_wissen: Wissen
     nav_orte: Orte
     nav_weg: Mein Weg
