@@ -672,9 +672,6 @@ ui:
     title: "Conocimiento"
     description: "Doce secciones sobre regresar o emigrar a Croacia: estatus, documentos, trabajo, impuestos, salud, escuela, vivienda, ayudas."
     lede: "Respuestas sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda."
-    pages_one: "{n} página temática"
-    pages_many: "{n} páginas temáticas"
-    topics_wip: "{n} temas en preparación"
     group_basics: Lo básico
     group_work_money: Trabajo y dinero
     group_family_life: Familia y vida cotidiana

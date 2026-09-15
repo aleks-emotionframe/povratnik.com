@@ -672,9 +672,6 @@ ui:
     title: "Knowledge"
     description: "Twelve sections on returning or emigrating to Croatia: status, documents, work, taxes, health, school, housing, support."
     lede: "Answers on residence, documents, work, taxes, health, school and housing."
-    pages_one: "{n} topic page"
-    pages_many: "{n} topic pages"
-    topics_wip: "{n} topics in preparation"
     group_basics: Basics
     group_work_money: Work and money
     group_family_life: Family and everyday life

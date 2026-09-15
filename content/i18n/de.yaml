@@ -443,9 +443,6 @@ ui:
     title: "Wissen"
     description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."
     lede: "Antworten zu Aufenthalt, Dokumenten, Arbeit, Steuern, Gesundheit, Schule und Wohnen."
-    pages_one: "{n} Themenseite"
-    pages_many: "{n} Themenseiten"
-    topics_wip: "{n} Themen in Arbeit"
     group_basics: Grundlagen
     group_work_money: Arbeit und Geld
     group_family_life: Familie und Alltag

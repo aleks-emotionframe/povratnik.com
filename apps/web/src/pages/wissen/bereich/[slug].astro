@@ -1,21 +1,17 @@
 ---
 // Bereichsseite (inhaltskonzept.md 4.1): die Rubriken eines der vier Bereiche als
-// Karten mit Einleitung und der Zahl ihrer Themenseiten; Rubriken ohne Seite tragen
-// ihren Zustand sichtbar. Darunter die anderen drei Bereiche zum direkten Wechsel.
+// Karten mit Einleitung. Darunter die anderen drei Bereiche zum direkten Wechsel.
 import Base from "../../../layouts/Base.astro";
 import { RUBRIC_GROUPS, groupBySlug, rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
-import { loadPages } from "../../../lib/pages.ts";
-import { CONTENT_DIR, pageContext } from "../../../lib/page.ts";
+import { pageContext } from "../../../lib/page.ts";
 
 export function getStaticPaths() {
   return RUBRIC_GROUPS.map((g) => ({ params: { slug: g.slug } }));
 }
 
-const { lang, texts, u, p } = pageContext(Astro);
+const { texts, u, p } = pageContext(Astro);
 const group = groupBySlug(Astro.params.slug!)!;
 const title = u(`wissen.group_${group.key}`);
-const pages = loadPages(CONTENT_DIR, lang);
-const count = (slug: string) => pages.filter((x) => x.category === slug).length;
 const others = RUBRIC_GROUPS.filter((g) => g.key !== group.key);
 ---
 
@@ -35,17 +31,11 @@ const others = RUBRIC_GROUPS.filter((g) => g.key !== group.key);
         {group.rubrics.map((slug) => {
           const r = rubricBySlug(slug)!;
           const tx = rubricText(r, texts);
-          const n = count(slug);
           return (
             <li class="card card--link">
               <div class="card__body">
                 <h3><a href={p(`/wissen/${slug}`)}>{tx.title}</a></h3>
                 <p>{tx.intro}</p>
-                {n > 0 ? (
-                  <span class="arrow-link">{u(n === 1 ? "wissen.pages_one" : "wissen.pages_many", { n })}</span>
-                ) : (
-                  <span class="state state--unknown">{u("wissen.topics_wip", { n: r.topics.length })}</span>
-                )}
               </div>
             </li>
           );
