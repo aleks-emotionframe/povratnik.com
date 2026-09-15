@@ -1102,6 +1102,7 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
   height: 1.5rem;
+  margin-bottom: 0.45rem !important;
 }
 .benefit__place {
   font-size: 0.8125rem;
