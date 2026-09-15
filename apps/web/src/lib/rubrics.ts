@@ -128,8 +128,29 @@ export const RUBRICS: Rubric[] = [
   },
 ];
 
+/** Die vier Bereiche der Übersicht (inhaltskonzept.md 4.1, Entscheid vom 15.09.2026),
+ *  geordnet nach der Abhängigkeitskette. Titel im Katalog unter wissen.group_<key>,
+ *  Adresse /wissen/bereich/<slug>. */
+export type RubricGroup = { key: string; slug: string; rubrics: string[] };
+
+export const RUBRIC_GROUPS: RubricGroup[] = [
+  { key: "basics", slug: "grundlagen", rubrics: ["status-und-staatsangehoerigkeit", "dokumente-und-behoerden", "das-bisherige-wohnland-verlassen"] },
+  { key: "work_money", slug: "arbeit-und-geld", rubrics: ["arbeit-und-qualifikation", "unternehmen-gruenden", "steuern-geld-und-pension", "leistungen-und-foerderung"] },
+  { key: "family_life", slug: "familie-und-alltag", rubrics: ["gesundheit-und-pflege", "kinder-schule-und-ausbildung", "sprache-und-gemeinschaft"] },
+  { key: "housing_move", slug: "wohnen-und-umzug", rubrics: ["wohnen-und-regionen", "umzug-und-mobilitaet"] },
+];
+
 export function rubricBySlug(slug: string): Rubric | undefined {
   return RUBRICS.find((r) => r.slug === slug);
+}
+
+export function groupBySlug(slug: string): RubricGroup | undefined {
+  return RUBRIC_GROUPS.find((g) => g.slug === slug);
+}
+
+/** Der Bereich, zu dem eine Rubrik gehört. */
+export function rubricGroup(rubricSlug: string): RubricGroup | undefined {
+  return RUBRIC_GROUPS.find((g) => g.rubrics.includes(rubricSlug));
 }
 
 /** Texte einer Rubrik in der Sprache des Katalogs (rubrics.<slug>.*), Rückfall Deutsch. */

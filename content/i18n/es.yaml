@@ -361,7 +361,7 @@ checklists:
     s8: Revisar el plan a los doce meses, porque las reglas cambian cada año
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: "povratnik.com: Vivir en Croacia"
+    title: "Estatus y nacionalidad"
     intro: "Antes del estatus no se puede decidir nada: determina la vía de residencia, el acceso al trabajo, a la escuela y a las ayudas."
     q1: ¿Obtengo la nacionalidad croata a través de mis abuelos?
     q2: ¿Qué es el certificado para emigrantes y para qué me sirve?
@@ -675,6 +675,12 @@ ui:
     pages_one: "{n} página temática"
     pages_many: "{n} páginas temáticas"
     topics_wip: "{n} temas en preparación"
+    group_basics: Lo básico
+    group_work_money: Trabajo y dinero
+    group_family_life: Familia y vida cotidiana
+    group_housing_move: Vivienda y mudanza
+    rubrics_n: "{n} secciones"
+    other_groups: Otras áreas
     more_title: "Otros caminos al conocimiento"
     more_situations: Por situación de vida
     more_glossary: Glosario de términos oficiales

@@ -530,6 +530,7 @@ a:hover {
 }
 .hero__text .lede {
   color: var(--on-brand-soft);
+  text-wrap: pretty; /* keine Einzelwort-Zeile am Ende, z. B. «osoba.» auf Kroatisch */
 }
 .hero__actions {
   display: flex;
@@ -674,7 +675,7 @@ a:hover {
   position: relative;
   z-index: 1;
   align-self: end;
-  max-width: 46rem;
+  max-width: 52rem;
   padding-right: var(--gutter);
   padding-bottom: 1.5rem;
 }
@@ -785,7 +786,10 @@ a:hover {
     padding-bottom: 2rem;
   }
   .hero--full .hero__text h1 {
-    max-width: 14ch;
+    max-width: 18ch;
+  }
+  .hero--full .lede {
+    max-width: 56ch;
   }
   .hero--full .hero__media img {
     object-position: 50% 30%;
@@ -917,6 +921,33 @@ a:hover {
 }
 .card--link:hover h3 a {
   color: var(--accent);
+}
+/* Karte mit Liste statt Bild: nummerierte Einträge auf blauer Fläche (Startseite, Wissen). */
+.card__media--list {
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  align-items: flex-start;
+}
+.card__media--list ol,
+.card__media--list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--brand);
+  display: grid;
+  gap: 0.45rem;
+}
+.card__media--list li {
+  display: flex;
+  gap: 0.35rem;
+}
+.card__media--list .mono {
+  color: var(--accent);
+  flex: none;
 }
 .card--brand {
   background: var(--surface-blue);
