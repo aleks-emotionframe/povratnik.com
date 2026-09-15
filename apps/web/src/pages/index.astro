@@ -1,14 +1,12 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
-// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, was gerade läuft, die
-// Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
-// Sprache (ui.home.*), Pfade mit Sprachpräfix.
+// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, Lebenssituationen,
+// Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS, rubricBySlug, rubricText } from "../lib/rubrics.ts";
 import { SITUATIONS, situationText } from "../lib/situations.ts";
 import { CASES, caseText } from "../lib/cases.ts";
-import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
 import { CONTENT_DIR, pageContext } from "../lib/page.ts";
 import hero from "../assets/hero-dokumente.webp";
@@ -22,15 +20,6 @@ const byId = new Map(pages.map((x) => [x.id, x]));
 const chips = ["oib", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "wohnsitz-anmelden", "krankenversicherung", "lohnsteuerbefreiung", "biram-hrvatsku", "schule-und-zeugnisse", "fuehrerschein-umschreiben"]
   .map((id) => byId.get(id))
   .filter((x): x is NonNullable<typeof x> => !!x);
-
-// Was gerade läuft: offene und angekündigte Leistungen mit Antragszeitraum, dazu
-// Themenseiten mit befristeter Gültigkeit. Der Block ist der Grund für Wiederbesuche.
-const places = loadPlaces();
-const running = places
-  .flatMap((pl) => pl.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(pl), href: p(`/orte/${pl.id}`), until: b.application.until, state: b.program_state, checked: b.checked })))
-  .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
-const dated = pages.filter((x) => x.validity.valid_until.kind === "date");
-const stateLabel = (s: string) => u(`place.state_${s}`);
 // Die vier Schlüssel (inhaltskonzept.md 1.1) mit ihrer Zielseite: Rubrik für den Status,
 // sonst die Themenseite, sofern sie existiert.
 const topicHref = (id: string) => { const x = byId.get(id); return x ? p(pagePath(x)) : undefined; };
@@ -40,7 +29,6 @@ const keys = [
   { title: u("home.key3_title"), sub: "prijava prebivališta", hr: true, text: u("home.key3_text"), href: topicHref("wohnsitz-anmelden") },
   { title: u("home.key4_title"), sub: "zdravstveno osiguranje", hr: true, text: u("home.key4_text"), href: topicHref("krankenversicherung") },
 ];
-const elig = texts.eligibility as Record<string, string>;
 ---
 
 <Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
@@ -155,55 +143,6 @@ const elig = texts.eligibility as Record<string, string>;
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <section class="band band--surface">
-    <div class="container">
-      <div class="band__head">
-        <h2>{u("home.running_title")}</h2>
-        <p class="soft">{u("home.running_help")}</p>
-      </div>
-      <ul class="running">
-        {dated.map((x) => (
-          <li class="running__item">
-            <span class="state state--matches">{u("home.running_state")}</span>
-            <a href={p(pagePath(x))}>{x.title}</a>
-            <span class="running__where">{u("home.running_national")}</span>
-            <span class="mono">{u("home.running_until", { date: formatDate(x.validity.valid_until.date!) })}</span>
-            <span class="mono muted">{u("home.running_checked", { date: formatDate(x.sources[0]?.checked ?? x.validity.valid_from) })}</span>
-          </li>
-        ))}
-        {running.map((r) => (
-          <li class="running__item">
-            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{stateLabel(r.state)}</span>
-            <a href={r.href}>{r.title}</a>
-            <span class="running__where">{r.where}</span>
-            <span class="mono">{r.until ? u("home.running_until", { date: formatDate(r.until) }) : u("place.period_unknown")}</span>
-            <span class="mono muted">{u("home.running_checked", { date: formatDate(r.checked) })}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="soft running__note">{u("home.running_note")} <a class="arrow-link" href={p("/orte/leistungen")}>{u("home.running_all")}</a></p>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="container why">
-      <div class="why__text">
-        <h2>{u("home.why_title")}</h2>
-        <p>{u("home.why_text")}</p>
-        <p class="soft">{u("home.why_note")}</p>
-      </div>
-      <div class="why__states">
-        <h3>{u("home.states_title")}</h3>
-        <ul class="why__list">
-          <li><span class="state state--matches">{elig.matches}</span><span>{u("home.state_matches")}</span></li>
-          <li><span class="state state--unclear">{elig.unclear}</span><span>{u("home.state_unclear")}</span></li>
-          <li><span class="state state--condition_missing">{elig.condition_missing}</span><span>{u("home.state_missing")}</span></li>
-          <li><span class="state state--unknown">{u("place.fact_unknown")}</span><span>{u("home.state_unknown")}</span></li>
-        </ul>
-      </div>
     </div>
   </section>
 
@@ -333,56 +272,6 @@ const elig = texts.eligibility as Record<string, string>;
     color: var(--accent);
     margin-right: 0.35rem;
   }
-  .running {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-  }
-  .running__item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.25rem 1rem;
-    align-items: center;
-    padding: 0.85rem 1.25rem;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.9375rem;
-  }
-  .running__item:last-child {
-    border-bottom: 0;
-  }
-  .running__item a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .running__item a:hover {
-    color: var(--accent);
-  }
-  .running__where {
-    color: var(--ink-soft);
-    grid-column: 2;
-  }
-  .running__item .mono {
-    grid-column: 2;
-  }
-  @media (min-width: 900px) {
-    .running__item {
-      grid-template-columns: 9rem 1fr 12rem 9rem 9rem;
-    }
-    .running__where,
-    .running__item .mono {
-      grid-column: auto;
-    }
-  }
-  .running__note {
-    margin: 1rem 0 0;
-    font-size: 0.9375rem;
-  }
   .cases {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
@@ -393,46 +282,5 @@ const elig = texts.eligibility as Record<string, string>;
     border-top: 1px solid var(--line);
     padding-top: 0.6rem;
     margin-top: auto !important;
-  }
-  /* Glaubwürdigkeit: Text links, die Zustände rechts als Zeilen mit Trennlinien. */
-  .why {
-    display: grid;
-    gap: 2.5rem 4rem;
-    grid-template-columns: 1fr;
-  }
-  @media (min-width: 900px) {
-    .why {
-      grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
-      align-items: start;
-    }
-  }
-  .why__text h2 {
-    max-width: 18ch;
-  }
-  .why__states h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .why__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-    border-top: 1px solid var(--line-strong);
-  }
-  .why__list li {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.25rem 1.5rem;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.9375rem;
-    color: var(--ink-soft);
-  }
-  @media (min-width: 600px) {
-    .why__list li {
-      grid-template-columns: 13rem minmax(0, 1fr);
-      align-items: baseline;
-    }
   }
 </style>

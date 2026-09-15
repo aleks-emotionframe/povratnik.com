@@ -663,22 +663,6 @@ ui:
     key3_text: Activa plazos y en muchas ayudas es la fecha que cuenta, no la llegada.
     key4_title: Seguro
     key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
-    running_title: Qué está en curso
-    running_help: Plazos abiertos y medidas actuales, con estado y fecha de comprobación.
-    running_state: en curso
-    running_national: estatal
-    running_until: hasta el {date}
-    running_checked: comprobado el {date}
-    running_note: En la fase de prueba, las entradas municipales provienen de municipios ficticios.
-    running_all: Todas las ayudas
-    why_title: Por qué un importe por sí solo no dice nada
-    why_text: Una ayuda puede estar abierta, anunciada o agotada. Un valor puede ser conocido, documentado y aun así estar desactualizado. Por eso cada dato lleva aquí fuente, fecha de comprobación y estado. Donde no sabemos algo, se ve, en vez de una laguna.
-    why_note: Sobre las solicitudes decide siempre la entidad competente. El plan muestra el camino, no el resultado.
-    states_title: Cómo leer los estados
-    state_matches: Según sus datos, los requisitos se cumplen.
-    state_unclear: Falta un dato o debe decidir un profesional.
-    state_missing: Un requisito no se cumple actualmente.
-    state_unknown: Este valor todavía no lo conocemos.
     situations_title: Entradas por situación de vida
     situations_help: Los mismos temas, en el orden que le corresponde.
     cases_title: Cinco caminos de ejemplo

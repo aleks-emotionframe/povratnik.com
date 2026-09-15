@@ -663,22 +663,6 @@ ui:
     key3_text: Pokreće rokove i kod mnogih je potpora mjerodavan datum, ne dolazak.
     key4_title: Osiguranje
     key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
-    running_title: Što trenutačno teče
-    running_help: Otvoreni rokovi i aktualne mjere, sa stanjem i datumom provjere.
-    running_state: teče
-    running_national: državno
-    running_until: do {date}
-    running_checked: provjereno {date}
-    running_note: Općinski unosi u testnoj fazi potječu iz fiktivnih testnih općina.
-    running_all: Sve mjere
-    why_title: Zašto iznos sam po sebi ništa ne govori
-    why_text: Potpora može biti otvorena, najavljena ili iscrpljena. Vrijednost može biti poznata, dokumentirana i ipak zastarjela. Zato kod nas svaki podatak nosi izvor, datum provjere i stanje. Gdje nešto ne znamo, to piše vidljivo, umjesto praznine.
-    why_note: O zahtjevima uvijek odlučuje nadležno tijelo. Plan pokazuje put, ne rezultat.
-    states_title: Kako čitati stanja
-    state_matches: Uvjeti prema vašim podacima odgovaraju.
-    state_unclear: Nedostaje podatak ili mora odlučiti stručnjak.
-    state_missing: Uvjet trenutačno nije ispunjen.
-    state_unknown: Ovu vrijednost još ne znamo.
     situations_title: Ulazi prema životnoj situaciji
     situations_help: Iste teme, redoslijedom koji vama odgovara.
     cases_title: Pet primjernih putova

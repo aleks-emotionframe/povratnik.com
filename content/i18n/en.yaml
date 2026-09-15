@@ -663,22 +663,6 @@ ui:
     key3_text: Triggers deadlines and for many support schemes is the decisive date, not arrival.
     key4_title: Insurance
     key4_text: Enables doctor visits, school enrolment, a childcare place. Has a gap if it was not planned in advance.
-    running_title: What is running now
-    running_help: Open deadlines and current measures, with status and check date.
-    running_state: running
-    running_national: national
-    running_until: until {date}
-    running_checked: checked {date}
-    running_note: During the test stage, municipal entries come from fictional test municipalities.
-    running_all: All measures
-    why_title: Why an amount alone says nothing
-    why_text: A support scheme can be open, announced or exhausted. A value can be known, documented and still outdated. That is why every fact here carries source, check date and status. Where we do not know something, it says so, visibly, instead of a gap.
-    why_note: The competent body always decides on applications. The plan shows the way, not the outcome.
-    states_title: How to read states
-    state_matches: The requirements are met according to your answers.
-    state_unclear: A fact is missing or a professional must decide.
-    state_missing: A requirement is not currently met.
-    state_unknown: We do not know this value yet.
     situations_title: Entry points by life situation
     situations_help: The same topics, in the order that suits you.
     cases_title: Five example paths

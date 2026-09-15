@@ -433,22 +433,6 @@ ui:
     key3_text: Löst Fristen aus und ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
     key4_title: Versicherung
     key4_text: Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.
-    running_title: Was gerade läuft
-    running_help: Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.
-    running_state: läuft
-    running_national: staatlich
-    running_until: bis {date}
-    running_checked: geprüft {date}
-    running_note: Kommunale Einträge stammen auf der Teststufe aus fiktiven Testgemeinden.
-    running_all: Alle Leistungen
-    why_title: Warum ein Betrag allein nichts sagt
-    why_text: Eine Förderung kann offen, angekündigt oder ausgeschöpft sein. Ein Wert kann bekannt, belegt und trotzdem veraltet sein. Deshalb trägt bei uns jede Angabe Quelle, Prüfdatum und Zustand. Wo wir etwas nicht wissen, steht das dort, sichtbar, statt einer Lücke.
-    why_note: Über Anträge entscheidet immer die zuständige Stelle. Der Plan zeigt den Weg, nicht das Ergebnis.
-    states_title: So lesen Sie Zustände
-    state_matches: Die Voraussetzungen treffen nach Ihren Angaben zu.
-    state_unclear: Eine Angabe fehlt oder eine Fachperson muss entscheiden.
-    state_missing: Eine Voraussetzung ist derzeit nicht erfüllt.
-    state_unknown: Diesen Wert kennen wir noch nicht.
     situations_title: Einstiege nach Lebenssituation
     situations_help: Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.
     cases_title: Fünf Beispielwege
