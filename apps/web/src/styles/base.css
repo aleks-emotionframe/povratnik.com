@@ -489,6 +489,8 @@ a:hover {
     z-index: 1;
     max-width: 46rem;
     padding-right: 0;
+    align-self: end;
+    padding-bottom: clamp(2.5rem, 7vh, 5rem);
   }
   .hero--full .hero__text h1 {
     max-width: 14ch;
