@@ -53,7 +53,6 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
       <span class="muted">{u("map.source", { source: MAP_SOURCE })}</span>
     </figcaption>
   )}
-  {hero && <figcaption class="map__credit">{u("map.source", { source: MAP_SOURCE })}</figcaption>}
 </figure>
 
 <script is:inline>
@@ -186,12 +185,6 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
   .map--hero .map__place:hover .map__dot,
   .map--hero .map__place:focus .map__dot {
     r: 19;
-  }
-  .map--hero .map__credit {
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--on-brand-soft);
-    text-align: right;
   }
   @keyframes map-pulse {
     0% { transform: scale(1); opacity: 0.9; }
