@@ -9,6 +9,9 @@ title: "Beispiel: Testgemeinde Kamenik Gornji öffnet Bauland-Programm"
 short_answer: "Fiktive Meldung für die Teststufe: Die fiktive Gemeinde Kamenik Gornji würde demnach vergünstigtes Bauland für Rückkehrer ausschreiben."
 news:
   published_on: 2026-08-28
+  image:
+    file: bauland-dorfrand.webp
+    alt: "Ein Grundstück am Rand eines kroatischen Dorfs mit Trockenmauer, Olivenbäumen und einem Vermessungspflock."
   body:
     - "Diese Meldung ist erfunden, ebenso wie die Gemeinde. Sie dient nur dazu, die Sektion «Aktuelles» auf der Teststufe zu zeigen."
     - "Echte Gemeindemeldungen kommen aus den Ortsprofilen: Wenn eine Gemeinde ein Programm öffnet oder schliesst, ändert sich der Zustand dort und erscheint hier als Meldung."

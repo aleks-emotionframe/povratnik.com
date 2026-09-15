@@ -441,11 +441,31 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "image": {
+          "description": "Picture of the item: file name in apps/web/src/assets/news/ (WebP, compressed) and an alt text.",
+          "type": "object",
+          "properties": {
+            "file": {
+              "type": "string",
+              "pattern": "^[a-z0-9-]+.webp$"
+            },
+            "alt": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "file",
+            "alt"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [
         "published_on",
-        "body"
+        "body",
+        "image"
       ],
       "additionalProperties": false
     }

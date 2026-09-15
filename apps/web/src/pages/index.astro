@@ -7,7 +7,7 @@ import Base from "../layouts/Base.astro";
 import { RUBRICS, rubricText } from "../lib/rubrics.ts";
 import { SITUATIONS, situationText } from "../lib/situations.ts";
 import { CASES, caseText } from "../lib/cases.ts";
-import { loadNews, newsPath } from "../lib/news.ts";
+import { loadNews, newsPath, newsImage } from "../lib/news.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
 import { CONTENT_DIR, fmtDate, pageContext } from "../lib/page.ts";
 import hero from "../assets/hero-dokumente.webp";
@@ -37,6 +37,7 @@ const keys = [
 <Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
   <section class="hero hero--full">
     <div class="container">
+      <div class="hero__screen">
       <div class="hero__text">
         <h1>{u("home.hero_title")}</h1>
         <p class="lede">{u("home.hero_lede")}</p>
@@ -47,6 +48,7 @@ const keys = [
           {SITUATIONS.map((x) => <li><a href={p(`/wissen/situation/${x.slug}`)}>{situationText(x, texts).title}</a></li>)}
         </ul>
       </nav>
+      </div>
       {/* Schmal zugeklappt (details ohne open), breit immer offen; das Skript unten setzt
           das Attribut nach Bildschirmbreite. Ohne JavaScript bleibt alles offen. */}
       <details class="hero__situations hero__quick" open>
@@ -142,6 +144,9 @@ const keys = [
       <ul class="cards news">
         {news.map((n) => (
           <li class="card card--link">
+            <div class="card__media">
+              <Image src={newsImage(n)!} alt={n.news.image.alt} width={640} height={427} format="webp" loading="lazy" />
+            </div>
             <div class="card__body">
               <span class="news__date">{fmtDate(n.news.published_on)}{n.synthetic && <span class="news__example">{u("news.example")}</span>}</span>
               <h3><a href={p(newsPath(n))}>{n.title}</a></h3>

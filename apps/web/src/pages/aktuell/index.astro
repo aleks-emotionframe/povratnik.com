@@ -1,8 +1,9 @@
 ---
 // Übersicht «Aktuelles»: alle Meldungen, neueste zuerst, jede mit Datum, Quelle und
 // Prüfdatum. Synthetische Beispiele sind als solche gekennzeichnet (nur Teststufe).
+import { Image } from "astro:assets";
 import Base from "../../layouts/Base.astro";
-import { loadNews, newsPath } from "../../lib/news.ts";
+import { loadNews, newsPath, newsImage } from "../../lib/news.ts";
 import { CONTENT_DIR, fmtDate, pageContext } from "../../lib/page.ts";
 
 const { lang, u, p } = pageContext(Astro);
@@ -26,6 +27,9 @@ const fallback = items.some((x) => x.fallback);
       <ul class="cards news">
         {items.map((n) => (
           <li class="card card--link">
+            <div class="card__media">
+              <Image src={newsImage(n)!} alt={n.news.image.alt} width={640} height={427} format="webp" loading="lazy" />
+            </div>
             <div class="card__body">
               <span class="news__date">{fmtDate(n.news.published_on)}{n.synthetic && <span class="news__example">{u("news.example")}</span>}</span>
               <h3><a href={p(newsPath(n))}>{n.title}</a></h3>

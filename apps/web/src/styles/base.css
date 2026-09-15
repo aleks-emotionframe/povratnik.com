@@ -444,17 +444,23 @@ a:hover {
 /* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
    Das Foto liegt hinter dem ganzen Aufmacher, darüber ein Verlauf in Markenfarbe;
    unten die Einstiege nach Lebenssituation über die ganze Breite. --head-h ist die
-   Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung nach oben ist
+   Kopfhöhe (Desktop 78 px, schmal 110 px); leichte Abweichung nach oben ist
    unschädlich, weil min-height nur ein Minimum setzt. */
 .hero--full {
-  --head-h: 4.6rem;
+  --head-h: 4.9rem;
   position: relative;
   overflow: hidden;
 }
 .hero--full .container {
-  min-height: calc(100svh - var(--head-h));
   grid-template-columns: minmax(0, 1fr);
-  grid-template-rows: 1fr auto auto;
+  grid-template-rows: auto auto;
+}
+/* Der erste Bildschirm endet genau mit den Lebenssituationen; «Häufig gesucht» kommt
+   erst beim Scrollen. */
+.hero__screen {
+  min-height: calc(100svh - var(--head-h));
+  display: grid;
+  grid-template-rows: 1fr auto;
 }
 /* Zwei Gruppen untereinander: Lebenssituationen als Umriss-Felder, häufig gesuchte
    Themen als weisse Felder, damit man sie auf einen Blick unterscheidet. */
@@ -592,7 +598,7 @@ a:hover {
 @media (max-width: 720px) {
   /* Schmal: Text kompakt, damit Titel, Suche und Lebenssituationen auf einen Bildschirm passen. */
   .hero--full {
-    --head-h: 6.3rem;
+    --head-h: 6.9rem;
   }
   .hero--full .hero__text {
     padding-block: 1.75rem 1.25rem;

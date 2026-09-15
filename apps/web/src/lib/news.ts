@@ -8,7 +8,14 @@ import { parse } from "yaml";
 import { STAGE } from "./stage.ts";
 import type { PageView } from "./pages.ts";
 
-export type NewsView = PageView & { synthetic: boolean; news: { published_on: string; body: string[] } };
+export type NewsView = PageView & { synthetic: boolean; news: { published_on: string; body: string[]; image: { file: string; alt: string } } };
+
+// Bilder liegen in src/assets/news und werden zur Bauzeit von Astro als WebP in mehreren
+// Breiten erzeugt; der Dateiname kommt aus dem Datensatz.
+const IMAGES = import.meta.glob<{ default: ImageMetadata }>("../assets/news/*.webp", { eager: true });
+export function newsImage(n: NewsView): ImageMetadata | undefined {
+  return IMAGES[`../assets/news/${n.news.image.file}`]?.default;
+}
 
 function visible(n: NewsView): boolean {
   if (STAGE === "public") return !n.synthetic && n.approval.state === "approved" && n.publication.state === "published";
