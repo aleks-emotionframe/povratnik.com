@@ -633,95 +633,100 @@ a:hover {
 }
 
 /* Die vier Schlüssel: Abhängigkeitskette (inhaltskonzept.md 1.1) */
+/* Die vier Schlüssel als Kette auf Markenfläche: Nummern auf einer Linie,
+   schmal untereinander mit senkrechter Linie, breit nebeneinander mit waagrechter. */
 .keys {
   list-style: none;
   padding: 0;
   margin: 0;
   max-width: none;
   display: grid;
-  gap: 1rem;
+  gap: 2rem 1.75rem;
   grid-template-columns: 1fr;
-  counter-reset: key;
 }
 .key {
-  counter-increment: key;
   position: relative;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 1.25rem 1.35rem 1.35rem 4rem;
+  padding-left: 3.75rem;
 }
-.key::before {
-  content: counter(key);
+.key__num {
   position: absolute;
-  left: 1.25rem;
-  top: 1.25rem;
-  width: 2rem;
-  height: 2rem;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
+  border: 2px solid var(--accent-bright);
   background: var(--brand);
-  color: var(--on-brand);
+  color: var(--accent-bright);
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: 1.0625rem;
   display: grid;
   place-items: center;
 }
+.key::before {
+  content: "";
+  position: absolute;
+  left: calc(1.25rem - 1px);
+  top: 2.5rem;
+  width: 2px;
+  bottom: -2rem;
+  background: rgba(255, 255, 255, 0.18);
+}
+.key:last-child::before {
+  display: none;
+}
 .key h3 {
-  margin: 0.25rem 0 0.15rem;
+  font-size: 1.5rem;
+  margin: 0.15rem 0 0.2rem;
+  color: var(--on-brand);
+}
+.band--brand .key h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.key h3 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 .key__hr {
   font-family: var(--font-mono);
   font-size: 0.8125rem;
-  color: var(--muted);
+  color: var(--on-brand-soft);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 .key p {
-  margin: 0;
+  margin: 0 0 0.9rem;
   font-size: 0.9375rem;
-  color: var(--ink-soft);
+  color: var(--on-brand-soft);
+  max-width: 34ch;
 }
-.key ul {
-  margin: 0.6rem 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.875rem;
-  color: var(--ink-soft);
-}
-.key li::before {
-  content: "· ";
-  color: var(--accent);
-}
-@media (min-width: 720px) {
+@media (min-width: 720px) and (max-width: 1079px) {
   .keys {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .key::before {
+    display: none;
   }
 }
 @media (min-width: 1080px) {
   .keys {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    gap: 2rem;
   }
   .key {
-    border-radius: 0;
-    border-right-width: 0;
+    padding-left: 0;
+    padding-top: 3.5rem;
   }
-  .key:first-child {
-    border-radius: var(--radius-md) 0 0 var(--radius-md);
-  }
-  .key:last-child {
-    border-right-width: 1px;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  }
-  .key + .key::after {
-    content: "";
-    position: absolute;
-    left: -1px;
-    top: 1.65rem;
-    width: 0;
-    height: 0;
-    border: 0.55rem solid transparent;
-    border-left-color: var(--line-strong);
+  .key::before {
+    left: 2.5rem;
+    right: -2rem;
+    top: calc(1.25rem - 1px);
+    width: auto;
+    height: 2px;
+    bottom: auto;
   }
 }
 

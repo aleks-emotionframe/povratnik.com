@@ -31,6 +31,15 @@ const running = places
   .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
 const dated = pages.filter((x) => x.validity.valid_until.kind === "date");
 const stateLabel = (s: string) => u(`place.state_${s}`);
+// Die vier Schlüssel (inhaltskonzept.md 1.1) mit ihrer Zielseite: Rubrik für den Status,
+// sonst die Themenseite, sofern sie existiert.
+const topicHref = (id: string) => { const x = byId.get(id); return x ? p(pagePath(x)) : undefined; };
+const keys = [
+  { title: u("home.key1_title"), sub: u("home.key1_sub"), hr: false, text: u("home.key1_text"), href: p("/wissen/status-und-staatsangehoerigkeit") },
+  { title: u("home.key2_title"), sub: "osobni identifikacijski broj", hr: true, text: u("home.key2_text"), href: topicHref("oib") },
+  { title: u("home.key3_title"), sub: "prijava prebivališta", hr: true, text: u("home.key3_text"), href: topicHref("wohnsitz-anmelden") },
+  { title: u("home.key4_title"), sub: "zdravstveno osiguranje", hr: true, text: u("home.key4_text"), href: topicHref("krankenversicherung") },
+];
 const elig = texts.eligibility as Record<string, string>;
 const phaseNames = texts.phases as Record<string, string>;
 ---
@@ -130,33 +139,22 @@ const phaseNames = texts.phases as Record<string, string>;
     </div>
   </section>
 
-  <section class="band band--surface">
+  <section class="band band--brand">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.keys_title")}</h2>
         <p class="soft">{u("home.keys_help")}</p>
       </div>
       <ol class="keys">
-        <li class="key">
-          <h3>{u("home.key1_title")}</h3>
-          <span class="key__hr">{u("home.key1_sub")}</span>
-          <p>{u("home.key1_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key2_title")}</h3>
-          <span class="key__hr" lang="hr">osobni identifikacijski broj</span>
-          <p>{u("home.key2_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key3_title")}</h3>
-          <span class="key__hr" lang="hr">prijava prebivališta</span>
-          <p>{u("home.key3_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key4_title")}</h3>
-          <span class="key__hr" lang="hr">zdravstveno osiguranje</span>
-          <p>{u("home.key4_text")}</p>
-        </li>
+        {keys.map((k, i) => (
+          <li class="key">
+            <span class="key__num" aria-hidden="true">{i + 1}</span>
+            <h3>{k.href ? <a href={k.href}>{k.title}</a> : k.title}</h3>
+            <span class="key__hr" lang={k.hr ? "hr" : undefined}>{k.sub}</span>
+            <p>{k.text}</p>
+            {k.href && <a class="arrow-link" href={k.href}>{u("home.key_link")}</a>}
+          </li>
+        ))}
       </ol>
     </div>
   </section>
