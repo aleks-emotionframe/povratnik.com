@@ -132,6 +132,8 @@ wizard:
       help: La fecha de entrada activa plazos. Sin fecha, los plazos solo se pueden calcular cuando esté confirmada.
   refine:
     unknown: No lo sé
+    done: respondido
+    open: abierto
     children:
       title: "{person}: edad e idioma"
       help: Influye en la escuela, el apoyo lingüístico y el calendario.

@@ -132,6 +132,8 @@ wizard:
       help: The entry date triggers deadlines. Without a date, deadlines can only be calculated once it is confirmed.
   refine:
     unknown: I do not know
+    done: answered
+    open: open
     children:
       title: "{person}: age and language"
       help: Affects school, language support and the timeline.

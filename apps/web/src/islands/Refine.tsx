@@ -36,7 +36,7 @@ export function Refine({ answers, texts, places, personLabel, onChange }: Props)
         return (
           <details class="refine__q" key={`${q.id}-${q.person?.id ?? "h"}`}>
             <summary>
-              <span class={`state state--${done ? "matches" : "unchecked"}`}>{done ? "beantwortet" : "offen"}</span> {title}
+              <span class={`state state--${done ? "matches" : "unchecked"}`}>{t(texts, done ? "wizard.refine.done" : "wizard.refine.open")}</span> {title}
             </summary>
             <p class="soft">{t(texts, `wizard.refine.${q.id}.help`)}</p>
             {q.fields.map((f) => {

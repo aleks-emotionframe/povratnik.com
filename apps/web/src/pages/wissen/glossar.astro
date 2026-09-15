@@ -17,6 +17,8 @@ for (const x of pages) {
   }
 }
 const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "hr"));
+/* Anker je Begriff, damit andere Seiten direkt auf die Erklärung verweisen können. */
+const anchor = (term: string) => term.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 ---
 
 <Base title={`${u("glossary.title")}: povratnik.com`} description={u("glossary.description")} current="wissen">
@@ -36,7 +38,7 @@ const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "
         <p class="count mono">{u("glossary.count", { n: list.length, pages: pages.length })}</p>
         <dl class="glossary">
           {list.map((e) => (
-            <div class="glossary__entry">
+            <div class="glossary__entry" id={anchor(e.term)}>
               <dt lang="hr">{e.term}</dt>
               <dd>
                 <p>{e.explained}</p>
@@ -72,6 +74,7 @@ const list = [...entries.values()].sort((a, b) => a.term.localeCompare(b.term, "
     gap: 0.75rem;
   }
   .glossary__entry {
+    scroll-margin-top: 6rem;
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);

@@ -132,6 +132,8 @@ wizard:
       help: Datum ulaska pokreće rokove. Bez datuma rokovi se mogu izračunati tek kada bude potvrđen.
   refine:
     unknown: Ne znam
+    done: odgovoreno
+    open: otvoreno
     children:
       title: "{person}: dob i jezik"
       help: Utječe na školu, jezičnu potporu i vremenski plan.

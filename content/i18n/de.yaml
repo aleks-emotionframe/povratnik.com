@@ -135,6 +135,8 @@ wizard:
   # Vertiefende Fragen (wizard-konzept.md 2.3, lib/refine.ts). Freiwillig, nach der Zusammenfassung.
   refine:
     unknown: Weiss ich nicht
+    done: beantwortet
+    open: offen
     children:
       title: "{person}: Alter und Sprache"
       help: Wirkt auf Schule, Sprachförderung und Zeitplan.
