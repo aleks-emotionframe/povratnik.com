@@ -45,15 +45,18 @@
   --st-closed: oklch(47% 0.020 240);
   --st-closed-bg: oklch(95% 0.004 240);
   /* Vokabular A, Fachwert unbekannt */
-  --st-unknown: oklch(50% 0.030 85);
+  --st-unknown: oklch(46% 0.035 85);
   --st-unknown-bg: oklch(96% 0.030 85);
 
   --font-display: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-text: "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace;
+  /* Metadaten, Beträge, Fristen: derselbe Textstapel, nur mit Tabellenziffern.
+     Keine Schreibmaschinenschrift (Entscheid der Produktverantwortung, 15.09.2026);
+     fonts.test.ts erzwingt das. */
+  --font-meta: var(--font-text);
 
   --measure: 68ch;
-  --maxw: 1320px;
+  --maxw: 1600px;
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --radius-sm: 6px;
   --radius-md: 8px;

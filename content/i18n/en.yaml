@@ -589,17 +589,11 @@ cases:
     line: Croatian passport, partner without one, lives on a Canadian pension, move open.
     shapes: His partner follows a different path than he does. His health insurance does not follow from employment; that is where gaps arise. Return support for work and founding does not apply to him.
     first: Clarify pension crediting and the insurance basis, with the agreement between Canada and Croatia.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: Does not know whether her grandmother held citizenship. Alone, move later or unclear.
-    shapes: The plan consists almost entirely of clarification tasks, and that is right. It shows her which three pieces of information she needs before anything can be planned.
-    first: Three concrete, doable steps instead of the certainty that she could already plan.
 ui:
   shell:
     tagline: Living in Croatia
     stage: Test stage
     stage_text: Example rules without professional approval, professional review as a placeholder. Not intended for customers.
-    report: Report an error
     skip: Skip to content
     nav_wissen: Knowledge
     nav_orte: Places
@@ -608,9 +602,6 @@ ui:
     nav_search: Search
     cta: Start the quick check
     language: Language
-    contact_title: Found something that is not right?
-    contact_text: "A wrong deadline, a wrong fact, a dead link: we review every report within two working days."
-    contact_how: How we work
     foot_claim: "Living in Croatia: the right order for returning or emigrating, person by person."
     foot_disclaimer: This website does not replace legal or tax advice. The competent body always decides on applications.
     foot_stage: Test stage. Example rules without professional approval (ADR-0004).
@@ -642,7 +633,6 @@ ui:
     hero_alt: A woman and her father sort documents at a table in an old town.
     quick_title: Frequently searched
     ways_title: Three ways to the same knowledge
-    ways_help: By topic, by place or in your order.
     way_check_title: My way
     way_check_text: "Six questions about your household, then a first plan: what comes first, which deadline is triggered by what, what remains open."
     way_wissen_title: Knowledge by topic
@@ -652,7 +642,7 @@ ui:
     way_orte_text: Municipalities with their measures for returnees, schools, doctors and housing. With status, check date and data depth, without ranking.
     way_orte_link: Places and measures
     keys_title: Almost everything hangs on four keys
-    keys_help: And in this order. It is the common thread of the whole website.
+    key_link: Go to the topic
     key1_title: Status
     key1_sub: Who am I legally?
     key1_text: Decides the residence route and access to work, school and support.
@@ -662,38 +652,10 @@ ui:
     key3_text: Triggers deadlines and for many support schemes is the decisive date, not arrival.
     key4_title: Insurance
     key4_text: Enables doctor visits, school enrolment, a childcare place. Has a gap if it was not planned in advance.
-    phases_title: Five phases, and everyone leaves one out
-    phases_help: "The fifth is the most important: that is where return fails, not at registration."
-    phase1_time: 12 to 6 months before
-    phase1_text: Is it feasible? Which status route? Which place? Is the money enough?
-    phase2_time: 9 to 2 months before
-    phase2_text: Documents, residence, insurance, school, housing, country of origin.
-    phase3_time: 4 weeks before until arrival
-    phase3_text: Transport, transitional cover, travel, first appointments.
-    phase4_time: first 8 weeks
-    phase4_text: Registration, insurance, work, school, everyday life.
-    phase5_time: months 3 to 24
-    phase5_text: Extensions, support commitments, language, integration.
-    running_title: What is running now
-    running_help: Open deadlines and current measures, with status and check date.
-    running_state: running
-    running_national: national
-    running_until: until {date}
-    running_checked: checked {date}
-    running_note: During the test stage, municipal entries come from fictional test municipalities.
-    running_all: All measures
-    why_title: Why an amount alone says nothing
-    why_text: A support scheme can be open, announced or exhausted. A value can be known, documented and still outdated. That is why every fact here carries source, check date and status. Where we do not know something, it says so, visibly, instead of a gap.
-    why_note: The competent body always decides on applications. The plan shows the way, not the outcome.
-    states_title: How to read states
-    state_matches: The requirements are met according to your answers.
-    state_unclear: A fact is missing or a professional must decide.
-    state_missing: A requirement is not currently met.
-    state_unknown: We do not know this value yet.
     situations_title: Entry points by life situation
-    situations_help: The same topics, in the order that suits you.
     cases_title: Five example paths
-    cases_help: Fictional case profiles from the concept. Real reports follow once test users have used the plan.
+    news_title: "News on returning and emigrating"
+    news_all: "All news"
     cases_label: Example, fictional
     cases_first: "First step:"
   wissen:
@@ -1037,6 +999,16 @@ ui:
     kind_country: Country of origin
     kind_place: Place (fictional)
     kind_term: Official term
+  news:
+    title: "News: povratnik.com"
+    description: "New deadlines, changed rules and programmes around returning and emigrating to Croatia, with source and check date."
+    heading: "News"
+    lede: "New deadlines, changed rules and programmes around returning and emigrating to Croatia. Every item with source and check date."
+    crumb: "News"
+    example: "Example, fictitious"
+    published: "Published {date}"
+    checked: "Source checked {date}"
+    empty: "No news at the moment."
   figures:
     title: "Figures and facts: povratnik.com"
     description: Return and immigration to Croatia in figures, with status and source.

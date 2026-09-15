@@ -1,0 +1,44 @@
+# SYNTHETISCH. Fiktive Beispielmeldung für die Sektion «Aktuelles» auf der Teststufe.
+id: beispiel-lohnsteuer-rueckkehrer
+lang: de
+version: 1
+synthetic: true
+type: news
+depth: short
+title: "Beispiel: Lohnsteuerbefreiung für Rückkehrer bleibt fünf Jahre"
+short_answer: "Fiktive Meldung für die Teststufe: Die fünfjährige Befreiung von der Lohnsteuer für Rückkehrer wäre demnach unverändert bestätigt worden."
+news:
+  published_on: 2026-09-05
+  image:
+    file: lohnabrechnung-kueche.webp
+    alt: "Ein Mann prüft am Küchentisch eines Steinhauses eine Lohnabrechnung mit dem Taschenrechner."
+  body:
+    - "Diese Meldung ist erfunden und dient nur dazu, die Sektion «Aktuelles» auf der Teststufe zu zeigen. Sie beschreibt keine tatsächliche Entscheidung."
+    - "Eine echte Meldung dieser Art würde erklären, wer unter die Regelung fällt, welches Ereignis die Frist auslöst und wo der Antrag gestellt wird."
+    - "Die zugehörige Themenseite auf povratnik erklärt die Regel im Detail, mit Quelle und Prüfdatum."
+terms: []
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: []
+sources:
+  - id: hr-hzz
+    reference: "Fiktive Fundstelle, nur als Beispiel für die Teststufe"
+    checked: 2026-09-15
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-05
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-15
+  cycle: quarterly

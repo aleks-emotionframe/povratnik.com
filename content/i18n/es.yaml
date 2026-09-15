@@ -589,17 +589,11 @@ cases:
     line: Pasaporte croata, pareja sin él, vive de una pensión canadiense, mudanza sin fecha.
     shapes: Su pareja sigue un camino distinto al suyo. En su caso el seguro de salud no deriva de un empleo; ahí surgen lagunas. Las ayudas al regreso para trabajo y emprendimiento no se aplican a él.
     first: Aclarar el cómputo de la pensión y la base del seguro, con el convenio entre Canadá y Croacia.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: No sabe si su abuela tenía la nacionalidad. Sola, mudanza más adelante o sin definir.
-    shapes: El plan consiste casi solo en tareas de aclaración, y así debe ser. Muestra qué tres informaciones necesita antes de que nada sea planificable.
-    first: Tres pasos concretos y realizables, en vez de la certeza de que ya podría planificar.
 ui:
   shell:
     tagline: Vivir en Croacia
     stage: Fase de prueba
     stage_text: Reglas de ejemplo sin revisión profesional, revisión profesional como marcador de posición. No destinado a clientes.
-    report: Informar de un error
     skip: Saltar al contenido
     nav_wissen: Conocimiento
     nav_orte: Lugares
@@ -608,9 +602,6 @@ ui:
     nav_search: Buscar
     cta: Iniciar el chequeo rápido
     language: Idioma
-    contact_title: ¿Ha encontrado algo que no es correcto?
-    contact_text: "Un plazo erróneo, un dato erróneo, un enlace roto: revisamos cada aviso en dos días laborables."
-    contact_how: Cómo trabajamos
     foot_claim: "Vivir en Croacia: el orden correcto para regresar o emigrar, persona por persona."
     foot_disclaimer: Esta web no sustituye el asesoramiento jurídico ni fiscal. Sobre las solicitudes decide siempre la entidad competente.
     foot_stage: Fase de prueba. Reglas de ejemplo sin revisión profesional (ADR-0004).
@@ -642,7 +633,6 @@ ui:
     hero_alt: Una mujer y su padre ordenan documentos en una mesa en un casco antiguo.
     quick_title: Búsquedas frecuentes
     ways_title: Tres caminos al mismo conocimiento
-    ways_help: Por tema, por lugar o según su orden.
     way_check_title: Mi camino
     way_check_text: "Seis preguntas sobre su hogar y luego un primer plan: qué va primero, qué plazo activa cada cosa, qué queda abierto."
     way_wissen_title: Conocimiento por tema
@@ -652,7 +642,7 @@ ui:
     way_orte_text: Municipios con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado, fecha de comprobación y profundidad de datos, sin ranking.
     way_orte_link: Lugares y ayudas
     keys_title: Casi todo depende de cuatro claves
-    keys_help: Y en este orden. Es el hilo conductor de toda la web.
+    key_link: Ir al tema
     key1_title: Estatus
     key1_sub: ¿Quién soy legalmente?
     key1_text: Decide la vía de residencia y el acceso al trabajo, la escuela y las ayudas.
@@ -662,38 +652,10 @@ ui:
     key3_text: Activa plazos y en muchas ayudas es la fecha que cuenta, no la llegada.
     key4_title: Seguro
     key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
-    phases_title: Cinco fases, y una la omiten todos
-    phases_help: "La quinta es la más importante: ahí fracasa el regreso, no en el registro."
-    phase1_time: de 12 a 6 meses antes
-    phase1_text: ¿Es viable? ¿Qué vía de estatus? ¿Qué lugar? ¿Alcanza el dinero?
-    phase2_time: de 9 a 2 meses antes
-    phase2_text: Documentos, residencia, seguro, escuela, vivienda, país de origen.
-    phase3_time: de 4 semanas antes hasta la llegada
-    phase3_text: Transporte, cobertura transitoria, viaje, primeras citas.
-    phase4_time: primeras 8 semanas
-    phase4_text: Registro, seguro, trabajo, escuela, vida cotidiana.
-    phase5_time: del mes 3 al 24
-    phase5_text: Prórrogas, obligaciones de las ayudas, idioma, integración.
-    running_title: Qué está en curso
-    running_help: Plazos abiertos y medidas actuales, con estado y fecha de comprobación.
-    running_state: en curso
-    running_national: estatal
-    running_until: hasta el {date}
-    running_checked: comprobado el {date}
-    running_note: En la fase de prueba, las entradas municipales provienen de municipios ficticios.
-    running_all: Todas las ayudas
-    why_title: Por qué un importe por sí solo no dice nada
-    why_text: Una ayuda puede estar abierta, anunciada o agotada. Un valor puede ser conocido, documentado y aun así estar desactualizado. Por eso cada dato lleva aquí fuente, fecha de comprobación y estado. Donde no sabemos algo, se ve, en vez de una laguna.
-    why_note: Sobre las solicitudes decide siempre la entidad competente. El plan muestra el camino, no el resultado.
-    states_title: Cómo leer los estados
-    state_matches: Según sus datos, los requisitos se cumplen.
-    state_unclear: Falta un dato o debe decidir un profesional.
-    state_missing: Un requisito no se cumple actualmente.
-    state_unknown: Este valor todavía no lo conocemos.
     situations_title: Entradas por situación de vida
-    situations_help: Los mismos temas, en el orden que le corresponde.
     cases_title: Cinco caminos de ejemplo
-    cases_help: Perfiles ficticios del concepto. Los testimonios reales llegarán cuando personas de prueba hayan usado el plan.
+    news_title: "Actualidad sobre el retorno y la emigración"
+    news_all: "Todas las noticias"
     cases_label: Ejemplo, ficticio
     cases_first: "Primer paso:"
   wissen:
@@ -1037,6 +999,16 @@ ui:
     kind_country: País de origen
     kind_place: Lugar (ficticio)
     kind_term: Término oficial
+  news:
+    title: "Actualidad: povratnik.com"
+    description: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia, con fuente y fecha de revisión."
+    heading: "Actualidad"
+    lede: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia. Cada noticia con fuente y fecha de revisión."
+    crumb: "Actualidad"
+    example: "Ejemplo, ficticio"
+    published: "Publicado el {date}"
+    checked: "Fuente revisada el {date}"
+    empty: "No hay noticias por el momento."
   figures:
     title: "Cifras y datos: povratnik.com"
     description: Regreso e inmigración a Croacia en cifras, con estado y fuente.

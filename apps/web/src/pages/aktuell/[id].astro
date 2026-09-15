@@ -1,0 +1,62 @@
+---
+// Einzelne Meldung: Datum, Titel, Vorspann, Absätze, Datenstand mit Quelle und Prüfdatum.
+import { Image } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import { loadNews, newsImage } from "../../lib/news.ts";
+import { loadSources } from "../../lib/pages.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../lib/page.ts";
+
+export function getStaticPaths() {
+  return loadNews(CONTENT_DIR, "de").map((n) => ({ params: { id: n.id } }));
+}
+
+const { lang, u, p } = pageContext(Astro);
+const item = loadNews(CONTENT_DIR, lang).find((n) => n.id === Astro.params.id)!;
+const sources = loadSources(CONTENT_DIR);
+---
+
+<Base title={`${item.title}: povratnik.com`} description={item.short_answer} fallback={item.fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <p class="crumbs"><a href={p("/aktuell")}>{u("news.crumb")}</a></p>
+        <h1>{item.title}</h1>
+        <p class="lede">{item.short_answer}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="container grid">
+      <article class="col-main">
+        <Image class="news__image" src={newsImage(item)!} alt={item.news.image.alt} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" loading="eager" />
+        <p class="news__meta">{u("news.published", { date: fmtDate(item.news.published_on) })}{item.synthetic && <span class="news__example">{u("news.example")}</span>}</p>
+        {item.news.body.map((para) => <p>{para}</p>)}
+        <p class="datenstand">
+          {item.sources.map((s) => <span>{sources[s.id]?.title ?? s.id}: {s.reference}, {u("news.checked", { date: fmtDate(s.checked) })}</span>)}
+        </p>
+        <p><a class="arrow-link" href={p("/aktuell")}>{u("home.news_all")}</a></p>
+      </article>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .news__image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+  }
+  .news__meta {
+    font-family: var(--font-meta);
+    font-size: 0.875rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .news__example {
+    color: var(--st-unknown);
+  }
+</style>

@@ -1,7 +1,7 @@
 ---
 // Grundlayout jeder Seite. Ohne JavaScript vollständig lesbar (CLAUDE.md 2.6).
-// Kopf nach designsystem.md 2.1: Logo, Hauptnavigation, Sprachwahl als Kürzel,
-// hervorgehobener Kurzcheck. Die Teststufe (ADR-0004) steht im Fuss jeder Seite.
+// Kopf nach designsystem.md 2.1: Logo, Hauptnavigation, Suchfeld (schmal ein Link zur
+// Suchseite), Sprachwahl als Kürzel, hervorgehobener Kurzcheck. Die Teststufe (ADR-0004) steht im Fuss jeder Seite.
 // Im Fuss dasselbe Logo, per CSS weiss. Sprache aus
 // der Adresse (lib/i18n.ts). Der EmotionFrame Footer steht als letztes Element.
 import "../styles/base.css";
@@ -28,7 +28,6 @@ const nav = [
   { href: p("/orte"), label: u("shell.nav_orte"), key: "orte" },
   { href: p("/mein-weg"), label: u("shell.nav_weg"), key: "mein-weg" },
   { href: p("/ueber-uns"), label: u("shell.nav_about"), key: "ueber-uns" },
-  { href: p("/suche"), label: u("shell.nav_search"), key: "suche" },
 ];
 // Pfad ohne Sprachpräfix, für die Sprachwahl und hreflang.
 const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
@@ -62,6 +61,16 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
         <nav class="site-nav" aria-label="Navigation">
           {nav.map((n) => <a href={n.href} aria-current={current === n.key ? "page" : undefined}>{n.label}</a>)}
         </nav>
+        <form class="head-search" role="search" action={p("/suche")} method="get" data-search>
+          <label class="visually-hidden" for="head-q">{u("search.label")}</label>
+          <input id="head-q" type="search" placeholder={u("shell.nav_search")} autocomplete="off" />
+          <button type="submit" aria-label={u("search.button")}>
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+          </button>
+        </form>
+        <a class="head-search-link" href={p("/suche")} aria-label={u("shell.nav_search")}>
+          <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="2" /><path d="M13 13l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+        </a>
         <nav class="lang" aria-label={u("shell.language")}>
           {LOCALES.map((l) => (
             <a href={localePath(l, bare)} lang={l} hreflang={l} aria-label={LOCALE_NAMES[l]} aria-current={l === lang ? "true" : undefined}>{l.toUpperCase()}</a>
@@ -70,6 +79,26 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
         <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
       </div>
     </header>
+
+    <script is:inline>
+      // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.
+      // Auf der Suchseite selbst wird das dortige Feld direkt gefüllt.
+      (function () {
+        var form = document.querySelector("[data-search]");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var q = form.querySelector("input").value.trim();
+          var local = document.getElementById("q");
+          if (local) {
+            local.value = q;
+            local.dispatchEvent(new Event("input"));
+            local.focus();
+            return;
+          }
+          location.href = form.getAttribute("action") + (q ? "#q=" + encodeURIComponent(q) : "");
+        });
+      })();
+    </script>
 
     <main id="inhalt">
       {fallback && (
@@ -82,19 +111,6 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
       )}
       <slot />
     </main>
-
-    <section class="band band--brand contact">
-      <div class="container">
-        <div>
-          <h2>{u("shell.contact_title")}</h2>
-          <p>{u("shell.contact_text")}</p>
-        </div>
-        <div class="contact__actions">
-          <a class="button button--light" href="mailto:kontakt@povratnik.com">{u("shell.report")}</a>
-          <a class="button button--outline-light" href={p("/ueber-uns")}>{u("shell.contact_how")}</a>
-        </div>
-      </div>
-    </section>
 
     <footer class="site-foot">
       <div class="container">
@@ -111,6 +127,7 @@ const bare = Astro.url.pathname.replace(/^\/(hr|en|es)(?=\/|$)/, "") || "/";
           <ul>
             <li><a href={p("/wissen")}>{u("shell.foot_all")}</a></li>
             <li><a href={p("/wissen/glossar")}>{u("shell.foot_glossary")}</a></li>
+            <li><a href={p("/aktuell")}>{u("news.crumb")}</a></li>
             <li><a href={p("/zahlen")}>{u("shell.foot_figures")}</a></li>
             <li><a href={p("/anlaufstellen")}>{u("shell.foot_contacts")}</a></li>
           </ul>

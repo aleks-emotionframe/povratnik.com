@@ -369,7 +369,6 @@ ui:
     tagline: Leben in Kroatien
     stage: Teststufe
     stage_text: Beispielregeln ohne fachliche Freigabe, Fachprüfung als Platzhalter. Nicht für Kundinnen und Kunden bestimmt.
-    report: Fehler melden
     skip: Zum Inhalt springen
     nav_wissen: Wissen
     nav_orte: Orte
@@ -378,9 +377,6 @@ ui:
     nav_search: Suche
     cta: Kurzcheck starten
     language: Sprache
-    contact_title: Haben Sie etwas gefunden, das nicht stimmt?
-    contact_text: "Falsche Frist, falsche Angabe, toter Link: Wir sichten jede Meldung innert zwei Werktagen."
-    contact_how: Wie wir arbeiten
     foot_claim: "Leben in Kroatien: die Reihenfolge für Rückkehr und Auswanderung, Person für Person."
     foot_disclaimer: Diese Website ersetzt keine Rechts- oder Steuerberatung. Über Anträge entscheidet immer die zuständige Stelle.
     foot_stage: Teststufe. Beispielregeln ohne fachliche Freigabe (ADR-0004).
@@ -403,67 +399,38 @@ ui:
     translation_note: Arbeitsfassung. Massgeblich ist die deutsche Fassung; kroatische Rechtstexte gelten im Original.
     legal_note: Rechtstexte gibt es nur auf Deutsch.
   home:
-    title: "povratnik.com: Leben in Kroatien"
-    description: "Rückkehr und Auswanderung nach Kroatien in der richtigen Reihenfolge: Aufenthalt, Meldung, Versicherung, Familie, Förderung. Persönlicher Plan im Browser, ohne Konto."
-    hero_title: Nach Kroatien zurück oder neu dorthin. In der richtigen Reihenfolge.
-    hero_lede: "Aufenthalt, Meldung, Versicherung, Schule, Förderung: Was zuerst kommt, steht nirgends. Hier bekommen Sie die Reihenfolge für Ihren Haushalt, Person für Person."
+    title: "Auswandern und Rückkehr nach Kroatien: povratnik.com"
+    description: "Alles Wichtige für Auswanderung und Rückkehr nach Kroatien: Aufenthalt, Behörden, Krankenversicherung, Schule, Arbeit und Förderungen. Verständlich erklärt, mit Quelle und Prüfdatum."
+    hero_title: Ihr Weg nach Kroatien, Schritt für Schritt.
+    hero_lede: "Alles Wichtige für Auswanderung und Rückkehr nach Kroatien: Aufenthalt, Behörden, Krankenversicherung, Schule, Arbeit und Förderungen. Verständlich erklärt, mit Quelle und Prüfdatum."
     hero_wissen: Wissen nach Thema
     hero_note: Ohne Konto. Ihre Antworten bleiben in Ihrem Browser.
     hero_alt: Eine Frau und ihr Vater sortieren an einem Tisch in einer Altstadt Unterlagen.
     quick_title: Häufig gesucht
-    ways_title: Drei Wege zum selben Wissen
-    ways_help: Nach Thema, nach Ort oder nach Ihrer Reihenfolge.
-    way_check_title: Mein Weg
-    way_check_text: "Sechs Fragen zu Ihrem Haushalt, dann ein erster Plan: was zuerst, welche Frist wodurch ausgelöst wird, was offen bleibt."
+    ways_title: So hilft Ihnen povratnik
+    way_check_title: Ihr persönlicher Plan
+    way_check_text: Beantworten Sie ein paar Fragen zu Ihrer Situation. Sie erhalten einen Plan mit den nächsten Schritten, den Fristen und dem, was noch zu klären ist.
     way_wissen_title: Wissen nach Thema
-    way_wissen_text: "Zwölf Rubriken, von Status bis Förderung. Jede Themenseite mit derselben Maske: kurze Antwort, gilt für, zuständig, Stand."
-    way_wissen_link: Zu den Rubriken
-    way_orte_title: Orte entdecken
-    way_orte_text: Gemeinden mit ihren Leistungen für Rückkehrer, Schulen, Ärzten und Wohnraum. Mit Zustand, Prüfdatum und Datentiefe, ohne Rangliste.
-    way_orte_link: Orte und Leistungen
-    keys_title: Fast alles hängt an vier Schlüsseln
-    keys_help: Und zwar in dieser Reihenfolge. Das ist der rote Faden der ganzen Website.
-    key1_title: Status
-    key1_sub: Wer bin ich rechtlich?
-    key1_text: Entscheidet über den Aufenthaltsweg, den Zugang zu Arbeit, Schule und Förderung.
+    way_wissen_text: Verständliche Antworten zu Aufenthalt, Dokumenten, Arbeit, Steuern, Gesundheit, Schule und Wohnen. Jede Seite sagt, für wen sie gilt, wer zuständig ist und wann sie geprüft wurde.
+    way_wissen_link: Zu den Themen
+    way_orte_title: Gemeinden und Förderungen
+    way_orte_text: Gemeinden in Kroatien mit ihren Förderungen für Rückkehrer, mit Schulen, Ärzten und Wohnangeboten. Ehrlich ausgewiesen, auch wenn eine Angabe noch fehlt.
+    way_orte_link: Gemeinden ansehen
+    keys_title: Diese vier Schritte kommen zuerst
+    key_link: Zum Thema
+    key1_title: Rechtlicher Status
+    key1_sub: Kroatischer Pass, EU-Bürger oder Drittstaat
+    key1_text: Ihr Status bestimmt, welcher Weg Ihnen für Aufenthalt, Arbeit, Schule und Förderungen offen steht. Darum klären wir ihn als Erstes.
     key2_title: OIB
-    key2_text: Die Steuernummer. Ohne sie kein Bankkonto, kein Mietvertrag, kein Antrag, kein Arbeitsvertrag.
-    key3_title: Anmeldung
-    key3_text: Löst Fristen aus und ist bei vielen Förderungen das massgebende Datum, nicht die Ankunft.
-    key4_title: Versicherung
-    key4_text: Ermöglicht Arztbesuch, Schuleinschreibung, Betreuungsplatz. Hat eine Lücke, wenn sie nicht vorher geplant wurde.
-    phases_title: Fünf Phasen, eine davon lassen alle weg
-    phases_help: "Die fünfte ist die wichtigste: Dort scheitert die Rückkehr, nicht bei der Anmeldung."
-    phase1_time: 12 bis 6 Monate vorher
-    phase1_text: Ist es machbar? Welcher Statusweg? Welcher Ort? Reicht das Geld?
-    phase2_time: 9 bis 2 Monate vorher
-    phase2_text: Dokumente, Aufenthalt, Versicherung, Schule, Wohnung, Herkunftsland.
-    phase3_time: 4 Wochen vorher bis Ankunft
-    phase3_text: Transport, Übergangsdeckung, Anreise, erste Termine.
-    phase4_time: erste 8 Wochen
-    phase4_text: Anmeldung, Versicherung, Arbeit, Schule, Alltag.
-    phase5_time: Monat 3 bis 24
-    phase5_text: Verlängerungen, Förderpflichten, Sprache, Anschluss.
-    running_title: Was gerade läuft
-    running_help: Offene Fristen und aktuelle Massnahmen, mit Zustand und Prüfdatum.
-    running_state: läuft
-    running_national: staatlich
-    running_until: bis {date}
-    running_checked: geprüft {date}
-    running_note: Kommunale Einträge stammen auf der Teststufe aus fiktiven Testgemeinden.
-    running_all: Alle Leistungen
-    why_title: Warum ein Betrag allein nichts sagt
-    why_text: Eine Förderung kann offen, angekündigt oder ausgeschöpft sein. Ein Wert kann bekannt, belegt und trotzdem veraltet sein. Deshalb trägt bei uns jede Angabe Quelle, Prüfdatum und Zustand. Wo wir etwas nicht wissen, steht das dort, sichtbar, statt einer Lücke.
-    why_note: Über Anträge entscheidet immer die zuständige Stelle. Der Plan zeigt den Weg, nicht das Ergebnis.
-    states_title: So lesen Sie Zustände
-    state_matches: Die Voraussetzungen treffen nach Ihren Angaben zu.
-    state_unclear: Eine Angabe fehlt oder eine Fachperson muss entscheiden.
-    state_missing: Eine Voraussetzung ist derzeit nicht erfüllt.
-    state_unknown: Diesen Wert kennen wir noch nicht.
-    situations_title: Einstiege nach Lebenssituation
-    situations_help: Dieselben Themen, in der Reihenfolge, die zu Ihnen passt.
-    cases_title: Fünf Beispielwege
-    cases_help: Fiktive Fallprofile aus dem Konzept. Echte Erfahrungsberichte folgen, sobald Testpersonen den Plan benutzt haben.
+    key2_text: Die persönliche Identifikationsnummer. Ohne OIB gibt es kein Bankkonto, keinen Mietvertrag, keinen Arbeitsvertrag und keinen Antrag.
+    key3_title: Wohnsitz anmelden
+    key3_text: Mit der Anmeldung beginnen viele Fristen. Für Förderungen zählt oft dieses Datum, nicht der Tag der Ankunft.
+    key4_title: Krankenversicherung
+    key4_text: Ohne Versicherung kein Arztbesuch, keine Schuleinschreibung, kein Betreuungsplatz. Wer sie nicht vor dem Umzug plant, hat eine Lücke.
+    situations_title: Was trifft auf Sie zu?
+    cases_title: So kann Ihr Weg aussehen
+    news_title: "Aktuelles zu Rückkehr und Auswanderung"
+    news_all: "Alle Meldungen"
     cases_label: Beispiel, fiktiv
     cases_first: "Erster Schritt:"
   wissen:
@@ -807,6 +774,16 @@ ui:
     kind_country: Herkunftsland
     kind_place: Ort (fiktiv)
     kind_term: Amtsbegriff
+  news:
+    title: "Aktuelles: povratnik.com"
+    description: "Neue Fristen, geänderte Regeln und Programme rund um Rückkehr und Auswanderung nach Kroatien, mit Quelle und Prüfdatum."
+    heading: "Aktuelles"
+    lede: "Neue Fristen, geänderte Regeln und Programme rund um Rückkehr und Auswanderung nach Kroatien. Jede Meldung mit Quelle und Prüfdatum."
+    crumb: "Aktuelles"
+    example: "Beispiel, fiktiv"
+    published: "Veröffentlicht am {date}"
+    checked: "Quelle geprüft {date}"
+    empty: "Derzeit keine Meldungen."
   figures:
     title: "Zahlen und Fakten: povratnik.com"
     description: Rückkehr und Zuwanderung nach Kroatien in Zahlen, mit Stand und Quelle.

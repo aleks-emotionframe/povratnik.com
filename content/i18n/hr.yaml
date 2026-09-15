@@ -589,17 +589,11 @@ cases:
     line: Hrvatska putovnica, partnerica bez nje, živi od kanadske mirovine, selidba otvorena.
     shapes: Njegova partnerica ide drugim putem od njega. Zdravstveno osiguranje kod njega ne proizlazi iz zaposlenja; ondje nastaju praznine. Potpore za povratnike za rad i osnivanje na njega se ne odnose.
     first: Razjasniti priznavanje mirovinskog staža i osnovu osiguranja, uz ugovor između Kanade i Hrvatske.
-  ohne-pass:
-    name: Sofía, 26, Santiago de Chile
-    line: Ne zna je li njezina baka imala državljanstvo. Sama, selidba kasnije ili neodređeno.
-    shapes: Plan se gotovo isključivo sastoji od zadataka razjašnjenja, i to je ispravno. Pokazuje joj koje tri informacije treba prije nego što se išta može planirati.
-    first: Tri konkretna, izvediva koraka umjesto uvjerenja da bi već mogla planirati.
 ui:
   shell:
     tagline: Život u Hrvatskoj
     stage: Testna faza
     stage_text: Primjerna pravila bez stručnog odobrenja, stručna provjera kao rezervirano mjesto. Nije namijenjeno korisnicima.
-    report: Prijavi pogrešku
     skip: Skoči na sadržaj
     nav_wissen: Znanje
     nav_orte: Mjesta
@@ -608,9 +602,6 @@ ui:
     nav_search: Pretraga
     cta: Pokreni brzu provjeru
     language: Jezik
-    contact_title: Pronašli ste nešto što nije točno?
-    contact_text: "Pogrešan rok, pogrešan podatak, mrtva poveznica: svaku prijavu pregledamo u roku od dva radna dana."
-    contact_how: Kako radimo
     foot_claim: "Život u Hrvatskoj: redoslijed za povratak i useljenje, osoba po osoba."
     foot_disclaimer: Ova stranica ne zamjenjuje pravno ni porezno savjetovanje. O zahtjevima uvijek odlučuje nadležno tijelo.
     foot_stage: Testna faza. Primjerna pravila bez stručnog odobrenja (ADR-0004).
@@ -642,7 +633,6 @@ ui:
     hero_alt: Žena i njezin otac razvrstavaju dokumente za stolom u starom gradu.
     quick_title: Često traženo
     ways_title: Tri puta do istog znanja
-    ways_help: Po temi, po mjestu ili po vašem redoslijedu.
     way_check_title: Moj put
     way_check_text: "Šest pitanja o vašem kućanstvu, zatim prvi plan: što prvo, koji rok što pokreće, što ostaje otvoreno."
     way_wissen_title: Znanje po temama
@@ -652,7 +642,7 @@ ui:
     way_orte_text: Općine sa svojim mjerama za povratnike, školama, liječnicima i stambenim prostorom. Sa stanjem, datumom provjere i dubinom podataka, bez rang-liste.
     way_orte_link: Mjesta i mjere
     keys_title: Gotovo sve ovisi o četiri ključa
-    keys_help: I to ovim redom. To je crvena nit cijele stranice.
+    key_link: Na temu
     key1_title: Status
     key1_sub: Tko sam pravno?
     key1_text: Odlučuje o boravišnom putu, pristupu radu, školi i potporama.
@@ -662,38 +652,10 @@ ui:
     key3_text: Pokreće rokove i kod mnogih je potpora mjerodavan datum, ne dolazak.
     key4_title: Osiguranje
     key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
-    phases_title: Pet faza, jednu svi izostavljaju
-    phases_help: "Peta je najvažnija: ondje povratak propada, ne na prijavi."
-    phase1_time: 12 do 6 mjeseci prije
-    phase1_text: Je li izvedivo? Koji statusni put? Koje mjesto? Je li novca dovoljno?
-    phase2_time: 9 do 2 mjeseca prije
-    phase2_text: Isprave, boravak, osiguranje, škola, stan, zemlja podrijetla.
-    phase3_time: 4 tjedna prije do dolaska
-    phase3_text: Prijevoz, prijelazno pokriće, putovanje, prvi termini.
-    phase4_time: prvih 8 tjedana
-    phase4_text: Prijava, osiguranje, rad, škola, svakodnevica.
-    phase5_time: od 3. do 24. mjeseca
-    phase5_text: Produljenja, obveze iz potpora, jezik, uključivanje.
-    running_title: Što trenutačno teče
-    running_help: Otvoreni rokovi i aktualne mjere, sa stanjem i datumom provjere.
-    running_state: teče
-    running_national: državno
-    running_until: do {date}
-    running_checked: provjereno {date}
-    running_note: Općinski unosi u testnoj fazi potječu iz fiktivnih testnih općina.
-    running_all: Sve mjere
-    why_title: Zašto iznos sam po sebi ništa ne govori
-    why_text: Potpora može biti otvorena, najavljena ili iscrpljena. Vrijednost može biti poznata, dokumentirana i ipak zastarjela. Zato kod nas svaki podatak nosi izvor, datum provjere i stanje. Gdje nešto ne znamo, to piše vidljivo, umjesto praznine.
-    why_note: O zahtjevima uvijek odlučuje nadležno tijelo. Plan pokazuje put, ne rezultat.
-    states_title: Kako čitati stanja
-    state_matches: Uvjeti prema vašim podacima odgovaraju.
-    state_unclear: Nedostaje podatak ili mora odlučiti stručnjak.
-    state_missing: Uvjet trenutačno nije ispunjen.
-    state_unknown: Ovu vrijednost još ne znamo.
     situations_title: Ulazi prema životnoj situaciji
-    situations_help: Iste teme, redoslijedom koji vama odgovara.
     cases_title: Pet primjernih putova
-    cases_help: Fiktivni profili iz koncepta. Prava iskustva slijede čim testne osobe upotrijebe plan.
+    news_title: "Aktualno o povratku i iseljavanju"
+    news_all: "Sve obavijesti"
     cases_label: Primjer, fiktivno
     cases_first: "Prvi korak:"
   wissen:
@@ -1037,6 +999,16 @@ ui:
     kind_country: Zemlja podrijetla
     kind_place: Mjesto (fiktivno)
     kind_term: Službeni pojam
+  news:
+    title: "Aktualno: povratnik.com"
+    description: "Novi rokovi, izmijenjena pravila i programi vezani uz povratak i iseljavanje u Hrvatsku, s izvorom i datumom provjere."
+    heading: "Aktualno"
+    lede: "Novi rokovi, izmijenjena pravila i programi vezani uz povratak i iseljavanje u Hrvatsku. Svaka obavijest s izvorom i datumom provjere."
+    crumb: "Aktualno"
+    example: "Primjer, izmišljeno"
+    published: "Objavljeno {date}"
+    checked: "Izvor provjeren {date}"
+    empty: "Trenutačno nema obavijesti."
   figures:
     title: "Brojke i činjenice: povratnik.com"
     description: Povratak i useljenje u Hrvatsku u brojkama, sa stanjem i izvorom.

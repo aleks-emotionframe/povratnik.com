@@ -1,16 +1,15 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
-// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, die fünf Phasen, was gerade
-// läuft, die Zustände, Lebenssituationen, Beispielwege. Texte aus dem Katalog der
-// Sprache (ui.home.*), Pfade mit Sprachpräfix.
+// Lebenssituationen und Schnelleinstiegen (die Suche steht im Kopf), die drei Wege,
+// die vier Schlüssel, Aktuelles, Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS, rubricText } from "../lib/rubrics.ts";
 import { SITUATIONS, situationText } from "../lib/situations.ts";
 import { CASES, caseText } from "../lib/cases.ts";
-import { loadPlaces, placeName, formatDate, PROGRAM_STATE } from "../lib/places.ts";
+import { loadNews, newsPath, newsImage } from "../lib/news.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
-import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../lib/page.ts";
 import hero from "../assets/hero-dokumente.webp";
 import ort from "../assets/ort-hauptplatz.webp";
 
@@ -22,67 +21,64 @@ const byId = new Map(pages.map((x) => [x.id, x]));
 const chips = ["oib", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "wohnsitz-anmelden", "krankenversicherung", "lohnsteuerbefreiung", "biram-hrvatsku", "schule-und-zeugnisse", "fuehrerschein-umschreiben"]
   .map((id) => byId.get(id))
   .filter((x): x is NonNullable<typeof x> => !!x);
-
-// Was gerade läuft: offene und angekündigte Leistungen mit Antragszeitraum, dazu
-// Themenseiten mit befristeter Gültigkeit. Der Block ist der Grund für Wiederbesuche.
-const places = loadPlaces();
-const running = places
-  .flatMap((pl) => pl.benefits.filter((b) => b.program_state === "open" || b.program_state === "announced").map((b) => ({ title: b.title, where: placeName(pl), href: p(`/orte/${pl.id}`), until: b.application.until, state: b.program_state, checked: b.checked })))
-  .sort((a, b) => (a.until ?? "9").localeCompare(b.until ?? "9"));
-const dated = pages.filter((x) => x.validity.valid_until.kind === "date");
-const stateLabel = (s: string) => u(`place.state_${s}`);
-const elig = texts.eligibility as Record<string, string>;
-const phaseNames = texts.phases as Record<string, string>;
+// Aktuelles: die drei neuesten Meldungen.
+const news = loadNews(CONTENT_DIR, lang).slice(0, 3);
+// Die vier Schlüssel (inhaltskonzept.md 1.1) mit ihrer Zielseite: Rubrik für den Status,
+// sonst die Themenseite, sofern sie existiert.
+const topicHref = (id: string) => { const x = byId.get(id); return x ? p(pagePath(x)) : undefined; };
+const keys = [
+  { title: u("home.key1_title"), sub: u("home.key1_sub"), hr: false, text: u("home.key1_text"), href: p("/wissen/status-und-staatsangehoerigkeit") },
+  { title: u("home.key2_title"), sub: "osobni identifikacijski broj", hr: true, text: u("home.key2_text"), href: topicHref("oib") },
+  { title: u("home.key3_title"), sub: "prijava prebivališta", hr: true, text: u("home.key3_text"), href: topicHref("wohnsitz-anmelden") },
+  { title: u("home.key4_title"), sub: "zdravstveno osiguranje", hr: true, text: u("home.key4_text"), href: topicHref("krankenversicherung") },
+];
 ---
 
 <Base title={u("home.title")} description={u("home.description")} current="start" preload={heroImg.src}>
   <section class="hero hero--full">
     <div class="container">
+      <div class="hero__screen">
       <div class="hero__text">
         <h1>{u("home.hero_title")}</h1>
         <p class="lede">{u("home.hero_lede")}</p>
-        <form class="search" action={p("/suche")} method="get" data-search>
-          <label class="visually-hidden" for="hero-q">{u("search.label")}</label>
-          <input id="hero-q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
-          <button class="button button--outline-light" type="submit">{u("search.button")}</button>
-        </form>
-        <div class="hero__actions">
-          <a class="button button--light" href={p("/mein-weg")}>{u("shell.cta")}</a>
-          <a class="button button--outline-light" href={p("/wissen")}>{u("home.hero_wissen")}</a>
-        </div>
-        <p class="hero__note">{u("home.hero_note")}</p>
       </div>
+      <nav class="hero__situations" aria-label={u("home.situations_title")}>
+        <h2>{u("home.situations_title")}</h2>
+        <ul>
+          {SITUATIONS.map((x) => <li><a href={p(`/wissen/situation/${x.slug}`)}>{situationText(x, texts).title}</a></li>)}
+        </ul>
+      </nav>
+      </div>
+      {/* Schmal zugeklappt (details ohne open), breit immer offen; das Skript unten setzt
+          das Attribut nach Bildschirmbreite. Ohne JavaScript bleibt alles offen. */}
+      <details class="hero__situations hero__quick" open>
+        <summary><h2>{u("home.quick_title")}</h2></summary>
+        <nav aria-label={u("home.quick_title")}>
+          <ul>
+            {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
+          </ul>
+        </nav>
+      </details>
       <div class="hero__media">
         <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
       </div>
     </div>
   </section>
   <script is:inline>
-    // Der Suchbegriff geht als Fragment zur Suchseite und wird nie an den Server gesendet.
+    // «Häufig gesucht» ist auf schmalen Bildschirmen zugeklappt, auf breiten offen.
     (function () {
-      var form = document.querySelector("[data-search]");
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var q = form.querySelector("input").value.trim();
-        location.href = form.getAttribute("action") + (q ? "#q=" + encodeURIComponent(q) : "");
-      });
+      var box = document.querySelector(".hero__quick");
+      var narrow = window.matchMedia("(max-width: 720px)");
+      function apply() { box.open = !narrow.matches; }
+      apply();
+      narrow.addEventListener("change", apply);
     })();
   </script>
-
-  <section class="band band--surface quick">
-    <div class="container">
-      <h2 class="quick__title">{u("home.quick_title")}</h2>
-      <ul class="chips">
-        {chips.map((x) => <li><a href={p(pagePath(x))}>{x.title}</a></li>)}
-      </ul>
-    </div>
-  </section>
 
   <section class="band">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.ways_title")}</h2>
-        <p class="soft">{u("home.ways_help")}</p>
       </div>
       <ul class="cards cards--ways">
         <li class="card card--link">
@@ -121,33 +117,21 @@ const phaseNames = texts.phases as Record<string, string>;
     </div>
   </section>
 
-  <section class="band band--surface">
+  <section class="band band--brand">
     <div class="container">
       <div class="band__head">
         <h2>{u("home.keys_title")}</h2>
-        <p class="soft">{u("home.keys_help")}</p>
       </div>
       <ol class="keys">
-        <li class="key">
-          <h3>{u("home.key1_title")}</h3>
-          <span class="key__hr">{u("home.key1_sub")}</span>
-          <p>{u("home.key1_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key2_title")}</h3>
-          <span class="key__hr" lang="hr">osobni identifikacijski broj</span>
-          <p>{u("home.key2_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key3_title")}</h3>
-          <span class="key__hr" lang="hr">prijava prebivališta</span>
-          <p>{u("home.key3_text")}</p>
-        </li>
-        <li class="key">
-          <h3>{u("home.key4_title")}</h3>
-          <span class="key__hr" lang="hr">zdravstveno osiguranje</span>
-          <p>{u("home.key4_text")}</p>
-        </li>
+        {keys.map((k, i) => (
+          <li class="key">
+            <span class="key__num" aria-hidden="true">{i + 1}</span>
+            <h3>{k.href ? <a href={k.href}>{k.title}</a> : k.title}</h3>
+            <span class="key__hr" lang={k.hr ? "hr" : undefined}>{k.sub}</span>
+            <p>{k.text}</p>
+            {k.href && <a class="arrow-link" href={k.href}>{u("home.key_link")}</a>}
+          </li>
+        ))}
       </ol>
     </div>
   </section>
@@ -155,75 +139,23 @@ const phaseNames = texts.phases as Record<string, string>;
   <section class="band">
     <div class="container">
       <div class="band__head">
-        <h2>{u("home.phases_title")}</h2>
-        <p class="soft">{u("home.phases_help")}</p>
+        <h2>{u("home.news_title")}</h2>
       </div>
-      <ol class="phases">
-        {(["orient", "prepare", "move", "arrive", "stay"] as const).map((ph, i) => (
-          <li class="phase-step"><h3>{phaseNames[ph]}</h3><span class="mono">{u(`home.phase${i + 1}_time`)}</span><p>{u(`home.phase${i + 1}_text`)}</p></li>
-        ))}
-      </ol>
-    </div>
-  </section>
-
-  <section class="band band--surface">
-    <div class="container">
-      <div class="band__head">
-        <h2>{u("home.running_title")}</h2>
-        <p class="soft">{u("home.running_help")}</p>
-      </div>
-      <ul class="running">
-        {dated.map((x) => (
-          <li class="running__item">
-            <span class="state state--matches">{u("home.running_state")}</span>
-            <a href={p(pagePath(x))}>{x.title}</a>
-            <span class="running__where">{u("home.running_national")}</span>
-            <span class="mono">{u("home.running_until", { date: formatDate(x.validity.valid_until.date!) })}</span>
-            <span class="mono muted">{u("home.running_checked", { date: formatDate(x.sources[0]?.checked ?? x.validity.valid_from) })}</span>
-          </li>
-        ))}
-        {running.map((r) => (
-          <li class="running__item">
-            <span class={`state state--${PROGRAM_STATE[r.state].css}`}>{stateLabel(r.state)}</span>
-            <a href={r.href}>{r.title}</a>
-            <span class="running__where">{r.where}</span>
-            <span class="mono">{r.until ? u("home.running_until", { date: formatDate(r.until) }) : u("place.period_unknown")}</span>
-            <span class="mono muted">{u("home.running_checked", { date: formatDate(r.checked) })}</span>
+      <ul class="cards news">
+        {news.map((n) => (
+          <li class="card card--link">
+            <div class="card__media">
+              <Image src={newsImage(n)!} alt={n.news.image.alt} width={640} height={427} format="webp" loading="lazy" />
+            </div>
+            <div class="card__body">
+              <span class="news__date">{fmtDate(n.news.published_on)}{n.synthetic && <span class="news__example">{u("news.example")}</span>}</span>
+              <h3><a href={p(newsPath(n))}>{n.title}</a></h3>
+              <p>{n.short_answer}</p>
+            </div>
           </li>
         ))}
       </ul>
-      <p class="soft running__note">{u("home.running_note")} <a class="arrow-link" href={p("/orte/leistungen")}>{u("home.running_all")}</a></p>
-    </div>
-  </section>
-
-  <section class="band band--brand">
-    <div class="container grid">
-      <div class="col-main">
-        <h2>{u("home.why_title")}</h2>
-        <p>{u("home.why_text")}</p>
-        <p class="soft">{u("home.why_note")}</p>
-      </div>
-      <aside class="col-aside states-aside">
-        <h3>{u("home.states_title")}</h3>
-        <ul class="state-list">
-          <li><span class="state state--matches">{elig.matches}</span> {u("home.state_matches")}</li>
-          <li><span class="state state--unclear">{elig.unclear}</span> {u("home.state_unclear")}</li>
-          <li><span class="state state--condition_missing">{elig.condition_missing}</span> {u("home.state_missing")}</li>
-          <li><span class="state state--unknown">{u("place.fact_unknown")}</span> {u("home.state_unknown")}</li>
-        </ul>
-      </aside>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="container">
-      <div class="band__head">
-        <h2>{u("home.situations_title")}</h2>
-        <p class="soft">{u("home.situations_help")}</p>
-      </div>
-      <ul class="chips">
-        {SITUATIONS.map((s) => <li><a href={p(`/wissen/situation/${s.slug}`)}>{situationText(s, texts).title}</a></li>)}
-      </ul>
+      <p class="news__more"><a class="arrow-link" href={p("/aktuell")}>{u("home.news_all")}</a></p>
     </div>
   </section>
 
@@ -231,7 +163,6 @@ const phaseNames = texts.phases as Record<string, string>;
     <div class="container">
       <div class="band__head">
         <h2>{u("home.cases_title")}</h2>
-        <p class="soft">{u("home.cases_help")}</p>
       </div>
       <ul class="cards cases">
         {CASES.map((raw) => {
@@ -254,12 +185,27 @@ const phaseNames = texts.phases as Record<string, string>;
 </Base>
 
 <style>
-  .quick {
-    padding-block: clamp(1.75rem, 4vw, 2.75rem);
+  .news {
+    grid-template-columns: 1fr;
   }
-  .quick__title {
-    font-size: 1.0625rem;
-    margin-bottom: 0.9rem;
+  @media (min-width: 720px) {
+    .news {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .news__date {
+    font-family: var(--font-meta);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .news__example {
+    color: var(--st-unknown);
+  }
+  .news__more {
+    margin: 1.25rem 0 0;
   }
   .card__media--list {
     padding: 1.25rem 1.35rem;
@@ -287,56 +233,6 @@ const phaseNames = texts.phases as Record<string, string>;
     color: var(--accent);
     margin-right: 0.35rem;
   }
-  .running {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    max-width: none;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-  }
-  .running__item {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.25rem 1rem;
-    align-items: center;
-    padding: 0.85rem 1.25rem;
-    border-bottom: 1px solid var(--line);
-    font-size: 0.9375rem;
-  }
-  .running__item:last-child {
-    border-bottom: 0;
-  }
-  .running__item a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .running__item a:hover {
-    color: var(--accent);
-  }
-  .running__where {
-    color: var(--ink-soft);
-    grid-column: 2;
-  }
-  .running__item .mono {
-    grid-column: 2;
-  }
-  @media (min-width: 900px) {
-    .running__item {
-      grid-template-columns: 9rem 1fr 12rem 9rem 9rem;
-    }
-    .running__where,
-    .running__item .mono {
-      grid-column: auto;
-    }
-  }
-  .running__note {
-    margin: 1rem 0 0;
-    font-size: 0.9375rem;
-  }
   .cases {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
@@ -347,18 +243,5 @@ const phaseNames = texts.phases as Record<string, string>;
     border-top: 1px solid var(--line);
     padding-top: 0.6rem;
     margin-top: auto !important;
-  }
-  .states-aside {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-  }
-  .states-aside h3 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  .states-aside .state-list li {
-    color: var(--on-brand-soft);
   }
 </style>

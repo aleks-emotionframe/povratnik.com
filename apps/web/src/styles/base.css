@@ -84,9 +84,9 @@ a:hover {
 .mono,
 .datenstand,
 .deadline {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
-  letter-spacing: 0.01em;
+  font-variant-numeric: tabular-nums;
 }
 .soft {
   color: var(--ink-soft);
@@ -258,9 +258,9 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem 2rem;
+  gap: 0.5rem 1.25rem;
   flex-wrap: wrap;
-  padding-block: 0.9rem;
+  padding-block: 1rem;
 }
 .brand {
   display: inline-flex;
@@ -279,13 +279,14 @@ a:hover {
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 0.25rem 1.75rem;
+  gap: 0.25rem clamp(1.1rem, 1.6vw, 2rem);
   flex-wrap: wrap;
+  margin-left: clamp(0.5rem, 1.5vw, 1.75rem);
 }
 .site-nav a {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--ink-soft);
   text-decoration: none;
   padding-block: 0.6rem;
@@ -305,38 +306,51 @@ a:hover {
   min-height: 44px;
   padding-block: 0.55rem;
 }
-@media (max-width: 720px) {
+@media (max-width: 1100px) {
+  /* Zweizeilig: Logo, Lupe, Sprachwahl und Handlung oben, die Navigation darunter
+     über die volle Breite (scrollt, wenn sie nicht passt). */
   .site-head {
     position: static;
   }
   .site-head .container {
     padding-block: 0.7rem 0;
     display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.5rem 1rem;
+    grid-template-columns: 1fr auto auto auto;
+    gap: 0.5rem 0.75rem;
+    align-items: center;
   }
-  /* Zeile 1: Logo und Sprachwahl, Zeile 2: Navigation scrollt über die volle Breite.
-     Die Handlung im Kopf entfällt hier; der Kurzcheck ist über «Mein Weg» und den
-     Aufmacher erreichbar. */
   .site-nav {
     grid-column: 1 / -1;
     gap: 0 1.25rem;
     overflow-x: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
+    margin-left: 0;
+  }
+  .site-nav a {
+    white-space: nowrap;
   }
   .lang {
     grid-row: 1;
-    grid-column: 2;
-    align-self: center;
-    margin-left: 0;
+    grid-column: 3;
+    padding-right: 0;
+    border-right: 0;
   }
   .lang a {
     min-width: 32px;
     padding-inline: 0.25rem;
   }
-  .site-nav a {
-    white-space: nowrap;
+  .site-head .button {
+    grid-row: 1;
+    grid-column: 4;
+  }
+}
+@media (max-width: 720px) {
+  /* Schmal entfällt die Handlung im Kopf; der Kurzcheck bleibt über «Mein Weg» und
+     den Aufmacher erreichbar. */
+  .site-head .container {
+    grid-template-columns: 1fr auto auto;
+    gap: 0.5rem 0.5rem;
   }
   .site-head .button {
     display: none;
@@ -428,23 +442,214 @@ a:hover {
   padding-block: clamp(2rem, 5vw, 3.5rem);
 }
 /* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
-   --head-h ist die Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung
-   nach oben ist unschädlich, weil min-height nur ein Minimum setzt. */
+   Das Foto liegt hinter dem ganzen Aufmacher, darüber ein Verlauf in Markenfarbe;
+   unten die Einstiege nach Lebenssituation über die ganze Breite. --head-h ist die
+   Kopfhöhe (Desktop 78 px, schmal 110 px); leichte Abweichung nach oben ist
+   unschädlich, weil min-height nur ein Minimum setzt. */
 .hero--full {
-  --head-h: 4.6rem;
+  --head-h: 4.9rem;
+  position: relative;
+  overflow: hidden;
 }
 .hero--full .container {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+}
+/* Der erste Bildschirm endet genau mit den Lebenssituationen; «Häufig gesucht» kommt
+   erst beim Scrollen. */
+.hero__screen {
   min-height: calc(100svh - var(--head-h));
-  grid-template-rows: auto minmax(240px, 1fr);
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+/* Zwei Gruppen untereinander: Lebenssituationen als Umriss-Felder, häufig gesuchte
+   Themen als weisse Felder, damit man sie auf einen Blick unterscheidet. */
+.hero__situations:has(+ .hero__situations) {
+  padding-bottom: 2.25rem;
+}
+.hero__situations + .hero__situations {
+  padding-top: 0;
+}
+.hero__quick summary {
+  list-style: none;
+  cursor: default;
+}
+.hero__quick summary::-webkit-details-marker {
+  display: none;
+}
+.hero__quick summary h2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 @media (max-width: 720px) {
+  /* Schmal ist der Titel die Klappe: 44 px hoch, Pfeil rechts, dreht sich beim Öffnen. */
+  .hero__quick summary {
+    cursor: pointer;
+  }
+  .hero__quick summary h2 {
+    min-height: 44px;
+    margin: 0;
+  }
+  .hero__quick summary h2::after {
+    content: "";
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right: 2px solid var(--on-brand);
+    border-bottom: 2px solid var(--on-brand);
+    transform: rotate(45deg);
+    margin-right: 0.35rem;
+    transition: transform var(--dur) var(--ease);
+  }
+  .hero__quick[open] summary h2::after {
+    transform: rotate(-135deg);
+  }
+  .hero__quick[open] summary h2 {
+    margin-bottom: 0.85rem;
+  }
+}
+.hero__situations.hero__quick a {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+.hero__situations.hero__quick a::after {
+  color: var(--accent);
+}
+.hero__situations.hero__quick a:hover {
+  background: var(--surface-blue);
+  border-color: var(--surface-blue);
+}
+.hero--full .hero__text {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  max-width: 46rem;
+  padding-right: var(--gutter);
+  padding-bottom: 1.5rem;
+}
+.hero--full .hero__media {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+}
+.hero--full .hero__media img {
+  position: absolute;
+  inset: 0;
+  object-position: 60% 25%;
+}
+.hero--full .hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, oklch(28% 0.09 262 / 0.8) 0%, oklch(28% 0.09 262 / 0.94) 55%, var(--brand) 100%);
+}
+.hero__situations {
+  position: relative;
+  z-index: 1;
+  margin-inline: var(--gutter);
+  padding: 0.75rem 0 clamp(1.5rem, 5vh, 3rem);
+}
+.hero__situations h2 {
+  font-size: 1.25rem;
+  color: var(--on-brand);
+  margin: 0 0 0.85rem;
+}
+.hero__situations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.hero__situations li {
+  display: flex;
+}
+.hero__situations a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-sm);
+  color: var(--on-brand);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.hero__situations a::after {
+  content: "→";
+  color: var(--accent-bright);
+  flex: none;
+}
+.hero__situations a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+@media (max-width: 720px) {
+  /* Schmal: Text kompakt, damit Titel, Suche und Lebenssituationen auf einen Bildschirm passen. */
   .hero--full {
-    --head-h: 6.3rem;
+    --head-h: 6.9rem;
+  }
+  .hero--full .hero__text {
+    padding-block: 1.75rem 1.25rem;
+  }
+  .hero--full h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.6rem;
+  }
+  /* Schmal: Titel, Vorspann und die sechs Lebenssituationen auf einem Bildschirm,
+     jede Situation in einer Zeile. */
+  .hero--full .lede {
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .hero__situations ul {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+  .hero--full .search input {
+    flex: 1 1 0;
+    min-width: 0;
   }
 }
 @media (min-width: 860px) {
-  .hero--full .container {
-    grid-template-rows: none;
+  /* Breit: Verlauf von links, dazu ein dunkler Saum unten für die Lebenssituationen. */
+  .hero--full .hero__text {
+    padding-bottom: 2rem;
+  }
+  .hero--full .hero__text h1 {
+    max-width: 14ch;
+  }
+  .hero--full .hero__media img {
+    object-position: 50% 30%;
+  }
+  .hero--full .hero__media::after {
+    background:
+      linear-gradient(0deg, var(--brand) 0%, oklch(28% 0.09 262 / 0.85) 16%, transparent 42%),
+      linear-gradient(90deg, var(--brand) 0%, var(--brand) 32%, oklch(28% 0.09 262 / 0.75) 52%, oklch(28% 0.09 262 / 0.15) 72%, transparent 88%);
+  }
+  .hero__situations {
+    padding: 1rem 0 clamp(2rem, 6vh, 3.5rem);
+  }
+  .hero__situations ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem 0.75rem;
+  }
+  .hero__situations a {
+    min-height: 48px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9375rem;
   }
 }
 
@@ -562,182 +767,137 @@ a:hover {
   border-color: transparent;
 }
 .card__num {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
   color: var(--muted);
 }
 
 /* Die vier Schlüssel: Abhängigkeitskette (inhaltskonzept.md 1.1) */
+/* Die vier Schlüssel als Kette auf Markenfläche: Nummern auf einer Linie,
+   schmal untereinander mit senkrechter Linie, breit nebeneinander mit waagrechter. */
 .keys {
   list-style: none;
   padding: 0;
   margin: 0;
   max-width: none;
   display: grid;
-  gap: 1rem;
+  gap: 2rem 1.75rem;
   grid-template-columns: 1fr;
-  counter-reset: key;
 }
 .key {
-  counter-increment: key;
   position: relative;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: 1.25rem 1.35rem 1.35rem 4rem;
+  padding-left: 3.75rem;
+  display: flex;
+  flex-direction: column;
 }
-.key::before {
-  content: counter(key);
+.key__num {
   position: absolute;
-  left: 1.25rem;
-  top: 1.25rem;
-  width: 2rem;
-  height: 2rem;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: 50%;
+  border: 2px solid var(--accent-bright);
   background: var(--brand);
-  color: var(--on-brand);
+  color: var(--accent-bright);
   font-family: var(--font-display);
   font-weight: 600;
+  font-size: 1.0625rem;
   display: grid;
   place-items: center;
 }
+.key::before {
+  content: "";
+  position: absolute;
+  left: calc(1.25rem - 1px);
+  top: 2.5rem;
+  width: 2px;
+  bottom: -2rem;
+  background: rgba(255, 255, 255, 0.18);
+}
+.key:last-child::before {
+  display: none;
+}
 .key h3 {
-  margin: 0.25rem 0 0.15rem;
+  font-size: 1.5rem;
+  margin: 0.15rem 0 0.2rem;
+  color: var(--on-brand);
+}
+.band--brand .key h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.key h3 a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
 }
 .key__hr {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
-  color: var(--muted);
+  color: var(--on-brand-soft);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 .key p {
-  margin: 0;
+  margin: 0 0 0.9rem;
   font-size: 0.9375rem;
-  color: var(--ink-soft);
+  color: var(--on-brand-soft);
+  max-width: 34ch;
 }
-.key ul {
-  margin: 0.6rem 0 0;
-  padding: 0;
-  list-style: none;
-  font-size: 0.875rem;
-  color: var(--ink-soft);
+/* Der Link steht in allen vier Spalten auf derselben Höhe, egal wie lang der Text ist. */
+.key .arrow-link {
+  margin-top: auto;
+  align-self: flex-start;
 }
-.key li::before {
-  content: "· ";
-  color: var(--accent);
-}
-@media (min-width: 720px) {
+@media (min-width: 720px) and (max-width: 1079px) {
   .keys {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .key::before {
+    display: none;
   }
 }
 @media (min-width: 1080px) {
   .keys {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
+    gap: 2rem;
   }
   .key {
-    border-radius: 0;
-    border-right-width: 0;
+    padding-left: 0;
+    padding-top: 3.5rem;
   }
-  .key:first-child {
-    border-radius: var(--radius-md) 0 0 var(--radius-md);
-  }
-  .key:last-child {
-    border-right-width: 1px;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  }
-  .key + .key::after {
-    content: "";
-    position: absolute;
-    left: -1px;
-    top: 1.65rem;
-    width: 0;
-    height: 0;
-    border: 0.55rem solid transparent;
-    border-left-color: var(--line-strong);
+  .key::before {
+    left: 2.5rem;
+    right: -2rem;
+    top: calc(1.25rem - 1px);
+    width: auto;
+    height: 2px;
+    bottom: auto;
   }
 }
 
-/* Die fünf Phasen als Zeitleiste */
-.phases {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-width: none;
-  display: grid;
-  gap: 0;
-  grid-template-columns: 1fr;
-}
-.phase-step {
-  padding: 1rem 0 1rem 1.5rem;
-  border-left: 3px solid var(--line);
-  position: relative;
-}
-.phase-step::before {
-  content: "";
-  position: absolute;
-  left: -0.5rem;
-  top: 1.35rem;
-  width: 0.8rem;
-  height: 0.8rem;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--paper);
-}
-.phase-step h3 {
-  margin: 0 0 0.1rem;
-  font-size: 1.125rem;
-}
-.phase-step .mono {
-  color: var(--muted);
-  display: block;
-  margin-bottom: 0.4rem;
-}
-.phase-step p {
-  margin: 0;
-  font-size: 0.9375rem;
-  color: var(--ink-soft);
-}
-@media (min-width: 900px) {
-  .phases {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  .phase-step {
-    border-left: 0;
-    border-top: 3px solid var(--line);
-    padding: 1.25rem 1.25rem 0 0;
-  }
-  .phase-step::before {
-    left: 0;
-    top: -0.55rem;
-  }
-}
-
-/* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). */
+/* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). Punkt und Wort in der
+   Zustandsfarbe, ohne Hintergrund. */
 .state {
-  font-family: var(--font-mono);
+  font-family: var(--font-meta);
   font-size: 0.8125rem;
-  letter-spacing: 0.01em;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  padding: 0.2em 0.65em;
-  border-radius: 999px;
+  gap: 0.45em;
   white-space: nowrap;
 }
 .state::before {
   content: "";
-  width: 0.55em;
-  height: 0.55em;
+  width: 0.6em;
+  height: 0.6em;
   border-radius: 50%;
   border: 1.5px solid currentColor;
   flex: none;
 }
 .state--matches {
   color: var(--st-open);
-  background: var(--st-open-bg);
 }
 .state--matches::before {
   background: currentColor;
@@ -745,23 +905,19 @@ a:hover {
 .state--unclear,
 .state--unknown {
   color: var(--st-unknown);
-  background: var(--st-unknown-bg);
 }
 .state--condition_missing,
 .state--unchecked {
   color: var(--st-closed);
-  background: var(--st-closed-bg);
 }
 .state--condition_missing::before {
   background: linear-gradient(90deg, currentColor 50%, transparent 50%);
 }
 .state--announced {
   color: var(--st-announced);
-  background: var(--st-announced-bg);
 }
 .state--closed {
   color: var(--st-closed);
-  background: var(--st-closed-bg);
 }
 .state--closed::before {
   background: currentColor;
@@ -798,23 +954,6 @@ a:hover {
 .hero .depth__fill {
   background: var(--accent-bright);
 }
-.state-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.9rem;
-}
-.state-list li {
-  display: grid;
-  gap: 0.3rem;
-  font-size: 0.9375rem;
-  color: var(--ink-soft);
-}
-.state-list .state {
-  justify-self: start;
-}
-
 /* Datenstand-Zeile: Quelle, Prüfdatum, Fassung, immer an derselben Stelle. */
 .datenstand {
   color: var(--muted);
@@ -889,27 +1028,6 @@ a:hover {
   .open-field dd {
     margin: 0;
   }
-}
-
-/* Kontaktband vor dem Fuss */
-.contact .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
-  flex-wrap: wrap;
-}
-.contact h2 {
-  margin-bottom: 0.25rem;
-}
-.contact p {
-  margin: 0;
-  color: var(--on-brand-soft);
-}
-.contact__actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 /* Fuss der Website, über dem EmotionFrame Balken */
@@ -1020,11 +1138,76 @@ a:hover {
   top: 1rem;
 }
 
+/* Suche im Kopf: breit ein Feld mit Lupe, schmal nur die Lupe als Link zur Suchseite. */
+.head-search {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  border-radius: 999px;
+  background: var(--surface);
+  transition: background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.head-search:focus-within {
+  background: var(--paper);
+  box-shadow: 0 0 0 2px var(--accent);
+}
+.head-search input {
+  width: clamp(6rem, 9vw, 11rem);
+  min-height: 42px;
+  padding: 0.4rem 1rem 0.4rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.9375rem;
+}
+.head-search input::placeholder {
+  color: var(--ink-soft);
+}
+.head-search input:focus-visible {
+  outline: none;
+}
+.head-search button {
+  order: -1;
+  width: 42px;
+  min-height: 42px;
+  border: 0;
+  background: transparent;
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.head-search button:hover {
+  color: var(--accent);
+}
+.head-search-link {
+  display: none;
+  width: 44px;
+  min-height: 44px;
+  place-items: center;
+  color: var(--ink-soft);
+}
+.head-search-link:hover {
+  color: var(--ink);
+}
+@media (max-width: 1100px) {
+  .head-search {
+    display: none;
+  }
+  .head-search-link {
+    display: grid;
+    grid-row: 1;
+    grid-column: 2;
+  }
+}
+
 /* Sprachwahl im Kopf: Kürzel, aktuelle Sprache gefüllt */
 .lang {
   display: flex;
   gap: 0.15rem;
-  margin-left: auto;
+  padding-right: 1.25rem;
+  border-right: 1px solid var(--line);
 }
 .lang a {
   font-family: var(--font-display);
