@@ -75,8 +75,8 @@ const targets = (pl: (typeof places)[number]) => {
         {places.map((pl) => (
           <li class="card card--link" data-region={pl.region} data-targets={targets(pl)} data-open={openBenefits(pl)}>
             <div class="card__body">
-              <span class="card__num">{pl.county} · {u(pl.region === "coast" ? "orte.coast" : "orte.inland")}</span>
               <h3><a href={p(`/orte/${pl.id}`)}>{placeName(pl)}</a></h3>
+              <span class="card__num">{pl.county} · {u(pl.region === "coast" ? "orte.coast" : "orte.inland")}</span>
               <p>{pl.summary}</p>
               <p class="card__facts">
                 <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
@@ -292,7 +292,12 @@ const targets = (pl: (typeof places)[number]) => {
     margin-bottom: 0.75rem;
   }
   .cards--places {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .cards--places {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
   .card__facts {
     display: flex;
