@@ -428,88 +428,152 @@ a:hover {
   padding-block: clamp(2rem, 5vw, 3.5rem);
 }
 /* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
-   --head-h ist die Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung
-   nach oben ist unschädlich, weil min-height nur ein Minimum setzt. */
+   Das Foto liegt hinter dem ganzen Aufmacher, darüber ein Verlauf in Markenfarbe;
+   unten die Einstiege nach Lebenssituation über die ganze Breite. --head-h ist die
+   Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung nach oben ist
+   unschädlich, weil min-height nur ein Minimum setzt. */
 .hero--full {
   --head-h: 4.6rem;
+  position: relative;
+  overflow: hidden;
 }
 .hero--full .container {
   min-height: calc(100svh - var(--head-h));
-  grid-template-rows: auto minmax(240px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+}
+.hero--full .hero__text {
+  position: relative;
+  z-index: 1;
+  align-self: end;
+  max-width: 46rem;
+  padding-right: var(--gutter);
+  padding-bottom: 1.5rem;
+}
+.hero--full .hero__media {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+}
+.hero--full .hero__media img {
+  position: absolute;
+  inset: 0;
+  object-position: 60% 25%;
+}
+.hero--full .hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, oklch(28% 0.09 262 / 0.8) 0%, oklch(28% 0.09 262 / 0.94) 55%, var(--brand) 100%);
+}
+.hero__situations {
+  position: relative;
+  z-index: 1;
+  margin-inline: var(--gutter);
+  padding: 1.1rem 0 clamp(1.5rem, 5vh, 3rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.hero__situations h2 {
+  font-size: 0.9375rem;
+  color: var(--on-brand-soft);
+  margin: 0 0 0.7rem;
+}
+.hero__situations ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.hero__situations li {
+  display: flex;
+}
+.hero__situations a {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--radius-sm);
+  color: var(--on-brand);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.hero__situations a::after {
+  content: "→";
+  color: var(--accent-bright);
+  flex: none;
+}
+.hero__situations a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.7);
 }
 @media (max-width: 720px) {
-  /* Schmal: Text kompakt, damit der Aufmacher samt Foto auf einen Bildschirm passt. */
+  /* Schmal: Text kompakt, damit Titel, Suche und Lebenssituationen auf einen Bildschirm passen. */
   .hero--full {
     --head-h: 6.3rem;
   }
-  .hero--full .container {
-    grid-template-rows: auto minmax(8rem, 1fr);
-  }
   .hero--full .hero__text {
-    padding-block: 1.75rem 1.5rem;
+    padding-block: 1.75rem 1.25rem;
   }
   .hero--full h1 {
     font-size: 1.75rem;
     margin-bottom: 0.6rem;
   }
+  /* Der Vorspann entfällt schmal: Titel, Suche und die sechs Lebenssituationen
+     sollen ohne Scrollen bedienbar sein, jede Situation in einer Zeile. */
   .hero--full .lede {
-    font-size: 1rem;
-    line-height: 1.4;
-    margin: 0;
+    display: none;
   }
   .hero--full .search {
-    margin-top: 1.1rem;
+    margin-top: 0.5rem;
     flex-wrap: nowrap;
+  }
+  .hero__situations ul {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
   }
   .hero--full .search input {
     flex: 1 1 0;
     min-width: 0;
   }
-  .hero--full .hero__media {
-    min-height: 8rem;
-  }
-  .hero--full .hero__media img {
-    position: absolute;
-    inset: 0;
-  }
 }
 @media (min-width: 860px) {
-  /* Breit: das Foto liegt hinter dem ganzen Aufmacher bis zum Bildschirmrand, links
-     ein Verlauf in Markenfarbe, darauf der Text in der Seitenbreite. */
-  .hero--full {
-    position: relative;
-    overflow: hidden;
-  }
-  .hero--full .container {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
-  }
+  /* Breit: Verlauf von links, dazu ein dunkler Saum unten für die Lebenssituationen. */
   .hero--full .hero__text {
-    position: relative;
-    z-index: 1;
-    max-width: 46rem;
-    padding-right: 0;
-    align-self: end;
-    padding-bottom: clamp(2.5rem, 7vh, 5rem);
+    padding-bottom: 2rem;
   }
   .hero--full .hero__text h1 {
     max-width: 14ch;
   }
-  .hero--full .hero__media {
-    position: absolute;
-    inset: 0;
-    min-height: 0;
-  }
   .hero--full .hero__media img {
-    position: absolute;
-    inset: 0;
     object-position: 50% 30%;
   }
   .hero--full .hero__media::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, var(--brand) 0%, var(--brand) 32%, oklch(28% 0.09 262 / 0.75) 52%, oklch(28% 0.09 262 / 0.15) 72%, transparent 88%);
+    background:
+      linear-gradient(0deg, var(--brand) 0%, oklch(28% 0.09 262 / 0.85) 16%, transparent 42%),
+      linear-gradient(90deg, var(--brand) 0%, var(--brand) 32%, oklch(28% 0.09 262 / 0.75) 52%, oklch(28% 0.09 262 / 0.15) 72%, transparent 88%);
+  }
+  .hero__situations {
+    padding: 1.35rem 0 clamp(2rem, 6vh, 3.5rem);
+  }
+  .hero__situations ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.6rem 0.75rem;
+  }
+  .hero__situations a {
+    min-height: 48px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9375rem;
   }
 }
 

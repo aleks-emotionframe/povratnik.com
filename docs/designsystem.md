@@ -9,7 +9,10 @@ Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
 Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
 Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
 und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
-Aufmacher erreichbar).
+Aufmacher erreichbar). Die Einstiege nach Lebenssituation stehen im Aufmacher der
+Startseite unter dem Suchfeld: breit in drei Spalten, schmal als Liste in einer Zeile je
+Situation; dafür entfällt schmal der Vorspann, damit Titel, Suche und alle sechs
+Einstiege ohne Scrollen bedienbar sind.
 
 Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
 folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich

@@ -1,6 +1,6 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
-// Suchfeld, Schnelleinstiege, die drei Wege, die vier Schlüssel, Lebenssituationen,
+// Suchfeld und Lebenssituationen, Schnelleinstiege, die drei Wege, die vier Schlüssel,
 // Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
@@ -43,6 +43,12 @@ const keys = [
           <button class="button button--outline-light" type="submit">{u("search.button")}</button>
         </form>
       </div>
+      <nav class="hero__situations" aria-label={u("home.situations_title")}>
+        <h2>{u("home.situations_title")}</h2>
+        <ul>
+          {SITUATIONS.map((x) => <li><a href={p(`/wissen/situation/${x.slug}`)}>{situationText(x, texts).title}</a></li>)}
+        </ul>
+      </nav>
       <div class="hero__media">
         <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
       </div>
@@ -141,17 +147,6 @@ const keys = [
           </li>
         ))}
       </ol>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="container">
-      <div class="band__head">
-        <h2>{u("home.situations_title")}</h2>
-      </div>
-      <ul class="chips">
-        {SITUATIONS.map((s) => <li><a href={p(`/wissen/situation/${s.slug}`)}>{situationText(s, texts).title}</a></li>)}
-      </ul>
     </div>
   </section>
 
