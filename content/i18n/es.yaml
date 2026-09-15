@@ -607,7 +607,7 @@ ui:
     nav_search: Buscar
     cta: Iniciar el chequeo rápido
     language: Idioma
-    foot_claim: "Vivir en Croacia: el orden correcto para regresar o emigrar, persona por persona."
+    foot_claim: "Todo lo importante para emigrar o volver a Croacia."
     foot_disclaimer: Esta web no sustituye el asesoramiento jurídico ni fiscal. Sobre las solicitudes decide siempre la entidad competente.
     foot_stage: Fase de prueba. Reglas de ejemplo sin revisión profesional (ADR-0004).
     foot_wissen: Conocimiento
@@ -641,10 +641,10 @@ ui:
     way_check_title: Mi camino
     way_check_text: "Seis preguntas sobre su hogar y luego un primer plan: qué va primero, qué plazo activa cada cosa, qué queda abierto."
     way_wissen_title: Conocimiento por tema
-    way_wissen_text: "Doce secciones, del estatus a las ayudas. Cada página temática con la misma plantilla: respuesta breve, a quién aplica, entidad competente, estado."
+    way_wissen_text: "Respuestas claras sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda."
     way_wissen_link: A las secciones
     way_orte_title: Descubrir lugares
-    way_orte_text: Municipios con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado, fecha de comprobación y profundidad de datos, sin ranking.
+    way_orte_text: "Municipios de Croacia con sus ayudas para retornados, escuelas, médicos y vivienda."
     way_orte_link: Lugares y ayudas
     keys_title: Casi todo depende de cuatro claves
     key_link: Ir al tema
@@ -669,7 +669,7 @@ ui:
   wissen:
     title: "Conocimiento"
     description: "Doce secciones sobre regresar o emigrar a Croacia: estatus, documentos, trabajo, impuestos, salud, escuela, vivienda, ayudas."
-    lede: "Respuestas sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda. Cada página dice a quién se aplica, quién es responsable y cuándo se revisó."
+    lede: "Respuestas sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda."
     pages_one: "{n} página temática"
     pages_many: "{n} páginas temáticas"
     topics_wip: "{n} temas en preparación"
@@ -686,12 +686,12 @@ ui:
     topics_title: Temas de esta sección
     remaining_more: Otros temas, todavía en preparación
     remaining_only: Temas, todavía en preparación
-    remaining_help: Cada tema aparece en cuanto tiene fuente y fecha de comprobación.
+    remaining_help: "Estos temas están en preparación."
     wip: en preparación
     requires: Necesario antes
     followed: Después viene
     cta_title: ¿Qué se aplica a mí?
-    cta_text: "El chequeo rápido ordena los temas según su hogar: quién sigue qué camino y qué va primero."
+    cta_text: "El chequeo rápido muestra qué temas se aplican a usted y a su familia y qué va primero."
     mask_title: Así se estructura cada página temática
     mask_answer: Respuesta breve
     mask_answer_v: en dos o tres frases
@@ -709,7 +709,7 @@ ui:
     mask_notdecided_v: lo que decide un profesional
   topic:
     state_checked: revisado profesionalmente
-    state_draft: Bases disponibles, sin revisión profesional
+    state_draft: "aún sin revisión profesional"
     stand: Estado {date}
     missing: todavía sin investigar
     applies: Aplica a
@@ -724,7 +724,7 @@ ui:
     requires: Necesario antes
     followed: Después viene
     cta_title: ¿Se aplica a mí?
-    cta_text: El chequeo rápido sitúa este tema en su camino, persona por persona.
+    cta_text: "El chequeo rápido muestra si este tema le afecta y cuándo toca."
     mistake: Error frecuente
     not_decided: Qué no se decide aquí
     open_points: Puntos abiertos
@@ -733,7 +733,7 @@ ui:
     stand_title: Estado y fuentes
     label: Marcado
     source: Fuente original
-    source_meta: "{publisher}, nivel {tier}. Referencia: {reference}. Comprobado el {date}."
+    source_meta: "{publisher}. {reference}. Revisado el {date}."
     valid_from: Vigente desde
     valid_until: hasta el {date}
     next_check: Próxima comprobación
@@ -743,22 +743,22 @@ ui:
     crumb: Por país de origen
     title: "Por país de origen"
     description: "Lo que debe resolver en su país de residencia actual antes de mudarse a Croacia, para seis países."
-    lede: "Lo que debe resolver en su país de residencia actual antes de partir a Croacia: baja, apostilla, seguridad social, impuestos. La parte croata es aparte."
+    lede: "Lo que debe resolver en su país de residencia actual antes de partir a Croacia: baja, apostilla, seguridad social, impuestos."
     others: Otros países de origen
     what_title: Qué cuenta para la salida
-    what_help: El procedimiento croata y los requisitos del país de origen son dos cosas distintas.
+    what_help: "Estos puntos los resuelve en su país de origen antes de mudarse."
     representation: Representación croata
     apostille: Apostilla
     social_security: Seguridad social
     double_taxation: Doble imposición
     deregistration: Deberes de baja
-    duration: Plazos realistas
+    duration: "Cuánto tarda"
     unknown: desconocido
     not_collected: no recopilado
     outdated: desactualizado
     followed: Después viene en Croacia
-    cta_title: Su camino, persona por persona
-    cta_text: El chequeo rápido pregunta por el país de origen de cada persona del hogar.
+    cta_title: "Su plan personal"
+    cta_text: "El chequeo rápido tiene en cuenta el país de origen de cada persona de su hogar."
   situation:
     crumb: Situación de vida
     title: "Entradas por situación de vida"
@@ -766,19 +766,19 @@ ui:
     lede: "Seis puntos de partida típicos, desde la mudanza con familia hasta la jubilación. Cada uno le guía por los temas en el orden adecuado."
     trap_title: Dónde suele fracasar
     path_title: Su camino en este orden
-    rubrics_title: Estas secciones también cuentan
-    cta_title: Personal en vez de general
-    cta_text: El chequeo rápido convierte este recorrido en su plan, persona por persona, con plazos.
+    rubrics_title: "Estos temas también importan"
+    cta_title: "Su plan personal"
+    cta_text: "El chequeo rápido convierte este camino en su plan, con plazos."
   glossary:
     title: Glosario de términos oficiales
     description: "Términos oficiales croatas en su original, explicados de forma comprensible: OIB, prebivalište, Domovnica, HZZO y más."
     crumb: Glosario
-    lede: El término croata se mantiene, porque lo necesita en la ventanilla. Al lado está lo que significa.
+    lede: "Términos oficiales croatas que necesita en la ventanilla, explicados con claridad."
     count: "{n} términos de {pages} páginas temáticas"
   orte:
     title: "Lugares"
-    description: Municipios de Croacia con sus ayudas para quienes regresan, escuelas, médicos y vivienda. Con estado y fecha de comprobación.
-    lede: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda. En el mapa o en la lista, sin clasificación."
+    description: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda."
+    lede: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda, en el mapa o en la lista."
     all_benefits: Todas las ayudas
     compare: Comparar lugares
     image_alt: Plaza principal de una pequeña ciudad de Croacia con el ayuntamiento y una panadería.
@@ -802,13 +802,13 @@ ui:
     open_one: "{n} ayuda abierta"
     open_many: "{n} ayudas abiertas"
     more: "{n} más"
-    depth: Profundidad de datos {n} de {total} datos recopilados
-    empty: Ningún lugar coincide con esta selección. Eso no significa que no haya ofertas, solo que no las hemos recopilado.
+    depth: "{n} de {total} datos registrados"
+    empty: "Ningún lugar coincide con esta selección."
     ranking_title: Sin ranking, sin nota global
     ranking_text: Dos o tres lugares se pueden comparar uno junto a otro, como información en bruto. Un valor global siempre impondría nuestra ponderación y no la suya. Lo que falta aparece como «desconocido» y no como celda vacía. Un lugar con pocos datos nunca parece un lugar sin ofertas; por eso cada lugar muestra su profundidad de datos.
     to_compare: A la comparación
     municipality_title: ¿Representa a un municipio?
-    municipality_text: Registre sus ayudas para quienes regresan. Cada dato aparece con fuente, fecha de comprobación y estado.
+    municipality_text: "Registre las ofertas de su municipio para retornados."
     municipality_cta: Registrar municipio
     crumb: Lugares
   place:
@@ -822,7 +822,7 @@ ui:
     details: "Detalles"
     jump_label: "Secciones de este perfil"
     benefits_help: Cuatro fechas, un estado. Sobre la solicitud decide el municipio.
-    benefits_empty: Para este lugar no hay ayudas registradas. Eso no significa que no las haya.
+    benefits_empty: "Todavía no hay ayudas registradas para este lugar."
     target: Para quién
     amount: Importe
     conditions: Condiciones
@@ -877,7 +877,7 @@ ui:
     changes_title: Cambios
     changes_note: Un anuncio no es un estado. Solo cuenta «en funcionamiento».
     cta_title: ¿Encaja este lugar con mi camino?
-    cta_text: El chequeo rápido muestra qué ayudas podrían aplicarse según sus datos.
+    cta_text: "El chequeo rápido muestra qué ayudas de este lugar pueden aplicarse a usted."
     cta_compare: Comparar con otros lugares
     state_open: abierta
     state_announced: anunciada
@@ -896,13 +896,13 @@ ui:
     fact_not_applicable: no aplicable
     fact_not_present: no existe
     fact_stand: Estado {date}
-    fact_outdated_note: Estado {date}. El importe actual no está aclarado.
-    fact_clarify: "Así se puede aclarar: consulta al municipio; la respuesta aparece aquí con fecha."
+    fact_outdated_note: "A fecha {date}. El valor actual no se conoce."
+    fact_clarify: "A petición al municipio."
   compare:
     title: Comparar lugares
-    description: Dos o tres lugares uno junto a otro, como información en bruto sin nota global.
+    description: "Hasta tres lugares uno junto a otro: ayudas, escuelas, médicos, alquileres y conexiones."
     crumb: Comparación
-    lede: Información en bruto una junto a otra, sin nota global. Un valor global impondría nuestra ponderación y no la suya.
+    lede: "Hasta tres lugares uno junto a otro: ayudas, escuelas, médicos, alquileres y conexiones de un vistazo."
     fictional_text: Todos los lugares de esta comparación son inventados. Muestran la presentación, no condiciones reales.
     feature: Característica
     location: Ubicación
@@ -923,30 +923,30 @@ ui:
     internet: Internet
     transport: Transporte público
     courses: Cursos de idioma
-    depth: Profundidad de datos
+    depth: "Datos registrados"
   benefits:
     title: Prestaciones y ayudas
-    description: Todas las ayudas registradas con estado, periodo de solicitud y fecha de comprobación, sin pasar por el mapa.
+    description: "Todas las ayudas de los municipios registrados, con plazo de solicitud."
     crumb: Ayudas
-    lede: Para quienes saben qué buscan, pero todavía no dónde. Cada entrada con estado, periodo de solicitud y fecha de comprobación.
+    lede: "Todas las ayudas de los municipios registrados de un vistazo, con estado y plazo de solicitud."
     fictional_text: Todas las ayudas de aquí son inventadas. Los programas estatales como Biram Hrvatsku están en
     filter_label: Filtrar ayudas
     filter_state: Estado
     count_one: "{n} ayuda"
     count_many: "{n} ayudas"
-    empty: Ninguna ayuda registrada en este estado.
+    empty: "Ninguna ayuda con este estado."
   about:
     title: "Sobre nosotros: povratnik.com"
     description: Quién está detrás de povratnik.com, cómo nos financiamos, cómo comprobamos y por qué los servicios de pago no cambian los contenidos.
     hero: Entender, comparar, llegar.
-    lede: Las webs de las administraciones explican cada una su propio fragmento. Nadie explica en qué orden encajan los fragmentos y qué depende de qué. Exactamente eso hacemos por usted.
+    lede: "povratnik explica qué hacer para volver o emigrar a Croacia y en qué orden."
     mission_title: Misión e independencia
-    mission_1: "povratnik.com lo gestiona EmotionFrame GmbH en Suiza. La orientación es gratuita: la información general, el perfil básico de cada municipio, las correcciones objetivas y los datos comparativos neutrales no cuestan nada y nunca se ponen tras un muro de pago."
-    mission_2: "Se pagan los servicios de mantenimiento: municipios que hacen preparar, traducir y comprobar continuamente sus ofertas, socios profesionales con un perfil transparente, empleadores con ofertas actuales. Un municipio que no paga no se mantiene artificialmente incompleto. Los servicios de pago no cambian los resultados; no hay posicionamiento pagado y la publicidad se marca."
+    mission_1: "povratnik.com lo gestiona EmotionFrame GmbH en Suiza. Toda la información es gratuita, sin cuenta y sin muro de pago."
+    mission_2: "Se cobran servicios adicionales para municipios, socios profesionales y empleadores. No cambian ningún contenido, no hay posicionamiento pagado y la publicidad se señala."
     households_title: Hogares en vez de personas individuales
-    households_text: La pareja y los hijos pueden tener nacionalidades, vías de residencia y bases de seguro distintas. Por eso, para nosotros la persona es la unidad de planificación y el hogar es el marco.
+    households_text: "Parejas e hijos pueden tener pasaportes, vías de residencia y seguros distintos. Por eso planificamos para cada persona por separado."
     stay_title: Quedarse después de llegar
-    stay_text: "Los primeros doce meses forman parte del producto: aprender el idioma, el cambio de escuela, la integración, la búsqueda de empleo de la pareja, las prórrogas. El éxito no termina con el registro."
+    stay_text: "Después del registro sigue: idioma, escuela, trabajo de la pareja, renovaciones. Eso forma parte."
     always_title: Lo que siempre vale
     always_1: Sin muro de pago ante la información esencial
     always_2: Sin posicionamiento pagado
@@ -954,7 +954,7 @@ ui:
     always_4: Ninguna respuesta sale del navegador
     always_5: Ninguna regla sin revisión profesional nominal
     check_title: Cómo comprobamos
-    check_text: "Cada afirmación es de uno de tres tipos y se marca como tal: un hallazgo con fuente nombrada y fecha de comprobación, una regla de producto que derivamos de él, o un punto abierto que requiere una aclaración individual o administrativa. Una oferta no encontrada nunca se presenta como inexistente."
+    check_text: "Cada dato tiene una fuente identificada y una fecha de revisión. Lo que no podemos comprobar lo marcamos como abierto."
     hierarchy_title: Jerarquía de fuentes
     h1: Publicación legal oficial en su original, leída con sus modificaciones
     h2: Administración croata competente
@@ -963,7 +963,7 @@ ui:
     h5: Información profesional escrita de una administración, con fecha y supuestos del caso
     h6: Publicaciones especializadas y artículos de asesoramiento
     h7: "Prensa y testimonios: contexto, nunca base de un derecho"
-    hierarchy_note: Un nivel inferior nunca refuta a uno superior. Un artículo de prensa nunca es prueba de un plazo, un importe o un requisito.
+    hierarchy_note: "Plazos, importes y condiciones solo se respaldan con fuentes oficiales."
     cycles_title: Ciclos de comprobación
     c1: Convocatorias de ayudas abiertas
     c1_v: semanal mientras estén vigentes
@@ -973,7 +973,7 @@ ui:
     c3_v: trimestral y con cada resolución
     c4: Contactos e instituciones
     c4_v: semestral
-    cycles_note: Una fecha de comprobación incumplida genera un aviso, no una reutilización silenciosa.
+    cycles_note: "Si una revisión está pendiente, se muestra."
     roles_title: Quién es responsable
     role_product: Responsabilidad del producto
     role_tech: Responsabilidad técnica
@@ -985,7 +985,7 @@ ui:
     role_errors: Contacto para errores
     role_errors_v: revisión en dos días laborables
     stage_title: Fase de prueba
-    stage_text: No hay ninguna regla jurídica revisada profesionalmente. El chequeo rápido funciona con reglas de ejemplo marcadas, para que el portal pueda probarse. Ningún resultado dice nada sobre su situación real. Una revisión por un sistema de IA no sustituye a un profesional independiente cualificado.
+    stage_text: "En la fase de prueba, el chequeo rápido funciona con reglas de ejemplo señaladas. Ningún resultado es una afirmación sobre su situación real."
     join_title: Participar
     join_municipality: Registrar municipio
     join_expert: Ser profesional revisor
@@ -994,16 +994,16 @@ ui:
     mail: Correo
   search:
     title: "Buscar: povratnik.com"
-    description: Búsqueda en temas, secciones, lugares y términos oficiales. Funciona en el navegador.
+    description: "Busque temas, lugares, noticias y términos oficiales."
     heading: Buscar
-    lede: Temas, secciones, situaciones de vida, países, lugares y términos oficiales. La búsqueda funciona en su navegador; ningún término se envía.
+    lede: "Temas, situaciones de vida, países, lugares, noticias y términos oficiales."
     label: Término de búsqueda
     placeholder: OIB, seguro de salud, apostilla, Biram Hrvatsku
     button: Buscar
     entries: "{n} entradas"
     entry: "{n} entrada"
     for: para «{q}»
-    empty: No se ha encontrado nada. Eso no significa que el tema no exista, solo que todavía no tenemos una página sobre él.
+    empty: "No se encontró nada."
     empty_link: Díganos qué ha buscado.
     all: Todos los resultados
     none: Sin resultados
@@ -1015,9 +1015,9 @@ ui:
     kind_term: Término oficial
   news:
     title: "Actualidad: povratnik.com"
-    description: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia, con fuente y fecha de revisión."
+    description: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia."
     heading: "Actualidad"
-    lede: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia. Cada noticia con fuente y fecha de revisión."
+    lede: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia."
     crumb: "Actualidad"
     example: "Ejemplo, ficticio"
     published: "Publicado el {date}"
@@ -1027,7 +1027,7 @@ ui:
     title: "Cifras y datos: povratnik.com"
     description: Regreso e inmigración a Croacia en cifras, con estado y fuente.
     heading: Cifras y datos
-    lede: Cada cifra lleva estado y fuente. Donde falta una cifra, se ve, en vez de una estimación.
+    lede: "Retorno e inmigración a Croacia en cifras, con fecha y fuente."
     figure: Indicador
     value: Valor
     stand: Estado
@@ -1039,22 +1039,22 @@ ui:
     title: "Puntos de contacto: povratnik.com"
     description: Administraciones en Croacia, consulados, oficinas municipales de bienvenida y asociaciones, con los temas de los que son responsables.
     heading: Puntos de contacto
-    lede: Qué entidad es responsable de qué, con acceso a la administración y las páginas temáticas que la citan.
+    lede: "Qué organismo es responsable de qué."
     authorities_title: Administraciones en Croacia
-    authorities_help: Páginas de entrada de las administraciones. La referencia exacta está en cada página temática.
+    authorities_help: "Páginas de entrada de las autoridades."
     consulates_title: Consulados y representaciones
-    consulates_text: Las representaciones croatas en el país de origen emiten cartas de recomendación, reciben solicitudes de OIB y legalizan. Las direcciones y competencias se confirman con cada representación y luego se registran en la página del país.
+    consulates_text: "Las representaciones croatas en su país de origen emiten cartas de recomendación, reciben solicitudes de OIB y certifican documentos."
     confirmed: confirmado
     not_collected: no recopilado
     municipal_title: Oficinas municipales de bienvenida
     recorded: registrado
     unknown: desconocido
     clubs_title: Asociaciones y redes de la diáspora
-    clubs_text: Se recopilan por lugar y país de origen.
+    clubs_text: "Se registran por lugar."
     wip: en preparación
   weg:
     title: "Mi camino a Croacia: chequeo rápido"
-    description: Seis preguntas y luego su primer plan. Las respuestas se quedan en el navegador.
+    description: "Unas preguntas y después su primer plan."
     promise_1: Sin cuenta, sin registro
     promise_2: Las respuestas se quedan en este navegador
     promise_3: Cada dato del plan con fuente y fecha de comprobación
@@ -1073,20 +1073,20 @@ ui:
     toggle: Mostrar el mapa
     region_crumb: Región
     region_title: "Condado de {name}"
-    region_lede: Vida real en vez de turismo, para elegir el lugar. Mercado laboral, atención sanitaria, accesibilidad, precios, escuelas, hospitales, conexiones, programas regionales y una sección honesta sobre las desventajas.
+    region_lede: "Mercado laboral, servicios, accesibilidad, precios, escuelas y programas de este condado."
     region_places: Lugares registrados en este condado
-    region_places_empty: Para este condado todavía no hay ningún lugar registrado. Eso no significa que no haya ofertas.
-    region_facts: Qué figurará aquí
+    region_places_empty: "Todavía no hay ningún lugar registrado para este condado."
+    region_facts: "Lo que encontrará aquí"
     region_fact_1: Mercado laboral y destinos de desplazamiento
     region_fact_2: Atención con médicos, farmacias y hospitales
     region_fact_3: Accesibilidad y conexiones
     region_fact_4: Nivel de precios de alquiler y compra
     region_fact_5: Densidad de escuelas y hospitales
     region_fact_6: Programas regionales con estado
-    region_fact_7: Desventajas de la región, nombradas con honestidad
+    region_fact_7: "Desventajas de la región"
     region_wip: no recopilado
     region_others: Otros condados
   notfound:
     title: Página no encontrada
-    text: Esta dirección no existe o ya no existe. La página de inicio lleva a los tres caminos.
+    text: "Esta dirección no existe o ya no existe."
     home: A la página de inicio

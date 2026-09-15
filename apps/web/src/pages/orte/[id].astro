@@ -180,7 +180,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
               {place.changes.map((c) => <li><span class={`state state--${changeCss(c.state)}`}>{u(`place.change_${c.state}`)}</span> {c.title} <span class="mono muted">{formatDate(c.as_of)}</span></li>)}
             </ul>
           )}
-          <p class="fact__note">{u("place.changes_note")}</p>
         </div>
         {place.map && (
           <div class="side">
