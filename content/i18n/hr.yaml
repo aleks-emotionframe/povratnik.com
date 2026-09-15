@@ -804,8 +804,8 @@ ui:
     more: "{n} daljnjih"
     depth: Dubina podataka {n} od {total} podataka prikupljeno
     empty: Nijedno mjesto ne odgovara ovom odabiru. To ne znači da nema ponuda, samo da ih nismo prikupili.
-    ranking_title: Bez rang-liste, bez ukupne ocjene
-    ranking_text: Dva do tri mjesta mogu se usporediti jedno pokraj drugog, kao sirova informacija. Ukupna bi vrijednost uvijek nametnula naše vaganje, a ne vaše. Što nedostaje, piše kao «nepoznato», a ne kao prazno polje. Mjesto s malo podataka nikad ne izgleda kao mjesto bez ponuda, zato svako mjesto pokazuje svoju dubinu podataka.
+    ranking_title: "Usporedite mjesta izravno"
+    ranking_text: "Stavite do tri općine jednu uz drugu: potpore, škole, liječnici, najamnine i prometna povezanost na jedan pogled. Tako brzo vidite koje mjesto odgovara vašoj svakodnevici."
     to_compare: Na usporedbu
     municipality_title: Zastupate općinu?
     municipality_text: Upišite svoje mjere za povratnike. Svaki se podatak prikazuje s izvorom, datumom provjere i stanjem.

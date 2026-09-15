@@ -804,8 +804,8 @@ ui:
     more: "{n} más"
     depth: Profundidad de datos {n} de {total} datos recopilados
     empty: Ningún lugar coincide con esta selección. Eso no significa que no haya ofertas, solo que no las hemos recopilado.
-    ranking_title: Sin ranking, sin nota global
-    ranking_text: Dos o tres lugares se pueden comparar uno junto a otro, como información en bruto. Un valor global siempre impondría nuestra ponderación y no la suya. Lo que falta aparece como «desconocido» y no como celda vacía. Un lugar con pocos datos nunca parece un lugar sin ofertas; por eso cada lugar muestra su profundidad de datos.
+    ranking_title: "Compare lugares directamente"
+    ranking_text: "Ponga hasta tres municipios uno junto a otro: ayudas, escuelas, médicos, alquileres y conexiones de un vistazo. Así verá rápidamente qué lugar encaja con su día a día."
     to_compare: A la comparación
     municipality_title: ¿Representa a un municipio?
     municipality_text: Registre sus ayudas para quienes regresan. Cada dato aparece con fuente, fecha de comprobación y estado.
