@@ -1,0 +1,56 @@
+---
+// Übersicht «Aktuelles»: alle Meldungen, neueste zuerst, jede mit Datum, Quelle und
+// Prüfdatum. Synthetische Beispiele sind als solche gekennzeichnet (nur Teststufe).
+import Base from "../../layouts/Base.astro";
+import { loadNews, newsPath } from "../../lib/news.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../../lib/page.ts";
+
+const { lang, u, p } = pageContext(Astro);
+const items = loadNews(CONTENT_DIR, lang);
+const fallback = items.some((x) => x.fallback);
+---
+
+<Base title={u("news.title")} description={u("news.description")} fallback={fallback}>
+  <section class="hero hero--small">
+    <div class="container">
+      <div class="hero__text">
+        <h1>{u("news.heading")}</h1>
+        <p class="lede">{u("news.lede")}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--surface">
+    <div class="container">
+      {items.length === 0 && <p class="soft">{u("news.empty")}</p>}
+      <ul class="cards news">
+        {items.map((n) => (
+          <li class="card card--link">
+            <div class="card__body">
+              <span class="news__date">{fmtDate(n.news.published_on)}{n.synthetic && <span class="news__example">{u("news.example")}</span>}</span>
+              <h3><a href={p(newsPath(n))}>{n.title}</a></h3>
+              <p>{n.short_answer}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .news {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  }
+  .news__date {
+    font-family: var(--font-meta);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .news__example {
+    color: var(--st-unknown);
+  }
+</style>

@@ -1,14 +1,15 @@
 ---
 // Startseite nach inhaltskonzept.md 3 und designsystem.md 2.1: Aufmacher mit Foto und
 // Lebenssituationen und Schnelleinstiegen (die Suche steht im Kopf), die drei Wege,
-// die vier Schlüssel, Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
+// die vier Schlüssel, Aktuelles, Beispielwege. Texte aus dem Katalog der Sprache (ui.home.*), Pfade mit Sprachpräfix.
 import { Image, getImage } from "astro:assets";
 import Base from "../layouts/Base.astro";
 import { RUBRICS, rubricText } from "../lib/rubrics.ts";
 import { SITUATIONS, situationText } from "../lib/situations.ts";
 import { CASES, caseText } from "../lib/cases.ts";
+import { loadNews, newsPath } from "../lib/news.ts";
 import { loadPages, pagePath } from "../lib/pages.ts";
-import { CONTENT_DIR, pageContext } from "../lib/page.ts";
+import { CONTENT_DIR, fmtDate, pageContext } from "../lib/page.ts";
 import hero from "../assets/hero-dokumente.webp";
 import ort from "../assets/ort-hauptplatz.webp";
 
@@ -20,6 +21,8 @@ const byId = new Map(pages.map((x) => [x.id, x]));
 const chips = ["oib", "staatsangehoerigkeit-abstammung", "bescheinigung-auswanderer", "wohnsitz-anmelden", "krankenversicherung", "lohnsteuerbefreiung", "biram-hrvatsku", "schule-und-zeugnisse", "fuehrerschein-umschreiben"]
   .map((id) => byId.get(id))
   .filter((x): x is NonNullable<typeof x> => !!x);
+// Aktuelles: die drei neuesten Meldungen.
+const news = loadNews(CONTENT_DIR, lang).slice(0, 3);
 // Die vier Schlüssel (inhaltskonzept.md 1.1) mit ihrer Zielseite: Rubrik für den Status,
 // sonst die Themenseite, sofern sie existiert.
 const topicHref = (id: string) => { const x = byId.get(id); return x ? p(pagePath(x)) : undefined; };
@@ -131,6 +134,26 @@ const keys = [
     </div>
   </section>
 
+  <section class="band">
+    <div class="container">
+      <div class="band__head">
+        <h2>{u("home.news_title")}</h2>
+      </div>
+      <ul class="cards news">
+        {news.map((n) => (
+          <li class="card card--link">
+            <div class="card__body">
+              <span class="news__date">{fmtDate(n.news.published_on)}{n.synthetic && <span class="news__example">{u("news.example")}</span>}</span>
+              <h3><a href={p(newsPath(n))}>{n.title}</a></h3>
+              <p>{n.short_answer}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+      <p class="news__more"><a class="arrow-link" href={p("/aktuell")}>{u("home.news_all")}</a></p>
+    </div>
+  </section>
+
   <section class="band band--surface">
     <div class="container">
       <div class="band__head">
@@ -157,6 +180,28 @@ const keys = [
 </Base>
 
 <style>
+  .news {
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .news {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .news__date {
+    font-family: var(--font-meta);
+    font-size: 0.8125rem;
+    color: var(--muted);
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .news__example {
+    color: var(--st-unknown);
+  }
+  .news__more {
+    margin: 1.25rem 0 0;
+  }
   .card__media--list {
     padding: 1.25rem 1.35rem;
     display: flex;

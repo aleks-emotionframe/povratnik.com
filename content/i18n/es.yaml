@@ -654,6 +654,8 @@ ui:
     key4_text: Permite ir al médico, inscribirse en la escuela, obtener plaza de guardería. Tiene una laguna si no se planificó antes.
     situations_title: Entradas por situación de vida
     cases_title: Cinco caminos de ejemplo
+    news_title: "Actualidad sobre el retorno y la emigración"
+    news_all: "Todas las noticias"
     cases_label: Ejemplo, ficticio
     cases_first: "Primer paso:"
   wissen:
@@ -997,6 +999,16 @@ ui:
     kind_country: País de origen
     kind_place: Lugar (ficticio)
     kind_term: Término oficial
+  news:
+    title: "Actualidad: povratnik.com"
+    description: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia, con fuente y fecha de revisión."
+    heading: "Actualidad"
+    lede: "Nuevos plazos, normas modificadas y programas sobre el retorno y la emigración a Croacia. Cada noticia con fuente y fecha de revisión."
+    crumb: "Actualidad"
+    example: "Ejemplo, ficticio"
+    published: "Publicado el {date}"
+    checked: "Fuente revisada el {date}"
+    empty: "No hay noticias por el momento."
   figures:
     title: "Cifras y datos: povratnik.com"
     description: Regreso e inmigración a Croacia en cifras, con estado y fuente.

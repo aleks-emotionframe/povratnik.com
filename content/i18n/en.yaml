@@ -654,6 +654,8 @@ ui:
     key4_text: Enables doctor visits, school enrolment, a childcare place. Has a gap if it was not planned in advance.
     situations_title: Entry points by life situation
     cases_title: Five example paths
+    news_title: "News on returning and emigrating"
+    news_all: "All news"
     cases_label: Example, fictional
     cases_first: "First step:"
   wissen:
@@ -997,6 +999,16 @@ ui:
     kind_country: Country of origin
     kind_place: Place (fictional)
     kind_term: Official term
+  news:
+    title: "News: povratnik.com"
+    description: "New deadlines, changed rules and programmes around returning and emigrating to Croatia, with source and check date."
+    heading: "News"
+    lede: "New deadlines, changed rules and programmes around returning and emigrating to Croatia. Every item with source and check date."
+    crumb: "News"
+    example: "Example, fictitious"
+    published: "Published {date}"
+    checked: "Source checked {date}"
+    empty: "No news at the moment."
   figures:
     title: "Figures and facts: povratnik.com"
     description: Return and immigration to Croatia in figures, with status and source.

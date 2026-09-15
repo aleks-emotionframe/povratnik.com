@@ -1,0 +1,41 @@
+# SYNTHETISCH. Fiktive Beispielmeldung für die Sektion «Aktuelles» auf der Teststufe.
+id: beispiel-gemeinde-wohnbauland
+lang: de
+version: 1
+synthetic: true
+type: news
+depth: short
+title: "Beispiel: Testgemeinde Kamenik Gornji öffnet Bauland-Programm"
+short_answer: "Fiktive Meldung für die Teststufe: Die fiktive Gemeinde Kamenik Gornji würde demnach vergünstigtes Bauland für Rückkehrer ausschreiben."
+news:
+  published_on: 2026-08-28
+  body:
+    - "Diese Meldung ist erfunden, ebenso wie die Gemeinde. Sie dient nur dazu, die Sektion «Aktuelles» auf der Teststufe zu zeigen."
+    - "Echte Gemeindemeldungen kommen aus den Ortsprofilen: Wenn eine Gemeinde ein Programm öffnet oder schliesst, ändert sich der Zustand dort und erscheint hier als Meldung."
+    - "So bleibt ein Fakt an einer Stelle gepflegt und taucht in mehreren Ansichten auf."
+terms: []
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: []
+sources:
+  - id: hr-hzz
+    reference: "Fiktive Fundstelle, nur als Beispiel für die Teststufe"
+    checked: 2026-09-15
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-08-28
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-15
+  cycle: quarterly

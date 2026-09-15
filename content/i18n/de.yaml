@@ -429,6 +429,8 @@ ui:
     key4_text: Ohne Versicherung kein Arztbesuch, keine Schuleinschreibung, kein Betreuungsplatz. Wer sie nicht vor dem Umzug plant, hat eine Lücke.
     situations_title: Was trifft auf Sie zu?
     cases_title: So kann Ihr Weg aussehen
+    news_title: "Aktuelles zu Rückkehr und Auswanderung"
+    news_all: "Alle Meldungen"
     cases_label: Beispiel, fiktiv
     cases_first: "Erster Schritt:"
   wissen:
@@ -772,6 +774,16 @@ ui:
     kind_country: Herkunftsland
     kind_place: Ort (fiktiv)
     kind_term: Amtsbegriff
+  news:
+    title: "Aktuelles: povratnik.com"
+    description: "Neue Fristen, geänderte Regeln und Programme rund um Rückkehr und Auswanderung nach Kroatien, mit Quelle und Prüfdatum."
+    heading: "Aktuelles"
+    lede: "Neue Fristen, geänderte Regeln und Programme rund um Rückkehr und Auswanderung nach Kroatien. Jede Meldung mit Quelle und Prüfdatum."
+    crumb: "Aktuelles"
+    example: "Beispiel, fiktiv"
+    published: "Veröffentlicht am {date}"
+    checked: "Quelle geprüft {date}"
+    empty: "Derzeit keine Meldungen."
   figures:
     title: "Zahlen und Fakten: povratnik.com"
     description: Rückkehr und Zuwanderung nach Kroatien in Zahlen, mit Stand und Quelle.

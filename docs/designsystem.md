@@ -117,6 +117,10 @@ Jeder Typ hat eine festgelegte Struktur:
 7. **Leistungsdatenbank** filterbare Liste mit denselben Feldern
 8. **Frageansicht** eine Hauptfrage je Ansicht, Haushaltsleiste, Erklärung wozu
 9. **Abschlussplan** Ausgangslage, Weg, nächste Schritte, Fahrplan, Offenes, Kontakte
+10. **Meldung** (Aktuelles, seit 15.09.2026) Datum, Titel, Vorspann, Absätze, Datenstand
+    mit Quelle und Prüfdatum; auf der Startseite die drei neuesten als Karten, Übersicht
+    unter /aktuell. Auf der Teststufe erscheinen synthetische Beispielmeldungen, sichtbar
+    als «Beispiel, fiktiv» gekennzeichnet; auf der Stufe public nur freigegebene.
 
 ---
 

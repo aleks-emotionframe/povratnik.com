@@ -1,0 +1,41 @@
+# SYNTHETISCH. Fiktive Beispielmeldung für die Sektion «Aktuelles» auf der Teststufe.
+id: beispiel-biram-hrvatsku-frist
+lang: de
+version: 1
+synthetic: true
+type: news
+depth: short
+title: "Beispiel: Antragsfrist für Biram Hrvatsku verlängert"
+short_answer: "Fiktive Meldung für die Teststufe: Die Frist für Anträge im laufenden Jahr wäre demnach um einen Monat verlängert worden."
+news:
+  published_on: 2026-09-12
+  body:
+    - "Diese Meldung ist erfunden und dient nur dazu, die Sektion «Aktuelles» auf der Teststufe zu zeigen. Sie beschreibt keine tatsächliche Änderung."
+    - "In einer echten Meldung stünde hier, was sich geändert hat, für wen es gilt, ab wann es gilt und welche Stelle es entschieden hat, mit Link zur amtlichen Mitteilung."
+    - "Jede echte Meldung trägt Quelle und Prüfdatum. Ohne Quelle wird sie nicht veröffentlicht."
+terms: []
+links:
+  rules: []
+  tasks: []
+  procedures: []
+  requires_pages: []
+  followed_by_pages: []
+sources:
+  - id: hr-hzz
+    reference: "Fiktive Fundstelle, nur als Beispiel für die Teststufe"
+    checked: 2026-09-15
+approval:
+  state: draft
+publication:
+  state: unpublished
+validity:
+  valid_from: 2026-09-12
+  valid_until:
+    kind: open_ended
+    date: null
+  supersedes: null
+  superseded_by: null
+  transitional: null
+review:
+  next_check: 2026-12-15
+  cycle: quarterly

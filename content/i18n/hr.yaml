@@ -654,6 +654,8 @@ ui:
     key4_text: Omogućuje odlazak liječniku, upis u školu, mjesto u vrtiću. Ima prazninu ako nije unaprijed isplanirano.
     situations_title: Ulazi prema životnoj situaciji
     cases_title: Pet primjernih putova
+    news_title: "Aktualno o povratku i iseljavanju"
+    news_all: "Sve obavijesti"
     cases_label: Primjer, fiktivno
     cases_first: "Prvi korak:"
   wissen:
@@ -997,6 +999,16 @@ ui:
     kind_country: Zemlja podrijetla
     kind_place: Mjesto (fiktivno)
     kind_term: Službeni pojam
+  news:
+    title: "Aktualno: povratnik.com"
+    description: "Novi rokovi, izmijenjena pravila i programi vezani uz povratak i iseljavanje u Hrvatsku, s izvorom i datumom provjere."
+    heading: "Aktualno"
+    lede: "Novi rokovi, izmijenjena pravila i programi vezani uz povratak i iseljavanje u Hrvatsku. Svaka obavijest s izvorom i datumom provjere."
+    crumb: "Aktualno"
+    example: "Primjer, izmišljeno"
+    published: "Objavljeno {date}"
+    checked: "Izvor provjeren {date}"
+    empty: "Trenutačno nema obavijesti."
   figures:
     title: "Brojke i činjenice: povratnik.com"
     description: Povratak i useljenje u Hrvatsku u brojkama, sa stanjem i izvorom.
