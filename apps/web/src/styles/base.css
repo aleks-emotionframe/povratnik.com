@@ -456,12 +456,25 @@ a:hover {
   grid-template-columns: minmax(0, 1fr);
   grid-template-rows: 1fr auto auto;
 }
-/* Zwei Gruppen untereinander: die erste gibt unten Platz ab. */
+/* Zwei Gruppen untereinander: Lebenssituationen als Umriss-Felder, häufig gesuchte
+   Themen als weisse Felder, damit man sie auf einen Blick unterscheidet. */
 .hero__situations:has(+ .hero__situations) {
-  padding-bottom: 1.5rem;
+  padding-bottom: 2.25rem;
 }
 .hero__situations + .hero__situations {
-  padding-top: 0.25rem;
+  padding-top: 0;
+}
+.hero__situations.hero__quick a {
+  background: var(--paper);
+  border-color: var(--paper);
+  color: var(--ink);
+}
+.hero__situations.hero__quick a::after {
+  color: var(--accent);
+}
+.hero__situations.hero__quick a:hover {
+  background: var(--surface-blue);
+  border-color: var(--surface-blue);
 }
 .hero--full .hero__text {
   position: relative;
