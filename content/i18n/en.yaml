@@ -617,7 +617,7 @@ ui:
     foot_tools: Tools
     foot_check: "Quick check: my way"
     foot_places: Discover places
-    foot_benefits: Benefits database
+    foot_benefits: "All support schemes"
     foot_contacts: Points of contact
     foot_search: Search
     foot_about: About us
@@ -779,7 +779,7 @@ ui:
     title: "Places"
     description: "Municipalities in Croatia with their support schemes, schools, doctors and housing."
     lede: "Municipalities in Croatia with their support schemes, schools, doctors and housing, on the map or in the list."
-    all_benefits: All measures
+    all_benefits: "All support schemes"
     compare: Compare places
     image_alt: Main square of a small town in Croatia with the town hall and a bakery.
     fictional_title: Fictional test municipalities
@@ -790,17 +790,18 @@ ui:
     filter_all: all
     coast: Coast
     inland: Inland
-    filter_target: Measures for
+    filter_target: "Support for"
     target_families: Families
     target_returnees: Returnees and founders
     target_housing: Housing
     filter_state: Status
-    only_open: only with open measures
+    only_open: "only open for applications now"
     no_js: Without JavaScript the list shows all places.
     count_one: "{n} place"
     count_many: "{n} places"
-    open_one: "{n} open measure"
-    open_many: "{n} open measures"
+    open_one: "Open for applications now: {n} scheme"
+    open_many: "Open for applications now: {n} schemes"
+    open_none: "No scheme open for applications right now"
     more: "{n} more"
     depth: "{n} of {total} details recorded"
     empty: "No place matches this selection."
@@ -818,7 +819,7 @@ ui:
     arrival: Arrival
     fictional_title: Fictional test municipality
     fictional_text: This place is invented. It shows the structure of a place profile with all states. No value refers to a real place.
-    benefits_title: Measures of the municipality
+    benefits_title: "Support schemes of the municipality"
     details: "Details"
     jump_label: "Sections of this place profile"
     benefits_help: Four dates, one status. The municipality decides on the application.
@@ -879,10 +880,10 @@ ui:
     cta_title: Does this place fit my way?
     cta_text: "The quick check shows which of this place's schemes may apply to you."
     cta_compare: Compare with other places
-    state_open: open
+    state_open: "open for applications"
     state_announced: announced
-    state_closed: closed
-    state_exhausted: exhausted
+    state_closed: "deadline passed"
+    state_exhausted: "budget used up"
     state_unconfirmed: unconfirmed
     state_budget_unknown: budget unknown
     change_announced: announced
@@ -908,7 +909,7 @@ ui:
     location: Location
     population: Population
     index: Development index
-    open_benefits: Open measures
+    open_benefits: "Open for applications now"
     of: "{n} of {total}"
     kindergarten: Kindergarten, free places
     primary: Primary school
@@ -925,15 +926,15 @@ ui:
     courses: Language courses
     depth: "Details recorded"
   benefits:
-    title: Benefits and support
+    title: "All support schemes"
     description: "All support schemes of the recorded municipalities, with application period."
-    crumb: Measures
+    crumb: "Support schemes"
     lede: "All support schemes of the recorded municipalities at a glance, with status and application period."
     fictional_text: All measures here are invented. National programmes such as Biram Hrvatsku are under
     filter_label: Filter measures
     filter_state: Status
-    count_one: "{n} measure"
-    count_many: "{n} measures"
+    count_one: "{n} scheme"
+    count_many: "{n} schemes"
     empty: "No scheme with this status."
   about:
     title: "About us: povratnik.com"

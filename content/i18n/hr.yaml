@@ -617,7 +617,7 @@ ui:
     foot_tools: Alati
     foot_check: "Brza provjera: moj put"
     foot_places: Otkrij mjesta
-    foot_benefits: Baza mjera
+    foot_benefits: "Sve potpore"
     foot_contacts: Kontaktna mjesta
     foot_search: Pretraga
     foot_about: O nama
@@ -779,7 +779,7 @@ ui:
     title: "Mjesta"
     description: "Općine u Hrvatskoj s potporama, školama, liječnicima i stanovanjem."
     lede: "Općine u Hrvatskoj s potporama, školama, liječnicima i stanovanjem, na karti ili u popisu."
-    all_benefits: Sve mjere
+    all_benefits: "Sve potpore"
     compare: Usporedi mjesta
     image_alt: Glavni trg malog grada u Hrvatskoj s općinskom zgradom i pekarnicom.
     fictional_title: Fiktivne testne općine
@@ -790,17 +790,18 @@ ui:
     filter_all: sva
     coast: Obala
     inland: Unutrašnjost
-    filter_target: Mjere za
+    filter_target: "Potpore za"
     target_families: Obitelji
     target_returnees: Povratnike i osnivače
     target_housing: Stanovanje
     filter_state: Stanje
-    only_open: samo s otvorenim mjerama
+    only_open: "samo trenutačno dostupne"
     no_js: Bez JavaScripta popis prikazuje sva mjesta.
     count_one: "{n} mjesto"
     count_many: "{n} mjesta"
-    open_one: "{n} otvorena mjera"
-    open_many: "{n} otvorenih mjera"
+    open_one: "Trenutačno dostupno: {n} potpora"
+    open_many: "Trenutačno dostupno: {n} potpore"
+    open_none: "Trenutačno nema dostupnih potpora"
     more: "{n} daljnjih"
     depth: "{n} od {total} podataka zabilježeno"
     empty: "Nijedno mjesto ne odgovara ovom odabiru."
@@ -818,7 +819,7 @@ ui:
     arrival: Dolazak
     fictional_title: Fiktivna testna općina
     fictional_text: Ovo je mjesto izmišljeno. Pokazuje strukturu profila mjesta sa svim stanjima. Nijedna se vrijednost ne odnosi na stvarno mjesto.
-    benefits_title: Mjere općine
+    benefits_title: "Potpore općine"
     details: "Pojedinosti"
     jump_label: "Dijelovi profila mjesta"
     benefits_help: Četiri vremenska podatka, jedno stanje. O zahtjevu odlučuje općina.
@@ -879,10 +880,10 @@ ui:
     cta_title: Odgovara li ovo mjesto mom putu?
     cta_text: "Brza provjera pokazuje koje potpore ovog mjesta dolaze u obzir za vas."
     cta_compare: Usporedi s drugim mjestima
-    state_open: otvoreno
+    state_open: "trenutačno dostupno"
     state_announced: najavljeno
-    state_closed: zatvoreno
-    state_exhausted: iscrpljeno
+    state_closed: "rok istekao"
+    state_exhausted: "proračun iscrpljen"
     state_unconfirmed: nepotvrđeno
     state_budget_unknown: proračun nepoznat
     change_announced: najavljeno
@@ -908,7 +909,7 @@ ui:
     location: Položaj
     population: Stanovnici
     index: Indeks razvijenosti
-    open_benefits: Otvorene mjere
+    open_benefits: "Trenutačno dostupno"
     of: "{n} od {total}"
     kindergarten: Vrtić, slobodna mjesta
     primary: Osnovna škola
@@ -925,15 +926,15 @@ ui:
     courses: Jezični tečajevi
     depth: "Zabilježeni podaci"
   benefits:
-    title: Mjere i potpore
+    title: "Sve potpore"
     description: "Sve potpore zabilježenih općina, s rokom prijave."
-    crumb: Mjere
+    crumb: "Potpore"
     lede: "Sve potpore zabilježenih općina na jedan pogled, sa stanjem i rokom prijave."
     fictional_text: Sve mjere ovdje su izmišljene. Državni programi poput Biram Hrvatsku nalaze se pod
     filter_label: Filtriraj mjere
     filter_state: Stanje
-    count_one: "{n} mjera"
-    count_many: "{n} mjera"
+    count_one: "{n} potpora"
+    count_many: "{n} potpore"
     empty: "Nema potpore s ovim stanjem."
   about:
     title: "O nama: povratnik.com"

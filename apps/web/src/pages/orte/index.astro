@@ -78,13 +78,8 @@ const targets = (pl: (typeof places)[number]) => {
               <span class="card__num">{pl.county} · {u(pl.region === "coast" ? "orte.coast" : "orte.inland")}</span>
               <p>{pl.summary}</p>
               <p class="card__facts">
-                <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
-                <span class="state state--closed">{u("orte.more", { n: pl.benefits.length - openBenefits(pl) })}</span>
+                <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 0 ? "orte.open_none" : openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
               </p>
-              <div class="depth">
-                <span>{u("orte.depth", { n: pl.data_depth.collected, total: pl.data_depth.total })}</span>
-                <div class="depth__bar"><div class="depth__fill" style={`width:${Math.round((100 * pl.data_depth.collected) / pl.data_depth.total)}%`}></div></div>
-              </div>
             </div>
           </li>
         ))}
@@ -335,9 +330,6 @@ const targets = (pl: (typeof places)[number]) => {
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
-  }
-  .cards--places .depth {
-    margin-top: 0.5rem;
   }
   .empty {
     color: var(--ink-soft);

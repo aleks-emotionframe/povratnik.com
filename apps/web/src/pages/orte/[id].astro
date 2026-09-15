@@ -15,7 +15,6 @@ export function getStaticPaths() {
 
 const { place } = Astro.props as { place: Place };
 const { u, p } = pageContext(Astro);
-const depth = Math.round((100 * place.data_depth.collected) / place.data_depth.total);
 const period = (b: Place["benefits"][number]) =>
   b.application.from || b.application.until
     ? u("place.period_range", { from: b.application.from ? formatDate(b.application.from) : u("place.period_open"), until: b.application.until ? formatDate(b.application.until) : u("place.period_running") })
@@ -30,10 +29,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {place.county}</p>
         <h1>{placeName(place)}</h1>
         <p class="lede">{place.summary}</p>
-        <div class="depth">
-          <span>{u("orte.depth", { n: place.data_depth.collected, total: place.data_depth.total })}</span>
-          <div class="depth__bar"><div class="depth__fill" style={`width:${depth}%`}></div></div>
-        </div>
       </div>
       <div class="hero__media hero__media--plain">
         <dl class="glance">
@@ -205,10 +200,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   }
   .crumbs a {
     color: var(--on-brand);
-  }
-  .hero .depth {
-    margin-top: 1.25rem;
-    max-width: 28rem;
   }
   .hero__media--plain {
     display: flex;

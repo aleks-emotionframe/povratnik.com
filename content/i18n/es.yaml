@@ -617,7 +617,7 @@ ui:
     foot_tools: Herramientas
     foot_check: "Chequeo rápido: mi camino"
     foot_places: Descubrir lugares
-    foot_benefits: Base de datos de ayudas
+    foot_benefits: "Todas las ayudas"
     foot_contacts: Puntos de contacto
     foot_search: Buscar
     foot_about: Sobre nosotros
@@ -779,7 +779,7 @@ ui:
     title: "Lugares"
     description: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda."
     lede: "Municipios de Croacia con sus ayudas, escuelas, médicos y vivienda, en el mapa o en la lista."
-    all_benefits: Todas las ayudas
+    all_benefits: "Todas las ayudas"
     compare: Comparar lugares
     image_alt: Plaza principal de una pequeña ciudad de Croacia con el ayuntamiento y una panadería.
     fictional_title: Municipios de prueba ficticios
@@ -790,17 +790,18 @@ ui:
     filter_all: todos
     coast: Costa
     inland: Interior
-    filter_target: Ayudas para
+    filter_target: "Ayudas para"
     target_families: Familias
     target_returnees: Retornados y emprendedores
     target_housing: Vivienda
     filter_state: Estado
-    only_open: solo con ayudas abiertas
+    only_open: "solo solicitables ahora"
     no_js: Sin JavaScript la lista muestra todos los lugares.
     count_one: "{n} lugar"
     count_many: "{n} lugares"
-    open_one: "{n} ayuda abierta"
-    open_many: "{n} ayudas abiertas"
+    open_one: "Solicitable ahora: {n} ayuda"
+    open_many: "Solicitable ahora: {n} ayudas"
+    open_none: "Ninguna ayuda solicitable ahora"
     more: "{n} más"
     depth: "{n} de {total} datos registrados"
     empty: "Ningún lugar coincide con esta selección."
@@ -818,7 +819,7 @@ ui:
     arrival: Llegada
     fictional_title: Municipio de prueba ficticio
     fictional_text: Este lugar es inventado. Muestra la estructura de un perfil de lugar con todos los estados. Ningún valor se refiere a un lugar real.
-    benefits_title: Ayudas del municipio
+    benefits_title: "Ayudas del municipio"
     details: "Detalles"
     jump_label: "Secciones de este perfil"
     benefits_help: Cuatro fechas, un estado. Sobre la solicitud decide el municipio.
@@ -879,10 +880,10 @@ ui:
     cta_title: ¿Encaja este lugar con mi camino?
     cta_text: "El chequeo rápido muestra qué ayudas de este lugar pueden aplicarse a usted."
     cta_compare: Comparar con otros lugares
-    state_open: abierta
+    state_open: "solicitable ahora"
     state_announced: anunciada
-    state_closed: cerrada
-    state_exhausted: agotada
+    state_closed: "plazo vencido"
+    state_exhausted: "presupuesto agotado"
     state_unconfirmed: sin confirmar
     state_budget_unknown: presupuesto desconocido
     change_announced: anunciado
@@ -908,7 +909,7 @@ ui:
     location: Ubicación
     population: Habitantes
     index: Índice de desarrollo
-    open_benefits: Ayudas abiertas
+    open_benefits: "Solicitable ahora"
     of: "{n} de {total}"
     kindergarten: Guardería, plazas libres
     primary: Escuela primaria
@@ -925,9 +926,9 @@ ui:
     courses: Cursos de idioma
     depth: "Datos registrados"
   benefits:
-    title: Prestaciones y ayudas
+    title: "Todas las ayudas"
     description: "Todas las ayudas de los municipios registrados, con plazo de solicitud."
-    crumb: Ayudas
+    crumb: "Ayudas"
     lede: "Todas las ayudas de los municipios registrados de un vistazo, con estado y plazo de solicitud."
     fictional_text: Todas las ayudas de aquí son inventadas. Los programas estatales como Biram Hrvatsku están en
     filter_label: Filtrar ayudas

@@ -137,18 +137,20 @@ beschreibt ein Programm, Vokabular A einen einzelnen Fachwert.
 
 | Vokabular | Zustand | Darstellung |
 |---|---|---|
-| B Programm | offen | grüne Marke mit Wortlaut «offen» |
+| B Programm | offen | grüne Marke mit Wortlaut «jetzt beantragbar» |
 | B Programm | angekündigt | blaue Marke mit Wortlaut «angekündigt» |
-| B Programm | geschlossen | graue Marke mit Wortlaut «geschlossen» |
-| B Programm | ausgeschöpft | graue Marke mit Wortlaut «ausgeschöpft» |
+| B Programm | geschlossen | graue Marke mit Wortlaut «Frist abgelaufen» |
+| B Programm | ausgeschöpft | graue Marke mit Wortlaut «Budget aufgebraucht» |
 | B Programm | unbestätigt | gelbe Marke mit Wortlaut «unbestätigt» |
 | B Programm | Budget unbekannt | gelbe Marke mit Wortlaut «Budget unbekannt» |
 | A Fachwert | unbekannt | eigener Textstil mit Kreissymbol, nie leere Zelle |
 | A Fachwert | nicht erhoben | wie unbekannt, mit Zusatz «so lässt es sich klären» |
 | A Fachwert | veraltet | Wert sichtbar, mit Stand und Hinweis, dass die aktuelle Höhe ungeklärt ist |
 
-Ein Ort mit geringer Datentiefe darf nie wie ein Ort ohne Angebote aussehen. Die
-Datentiefe wird als eigener Balken angezeigt.
+Ein Ort mit geringer Datentiefe darf nie wie ein Ort ohne Angebote aussehen: Fehlende
+Angaben stehen im Profil als «nicht erhoben». Der frühere Balken «n von 30 Angaben
+erfasst» ist am 15.09.2026 entfallen (interne Sicht, für Besucher nicht verständlich).
+In der Oberfläche heisst «Leistung» durchgehend «Förderung».
 
 **Datenstand-Zeile** unter jeder Fachinformation: Quelle, Prüfdatum, Antragszeitraum,
 dicktengleich gesetzt, an immer derselben Position.

@@ -388,7 +388,7 @@ ui:
     foot_tools: Werkzeuge
     foot_check: "Kurzcheck: Mein Weg"
     foot_places: Orte entdecken
-    foot_benefits: Leistungsdatenbank
+    foot_benefits: "Alle Förderungen"
     foot_contacts: Anlaufstellen
     foot_search: Suche
     foot_about: Über uns
@@ -550,7 +550,7 @@ ui:
     title: "Orte"
     description: "Gemeinden in Kroatien mit ihren Förderungen, Schulen, Ärzten und Wohnangeboten."
     lede: "Gemeinden in Kroatien mit ihren Förderungen, Schulen, Ärzten und Wohnangeboten, auf der Karte oder in der Liste."
-    all_benefits: Alle Leistungen
+    all_benefits: "Alle Förderungen"
     compare: Orte vergleichen
     image_alt: Hauptplatz einer kleinen Stadt in Kroatien mit Gemeindehaus und Bäckerei.
     fictional_title: Fiktive Testgemeinden
@@ -561,17 +561,18 @@ ui:
     filter_all: alle
     coast: Küste
     inland: Landesinneres
-    filter_target: Leistungen für
+    filter_target: "Förderungen für"
     target_families: Familien
     target_returnees: Rückkehrer und Gründer
     target_housing: Wohnen
     filter_state: Zustand
-    only_open: nur mit offenen Leistungen
+    only_open: "nur jetzt beantragbar"
     no_js: Ohne JavaScript zeigt die Liste alle Orte.
     count_one: "{n} Ort"
     count_many: "{n} Orte"
-    open_one: "{n} offene Leistung"
-    open_many: "{n} offene Leistungen"
+    open_one: "Jetzt beantragbar: {n} Förderung"
+    open_many: "Jetzt beantragbar: {n} Förderungen"
+    open_none: "Derzeit keine Förderung beantragbar"
     more: "{n} weitere"
     depth: "{n} von {total} Angaben erfasst"
     empty: "Kein Ort passt zu dieser Auswahl."
@@ -589,11 +590,11 @@ ui:
     arrival: Ankommen
     fictional_title: Fiktive Testgemeinde
     fictional_text: Dieser Ort ist erfunden. Er zeigt die Struktur eines Ortsprofils mit allen Zuständen. Kein Wert bezieht sich auf einen realen Ort.
-    benefits_title: Leistungen der Gemeinde
+    benefits_title: "Förderungen der Gemeinde"
     details: "Details"
     jump_label: "Abschnitte dieses Ortsprofils"
     benefits_help: Vier Zeitangaben, ein Zustand. Über den Antrag entscheidet die Gemeinde.
-    benefits_empty: "Für diesen Ort sind noch keine Leistungen erfasst."
+    benefits_empty: "Für diesen Ort sind noch keine Förderungen erfasst."
     target: Für wen
     amount: Betrag
     conditions: Bedingungen
@@ -648,12 +649,12 @@ ui:
     changes_title: Veränderungen
     changes_note: Eine Ankündigung ist kein Zustand. Erst «in Betrieb» zählt.
     cta_title: Passt dieser Ort zu meinem Weg?
-    cta_text: "Der Kurzcheck zeigt, welche Leistungen dieses Orts für Sie infrage kommen."
+    cta_text: "Der Kurzcheck zeigt, welche Förderungen dieses Orts für Sie infrage kommen."
     cta_compare: Mit anderen Orten vergleichen
-    state_open: offen
+    state_open: "jetzt beantragbar"
     state_announced: angekündigt
-    state_closed: geschlossen
-    state_exhausted: ausgeschöpft
+    state_closed: "Frist abgelaufen"
+    state_exhausted: "Budget aufgebraucht"
     state_unconfirmed: unbestätigt
     state_budget_unknown: Budget unbekannt
     change_announced: angekündigt
@@ -679,7 +680,7 @@ ui:
     location: Lage
     population: Einwohner
     index: Entwicklungsindex
-    open_benefits: Offene Leistungen
+    open_benefits: "Jetzt beantragbar"
     of: "{n} von {total}"
     kindergarten: Kindergarten, freie Plätze
     primary: Grundschule
@@ -696,16 +697,16 @@ ui:
     courses: Sprachkurse
     depth: "Erfasste Angaben"
   benefits:
-    title: Leistungen und Förderungen
+    title: "Alle Förderungen"
     description: "Alle Förderungen der erfassten Gemeinden, mit Antragszeitraum."
-    crumb: Leistungen
+    crumb: "Förderungen"
     lede: "Alle Förderungen der erfassten Gemeinden auf einen Blick, mit Zustand und Antragszeitraum."
     fictional_text: Alle Leistungen hier sind erfunden. Staatliche Programme wie Biram Hrvatsku stehen im Wissen.
     filter_label: Leistungen filtern
     filter_state: Zustand
-    count_one: "{n} Leistung"
-    count_many: "{n} Leistungen"
-    empty: "Keine Leistung mit diesem Zustand."
+    count_one: "{n} Förderung"
+    count_many: "{n} Förderungen"
+    empty: "Keine Förderung mit diesem Zustand."
   about:
     title: "Über uns: povratnik.com"
     description: Wer hinter povratnik.com steht, wie wir finanziert werden, wie wir prüfen und warum bezahlte Leistungen keine Inhalte verändern.
