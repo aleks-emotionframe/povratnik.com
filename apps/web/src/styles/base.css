@@ -42,10 +42,23 @@ h4 {
   line-height: 1.15;
   margin: 0 0 0.5em;
   text-wrap: balance;
+  /* Lange deutsche Wörter (Identifikationsnummer) dürfen auf dem Handy umbrechen. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 h1 {
   font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem);
   line-height: 1.08;
+}
+/* Auf dem Handy so gross, dass ein Wort wie «Identifikationsnummer» in die Zeile passt. */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  /* Höhere Spezifität: die 16ch-Regel steht weiter unten in dieser Datei. */
+  .hero .hero__text h1 {
+    max-width: none;
+  }
 }
 h2 {
   font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);

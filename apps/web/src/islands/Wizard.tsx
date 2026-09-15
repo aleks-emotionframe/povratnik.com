@@ -157,8 +157,6 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
         else setStep(step + 1);
       }}
     >
-      <p class="wizard__progress mono">{t(texts, "wizard.progress", { n: step + 1, total: steps.length })}</p>
-
       {answers.persons.length > 1 && (
         <ol class="household" aria-label={t(texts, "wizard.household_label")}>
           {answers.persons.map((p) => (
@@ -202,6 +200,7 @@ export function Wizard({ bundle }: { bundle: Bundle }) {
         <button class="button button--quiet" type="button" onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0}>
           {t(texts, "wizard.back")}
         </button>
+        <p class="wizard__progress">{t(texts, "wizard.progress", { n: step + 1, total: steps.length })}</p>
         <button class="button button--primary" type="submit" disabled={!answered}>
           {isLast ? t(texts, "wizard.finish") : t(texts, "wizard.next")}
         </button>
