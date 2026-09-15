@@ -73,13 +73,17 @@ diese eine Datei. Der Schriftzug sagt derzeit «.CH», die Website läuft unter
 povratnik.com; die endgültige Fassung ist eine Entscheidung der Produktverantwortung.
 Rot kommt nirgends mehr vor.
 
-**Raster:** zwölf Spalten, Breite bis 1320 Pixel, linksbündig. Karten weiss mit
+**Raster:** zwölf Spalten, Breite bis 1600 Pixel (Änderung vom 15.09.2026, vorher 1320),
+linksbündig. Karten weiss mit
 8 Pixel Radius auf hellen Flächen, ohne Schatten, mit dünner Linie. Schaltflächen mit
 6 Pixel Radius, gefüllt in Akzent, auf dunklem Grund weiss.
 
-**Rhythmus:** Bänder wechseln zwischen Papier, Fläche und Marke. Der Aufmacher ist
-zweigeteilt: Markenfläche mit Titel links, Fotografie rechts, auf schmalen Geräten
-untereinander. Auf der Startseite steht unter dem Titel ein Suchfeld; es führt zur
+**Rhythmus:** Bänder wechseln zwischen Papier, Fläche und Marke. Der Aufmacher der
+Startseite füllt den Bildschirm unter dem Kopf: auf breiten Geräten liegt die
+Fotografie hinter dem ganzen Aufmacher bis zum Rand, links ein Verlauf in
+Markenfarbe, darauf Titel, Suchfeld und Handlungen; auf schmalen Geräten Text und
+Fotografie untereinander, zusammen genau ein Bildschirm. Andere Aufmacher bleiben
+Markenfläche mit Titel. Auf der Startseite steht unter dem Titel ein Suchfeld; es führt zur
 Suchseite, ohne den Suchbegriff in die Adresse oder an den Server zu schreiben.
 
 **Fotografie:** dokumentarisch wirkende Bilder von Menschen und Orten, natürliches
