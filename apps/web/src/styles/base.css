@@ -438,8 +438,51 @@ a:hover {
   grid-template-rows: auto minmax(240px, 1fr);
 }
 @media (max-width: 720px) {
+  /* Schmal: Text kompakt, damit der Aufmacher samt Foto auf einen Bildschirm passt. */
   .hero--full {
     --head-h: 6.3rem;
+  }
+  .hero--full .container {
+    grid-template-rows: auto minmax(8rem, 1fr);
+  }
+  .hero--full .hero__text {
+    padding-block: 1.75rem 1.5rem;
+  }
+  .hero--full h1 {
+    font-size: 1.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .hero--full .lede {
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .hero--full .search {
+    margin-top: 1.1rem;
+    flex-wrap: nowrap;
+  }
+  .hero--full .search input {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .hero--full .hero__actions {
+    margin: 0.85rem 0 0.7rem;
+    gap: 0.5rem;
+  }
+  .hero--full .hero__actions .button {
+    flex: 1 1 auto;
+    padding-inline: 0.6rem;
+    font-size: 0.875rem;
+  }
+  .hero--full .hero__media {
+    min-height: 8rem;
+  }
+  .hero--full .hero__media img {
+    position: absolute;
+    inset: 0;
+  }
+  .hero--full .hero__note {
+    font-size: 0.875rem;
   }
 }
 @media (min-width: 860px) {
