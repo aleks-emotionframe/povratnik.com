@@ -677,9 +677,9 @@ ui:
     more_situations: Prema životnoj situaciji
     more_glossary: Pojmovnik službenih pojmova
     more_countries: Prema zemlji podrijetla
-    more_situations_text: "Šest tipičnih slučajeva, od selidbe s obitelji do mirovine."
-    more_glossary_text: "OIB, prebivalište, domovnica i drugi službeni pojmovi, razumljivo objašnjeni."
-    more_countries_text: "Što morate riješiti u dosadašnjoj zemlji boravka, za šest zemalja."
+    more_situations_link: Šest ulaza
+    more_glossary_link: Pojmovnik
+    more_countries_link: Šest zemalja
     crumb: Znanje
     crumb_rubric: Rubrika {n}
     questions: Tipična pitanja

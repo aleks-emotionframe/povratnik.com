@@ -448,9 +448,9 @@ ui:
     more_situations: Nach Lebenssituation
     more_glossary: Glossar der Amtsbegriffe
     more_countries: Nach Herkunftsland
-    more_situations_text: "Sechs typische Fälle, vom Umzug mit Familie bis zur Pension."
-    more_glossary_text: "OIB, prebivalište, Domovnica und weitere Amtsbegriffe, verständlich erklärt."
-    more_countries_text: "Was Sie im bisherigen Wohnland erledigen müssen, für sechs Länder."
+    more_situations_link: Sechs Einstiege
+    more_glossary_link: Glossar
+    more_countries_link: Sechs Länder
     crumb: Wissen
     crumb_rubric: Rubrik {n}
     questions: Typische Fragen

@@ -677,9 +677,9 @@ ui:
     more_situations: Por situación de vida
     more_glossary: Glosario de términos oficiales
     more_countries: Por país de origen
-    more_situations_text: "Seis casos típicos, desde la mudanza con familia hasta la jubilación."
-    more_glossary_text: "OIB, prebivalište, Domovnica y otros términos oficiales, explicados con claridad."
-    more_countries_text: "Lo que debe resolver en su país de residencia actual, para seis países."
+    more_situations_link: Seis entradas
+    more_glossary_link: Glosario
+    more_countries_link: Seis países
     crumb: Conocimiento
     crumb_rubric: Sección {n}
     questions: Preguntas típicas

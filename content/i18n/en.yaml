@@ -677,9 +677,9 @@ ui:
     more_situations: By life situation
     more_glossary: Glossary of official terms
     more_countries: By country of origin
-    more_situations_text: "Six typical cases, from moving with a family to retirement."
-    more_glossary_text: "OIB, prebivalište, Domovnica and other official terms, explained in plain words."
-    more_countries_text: "What you need to settle in your current country, for six countries."
+    more_situations_link: Six entry points
+    more_glossary_link: Glossary
+    more_countries_link: Six countries
     crumb: Knowledge
     crumb_rubric: Section {n}
     questions: Typical questions
