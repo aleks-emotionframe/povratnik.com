@@ -486,6 +486,7 @@ ui:
     state_draft: "fachlich noch nicht geprüft"
     stand: Stand {date}
     missing: noch nicht recherchiert
+    glance_title: Auf einen Blick
     applies: Gilt für
     not_applies: Gilt nicht für
     authority: Zuständig
@@ -830,6 +831,7 @@ ui:
   weg:
     title: "Mein Weg nach Kroatien: Kurzcheck"
     description: "Ein paar Fragen, dann Ihr erster Plan."
+    promises_title: So funktioniert der Kurzcheck
     promise_1: Ohne Konto, ohne Anmeldung
     promise_2: Antworten bleiben in diesem Browser
     promise_3: Jede Angabe im Plan mit Quelle und Prüfdatum

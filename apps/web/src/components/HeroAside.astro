@@ -1,0 +1,23 @@
+---
+// Rechte Spalte im kleinen Aufmacher: Zwischentitel, darunter Zeilen mit feinen Linien
+// (Fragen, Angaben, Links). Auf dem Handy zugeklappt, auf breiten Bildschirmen offen;
+// ohne JavaScript immer offen. Styles in base.css (.hero__aside).
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<details class="hero__aside" open>
+  <summary><h2>{title}</h2></summary>
+  <slot />
+</details>
+<script is:inline>
+  (function () {
+    var box = document.querySelector(".hero__aside");
+    var narrow = window.matchMedia("(max-width: 720px)");
+    function apply() { box.open = !narrow.matches; }
+    apply();
+    narrow.addEventListener("change", apply);
+  })();
+</script>

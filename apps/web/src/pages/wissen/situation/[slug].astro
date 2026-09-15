@@ -2,6 +2,7 @@
 // Einstieg nach Lebenssituation (inhaltskonzept.md 4.3): ein kuratierter Pfad durch
 // bestehende Themenseiten, kein neuer Inhalt.
 import Base from "../../../layouts/Base.astro";
+import HeroAside from "../../../components/HeroAside.astro";
 import { SITUATIONS, situationBySlug, situationText } from "../../../lib/situations.ts";
 import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
 import { loadPages, pagePath, type PageView } from "../../../lib/pages.ts";
@@ -25,16 +26,15 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("situation.crumb")}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a><span class="crumbs__here"> / {u("situation.crumb")}</span></p>
         <h1>{tx.title}</h1>
         <p class="lede">{tx.intro}</p>
       </div>
-      <div class="hero__media hero__media--plain">
-        <div>
-          <h2 class="trap__title">{u("situation.trap_title")}</h2>
-          <p class="trap">{tx.trap}</p>
-        </div>
-      </div>
+      <HeroAside title={u("situation.trap_title")}>
+        <ul class="topics">
+          <li><span>{tx.trap}</span></li>
+        </ul>
+      </HeroAside>
     </div>
   </section>
 
@@ -70,41 +70,6 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
 </Base>
 
 <style>
-  .crumbs {
-    font-size: 0.875rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.75rem;
-  }
-  .crumbs a {
-    color: var(--on-brand);
-  }
-  .hero__media--plain {
-    display: flex;
-    align-items: center;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    min-height: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  @media (min-width: 860px) {
-    .hero__media--plain {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
-  }
-  .trap__title {
-    font-size: 1rem;
-    color: var(--on-brand-soft);
-    margin-bottom: 0.5rem;
-  }
-  .trap {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.125rem;
-    line-height: 1.4;
-    color: var(--on-brand);
-    max-width: 34ch;
-    margin: 0;
-  }
   .path {
     list-style: none;
     padding: 0;

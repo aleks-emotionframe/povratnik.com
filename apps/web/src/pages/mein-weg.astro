@@ -3,6 +3,7 @@
 // entscheidet die Stufe (src/lib/stage.ts, ADR-0004) über src/lib/content.ts. Der Katalog
 // der Sprache geht als texts in die Insel; sie ist die einzige Stelle mit JavaScript.
 import Base from "../layouts/Base.astro";
+import HeroAside from "../components/HeroAside.astro";
 import { Wizard } from "../islands/Wizard.tsx";
 import { bundleFor, loadContent } from "../lib/content.ts";
 import { bundleMode } from "../lib/stage.ts";
@@ -32,11 +33,11 @@ const w = texts.wizard as Record<string, string>;
         <h1>{w.title}</h1>
         <p class="lede">{w.intro}</p>
       </div>
-      <div class="hero__media hero__media--plain">
-        <ul class="promises">
-          {[1, 2, 3, 4].map((i) => <li>{u(`weg.promise_${i}`)}</li>)}
+      <HeroAside title={u("weg.promises_title")}>
+        <ul class="topics">
+          {[1, 2, 3, 4].map((i) => <li><span>{u(`weg.promise_${i}`)}</span></li>)}
         </ul>
-      </div>
+      </HeroAside>
     </div>
   </section>
   <section class="band band--surface">
@@ -64,42 +65,6 @@ const w = texts.wizard as Record<string, string>;
 </Base>
 
 <style>
-  .hero__media--plain {
-    display: flex;
-    align-items: center;
-    padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
-    min-height: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-  }
-  @media (min-width: 860px) {
-    .hero__media--plain {
-      border-top: 0;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-    }
-  }
-  .promises {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.7rem;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--on-brand);
-  }
-  .promises li::before {
-    content: "✓";
-    display: inline-grid;
-    place-items: center;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-right: 0.6rem;
-    border-radius: 50%;
-    background: var(--accent-bright);
-    color: var(--brand-deep);
-    font-size: 0.8rem;
-  }
   .wizard__notice {
     max-width: 52rem;
     margin-bottom: 1.25rem;

@@ -715,6 +715,7 @@ ui:
     state_draft: "aún sin revisión profesional"
     stand: Estado {date}
     missing: todavía sin investigar
+    glance_title: De un vistazo
     applies: Aplica a
     not_applies: No aplica a
     authority: Entidad competente
@@ -1059,6 +1060,7 @@ ui:
   weg:
     title: "Mi camino a Croacia: chequeo rápido"
     description: "Unas preguntas y después su primer plan."
+    promises_title: Cómo funciona el chequeo rápido
     promise_1: Sin cuenta, sin registro
     promise_2: Las respuestas se quedan en este navegador
     promise_3: Cada dato del plan con fuente y fecha de comprobación

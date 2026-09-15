@@ -715,6 +715,7 @@ ui:
     state_draft: "stručno još nije provjereno"
     stand: Stanje {date}
     missing: još nije istraženo
+    glance_title: Ukratko
     applies: Vrijedi za
     not_applies: Ne vrijedi za
     authority: Nadležno
@@ -1059,6 +1060,7 @@ ui:
   weg:
     title: "Moj put u Hrvatsku: brza provjera"
     description: "Nekoliko pitanja, zatim vaš prvi plan."
+    promises_title: Kako radi brza provjera
     promise_1: Bez računa, bez registracije
     promise_2: Odgovori ostaju u ovom pregledniku
     promise_3: Svaki podatak u planu s izvorom i datumom provjere
