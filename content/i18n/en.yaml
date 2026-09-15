@@ -819,6 +819,7 @@ ui:
     fictional_title: Fictional test municipality
     fictional_text: This place is invented. It shows the structure of a place profile with all states. No value refers to a real place.
     benefits_title: Measures of the municipality
+    jump_label: "Sections of this place profile"
     benefits_help: Four dates, one status. The municipality decides on the application.
     benefits_empty: No measures are recorded for this place. That does not mean there are none.
     target: For whom

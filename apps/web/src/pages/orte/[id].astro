@@ -46,15 +46,23 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     </div>
   </section>
 
-  <section class="band band--surface">
+  <nav class="jump" aria-label={u("place.jump_label")}>
     <div class="container">
-      <p class="notice" role="note">
-        <strong>{u("place.fictional_title")}</strong>
-        {u("place.fictional_text")}
-      </p>
+      <a href="#leistungen">{u("place.benefits_title")}</a>
+      <a href="#familie">{u("place.family_title")}</a>
+      <a href="#gesundheit">{u("place.health_title")}</a>
+      <a href="#wohnen">{u("place.housing_title")}</a>
+      <a href="#arbeit">{u("place.work_title")}</a>
+      <a href="#alltag">{u("place.daily_title")}</a>
+      <a href="#umfeld">{u("place.surroundings_title")}</a>
+    </div>
+  </nav>
+
+  <section class="band band--surface panel-anchor" id="leistungen">
+    <div class="container">
+      <p class="fictional">{u("place.fictional_text")}</p>
       <div class="band__head">
         <h2>{u("place.benefits_title")}</h2>
-        <p class="soft">{u("place.benefits_help")}</p>
       </div>
       {place.benefits.length === 0 ? (
         <p><span class="state state--unknown">{u("place.fact_not_collected")}</span> {u("place.benefits_empty")}</p>
@@ -82,9 +90,10 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     </div>
   </section>
 
-  <section class="band">
+  <section class="band band--surface">
     <div class="container grid">
       <div class="col-main profile">
+        <section class="panel" id="familie">
         <h2>{u("place.family_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.kindergarten")}</dt><dd><Fact fact={place.family_education.kindergarten} /></dd>
@@ -94,7 +103,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.language_support")}</dt><dd><Fact fact={place.family_education.language_support} /></dd>
           <dt>{u("place.costs")}</dt><dd><Fact fact={place.family_education.costs} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="gesundheit">
         <h2>{u("place.health_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.gp")}</dt><dd><Fact fact={place.health.gp} /></dd>
@@ -103,7 +114,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.pharmacy")}</dt><dd><Fact fact={place.health.pharmacy} /></dd>
           <dt>{u("place.clinic")}</dt><dd><Fact fact={place.health.clinic} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="wohnen">
         <h2>{u("place.housing_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.rent")}</dt><dd><Fact fact={place.housing.long_term_rent} /></dd>
@@ -111,14 +124,18 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.municipal")}</dt><dd><Fact fact={place.housing.municipal_housing} /></dd>
           <dt>{u("place.land")}</dt><dd><Fact fact={place.housing.building_land} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="arbeit">
         <h2>{u("place.work_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.sectors")}</dt><dd>{place.work.sectors.join(", ")}</dd>
           <dt>{u("place.commute")}</dt><dd>{place.work.commute.map((c) => `${c.to} ${u("place.minutes", { n: c.minutes })}`).join(", ")} <span class="fact__note">{u("place.commute_note")}</span></dd>
           <dt>{u("place.employers")}</dt><dd><Fact fact={place.work.employers} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="alltag">
         <h2>{u("place.daily_title")}</h2>
         <dl class="open-field">
           <dt>{u("place.internet")}</dt><dd><Fact fact={place.daily.internet} /></dd>
@@ -128,7 +145,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
           <dt>{u("place.church")}</dt><dd><Fact fact={place.daily.church} /></dd>
           <dt>{u("place.shopping")}</dt><dd><Fact fact={place.daily.shopping} /></dd>
         </dl>
+        </section>
 
+        <section class="panel" id="umfeld">
         <h2>{u("place.surroundings_title")}</h2>
         {place.surroundings.length === 0 ? (
           <p><span class="state state--closed">{u("place.not_collected")}</span></p>
@@ -137,6 +156,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
             {place.surroundings.map((s) => <li><span>{s.what}</span><span class="mono">{s.where}, {u("place.minutes", { n: s.minutes })}</span></li>)}
           </ul>
         )}
+        </section>
       </div>
 
       <aside class="col-aside">
@@ -163,7 +183,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         {place.map && (
           <div class="side">
             <MapHr compact places={[{ id: place.id, name: placeName(place), lon: place.map.lon, lat: place.map.lat, href: p(`/orte/${place.id}`) }]} />
-            <p class="fact__note">{u("map.source", { source: "Natural Earth" })}</p>
           </div>
         )}
         <div class="side side--cta">
@@ -262,25 +281,82 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   .card .datenstand {
     margin-top: 0.75rem;
   }
-  .profile h2 {
-    font-size: 1.375rem;
-    margin-top: 2rem;
+  /* Sprungleiste unter dem Aufmacher: die Abschnitte des Profils, schmal scrollbar. */
+  .jump {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
   }
-  .profile h2:first-child {
-    margin-top: 0;
+  .jump .container {
+    display: flex;
+    gap: 0 1.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .jump a {
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding-block: 0.9rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .jump a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  .panel-anchor {
+    scroll-margin-top: 5rem;
+  }
+  .fictional {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    margin: 0 0 1rem;
+  }
+  /* Abschnitte des Profils als weisse Tafeln mit Anker. */
+  .profile {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem 1.5rem;
+    scroll-margin-top: 6rem;
+  }
+  .panel h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.75rem;
   }
   .profile .open-field {
     max-width: none;
     align-items: start;
+  }
+  .profile .open-field dt {
+    color: var(--muted);
+  }
+  .profile .open-field:last-child {
+    border-bottom: 0;
+  }
+  .profile .topics {
+    border-top: 0;
+  }
+  .profile .topics li:last-child {
+    border-bottom: 0;
   }
   .fact__note {
     font-size: 0.875rem;
     color: var(--ink-soft);
   }
   .side {
-    padding-bottom: 1.25rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.35rem;
     margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
   }
   .side h3 {
     font-size: 1rem;
@@ -306,17 +382,27 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     font-size: 0.9375rem;
   }
   .side--cta {
-    background: var(--surface);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-    border-bottom: 0;
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--on-brand);
     display: grid;
     gap: 0.75rem;
     justify-items: start;
   }
+  .side--cta h3 {
+    color: var(--on-brand);
+  }
   .side--cta p {
     margin: 0;
     font-size: 0.9375rem;
-    color: var(--ink-soft);
+    color: var(--on-brand-soft);
+  }
+  .side--cta .button {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+  }
+  .side--cta .arrow-link {
+    color: var(--accent-bright);
   }
 </style>

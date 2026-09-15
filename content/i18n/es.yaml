@@ -819,6 +819,7 @@ ui:
     fictional_title: Municipio de prueba ficticio
     fictional_text: Este lugar es inventado. Muestra la estructura de un perfil de lugar con todos los estados. Ningún valor se refiere a un lugar real.
     benefits_title: Ayudas del municipio
+    jump_label: "Secciones de este perfil"
     benefits_help: Cuatro fechas, un estado. Sobre la solicitud decide el municipio.
     benefits_empty: Para este lugar no hay ayudas registradas. Eso no significa que no las haya.
     target: Para quién
