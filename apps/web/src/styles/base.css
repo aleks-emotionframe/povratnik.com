@@ -589,7 +589,120 @@ a:hover {
   outline-offset: 2px;
 }
 .hero--small .hero__text {
-  padding-block: clamp(2rem, 5vw, 3.5rem);
+  padding-block: clamp(3rem, 6vw, 4.5rem);
+}
+/* Titel der Unterseiten: eine Stufe kleiner als auf der Startseite und breiter als
+   16ch, damit lange Amtswörter (Identifikationsnummer) nicht mitten im Wort brechen. */
+.hero--small .hero__text h1 {
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  max-width: 20ch;
+}
+/* Brotkrumen über dem Titel, auf allen Unterseiten gleich. */
+.crumbs {
+  font-size: 0.875rem;
+  color: var(--on-brand-soft);
+  margin-bottom: 1rem;
+}
+.crumbs a {
+  color: var(--on-brand);
+}
+/* Schmal zeigen die Brotkrumen nur den Weg, nicht die aktuelle Seite: die steht als
+   Titel direkt darunter, und lange Namen würden umbrechen. */
+@media (max-width: 720px) {
+  .crumbs__here {
+    display: none;
+  }
+}
+/* Rechte Spalte im kleinen Aufmacher, auf allen Seiten gleich: ein Zwischentitel und
+   Zeilen mit feinen Linien (Fragen, Angaben, Links, Zusagen). */
+.hero__aside {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--gutter);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+@media (min-width: 860px) {
+  .hero__aside {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+.hero__aside summary {
+  list-style: none;
+  cursor: default;
+}
+.hero__aside summary::-webkit-details-marker {
+  display: none;
+}
+.hero__aside h2 {
+  font-size: 1.125rem;
+  color: var(--on-brand);
+  margin: 0 0 0.75rem;
+}
+@media (max-width: 720px) {
+  /* Schmal ist der Titel die Klappe: 44 px hoch, Pfeil rechts, dreht sich beim Öffnen. */
+  .hero__aside summary {
+    cursor: pointer;
+  }
+  .hero__aside summary h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 44px;
+    margin: 0;
+  }
+  .hero__aside summary h2::after {
+    content: "";
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right: 2px solid var(--on-brand);
+    border-bottom: 2px solid var(--on-brand);
+    transform: rotate(45deg);
+    margin-right: 0.35rem;
+    transition: transform var(--dur) var(--ease);
+  }
+  .hero__aside[open] summary h2::after {
+    transform: rotate(-135deg);
+  }
+  .hero__aside[open] summary h2 {
+    margin-bottom: 0.75rem;
+  }
+}
+/* Zeilen in normaler Schrift; nur der Zwischentitel ist fett. */
+.hero__aside .topics {
+  border-top-color: rgba(255, 255, 255, 0.2);
+}
+.hero__aside .topics li {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--on-brand);
+}
+.hero__aside .topics li span:first-child {
+  font-family: var(--font-text);
+  font-weight: 400;
+  font-size: 1rem;
+}
+.hero__aside .arrow-link {
+  color: var(--accent-bright);
+}
+/* Angaben als Zeilen: Beschriftung, darunter der Wert. */
+.hero__aside dl {
+  margin: 0;
+  max-width: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.hero__aside dt {
+  font-size: 0.875rem;
+  color: var(--on-brand-soft);
+  padding-top: 0.85rem;
+}
+.hero__aside dd {
+  margin: 0;
+  padding: 0.2rem 0 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--on-brand);
 }
 /* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
    Das Foto liegt hinter dem ganzen Aufmacher, darüber ein Verlauf in Markenfarbe;
@@ -1415,6 +1528,11 @@ a:hover {
 .side h3 {
   font-size: 1rem;
   margin-bottom: 0.5rem;
+}
+.side__text {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
 }
 .side__list {
   list-style: none;

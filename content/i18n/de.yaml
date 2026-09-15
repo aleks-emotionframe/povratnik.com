@@ -443,9 +443,6 @@ ui:
     title: "Wissen"
     description: "Zwölf Rubriken zu Rückkehr und Auswanderung nach Kroatien: Status, Dokumente, Arbeit, Steuern, Gesundheit, Schule, Wohnen, Förderung."
     lede: "Antworten zu Aufenthalt, Dokumenten, Arbeit, Steuern, Gesundheit, Schule und Wohnen."
-    pages_one: "{n} Themenseite"
-    pages_many: "{n} Themenseiten"
-    topics_wip: "{n} Themen in Arbeit"
     group_basics: Grundlagen
     group_work_money: Arbeit und Geld
     group_family_life: Familie und Alltag
@@ -455,10 +452,8 @@ ui:
     more_title: "Weitere Wege zum Wissen"
     more_situations: Nach Lebenssituation
     more_glossary: Glossar der Amtsbegriffe
-    more_countries: Nach Herkunftsland
     more_situations_link: Sechs Einstiege
     more_glossary_link: Glossar
-    more_countries_link: Sechs Länder
     crumb: Wissen
     questions: Typische Fragen
     topics_title: Themen in dieser Rubrik
@@ -491,6 +486,7 @@ ui:
     state_draft: "fachlich noch nicht geprüft"
     stand: Stand {date}
     missing: noch nicht recherchiert
+    glance_title: Auf einen Blick
     applies: Gilt für
     not_applies: Gilt nicht für
     authority: Zuständig
@@ -835,6 +831,7 @@ ui:
   weg:
     title: "Mein Weg nach Kroatien: Kurzcheck"
     description: "Ein paar Fragen, dann Ihr erster Plan."
+    promises_title: So funktioniert der Kurzcheck
     promise_1: Ohne Konto, ohne Anmeldung
     promise_2: Antworten bleiben in diesem Browser
     promise_3: Jede Angabe im Plan mit Quelle und Prüfdatum

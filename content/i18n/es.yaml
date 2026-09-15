@@ -672,9 +672,6 @@ ui:
     title: "Conocimiento"
     description: "Doce secciones sobre regresar o emigrar a Croacia: estatus, documentos, trabajo, impuestos, salud, escuela, vivienda, ayudas."
     lede: "Respuestas sobre residencia, documentos, trabajo, impuestos, salud, escuela y vivienda."
-    pages_one: "{n} página temática"
-    pages_many: "{n} páginas temáticas"
-    topics_wip: "{n} temas en preparación"
     group_basics: Lo básico
     group_work_money: Trabajo y dinero
     group_family_life: Familia y vida cotidiana
@@ -684,10 +681,8 @@ ui:
     more_title: "Otros caminos al conocimiento"
     more_situations: Por situación de vida
     more_glossary: Glosario de términos oficiales
-    more_countries: Por país de origen
     more_situations_link: Seis entradas
     more_glossary_link: Glosario
-    more_countries_link: Seis países
     crumb: Conocimiento
     questions: Preguntas típicas
     topics_title: Temas de esta sección
@@ -720,6 +715,7 @@ ui:
     state_draft: "aún sin revisión profesional"
     stand: Estado {date}
     missing: todavía sin investigar
+    glance_title: De un vistazo
     applies: Aplica a
     not_applies: No aplica a
     authority: Entidad competente
@@ -1064,6 +1060,7 @@ ui:
   weg:
     title: "Mi camino a Croacia: chequeo rápido"
     description: "Unas preguntas y después su primer plan."
+    promises_title: Cómo funciona el chequeo rápido
     promise_1: Sin cuenta, sin registro
     promise_2: Las respuestas se quedan en este navegador
     promise_3: Cada dato del plan con fuente y fecha de comprobación

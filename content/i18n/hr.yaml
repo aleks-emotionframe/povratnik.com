@@ -672,9 +672,6 @@ ui:
     title: "Znanje"
     description: "Dvanaest rubrika o povratku i useljenju u Hrvatsku: status, isprave, rad, porezi, zdravlje, škola, stanovanje, potpore."
     lede: "Odgovori o boravku, dokumentima, radu, porezima, zdravstvu, školi i stanovanju."
-    pages_one: "{n} tematska stranica"
-    pages_many: "{n} tematskih stranica"
-    topics_wip: "{n} tema u pripremi"
     group_basics: Osnove
     group_work_money: Rad i novac
     group_family_life: Obitelj i svakodnevica
@@ -684,10 +681,8 @@ ui:
     more_title: "Drugi putovi do znanja"
     more_situations: Prema životnoj situaciji
     more_glossary: Pojmovnik službenih pojmova
-    more_countries: Prema zemlji podrijetla
     more_situations_link: Šest ulaza
     more_glossary_link: Pojmovnik
-    more_countries_link: Šest zemalja
     crumb: Znanje
     questions: Tipična pitanja
     topics_title: Teme u ovoj rubrici
@@ -720,6 +715,7 @@ ui:
     state_draft: "stručno još nije provjereno"
     stand: Stanje {date}
     missing: još nije istraženo
+    glance_title: Ukratko
     applies: Vrijedi za
     not_applies: Ne vrijedi za
     authority: Nadležno
@@ -1064,6 +1060,7 @@ ui:
   weg:
     title: "Moj put u Hrvatsku: brza provjera"
     description: "Nekoliko pitanja, zatim vaš prvi plan."
+    promises_title: Kako radi brza provjera
     promise_1: Bez računa, bez registracije
     promise_2: Odgovori ostaju u ovom pregledniku
     promise_3: Svaki podatak u planu s izvorom i datumom provjere

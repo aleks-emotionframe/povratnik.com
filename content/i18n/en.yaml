@@ -672,9 +672,6 @@ ui:
     title: "Knowledge"
     description: "Twelve sections on returning or emigrating to Croatia: status, documents, work, taxes, health, school, housing, support."
     lede: "Answers on residence, documents, work, taxes, health, school and housing."
-    pages_one: "{n} topic page"
-    pages_many: "{n} topic pages"
-    topics_wip: "{n} topics in preparation"
     group_basics: Basics
     group_work_money: Work and money
     group_family_life: Family and everyday life
@@ -684,10 +681,8 @@ ui:
     more_title: "More ways into the knowledge"
     more_situations: By life situation
     more_glossary: Glossary of official terms
-    more_countries: By country of origin
     more_situations_link: Six entry points
     more_glossary_link: Glossary
-    more_countries_link: Six countries
     crumb: Knowledge
     questions: Typical questions
     topics_title: Topics in this section
@@ -720,6 +715,7 @@ ui:
     state_draft: "not yet professionally checked"
     stand: Status {date}
     missing: not yet researched
+    glance_title: At a glance
     applies: Applies to
     not_applies: Does not apply to
     authority: Competent body
@@ -1064,6 +1060,7 @@ ui:
   weg:
     title: "My way to Croatia: quick check"
     description: "A few questions, then your first plan."
+    promises_title: How the quick check works
     promise_1: No account, no registration
     promise_2: Answers stay in this browser
     promise_3: Every fact in the plan with source and check date
