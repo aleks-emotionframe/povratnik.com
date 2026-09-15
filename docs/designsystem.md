@@ -115,7 +115,8 @@ Jeder Typ hat eine festgelegte Struktur:
 ## 4. Zustände in der Oberfläche
 
 Das wichtigste gestalterische Prinzip. Immer unterscheidbar, immer mit Text, nie nur
-mit Farbe. Die Vokabulare sind in `datenmodell.md` Abschnitt 1.1 definiert: Vokabular B
+mit Farbe. Eine Marke ist ein kleiner Kreis (gefüllt, halb, leer) und das Wort in der
+Zustandsfarbe, ohne Hintergrundfläche und ohne Pillenform (Entscheid vom 15.09.2026). Die Vokabulare sind in `datenmodell.md` Abschnitt 1.1 definiert: Vokabular B
 beschreibt ein Programm, Vokabular A einen einzelnen Fachwert.
 
 | Vokabular | Zustand | Darstellung |

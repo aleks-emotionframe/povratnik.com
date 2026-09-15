@@ -730,29 +730,27 @@ a:hover {
   }
 }
 
-/* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). */
+/* Zustände: immer mit Text, nie nur Farbe (designsystem.md 4). Punkt und Wort in der
+   Zustandsfarbe, ohne Hintergrund. */
 .state {
   font-family: var(--font-meta);
   font-size: 0.8125rem;
-  letter-spacing: 0.01em;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  padding: 0.2em 0.65em;
-  border-radius: 999px;
+  gap: 0.45em;
   white-space: nowrap;
 }
 .state::before {
   content: "";
-  width: 0.55em;
-  height: 0.55em;
+  width: 0.6em;
+  height: 0.6em;
   border-radius: 50%;
   border: 1.5px solid currentColor;
   flex: none;
 }
 .state--matches {
   color: var(--st-open);
-  background: var(--st-open-bg);
 }
 .state--matches::before {
   background: currentColor;
@@ -760,23 +758,19 @@ a:hover {
 .state--unclear,
 .state--unknown {
   color: var(--st-unknown);
-  background: var(--st-unknown-bg);
 }
 .state--condition_missing,
 .state--unchecked {
   color: var(--st-closed);
-  background: var(--st-closed-bg);
 }
 .state--condition_missing::before {
   background: linear-gradient(90deg, currentColor 50%, transparent 50%);
 }
 .state--announced {
   color: var(--st-announced);
-  background: var(--st-announced-bg);
 }
 .state--closed {
   color: var(--st-closed);
-  background: var(--st-closed-bg);
 }
 .state--closed::before {
   background: currentColor;
@@ -813,23 +807,6 @@ a:hover {
 .hero .depth__fill {
   background: var(--accent-bright);
 }
-.state-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.9rem;
-}
-.state-list li {
-  display: grid;
-  gap: 0.3rem;
-  font-size: 0.9375rem;
-  color: var(--ink-soft);
-}
-.state-list .state {
-  justify-self: start;
-}
-
 /* Datenstand-Zeile: Quelle, Prüfdatum, Fassung, immer an derselben Stelle. */
 .datenstand {
   color: var(--muted);

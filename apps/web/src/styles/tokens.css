@@ -45,7 +45,7 @@
   --st-closed: oklch(47% 0.020 240);
   --st-closed-bg: oklch(95% 0.004 240);
   /* Vokabular A, Fachwert unbekannt */
-  --st-unknown: oklch(50% 0.030 85);
+  --st-unknown: oklch(46% 0.035 85);
   --st-unknown-bg: oklch(96% 0.030 85);
 
   --font-display: "Montserrat", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

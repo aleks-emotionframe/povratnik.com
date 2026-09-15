@@ -188,22 +188,22 @@ const elig = texts.eligibility as Record<string, string>;
     </div>
   </section>
 
-  <section class="band band--brand">
-    <div class="container grid">
-      <div class="col-main">
+  <section class="band">
+    <div class="container why">
+      <div class="why__text">
         <h2>{u("home.why_title")}</h2>
         <p>{u("home.why_text")}</p>
         <p class="soft">{u("home.why_note")}</p>
       </div>
-      <aside class="col-aside states-aside">
+      <div class="why__states">
         <h3>{u("home.states_title")}</h3>
-        <ul class="state-list">
-          <li><span class="state state--matches">{elig.matches}</span> {u("home.state_matches")}</li>
-          <li><span class="state state--unclear">{elig.unclear}</span> {u("home.state_unclear")}</li>
-          <li><span class="state state--condition_missing">{elig.condition_missing}</span> {u("home.state_missing")}</li>
-          <li><span class="state state--unknown">{u("place.fact_unknown")}</span> {u("home.state_unknown")}</li>
+        <ul class="why__list">
+          <li><span class="state state--matches">{elig.matches}</span><span>{u("home.state_matches")}</span></li>
+          <li><span class="state state--unclear">{elig.unclear}</span><span>{u("home.state_unclear")}</span></li>
+          <li><span class="state state--condition_missing">{elig.condition_missing}</span><span>{u("home.state_missing")}</span></li>
+          <li><span class="state state--unknown">{u("place.fact_unknown")}</span><span>{u("home.state_unknown")}</span></li>
         </ul>
-      </aside>
+      </div>
     </div>
   </section>
 
@@ -394,17 +394,45 @@ const elig = texts.eligibility as Record<string, string>;
     padding-top: 0.6rem;
     margin-top: auto !important;
   }
-  .states-aside {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
+  /* Glaubwürdigkeit: Text links, die Zustände rechts als Zeilen mit Trennlinien. */
+  .why {
+    display: grid;
+    gap: 2.5rem 4rem;
+    grid-template-columns: 1fr;
   }
-  .states-aside h3 {
+  @media (min-width: 900px) {
+    .why {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+      align-items: start;
+    }
+  }
+  .why__text h2 {
+    max-width: 18ch;
+  }
+  .why__states h3 {
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
-  .states-aside .state-list li {
-    color: var(--on-brand-soft);
+  .why__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: none;
+    border-top: 1px solid var(--line-strong);
+  }
+  .why__list li {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.25rem 1.5rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+  }
+  @media (min-width: 600px) {
+    .why__list li {
+      grid-template-columns: 13rem minmax(0, 1fr);
+      align-items: baseline;
+    }
   }
 </style>
