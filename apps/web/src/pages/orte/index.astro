@@ -176,7 +176,7 @@ const targets = (pl: (typeof places)[number]) => {
   /* Aufmacher: Text links, grosse Karte rechts auf Nachtblau. */
   .hero--map .container {
     padding-inline: var(--gutter);
-    align-items: center;
+    align-items: start;
     gap: 2rem;
     padding-block: clamp(2rem, 5vw, 4rem);
   }
@@ -192,13 +192,22 @@ const targets = (pl: (typeof places)[number]) => {
   .hero__map {
     min-height: 0;
   }
+  /* Feste Höhe: Wechselt der Inhalt, darf sich die Karte daneben nicht verschieben,
+     sonst rutscht der Punkt unter dem Zeiger weg und die Anzeige flackert. */
   .map-info {
     margin-top: 1.75rem;
     padding: 1.1rem 1.25rem;
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    min-height: 7.5rem;
+    height: 11rem;
+    overflow: hidden;
+  }
+  .map-info__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .map-info__title {
     display: block;
