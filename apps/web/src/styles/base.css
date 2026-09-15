@@ -42,10 +42,23 @@ h4 {
   line-height: 1.15;
   margin: 0 0 0.5em;
   text-wrap: balance;
+  /* Lange deutsche Wörter (Identifikationsnummer) dürfen auf dem Handy umbrechen. */
+  overflow-wrap: anywhere;
+  hyphens: auto;
 }
 h1 {
   font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem);
   line-height: 1.08;
+}
+/* Auf dem Handy so gross, dass ein Wort wie «Identifikationsnummer» in die Zeile passt. */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+  /* Höhere Spezifität: die 16ch-Regel steht weiter unten in dieser Datei. */
+  .hero .hero__text h1 {
+    max-width: none;
+  }
 }
 h2 {
   font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
@@ -100,7 +113,9 @@ a:hover {
 .hero .fact__note,
 .band--brand .muted,
 .band--brand .fact__meta,
-.band--brand .fact__note {
+.band--brand .fact__note,
+.hero .state,
+.band--brand .state {
   color: var(--on-brand-soft);
 }
 /* Zwei Bänder derselben Fläche hintereinander: das zweite ohne oberen Abstand. */
@@ -1101,6 +1116,8 @@ a:hover {
   gap: 0.75rem;
   flex-wrap: wrap;
   align-items: center;
+  height: 1.5rem;
+  margin-bottom: 0.45rem !important;
 }
 .benefit__place {
   font-size: 0.8125rem;
@@ -1113,10 +1130,36 @@ a:hover {
   font-size: 1.125rem;
   color: var(--ink) !important;
 }
-.benefit__amount .fact__meta,
-.benefit__amount .fact__note {
+.benefit__amount .fact__meta {
   font-family: var(--font-text);
   font-weight: 400;
+}
+/* Zugeklappt nur Wert und Stand; die Erläuterung zum Betrag steht in den Details. */
+.benefit__amount .fact__note {
+  display: none;
+}
+.benefit__amount {
+  height: 3.6rem;
+  overflow: hidden;
+}
+/* Jetzt beantragbar: die Karte selbst grün getönt, die Marke gross mit Haken. */
+.benefit-card--open {
+  background: var(--st-open-bg);
+  border-color: oklch(85% 0.08 155);
+}
+.benefit-card--open .benefit__state .state {
+  font-size: 0.9375rem;
+  font-family: var(--font-display);
+}
+.benefit-card--open .benefit__state .state::before {
+  width: 1.15em;
+  height: 1.15em;
+  border: 0;
+  border-radius: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox=' 0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='10' fill='%231f6a3f'/%3E%3Cpath d='M5.5 10.5l3 3 6-6' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.benefit-card--open .benefit__details {
+  border-top-color: oklch(85% 0.08 155);
 }
 .benefit__period {
   margin: 0 !important;
@@ -1155,17 +1198,38 @@ a:hover {
 .benefit__details[open] summary::after {
   transform: rotate(-135deg) translateY(-2px);
 }
+/* Details als Tabelle: Beschriftung links in fester Spalte, Wert rechts, Linie je Zeile. */
 .benefit {
-  margin: 0;
+  margin: 0 0 0.25rem;
   font-size: 0.9375rem;
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+}
+.benefit dt,
+.benefit dd {
+  margin: 0;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--line);
+}
+.benefit dt:first-of-type,
+.benefit dd:first-of-type {
+  border-top: 0;
 }
 .benefit dt {
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   color: var(--ink-soft);
 }
 .benefit dd {
-  margin: 0.1rem 0 0.65rem;
   color: var(--ink);
+}
+.benefit-card--open .benefit dt,
+.benefit-card--open .benefit dd {
+  border-top-color: oklch(85% 0.08 155);
+}
+.benefit .fact__meta,
+.benefit .fact__note {
+  font-size: 0.8125rem;
 }
 .benefit .plain {
   list-style: none;
@@ -1268,27 +1332,102 @@ a:hover {
 }
 
 /* Definitionslisten für Angaben */
+/* Angabenliste als Tabelle: Beschriftung links, Wert rechts, eine Linie je Zeile. */
 .open-field {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.25rem 1rem;
-  padding-block: 0.5rem;
-  border-bottom: 1px solid var(--line);
+  column-gap: 1rem;
   max-width: var(--measure);
+  margin: 0;
+}
+.open-field dt,
+.open-field dd {
+  margin: 0;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--line);
 }
 .open-field dt {
   color: var(--ink-soft);
+  padding-bottom: 0.1rem;
+  border-top-color: var(--line);
 }
 .open-field dd {
-  margin: 0 0 0.5rem;
+  border-top: 0;
+  padding-top: 0;
 }
 @media (min-width: 600px) {
   .open-field {
-    grid-template-columns: minmax(8rem, 12rem) 1fr;
+    grid-template-columns: minmax(8rem, 11rem) minmax(0, 1fr);
+  }
+  .open-field dt {
+    padding-bottom: 0.6rem;
   }
   .open-field dd {
-    margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 0.6rem;
   }
+}
+.open-field .fact__meta,
+.open-field .fact__note {
+  font-size: 0.8125rem;
+}
+
+/* Seitenspalte: jede Gruppe eine weisse Tafel, die Handlung in Markenfarbe. Gilt für
+   Rubriken, Lebenssituationen, Länder, Themen und Ortsprofile. */
+.side {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.25rem;
+}
+.side h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+.side__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side__list li {
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--line);
+}
+.side__list li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+.side__list a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+}
+.side--cta {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: var(--on-brand);
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+.side--cta h3 {
+  color: var(--on-brand);
+  margin: 0;
+}
+.side--cta p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--on-brand-soft);
+}
+.side--cta .button {
+  background: var(--paper);
+  color: var(--ink);
+  border-color: var(--paper);
+}
+.side--cta .arrow-link {
+  color: var(--accent-bright);
 }
 
 /* Fuss der Website, über dem EmotionFrame Balken */

@@ -15,7 +15,6 @@ export function getStaticPaths() {
 
 const { place } = Astro.props as { place: Place };
 const { u, p } = pageContext(Astro);
-const depth = Math.round((100 * place.data_depth.collected) / place.data_depth.total);
 const period = (b: Place["benefits"][number]) =>
   b.application.from || b.application.until
     ? u("place.period_range", { from: b.application.from ? formatDate(b.application.from) : u("place.period_open"), until: b.application.until ? formatDate(b.application.until) : u("place.period_running") })
@@ -30,16 +29,12 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         <p class="crumbs"><a href={p("/orte")}>{u("orte.crumb")}</a> / {place.county}</p>
         <h1>{placeName(place)}</h1>
         <p class="lede">{place.summary}</p>
-        <div class="depth">
-          <span>{u("orte.depth", { n: place.data_depth.collected, total: place.data_depth.total })}</span>
-          <div class="depth__bar"><div class="depth__fill" style={`width:${depth}%`}></div></div>
-        </div>
       </div>
       <div class="hero__media hero__media--plain">
         <dl class="glance">
           <dt>{u("place.location")}</dt><dd>{u(place.region === "coast" ? "orte.coast" : "orte.inland")}, {place.county}</dd>
           <dt>{u("place.population")}</dt><dd><Fact fact={place.population} /></dd>
-          <dt>{u("place.index")}</dt><dd><Fact fact={place.development_index} /></dd>
+          <dt><a href={p("/wissen/glossar#indeks-razvijenosti")}>{u("place.index")}</a></dt><dd><Fact fact={place.development_index} /></dd>
           <dt>{u("place.arrival")}</dt><dd><Fact fact={place.arrival.office} /></dd>
         </dl>
       </div>
@@ -68,7 +63,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
       ) : (
         <ul class="cards cards--benefits">
           {place.benefits.map((b) => (
-            <li class="card benefit-card">
+            <li class={`card benefit-card${b.program_state === "open" ? " benefit-card--open" : ""}`}>
               <div class="card__body">
                 <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span></p>
                 <h3>{b.title}</h3>
@@ -77,6 +72,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
                 <details class="benefit__details">
                   <summary>{u("place.details")}</summary>
                   <dl class="benefit">
+                    <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
                     <dt>{u("place.target")}</dt><dd>{b.target}</dd>
                     <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
                     <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
@@ -177,10 +173,9 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
             <p><span class="state state--closed">{u("place.not_collected")}</span></p>
           ) : (
             <ul class="changes">
-              {place.changes.map((c) => <li><span class={`state state--${changeCss(c.state)}`}>{u(`place.change_${c.state}`)}</span> {c.title} <span class="mono muted">{formatDate(c.as_of)}</span></li>)}
+              {place.changes.map((c) => <li><span class={`state state--${changeCss(c.state)}`}>{u(`place.change_${c.state}`)}</span><span>{c.title}</span><span class="mono muted">{formatDate(c.as_of)}</span></li>)}
             </ul>
           )}
-          <p class="fact__note">{u("place.changes_note")}</p>
         </div>
         {place.map && (
           <div class="side">
@@ -190,7 +185,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
         <div class="side side--cta">
           <h3>{u("place.cta_title")}</h3>
           <p>{u("place.cta_text")}</p>
-          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button" href={p("/mein-weg")}>{u("shell.cta")}</a>
           <a class="arrow-link" href={p("/orte/vergleich")}>{u("place.cta_compare")}</a>
         </div>
       </aside>
@@ -206,10 +201,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   }
   .crumbs a {
     color: var(--on-brand);
-  }
-  .hero .depth {
-    margin-top: 1.25rem;
-    max-width: 28rem;
   }
   .hero__media--plain {
     display: flex;
@@ -237,6 +228,12 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     font-weight: 600;
     color: var(--on-brand-soft);
     padding-top: 0.15rem;
+  }
+  /* Beschriftung mit Erklärung im Glossar: hell, gepunktet unterstrichen. */
+  .glance dt a {
+    color: inherit;
+    text-decoration: underline dotted;
+    text-underline-offset: 0.2em;
   }
   .glance dd {
     margin: 0 0 0.6rem;
@@ -312,8 +309,10 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   .profile .open-field dt {
     color: var(--muted);
   }
-  .profile .open-field:last-child {
-    border-bottom: 0;
+  .profile .open-field dt:first-of-type,
+  .profile .open-field dd:first-of-type {
+    border-top: 0;
+    padding-top: 0;
   }
   .profile .topics {
     border-top: 0;
@@ -325,62 +324,52 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     font-size: 0.875rem;
     color: var(--ink-soft);
   }
-  .side {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-    margin-bottom: 1.25rem;
-  }
   .side :global(.map) {
     border: 0;
     padding: 0;
   }
-  .side h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
   .side__dl {
     margin: 0;
     font-size: 0.9375rem;
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    column-gap: 0.75rem;
   }
-  .side__dl dt {
-    color: var(--muted);
-    margin-top: 0.5rem;
-  }
+  .side__dl dt,
   .side__dl dd {
     margin: 0;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .side__dl dt:first-of-type,
+  .side__dl dd:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .side__dl dt {
+    color: var(--ink-soft);
   }
   .changes {
     list-style: none;
     padding: 0;
-    margin: 0 0 0.5rem;
-    display: grid;
-    gap: 0.5rem;
-    font-size: 0.9375rem;
-  }
-  .side--cta {
-    background: var(--brand);
-    border-color: var(--brand);
-    color: var(--on-brand);
-    display: grid;
-    gap: 0.75rem;
-    justify-items: start;
-  }
-  .side--cta h3 {
-    color: var(--on-brand);
-  }
-  .side--cta p {
     margin: 0;
     font-size: 0.9375rem;
-    color: var(--on-brand-soft);
   }
-  .side--cta .button {
-    background: var(--paper);
-    color: var(--ink);
-    border-color: var(--paper);
+  .changes li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.15rem 0.75rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--line);
   }
-  .side--cta .arrow-link {
-    color: var(--accent-bright);
+  .changes li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .changes .state {
+    grid-column: 1 / -1;
+  }
+  .changes .muted {
+    font-size: 0.8125rem;
   }
 </style>

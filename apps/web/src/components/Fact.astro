@@ -51,4 +51,12 @@ const f: Fact = fact ?? { state: "not_collected" };
     font-size: 0.875rem;
     color: var(--ink-soft);
   }
+  /* Auf Markenflächen hell, nie grau auf Blau. Die gleichnamige Regel in base.css
+     verliert gegen den Komponentenstil, darum steht sie hier ein zweites Mal. */
+  :global(.hero) .fact__meta,
+  :global(.band--brand) .fact__meta,
+  :global(.hero) .fact__note,
+  :global(.band--brand) .fact__note {
+    color: var(--on-brand-soft);
+  }
 </style>

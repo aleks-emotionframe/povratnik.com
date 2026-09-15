@@ -42,7 +42,7 @@ const period = (b: (typeof items)[number]["b"]) =>
       <p class="count mono" id="count" aria-live="polite" data-one={u("benefits.count_one", { n: "{n}" })} data-many={u("benefits.count_many", { n: "{n}" })}>{u("benefits.count_many", { n: items.length })}</p>
       <ul class="cards cards--benefits" id="items">
         {items.map(({ place, b }) => (
-          <li class="card benefit-card" data-state={b.program_state}>
+          <li class={`card benefit-card${b.program_state === "open" ? " benefit-card--open" : ""}`} data-state={b.program_state}>
             <div class="card__body">
               <p class="benefit__state"><span class={`state state--${PROGRAM_STATE[b.program_state].css}`}>{u(`place.state_${b.program_state}`)}</span> <a class="benefit__place" href={p(`/orte/${place.id}`)}>{placeName(place)}</a></p>
               <h3>{b.title}</h3>
@@ -51,6 +51,7 @@ const period = (b: (typeof items)[number]["b"]) =>
               <details class="benefit__details">
                 <summary>{u("place.details")}</summary>
                 <dl class="benefit">
+                  <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
                   <dt>{u("place.target")}</dt><dd>{b.target}</dd>
                   <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
                 </dl>

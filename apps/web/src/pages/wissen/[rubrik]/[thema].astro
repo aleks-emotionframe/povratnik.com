@@ -2,6 +2,7 @@
 // Themenseite mit der festen Maske aus inhaltskonzept.md 4.2 (designsystem.md 3, Typ 3).
 // Inhalt aus content/pages in der Sprache der Adresse, sonst die deutsche Fassung mit
 // Hinweis (lib/pages.ts). Fehlende Felder erscheinen als Zustand, nie als leere Stelle.
+// Aufbau wie das Ortsprofil: Sprungleiste, Abschnitte als Tafeln, Seitenspalte als Tafeln.
 import Base from "../../../layouts/Base.astro";
 import { rubricBySlug, rubricText } from "../../../lib/rubrics.ts";
 import { loadPages, loadSources, pagePath, type PageView } from "../../../lib/pages.ts";
@@ -49,24 +50,76 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
     </div>
   </section>
 
+  <nav class="jump" aria-label={u("topic.jump_label")}>
+    <div class="container">
+      <a href="#voraussetzungen">{u("topic.prerequisites")}</a>
+      <a href="#ablauf">{u("topic.steps")}</a>
+      <a href="#unterlagen">{u("topic.documents")}</a>
+      <a href="#dauer">{u("topic.duration")}</a>
+      <a href="#fristen">{u("topic.deadlines")}</a>
+      <a href="#fehler">{u("topic.mistake")}</a>
+      <a href="#quellen">{u("topic.stand_title")}</a>
+    </div>
+  </nav>
+
   <section class="band band--surface">
-    <div class="container grid">
-      <div class="col-main mask">
-        <h2>{u("topic.prerequisites")}</h2>
-        {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
-
-        <h2>{u("topic.steps")}</h2>
-        {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
-
-        <h2>{u("topic.documents")}</h2>
-        {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
-
-        <h2>{u("topic.duration")}</h2>
-        <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
-
-        <h2>{u("topic.deadlines")}</h2>
-        {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+    <div class="container grid topic-grid">
+      <div class="col-main topic">
+        <section class="panel" id="voraussetzungen">
+          <h2>{u("topic.prerequisites")}</h2>
+          {s.prerequisites ? <ul class="checks">{s.prerequisites.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+        </section>
+        <section class="panel" id="ablauf">
+          <h2>{u("topic.steps")}</h2>
+          {s.steps ? <ol class="steps">{s.steps.map((x) => <li>{x}</li>)}</ol> : <p><span class="state state--unknown">{missing}</span></p>}
+        </section>
+        <section class="panel" id="unterlagen">
+          <h2>{u("topic.documents")}</h2>
+          {s.documents ? <ul class="checks checks--doc">{s.documents.map((x) => <li>{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+        </section>
+        <section class="panel" id="dauer">
+          <h2>{u("topic.duration")}</h2>
+          <p>{s.duration_costs ?? <span class="state state--unknown">{missing}</span>}</p>
+        </section>
+        <section class="panel" id="fristen">
+          <h2>{u("topic.deadlines")}</h2>
+          {s.deadlines ? <ul class="deadlines">{s.deadlines.map((x) => <li class="deadline">{x}</li>)}</ul> : <p><span class="state state--unknown">{missing}</span></p>}
+        </section>
+        <section class="panel panel--mistake" id="fehler">
+          <h2>{u("topic.mistake")}</h2>
+          <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
+        </section>
+        <section class="panel">
+          <h2>{u("topic.not_decided")}</h2>
+          <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
+          {s.open_points && (
+            <>
+              <h3>{u("topic.open_points")}</h3>
+              <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
+            </>
+          )}
+        </section>
+        {page.validity.transitional && <p class="notice" role="note"><strong>{u("topic.validity")}</strong>{page.validity.transitional[lang] ?? page.validity.transitional.de}</p>}
+        <section class="panel" id="quellen">
+          <h2>{u("topic.stand_title")}</h2>
+          <dl class="open-field">
+            <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
+            <dt>{u("topic.source")}</dt>
+            <dd>
+              {page.sources.map((src) => (
+                <p class="stand__source">
+                  <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
+                  <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
+                </p>
+              ))}
+            </dd>
+            <dt>{u("topic.valid_from")}</dt><dd class="mono">{fmtDate(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` ${u("topic.valid_until", { date: fmtDate(page.validity.valid_until.date!) })}`}</dd>
+            <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
+            <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
+          </dl>
+        </section>
       </div>
+
       <aside class="col-aside">
         {page.terms.length > 0 && (
           <div class="side">
@@ -96,54 +149,9 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
         <div class="side side--cta">
           <h3>{u("topic.cta_title")}</h3>
           <p>{u("topic.cta_text")}</p>
-          <a class="button button--primary" href={p("/mein-weg")}>{u("shell.cta")}</a>
+          <a class="button" href={p("/mein-weg")}>{u("shell.cta")}</a>
         </div>
       </aside>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="container">
-      <ul class="cards cards--two">
-        <li class="card card--mistake">
-          <div class="card__body">
-            <h3>{u("topic.mistake")}</h3>
-            <p>{s.common_mistake ?? <span class="state state--unknown">{missing}</span>}</p>
-          </div>
-        </li>
-        <li class="card">
-          <div class="card__body">
-            <h3>{u("topic.not_decided")}</h3>
-            <p>{s.not_decided_here ?? <span class="state state--unknown">{missing}</span>}</p>
-          </div>
-        </li>
-      </ul>
-      {s.open_points && (
-        <div class="open-points">
-          <h3>{u("topic.open_points")}</h3>
-          <ul class="checks checks--open">{s.open_points.map((x) => <li><span class="state state--unknown">{u("topic.open")}</span> {x}</li>)}</ul>
-        </div>
-      )}
-      {page.validity.transitional && <p class="notice" role="note"><strong>{u("topic.validity")}</strong>{page.validity.transitional[lang] ?? page.validity.transitional.de}</p>}
-
-      <div class="stand">
-        <h3>{u("topic.stand_title")}</h3>
-        <dl class="open-field">
-          <dt>{u("topic.label")}</dt><dd><span class={`state state--${state.key}`}>{state.label}</span></dd>
-          <dt>{u("topic.source")}</dt>
-          <dd>
-            {page.sources.map((src) => (
-              <p class="stand__source">
-                <a href={sources[src.id]?.url} rel="noopener">{sources[src.id]?.title ?? src.id}</a>
-                <span class="mono">{u("topic.source_meta", { publisher: sources[src.id]?.publisher ?? "", tier: sources[src.id]?.tier ?? "", reference: src.reference, date: fmtDate(src.checked) })}</span>
-              </p>
-            ))}
-          </dd>
-          <dt>{u("topic.valid_from")}</dt><dd class="mono">{fmtDate(page.validity.valid_from)}{page.validity.valid_until.kind === "date" && ` ${u("topic.valid_until", { date: fmtDate(page.validity.valid_until.date!) })}`}</dd>
-          <dt>{u("topic.next_check")}</dt><dd class="mono">{fmtDate(page.review.next_check)}</dd>
-          <dt>{u("topic.report")}</dt><dd><a href={`mailto:kontakt@povratnik.com?subject=${encodeURIComponent(u("topic.report_subject", { title: page.title }))}`}>kontakt@povratnik.com</a></dd>
-        </dl>
-      </div>
     </div>
   </section>
 </Base>
@@ -178,53 +186,123 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       border-left: 1px solid rgba(255, 255, 255, 0.12);
     }
   }
+  /* Gilt für, gilt nicht für, zuständig: als Tabelle auf Nachtblau. */
   .glance {
     margin: 0;
     display: grid;
-    gap: 0.35rem 1.25rem;
-    grid-template-columns: max-content 1fr;
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 1.25rem;
     max-width: none;
     font-size: 0.9375rem;
+    width: 100%;
+  }
+  .glance dt,
+  .glance dd {
+    margin: 0;
+    padding: 0.6rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+  }
+  .glance dt:first-of-type,
+  .glance dd:first-of-type {
+    border-top: 0;
+    padding-top: 0;
   }
   .glance dt {
     font-family: var(--font-display);
     font-weight: 600;
     color: var(--on-brand-soft);
-    padding-top: 0.15rem;
   }
   .glance dd {
-    margin: 0 0 0.6rem;
     color: var(--on-brand);
   }
   .glance .state {
-    background: rgba(255, 255, 255, 0.1);
     color: var(--on-brand-soft);
   }
-  .mask h2 {
-    font-size: 1.375rem;
-    margin-top: 1.75rem;
+  /* Sprungleiste unter dem Aufmacher. */
+  .jump {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
   }
-  .mask h2:first-child {
-    margin-top: 0;
+  .jump .container {
+    display: flex;
+    gap: 0 1.75rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .jump a {
+    flex: none;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding-block: 0.9rem;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .jump a:hover {
+    color: var(--ink);
+    border-bottom-color: var(--accent);
+  }
+  /* Tafeln über zwei Drittel, Seitenspalte ein Drittel, gleiche Kanten. */
+  @media (min-width: 1100px) {
+    .topic-grid {
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 1.25rem;
+    }
+    .topic-grid .col-main {
+      grid-column: 1 / 3;
+    }
+    .topic-grid .col-aside {
+      grid-column: 3;
+    }
+  }
+  .topic {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .panel {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 1.35rem 1.5rem 1.5rem;
+    scroll-margin-top: 6rem;
+  }
+  .panel h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.85rem;
+  }
+  .panel h3 {
+    font-size: 1rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+  .panel > p {
+    margin: 0;
+    max-width: none;
+  }
+  .panel--mistake {
+    background: var(--st-unknown-bg);
+    border-color: oklch(88% 0.06 85);
   }
   .checks,
   .steps,
   .deadlines {
     padding: 0;
-    margin: 0 0 0.5rem;
+    margin: 0;
     list-style: none;
     display: grid;
-    gap: 0.5rem;
+    gap: 0.6rem;
+    max-width: none;
   }
   .checks li {
-    padding-left: 1.75rem;
+    padding-left: 1.85rem;
     position: relative;
   }
   .checks li::before {
     content: "✓";
     position: absolute;
     left: 0;
-    top: 0;
+    top: 0.1rem;
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
@@ -233,7 +311,6 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
     font-size: 0.75rem;
     display: grid;
     place-items: center;
-    margin-top: 0.15rem;
   }
   .checks--doc li::before {
     content: "▪";
@@ -246,11 +323,13 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
   }
   .steps {
     counter-reset: step;
+    gap: 0.75rem;
   }
   .steps li {
     counter-increment: step;
     padding-left: 2.5rem;
     position: relative;
+    min-height: 1.75rem;
   }
   .steps li::before {
     content: counter(step);
@@ -274,81 +353,13 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
     padding: 0.35rem 0 0.35rem 0.85rem;
     border-left: 3px solid var(--accent);
   }
-  .side {
-    padding-bottom: 1.25rem;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .side h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-  }
-  .terms {
-    margin: 0;
-  }
-  .terms dt {
-    font-family: var(--font-meta);
-    font-size: 0.875rem;
-    color: var(--accent-deep);
-    margin-top: 0.6rem;
-  }
-  .terms dd {
-    margin: 0.15rem 0 0;
-    font-size: 0.9375rem;
-    color: var(--ink-soft);
-  }
-  .side__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .side__list li {
-    padding: 0.35rem 0;
-  }
-  .side__list a {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.9375rem;
-    text-decoration: none;
-  }
-  .side--cta {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.35rem;
-  }
-  .side--cta p {
-    font-size: 0.9375rem;
-    color: var(--ink-soft);
-  }
-  .cards--two {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-    margin-bottom: 2rem;
-  }
-  .card--mistake {
-    background: var(--st-unknown-bg);
-    border-color: transparent;
-  }
-  .card--mistake p,
-  .card p {
-    font-size: 1rem;
-    color: var(--ink);
-  }
-  .open-points {
-    margin-bottom: 2rem;
-  }
-  .open-points h3 {
-    font-size: 1.125rem;
-  }
-  .stand {
-    border-top: 1px solid var(--line);
-    padding-top: 1.5rem;
-  }
-  .stand h3 {
-    font-size: 1.125rem;
-  }
-  .stand .open-field {
+  .panel .open-field {
     max-width: none;
+  }
+  .panel .open-field dt:first-of-type,
+  .panel .open-field dd:first-of-type {
+    border-top: 0;
+    padding-top: 0;
   }
   .stand__source {
     margin: 0 0 0.5rem;
@@ -357,5 +368,25 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
   }
   .stand__source .mono {
     color: var(--muted);
+  }
+  .terms {
+    margin: 0;
+  }
+  .terms dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--accent-deep);
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--line);
+  }
+  .terms dt:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .terms dd {
+    margin: 0.15rem 0 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
   }
 </style>

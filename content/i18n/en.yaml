@@ -31,7 +31,7 @@ rules:
     matches: According to your answers, in the fictional example the remote work route may apply. The example authority (fictional) decides on the application.
 wizard:
   title: My way to Croatia
-  intro: Six questions, then your first plan. Your answers stay in this browser.
+  intro: "A few questions, then your first plan. Your answers stay in this browser."
   progress: Question {n} of {total}
   for_person: For {person}
   unknown: I do not know yet
@@ -132,6 +132,8 @@ wizard:
       help: The entry date triggers deadlines. Without a date, deadlines can only be calculated once it is confirmed.
   refine:
     unknown: I do not know
+    done: answered
+    open: open
     children:
       title: "{person}: age and language"
       help: Affects school, language support and the timeline.
@@ -607,7 +609,7 @@ ui:
     nav_search: Search
     cta: Start the quick check
     language: Language
-    foot_claim: "Living in Croatia: the right order for returning or emigrating, person by person."
+    foot_claim: "Everything that matters for emigrating or returning to Croatia."
     foot_disclaimer: This website does not replace legal or tax advice. The competent body always decides on applications.
     foot_stage: Test stage. Example rules without professional approval (ADR-0004).
     foot_wissen: Knowledge
@@ -617,7 +619,7 @@ ui:
     foot_tools: Tools
     foot_check: "Quick check: my way"
     foot_places: Discover places
-    foot_benefits: Benefits database
+    foot_benefits: "All support schemes"
     foot_contacts: Points of contact
     foot_search: Search
     foot_about: About us
@@ -639,12 +641,12 @@ ui:
     quick_title: Frequently searched
     ways_title: Three ways to the same knowledge
     way_check_title: My way
-    way_check_text: "Six questions about your household, then a first plan: what comes first, which deadline is triggered by what, what remains open."
+    way_check_text: "Answer a few questions about your situation. You get a plan with the next steps, the deadlines and what still needs clarifying."
     way_wissen_title: Knowledge by topic
-    way_wissen_text: "Twelve sections, from status to support. Every topic page with the same template: short answer, who it applies to, competent body, status."
+    way_wissen_text: "Clear answers on residence, documents, work, taxes, health, school and housing."
     way_wissen_link: To the sections
     way_orte_title: Discover places
-    way_orte_text: Municipalities with their measures for returnees, schools, doctors and housing. With status, check date and data depth, without ranking.
+    way_orte_text: "Municipalities in Croatia with their support for returnees, schools, doctors and housing."
     way_orte_link: Places and measures
     keys_title: Almost everything hangs on four keys
     key_link: Go to the topic
@@ -669,7 +671,7 @@ ui:
   wissen:
     title: "Knowledge"
     description: "Twelve sections on returning or emigrating to Croatia: status, documents, work, taxes, health, school, housing, support."
-    lede: "Answers on residence, documents, work, taxes, health, school and housing. Every page says who it applies to, who is responsible and when it was checked."
+    lede: "Answers on residence, documents, work, taxes, health, school and housing."
     pages_one: "{n} topic page"
     pages_many: "{n} topic pages"
     topics_wip: "{n} topics in preparation"
@@ -686,12 +688,12 @@ ui:
     topics_title: Topics in this section
     remaining_more: Further topics, still in preparation
     remaining_only: Topics, still in preparation
-    remaining_help: Every topic appears as soon as it carries source and check date.
+    remaining_help: "These topics are in progress."
     wip: in preparation
     requires: Needed first
     followed: Followed by
     cta_title: What applies to me?
-    cta_text: "The quick check sorts the topics by your household: who follows which path and what comes first."
+    cta_text: "The quick check shows which topics apply to you and your family and what comes first."
     mask_title: How every topic page is built
     mask_answer: Short answer
     mask_answer_v: in two or three sentences
@@ -709,31 +711,32 @@ ui:
     mask_notdecided_v: what a professional decides
   topic:
     state_checked: professionally checked
-    state_draft: Groundwork available, not professionally checked
+    jump_label: "Sections of this page"
+    state_draft: "not yet professionally checked"
     stand: Status {date}
     missing: not yet researched
     applies: Applies to
     not_applies: Does not apply to
     authority: Competent body
-    prerequisites: Requirements
-    steps: Procedure
-    documents: Documents
-    duration: Duration and costs
-    deadlines: Deadlines
-    terms: Official terms
-    requires: Needed first
-    followed: Followed by
-    cta_title: Does this apply to me?
-    cta_text: The quick check places this topic in your way, person by person.
-    mistake: Common mistake
-    not_decided: What is not decided here
-    open_points: Open points
+    prerequisites: "What you need"
+    steps: "How it works"
+    documents: "Documents you need"
+    duration: "Time and costs"
+    deadlines: "Deadlines"
+    terms: "Terms at the counter"
+    requires: "Do this first"
+    followed: "Afterwards"
+    cta_title: "Does this apply to me?"
+    cta_text: "The quick check shows whether this topic applies to you and when it is due."
+    mistake: "Common mistake"
+    not_decided: "What a professional decides"
+    open_points: "Open points"
     open: open
     validity: Validity
-    stand_title: Status and sources
-    label: Label
-    source: Original source
-    source_meta: "{publisher}, tier {tier}. Reference: {reference}. Checked {date}."
+    stand_title: "Status and sources"
+    label: "Check status"
+    source: "Source"
+    source_meta: "{publisher}. {reference}. Checked {date}."
     valid_from: Valid from
     valid_until: until {date}
     next_check: Next check
@@ -743,22 +746,22 @@ ui:
     crumb: By country of origin
     title: "By country of origin"
     description: "What you need to settle in your current country before moving to Croatia, for six countries."
-    lede: "What you need to settle in your current country before leaving for Croatia: deregistration, apostille, social security, taxes. The Croatian part is separate."
+    lede: "What you need to settle in your current country before leaving for Croatia: deregistration, apostille, social security, taxes."
     others: Other countries of origin
     what_title: What counts for leaving
-    what_help: The Croatian procedure and the requirements of the country of origin are two different things.
+    what_help: "You settle these points in your country of origin before you move."
     representation: Croatian representation
     apostille: Apostille
     social_security: Social security
     double_taxation: Double taxation
     deregistration: Deregistration duties
-    duration: Realistic timelines
+    duration: "How long it takes"
     unknown: unknown
     not_collected: not collected
     outdated: outdated
     followed: Followed by in Croatia
-    cta_title: Your way, person by person
-    cta_text: The quick check asks for the country of origin of every person in the household.
+    cta_title: "Your personal plan"
+    cta_text: "The quick check takes the country of origin of each person in your household into account."
   situation:
     crumb: Life situation
     title: "Entry points by life situation"
@@ -766,20 +769,20 @@ ui:
     lede: "Six typical starting points, from moving with a family to retirement. Each leads you through the topics in the order that fits."
     trap_title: Where it often fails here
     path_title: Your way in this order
-    rubrics_title: These sections also count
-    cta_title: Personal instead of general
-    cta_text: The quick check turns this path into your plan, person by person, with deadlines.
+    rubrics_title: "These topics matter too"
+    cta_title: "Your personal plan"
+    cta_text: "The quick check turns this path into your plan, with deadlines."
   glossary:
     title: Glossary of official terms
     description: "Croatian official terms in the original, explained plainly: OIB, prebivalište, Domovnica, HZZO and more."
     crumb: Glossary
-    lede: The Croatian term stays, because you need it at the counter. Next to it is what it means.
+    lede: "Croatian official terms you need at the counter, explained in plain words."
     count: "{n} terms from {pages} topic pages"
   orte:
     title: "Places"
-    description: Municipalities in Croatia with their measures for returnees, schools, doctors and housing. With status and check date.
-    lede: "Municipalities in Croatia with their support schemes, schools, doctors and housing. On the map or in the list, without a ranking."
-    all_benefits: All measures
+    description: "Municipalities in Croatia with their support schemes, schools, doctors and housing."
+    lede: "Municipalities in Croatia with their support schemes, schools, doctors and housing, on the map or in the list."
+    all_benefits: "All support schemes"
     compare: Compare places
     image_alt: Main square of a small town in Croatia with the town hall and a bakery.
     fictional_title: Fictional test municipalities
@@ -790,25 +793,26 @@ ui:
     filter_all: all
     coast: Coast
     inland: Inland
-    filter_target: Measures for
+    filter_target: "Support for"
     target_families: Families
     target_returnees: Returnees and founders
     target_housing: Housing
     filter_state: Status
-    only_open: only with open measures
+    only_open: "only open for applications now"
     no_js: Without JavaScript the list shows all places.
     count_one: "{n} place"
     count_many: "{n} places"
-    open_one: "{n} open measure"
-    open_many: "{n} open measures"
+    open_one: "Open for applications now: {n} scheme"
+    open_many: "Open for applications now: {n} schemes"
+    open_none: "No scheme open for applications right now"
     more: "{n} more"
-    depth: Data depth {n} of {total} facts collected
-    empty: No place matches this selection. That does not mean there are no offers, only that we have not collected any.
-    ranking_title: No ranking, no overall score
-    ranking_text: Two or three places can be compared side by side, as raw information. An overall score would always impose our weighting and not yours. What is missing is shown as «unknown» and not as an empty cell. A place with little data never looks like a place without offers, which is why every place shows its data depth.
+    depth: "{n} of {total} details recorded"
+    empty: "No place matches this selection."
+    ranking_title: "Compare places side by side"
+    ranking_text: "Put up to three municipalities next to each other: support schemes, schools, doctors, rents and connections at a glance. That way you quickly see which place fits your everyday life."
     to_compare: To the comparison
     municipality_title: Do you represent a municipality?
-    municipality_text: Enter your measures for returnees. Every fact appears with source, check date and status.
+    municipality_text: "Enter your municipality's offers for returnees."
     municipality_cta: Register municipality
     crumb: Places
   place:
@@ -818,11 +822,11 @@ ui:
     arrival: Arrival
     fictional_title: Fictional test municipality
     fictional_text: This place is invented. It shows the structure of a place profile with all states. No value refers to a real place.
-    benefits_title: Measures of the municipality
+    benefits_title: "Support schemes of the municipality"
     details: "Details"
     jump_label: "Sections of this place profile"
     benefits_help: Four dates, one status. The municipality decides on the application.
-    benefits_empty: No measures are recorded for this place. That does not mean there are none.
+    benefits_empty: "No support schemes have been recorded for this place yet."
     target: For whom
     amount: Amount
     conditions: Conditions
@@ -877,12 +881,12 @@ ui:
     changes_title: Changes
     changes_note: An announcement is not a status. Only «in operation» counts.
     cta_title: Does this place fit my way?
-    cta_text: The quick check shows which measures may apply according to your answers.
+    cta_text: "The quick check shows which of this place's schemes may apply to you."
     cta_compare: Compare with other places
-    state_open: open
+    state_open: "open for applications"
     state_announced: announced
-    state_closed: closed
-    state_exhausted: exhausted
+    state_closed: "deadline passed"
+    state_exhausted: "budget used up"
     state_unconfirmed: unconfirmed
     state_budget_unknown: budget unknown
     change_announced: announced
@@ -896,19 +900,19 @@ ui:
     fact_not_applicable: not applicable
     fact_not_present: not present
     fact_stand: Status {date}
-    fact_outdated_note: Status {date}. The current amount is unclear.
-    fact_clarify: "How to clarify: enquiry to the municipality; the answer appears here with a date."
+    fact_outdated_note: "As of {date}. The current value is not known."
+    fact_clarify: "On request from the municipality."
   compare:
     title: Compare places
-    description: Two or three places side by side, as raw information without an overall score.
+    description: "Up to three places side by side: support, schools, doctors, rents and connections."
     crumb: Comparison
-    lede: Raw information side by side, without an overall score. An overall score would impose our weighting and not yours.
+    lede: "Up to three places side by side: support, schools, doctors, rents and connections at a glance."
     fictional_text: All places in this comparison are invented. They show the presentation, not real conditions.
     feature: Feature
     location: Location
     population: Population
     index: Development index
-    open_benefits: Open measures
+    open_benefits: "Open for applications now"
     of: "{n} of {total}"
     kindergarten: Kindergarten, free places
     primary: Primary school
@@ -923,30 +927,30 @@ ui:
     internet: Internet
     transport: Public transport
     courses: Language courses
-    depth: Data depth
+    depth: "Details recorded"
   benefits:
-    title: Benefits and support
-    description: All recorded support measures with status, application period and check date, without going through the map.
-    crumb: Measures
-    lede: For everyone who knows what they are looking for, but not yet where. Every entry with status, application period and check date.
+    title: "All support schemes"
+    description: "All support schemes of the recorded municipalities, with application period."
+    crumb: "Support schemes"
+    lede: "All support schemes of the recorded municipalities at a glance, with status and application period."
     fictional_text: All measures here are invented. National programmes such as Biram Hrvatsku are under
     filter_label: Filter measures
     filter_state: Status
-    count_one: "{n} measure"
-    count_many: "{n} measures"
-    empty: No measure recorded in this state.
+    count_one: "{n} scheme"
+    count_many: "{n} schemes"
+    empty: "No scheme with this status."
   about:
     title: "About us: povratnik.com"
     description: Who is behind povratnik.com, how we are financed, how we check and why paid services do not change content.
     hero: Understand, compare, arrive.
-    lede: Authority websites each explain their own slice. Nobody explains in which order the slices belong together and what depends on what. That is exactly what we take off your hands.
+    lede: "povratnik explains what to do for returning or emigrating to Croatia and in which order."
     mission_title: Mission and independence
-    mission_1: "povratnik.com is run by EmotionFrame GmbH in Switzerland. Orientation is free: general information, the basic profile of every municipality, factual corrections and neutral comparison data cost nothing and are never put behind a paywall."
-    mission_2: "What is paid for is maintenance: municipalities that have their offers structured, translated and continuously checked, professional partners with a transparent profile, employers with current vacancies. A municipality that does not pay is not kept artificially incomplete. Paid services do not change results, there is no paid placement, and advertising is labelled."
+    mission_1: "povratnik.com is run by EmotionFrame GmbH in Switzerland. All information is free, without an account and without a paywall."
+    mission_2: "Additional services for municipalities, professional partners and employers are paid. They do not change any content, there is no paid placement, and advertising is labelled."
     households_title: Households instead of individuals
-    households_text: Partner and children can have different citizenships, residence routes and insurance bases. That is why for us the person is the planning unit and the household the frame.
+    households_text: "Partners and children can have different passports, residence paths and insurance. That is why we plan for each person individually."
     stay_title: Staying after arriving
-    stay_text: "The first twelve months are part of the product: learning the language, changing school, integration, the partner's job search, extensions. Success does not end with registration."
+    stay_text: "It goes on after registration: language, school, the partner's job, renewals. That is part of it."
     always_title: What always applies
     always_1: No paywall in front of core information
     always_2: No paid placement
@@ -954,7 +958,7 @@ ui:
     always_4: No answers that leave the browser
     always_5: No rule without named professional approval
     check_title: How we check
-    check_text: "Every statement is one of three kinds and is labelled as such: a finding with a named source and check date, a product rule we derive from it, or an open point that needs individual or official clarification. An offer that was not found is never presented as non-existent."
+    check_text: "Every statement has a named source and a check date. What we cannot verify, we mark as open."
     hierarchy_title: Hierarchy of sources
     h1: Official legal publication in the original, read together with its amendments
     h2: Competent Croatian authority
@@ -963,7 +967,7 @@ ui:
     h5: Written professional information from an authority, with date and case assumptions
     h6: Professional publications and advisory articles
     h7: "Press and experience reports: context, never the basis of an entitlement"
-    hierarchy_note: A lower tier never refutes a higher one. A press article is never evidence of a deadline, an amount or a requirement.
+    hierarchy_note: "Deadlines, amounts and conditions are backed by official sources only."
     cycles_title: Review cycles
     c1: Open funding calls
     c1_v: weekly while running
@@ -973,7 +977,7 @@ ui:
     c3_v: quarterly and on decisions
     c4: Contacts and institutions
     c4_v: every six months
-    cycles_note: A missed review date creates a warning, not silent reuse.
+    cycles_note: "If a check is overdue, it is shown."
     roles_title: Who is responsible
     role_product: Product responsibility
     role_tech: Technical responsibility
@@ -985,7 +989,7 @@ ui:
     role_errors: Error contact
     role_errors_v: review within two working days
     stage_title: Test stage
-    stage_text: There is no professionally approved legal rule. The quick check runs with labelled example rules so that the portal can be tested. No result says anything about your actual situation. A review by an AI system does not replace a qualified independent professional.
+    stage_text: "At the test stage the quick check runs on labelled example rules. No result is a statement about your actual situation."
     join_title: Get involved
     join_municipality: Register municipality
     join_expert: Become a reviewer
@@ -994,16 +998,16 @@ ui:
     mail: Mail
   search:
     title: "Search: povratnik.com"
-    description: Search across topics, sections, places and official terms. Runs in the browser.
+    description: "Search topics, places, news and official terms."
     heading: Search
-    lede: Topics, sections, life situations, countries, places and official terms. The search runs in your browser; no search term is transmitted.
+    lede: "Topics, life situations, countries, places, news and official terms."
     label: Search term
     placeholder: OIB, health insurance, apostille, Biram Hrvatsku
     button: Search
     entries: "{n} entries"
     entry: "{n} entry"
     for: for «{q}»
-    empty: Nothing found. That does not mean the topic does not exist, only that we do not have a page on it yet.
+    empty: "Nothing found."
     empty_link: Tell us what you were looking for.
     all: All results
     none: No results
@@ -1015,9 +1019,9 @@ ui:
     kind_term: Official term
   news:
     title: "News: povratnik.com"
-    description: "New deadlines, changed rules and programmes around returning and emigrating to Croatia, with source and check date."
+    description: "New deadlines, changed rules and programmes around returning and emigrating to Croatia."
     heading: "News"
-    lede: "New deadlines, changed rules and programmes around returning and emigrating to Croatia. Every item with source and check date."
+    lede: "New deadlines, changed rules and programmes around returning and emigrating to Croatia."
     crumb: "News"
     example: "Example, fictitious"
     published: "Published {date}"
@@ -1027,7 +1031,7 @@ ui:
     title: "Figures and facts: povratnik.com"
     description: Return and immigration to Croatia in figures, with status and source.
     heading: Figures and facts
-    lede: Every figure carries status and source. Where a figure is missing, it says so, instead of an estimate.
+    lede: "Return and immigration to Croatia in figures, with date and source."
     figure: Indicator
     value: Value
     stand: Status
@@ -1039,22 +1043,22 @@ ui:
     title: "Points of contact: povratnik.com"
     description: Authorities in Croatia, consulates, municipal welcome offices and associations, with the topics they are responsible for.
     heading: Points of contact
-    lede: Which body is responsible for what, with the entry point to the authority and the topic pages that cite it.
+    lede: "Which office is responsible for what."
     authorities_title: Authorities in Croatia
-    authorities_help: Entry pages of the authorities. The exact reference is on every topic page.
+    authorities_help: "Entry pages of the authorities."
     consulates_title: Consulates and representations
-    consulates_text: Croatian representations in the country of origin issue letters of recommendation, accept OIB applications and certify documents. Addresses and competences are confirmed with each representation and then entered on the country page.
+    consulates_text: "Croatian representations in your country of origin issue letters of recommendation, accept OIB applications and certify documents."
     confirmed: confirmed
     not_collected: not collected
     municipal_title: Municipal welcome offices
     recorded: recorded
     unknown: unknown
     clubs_title: Associations and diaspora networks
-    clubs_text: Collected by place and country of origin.
+    clubs_text: "Recorded per place."
     wip: in preparation
   weg:
     title: "My way to Croatia: quick check"
-    description: Six questions, then your first plan. Answers stay in the browser.
+    description: "A few questions, then your first plan."
     promise_1: No account, no registration
     promise_2: Answers stay in this browser
     promise_3: Every fact in the plan with source and check date
@@ -1073,20 +1077,20 @@ ui:
     toggle: Show map
     region_crumb: Region
     region_title: "{name} County"
-    region_lede: Real life instead of tourism, for choosing a place. Labour market, healthcare, accessibility, prices, schools, hospitals, connections, regional programmes, and an honest section on the drawbacks.
+    region_lede: "Job market, services, accessibility, prices, schools and programmes of this county."
     region_places: Recorded places in this county
-    region_places_empty: No place is recorded for this county yet. That does not mean there are no offers.
-    region_facts: What will appear here
+    region_places_empty: "No place has been recorded for this county yet."
+    region_facts: "What you will find here"
     region_fact_1: Labour market and commuting destinations
     region_fact_2: Doctors, pharmacies and hospitals
     region_fact_3: Accessibility and connections
     region_fact_4: Price level for renting and buying
     region_fact_5: Density of schools and hospitals
     region_fact_6: Regional programmes with status
-    region_fact_7: Drawbacks of the region, honestly named
+    region_fact_7: "Downsides of the region"
     region_wip: not collected
     region_others: Other counties
   notfound:
     title: Page not found
-    text: This address does not exist or no longer exists. The start page leads to all three ways.
+    text: "This address does not exist or no longer exists."
     home: To the start page

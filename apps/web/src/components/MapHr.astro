@@ -166,6 +166,12 @@ const uid = `map-${Math.random().toString(36).slice(2, 8)}`;
     stroke: var(--accent-bright);
     stroke-width: 5;
   }
+  /* Nur der Punkt reagiert auf den Zeiger; Schrift und Pulsring nicht, sonst flackert
+     die Karte, wenn der Zeiger zwischen Buchstaben und Fläche wechselt. */
+  .map--hero .map__place text,
+  .map--hero .map__pulse {
+    pointer-events: none;
+  }
   .map--hero .map__pulse {
     fill: none;
     stroke: var(--accent-bright);

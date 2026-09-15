@@ -78,13 +78,8 @@ const targets = (pl: (typeof places)[number]) => {
               <span class="card__num">{pl.county} · {u(pl.region === "coast" ? "orte.coast" : "orte.inland")}</span>
               <p>{pl.summary}</p>
               <p class="card__facts">
-                <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
-                <span class="state state--closed">{u("orte.more", { n: pl.benefits.length - openBenefits(pl) })}</span>
+                <span class={`state state--${openBenefits(pl) > 0 ? "matches" : "closed"}`}>{u(openBenefits(pl) === 0 ? "orte.open_none" : openBenefits(pl) === 1 ? "orte.open_one" : "orte.open_many", { n: openBenefits(pl) })}</span>
               </p>
-              <div class="depth">
-                <span>{u("orte.depth", { n: pl.data_depth.collected, total: pl.data_depth.total })}</span>
-                <div class="depth__bar"><div class="depth__fill" style={`width:${Math.round((100 * pl.data_depth.collected) / pl.data_depth.total)}%`}></div></div>
-              </div>
             </div>
           </li>
         ))}
@@ -176,7 +171,7 @@ const targets = (pl: (typeof places)[number]) => {
   /* Aufmacher: Text links, grosse Karte rechts auf Nachtblau. */
   .hero--map .container {
     padding-inline: var(--gutter);
-    align-items: center;
+    align-items: start;
     gap: 2rem;
     padding-block: clamp(2rem, 5vw, 4rem);
   }
@@ -192,13 +187,22 @@ const targets = (pl: (typeof places)[number]) => {
   .hero__map {
     min-height: 0;
   }
+  /* Feste Höhe: Wechselt der Inhalt, darf sich die Karte daneben nicht verschieben,
+     sonst rutscht der Punkt unter dem Zeiger weg und die Anzeige flackert. */
   .map-info {
     margin-top: 1.75rem;
     padding: 1.1rem 1.25rem;
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.07);
     border: 1px solid rgba(255, 255, 255, 0.18);
-    min-height: 7.5rem;
+    height: 11rem;
+    overflow: hidden;
+  }
+  .map-info__text {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
   .map-info__title {
     display: block;
@@ -326,9 +330,6 @@ const targets = (pl: (typeof places)[number]) => {
     display: flex;
     gap: 0.4rem;
     flex-wrap: wrap;
-  }
-  .cards--places .depth {
-    margin-top: 0.5rem;
   }
   .empty {
     color: var(--ink-soft);

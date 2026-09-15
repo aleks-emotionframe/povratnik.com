@@ -20,6 +20,9 @@ terms:
   - term_hr: Javni poziv
     term_explained:
       de: Öffentlicher Aufruf. Das jährliche Dokument mit den verbindlichen Bedingungen und Fristen.
+  - term_hr: indeks razvijenosti
+    term_explained:
+      de: Entwicklungsindex. Der Staat teilt jede Gemeinde nach Einkommen, Arbeitslosigkeit, Bevölkerungsentwicklung und Bildung in acht Stufen ein, I ist am schwächsten, VIII am stärksten entwickelt. Viele Förderungen sind höher oder gelten nur in Gemeinden mit tiefer Stufe.
 sections:
   applies_to: Kroatische Staatsbürger bis 60 Jahre mit mindestens 12 von 24 Monaten Arbeit oder Studium im EWR, in der Schweiz, im Vereinigten Königreich, in Nord- oder Südamerika, Australien oder Neuseeland, die sich selbständig machen. Rückkehrdatum frühestens 1.1.2025.
   not_applies_to: Angestellte ohne eigene Tätigkeit. Personen, die die Förderung schon einmal bezogen haben. Tätigkeiten in ausgeschlossenen Branchen, darunter Handel, Transport, Beherbergung und Gastronomie, Finanzen, Immobilien.
