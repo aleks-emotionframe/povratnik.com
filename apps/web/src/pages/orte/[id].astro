@@ -60,7 +60,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
 
   <section class="band band--surface panel-anchor" id="leistungen">
     <div class="container">
-      <p class="fictional">{u("place.fictional_text")}</p>
       <div class="band__head">
         <h2>{u("place.benefits_title")}</h2>
       </div>
@@ -75,7 +74,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
                 <h3>{b.title}</h3>
                 <dl class="benefit">
                   <dt>{u("place.target")}</dt><dd>{b.target}</dd>
-                  <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
+                  <dt>{u("place.amount")}</dt><dd class="benefit__amount"><Fact fact={b.amount} /></dd>
                   <dt>{u("place.conditions")}</dt><dd>{b.conditions.length ? <ul class="plain">{b.conditions.map((c) => <li>{c}</li>)}</ul> : <span class="state state--unknown">{u("place.fact_unknown")}</span>}</dd>
                   <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
                   <dt>{u("place.budget")}</dt><dd><Fact fact={b.budget} /></dd>
@@ -90,7 +89,7 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     </div>
   </section>
 
-  <section class="band band--surface">
+  <section class="band band--surface band--tight">
     <div class="container grid">
       <div class="col-main profile">
         <section class="panel" id="familie">
@@ -244,43 +243,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     background: rgba(255, 255, 255, 0.12);
     color: var(--on-brand-soft);
   }
-  .cards--benefits {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-  }
-  .benefit__state {
-    margin: 0;
-  }
-  .benefit {
-    margin: 0.5rem 0 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 0.15rem 1rem;
-    font-size: 0.9375rem;
-  }
-  @media (min-width: 480px) {
-    .benefit {
-      grid-template-columns: minmax(7rem, 9rem) 1fr;
-    }
-  }
-  .benefit dt {
-    color: var(--muted);
-  }
-  .benefit dd {
-    margin: 0 0 0.4rem;
-    color: var(--ink);
-  }
-  .plain {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .plain li::before {
-    content: "· ";
-    color: var(--accent);
-  }
-  .card .datenstand {
-    margin-top: 0.75rem;
-  }
   /* Sprungleiste unter dem Aufmacher: die Abschnitte des Profils, schmal scrollbar. */
   .jump {
     background: var(--paper);
@@ -309,11 +271,6 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
   }
   .panel-anchor {
     scroll-margin-top: 5rem;
-  }
-  .fictional {
-    color: var(--muted);
-    font-size: 0.9375rem;
-    margin: 0 0 1rem;
   }
   /* Abschnitte des Profils als weisse Tafeln mit Anker. */
   .profile {
@@ -357,6 +314,10 @@ const changeCss = (s: string) => (s === "operating" ? "matches" : s === "announc
     border-radius: var(--radius-md);
     padding: 1.25rem 1.35rem;
     margin-bottom: 1.25rem;
+  }
+  .side :global(.map) {
+    border: 0;
+    padding: 0;
   }
   .side h3 {
     font-size: 1rem;

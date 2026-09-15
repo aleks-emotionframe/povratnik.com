@@ -69,7 +69,6 @@ const targets = (pl: (typeof places)[number]) => {
         <noscript><p class="soft">{u("orte.no_js")}</p></noscript>
       </form>
 
-      <p class="fictional">{u("orte.fictional_line")}</p>
       <p class="count mono" id="count" aria-live="polite" data-one={u("orte.count_one", { n: "{n}" })} data-many={u("orte.count_many", { n: "{n}" })}>{u("orte.count_many", { n: places.length })}</p>
       <ul class="cards cards--places" id="places">
         {places.map((pl) => (
@@ -245,11 +244,6 @@ const targets = (pl: (typeof places)[number]) => {
     .hero__tools {
       margin-top: 0.5rem;
     }
-  }
-  .fictional {
-    color: var(--muted);
-    font-size: 0.9375rem;
-    margin: 0 0 0.25rem;
   }
   /* Filter als Schaltergruppen: Auswahl gefüllt in Markenfarbe, sonst Umriss. Die
      echten Eingabefelder bleiben für Tastatur und Vorleser, nur unsichtbar. */

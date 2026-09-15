@@ -31,10 +31,6 @@ const period = (b: (typeof items)[number]["b"]) =>
 
   <section class="band band--surface">
     <div class="container">
-      <p class="notice" role="note">
-        <strong>{u("orte.fictional_title")}</strong>
-        {u("benefits.fictional_text")} <a href={p("/wissen/leistungen-und-foerderung")}>{u("shell.nav_wissen")}</a>
-      </p>
       <form class="filters" id="filters" aria-label={u("benefits.filter_label")}>
         <fieldset>
           <legend>{u("benefits.filter_state")}</legend>
@@ -52,7 +48,7 @@ const period = (b: (typeof items)[number]["b"]) =>
               <h3>{b.title}</h3>
               <dl class="benefit">
                 <dt>{u("place.target")}</dt><dd>{b.target}</dd>
-                <dt>{u("place.amount")}</dt><dd><Fact fact={b.amount} /></dd>
+                <dt>{u("place.amount")}</dt><dd class="benefit__amount"><Fact fact={b.amount} /></dd>
                 <dt>{u("place.period")}</dt><dd class="mono">{period(b)}</dd>
                 <dt>{u("place.binding")}</dt><dd>{b.binding}</dd>
               </dl>
@@ -130,39 +126,6 @@ const period = (b: (typeof items)[number]["b"]) =>
   .count {
     color: var(--muted);
     margin-bottom: 0.75rem;
-  }
-  .cards--benefits {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
-  }
-  .benefit__state {
-    margin: 0;
-    display: flex;
-    gap: 0.75rem;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .benefit__place {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 0.875rem;
-    text-decoration: none;
-  }
-  .benefit {
-    margin: 0.5rem 0 0;
-    display: grid;
-    grid-template-columns: minmax(7rem, 9rem) 1fr;
-    gap: 0.15rem 1rem;
-    font-size: 0.9375rem;
-  }
-  .benefit dt {
-    color: var(--muted);
-  }
-  .benefit dd {
-    margin: 0 0 0.4rem;
-    color: var(--ink);
-  }
-  .card .datenstand {
-    margin-top: 0.75rem;
   }
   .empty {
     color: var(--ink-soft);
