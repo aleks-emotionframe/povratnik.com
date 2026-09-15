@@ -1,6 +1,15 @@
 # Designsystem
 
-Version 2.0, 14.09.2026. Verbindliche Gestaltungsgrundlage. Ersetzt Version 1.2.
+Version 2.1, 15.09.2026. Verbindliche Gestaltungsgrundlage. Ersetzt Version 1.2.
+
+Änderung in 2.1: Das provisorische Logo ersetzt die Wortmarke mit Schachbrett
+(Abschnitt 2), der Aufmacher der Startseite trägt das Suchfeld aus dem
+Inhaltskonzept, Abschnitt 3, und die schmale Leiste über dem Kopf entfällt: die
+Sprachwahl steht als Kürzel (DE, HR, EN, ES) im Kopf zwischen Navigation und
+Handlung, die Teststufe wird im Fuss gekennzeichnet. Auf schmalen Geräten steht die
+Sprachwahl neben dem Logo, die Navigation scrollt darunter über die volle Breite,
+und die Handlung im Kopf entfällt (der Kurzcheck bleibt über «Mein Weg» und den
+Aufmacher erreichbar).
 
 Änderung in 2.0 (Entscheid der Produktverantwortung vom 14.09.2026): Die Gestaltung
 folgt dem Vorbild Schweizer Regionalbanken (akb.ch, valiant.ch, shkb.ch). Massgeblich
@@ -57,8 +66,12 @@ Titel, Navigation und Schaltflächen. Lauftext im Systemstack (Segoe UI, Roboto,
 Helvetica), damit die Startressourcen im Budget bleiben. Metadaten, Beträge und Fristen
 dicktengleich im Systemstack. Zeilenlänge im Lauftext höchstens 70 Zeichen.
 
-**Wortmarke:** «povratnik» mit einem kleinen rot-weissen Schachbrett als Bildmarke,
-daneben «.com» in Tinte weich. Das Schachbrett ist der einzige Ort, an dem Rot vorkommt.
+**Logo:** provisorisch die Datei `apps/web/src/assets/povratnik-logo.webp` (blaue
+Bildmarke mit Haus im P, Schriftzug in Schwarz, Alpha-Kanal). Im Kopf 34 Pixel hoch
+auf Papier, im Fuss 30 Pixel hoch und per CSS-Filter vollständig weiss; es gibt nur
+diese eine Datei. Der Schriftzug sagt derzeit «.CH», die Website läuft unter
+povratnik.com; die endgültige Fassung ist eine Entscheidung der Produktverantwortung.
+Rot kommt nirgends mehr vor.
 
 **Raster:** zwölf Spalten, Breite bis 1320 Pixel, linksbündig. Karten weiss mit
 8 Pixel Radius auf hellen Flächen, ohne Schatten, mit dünner Linie. Schaltflächen mit
@@ -66,7 +79,8 @@ daneben «.com» in Tinte weich. Das Schachbrett ist der einzige Ort, an dem Rot
 
 **Rhythmus:** Bänder wechseln zwischen Papier, Fläche und Marke. Der Aufmacher ist
 zweigeteilt: Markenfläche mit Titel links, Fotografie rechts, auf schmalen Geräten
-untereinander.
+untereinander. Auf der Startseite steht unter dem Titel ein Suchfeld; es führt zur
+Suchseite, ohne den Suchbegriff in die Adresse oder an den Server zu schreiben.
 
 **Fotografie:** dokumentarisch wirkende Bilder von Menschen und Orten, natürliches
 Licht, gedeckte Farben, kein Stock-Lächeln. Jedes Bild als WebP in mehreren Breiten,

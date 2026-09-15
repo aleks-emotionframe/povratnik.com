@@ -246,40 +246,7 @@ a:hover {
   transform: translateX(3px);
 }
 
-/* Kopfzeile: Aufbaustufe als schmale Leiste, nicht als gelbes Band. */
-.topbar {
-  background: var(--brand-deep);
-  color: var(--on-brand-soft);
-  font-size: 0.8125rem;
-}
-.topbar .container {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  flex-wrap: wrap;
-  padding-block: 0.4rem;
-}
-.topbar p {
-  margin: 0;
-  max-width: none;
-}
-.topbar strong {
-  color: var(--on-brand);
-  font-weight: 600;
-  margin-right: 0.5rem;
-}
-.topbar a {
-  color: var(--on-brand);
-  text-decoration: none;
-  min-height: 28px;
-  display: inline-flex;
-  align-items: center;
-}
-.topbar a:hover {
-  text-decoration: underline;
-}
-
-/* Kopf mit Wortmarke, Hauptnavigation und hervorgehobener Handlung */
+/* Kopf mit Logo, Hauptnavigation, Sprachwahl und hervorgehobener Handlung */
 .site-head {
   background: var(--paper);
   border-bottom: 1px solid var(--line);
@@ -298,24 +265,16 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  color: var(--ink);
-  text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.375rem;
-  letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 0;
 }
-.brand__mark {
-  width: 28px;
-  height: 28px;
-  flex: none;
+.brand img {
+  height: 34px;
+  width: auto;
 }
-.brand small {
-  font-weight: 600;
-  font-size: inherit;
-  color: var(--muted);
+/* Auf dunklem Grund wird das Logo weiss; die Datei bleibt dieselbe. */
+.brand--on-dark img {
+  height: 30px;
+  filter: brightness(0) invert(1);
 }
 .site-nav {
   display: flex;
@@ -356,6 +315,9 @@ a:hover {
     grid-template-columns: 1fr auto;
     gap: 0.5rem 1rem;
   }
+  /* Zeile 1: Logo und Sprachwahl, Zeile 2: Navigation scrollt über die volle Breite.
+     Die Handlung im Kopf entfällt hier; der Kurzcheck ist über «Mein Weg» und den
+     Aufmacher erreichbar. */
   .site-nav {
     grid-column: 1 / -1;
     gap: 0 1.25rem;
@@ -363,21 +325,24 @@ a:hover {
     flex-wrap: nowrap;
     scrollbar-width: none;
   }
+  .lang {
+    grid-row: 1;
+    grid-column: 2;
+    align-self: center;
+    margin-left: 0;
+  }
+  .lang a {
+    min-width: 32px;
+    padding-inline: 0.25rem;
+  }
   .site-nav a {
     white-space: nowrap;
   }
   .site-head .button {
-    grid-row: 1;
-    grid-column: 2;
-    font-size: 0.875rem;
-    padding-inline: 1rem;
-    white-space: nowrap;
-  }
-  .brand {
-    font-size: 1.25rem;
-  }
-  .topbar__text {
     display: none;
+  }
+  .brand img {
+    height: 28px;
   }
 }
 
@@ -434,8 +399,53 @@ a:hover {
     min-height: 100%;
   }
 }
+/* Suchfeld auf Markenfläche (Startseite und Suchseite) */
+.search {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+  max-width: 40rem;
+}
+.search input {
+  flex: 1 1 16rem;
+  min-height: 48px;
+  padding: 0.6rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--on-brand);
+  font: inherit;
+}
+.search input::placeholder {
+  color: var(--on-brand-soft);
+}
+.search input:focus-visible {
+  outline: 2px solid var(--accent-bright);
+  outline-offset: 2px;
+}
 .hero--small .hero__text {
   padding-block: clamp(2rem, 5vw, 3.5rem);
+}
+/* Startseite: der Aufmacher füllt den Bildschirm unter dem Kopf, auf jedem Gerät.
+   --head-h ist die Kopfhöhe (Desktop 74 px, schmal 101 px); leichte Abweichung
+   nach oben ist unschädlich, weil min-height nur ein Minimum setzt. */
+.hero--full {
+  --head-h: 4.6rem;
+}
+.hero--full .container {
+  min-height: calc(100svh - var(--head-h));
+  grid-template-rows: auto minmax(240px, 1fr);
+}
+@media (max-width: 720px) {
+  .hero--full {
+    --head-h: 6.3rem;
+  }
+}
+@media (min-width: 860px) {
+  .hero--full .container {
+    grid-template-rows: none;
+  }
 }
 
 /* Schnelleinstiege als Chips */
@@ -947,11 +957,7 @@ a:hover {
   margin: 0 0 0.75rem;
 }
 .site-foot .brand {
-  color: var(--on-brand);
   margin-bottom: 1rem;
-}
-.site-foot .brand small {
-  color: var(--on-brand-soft);
 }
 .site-foot .datenstand {
   border-top-color: rgba(255, 255, 255, 0.15);
@@ -1014,15 +1020,34 @@ a:hover {
   top: 1rem;
 }
 
-/* Sprachwahl in der Kopfleiste */
+/* Sprachwahl im Kopf: Kürzel, aktuelle Sprache gefüllt */
 .lang {
   display: flex;
-  gap: 0.25rem 1rem;
-  flex-wrap: wrap;
+  gap: 0.15rem;
+  margin-left: auto;
+}
+.lang a {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  text-decoration: none;
+  min-width: 36px;
+  min-height: 36px;
+  padding-inline: 0.4rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.lang a:hover {
+  color: var(--ink);
+  background: var(--surface);
 }
 .lang a[aria-current="true"] {
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
+  color: var(--brand);
+  background: var(--surface-blue);
 }
 .notice--fallback {
   margin: 1rem 0 0;
