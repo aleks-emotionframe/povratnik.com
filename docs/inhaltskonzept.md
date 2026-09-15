@@ -98,7 +98,8 @@ Eine reine lineare Liste wäre falsch. Die Website macht deshalb sichtbar:
 STARTSEITE
 │
 ├── WISSEN
-│   ├── Übersicht: 12 Rubriken
+│   ├── Übersicht: 4 Bereiche
+│   ├── Bereichsseite (4x): die Rubriken des Bereichs
 │   ├── Rubrikseite (12x)
 │   ├── Themenseite (ca. 20 in voller Tiefe, ca. 60 als Kurzfassung)
 │   ├── Nach Herkunftsland (Länderseiten)
@@ -192,6 +193,20 @@ Inhalte von oben nach unten:
 | 10 | Sprache und Gemeinschaft | Kurse online und vor Ort, Stipendien, Sprachniveaus, Alltagssprache, Vereine, Kirche, Sport, Mentoring, Anschluss für Partner und Kinder |
 | 11 | Umzug und Mobilität | Hausrat, Zoll und Übersiedlungsgut, Fahrzeugeinfuhr, Führerscheinumschreibung, Haustiere, Transportunternehmen, Anreise, Strom, Wasser, Internet, Telefon |
 | 12 | Leistungen und Förderung | Staatliche, regionale und kommunale Leistungen, Familie, Wohnen, Bildung, Mobilität, Gründung, Anspruch, Nachweise, Kumulation, Bindungen, Rückzahlungspflichten |
+
+**Vier Bereiche in der Übersicht (Entscheid vom 15.09.2026).** Zwölf gleichwertige
+Karten waren auf dem Handy fünf Bildschirme lang und gaben keine Reihenfolge vor. Die
+Übersicht zeigt deshalb vier Bereiche als Karten, geordnet nach der Abhängigkeitskette
+aus Abschnitt 1.1: erst Status und Dokumente, dann alles andere. Jeder Bereich hat eine
+eigene Seite (`/wissen/bereich/<bereich>`) mit seinen Rubriken. Die Rubriken selbst,
+ihre Nummern und ihre Inhalte ändern sich dadurch nicht.
+
+| Bereich | Adresse | Rubriken |
+|---|---|---|
+| Grundlagen | grundlagen | 01, 02, 03 |
+| Arbeit und Geld | arbeit-und-geld | 04, 05, 06, 12 |
+| Familie und Alltag | familie-und-alltag | 07, 08, 10 |
+| Wohnen und Umzug | wohnen-und-umzug | 09, 11 |
 
 Zwei Tiefenstufen: Etwa zwanzig Themen werden vollständig ausgearbeitet, das sind
 die, an denen Menschen tatsächlich scheitern oder an denen Geld hängt. Der Rest

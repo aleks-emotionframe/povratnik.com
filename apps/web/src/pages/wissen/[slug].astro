@@ -2,7 +2,7 @@
 // Rubrikseite (designsystem.md 3, Typ 2): Einstieg, typische Fragen, Themenseiten,
 // verbleibende Themen mit Zustand, Abhängigkeiten zu anderen Rubriken.
 import Base from "../../layouts/Base.astro";
-import { RUBRICS, rubricBySlug, rubricText } from "../../lib/rubrics.ts";
+import { RUBRICS, rubricBySlug, rubricGroup, rubricText } from "../../lib/rubrics.ts";
 import { loadPages, pagePath, type PageView } from "../../lib/pages.ts";
 import { CONTENT_DIR, pageContext } from "../../lib/page.ts";
 
@@ -13,6 +13,7 @@ export function getStaticPaths() {
 const { lang, texts, u, p } = pageContext(Astro);
 const rubric = rubricBySlug(Astro.params.slug!)!;
 const tx = rubricText(rubric, texts);
+const group = rubricGroup(rubric.slug)!;
 const pages: PageView[] = loadPages(CONTENT_DIR, lang).filter((x) => x.category === rubric.slug);
 // Abdeckung nach den deutschen Themennamen (Struktur), Anzeige in der Sprache.
 const covered = new Set(pages.flatMap((x) => x.covers));
@@ -26,7 +27,7 @@ const stateOf = (x: PageView) => (x.approval.state === "approved" ? { key: "matc
   <section class="hero hero--small">
     <div class="container">
       <div class="hero__text">
-        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / {u("wissen.crumb_rubric", { n: rubric.number })}</p>
+        <p class="crumbs"><a href={p("/wissen")}>{u("wissen.crumb")}</a> / <a href={p(`/wissen/bereich/${group.slug}`)}>{u(`wissen.group_${group.key}`)}</a> / {tx.title}</p>
         <h1>{tx.title}</h1>
         <p class="lede">{tx.intro}</p>
       </div>

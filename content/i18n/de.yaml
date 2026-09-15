@@ -446,6 +446,12 @@ ui:
     pages_one: "{n} Themenseite"
     pages_many: "{n} Themenseiten"
     topics_wip: "{n} Themen in Arbeit"
+    group_basics: Grundlagen
+    group_work_money: Arbeit und Geld
+    group_family_life: Familie und Alltag
+    group_housing_move: Wohnen und Umzug
+    rubrics_n: "{n} Rubriken"
+    other_groups: Weitere Bereiche
     more_title: "Weitere Wege zum Wissen"
     more_situations: Nach Lebenssituation
     more_glossary: Glossar der Amtsbegriffe
@@ -454,7 +460,6 @@ ui:
     more_glossary_link: Glossar
     more_countries_link: Sechs Länder
     crumb: Wissen
-    crumb_rubric: Rubrik {n}
     questions: Typische Fragen
     topics_title: Themen in dieser Rubrik
     remaining_more: Weitere Themen, noch in Arbeit

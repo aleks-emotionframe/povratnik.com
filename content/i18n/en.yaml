@@ -361,7 +361,7 @@ checklists:
     s8: Review the plan after twelve months, because rules change every year
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: "povratnik.com: Living in Croatia"
+    title: "Status and citizenship"
     intro: "Nothing can be decided before the status: it determines the residence route and access to work, school and support."
     q1: Do I get Croatian citizenship through my grandparents?
     q2: What is the certificate for emigrants and what does it give me?
@@ -675,6 +675,12 @@ ui:
     pages_one: "{n} topic page"
     pages_many: "{n} topic pages"
     topics_wip: "{n} topics in preparation"
+    group_basics: Basics
+    group_work_money: Work and money
+    group_family_life: Family and everyday life
+    group_housing_move: Housing and moving
+    rubrics_n: "{n} sections"
+    other_groups: Other areas
     more_title: "More ways into the knowledge"
     more_situations: By life situation
     more_glossary: Glossary of official terms
@@ -683,7 +689,6 @@ ui:
     more_glossary_link: Glossary
     more_countries_link: Six countries
     crumb: Knowledge
-    crumb_rubric: Section {n}
     questions: Typical questions
     topics_title: Topics in this section
     remaining_more: Further topics, still in preparation

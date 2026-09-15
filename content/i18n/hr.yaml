@@ -361,7 +361,7 @@ checklists:
     s8: Nakon dvanaest mjeseci ponovno provjeriti plan, jer se pravila mijenjaju svake godine
 rubrics:
   status-und-staatsangehoerigkeit:
-    title: "povratnik.com: Život u Hrvatskoj"
+    title: "Status i državljanstvo"
     intro: "Prije statusa ništa se ne može odlučiti: on određuje boravišni put, pristup radu, školi i potporama."
     q1: Dobivam li preko bake i djeda hrvatsko državljanstvo?
     q2: Što je potvrda za iseljenike i što mi donosi?
@@ -675,6 +675,12 @@ ui:
     pages_one: "{n} tematska stranica"
     pages_many: "{n} tematskih stranica"
     topics_wip: "{n} tema u pripremi"
+    group_basics: Osnove
+    group_work_money: Rad i novac
+    group_family_life: Obitelj i svakodnevica
+    group_housing_move: Stanovanje i selidba
+    rubrics_n: "{n} rubrike"
+    other_groups: Ostala područja
     more_title: "Drugi putovi do znanja"
     more_situations: Prema životnoj situaciji
     more_glossary: Pojmovnik službenih pojmova
@@ -683,7 +689,6 @@ ui:
     more_glossary_link: Pojmovnik
     more_countries_link: Šest zemalja
     crumb: Znanje
-    crumb_rubric: Rubrika {n}
     questions: Tipična pitanja
     topics_title: Teme u ovoj rubrici
     remaining_more: Daljnje teme, još u pripremi
