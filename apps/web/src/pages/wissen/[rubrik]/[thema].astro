@@ -51,8 +51,11 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
     </div>
   </section>
 
-  <nav class="jump" aria-label={u("topic.jump_label")}>
-    <div class="container">
+  {/* Sprungleiste: breit eine Zeile, schmal eine Klappe mit den Abschnitten untereinander
+      (Skript unten setzt das Attribut nach Bildschirmbreite, ohne JavaScript offen). */}
+  <details class="jump" open>
+    <summary class="container">{u("topic.jump_label")}</summary>
+    <nav class="container" aria-label={u("topic.jump_label")}>
       <a href="#voraussetzungen">{u("topic.prerequisites")}</a>
       <a href="#ablauf">{u("topic.steps")}</a>
       <a href="#unterlagen">{u("topic.documents")}</a>
@@ -60,8 +63,17 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
       <a href="#fristen">{u("topic.deadlines")}</a>
       <a href="#fehler">{u("topic.mistake")}</a>
       <a href="#quellen">{u("topic.stand_title")}</a>
-    </div>
-  </nav>
+    </nav>
+  </details>
+  <script is:inline>
+    (function () {
+      var box = document.querySelector(".jump");
+      var narrow = window.matchMedia("(max-width: 720px)");
+      function apply() { box.open = !narrow.matches; }
+      apply();
+      narrow.addEventListener("change", apply);
+    })();
+  </script>
 
   <section class="band band--surface">
     <div class="container grid topic-grid">
@@ -171,11 +183,12 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
     background: var(--paper);
     border-bottom: 1px solid var(--line);
   }
-  .jump .container {
+  .jump summary {
+    display: none;
+  }
+  .jump nav {
     display: flex;
     gap: 0 1.75rem;
-    overflow-x: auto;
-    scrollbar-width: none;
   }
   .jump a {
     flex: none;
@@ -191,6 +204,52 @@ const explained = (t: { term_explained: Record<string, string | undefined> }) =>
   .jump a:hover {
     color: var(--ink);
     border-bottom-color: var(--accent);
+  }
+  @media (max-width: 720px) {
+    /* Schmal: Klappe mit Pfeil, darunter die Abschnitte untereinander, je 44 px hoch. */
+    .jump summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      min-height: 44px;
+      list-style: none;
+      cursor: pointer;
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--ink);
+    }
+    .jump summary::-webkit-details-marker {
+      display: none;
+    }
+    .jump summary::after {
+      content: "";
+      width: 0.65rem;
+      height: 0.65rem;
+      border-right: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      transform: rotate(45deg);
+      margin-right: 0.35rem;
+      transition: transform var(--dur) var(--ease);
+    }
+    .jump[open] summary::after {
+      transform: rotate(-135deg);
+    }
+    .jump nav {
+      flex-direction: column;
+      gap: 0;
+      padding-bottom: 0.5rem;
+    }
+    .jump a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding-block: 0.5rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 0;
+      white-space: normal;
+    }
   }
   /* Tafeln über zwei Drittel, Seitenspalte ein Drittel, gleiche Kanten. */
   @media (min-width: 1100px) {
