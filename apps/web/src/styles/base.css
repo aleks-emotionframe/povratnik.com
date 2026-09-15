@@ -465,24 +465,12 @@ a:hover {
     flex: 1 1 0;
     min-width: 0;
   }
-  .hero--full .hero__actions {
-    margin: 0.85rem 0 0.7rem;
-    gap: 0.5rem;
-  }
-  .hero--full .hero__actions .button {
-    flex: 1 1 auto;
-    padding-inline: 0.6rem;
-    font-size: 0.875rem;
-  }
   .hero--full .hero__media {
     min-height: 8rem;
   }
   .hero--full .hero__media img {
     position: absolute;
     inset: 0;
-  }
-  .hero--full .hero__note {
-    font-size: 0.875rem;
   }
 }
 @media (min-width: 860px) {

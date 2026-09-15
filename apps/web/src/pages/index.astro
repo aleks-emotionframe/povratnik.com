@@ -46,11 +46,6 @@ const phaseNames = texts.phases as Record<string, string>;
           <input id="hero-q" type="search" placeholder={u("search.placeholder")} autocomplete="off" />
           <button class="button button--outline-light" type="submit">{u("search.button")}</button>
         </form>
-        <div class="hero__actions">
-          <a class="button button--light" href={p("/mein-weg")}>{u("shell.cta")}</a>
-          <a class="button button--outline-light" href={p("/wissen")}>{u("home.hero_wissen")}</a>
-        </div>
-        <p class="hero__note">{u("home.hero_note")}</p>
       </div>
       <div class="hero__media">
         <Image src={hero} alt={u("home.hero_alt")} widths={[640, 960]} sizes="(min-width: 860px) 50vw, 100vw" format="webp" quality={62} loading="eager" fetchpriority="high" />
